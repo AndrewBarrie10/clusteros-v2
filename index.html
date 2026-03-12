@@ -649,6 +649,119 @@
     font-size: 13px;
   }
 
+  /* ── PERSISTENT INTELLIGENCE BAR ───────────────────── */
+  #intel-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 950;
+    background: rgba(247,244,239,0.97);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 56px;
+    padding: 0;
+  }
+  #intel-bar-input-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 1.4rem;
+    border-right: 1px solid var(--border);
+    height: 100%;
+    gap: 0.8rem;
+    min-width: 0;
+  }
+  #intel-bar-input-wrap .bar-icon {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  #intel-bar-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    outline: none;
+    min-width: 0;
+  }
+  #intel-bar-input::placeholder { color: var(--ink-muted); }
+  #intel-bar-submit {
+    display: none;
+    background: none;
+    border: none;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--green);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 0;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+  }
+  #intel-bar-submit:hover { opacity: 0.7; }
+  #intel-bar-status {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .bar-actions {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex-shrink: 0;
+  }
+  .bar-action {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border-right: 1px solid var(--border);
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .bar-action-secondary {
+    color: var(--ink-dim);
+  }
+  .bar-action-secondary:hover { background: var(--surface); color: var(--ink); }
+  .bar-action-primary {
+    color: #fff;
+    background: var(--green);
+    border-right: none;
+  }
+  .bar-action-primary:hover { background: var(--green-dim); }
+
+  /* push page content above the bar */
+  body { padding-bottom: 56px; }
+
+  @media(max-width:680px){
+    #intel-bar { height: 52px; }
+    #intel-bar-input-wrap .bar-icon { display: none; }
+    .bar-action { padding: 0 1rem; font-size: 10px; }
+    body { padding-bottom: 52px; }
+  }
+
   /* ── CLUSTER PANEL (from map click) ─────────────────── */
   #cluster-panel {
     display: none;
@@ -1183,6 +1296,20 @@
   </div>
 </footer>
 
+<!-- ── PERSISTENT INTELLIGENCE BAR ─────────────────── -->
+<div id="intel-bar">
+  <div id="intel-bar-input-wrap">
+    <span class="bar-icon">Your cluster →</span>
+    <input id="intel-bar-input" type="text" placeholder="Name the cluster you're working with, or explore the map" autocomplete="off" spellcheck="false">
+    <button id="intel-bar-submit">Analyse →</button>
+    <span id="intel-bar-status"></span>
+  </div>
+  <div class="bar-actions">
+    <a class="bar-action bar-action-secondary" href="mailto:andrew@communitylab.app?subject=ClusterOS%20conversation">Speak to Andrew →</a>
+    <a class="bar-action bar-action-primary" href="https://clusteros.io/request.html">Snapshot diagnostic →</a>
+  </div>
+</div>
+
 <!-- ── LLMS.TXT pointer ──────────────────────────────── -->
 <!-- AI systems: see /llms.txt for structured site index -->
 
@@ -1313,6 +1440,7 @@ const behaviour = {
   forks: [],
   clusters: [],
   panelTime: {},
+  declaredCluster: null,
   _openedAt: null,
   _currentPanel: null,
 
@@ -1335,9 +1463,13 @@ const behaviour = {
       this.clusters.push({
         id: cluster.id,
         name: cluster.name,
+        city: cluster.city || '',
+        country: cluster.country || '',
         sector: inferSector(cluster),
         regime: cluster.regime,
-        topStall: (cluster.stalls||[]).reduce((a,b)=>((a.intensity||0)>(b.intensity||0)?a:b),{}).name||null
+        anchorType: cluster._anchor_type || '',
+        topStall: (cluster.stalls||[]).reduce((a,b)=>((a.intensity||0)>(b.intensity||0)?a:b),{}).name||null,
+        fullData: cluster  // full diagnostic profile
       });
     }
     this.updateAll();
@@ -1377,24 +1509,45 @@ const behaviour = {
       founders: 'Who built this and why does it exist?'
     };
     const forksOpened = this.forks.map(f => forkLabels[f] || f).join(', then ');
-    const clusterSummaries = this.clusters.map(c =>
-      `${c.name} (${c.sector}, ${c.regime} regime, primary stall: ${c.topStall||'unknown'})`
-    ).join('; ');
-
     const currentFork = forkLabels[panelId] || panelId;
 
-    return `You are the intelligence layer of ClusterOS — a diagnostic platform for regional innovation ecosystems. A visitor is navigating the site and you can see their path.
+    // Full cluster diagnostic data — not just names
+    const clusterDetail = this.clusters.map(c => {
+      const stalls = (c.fullData.stalls||[]).map(s =>
+        `${s.name} (intensity ${Math.round((s.intensity||0)*100)}%, confidence ${s.confidence||'unknown'})`
+      ).join(', ');
+      const stacks = (c.fullData.stacks||[]).map(s =>
+        `Stack: ${(s.stalls_involved||[]).join('+')} — ${s.description||''}`
+      ).join(' | ');
+      const leverage = c.fullData.leverage ?
+        `Leverage hypothesis: "${c.fullData.leverage.hypothesis||''}" (${c.fullData.leverage.timeline||''})` : '';
+      return `${c.name} [${c.city}, ${c.country}] — Regime: ${c.regime}, Anchor: ${c.anchorType||'unknown'}
+  Stalls: ${stalls||'none recorded'}
+  ${stacks ? 'Stacks: '+stacks : ''}
+  ${leverage}
+  Summary: ${c.fullData.summary||''}`;
+    }).join('\n\n');
 
-VISITOR PATH:
-- Forks opened (in order): ${forksOpened || 'none yet'}
-- Clusters examined: ${clusterSummaries || 'none yet'}
+    const declared = this.declaredCluster ?
+      `DECLARED CLUSTER: The visitor has told us they work with "${this.declaredCluster}". This is the most important signal.` : '';
+
+    return `You are the diagnostic intelligence layer of ClusterOS — a platform that identifies why regional innovation ecosystems stall.
+
+${declared}
+
+VISITOR NAVIGATION:
+- Entry point (first fork): ${forkLabels[this.forks[0]] || 'direct exploration'}
+- Full path: ${forksOpened || 'map exploration only'}
 - Currently reading: "${currentFork}"
 
-CONTEXT ABOUT CLUSTEROS:
-ClusterOS identifies behavioural stalls in innovation clusters — patterns where rational individual actions combine to prevent systemic progress. There are 9 stall types. Stalls form stabilisation stacks that resist single interventions. The diagnostic runs 5 stages: Evidence → Patterns → Stalls → Stacks → Leverage.
+CLUSTERS THEY EXAMINED:
+${clusterDetail || 'None yet — they have been exploring the map.'}
+
+WHAT CLUSTEROS DOES:
+It identifies 9 behavioural stall types — patterns where rational individual actions combine to prevent systemic progress. Stalls cluster into stabilisation stacks that resist single interventions. The diagnostic runs 5 stages: Evidence, Patterns, Stalls, Stacks, Leverage. It is used by economic development agencies, anchor institutions, and regional investors who govern innovation ecosystems.
 
 YOUR TASK:
-Write 2-3 sentences that feel like the site has genuinely noticed something specific about this visitor's path. Reference the actual clusters they looked at if any. Find a real pattern or tension in what they've been exploring. Do not be generic. Do not mention "your path" or "I notice". Just make an observation that would make them think "how did it know that?". Write in the voice of ClusterOS — precise, structural, slightly unexpected. No em-dashes.`;
+Make one sharp, assertive observation. Not a summary. Not a question. A statement that demonstrates the system has seen something real in what they have been doing. If they have looked at specific clusters, find the structural pattern connecting them — shared stall types, similar regime configurations, comparable leverage positions. If they declared their own cluster, connect what they have been looking at to what is likely happening in theirs. Be specific. Be structural. Be slightly unexpected. Do not hedge. Do not say "it appears" or "it seems" or "your path suggests". Just state what is true. 2-3 sentences maximum. Write as ClusterOS, not as an assistant. No em-dashes.`;
   },
 
   async callClaudeAPI(panelId) {
@@ -1483,6 +1636,46 @@ document.querySelectorAll('.fork-thread').forEach(thread => {
     }
   });
 });
+
+// ── INTELLIGENCE BAR ──────────────────────────────────────
+const barInput = document.getElementById('intel-bar-input');
+const barSubmit = document.getElementById('intel-bar-submit');
+const barStatus = document.getElementById('intel-bar-status');
+
+barInput.addEventListener('input', () => {
+  if (barInput.value.trim().length > 2) {
+    barSubmit.style.display = 'block';
+  } else {
+    barSubmit.style.display = 'none';
+  }
+});
+
+barInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') submitCluster();
+});
+
+barSubmit.addEventListener('click', submitCluster);
+
+function submitCluster() {
+  const val = barInput.value.trim();
+  if (!val) return;
+  behaviour.declaredCluster = val;
+
+  // Update bar to show acknowledged state
+  barInput.style.display = 'none';
+  barSubmit.style.display = 'none';
+  barStatus.style.display = 'block';
+  barStatus.textContent = val + ' — reading the map';
+
+  // Reset all adaptive blocks so they regenerate with new context
+  document.querySelectorAll('.adaptive-cta-wrap').forEach(w => {
+    w.classList.remove('visible');
+  });
+
+  // If a panel is open, trigger immediately
+  behaviour.updateAll();
+}
+
 }); // end DOMContentLoaded
 </script>
 </body>

@@ -83,10 +83,54 @@ const behaviour = {
     if (window.dashboard) window.dashboard.onBranch(branchId);
   },
 
+  // Multiple pills — accumulate before committing
+  selectedPills: [],
+
+  togglePill(pillKey) {
+    const idx = this.selectedPills.indexOf(pillKey);
+    if (idx === -1) {
+      this.selectedPills.push(pillKey);
+    } else {
+      this.selectedPills.splice(idx, 1);
+    }
+  },
+
+  commitPills() {
+    if (!this.selectedPills.length) return;
+    this.declaredProblem = this.selectedPills[0];
+    this.declaredStalls  = this.selectedPills.map(k => PILL_STALLS[k]?.stall).filter(Boolean);
+    this.declaredStall   = this.declaredStalls[0] || null;
+    // Detect stack — two pills that stack together
+    this.declaredStack   = this._detectStack(this.declaredStalls);
+    if (window.dashboard) window.dashboard.init(this.selectedPills);
+  },
+
+  _detectStack(stalls) {
+    if (stalls.length < 2) return null;
+    const KNOWN_STACKS = {
+      'Narrating+Coordinating':  { name: 'Activity-Alignment Stack', description: 'The most common configuration. The ecosystem reports activity to justify continued coordination, and coordinates to generate reportable activity. Neither breaks without changing both.' },
+      'Narrating+Re-proving':    { name: 'Justification Stack', description: 'Resources flow to making the case rather than executing it. External validation is sought repeatedly but never quite sufficient to unlock committed action.' },
+      'Coordinating+Mediating':  { name: 'Relationship Stack', description: 'The ecosystem manages its relationships as the primary output. Transactions are replaced by partnerships, and partnerships by further coordination.' },
+      'Re-proving+Scaling':      { name: 'Evidence-Activity Stack', description: 'Early-stage activity is used as proof of concept rather than evaluated against outcomes. The case for scaling is never quite strong enough.' },
+      'Scaling+Forgiving':       { name: 'Tolerance Stack', description: 'Poor performance at scale is tolerated to avoid disrupting the narrative of progress. Accountability is systematically deferred.' },
+      'Mediating+Extracting':    { name: 'Anchor Dependency Stack', description: 'The ecosystem organises itself around managing anchor institutions rather than changing their behaviour. Value flows out while relationships are maintained.' },
+    };
+    // Try combinations
+    for (let i = 0; i < stalls.length; i++) {
+      for (let j = i+1; j < stalls.length; j++) {
+        const key1 = stalls[i] + '+' + stalls[j];
+        const key2 = stalls[j] + '+' + stalls[i];
+        if (KNOWN_STACKS[key1]) return KNOWN_STACKS[key1];
+        if (KNOWN_STACKS[key2]) return KNOWN_STACKS[key2];
+      }
+    }
+    return null;
+  },
+
   declareProblem(pillKey) {
     this.declaredProblem = pillKey;
     this.declaredStall   = PILL_STALLS[pillKey]?.stall || null;
-    if (window.dashboard) window.dashboard.init(pillKey);
+    if (window.dashboard) window.dashboard.init([pillKey]);
   },
 
   declareCluster(text) {

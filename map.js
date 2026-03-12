@@ -75,6 +75,7 @@ fetch('/clusters.json')
   })
   .then(data => {
     allClusters = data;
+    window._allClusters = data; // expose for similar clusters panel
     renderMarkers(allClusters);
   })
   .catch(err => console.warn('clusters.json error:', err));

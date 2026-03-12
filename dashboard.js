@@ -108,23 +108,22 @@ const dashboard = {
   currentBranch: null,
 
   // ── INIT ─────────────────────────────────────────────────
-  async init(pillKey) {
-    this.active   = true;
-    this.pillKey  = pillKey;
-    const pill    = PILLS.find(p => p.key === pillKey);
+  async init(pillKeys) {
+    // Accept single key or array
+    if (!Array.isArray(pillKeys)) pillKeys = [pillKeys];
+    this.active    = true;
+    this.pillKeys  = pillKeys;
+    this.pillKey   = pillKeys[0];
+    const pill     = PILLS.find(p => p.key === this.pillKey);
     this.stallName = pill?.stall || null;
+    this.stallNames = pillKeys.map(k => PILLS.find(p => p.key === k)?.stall).filter(Boolean);
+    this.stack     = window.behaviour?._detectStack(this.stallNames) || null;
 
-    // Show panel with skeleton
     this._showPanel();
     this._renderSkeleton();
-
-    // Update bar
     this._updateBar(pill);
-
-    // Generate initial pathway via Claude
     await this._generatePathway();
 
-    // Open recommended entry fork
     if (pill?.entry && window.openPanel) {
       setTimeout(() => window.openPanel(pill.entry), 800);
     }
@@ -198,10 +197,18 @@ const dashboard = {
 
   async _generatePathway() {
     const science = STALL_SCIENCE[this.stallName];
+    const stackInfo = this.stack
+      ? `DETECTED STACK: ${this.stack.name} — ${this.stack.description}`
+      : '';
+    const multiStall = this.stallNames.length > 1
+      ? `MULTIPLE STALLS SELECTED: ${this.stallNames.join(' + ')} — visitor is describing a compound configuration.`
+      : '';
     const prompt = `You are generating a personalised learning pathway for the ClusterOS diagnostic platform.
 
-VISITOR DECLARED: "${PILLS.find(p => p.key === this.pillKey)?.label}"
-THIS MAPS TO: The ${this.stallName} stall — ${science?.definition || ''}
+VISITOR DECLARED: "${this.pillKeys.map(k => PILLS.find(p => p.key === k)?.label).join('" AND "')}"
+PRIMARY STALL: The ${this.stallName} stall — ${science?.definition || ''}
+${multiStall}
+${stackInfo}
 STACKS WITH: ${science?.stacksWith?.join(', ') || 'unknown'}
 LEVERAGE DIRECTION: ${science?.leverage || 'unknown'}
 
@@ -365,7 +372,8 @@ Rewrite steps ${this.currentStep + 2} to 4 only (keep step 5 as the diagnostic).
     if (submit) submit.style.display = 'none';
     if (status) {
       status.style.display = 'block';
-      status.textContent   = `${pill?.stall || 'Stall'} detected — building your pathway`;
+      const stackMsg = this.stack ? `${this.stack.name} detected` : `${this.stallNames.join(' + ')} stall${this.stallNames.length > 1 ? 's' : ''} detected`;
+      status.textContent = stackMsg + ' — building your pathway';
     }
   },
 
@@ -390,6 +398,17 @@ Rewrite steps ${this.currentStep + 2} to 4 only (keep step 5 as the diagnostic).
     if (el && text) {
       el.textContent = text;
       el.style.display = 'block';
+    }
+    // Show stack callout if detected
+    if (this.stack) {
+      const header = document.querySelector('.db-header');
+      if (header && !document.getElementById('db-stack-callout')) {
+        const callout = document.createElement('div');
+        callout.id = 'db-stack-callout';
+        callout.style.cssText = 'margin-top:0.8rem;padding:0.7rem 0.8rem;background:rgba(200,240,208,0.2);border-left:2px solid var(--signal);font-size:11px;color:var(--ink-dim);line-height:1.5;';
+        callout.innerHTML = `<strong style="font-family:var(--font-mono);font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:3px">${this.stack.name}</strong>${this.stack.description}`;
+        header.appendChild(callout);
+      }
     }
   },
 
@@ -466,7 +485,7 @@ Rewrite steps ${this.currentStep + 2} to 4 only (keep step 5 as the diagnostic).
     const actions = {
       science:      () => window.openPanel && window.openPanel('diagnostic'),
       architecture: () => window.openPanel && window.openPanel('digital'),
-      clusters:     () => document.getElementById('map')?.scrollIntoView({ behavior:'smooth' }),
+      clusters:     () => window.openSimilarClusters && window.openSimilarClusters(),
       evidence:     () => window.openPanel && window.openPanel('evidence'),
       contact:      () => { window.location.href = 'mailto:andrew@communitylab.app?subject=ClusterOS%20conversation'; }
     };
@@ -479,50 +498,170 @@ window.dashboard = dashboard;
 
 // ── OPENING QUESTION & PILLS ──────────────────────────────
 function initOpeningQuestion() {
-  // Replace bar placeholder with question and render pills above bar
   const input = document.getElementById('intel-bar-input');
   if (input) {
-    input.placeholder = 'What does your ecosystem keep doing instead of progressing?';
+    input.placeholder = 'Name your cluster, or pick what your ecosystem keeps doing below';
   }
 
-  // Render pills strip above bar
   const bar = document.getElementById('intel-bar');
   if (!bar) return;
 
   const pillsEl = document.createElement('div');
   pillsEl.id = 'intel-pills';
   pillsEl.innerHTML = `
-    <div class="pills-label">Your ecosystem keeps…</div>
+    <div class="pills-label">Your ecosystem keeps… <span id="pills-hint" style="color:var(--green);margin-left:8px;display:none">Pick all that apply</span></div>
     <div class="pills-row">
       ${PILLS.map(p =>
         `<button class="pill" data-key="${p.key}">${p.label}</button>`
       ).join('')}
       <button class="pill pill-other" data-key="other">Something else →</button>
+    </div>
+    <div id="pills-commit-row" style="display:none;margin-top:0.6rem;">
+      <button id="pills-commit">Build my pathway →</button>
+      <span id="pills-stack-preview" style="font-family:var(--font-mono);font-size:10px;color:var(--green);margin-left:12px;text-transform:uppercase;letter-spacing:0.08em;"></span>
     </div>`;
 
   bar.parentNode.insertBefore(pillsEl, bar);
 
-  // Wire up pills
+  // Add commit button style
+  const style = document.createElement('style');
+  style.textContent = '#pills-commit{background:var(--green);color:#fff;border:none;font-family:var(--font-mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;padding:6px 16px;cursor:pointer;transition:background 0.15s;}#pills-commit:hover{background:var(--green-dim);}';
+  document.head.appendChild(style);
+
+  const commitRow  = document.getElementById('pills-commit-row');
+  const commitBtn  = document.getElementById('pills-commit');
+  const stackPrev  = document.getElementById('pills-stack-preview');
+  const hint       = document.getElementById('pills-hint');
+
+  // Wire up pills — multi-select
   document.querySelectorAll('.pill').forEach(btn => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.key;
       if (key === 'other') {
-        // Just focus the text input
         document.getElementById('intel-bar-input')?.focus();
         return;
       }
-      // Mark pill selected
-      document.querySelectorAll('.pill').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      // Dismiss pills after short delay
-      setTimeout(() => {
-        pillsEl.classList.add('dismissed');
-      }, 600);
-      // Fire
-      behaviour.declareProblem(key);
+      btn.classList.toggle('selected');
+      behaviour.togglePill(key);
+
+      const selected = behaviour.selectedPills;
+      if (selected.length === 0) {
+        commitRow.style.display = 'none';
+        hint.style.display = 'none';
+        stackPrev.textContent = '';
+      } else {
+        commitRow.style.display = 'block';
+        hint.style.display = 'inline';
+        // Preview stack if detectable
+        const stalls = selected.map(k => window.PILL_STALLS[k]?.stall).filter(Boolean);
+        const stack  = behaviour._detectStack(stalls);
+        stackPrev.textContent = stack ? stack.name + ' detected' : '';
+      }
     });
   });
+
+  // Commit
+  commitBtn?.addEventListener('click', () => {
+    if (!behaviour.selectedPills.length) return;
+    pillsEl.classList.add('dismissed');
+    behaviour.commitPills();
+  });
 }
+
+// ── SIMILAR CLUSTERS PANEL ────────────────────────────────
+function buildClusterCards(clusters) {
+  if (!clusters.length) return '<p style="color:var(--ink-muted);font-style:italic;font-size:14px;">No matching clusters found.</p>';
+
+  return '<div class="clusters-grid">' + clusters.map(c => {
+    const topStalls = (c.stalls || [])
+      .sort((a,b) => (b.intensity||0) - (a.intensity||0))
+      .slice(0, 3);
+
+    const stallsHtml = topStalls.map(s => {
+      const w   = Math.round((s.intensity||0.3) * 80);
+      const col = (s.intensity||0) > 0.65 ? '#d4695a' : (s.intensity||0) > 0.4 ? '#d4a94a' : '#2a7a4f';
+      return `<div class="cmc-stall-row">
+        <div class="cmc-stall-bar" style="width:${w}px;background:${col}"></div>
+        <span class="cmc-stall-name">${s.name}</span>
+      </div>`;
+    }).join('');
+
+    const leverage = c.leverage?.hypothesis
+      ? `<p class="cmc-leverage">"${c.leverage.hypothesis.slice(0,120)}${c.leverage.hypothesis.length > 120 ? '…' : ''}"</p>`
+      : '';
+
+    const slug = c.id || c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+    return `<a class="cluster-match-card" href="/clusters/${slug}.html">
+      <div class="cmc-name">${c.name}</div>
+      <div class="cmc-meta">${c.city || ''} · ${c.country || ''}</div>
+      <span class="cmc-regime ${c.regime||'emerging'}">${c.regime||'emerging'}</span>
+      <div class="cmc-stalls">${stallsHtml}</div>
+      ${leverage}
+      <span class="cmc-link">Full profile →</span>
+    </a>`;
+  }).join('') + '</div>';
+}
+
+window.openSimilarClusters = function() {
+  const b = window.behaviour;
+  const allClusters = window._allClusters || [];
+
+  if (!allClusters.length) {
+    // clusters not loaded yet — just open map
+    document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  // Build stall signature from declared stalls + clicked clusters
+  const targetStalls = new Set();
+  if (b.declaredStalls?.length) b.declaredStalls.forEach(s => targetStalls.add(s));
+  b.clusters.forEach(c => { if (c.topStall) targetStalls.add(c.topStall); });
+
+  // Score all clusters by stall overlap
+  const ALL_STALLS_MAP = {
+    'Narrating': 'narrating', 'Coordinating': 'coordinating',
+    'Re-proving': 're-proving', 'Scaling': 'scaling',
+    'Mediating': 'mediating', 'Extracting': 'extracting',
+    'Forgiving': 'forgiving', 'Stabilising': 'stabiliz',
+    'Waiting': 'waiting'
+  };
+
+  const scored = allClusters.map(c => {
+    const clusterStallNames = (c.stalls || []).map(s => s.name.toLowerCase());
+    let score = 0;
+    targetStalls.forEach(targetStall => {
+      const key = ALL_STALLS_MAP[targetStall] || targetStall.toLowerCase();
+      if (clusterStallNames.some(n => n.includes(key))) score++;
+    });
+    // Exclude already-clicked clusters
+    if (b.clusters.find(bc => bc.id === c.id)) score -= 0.5;
+    return { cluster: c, score };
+  })
+  .filter(x => x.score > 0)
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 6)
+  .map(x => x.cluster);
+
+  // Update panel content
+  const title = document.getElementById('clusters-panel-title');
+  const intro = document.getElementById('clusters-panel-intro');
+  const grid  = document.getElementById('clusters-panel-grid');
+
+  if (title) {
+    const stallList = Array.from(targetStalls).slice(0,2).join(' + ');
+    title.textContent = stallList
+      ? `Clusters with active ${stallList} stalls`
+      : 'Clusters with similar configurations';
+  }
+  if (intro && b.stack) {
+    intro.textContent = `These clusters share the ${b.stack.name}. Each has been through the full 5-stage diagnostic — stalls, stacks, and leverage hypotheses are live data.`;
+  }
+  if (grid) grid.innerHTML = buildClusterCards(scored);
+
+  // Open the panel
+  if (window.openPanel) window.openPanel('clusters');
+};
 
 // ── BOOT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {

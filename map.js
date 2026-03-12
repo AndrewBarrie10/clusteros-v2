@@ -1,0 +1,221 @@
+// ── ClusterOS Map & Panel Logic ───────────────────────────
+
+document.addEventListener('DOMContentLoaded', function () {
+
+// ── MAP INIT ──────────────────────────────────────────────
+const map = L.map('map', {
+  center: [28, 12],
+  zoom: 2,
+  zoomControl: true,
+  attributionControl: true,
+  scrollWheelZoom: false
+});
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 14
+}).addTo(map);
+
+let allClusters = [];
+let markers     = [];
+let activeFilter = 'all';
+
+function inferSector(c) {
+  const name = (c.name + ' ' + (c.sector || '')).toLowerCase();
+  if (/cyber|security|infosec/.test(name))               return 'cyber';
+  if (/life.sci|biotech|medtech|health|pharma/.test(name)) return 'life';
+  if (/manufactur|industrial|engineer/.test(name))       return 'manufacturing';
+  if (/space|deep.tech|quantum|photon|satel/.test(name)) return 'space';
+  return 'other';
+}
+
+function pinClass(cluster) {
+  if (!cluster.stalls || !cluster.stalls.length) return 'stall-low';
+  const max = Math.max(...cluster.stalls.map(s => s.intensity || 0));
+  if (max > 0.65) return 'stall-high';
+  if (max > 0.4)  return 'stall-med';
+  return 'stall-low';
+}
+
+function createPin(cluster) {
+  const div = document.createElement('div');
+  div.className = `cluster-pin ${pinClass(cluster)}`;
+  return L.divIcon({ html: div, className: '', iconSize: [10, 10], iconAnchor: [5, 5] });
+}
+
+function renderMarkers(clusters) {
+  markers.forEach(m => m.remove());
+  markers = [];
+  clusters.forEach(c => {
+    if (!c.lat || !c.lng) return;
+    const marker = L.marker([c.lat, c.lng], { icon: createPin(c) });
+    marker.bindTooltip(
+      `<div class="cluster-tooltip"><strong>${c.name}</strong><span>${c.city}, ${c.country}</span></div>`,
+      { permanent: false, direction: 'top', offset: [0, -8], className: '' }
+    );
+    marker.on('click', () => openClusterPanel(c));
+    marker.addTo(map);
+    markers.push(marker);
+  });
+  const countEl = document.getElementById('map-count');
+  if (countEl) countEl.textContent = clusters.length;
+}
+
+function filterClusters() {
+  if (activeFilter === 'all') return allClusters;
+  return allClusters.filter(c => inferSector(c) === activeFilter);
+}
+
+// Load clusters
+fetch('/clusters.json')
+  .then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
+  .then(data => {
+    allClusters = data;
+    renderMarkers(allClusters);
+  })
+  .catch(err => console.warn('clusters.json error:', err));
+
+// Filter buttons
+document.querySelectorAll('.map-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.map-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    renderMarkers(filterClusters());
+  });
+});
+
+// ── CLUSTER SIDE PANEL ────────────────────────────────────
+function openClusterPanel(c) {
+  document.getElementById('cp-name').textContent    = c.name;
+  document.getElementById('cp-meta').textContent    = `${c.city} · ${c.country}`;
+  document.getElementById('cp-summary').textContent = c.summary || 'Diagnostic profile available on request.';
+
+  const badge = document.getElementById('cp-regime-badge');
+  if (badge) badge.innerHTML = c.regime
+    ? `<span class="cp-regime ${c.regime}">${c.regime}</span>` : '';
+
+  const stallsEl = document.getElementById('cp-stalls');
+  if (stallsEl) {
+    stallsEl.innerHTML = '';
+    (c.stalls || []).slice(0, 5).forEach(s => {
+      const row  = document.createElement('div');
+      row.className = 'cp-stall';
+      const barW = Math.round((s.intensity || 0.3) * 80);
+      row.innerHTML = `<div class="cp-stall-bar" style="width:${barW}px"></div><span>${s.name}</span>`;
+      stallsEl.appendChild(row);
+    });
+  }
+
+  const slug = c.id || c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const link = document.getElementById('cp-full-link');
+  if (link) link.href = `/clusters/${slug}.html`;
+
+  document.getElementById('cluster-panel').classList.add('open');
+
+  // Signal to behaviour layer
+  if (window.behaviour) window.behaviour.recordCluster(c);
+}
+
+function closeClusterPanel() {
+  document.getElementById('cluster-panel').classList.remove('open');
+}
+
+// ── JOURNEY PANELS ────────────────────────────────────────
+function closePanel(id) {
+  const panel = document.getElementById(`panel-${id}`);
+  if (panel) panel.classList.remove('open');
+  if (window.behaviour) window.behaviour.recordClose(id);
+  document.getElementById('forks')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function openPanel(id) {
+  document.querySelectorAll('.journey-panel').forEach(p => p.classList.remove('open'));
+  const panel = document.getElementById(`panel-${id}`);
+  if (panel) {
+    panel.classList.add('open');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  if (window.behaviour) {
+    window.behaviour.recordFork(id);
+    window.behaviour.updateAll();
+  }
+  if (window.dashboard) window.dashboard.onForkOpen(id);
+}
+
+function switchPanel(from, to) {
+  const fromPanel = document.getElementById(`panel-${from}`);
+  if (fromPanel) fromPanel.classList.remove('open');
+  openPanel(to);
+}
+
+// Expose to global scope for onclick attributes in HTML
+window.closePanel       = closePanel;
+window.openPanel        = openPanel;
+window.switchPanel      = switchPanel;
+window.closeClusterPanel = closeClusterPanel;
+
+// Fork thread click handlers
+document.querySelectorAll('.fork-thread').forEach(thread => {
+  thread.addEventListener('click', () => {
+    const id    = thread.dataset.panel;
+    const panel = document.getElementById(`panel-${id}`);
+    if (panel?.classList.contains('open')) {
+      closePanel(id);
+    } else {
+      openPanel(id);
+    }
+  });
+});
+
+// ── INTELLIGENCE BAR ──────────────────────────────────────
+const barInput  = document.getElementById('intel-bar-input');
+const barSubmit = document.getElementById('intel-bar-submit');
+const barStatus = document.getElementById('intel-bar-status');
+
+if (barInput) {
+  barInput.addEventListener('input', () => {
+    if (barSubmit) {
+      barSubmit.style.display = barInput.value.trim().length > 2 ? 'block' : 'none';
+    }
+  });
+
+  barInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitBar();
+  });
+}
+
+if (barSubmit) barSubmit.addEventListener('click', submitBar);
+
+function submitBar() {
+  const val = barInput?.value.trim();
+  if (!val) return;
+
+  if (window.behaviour) window.behaviour.declareCluster(val);
+
+  if (barInput)  barInput.style.display  = 'none';
+  if (barSubmit) barSubmit.style.display = 'none';
+  if (barStatus) {
+    barStatus.style.display = 'block';
+    barStatus.textContent   = val + ' — reading the map';
+  }
+
+  // Reset adaptive blocks
+  document.querySelectorAll('.adaptive-cta-wrap').forEach(w => w.classList.remove('visible'));
+  if (window.behaviour) window.behaviour.updateAll();
+}
+
+// ── DASHBOARD PANEL CLOSE ─────────────────────────────────
+const dbClose = document.getElementById('dashboard-close');
+if (dbClose) {
+  dbClose.addEventListener('click', () => {
+    document.getElementById('dashboard-panel')?.classList.remove('open');
+    document.body.classList.remove('dashboard-open');
+  });
+}
+
+}); // end DOMContentLoaded

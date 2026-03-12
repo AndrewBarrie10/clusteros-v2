@@ -1248,7 +1248,7 @@ function openClusterPanel(c) {
   }
 
   const slug = c.id || c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  document.getElementById('cp-full-link').href = `https://clusteros.io/clusters/${slug}.html`;
+  document.getElementById('cp-full-link').href = `/clusters/${slug}.html`;
 
   document.getElementById('cluster-panel').classList.add('open');
 }

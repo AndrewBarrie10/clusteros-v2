@@ -1190,11 +1190,11 @@
   /* Pills strip above bar */
   #intel-pills {
     position: fixed; bottom: 56px; left: 0; right: 0;
-    background: rgba(247,244,239,0.98);
-    backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border);
-    padding: 0.7rem 1.4rem;
-    z-index: 949;
+    background: var(--page);
+    border-top: 2px solid var(--green);
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.08);
+    padding: 0.8rem 1.4rem;
+    z-index: 960;
     transition: opacity 0.3s, transform 0.3s;
   }
   #intel-pills.dismissed {

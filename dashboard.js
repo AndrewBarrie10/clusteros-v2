@@ -311,47 +311,50 @@ LEVERAGE DIRECTION: ${science.leverage || ''}
 MATCHED CLUSTERS — use these as the evidence base for the pathway:
 ${clusterEvidence}
 
-PATHWAY RULES:
-- Step 1: Already complete (visitor just declared their problem). Name the stall explicitly.
-- Step 2: Show them they are not alone. Reference a specific matched cluster by name — its stall intensity, its regime. Make it concrete.
-- Step 3: Introduce the stack concept through their specific configuration. Name which clusters share the same stall combination and why that matters for intervention.
-- Step 4: The leverage hypothesis. Reference the specific leverage hypothesis from the best-matched cluster — what entry point, what timeline, what the hypothesis actually was. Be precise.
-- Step 5: Always "Confirm it in yours" — snapshot diagnostic, 4-5 weeks, fixed price.
+STRICT RULES:
+- Every description is EXACTLY one sentence. Maximum 25 words. No exceptions.
+- Name a real cluster from the matched data in steps 2, 3, and 4.
+- No hedging. No "suggests", "may", "often". State facts.
+- No em-dashes. No semicolons. Short, direct, specific.
 
-Descriptions must be specific. "Coventry & Warwickshire's Narrating stall ran at 71% intensity" is good. "Many clusters share this pattern" is not.
+Step 1 (complete): Name the stall. State how many of the 75 clusters show it. One sentence.
+Step 2: Name one matched cluster + one specific data point (stall intensity % or regime). One sentence.
+Step 3: Name the stack + which clusters share this combination. One sentence.
+Step 4: State the leverage entry point from the best matched cluster's leverage hypothesis. Name the cluster. One sentence.
+Step 5: Fixed. "A snapshot diagnostic takes 4-5 weeks at a fixed price and tells you where leverage sits in your ecosystem."
 
-Return ONLY valid JSON, no markdown, no explanation:
+Return ONLY valid JSON, no markdown:
 {
-  "opening": "A single sharp sentence naming their stall that makes them feel seen. Under 20 words. No em-dashes. Reference a real cluster name if possible.",
+  "opening": "One sentence. Name a real cluster from the matched data. Make the visitor feel seen. Under 18 words. No em-dashes.",
   "steps": [
     {
       "id": 1,
-      "title": "Short title (3-5 words)",
-      "description": "One sentence. Name the stall. Reference how many of the 75 clusters show it.",
+      "title": "3-4 words max",
+      "description": "EXACTLY one sentence, max 25 words, names the stall and a prevalence number.",
       "target": "evidence",
       "branches": ["science", "evidence"],
       "complete": true
     },
     {
       "id": 2,
-      "title": "...",
-      "description": "One sentence citing a specific matched cluster by name with a real data point.",
+      "title": "3-4 words max",
+      "description": "EXACTLY one sentence, max 25 words, names a real cluster with a specific data point.",
       "target": "clusters",
       "branches": ["science", "evidence"],
       "complete": false
     },
     {
       "id": 3,
-      "title": "...",
-      "description": "One sentence on why the stall holds — name the stack, name which clusters share it.",
+      "title": "3-4 words max",
+      "description": "EXACTLY one sentence, max 25 words, names the stack and which clusters share it.",
       "target": "diagnostic",
       "branches": ["science", "architecture", "clusters"],
       "complete": false
     },
     {
       "id": 4,
-      "title": "...",
-      "description": "One sentence on leverage — quote or closely paraphrase the actual leverage hypothesis from the best-matched cluster. Name the cluster.",
+      "title": "3-4 words max",
+      "description": "EXACTLY one sentence, max 25 words, states the leverage entry point from a named cluster.",
       "target": "clusters",
       "branches": ["clusters", "evidence"],
       "complete": false
@@ -359,7 +362,7 @@ Return ONLY valid JSON, no markdown, no explanation:
     {
       "id": 5,
       "title": "Confirm it in yours",
-      "description": "A snapshot diagnostic takes 4-5 weeks at a fixed price. It tells you whether this configuration is active in your ecosystem — and where leverage actually sits.",
+      "description": "A snapshot diagnostic takes 4-5 weeks at a fixed price and tells you where leverage sits in your ecosystem.",
       "target": "snapshot",
       "branches": ["contact"],
       "complete": false
@@ -423,19 +426,19 @@ The visitor has ${reason === 'cluster_exploration'
   : 'declared their specific cluster. Reframe remaining steps around that cluster context — compare it explicitly to the matched clusters above.'
 }
 
-Rewrite steps ${this.currentStep + 2} through 4 only. Keep step 5 unchanged. Every description must name a specific cluster. Return ONLY valid JSON:
+Rewrite steps ${this.currentStep + 2} through 4 only. Keep step 5 unchanged. STRICT: every description is exactly one sentence, maximum 25 words, must name a specific cluster. Return ONLY valid JSON:
 {
   "steps": [
     {
       "id": ${this.currentStep + 2},
-      "title": "...",
-      "description": "One sentence. Specific cluster name + real data point.",
+      "title": "3-4 words",
+      "description": "EXACTLY one sentence, max 25 words, specific cluster name + data point.",
       "target": "one of: evidence, diagnostic, digital, founders, clusters, snapshot",
       "branches": ["science", "clusters"],
       "complete": false
     }
   ],
-  "recalibration_note": "One sentence on why the path changed. Under 15 words. Specific."
+  "recalibration_note": "Under 10 words. Specific. No hedging."
 }`;
 
     try {

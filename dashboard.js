@@ -353,6 +353,7 @@ Rewrite steps ${this.currentStep + 2} to 4 only (keep step 5 as the diagnostic).
     if (panel) {
       panel.classList.add('open');
       document.body.classList.add('dashboard-open');
+      document.getElementById('dashboard-tab')?.classList.remove('visible');
     }
   },
 

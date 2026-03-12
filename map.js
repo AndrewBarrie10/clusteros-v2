@@ -209,13 +209,21 @@ function submitBar() {
   if (window.behaviour) window.behaviour.updateAll();
 }
 
-// ── DASHBOARD PANEL CLOSE ─────────────────────────────────
+// ── DASHBOARD PANEL CLOSE / REOPEN ───────────────────────
 const dbClose = document.getElementById('dashboard-close');
 if (dbClose) {
   dbClose.addEventListener('click', () => {
     document.getElementById('dashboard-panel')?.classList.remove('open');
     document.body.classList.remove('dashboard-open');
+    // Show the tab so they can reopen
+    document.getElementById('dashboard-tab')?.classList.add('visible');
   });
 }
+
+window.dashboardReopen = function() {
+  document.getElementById('dashboard-panel')?.classList.add('open');
+  document.body.classList.add('dashboard-open');
+  document.getElementById('dashboard-tab')?.classList.remove('visible');
+};
 
 }); // end DOMContentLoaded

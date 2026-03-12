@@ -195,71 +195,165 @@ const dashboard = {
 
   // ── API CALLS ─────────────────────────────────────────────
 
+  // ── CLUSTER MATCHING ─────────────────────────────────────
+  // Run before pathway generation. Returns top N clusters scored
+  // against declared stalls, with full diagnostic data serialised.
+
+  _matchClusters(limit = 4) {
+    const all = window._allClusters || [];
+    if (!all.length) return [];
+
+    const targetStalls = this.stallNames.map(s => s.toLowerCase());
+
+    const STALL_ALIASES = {
+      'narrating':    ['narrat'],
+      'coordinating': ['coordinat'],
+      're-proving':   ['re-prov', 'reprov', 'proving'],
+      'scaling':      ['scal'],
+      'mediating':    ['mediat'],
+      'extracting':   ['extract'],
+      'forgiving':    ['forgiv'],
+      'stabilising':  ['stabilis', 'stabiliz'],
+      'waiting':      ['wait'],
+    };
+
+    return all
+      .map(c => {
+        const clusterStalls = (c.stalls || []).map(s => ({
+          name:      s.name || '',
+          intensity: s.intensity || 0,
+          confidence: s.confidence || 'medium'
+        }));
+
+        // Score: sum of intensity for each matched target stall
+        let score = 0;
+        targetStalls.forEach(target => {
+          const aliases = STALL_ALIASES[target] || [target];
+          clusterStalls.forEach(cs => {
+            const csName = cs.name.toLowerCase();
+            if (aliases.some(a => csName.includes(a))) {
+              score += cs.intensity * (target === csName ? 1.2 : 1); // bonus for exact
+            }
+          });
+        });
+
+        // Boost if regime + stall combination is strong
+        if (score > 0 && c.regime === 'cycling') score += 0.1;
+
+        return { cluster: c, score };
+      })
+      .filter(x => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit)
+      .map(x => x.cluster);
+  },
+
+  _serializeCluster(c) {
+    const stalls = (c.stalls || [])
+      .sort((a, b) => (b.intensity||0) - (a.intensity||0))
+      .slice(0, 4)
+      .map(s => `    • ${s.name}: ${Math.round((s.intensity||0)*100)}% intensity (${s.confidence||'medium'} confidence)`)
+      .join('\n');
+
+    const stacks = (c.stacks || [])
+      .map(s => `    Stack [${(s.stalls_involved||[]).join(' + ')}]: ${s.description||''}`)
+      .join('\n');
+
+    const leverage = c.leverage
+      ? `    Hypothesis: "${c.leverage.hypothesis||''}"\n    Timeline: ${c.leverage.timeline||'unknown'}\n    Entry point: ${c.leverage.entry_point||'unknown'}`
+      : '    No leverage hypothesis recorded.';
+
+    const summary = c.summary ? `    "${c.summary.slice(0,200)}${c.summary.length>200?'…':''}"` : '';
+
+    return `CLUSTER: ${c.name}
+  Location: ${c.city||''}, ${c.country||''}
+  Regime: ${c.regime||'unknown'} | Anchor type: ${c._anchor_type||'unknown'}
+  Summary: ${summary}
+  Stalls:
+${stalls||'    None recorded'}
+  Stacks:
+${stacks||'    None recorded'}
+  Leverage:
+${leverage}`;
+  },
+
   async _generatePathway() {
-    const science = STALL_SCIENCE[this.stallName];
+    const science = STALL_SCIENCE[this.stallName] || {};
+
+    // Pre-compute matched clusters before generating prompt
+    this.matchedClusters = this._matchClusters(4);
+    const clusterEvidence = this.matchedClusters.length
+      ? this.matchedClusters.map(c => this._serializeCluster(c)).join('\n\n')
+      : 'Cluster data not yet loaded — generate pathway from stall science only.';
+
     const stackInfo = this.stack
-      ? `DETECTED STACK: ${this.stack.name} — ${this.stack.description}`
+      ? `DETECTED STACK: ${this.stack.name}\n${this.stack.description}`
       : '';
     const multiStall = this.stallNames.length > 1
-      ? `MULTIPLE STALLS SELECTED: ${this.stallNames.join(' + ')} — visitor is describing a compound configuration.`
+      ? `MULTIPLE STALLS: ${this.stallNames.join(' + ')} — compound configuration.`
       : '';
-    const prompt = `You are generating a personalised learning pathway for the ClusterOS diagnostic platform.
+
+    const prompt = `You are generating a highly personalised learning pathway for the ClusterOS diagnostic platform. ClusterOS has diagnosed 75 real innovation clusters worldwide. The pathway must reference specific clusters by name — not generically. Every step description should cite real cluster evidence from the data below.
 
 VISITOR DECLARED: "${this.pillKeys.map(k => PILLS.find(p => p.key === k)?.label).join('" AND "')}"
-PRIMARY STALL: The ${this.stallName} stall — ${science?.definition || ''}
+PRIMARY STALL: The ${this.stallName} stall — ${science.definition || ''}
 ${multiStall}
 ${stackInfo}
-STACKS WITH: ${science?.stacksWith?.join(', ') || 'unknown'}
-LEVERAGE DIRECTION: ${science?.leverage || 'unknown'}
+STALL SCIENCE: ${science.stacksWith ? 'Stacks with: ' + science.stacksWith.join(', ') : ''}
+LEVERAGE DIRECTION: ${science.leverage || ''}
 
-THE PLATFORM HAS:
-- A map of 75 diagnosed clusters worldwide (with full stall, stack, and leverage data)
-- Four content panels: Evidence (what 75 diagnostics found), Diagnostic (how the 5-stage pipeline works), Architecture (MCP tech layer), Founders (B&H background and credibility)
-- Individual cluster profile pages with radar charts
-- A snapshot diagnostic product (4-5 weeks, fixed price)
+MATCHED CLUSTERS — use these as the evidence base for the pathway:
+${clusterEvidence}
 
-Generate a 5-step pathway for this visitor. Each step should reveal one layer of the ClusterOS intellectual framework — stalls, stacks, leverage — through their specific problem. Step 1 is always completing (they just declared). Step 5 is always the diagnostic conversation.
+PATHWAY RULES:
+- Step 1: Already complete (visitor just declared their problem). Name the stall explicitly.
+- Step 2: Show them they are not alone. Reference a specific matched cluster by name — its stall intensity, its regime. Make it concrete.
+- Step 3: Introduce the stack concept through their specific configuration. Name which clusters share the same stall combination and why that matters for intervention.
+- Step 4: The leverage hypothesis. Reference the specific leverage hypothesis from the best-matched cluster — what entry point, what timeline, what the hypothesis actually was. Be precise.
+- Step 5: Always "Confirm it in yours" — snapshot diagnostic, 4-5 weeks, fixed price.
 
-Return ONLY valid JSON in this exact structure, no markdown, no explanation:
+Descriptions must be specific. "Coventry & Warwickshire's Narrating stall ran at 71% intensity" is good. "Many clusters share this pattern" is not.
+
+Return ONLY valid JSON, no markdown, no explanation:
 {
-  "opening": "A single sharp sentence that names their stall and makes them feel seen. Under 20 words. No em-dashes.",
+  "opening": "A single sharp sentence naming their stall that makes them feel seen. Under 20 words. No em-dashes. Reference a real cluster name if possible.",
   "steps": [
     {
       "id": 1,
       "title": "Short title (3-5 words)",
-      "description": "One sentence — what they will understand after this step. Specific to their stall.",
-      "target": "one of: evidence, diagnostic, digital, founders, map, clusters, contact, snapshot",
-      "branches": ["science", "evidence", "architecture"],
+      "description": "One sentence. Name the stall. Reference how many of the 75 clusters show it.",
+      "target": "evidence",
+      "branches": ["science", "evidence"],
       "complete": true
     },
     {
       "id": 2,
       "title": "...",
-      "description": "...",
-      "target": "...",
+      "description": "One sentence citing a specific matched cluster by name with a real data point.",
+      "target": "clusters",
       "branches": ["science", "evidence"],
       "complete": false
     },
     {
       "id": 3,
       "title": "...",
-      "description": "...",
-      "target": "...",
+      "description": "One sentence on why the stall holds — name the stack, name which clusters share it.",
+      "target": "diagnostic",
       "branches": ["science", "architecture", "clusters"],
       "complete": false
     },
     {
       "id": 4,
       "title": "...",
-      "description": "...",
-      "target": "...",
+      "description": "One sentence on leverage — quote or closely paraphrase the actual leverage hypothesis from the best-matched cluster. Name the cluster.",
+      "target": "clusters",
       "branches": ["clusters", "evidence"],
       "complete": false
     },
     {
       "id": 5,
       "title": "Confirm it in yours",
-      "description": "A snapshot diagnostic takes 4-5 weeks at a fixed price. It tells you whether this is what is happening — and where leverage exists.",
+      "description": "A snapshot diagnostic takes 4-5 weeks at a fixed price. It tells you whether this configuration is active in your ecosystem — and where leverage actually sits.",
       "target": "snapshot",
       "branches": ["contact"],
       "complete": false
@@ -273,45 +367,69 @@ Return ONLY valid JSON in this exact structure, no markdown, no explanation:
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ prompt })
       });
-      const data = await response.json();
-      const text = data.text || '';
+      const data   = await response.json();
+      const text   = data.text || '';
       const parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
-      this.steps        = parsed.steps;
-      this.currentStep  = 1; // step 1 already complete
+      this.steps       = parsed.steps;
+      this.currentStep = 1;
       this._renderOpening(parsed.opening);
       this._render();
     } catch(e) {
-      // Fallback pathway
       this._fallbackPathway();
     }
   },
 
   async _recalibrate(reason) {
     const stepsAhead = this.steps.slice(this.currentStep + 1);
-    const clusters   = window.behaviour.clusters.map(c => c.name).join(', ');
-    const prompt = `You are recalibrating a ClusterOS visitor pathway.
+
+    // Get the clusters they actually clicked — serialize their full data
+    const clickedClusters = window.behaviour.clusters.map(c =>
+      c.fullData ? this._serializeCluster(c.fullData) : `CLUSTER: ${c.name} [${c.city}, ${c.country}]`
+    ).join('\n\n');
+
+    // Re-run matching with any new stall signals from clicked clusters
+    const updatedMatches = this._matchClusters(3);
+    const freshEvidence  = updatedMatches
+      .filter(c => !window.behaviour.clusters.find(bc => bc.id === c.id)) // exclude already clicked
+      .map(c => this._serializeCluster(c))
+      .join('\n\n');
+
+    const declaredCluster = window.behaviour.declaredCluster
+      ? `DECLARED CLUSTER: "${window.behaviour.declaredCluster}" — weight all steps toward this context.`
+      : '';
+
+    const prompt = `You are recalibrating a ClusterOS visitor pathway based on new signals. References must be specific — name real clusters, cite real data points.
 
 ORIGINAL STALL: ${this.stallName}
+${this.stack ? 'STACK: ' + this.stack.name : ''}
 RECALIBRATION TRIGGER: ${reason}
-CLUSTERS VISITED: ${clusters || 'none'}
-COMPLETED STEPS: ${this.currentStep} of 5
-STEPS AHEAD WERE: ${stepsAhead.map(s => s.title).join(', ')}
+COMPLETED STEPS SO FAR: ${this.currentStep} of 5
+${declaredCluster}
 
-The visitor has ${reason === 'cluster_exploration' ? 'been exploring specific clusters on the map — they are going deeper into evidence than the pathway predicted' : 'declared their specific cluster — this is now the primary framing context'}.
+CLUSTERS THEY HAVE EXPLORED:
+${clickedClusters || 'None clicked yet.'}
 
-Rewrite steps ${this.currentStep + 2} to 4 only (keep step 5 as the diagnostic). Return ONLY valid JSON:
+ADDITIONAL MATCHED CLUSTERS NOT YET SEEN:
+${freshEvidence || 'None.'}
+
+The visitor has ${reason === 'cluster_exploration'
+  ? 'gone deeper into cluster evidence than predicted. Rewrite the remaining steps to follow that depth — more specific cluster comparisons, more precise leverage.'
+  : 'declared their specific cluster. Reframe remaining steps around that cluster context — compare it explicitly to the matched clusters above.'
+}
+
+Rewrite steps ${this.currentStep + 2} through 4 only. Keep step 5 unchanged. Every description must name a specific cluster. Return ONLY valid JSON:
 {
   "steps": [
     {
       "id": ${this.currentStep + 2},
       "title": "...",
-      "description": "...",
-      "target": "one of: evidence, diagnostic, digital, founders, map, clusters, contact, snapshot",
+      "description": "One sentence. Specific cluster name + real data point.",
+      "target": "one of: evidence, diagnostic, digital, founders, clusters, snapshot",
       "branches": ["science", "clusters"],
       "complete": false
     }
   ],
-  "recalibration_note": "One sentence explaining why the path changed. Under 15 words."
+  "recalibration_note": "One sentence on why the path changed. Under 15 words. Specific."
 }`;
 
     try {
@@ -340,16 +458,35 @@ Rewrite steps ${this.currentStep + 2} to 4 only (keep step 5 as the diagnostic).
   },
 
   _fallbackPathway() {
-    const science = STALL_SCIENCE[this.stallName] || {};
+    const science   = STALL_SCIENCE[this.stallName] || {};
+    const matched   = this.matchedClusters || [];
+    const top       = matched[0];
+    const second    = matched[1];
+
+    const step2desc = top
+      ? `${top.name} (${top.city}, ${top.country}) shows the ${this.stallName} stall at ${Math.round(((top.stalls||[])[0]?.intensity||0.5)*100)}% intensity — same configuration, already diagnosed.`
+      : `Three of the 75 clusters share your configuration. Their stall profiles are already mapped.`;
+
+    const stackDesc = this.stack
+      ? `${this.stallName} stacks with ${this.stack.name} — ${second ? second.name + ' shows both active.' : 'single interventions will not break it.'}`
+      : `${this.stallName} rarely travels alone. It stacks with ${(science.stacksWith||[]).join(' and ')}.`;
+
+    const leverageDesc = top?.leverage?.hypothesis
+      ? `${top.name}'s leverage hypothesis: "${top.leverage.hypothesis.slice(0,120)}${top.leverage.hypothesis.length>120?'…':''}"`
+      : science.leverage || 'The point of intervention is almost never where the stall is most visible.';
+
     this.steps = [
-      { id:1, title:'You\'ve named it',        description:`The ${this.stallName} stall appears in 67% of clusters we\'ve diagnosed. It is not unique to yours.`, target:'evidence',   branches:['science','evidence'], complete:true },
-      { id:2, title:'See it in the data',      description:'Three of the 75 clusters share your configuration. Their stall profiles are already mapped.', target:'map',        branches:['science','evidence'], complete:false },
-      { id:3, title:'Understand why it holds', description:`${this.stallName} rarely travels alone. It stacks with ${(science.stacksWith||[]).join(' and ')}.`, target:'diagnostic', branches:['science','architecture','clusters'], complete:false },
-      { id:4, title:'Find the leverage',       description:science.leverage || 'The point of intervention is almost never where the stall is most visible.', target:'clusters',   branches:['clusters','evidence'], complete:false },
-      { id:5, title:'Confirm it in yours',     description:'A snapshot diagnostic takes 4-5 weeks at a fixed price. It tells you whether this is what is happening — and where leverage exists.', target:'snapshot', branches:['contact'], complete:false }
+      { id:1, title:'You've named it',        description:`The ${this.stallName} stall appears across ${matched.length > 0 ? matched.length + ' of our closest matches' : '67% of clusters diagnosed'}. It is not unique to yours.`, target:'evidence',   branches:['science','evidence'], complete:true },
+      { id:2, title:'See it in the data',      description:step2desc, target:'clusters', branches:['science','evidence'], complete:false },
+      { id:3, title:'Understand why it holds', description:stackDesc, target:'diagnostic', branches:['science','architecture','clusters'], complete:false },
+      { id:4, title:'Find the leverage',       description:leverageDesc, target:'clusters', branches:['clusters','evidence'], complete:false },
+      { id:5, title:'Confirm it in yours',     description:'A snapshot diagnostic takes 4-5 weeks at a fixed price. It tells you whether this configuration is active — and where leverage actually sits.', target:'snapshot', branches:['contact'], complete:false }
     ];
     this.currentStep = 1;
-    this._renderOpening(`The ${this.stallName} stall is active. It will not respond to strategy.`);
+    const opening = top
+      ? `${top.name} has been through this. So have ${matched.length - 1} others in the dataset.`
+      : `The ${this.stallName} stall is active. It will not respond to strategy.`;
+    this._renderOpening(opening);
     this._render();
   },
 
@@ -605,43 +742,41 @@ function buildClusterCards(clusters) {
 
 window.openSimilarClusters = function() {
   const b = window.behaviour;
-  const allClusters = window._allClusters || [];
 
-  if (!allClusters.length) {
-    // clusters not loaded yet — just open map
-    document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' });
-    return;
+  // Prefer pre-computed matches from the dashboard; fall back to re-scoring
+  let scored = [];
+  if (window.dashboard?.matchedClusters?.length) {
+    // Use pre-computed matches — already scored against declared stalls
+    scored = window.dashboard.matchedClusters.slice(0, 6);
+  } else {
+    const allClusters = window._allClusters || [];
+    if (!allClusters.length) {
+      document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    const targetStalls = new Set();
+    if (b.declaredStalls?.length) b.declaredStalls.forEach(s => targetStalls.add(s));
+    b.clusters.forEach(c => { if (c.topStall) targetStalls.add(c.topStall); });
+
+    const ALIASES = {
+      'Narrating':'narrat','Coordinating':'coordinat','Re-proving':'re-prov',
+      'Scaling':'scal','Mediating':'mediat','Extracting':'extract',
+      'Forgiving':'forgiv','Stabilising':'stabilis','Waiting':'wait'
+    };
+    scored = allClusters.map(c => {
+      const names = (c.stalls||[]).map(s => s.name.toLowerCase());
+      let score = 0;
+      targetStalls.forEach(t => {
+        const alias = ALIASES[t] || t.toLowerCase();
+        if (names.some(n => n.includes(alias))) score += 1;
+      });
+      return { cluster: c, score };
+    })
+    .filter(x => x.score > 0)
+    .sort((a,b) => b.score - a.score)
+    .slice(0,6)
+    .map(x => x.cluster);
   }
-
-  // Build stall signature from declared stalls + clicked clusters
-  const targetStalls = new Set();
-  if (b.declaredStalls?.length) b.declaredStalls.forEach(s => targetStalls.add(s));
-  b.clusters.forEach(c => { if (c.topStall) targetStalls.add(c.topStall); });
-
-  // Score all clusters by stall overlap
-  const ALL_STALLS_MAP = {
-    'Narrating': 'narrating', 'Coordinating': 'coordinating',
-    'Re-proving': 're-proving', 'Scaling': 'scaling',
-    'Mediating': 'mediating', 'Extracting': 'extracting',
-    'Forgiving': 'forgiving', 'Stabilising': 'stabiliz',
-    'Waiting': 'waiting'
-  };
-
-  const scored = allClusters.map(c => {
-    const clusterStallNames = (c.stalls || []).map(s => s.name.toLowerCase());
-    let score = 0;
-    targetStalls.forEach(targetStall => {
-      const key = ALL_STALLS_MAP[targetStall] || targetStall.toLowerCase();
-      if (clusterStallNames.some(n => n.includes(key))) score++;
-    });
-    // Exclude already-clicked clusters
-    if (b.clusters.find(bc => bc.id === c.id)) score -= 0.5;
-    return { cluster: c, score };
-  })
-  .filter(x => x.score > 0)
-  .sort((a, b) => b.score - a.score)
-  .slice(0, 6)
-  .map(x => x.cluster);
 
   // Update panel content
   const title = document.getElementById('clusters-panel-title');

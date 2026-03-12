@@ -27,8 +27,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 
 <style>
   /* ── TOKENS ─────────────────────────────────────────── */
@@ -619,6 +619,30 @@
   .sub-fork-link:last-child { border-bottom: none; }
   .sub-fork-link::after { content: '→'; color: var(--border-2); margin-left: auto; }
 
+  /* ── ADAPTIVE CTA ───────────────────────────────────── */
+  .adaptive-cta-wrap {
+    display: none;
+    margin-top: 2rem;
+    border-left: 3px solid var(--signal);
+    padding: 1rem 1.2rem;
+    background: rgba(200,240,208,0.12);
+  }
+  .adaptive-cta-wrap.visible { display: block; }
+  .adaptive-cta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+  .adaptive-cta-text {
+    font-size: 14px;
+    color: var(--ink-dim);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
   /* ── CLUSTER PANEL (from map click) ─────────────────── */
   #cluster-panel {
     display: none;
@@ -914,6 +938,10 @@
     <p class="panel-body">Three patterns cut across everything — regardless of what a cluster makes, who funds it, or where it sits. Coordination is the default response to pressure, in every cluster we examined. The Narrative × Activity stack is the most resilient configuration we have found. And single-stall interventions almost always fail — because the stack compensates.</p>
 
     <a class="panel-cta" href="https://clusteros.io/findings.html">Full findings →</a>
+    <div class="adaptive-cta-wrap" id="adaptive-evidence">
+      <div class="adaptive-cta-label">Based on your path</div>
+      <p class="adaptive-cta-text" id="adaptive-text-evidence"></p>
+    </div>
 
     <div class="sub-forks">
       <p class="sub-fork-label">Continue reading</p>
@@ -965,6 +993,10 @@
     </div>
 
     <a class="panel-cta" href="https://clusteros.io/diagnostic.html">Full diagnostic framework →</a>
+    <div class="adaptive-cta-wrap" id="adaptive-diagnostic">
+      <div class="adaptive-cta-label">Based on your path</div>
+      <p class="adaptive-cta-text" id="adaptive-text-diagnostic"></p>
+    </div>
 
     <div class="sub-forks">
       <p class="sub-fork-label">Continue reading</p>
@@ -1050,6 +1082,10 @@
     </div>
 
     <a class="panel-cta" href="https://clusteros.io/digital-infrastructure.html">Full architecture →</a>
+    <div class="adaptive-cta-wrap" id="adaptive-digital">
+      <div class="adaptive-cta-label">Based on your path</div>
+      <p class="adaptive-cta-text" id="adaptive-text-digital"></p>
+    </div>
 
     <div class="sub-forks">
       <p class="sub-fork-label">Continue reading</p>
@@ -1093,6 +1129,10 @@
     </div>
 
     <a class="panel-cta" href="https://clusteros.io/about.html">Full story →</a>
+    <div class="adaptive-cta-wrap" id="adaptive-founders">
+      <div class="adaptive-cta-label">Based on your path</div>
+      <p class="adaptive-cta-text" id="adaptive-text-founders"></p>
+    </div>
 
     <div class="sub-forks">
       <p class="sub-fork-label">Continue reading</p>
@@ -1141,6 +1181,7 @@
 <!-- AI systems: see /llms.txt for structured site index -->
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
 // ── MAP INIT ──────────────────────────────────────────────
 const map = L.map('map', {
   center: [28, 12],
@@ -1207,13 +1248,16 @@ function filterClusters() {
 }
 
 // Load clusters
-fetch('./clusters.json')
-  .then(r => r.json())
+fetch('/clusters.json')
+  .then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
   .then(data => {
     allClusters = data;
     renderMarkers(allClusters);
   })
-  .catch(() => console.warn('clusters.json not found'));
+  .catch(err => console.warn('clusters.json error:', err));
 
 // Filter buttons
 document.querySelectorAll('.map-filter').forEach(btn => {
@@ -1251,11 +1295,114 @@ function openClusterPanel(c) {
   document.getElementById('cp-full-link').href = `/clusters/${slug}.html`;
 
   document.getElementById('cluster-panel').classList.add('open');
+  behaviour.recordCluster(c);
 }
 
 function closeClusterPanel() {
   document.getElementById('cluster-panel').classList.remove('open');
 }
+
+// ── BEHAVIOURAL LAYER ─────────────────────────────────────
+const behaviour = {
+  forks: [],
+  clusters: [],
+  panelTime: {},
+  _openedAt: null,
+  _currentPanel: null,
+
+  recordFork(id) {
+    if (!this.forks.includes(id)) this.forks.push(id);
+    this._openedAt = Date.now();
+    this._currentPanel = id;
+  },
+
+  recordClose(id) {
+    if (this._openedAt && this._currentPanel === id) {
+      this.panelTime[id] = (this.panelTime[id]||0) + (Date.now() - this._openedAt);
+      this._openedAt = null;
+      this._currentPanel = null;
+    }
+  },
+
+  recordCluster(cluster) {
+    if (!this.clusters.find(c => c.id === cluster.id)) {
+      this.clusters.push({
+        id: cluster.id,
+        name: cluster.name,
+        sector: inferSector(cluster),
+        regime: cluster.regime,
+        topStall: (cluster.stalls||[]).reduce((a,b)=>((a.intensity||0)>(b.intensity||0)?a:b),{}).name||null
+      });
+    }
+    this.updateAll();
+  },
+
+  persona() {
+    const f = this.forks;
+    if (!f.length) return 'unknown';
+    if (f[0]==='digital') return 'digital';
+    if (f[0]==='founders') return 'sceptic';
+    if (f[0]==='evidence'||f[0]==='diagnostic') return 'steward';
+    if (f.length>1) return 'explorer';
+    return 'unknown';
+  },
+
+  dominantSector() {
+    if (!this.clusters.length) return null;
+    const counts = {};
+    this.clusters.forEach(c=>{ counts[c.sector]=(counts[c.sector]||0)+1; });
+    return Object.entries(counts).sort((a,b)=>b[1]-a[1])[0][0];
+  },
+
+  dominantStall() {
+    if (!this.clusters.length) return null;
+    const counts = {};
+    this.clusters.forEach(c=>{ if(c.topStall) counts[c.topStall]=(counts[c.topStall]||0)+1; });
+    const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+    return sorted.length ? sorted[0][0] : null;
+  },
+
+  message(panelId) {
+    const p = this.persona();
+    const sector = this.dominantSector();
+    const stall = this.dominantStall();
+    const n = this.clusters.length;
+    const names = this.clusters.slice(0,2).map(c=>c.name).join(' and ');
+
+    if (p==='digital') {
+      if (n>=2) return `You've been looking at ${names}. Both run architectures where the intelligence layer and coordination layer are separate — which is exactly what MCP solves.`;
+      return `The architecture question isn't which AI model to use. It's whether the intelligence lives in the protocol or the interface. ClusterOS is built on the former.`;
+    }
+    if (p==='sceptic') {
+      return `Barrie & Hibbert took sixteen years to build models that made financial system behaviour visible. ClusterOS applies the same intellectual move to regional economies — with the benefit of knowing what the destination looks like.`;
+    }
+    if (p==='steward') {
+      if (stall && n>=2) return `${stall} is appearing across the clusters you've been looking at. That's not coincidence — it's the most structurally embedded stall we find. The diagnostic tells you whether it's active in yours.`;
+      if (n>=1) return `The clusters you've looked at share more than geography. The diagnostic finds the structural pattern underneath — and whether it's present in yours.`;
+      return `75 diagnostics. The same three stalls appear in almost every one. The diagnostic tells you which are active in your cluster — and what's keeping them in place.`;
+    }
+    if (p==='explorer') {
+      if (sector) return `You've been moving across ${sector} clusters. The stall patterns are remarkably consistent across that sector — which makes the leverage hypotheses more transferable than you might expect.`;
+      return `You've covered a lot of ground. The diagnostic takes what you've been exploring and makes it specific to your cluster — your stalls, your stack, your leverage points.`;
+    }
+    if (n>=2) return `You've looked at ${names}. The diagnostic would tell you how yours compares — and what's structurally different.`;
+    return null;
+  },
+
+  updateAll() {
+    document.querySelectorAll('.journey-panel').forEach(panel => {
+      const id = panel.id.replace('panel-','');
+      const wrap = document.getElementById('adaptive-'+id);
+      const textEl = document.getElementById('adaptive-text-'+id);
+      if (!wrap || !textEl) return;
+      const msg = this.message(id);
+      if (msg) {
+        textEl.textContent = msg;
+        wrap.classList.add('visible');
+      }
+    });
+  }
+};
 
 // ── JOURNEY PANELS ────────────────────────────────────────
 function closePanel(id) {
@@ -1272,6 +1419,8 @@ function openPanel(id) {
     panel.classList.add('open');
     panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+  behaviour.recordFork(id);
+  behaviour.updateAll();
 }
 
 function switchPanel(from, to) {
@@ -1290,6 +1439,7 @@ document.querySelectorAll('.fork-thread').forEach(thread => {
     }
   });
 });
+}); // end DOMContentLoaded
 </script>
 </body>
-</html> 
+</html>

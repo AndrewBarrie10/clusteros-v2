@@ -1,0 +1,4538 @@
+[
+  {
+    "id": "abu-dhabi-helm-life-sciences",
+    "name": "Abu Dhabi HELM Life Sciences",
+    "city": "Abu Dhabi",
+    "country": "AE",
+    "lat": 24.4539,
+    "lng": 54.7273,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "S1 (re-proving through partnerships/programs) generates material for S7 (narrating cluster initiative), while S8 (scaling institutional base) provides substrate for continued S1"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "S2 (coordinating through government entities) sustains S5 (mediating rather than direct coupling) by maintaining intermediary structures, while S6 stabilizes around established healthcare operators"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "S8 (scaling facilities/programs/partnerships) generates increased demand for S5 (intermediation services) as new entities and international partners require navigation support"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If partnership announcements were categorized at formation as 'exploratory' vs. committed, it might reduce the system's ability to absorb decision pressure through repeated validation cycles.",
+      "target_stack": "STACK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Abu Dhabi HELM Life Sciences exhibits 6 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083306",
+    "_evidence_count": 53,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "adelaide-space-technology",
+    "name": "Adelaide Space Technology",
+    "city": "Adelaide",
+    "country": "AU",
+    "lat": -34.9285,
+    "lng": 138.6007,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Strategy articulation co-occurs with activity expansion. Each behavior plausibly sustains the other."
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination mechanisms co-occur with organizational breadth. Each behavior plausibly sustains the other."
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediation functions co-occur with narrative construction. Each behavior plausibly sustains the other."
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If coordination mechanisms were required to publish exclusionary decisions with explicit rationale, it might reduce the system's ability to absorb decision pressure through coordination.",
+      "target_stack": "STACK_2",
+      "timeline": "6-12 months"
+    },
+    "summary": "Adelaide Space Technology exhibits 4 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153840",
+    "_evidence_count": 62,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "australia-canberra-cyber-security",
+    "name": "Australia Canberra Cyber Security",
+    "city": "Canberra",
+    "country": "AU",
+    "lat": -35.2809,
+    "lng": 149.13,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Waiting for permission"
+        ],
+        "description": "Repeated institutional establishment creates multiple entities requiring coordination mechanisms. Ministerial oversight structures provide the permission-seeking substrate."
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Scaling of workforce, facilities, and programs generates material for recurring public documentation. Narrative production creates legitimacy for continued activity expansion."
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Incumbent continuity creates capability gaps and security clearance boundaries that make intermediation structures locally rational."
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If consequences of lead organization designation were made observable through published resource allocation or program termination records, it might reduce the system's ability to absorb ministerial accountability pressure without exclusionary decision-making.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Australia Canberra Cyber Security exhibits 8 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124850",
+    "_evidence_count": 53,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "basel-life-sciences",
+    "name": "Basel Life Sciences",
+    "city": "Basel",
+    "country": "CH",
+    "lat": 47.5596,
+    "lng": 7.5886,
+    "regime": "cycling",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.7,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Scaling activity"
+        ],
+        "description": "X-side of S1 (re-proving: multiple capital investments, partnerships) co-occurs with X-side of S2 (coordinating: support organizations, inter-cantonal coordination)."
+      },
+      {
+        "stalls_involved": [
+          "Stabilising",
+          "Narrating"
+        ],
+        "description": "X-side of S6 (stabilizing around incumbents: spatial concentration in Roche and Novartis) co-occurs with X-side of S7 (narrating: cultural characterizations emphasizing history)."
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "X-side of S5 (mediating: support organizations, early-stage funding) co-occurs with X-side of S8 (scaling activity: 700+ companies, multiple 2024 capital events)."
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If intermediation infrastructure were designed with explicit transition thresholds where successful actors graduate from intermediated to direct coupling, it might reduce dependency on mediation structures.",
+      "target_stack": "STK-03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Basel Life Sciences exhibits 6 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083233",
+    "_evidence_count": 65,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "basque-country-innovation-ecosystem",
+    "name": "Basque Country Innovation Ecosystem",
+    "city": "Bilbao",
+    "country": "ES",
+    "lat": 43.263,
+    "lng": -2.935,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Coordinating instead of deciding creates demand for intermediary structures to manage coordination complexity"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Re-proving instead of narrowing generates repeated program launches across domains"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Stabilizing around incumbents provides established actors whose longevity can anchor ecosystem narratives"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If new programs were required to specify termination conditions or fixed operational windows at launch, it might reduce the system's ability to absorb new funding through indefinite program addition.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Basque Country Innovation Ecosystem exhibits 1 observable stall with Mediating instead of coupling as primary behavioural pattern. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171355",
+    "_evidence_count": 68,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "belfast-cyber-security",
+    "name": "Belfast Cyber Security",
+    "city": "Belfast",
+    "country": "GB",
+    "lat": 54.5973,
+    "lng": -5.9301,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Strategy documents and publication volume provide legitimacy for expanding programme portfolios"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Formal coordinating bodies create demand for intermediation mechanisms"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Repeated accelerator programmes demonstrate activity that justifies continued public funding requests"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Institutional centrality of established actors positions them as natural intermediaries"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multinational operations extracting value through talent access create capability gaps that justify public funding"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of programmes were required to operate with mutually exclusive eligibility criteria, it might reduce the system's ability to absorb outcome measurement complexity without adapting programme design.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Belfast Cyber Security exhibits 3 observable stalls with Extracting without reinvesting and Stabilising around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124824",
+    "_evidence_count": 54,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "bengaluru-space-technology",
+    "name": "Bengaluru Space Technology",
+    "city": "Bengaluru",
+    "country": "IN",
+    "lat": 12.9716,
+    "lng": 77.5946,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Network formalization creates venues where intermediation through commercial entities occurs"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Repeated launch and technology demonstrations generate observable activity that incubation expansion can reference"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Institutional colocation with ISRO creates dependencies that intermediation through commercial entities sustains"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If access to ISRO facilities were structured with explicit time-limited terms requiring transition to independent infrastructure, it might reduce the system's ability to absorb access pressure without testing independent capability development.",
+      "target_stack": "STACK_03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Bengaluru Space Technology exhibits 4 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153836",
+    "_evidence_count": 72,
+    "_lifecycle_stage": "",
+    "_anchor_type": ""
+  },
+  {
+    "id": "birmingham-alabama-innovation-ecosystem",
+    "name": "Birmingham Alabama Innovation Ecosystem",
+    "city": "Birmingham AL",
+    "country": "US",
+    "lat": 33.5207,
+    "lng": -86.8025,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Central intermediary infrastructure (Innovation Depot) expands physical capacity while maintaining brokerage position"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent anchor institutions (particularly UAB) provide resource base and legitimacy that makes multi-stakeholder coordination viable"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Sequential program establishment over 13-year period generates visible activity that narrative framing can reference"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of Innovation Depot portfolio companies were provided direct access to capital networks without intermediary facilitation, it might expose whether direct coupling is operationally viable.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Birmingham Alabama Innovation Ecosystem exhibits 2 observable stalls with Coordinating instead of deciding and Stabilising around incumbents as primary behavioural patterns. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171410",
+    "_evidence_count": 61,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "bordeaux-metropolitan-innovation-ecosystem",
+    "name": "Bordeaux Metropolitan Innovation Ecosystem",
+    "city": "Bordeaux",
+    "country": "FR",
+    "lat": 44.8378,
+    "lng": -0.5792,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Multiple overlapping support programs create demand for intermediary coordination structures"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Governance structure establishment provides formal venues for strategy articulation and identity signaling"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent actor presence and sectoral concentration provides absorptive capacity for program and infrastructure expansion"
+      },
+      {
+        "stalls_involved": [],
+        "description": "National program frameworks provide legitimacy and structure for local intermediary operations"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If one incubator program were required to publish cohort-level outcome data in standardized format, it might reduce the system's ability to absorb uncertainty about program redundancy without triggering comparative evaluation pressure.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Bordeaux Metropolitan Innovation Ecosystem exhibits 2 observable stalls with Mediating instead of coupling and Waiting for permission as primary behavioural patterns. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171430",
+    "_evidence_count": 60,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "boston-cambridge-life-sciences",
+    "name": "Boston-Cambridge Life Sciences",
+    "city": "Cambridge UK",
+    "country": "GB",
+    "lat": 52.2053,
+    "lng": 0.4718,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "X-side of S1 (repeated accelerator program creation) co-occurs with X-side of S2 (repeated coordination entity creation). Each new program creates coordination demand."
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "X-side of S6 (continuity of Harvard hospitals, major pharma) co-occurs with X-side of S5 (coordination entities, shared facilities). Incumbents create stable demand for intermediation."
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Scaling activity"
+        ],
+        "description": "X-side of S2 (coordination entity creation) co-occurs with X-side of S8 (accelerator program expansion). Program activity expansion creates coordination demand."
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of partnerships were structured to require joint governance or shared IP ownership, it might reduce the system's ability to absorb uncertainty about partnership structures through intermediation.",
+      "target_stack": "ST2",
+      "timeline": "12-18 months"
+    },
+    "summary": "Boston-Cambridge Life Sciences exhibits 5 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083229",
+    "_evidence_count": 82,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "buffalo-niagara-innovation-ecosystem",
+    "name": "Buffalo Niagara Innovation Ecosystem",
+    "city": "Buffalo NY",
+    "country": "US",
+    "lat": 42.8864,
+    "lng": -78.8784,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.7,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Multiple specialized facilities create demand for coordination services"
+      },
+      {
+        "stalls_involved": [
+          "Stabilising",
+          "Waiting for permission"
+        ],
+        "description": "Incumbent institutional infrastructure provides venues and legitimacy for external funding applications"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Waiting for permission"
+        ],
+        "description": "Coordinating structures facilitate collective external funding applications"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Partnership announcements provide narrative content that justifies activity scaling"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Mediating"
+        ],
+        "description": "Multiple specialized facilities create fragmentation that increases demand for intermediary coordination"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a small number of external funding applications were required to demonstrate non-anchor infrastructure utilization before anchor facility access, it might expose whether pressure to demonstrate capacity can be absorbed without anchor dependency.",
+      "target_stack": "ST-02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Buffalo Niagara Innovation Ecosystem exhibits 8 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171414",
+    "_evidence_count": 63,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "busan-innovation-ecosystem",
+    "name": "Busan Innovation Ecosystem",
+    "city": "Busan",
+    "country": "KR",
+    "lat": 35.1796,
+    "lng": 129.0756,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Multiple entity/program establishment plausibly creates fragmentation that intermediary functions address"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Waiting for permission"
+        ],
+        "description": "Government authorization-seeking plausibly sustains coordination mechanisms by creating legitimacy requirements"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Strategic planning/cultural documentation plausibly provides legitimacy framework for program/activity proliferation"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If data on resource retention, local reinvestment, and circulation were made systematically observable to funding sources and recipients, it might reduce the system's ability to absorb pressure through external resource extraction.",
+      "target_stack": "STK-04",
+      "timeline": "6-12 months"
+    },
+    "summary": "Busan Innovation Ecosystem exhibits 2 observable stalls with Extracting without reinvesting and Narrating instead of testing as primary behavioural patterns. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171438",
+    "_evidence_count": 54,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "cambridge-uk-life-sciences",
+    "name": "Cambridge UK Life Sciences",
+    "city": "Cambridge",
+    "country": "GB",
+    "lat": 52.2053,
+    "lng": -0.2282,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Intermediary structures create venues for activity scaling"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination structures create contexts where intermediaries operate"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Repeated programme creation occurs within stable incumbent institutional framework"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of early-stage funding competitions were structured to require direct company presentation to capital providers without intermediary curation, it might expose whether intermediation is reducing transaction costs or absorbing coupling signals.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Cambridge UK Life Sciences exhibits 1 observable stall with Mediating instead of coupling as primary behavioural pattern. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083254",
+    "_evidence_count": 62,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "cape-canaveral-space-coast",
+    "name": "Cape Canaveral Space Coast",
+    "city": "Cape Canaveral",
+    "country": "US",
+    "lat": 28.3922,
+    "lng": -80.6077,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.6,
+        "confidence": "high"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Centralized range services and multi-agency governance creates infrastructure that sustains activity"
+      },
+      {
+        "stalls_involved": [],
+        "description": "ULA, Boeing, Northrop Grumman facility continuity provides stable actor set that multi-agency governance reinforces"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Program operation and partnership formation alongside program proliferation in workforce development"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If infrastructure dependencies specific to incumbent operators were documented and made visible to coordination bodies, it might reduce the system's ability to absorb technology transition uncertainty through incumbent concentration.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Cape Canaveral Space Coast exhibits 3 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153825",
+    "_evidence_count": 50,
+    "_lifecycle_stage": "",
+    "_anchor_type": ""
+  },
+  {
+    "id": "chattanooga-regional-innovation-ecosystem",
+    "name": "Chattanooga Regional Innovation Ecosystem",
+    "city": "Chattanooga TN",
+    "country": "US",
+    "lat": 35.0456,
+    "lng": -85.3097,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Multiple accelerators and training programs generate demand for intermediation through CO.LAB multi-domain presence"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Chamber coordination integrates incumbent institutions including entities from 1938-1998 and EPB multi-domain presence"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Stakeholder statements legitimates scaling activity as evidence of stated values"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of accelerator participants were given structured access to investment entities without intermediary filtering, it might reduce the system's ability to absorb complexity through coordination infrastructure.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Chattanooga Regional Innovation Ecosystem exhibits 3 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171348",
+    "_evidence_count": 71,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "cheltenham-cyber-security",
+    "name": "Cheltenham Cyber Security",
+    "city": "Cheltenham",
+    "country": "GB",
+    "lat": 51.8994,
+    "lng": -2.0783,
+    "regime": "cycling",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Narrating"
+        ],
+        "description": "Re-proving through infrastructure establishment co-occurs with narrating through strategic designation"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Stabilising"
+        ],
+        "description": "Coordinating through partnership structures co-occurs with stabilisation around government agencies and established entities"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Mediating through intermediary structures co-occurs with scaling of inputs and activities"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Narrating"
+        ],
+        "description": "Infrastructure investments generate partnerships and strategic designation creates reinforcing loop"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If procurement relationships were structured to enable direct supplier-agency transactions without mandatory intermediation through partnership structures, it might expose whether coordination structures are absorbing complexity or substituting for direct coupling.",
+      "target_stack": "ST2",
+      "timeline": "6-12 months"
+    },
+    "summary": "Cheltenham Cyber Security exhibits 6 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124820",
+    "_evidence_count": 54,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "colorado-springs-space-technology",
+    "name": "Colorado Springs Space Technology",
+    "city": "Colorado Springs",
+    "country": "US",
+    "lat": 38.8339,
+    "lng": -104.8214,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Established contractors with persistent facility presence receive recurring contract awards"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Six distinct connector organizations create venues for program proliferation and workforce expansion"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination functions and intermediary programs create venues and generate rationale for integration claims"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If contract award announcements included explicit portfolio position statements, it might reduce the system's ability to absorb competition pressure without strategic commitment.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Colorado Springs Space Technology exhibits 2 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153848",
+    "_evidence_count": 60,
+    "_lifecycle_stage": "",
+    "_anchor_type": ""
+  },
+  {
+    "id": "copenhagen-medicon-valley-life-sciences",
+    "name": "Copenhagen-Medicon Valley Life Sciences",
+    "city": "Copenhagen",
+    "country": "DK",
+    "lat": 55.6761,
+    "lng": 12.5683,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "Distributed validation infrastructure creates multiple decision points requiring coordination mechanisms"
+      },
+      {
+        "stalls_involved": [
+          "Stabilising",
+          "Narrating"
+        ],
+        "description": "Incumbent concentration including 8 pharmaceutical headquarters provides material basis for priority sector designation"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Intermediation infrastructure creates demand for activity scaling including multiple incubator types and 100+ digital health companies"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If one intermediation entity were restricted from serving ventures already connected to direct university-corporate partnerships, it might reduce the system's ability to absorb institutional heterogeneity through mediation.",
+      "target_stack": "STACK-03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Copenhagen-Medicon Valley Life Sciences exhibits 6 observable stalls. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083236",
+    "_evidence_count": 83,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "eindhoven-brainport-innovation-ecosystem",
+    "name": "Eindhoven Brainport Innovation Ecosystem",
+    "city": "Eindhoven",
+    "country": "NL",
+    "lat": 51.4416,
+    "lng": 5.4697,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving through program establishment generates material for regional narrative construction"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multi-stakeholder coordination structures create demand for intermediary organizations"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Stabilization around incumbent corporations increases importance of maintaining relationships with government entities"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If transaction costs for direct business-knowledge partnerships were reduced through standardized legal frameworks or pre-negotiated IP templates, it might weaken the necessity of intermediary mediation.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Eindhoven Brainport Innovation Ecosystem exhibits 2 observable stalls. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171402",
+    "_evidence_count": 72,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "estonia-cyber-security",
+    "name": "Estonia Cyber Security",
+    "city": "Tallinn",
+    "country": "EE",
+    "lat": 59.437,
+    "lng": 24.7536,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving activities occur through incumbent institutions including NATO CCDCOE, RIA, TalTech"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordinating activities occur through mediating institutions including NATO CCDCOE and RIA"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Re-proving activities and activity scaling generate material for narrative construction"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If NATO CCDCOE, RIA, or TalTech published internal resource allocation decisions showing choices between validation activities and other functions, it might reduce the system's ability to absorb complexity through distributed validation.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Estonia Cyber Security exhibits 2 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124827",
+    "_evidence_count": 55,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "glasgow-city-region-innovation-ecosystem",
+    "name": "Glasgow City Region Innovation Ecosystem",
+    "city": "Glasgow",
+    "country": "GB",
+    "lat": 55.8642,
+    "lng": -3.7018,
+    "regime": "cycling",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.7,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.5,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "S1 (re-proving) generates multiple parallel support mechanisms requiring coordination"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Waiting for permission"
+        ],
+        "description": "S7 (narrating) produces announcements and trajectory narratives that signal intent"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "S6 (stabilising around incumbents) concentrates resources and network centrality in established universities"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Scaling activity"
+        ],
+        "description": "S1 (re-proving) establishes multiple parallel support programs"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "S2 (coordinating) creates multi-party governance structures involving 8 jurisdictions"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If announcement timing were decoupled from 2024 funding cycle concentration, it might reduce the system's ability to absorb opportunity signals without requiring validation of announced initiatives independent of funding events.",
+      "target_stack": "STK-02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Glasgow City Region Innovation Ecosystem exhibits 8 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171338",
+    "_evidence_count": 69,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "glasgow-fintech",
+    "name": "Glasgow FinTech",
+    "city": "Glasgow",
+    "country": "GB",
+    "lat": 56.3873,
+    "lng": -4.0818,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Coordination infrastructure creates venues where intermediated relationships form"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination frameworks provide legitimacy structures that integrate incumbent institutions"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent institutions including JP Morgan and Barclays operate as primary intermediaries"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Formal establishment sequence creates coordination infrastructure"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If quarterly roundtable decisions and non-decisions were documented and circulated, it might reduce the system's ability to absorb pressure for exclusionary resource allocation without adaptation.",
+      "target_stack": "STACK-GF-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Glasgow FinTech exhibits 3 observable stalls. 10 stabilisation stacks identified.",
+    "_run_id": "2026Q1-18235203",
+    "_evidence_count": 62,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "glasgow-health-and-life-sciences",
+    "name": "Glasgow Health & Life Sciences",
+    "city": "Glasgow",
+    "country": "GB",
+    "lat": 56.1875,
+    "lng": -4.6968,
+    "regime": "emerging",
+    "stalls": [],
+    "stacks": [],
+    "leverage": {
+      "hypothesis": "Insufficient data for leverage hypothesis",
+      "target_stack": "N/A",
+      "timeline": "N/A"
+    },
+    "summary": "Glasgow Health & Life Sciences exhibits 0 observable stalls.",
+    "_run_id": "2026Q1-19122947",
+    "_evidence_count": 72,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "greater-manchester-innovation-ecosystem",
+    "name": "Greater Manchester Innovation Ecosystem",
+    "city": "Manchester",
+    "country": "GB",
+    "lat": 53.4808,
+    "lng": -2.2426,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Strategic documents identifying priority sectors co-occur with expansion of physical facilities and skills programs"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multiple intermediary entities operating between actors co-occur with centrality of established universities"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Repeated formation of new partnerships and facilities co-occur with governance structures"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Public funding allocations exceeding \u00a340m to universities co-occur with scaling of facilities and programs"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of university actors established direct resource allocation mechanisms to startups bypassing intermediary entities, it might expose whether intermediation is absorbing coordination complexity or whether direct coupling is viable at scale.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Greater Manchester Innovation Ecosystem exhibits 1 observable stall. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171332",
+    "_evidence_count": 76,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "harwell-space-technology",
+    "name": "Harwell Space Technology",
+    "city": "Harwell Campus",
+    "country": "GB",
+    "lat": 51.5711,
+    "lng": -1.3138,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Scaling activity",
+          "Waiting for permission"
+        ],
+        "description": "Facility expansions and partnership formations increase organizational density. Activity scaling creates pressure for external validation."
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "Governance structures create demand for intermediation services. Brokerage through support organizations reduces direct coupling pressure."
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Strategic positioning framing attracts resources that enable activity scaling and facility expansion"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Continuity with anchor institutions creates stability that enables intermediation through support organizations"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If governance structures published records of decisions made with alternatives considered rather than only consultation activities, it might reduce the system's ability to absorb decision pressure through alignment processes.",
+      "target_stack": "ST2",
+      "timeline": "6-12 months"
+    },
+    "summary": "Harwell Space Technology exhibits 8 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153844",
+    "_evidence_count": 55,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "houston-space-technology",
+    "name": "Houston Space Technology",
+    "city": "Houston",
+    "country": "US",
+    "lat": 29.7604,
+    "lng": -95.3698,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "Repeated initiation activity may sustain formation of collaborative structures across NASA, universities, spaceport"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "NASA JSC as intermediary may sustain sustained incumbent presence and resource flows"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Creation of governance units and strategy structures may sustain expansion of programs and announcements"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Collaborative structure formation may sustain intermediary role by creating partnership arrangements requiring coordination"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If new collaborative structures were subject to mandatory waiting period after announcement events, it might reduce the system's ability to absorb stakeholder pressure for visible progress.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Houston Space Technology exhibits 7 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153821",
+    "_evidence_count": 56,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "hyderabad-genome-valley-life-sciences",
+    "name": "Hyderabad Genome Valley Life Sciences",
+    "city": "Hyderabad",
+    "country": "IN",
+    "lat": 17.385,
+    "lng": 78.4867,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Multiple intermediary entities sustain activity and input scaling by creating additional activity layers"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Waiting for permission"
+        ],
+        "description": "Coordination entities sustain formal partnerships by creating approval pathways for legitimacy-seeking"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Aggregate indicators and performance claims justify continued infrastructure funding"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Established manufacturers create stable demand for intermediary services"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "Capacity expansions and partnerships generate coordination demands"
+      },
+      {
+        "stalls_involved": [
+          "Stabilising",
+          "Narrating"
+        ],
+        "description": "Established manufacturers generate performance metrics that narrative references"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If performance claims were required to disaggregate by entity cohort, it might reduce the system's ability to absorb uncertainty through aggregate metrics.",
+      "target_stack": "STACK-03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Hyderabad Genome Valley Life Sciences exhibits 7 observable stalls. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083250",
+    "_evidence_count": 50,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "los-angeles-space-technology",
+    "name": "Los Angeles Space Technology",
+    "city": "Los Angeles",
+    "country": "US",
+    "lat": 34.0522,
+    "lng": -118.2437,
+    "regime": "active",
+    "stalls": [
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Partnership arrangements and collective representation structures may reduce pressure for direct bilateral commitments"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediation structures may channel activity through innovation centers and accelerators"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If organizational continuity data were made visible alongside new entrant formation/exit data, it might reduce the system's ability to absorb pressure for incumbent stability by making relative persistence rates observable.",
+      "target_stack": "STACK_1",
+      "timeline": "6-12 months"
+    },
+    "summary": "Los Angeles Space Technology exhibits 1 observable stall. 2 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153829",
+    "_evidence_count": 54,
+    "_lifecycle_stage": "",
+    "_anchor_type": ""
+  },
+  {
+    "id": "madison-regional-innovation-ecosystem",
+    "name": "Madison Regional Innovation Ecosystem",
+    "city": "Madison WI",
+    "country": "US",
+    "lat": 43.0731,
+    "lng": -89.4012,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Repeated establishment of entrepreneurship infrastructure creates venues for activity scaling"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Long-duration institutional presence creates stable actor set for partnership formation"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Aggregate prestige indicators and rankings strengthen case for federal funding receipt"
+      },
+      {
+        "stalls_involved": [],
+        "description": "High intermediary density creates organizational demand for entrepreneurship infrastructure"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If new entrepreneurship infrastructure establishment were paused for a defined period, it might expose whether absence of new infrastructure increases direct coupling pressure.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Madison Regional Innovation Ecosystem exhibits 3 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171418",
+    "_evidence_count": 60,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "medellin-innovation-ecosystem",
+    "name": "Medellin Innovation Ecosystem",
+    "city": "Medellin",
+    "country": "CO",
+    "lat": 6.2442,
+    "lng": -75.5812,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Strategy documents and international recognition co-occur with program proliferation and event concentration"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multi-stakeholder governance structures co-occur with Ruta N's multi-domain intermediary presence"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Established institutions' multi-domain participation co-occurs with repeated program creation by diverse operators"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If direct coupling instances between universities and companies were made observable, it might reduce the system's reliance on intermediation to manage collaboration complexity.",
+      "target_stack": "STACK_2",
+      "timeline": "6-12 months"
+    },
+    "summary": "Medellin Innovation Ecosystem exhibits 2 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171358",
+    "_evidence_count": 63,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "melbourne-life-sciences",
+    "name": "Melbourne Life Sciences",
+    "city": "Melbourne",
+    "country": "AU",
+    "lat": -37.8136,
+    "lng": 144.9631,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Stabilising"
+        ],
+        "description": "Formal coordination bodies provide governance structures that integrate established institutions"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Scaling activity"
+        ],
+        "description": "Repeated establishment of coordination structures generates coordination requirements"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Mediation through coordination bodies and industry associations reduces direct coupling requirements"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If coordination body decision-making processes were made observable, it might reduce the system's ability to absorb complexity through undisclosed governance.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Melbourne Life Sciences exhibits 7 observable stalls. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083246",
+    "_evidence_count": 65,
+    "_lifecycle_stage": "",
+    "_anchor_type": ""
+  },
+  {
+    "id": "nashville-regional-innovation-ecosystem",
+    "name": "Nashville Regional Innovation Ecosystem",
+    "city": "Nashville TN",
+    "country": "US",
+    "lat": 36.1627,
+    "lng": -86.7816,
+    "regime": "cycling",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.7,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Program proliferation creates coordination complexity that intermediaries absorb through brokerage"
+      },
+      {
+        "stalls_involved": [
+          "Stabilising",
+          "Narrating"
+        ],
+        "description": "Incumbent presence provides legitimacy platform for partnership announcements"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "Broad stakeholder inclusion generates coordination complexity that intermediaries absorb"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Partnership announcements justify activity expansion as implementation vehicles"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "Program proliferation creates stakeholder constituencies that coordination mechanisms must include"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If new entities formed direct operational partnerships with incumbents without intermediary brokerage, it might expose whether incumbent centrality depends on mediation or persists through direct coupling.",
+      "target_stack": "STK-02",
+      "timeline": "12-18 months"
+    },
+    "summary": "Nashville Regional Innovation Ecosystem exhibits 8 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171426",
+    "_evidence_count": 65,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "new-zealand-space-technology",
+    "name": "New Zealand Space Technology",
+    "city": "Mahia Peninsula",
+    "country": "NZ",
+    "lat": -39.0906,
+    "lng": 177.864,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Re-proving through multiple funding mechanisms creates demand for intermediary programme structures which enables further programme proliferation"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Narrating"
+        ],
+        "description": "Coordinating through multiple agencies sustains institutional framework establishment"
+      },
+      {
+        "stalls_involved": [
+          "Extracting",
+          "Stabilising"
+        ],
+        "description": "Stabilising around incumbents channels resources toward actors with external extraction capacity"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If funding recipients were required to publicly report which government programmes supported which specific activities, it might reduce the system's ability to absorb uncertainty about programme effectiveness without consolidation pressure.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "New Zealand Space Technology exhibits 7 observable stalls. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153900",
+    "_evidence_count": 64,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "orlando-advanced-manufacturing",
+    "name": "Orlando Advanced Manufacturing",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 28.5383,
+    "lng": -80.5292,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Coordination through intermediaries creates structured channels that become the default interaction mode"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination mechanisms preserve relationships among established incumbents by distributing attention"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Network expansion generates new activity venues that enable activity scaling without pathway commitment"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If intermediary organizations were to explicitly define which coordination functions they perform vs. which they substitute for, it might expose whether mediation is structurally necessary.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando Advanced Manufacturing exhibits 1 observable stall. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20141052",
+    "_evidence_count": 58,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "orlando-agtech",
+    "name": "Orlando AgTech",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 29.0379,
+    "lng": -80.6915,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Broad research portfolio generates multiple stakeholder constituencies requiring coordination"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Extension mediation enables activity scaling without requiring throughput measurement"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Regional narrative-building occurs within policy-enabled action space"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If one Extension program piloted direct outcome measurement, it might expose whether mediation is necessary for all connection types.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando AgTech exhibits 1 observable stall. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20141018",
+    "_evidence_count": 54,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "orlando-aviation-and-aerospace",
+    "name": "Orlando Aviation & Aerospace",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 29.3467,
+    "lng": -81.1165,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Coordination bodies create venues for multi-stakeholder alignment without exclusionary decisions"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Scaling activity through facilities and programs generates justification for seeking external grants"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Stabilisation around long-lived institutions provides stable membership for coordination bodies"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If one coordination body were to narrow its mandate to a single decision domain, it might expose whether breadth is necessary or substituting for commitment.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando Aviation & Aerospace exhibits 1 observable stall. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20141006",
+    "_evidence_count": 55,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "orlando-cybersecurity",
+    "name": "Orlando Cybersecurity",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 29.3467,
+    "lng": -81.6419,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving activities generate coordination requirements"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Mediation structures provide platforms that amplify incumbent visibility and access"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Mission articulation frames educational activity expansion"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Federal designation-seeking enables re-proving activities"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If partnership announcements were temporally decoupled from federal funding application windows, it might expose whether partnership formation serves validation purposes or operational integration needs.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando Cybersecurity exhibits 2 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20141041",
+    "_evidence_count": 56,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "military"
+  },
+  {
+    "id": "orlando-digital-media",
+    "name": "Orlando Digital Media",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 29.0379,
+    "lng": -82.0669,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving through program expansion provides material content for narrative activities"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Extracting talent through placement systems is facilitated by institutional mediation infrastructure"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordinating through multi-stakeholder bodies aligns with waiting for policy frameworks"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of employers and students were enabled to form direct hiring relationships without institutional intermediation, it might expose whether mediation currently absorbs uncertainty that could be managed through peer mechanisms.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando Digital Media exhibits 4 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20140933",
+    "_evidence_count": 58,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "orlando-medtech",
+    "name": "Orlando MedTech",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 28.5383,
+    "lng": -82.2292,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Narrating"
+        ],
+        "description": "Partnership formation co-occurs with collaborative platform establishment and partnership announcements"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Intermediated relationships co-occur with activity and facility expansion"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Intermediated relationships co-occur with incumbent centrality. Mediation preserves incumbent autonomy while enabling collaboration."
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If one partnership relationship piloted direct operational coupling, it might expose whether mediation is necessary or substituting for direct connection.",
+      "target_stack": "ST-02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando MedTech exhibits 6 observable stalls. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20140944",
+    "_evidence_count": 57,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "orlando-photonics-and-optics",
+    "name": "Orlando Photonics & Optics",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 28.0387,
+    "lng": -82.0669,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Coordination infrastructure creates channels through which mediation occurs"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Re-proving activity generates narrative content"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Knowledge extraction serves incumbent defense contractors' workforce and research needs"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If CREOL published annual workforce destination reports distinguishing between defense contractor placement, emerging firm placement, and out-migration, it might reduce the system's ability to absorb pressure to maintain research output without reinvestment visibility.",
+      "target_stack": "STACK_03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando Photonics & Optics exhibits 2 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20141029",
+    "_evidence_count": 58,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "orlando-simulation-and-training",
+    "name": "Orlando Simulation & Training",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 27.7299,
+    "lng": -81.6419,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Coordinating structures sustain intermediary organizations, while intermediary organizations justify coordinating structures"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Aggregate narrative metrics justify scaling of programs and events"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Expanding partnerships and membership sustains incumbent relationships"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If one intermediary organization were required to operate without ability to refer participants to affiliated entities, it might expose whether referral networks are managing complexity or sustaining intermediary relevance.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando Simulation & Training exhibits 2 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20140921",
+    "_evidence_count": 61,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "military"
+  },
+  {
+    "id": "orlando-spacetech",
+    "name": "Orlando SpaceTech",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 27.7299,
+    "lng": -81.1165,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Partnership formations create venues and relationships that enable coordination mechanisms"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Network organizations provide infrastructure for activity expansion"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent continuity provides stable reference points for narrative construction"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If manufacturers and educational institutions were provided infrastructure for direct collaboration without intermediary organizational forms, it might expose whether intermediation is absorbing complexity that could be managed through direct coupling.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando SpaceTech exhibits 1 observable stall. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20140910",
+    "_evidence_count": 57,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "orlando-tourism-technology",
+    "name": "Orlando Tourism Technology",
+    "city": "Orlando",
+    "country": "US",
+    "lat": 28.0387,
+    "lng": -80.6915,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "S02",
+          "S08"
+        ],
+        "description": "Coordination structures create venues for activity expansion"
+      },
+      {
+        "stalls_involved": [
+          "S05",
+          "S06"
+        ],
+        "description": "Intermediary structures reduce transaction costs for incumbent operators"
+      },
+      {
+        "stalls_involved": [
+          "S01",
+          "S05"
+        ],
+        "description": "Independent technology validation generates complexity that increases value of intermediary coordination"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If throughput data were made visible across coordination venues, it might reduce the system's ability to absorb workforce pressure through coordination expansion without exposing performance variances.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Orlando Tourism Technology exhibits 6 observable stalls. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-20140955",
+    "_evidence_count": 68,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "pittsburgh-regional-innovation-ecosystem",
+    "name": "Pittsburgh Regional Innovation Ecosystem",
+    "city": "Pittsburgh PA",
+    "country": "US",
+    "lat": 40.4406,
+    "lng": -79.9959,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Coordination infrastructure creates venues for intermediary proliferation"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent centrality provides anchor points for coordination entities"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Activity scaling provides material for narrative construction"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If two intermediaries with overlapping functional domains were required to operate a shared intake or referral protocol, it might reduce the system's ability to absorb complexity through parallel buffering.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Pittsburgh Regional Innovation Ecosystem exhibits 2 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171342",
+    "_evidence_count": 75,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "porto-innovation-ecosystem",
+    "name": "Porto Innovation Ecosystem",
+    "city": "Porto",
+    "country": "PT",
+    "lat": 41.1579,
+    "lng": -8.6291,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving through program proliferation sustains narrating through structure establishment"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Mediating through UPTEC hosting 200+ companies sustains stabilisation around incumbents"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordinating through governance partnerships sustains mediating through intermediary infrastructure"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of UPTEC-hosted entities were required to establish direct operational connections outside intermediary infrastructure, it might expose whether intermediation is managing irreducible complexity or substituting for direct coupling.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Porto Innovation Ecosystem exhibits 1 observable stall. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171434",
+    "_evidence_count": 59,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "quebec-city-innovation-ecosystem",
+    "name": "Quebec City Innovation Ecosystem",
+    "city": "Quebec City",
+    "country": "CA",
+    "lat": 46.8139,
+    "lng": -71.208,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Repeated capability-building creates coordination surface area"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent centrality including Universit\u00e9 Laval provides institutional foundation for policy narratives"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediary presence provides channels for activity scaling"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If collaborative projects required matched industry investment without intermediary subsidy, it might reduce the system's ability to absorb complexity through mediation and expose direct coupling viability.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Quebec City Innovation Ecosystem exhibits 3 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171442",
+    "_evidence_count": 57,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "research-triangle-innovation-ecosystem",
+    "name": "Research Triangle Innovation Ecosystem",
+    "city": "Raleigh-Durham NC",
+    "country": "US",
+    "lat": 35.7796,
+    "lng": -78.2882,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Coordinating activity creates demand for intermediary infrastructure"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Re-proving activity generates expanded program and facility infrastructure"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Stabilisation around anchor universities creates structural demand for intermediary layers to manage incumbent-to-market transactions"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If utilization data for training programs and coworking facilities were made visible to entities funding exploratory intermediaries, it might reduce the system's ability to absorb pressure to demonstrate entrepreneurship support through activity expansion.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Research Triangle Innovation Ecosystem exhibits 2 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171351",
+    "_evidence_count": 76,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "research-triangle-life-sciences",
+    "name": "Research Triangle Life Sciences",
+    "city": "Raleigh-Durham-Chapel Hill",
+    "country": "US",
+    "lat": 35.7796,
+    "lng": -78.9882,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating",
+          "Re-proving"
+        ],
+        "description": "Intermediary organizations provide coordination infrastructure that may enable multiple collaborative programs to coexist without requiring strategic commitment"
+      },
+      {
+        "stalls_involved": [
+          "Stabilising",
+          "Mediating"
+        ],
+        "description": "Founding universities maintain continuous institutional presence while intermediary organizations broker relationships"
+      },
+      {
+        "stalls_involved": [
+          "Scaling activity",
+          "Re-proving"
+        ],
+        "description": "Training programs and accelerator infrastructure expand while multiple collaborative programs proliferate"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If new corporate entrants were offered structured pathways to form direct partnerships with founding universities without intermediary brokerage, it might test whether intermediation currently absorbs coupling pressure.",
+      "target_stack": "STK-02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Research Triangle Life Sciences exhibits 1 observable stall. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083258",
+    "_evidence_count": 62,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "san-francisco-bay-area-cyber-security",
+    "name": "San Francisco Bay Area Cyber Security",
+    "city": "San Francisco Bay Area",
+    "country": "US",
+    "lat": 37.7749,
+    "lng": -122.0694,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving through accelerators/conferences sustains intermediation infrastructure"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination without decision sustains incumbent presence by avoiding exclusionary choices"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Narrating strategic commitments sustains activity scaling by signaling demand"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If accelerator programs introduced fixed intervals between validation cycles, it might reduce the system's ability to absorb uncertainty through continuous re-proving activity.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "San Francisco Bay Area Cyber Security exhibits 2 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124835",
+    "_evidence_count": 74,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "san-francisco-bay-area-life-sciences",
+    "name": "San Francisco Bay Area Life Sciences",
+    "city": "San Francisco Bay Area",
+    "country": "US",
+    "lat": 37.7749,
+    "lng": -122.7694,
+    "regime": "cycling",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.7,
+        "confidence": "medium"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "S1 generates multiple distinct program types requiring specialized support infrastructure"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Stabilising"
+        ],
+        "description": "S2 establishes multi-stakeholder alignment mechanisms"
+      },
+      {
+        "stalls_involved": [
+          "Extracting",
+          "Mediating"
+        ],
+        "description": "S4 represents geographic expansion of CZ Biohub to multi-city network"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Stabilising",
+          "Scaling activity"
+        ],
+        "description": "S1 and S8 generate multiple program types and events"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of researchers in established programs were provided direct industry partnership mechanisms bypassing incubator intermediaries, it might reduce the system's ability to absorb complexity through intermediary buffering.",
+      "target_stack": "STACK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "San Francisco Bay Area Life Sciences exhibits 6 observable stalls. 8 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083239",
+    "_evidence_count": 55,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "scotland-advanced-manufacturing",
+    "name": "Scotland Advanced Manufacturing",
+    "city": "Renfrewshire",
+    "country": "GB",
+    "lat": 55.5409,
+    "lng": -4.6968,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "Re-proving activity generates coordination requirements"
+      },
+      {
+        "stalls_involved": [
+          "Scaling activity",
+          "Mediating"
+        ],
+        "description": "Activity expansion creates connection demand"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Stabilising"
+        ],
+        "description": "Capability claims align with incumbent capabilities"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of partnership formation or collaborative projects were required to occur without intermediary facilitation, it might expose whether direct coupling capacity exists or whether intermediation is structurally necessary.",
+      "target_stack": "STK-02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Advanced Manufacturing exhibits 2 observable stalls. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132646",
+    "_evidence_count": 72,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "scotland-creative-industries",
+    "name": "Scotland Creative Industries",
+    "city": "Glasgow",
+    "country": "GB",
+    "lat": 55.9533,
+    "lng": -2.6383,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Mediating",
+          "Scaling activity"
+        ],
+        "description": "Re-proving generates demand for distribution infrastructure"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Stabilising"
+        ],
+        "description": "Coordinating distributes risk and defers exclusionary choices"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Scaling activity"
+        ],
+        "description": "Re-proving creates new entities and programmes"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of resource allocation were altered to enable direct coupling between funders and creative industries actors for a bounded pilot, it might expose whether direct allocation is viable without intermediation.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Creative Industries exhibits 1 observable stall. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132638",
+    "_evidence_count": 69,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "scotland-cyber-security",
+    "name": "Scotland Cyber Security",
+    "city": "Edinburgh-Glasgow",
+    "country": "GB",
+    "lat": 56.4296,
+    "lng": -2.9133,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving through training programmes and events generates demand for coordination structures"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Strategy documents and conference activity provide legitimacy for programme and infrastructure expansion"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Established institutional actors provide stable platforms for intermediary structures"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If one accelerator programme required participants to demonstrate revenue from a single defined customer segment within 12 months as a continuation condition, it might reduce the programme's ability to absorb uncertainty about viable markets.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Cyber Security exhibits 1 observable stall. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124854",
+    "_evidence_count": 55,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "scotland-data-and-ai",
+    "name": "Scotland Data and AI",
+    "city": "Edinburgh",
+    "country": "GB",
+    "lat": 56.4296,
+    "lng": -3.4633,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Launching multiple initiatives including 11 events in 2024 plausibly creates coordination demand"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Operating network organizations including Data Lab, SICSA, TechScaler channels activity through intermediaries"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Concentration of facilities in established institutions including University of Edinburgh creates stability"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If outcomes from 2018-2021 initiatives were made systematically observable to 2024 initiative designers, it might reduce the system's ability to absorb uncertainty through re-proving by exposing redundancy.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Data and AI exhibits 1 observable stall. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132630",
+    "_evidence_count": 65,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "scotland-energy-transition",
+    "name": "Scotland Energy Transition",
+    "city": "Aberdeen",
+    "country": "GB",
+    "lat": 57.1497,
+    "lng": -2.0943,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Repeated programme establishment generates coordination requirements that partnership governance structures can absorb"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Strategic initiative formulation provides legitimacy framework for activity expansion"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent participation creates coordination demand that intermediary structures fulfill"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If capital flows from incumbent participants into transition initiatives were made observable alongside public funding patterns, it might reduce the system's ability to absorb pressure to include incumbents without exposing reinvestment asymmetry.",
+      "target_stack": "STACK_03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Energy Transition exhibits 2 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132624",
+    "_evidence_count": 63,
+    "_lifecycle_stage": "transitioning",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "scotland-fintech",
+    "name": "Scotland FinTech",
+    "city": "Edinburgh",
+    "country": "GB",
+    "lat": 55.9533,
+    "lng": -3.7383,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Strategic articulation provides legitimacy frame for programme proliferation"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Governance structures with advisory functions create institutional venues for network coordination"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent institutional presence provides stable anchor points for governance coordination structures"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If strategic articulation events were temporally decoupled from programme launch windows by 18-24 months, it might expose whether narrative-activity reinforcement requires temporal proximity.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland FinTech exhibits 2 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132621",
+    "_evidence_count": 61,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "scotland-food-and-drink",
+    "name": "Scotland Food and Drink",
+    "city": "Scotland",
+    "country": "GB",
+    "lat": 56.4907,
+    "lng": -3.8526,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Multiple governance structures operate alongside intermediary innovation mechanisms"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multiple parallel business support programs co-occur with multiple internal program structures"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Governance structures with industry board representation co-occur with large incumbent facility concentration"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If examples of direct company-university collaboration without intermediary involvement were made visible within existing governance structures, it might reduce the perceived necessity of translation services.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Food and Drink exhibits 3 observable stalls. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132634",
+    "_evidence_count": 69,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "scotland-health-tech",
+    "name": "Scotland Health Tech",
+    "city": "Edinburgh",
+    "country": "GB",
+    "lat": 55.477,
+    "lng": -3.4633,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "Coordination infrastructure creates channels through which partnership formation flows"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Strategy articulation and sector characterization provides framing for activity scaling"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Waiting for permission"
+        ],
+        "description": "Coordination bodies create governance architecture through which permission-seeking operates"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Intermediary organizations may preferentially connect to established institutions due to legitimacy and resource concentration"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If sector characterizations included company exit rates, partnership dissolution rates, or clinical implementation rates alongside company counts and partnership announcements, it might reduce the system's ability to absorb progress pressure through activity scaling alone.",
+      "target_stack": "STK-02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Health Tech exhibits 7 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132654",
+    "_evidence_count": 69,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "scotland-life-sciences",
+    "name": "Scotland Life Sciences",
+    "city": "Edinburgh",
+    "country": "GB",
+    "lat": 55.477,
+    "lng": -2.9133,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving behaviours may be sustained by coordination mechanisms with overlapping mandates"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Mediating behaviours may sustain activity scaling through multiple incubator facilities"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Stabilisation around incumbents may be sustained by narrative practices emphasizing historical milestones"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If funding allocation decisions were accompanied by published strategic rationale documents specifying what validation questions each allocation addresses and what evidence would trigger pathway narrowing, it might reduce the system's ability to absorb uncertainty through repeated re-proving.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Life Sciences exhibits 2 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132627",
+    "_evidence_count": 71,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "scotland-quantum-and-photonics",
+    "name": "Scotland Quantum and Photonics",
+    "city": "Glasgow",
+    "country": "GB",
+    "lat": 55.3411,
+    "lng": -4.0818,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Coordination structures create venues for initiating new activities"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediary organizations connect established institutions maintaining their centrality"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Strategic narratives legitimate activity scaling including training programmes and 40+ prototypes"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If coordination structures were required to report initiative closures alongside initiative launches, it might expose whether exploration is narrowing or whether new initiatives substitute for commitment on existing ones.",
+      "target_stack": "STACK_1",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Quantum and Photonics exhibits 1 observable stall. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132642",
+    "_evidence_count": 57,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "scotland-spacetech",
+    "name": "Scotland SpaceTech",
+    "city": "Scotland",
+    "country": "GB",
+    "lat": 56.7938,
+    "lng": -4.3776,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Mediating"
+        ],
+        "description": "Repeated discrete funding allocations may increase perceived need for intermediary support programs"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Narrating"
+        ],
+        "description": "Multiple governance entities with defined responsibilities may increase value of sector branding and policy articulation"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Scaling activity"
+        ],
+        "description": "Multiple discrete funding allocations may sustain proliferation of support programs"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If validation criteria used by UK Space Agency and Highlands and Islands Enterprise were made observable to applicants and intermediaries, it might reduce perceived need for specialized intermediary navigation support.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland SpaceTech exhibits 5 observable stalls. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132618",
+    "_evidence_count": 62,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "scotland-tourism-and-hospitality-tech",
+    "name": "Scotland Tourism and Hospitality Tech",
+    "city": "Scotland",
+    "country": "GB",
+    "lat": 56.1876,
+    "lng": -4.3776,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.7,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "Coordination structures create demand for intermediary services"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Scaling activity"
+        ],
+        "description": "Multiple funding programmes enable proliferation of capability-building activities"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Stabilising"
+        ],
+        "description": "Coordination structures channel resources and authority through established organizations"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Waiting for permission"
+        ],
+        "description": "Intermediary structures create formalized pathways that become sites for permission-seeking"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Sector identity construction provides legitimacy and attention that enable activity proliferation"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If outcomes from 2024 direct partnerships were made observable to coordination structures, it might reduce uncertainty about whether intermediation is necessary for all connection types.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Scotland Tourism and Hospitality Tech exhibits 7 observable stalls. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-26132650",
+    "_evidence_count": 66,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "singapore-biopolis-life-sciences",
+    "name": "Singapore Biopolis Life Sciences",
+    "city": "Singapore",
+    "country": "SG",
+    "lat": 1.3521,
+    "lng": 104.1698,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Sequential funding cycles and multiple support programs create continuous validation requirements"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multi-agency governance creates demand for coordination services"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Established institutions provide credible narrators"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Manufacturing operations by multinationals create demand for coordination services"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If startup support programs were required to publish standardized throughput metrics, it might reduce the system's ability to absorb uncertainty about program effectiveness through activity scaling.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Singapore Biopolis Life Sciences exhibits 2 observable stalls. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083243",
+    "_evidence_count": 63,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "singapore-cyber-security",
+    "name": "Singapore Cyber Security",
+    "city": "Singapore",
+    "country": "SG",
+    "lat": 1.3521,
+    "lng": 103.4698,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Repeated resource allocation across multiple programmes sustains coordination activities across stakeholders"
+      },
+      {
+        "stalls_involved": [],
+        "description": "CSA intermediation sustains programme proliferation by enabling management of multiple distinct programmes"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Policy articulation through formal instruments sustains incumbent institutional presence"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If CSA-operated programmes implemented shared participant registries visible across programme boundaries, it might reduce the system's ability to absorb pressure to demonstrate reach without programme proliferation adapting toward participant pathway coherence.",
+      "target_stack": "STACK_02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Singapore Cyber Security exhibits 3 observable stalls. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124838",
+    "_evidence_count": 74,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "tel-aviv-cyber-security",
+    "name": "Tel Aviv Cyber Security",
+    "city": "Tel Aviv",
+    "country": "IL",
+    "lat": 32.0853,
+    "lng": 34.7818,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "Repeated institution creation sustains intermediation infrastructure which sustains coordination mechanisms"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity",
+          "Waiting for permission"
+        ],
+        "description": "Legitimacy-seeking through governance sustains narrative construction through rankings which sustains activity scaling"
+      },
+      {
+        "stalls_involved": [
+          "Extracting",
+          "Stabilising"
+        ],
+        "description": "Incumbent integration and geographic concentration sustains value extraction through acquisitions and exports"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Waiting for permission"
+        ],
+        "description": "Coordination infrastructure sustains legitimacy-seeking creating a reinforcing loop"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If governance entities published decision calendars and consultation windows, it might reduce the system's ability to absorb uncertainty about strategic direction through continuous coordination activity.",
+      "target_stack": "STK-04",
+      "timeline": "6-12 months"
+    },
+    "summary": "Tel Aviv Cyber Security exhibits 3 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124816",
+    "_evidence_count": 70,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "the-hague-cyber-security",
+    "name": "The Hague Cyber Security",
+    "city": "The Hague",
+    "country": "NL",
+    "lat": 52.0705,
+    "lng": 4.3007,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Infrastructure proliferation co-occurs with coordination expansion across 2014-2024"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Activity scaling co-occurs with legitimacy-seeking through formal authorization"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediation roles co-occur with incumbent stabilisation"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Narrative construction co-occurs with activity scaling"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination mechanisms co-occur with intermediation roles"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If infrastructure facilities were required to publish standardized utilization metrics, it might reduce the system's ability to absorb demand uncertainty through re-proving without exposing underutilization.",
+      "target_stack": "STACK_01",
+      "timeline": "6-12 months"
+    },
+    "summary": "The Hague Cyber Security exhibits 1 observable stall. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124842",
+    "_evidence_count": 52,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "toulouse-space-technology",
+    "name": "Toulouse Space Technology",
+    "city": "Toulouse",
+    "country": "FR",
+    "lat": 43.6047,
+    "lng": 1.4442,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.7,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "Re-proving infrastructure creates venues requiring coordination"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Narrating through designations and multi-domain stories justifies scaling activity"
+      },
+      {
+        "stalls_involved": [
+          "Stabilising",
+          "Waiting for permission"
+        ],
+        "description": "Stabilizing around incumbents aligns with waiting for official designations and institutional partnerships"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Narrating"
+        ],
+        "description": "Multiple support programs and recurring events generate material for narrating ecosystem vitality"
+      },
+      {
+        "stalls_involved": [
+          "Extracting",
+          "Stabilising"
+        ],
+        "description": "Startup capital exits reduce pressure on incumbents to adapt"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Waiting for permission"
+        ],
+        "description": "Coordinating instead of deciding defers exclusionary choices to permission structures"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If coordination entities published decision rationales for resource allocation or strategic priorities, it might reduce the system's ability to absorb pressure to maintain stability by exposing whether incumbents gate access to opportunities.",
+      "target_stack": "STK-03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Toulouse Space Technology exhibits 8 observable stalls. 6 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153833",
+    "_evidence_count": 60,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "tsukuba-space-technology",
+    "name": "Tsukuba Space Technology",
+    "city": "Tsukuba",
+    "country": "JP",
+    "lat": 36.0835,
+    "lng": 140.0764,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "Re-proving through operational demonstrations co-occurs with coordinating through 110+ member organizations"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Mediating through industry organizations co-occurs with stabilizing around incumbents including large electronics corporations and JAXA"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Narrating through regulatory frameworks co-occurs with scaling through specialized centers and multi-billion yen funding"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Stabilising"
+        ],
+        "description": "Re-proving through demonstrations co-occurs with stabilizing around large corporations and JAXA long history"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Waiting for permission"
+        ],
+        "description": "Coordinating through 110+ member organizations co-occurs with waiting for regulatory frameworks and business support programs"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If business support programs restricted eligibility to entities without existing incumbent partnerships, it might reduce the system's ability to absorb opportunity signals through incumbent-adjacent positioning.",
+      "target_stack": "STACK-02",
+      "timeline": "6-12 months"
+    },
+    "summary": "Tsukuba Space Technology exhibits 8 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153856",
+    "_evidence_count": 55,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "tulsa-regional-innovation-ecosystem",
+    "name": "Tulsa Regional Innovation Ecosystem",
+    "city": "Tulsa OK",
+    "country": "US",
+    "lat": 36.154,
+    "lng": -95.9928,
+    "regime": "cycling",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "medium"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Scaling activity"
+        ],
+        "description": "Coordinating behaviors may sustain activity scaling by creating venues for announcing initiatives"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Intermediary entities may sustain incumbent centrality by channeling connections through established actors"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Waiting for permission"
+        ],
+        "description": "Re-proving behaviors may sustain permission-seeking by generating diverse initiatives requiring external validation"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "Coordinating behaviors may sustain intermediation structures by creating demand for neutral convening capacity"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If partnership formation timing were distributed across longer intervals rather than concentrated in single periods, it might reduce the system's ability to absorb pressure for momentum demonstration without requiring substantive program commitments.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Tulsa Regional Innovation Ecosystem exhibits 6 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171345",
+    "_evidence_count": 56,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "mixed"
+  },
+  {
+    "id": "uae-cyber-security",
+    "name": "UAE Cyber Security",
+    "city": "Abu Dhabi-Dubai",
+    "country": "AE",
+    "lat": 24.757,
+    "lng": 54.2023,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "Re-proving activity including multiple research centers and training programs generates coordination demand"
+      },
+      {
+        "stalls_involved": [
+          "Stabilising",
+          "Coordinating"
+        ],
+        "description": "Incumbent persistence and expansion including EDGE consolidation sustains coordination mechanisms"
+      },
+      {
+        "stalls_involved": [
+          "Scaling activity",
+          "Narrating"
+        ],
+        "description": "Scaling participation generates content for narrative construction"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Stabilising"
+        ],
+        "description": "Multiple parallel programs distribute validation opportunities to multiple actors"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If per-program resource consumption were made observable across all parallel demonstration activities, it might reduce the system's ability to absorb pressure through distributed validation without exposing relative program efficiency.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "UAE Cyber Security exhibits 6 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124846",
+    "_evidence_count": 63,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "uae-space-technology",
+    "name": "UAE Space Technology",
+    "city": "Abu Dhabi",
+    "country": "AE",
+    "lat": 24.1508,
+    "lng": 54.2023,
+    "regime": "cycling",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.7,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Narrating"
+        ],
+        "description": "Capability demonstrations across satellites, astronauts, planetary missions provide material basis for strategic narrative"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "Coordination infrastructure creates institutional channels that become sites for intermediation through formal cross-sector bodies"
+      },
+      {
+        "stalls_involved": [
+          "Stabilising",
+          "Scaling activity"
+        ],
+        "description": "Continuity of established government entities provides stable institutional base for activity scaling"
+      },
+      {
+        "stalls_involved": [
+          "Coordinating",
+          "Re-proving",
+          "Mediating"
+        ],
+        "description": "Coordination infrastructure creates context for capability demonstrations which require intermediation with international partners"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of actors were required to establish direct partnership connections without intermediary facilitation, it might expose whether coordination structures are necessary or substituting for direct coupling.",
+      "target_stack": "STK-02",
+      "timeline": "6-12 months"
+    },
+    "summary": "UAE Space Technology exhibits 6 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23153852",
+    "_evidence_count": 57,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "washington-dc-cyber-security",
+    "name": "Washington DC Cyber Security",
+    "city": "Washington DC",
+    "country": "US",
+    "lat": 38.9072,
+    "lng": -77.0369,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving through recurring network formation sustains activity scaling"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordinating through multi-party structures sustains mediating through intermediary entities"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Narrating through framework production sustains re-proving by providing artifacts for legitimacy demonstration"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Extracting through resource allocation to established entities sustains stabilising around incumbents"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If knowledge artifacts carried explicit temporal validity boundaries requiring re-validation, it might reduce the system's ability to absorb uncertainty through continuous narrating without exposing whether testing of effectiveness is occurring.",
+      "target_stack": "STACK_03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Washington DC Cyber Security exhibits 1 observable stall. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-23124831",
+    "_evidence_count": 68,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "west-midlands-innovation-ecosystem",
+    "name": "West Midlands Innovation Ecosystem",
+    "city": "Birmingham UK",
+    "country": "GB",
+    "lat": 52.4862,
+    "lng": -1.8904,
+    "regime": "cycling",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilising around incumbents",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising",
+          "Scaling activity"
+        ],
+        "description": "Stabilising around incumbents creates institutional centrality that makes intermediary infrastructure appear necessary for access"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating"
+        ],
+        "description": "Coordinating creates governance structures that enable distributed investment patterns"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Narrating provides identity and promotional framing that legitimates activity expansion without requiring throughput validation"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Stabilising around incumbents concentrates capability in established institutions creating demand for intermediary infrastructure"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If a subset of 2024 investment activity were structured with explicit non-renewal clauses requiring reallocation after defined period, it might reduce the system's ability to absorb stakeholder inclusion pressure through distributed investment.",
+      "target_stack": "STK-02",
+      "timeline": "6-12 months"
+    },
+    "summary": "West Midlands Innovation Ecosystem exhibits 6 observable stalls. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171335",
+    "_evidence_count": 86,
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "government"
+  },
+  {
+    "id": "wichita-regional-innovation-ecosystem",
+    "name": "Wichita Regional Innovation Ecosystem",
+    "city": "Wichita KS",
+    "country": "US",
+    "lat": 37.6872,
+    "lng": -97.3301,
+    "regime": "cycling",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.7,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.5,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.7,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.5,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Coordinating",
+          "Mediating"
+        ],
+        "description": "Repeated capability-building creates demand for coordination structures to manage proliferating initiatives"
+      },
+      {
+        "stalls_involved": [
+          "Narrating",
+          "Scaling activity"
+        ],
+        "description": "Identity and culture narratives legitimate activity scaling without throughput measurement"
+      },
+      {
+        "stalls_involved": [
+          "Mediating",
+          "Stabilising"
+        ],
+        "description": "Concentration around established aerospace actors shapes the intermediation model"
+      },
+      {
+        "stalls_involved": [
+          "Scaling activity",
+          "Waiting for permission"
+        ],
+        "description": "External funding dependency sustains activity scaling by providing resources for infrastructure expansion"
+      },
+      {
+        "stalls_involved": [
+          "Re-proving",
+          "Narrating"
+        ],
+        "description": "Repeated capability-building provides material basis for diversification and entrepreneurship narratives"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If transactions between Innovation Campus hosted companies and actors outside aerospace sector were made visible, it might reduce the system's ability to absorb disruption potential through incumbent-adjacent intermediation.",
+      "target_stack": "STACK-03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Wichita Regional Innovation Ecosystem exhibits 8 observable stalls. 7 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24171422",
+    "_evidence_count": 59,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "corporate"
+  },
+  {
+    "id": "zurich-zug-medtech",
+    "name": "Zurich-Zug MedTech",
+    "city": "Zurich",
+    "country": "CH",
+    "lat": 47.3769,
+    "lng": 8.5417,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.4,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.4,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Repeated partnership initiation generates demand for intermediation services"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination activity produces material for regional narrative"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent presence provides stable demand for ecosystem services justifying program proliferation"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If accelerator and funding programs introduced eligibility criteria excluding ventures with more than 50% incumbent corporate ownership, it might reduce the system's ability to absorb opportunity from incumbent resources while maintaining program proliferation metrics.",
+      "target_stack": "STACK_03",
+      "timeline": "6-12 months"
+    },
+    "summary": "Zurich-Zug MedTech exhibits 2 observable stalls. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-24083302",
+    "_evidence_count": 66,
+    "_lifecycle_stage": "",
+    "_anchor_type": "university"
+  }
+]

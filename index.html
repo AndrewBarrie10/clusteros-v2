@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClusterOS — Diagnostic Intelligence for Regional Economies</title>
+<meta name="description" content="75 clusters diagnosed across 18 countries. ClusterOS identifies why regional innovation ecosystems stall — and what to do about it.">
+
+<!-- AIO / LLM structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ClusterOS",
+  "description": "ClusterOS is diagnostic intelligence infrastructure for regional innovation economies. It identifies behavioural stalls — patterns where rational individual actions combine to prevent systemic progress — maps the stabilisation stacks they form, and surfaces specific leverage hypotheses. Built on a federated MCP architecture with sovereign data residency per regional EDA.",
+  "url": "https://clusteros.io",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "5000", "priceCurrency": "GBP", "description": "Cluster Snapshot — fixed fee entry diagnostic" },
+  "creator": { "@type": "Person", "name": "Andrew Barrie", "affiliation": "Community Lab" },
+  "foundingLocation": "Edinburgh, Scotland",
+  "numberOfItems": 75,
+  "keywords": "regional innovation, cluster diagnostics, complex adaptive systems, economic development, stall analysis, leverage hypothesis, EDA, LEP"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+  /* ── TOKENS ─────────────────────────────────────────── */
+  :root {
+    --ink:       #1a1a1a;
+    --ink-dim:   #5a5650;
+    --ink-muted: #8c8780;
+    --page:      #f7f4ef;
+    --surface:   #f0ece4;
+    --border:    #ddd8cf;
+    --border-2:  #c8c2b7;
+    --green:     #2a7a4f;
+    --green-dim: #1d5c3a;
+    --signal:    #c8f0d0;
+    --teal:      #7dd3c8;
+    --amber:     #f5d97a;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans:  'Geist', system-ui, sans-serif;
+    --font-mono:  'Geist Mono', monospace;
+  }
+
+  /* ── RESET ───────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ─────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 52px;
+    background: rgba(247,244,239,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-dim);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--green);
+    padding: 5px 14px;
+    border-radius: 2px;
+    transition: background 0.15s, color 0.15s !important;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff !important; }
+
+  /* ── MAP SECTION ─────────────────────────────────────── */
+  #map-section {
+    margin-top: 52px;
+    position: relative;
+    width: 100%;
+    height: 62vh;
+    min-height: 340px;
+    max-height: 680px;
+  }
+  #map {
+    width: 100%;
+    height: 100%;
+  }
+  /* Leaflet attribution tidy */
+  .leaflet-control-attribution {
+    font-size: 10px;
+    opacity: 0.6;
+  }
+
+  /* Map overlay — count + filter bar */
+  .map-overlay {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 800;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+  }
+  .map-count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-dim);
+    background: rgba(247,244,239,0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 2px;
+    pointer-events: none;
+    letter-spacing: 0.04em;
+  }
+  .map-filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    pointer-events: all;
+  }
+  .map-filter {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--border-2);
+    border-radius: 2px;
+    background: rgba(247,244,239,0.88);
+    backdrop-filter: blur(8px);
+    color: var(--ink-dim);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .map-filter:hover { border-color: var(--green); color: var(--green); }
+  .map-filter.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+  /* Cluster tooltip */
+  .cluster-tooltip {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--ink);
+    background: var(--page);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 8px 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    white-space: nowrap;
+  }
+  .cluster-tooltip strong {
+    display: block;
+    font-weight: 500;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+  .cluster-tooltip span {
+    color: var(--ink-muted);
+    font-size: 11px;
+  }
+
+  /* Custom pin */
+  .cluster-pin {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 2px solid rgba(255,255,255,0.9);
+    box-shadow: 0 1px 4px rgba(42,122,79,0.4);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .cluster-pin:hover { transform: scale(1.6); }
+  .cluster-pin.stall-high { background: #d4695a; }
+  .cluster-pin.stall-med  { background: #d4a94a; }
+  .cluster-pin.stall-low  { background: var(--green); }
+
+  /* ── OPENING STATEMENT ───────────────────────────────── */
+  #opening {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 5rem 2rem 2rem;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--border-2);
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--green);
+  }
+  .lede {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-weight: 300;
+    color: var(--ink-dim);
+    line-height: 1.7;
+    max-width: 620px;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── FORK THREADS ────────────────────────────────────── */
+  #forks {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+  .fork-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 1.2rem;
+  }
+  .fork-threads {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 1px solid var(--border-2);
+    padding-left: 1.4rem;
+  }
+  .fork-thread {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    transition: all 0.15s;
+  }
+  .fork-thread:last-child { border-bottom: none; }
+  .fork-thread:hover .fork-arrow { transform: translateX(4px); }
+  .fork-thread:hover .fork-title { color: var(--ink); }
+  .fork-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+    letter-spacing: 0.06em;
+  }
+  .fork-title {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-dim);
+    transition: color 0.15s;
+    flex: 1;
+  }
+  .fork-arrow {
+    font-size: 14px;
+    color: var(--border-2);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  /* ── JOURNEY PANELS ─────────────────────────────────── */
+  .journey-panel {
+    display: none;
+    background: var(--page);
+    border-top: 1px solid var(--border);
+    animation: panelIn 0.3s ease;
+  }
+  .journey-panel.open { display: block; }
+
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+  .panel-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    margin-bottom: 3rem;
+    border: none;
+    background: none;
+    padding: 0;
+    transition: color 0.15s;
+  }
+  .panel-close:hover { color: var(--ink); }
+  .panel-close::before { content: '←'; font-size: 13px; }
+
+  .panel-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 1rem;
+  }
+  .panel-h {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.22;
+    margin-bottom: 1.6rem;
+  }
+  .panel-h em { font-style: italic; color: var(--green); }
+  .panel-body {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-dim);
+    line-height: 1.75;
+    max-width: 600px;
+    margin-bottom: 1.6rem;
+  }
+  .panel-body strong { font-weight: 500; color: var(--ink); }
+  .panel-pull {
+    border-left: 3px solid var(--signal);
+    padding: 1rem 1.4rem;
+    margin: 2.4rem 0;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    background: rgba(200,240,208,0.12);
+  }
+
+  /* Principle grid */
+  .principle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    margin: 2.4rem 0;
+  }
+  .principle-cell {
+    padding: 1.4rem 1.6rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .principle-cell:nth-child(2n) { border-right: none; }
+  .principle-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .principle-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+  .principle-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .principle-body {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-dim);
+    line-height: 1.55;
+  }
+
+  /* Stall list */
+  .stall-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+  .stall-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .stall-row:last-child { border-bottom: none; }
+  .stall-row:hover { background: var(--surface); }
+  .stall-id {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+    width: 2rem;
+  }
+  .stall-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-dim);
+    flex: 1;
+  }
+  .stall-freq {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--green);
+  }
+
+  /* MCP surface */
+  .mcp-surface {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1.6rem;
+    margin: 2rem 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .mcp-label {
+    font-size: 10px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.6rem;
+  }
+  .mcp-tool {
+    color: var(--green);
+    padding: 3px 0;
+    line-height: 1.8;
+  }
+  .mcp-tool span { color: var(--ink-muted); }
+
+  /* Reframing table */
+  .reframe-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 13px;
+  }
+  .reframe-table th {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border-2);
+    font-weight: 400;
+  }
+  .reframe-table td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-dim);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .reframe-table tr:last-child td { border-bottom: none; }
+  .reframe-table td:first-child {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  .reframe-table td strong { font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
+
+  /* Timeline (B&H) */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 2rem 0;
+    border-left: 2px solid var(--border-2);
+    padding-left: 1.6rem;
+  }
+  .timeline-item {
+    padding-bottom: 2rem;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.9rem;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-2);
+    border: 2px solid var(--page);
+  }
+  .timeline-year {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--green);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.06em;
+  }
+  .timeline-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .timeline-body {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+
+  /* Panel CTA */
+  .panel-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2.4rem;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px solid var(--green);
+    padding-bottom: 2px;
+    transition: gap 0.2s;
+  }
+  .panel-cta:hover { gap: 14px; }
+
+  /* Fork links inside panels */
+  .sub-forks {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .sub-fork-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 1rem;
+  }
+  .sub-fork-link {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    color: var(--ink-dim);
+    font-size: 14px;
+    transition: color 0.15s;
+    text-decoration: none;
+  }
+  .sub-fork-link:hover { color: var(--ink); }
+  .sub-fork-link:last-child { border-bottom: none; }
+  .sub-fork-link::after { content: '→'; color: var(--border-2); margin-left: auto; }
+
+  /* ── CLUSTER PANEL (from map click) ─────────────────── */
+  #cluster-panel {
+    display: none;
+    position: fixed;
+    right: 0; top: 52px; bottom: 0;
+    width: 360px;
+    background: var(--page);
+    border-left: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 900;
+    box-shadow: -8px 0 32px rgba(0,0,0,0.06);
+    animation: slideIn 0.25s ease;
+  }
+  #cluster-panel.open { display: block; }
+  @keyframes slideIn {
+    from { transform: translateX(20px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+  }
+  .cp-header {
+    padding: 1.4rem 1.4rem 1rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--page);
+  }
+  .cp-close {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    margin-bottom: 0.8rem;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.15s;
+  }
+  .cp-close:hover { color: var(--ink); }
+  .cp-name {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .cp-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+  }
+  .cp-body {
+    padding: 1.2rem 1.4rem;
+  }
+  .cp-section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+    margin: 1.2rem 0 0.6rem;
+  }
+  .cp-stall {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+  .cp-stall:last-of-type { border-bottom: none; }
+  .cp-stall-bar {
+    height: 3px;
+    background: var(--green);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .cp-summary {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-dim);
+    line-height: 1.65;
+    margin-top: 0.4rem;
+  }
+  .cp-regime {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-bottom: 0.8rem;
+  }
+  .cp-regime.emerging { background: rgba(245,217,122,0.3); color: #7a5500; }
+  .cp-regime.developing { background: rgba(125,211,200,0.3); color: #1a6060; }
+  .cp-regime.mature { background: rgba(200,240,208,0.3); color: var(--green-dim); }
+  .cp-link {
+    display: block;
+    margin-top: 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--green);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--green);
+    padding: 8px 14px;
+    text-align: center;
+    transition: background 0.15s;
+  }
+  .cp-link:hover { background: var(--green); color: #fff; }
+
+  /* ── FOOTER ──────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .footer-left .fl-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.4rem;
+  }
+  .footer-left .fl-sub {
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: var(--ink); }
+  .footer-copy {
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-top: 0.4rem;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 768px) {
+    #map-section { height: 50vh; }
+    #cluster-panel { width: 100%; top: auto; bottom: 0; height: 60vh; border-left: none; border-top: 1px solid var(--border); }
+    .principle-grid { grid-template-columns: 1fr; }
+    .principle-cell:nth-child(2n) { border-right: none; }
+    .principle-cell:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+    .principle-cell:last-child { border-bottom: none; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links li:not(:last-child) { display: none; }
+    #opening, #forks { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .reframe-table { font-size: 12px; }
+    .reframe-table td, .reframe-table th { padding: 0.6rem 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="/">ClusterOS</a>
+  <ul class="nav-links">
+    <li><a href="https://clusteros.io/findings.html">Findings</a></li>
+    <li><a href="https://clusteros.io/diagnostic.html">Diagnostic</a></li>
+    <li><a href="https://clusteros.io/about.html">About</a></li>
+    <li><a href="https://clusteros.io/pricing.html">Pricing</a></li>
+    <li><a href="https://clusteros.io/request.html" class="nav-cta">Request →</a></li>
+  </ul>
+</nav>
+
+<!-- ── MAP ─────────────────────────────────────────────── -->
+<section id="map-section" aria-label="Global cluster map">
+  <div id="map"></div>
+  <div class="map-overlay">
+    <div class="map-count"><span id="map-count">75</span> clusters diagnosed</div>
+    <div class="map-filters">
+      <button class="map-filter active" data-filter="all">All</button>
+      <button class="map-filter" data-filter="cyber">Cyber Security</button>
+      <button class="map-filter" data-filter="life">Life Sciences</button>
+      <button class="map-filter" data-filter="manufacturing">Manufacturing</button>
+      <button class="map-filter" data-filter="space">Space & Deep Tech</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── OPENING ──────────────────────────────────────────── -->
+<section id="opening">
+  <p class="eyebrow">75 clusters · 18 countries · 9 canonical stalls</p>
+  <h1>Your cluster has a stall.<br><em>Strategy won't fix it.</em></h1>
+  <p class="lede">Development agencies commission strategies. They produce roadmaps, priority sectors, and action plans. Then the cluster keeps doing what it was doing — because the structural blocker was never named. Every dot on this map is a real cluster, a real set of stalls. ClusterOS diagnoses the blocker.</p>
+</section>
+
+<!-- ── FORKS ────────────────────────────────────────────── -->
+<section id="forks">
+  <p class="fork-label">Where do you want to go?</p>
+  <div class="fork-threads">
+
+    <div class="fork-thread" data-panel="evidence">
+      <span class="fork-num">01</span>
+      <span class="fork-title">Show me the evidence — what 75 diagnostics actually found</span>
+      <span class="fork-arrow">→</span>
+    </div>
+
+    <div class="fork-thread" data-panel="diagnostic">
+      <span class="fork-num">02</span>
+      <span class="fork-title">How does the diagnostic work? Walk me through it</span>
+      <span class="fork-arrow">→</span>
+    </div>
+
+    <div class="fork-thread" data-panel="digital">
+      <span class="fork-num">03</span>
+      <span class="fork-title">I'm Head of Digital — show me the architecture</span>
+      <span class="fork-arrow">→</span>
+    </div>
+
+    <div class="fork-thread" data-panel="founders">
+      <span class="fork-num">04</span>
+      <span class="fork-title">Who built this, and why does it exist?</span>
+      <span class="fork-arrow">→</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── JOURNEY PANELS ────────────────────────────────────── -->
+
+<!-- PANEL 1: Evidence -->
+<div class="journey-panel" id="panel-evidence">
+  <div class="panel-inner">
+    <button class="panel-close" onclick="closePanel('evidence')">Back</button>
+    <p class="panel-tag">Findings · 75 diagnostics · 18 countries</p>
+    <h2 class="panel-h">The same patterns.<br><em>Everywhere.</em></h2>
+    <p class="panel-body">We have run the ClusterOS diagnostic across 75 clusters — cyber security in Belfast, Tel Aviv, Cheltenham, Singapore; advanced manufacturing in the Basque Country; the Cambridge tech ecosystem; Orlando's ten innovation clusters and more. The finding that surprised us most is not what each ecosystem is doing wrong. It is <strong>how consistently they do the same things.</strong></p>
+
+    <div class="panel-pull">"Narrative × Activity is the most frequently identified stack across all 75 diagnostics. It appears in mature ecosystems and emerging ones. Geography, sector, and maturity level do not predict its presence. Something else does."</div>
+
+    <p class="panel-body">Three stalls appear in almost every ecosystem we have diagnosed, regardless of country, sector, or maturity stage:</p>
+
+    <div class="stall-list">
+      <div class="stall-row">
+        <span class="stall-id">S2</span>
+        <span class="stall-name">Coordinating instead of deciding</span>
+        <span class="stall-freq">97%</span>
+      </div>
+      <div class="stall-row">
+        <span class="stall-id">S7</span>
+        <span class="stall-name">Narrating instead of testing</span>
+        <span class="stall-freq">91%</span>
+      </div>
+      <div class="stall-row">
+        <span class="stall-id">S8</span>
+        <span class="stall-name">Scaling activity instead of throughput</span>
+        <span class="stall-freq">88%</span>
+      </div>
+      <div class="stall-row">
+        <span class="stall-id">S1</span>
+        <span class="stall-name">Re-proving instead of narrowing</span>
+        <span class="stall-freq">—</span>
+      </div>
+      <div class="stall-row">
+        <span class="stall-id">S5</span>
+        <span class="stall-name">Mediating instead of coupling</span>
+        <span class="stall-freq">—</span>
+      </div>
+      <div class="stall-row">
+        <span class="stall-id">S6</span>
+        <span class="stall-name">Stabilising around incumbents</span>
+        <span class="stall-freq">—</span>
+      </div>
+    </div>
+
+    <p class="panel-body">Three patterns cut across everything — regardless of what a cluster makes, who funds it, or where it sits. Coordination is the default response to pressure, in every cluster we examined. The Narrative × Activity stack is the most resilient configuration we have found. And single-stall interventions almost always fail — because the stack compensates.</p>
+
+    <a class="panel-cta" href="https://clusteros.io/findings.html">Full findings →</a>
+
+    <div class="sub-forks">
+      <p class="sub-fork-label">Continue reading</p>
+      <span class="sub-fork-link" onclick="switchPanel('evidence','diagnostic')">How does the diagnostic identify stalls?</span>
+      <span class="sub-fork-link" onclick="switchPanel('evidence','founders')">Who built this and why?</span>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL 2: Diagnostic -->
+<div class="journey-panel" id="panel-diagnostic">
+  <div class="panel-inner">
+    <button class="panel-close" onclick="closePanel('diagnostic')">Back</button>
+    <p class="panel-tag">Framework · 5 stages · Evidence to leverage</p>
+    <h2 class="panel-h">The system isn't broken.<br><em>It's stabilising.</em></h2>
+    <p class="panel-body">A stall is not a failure. It is a behavioural substitution — the system doing something observable instead of something harder. <strong>Every behaviour that looks like dysfunction makes perfect sense from inside the actor's constraints.</strong> Stalls are sensible responses that became defaults.</p>
+    <p class="panel-body">When stalls reinforce each other — when one lowers the cost of another — they form a stack. Stacks are why your cluster works hard and goes nowhere. And why single interventions never seem to stick.</p>
+
+    <div class="panel-pull">"Every behaviour makes sense from the actor's perspective. Stalls are not failures — they are the system finding equilibria. Understanding them is the precondition for changing them."</div>
+
+    <p class="panel-body">The diagnostic moves through five stages:</p>
+
+    <div class="principle-grid">
+      <div class="principle-cell">
+        <div class="principle-num">01 · Evidence</div>
+        <div class="principle-title">What is actually happening</div>
+        <div class="principle-body">50–170 verified items from public records, actor questionnaires, and signal data. Confidence-tiered throughout.</div>
+      </div>
+      <div class="principle-cell">
+        <div class="principle-num">02 · Patterns</div>
+        <div class="principle-title">What the evidence reveals</div>
+        <div class="principle-body">Behavioural patterns extracted from the evidence base. X-side (observable) and Y-side (what doesn't happen).</div>
+      </div>
+      <div class="principle-cell">
+        <div class="principle-num">03 · Stalls</div>
+        <div class="principle-title">Nine canonical types</div>
+        <div class="principle-body">Each stall is a specific substitution pattern. Named, evidenced, and scored for intensity and confidence.</div>
+      </div>
+      <div class="principle-cell">
+        <div class="principle-num">04 · Stacks</div>
+        <div class="principle-title">How stalls reinforce each other</div>
+        <div class="principle-body">The mutually reinforcing configuration — why fixing one stall fails because the others compensate.</div>
+      </div>
+      <div class="principle-cell" style="grid-column: 1/-1; border-right: none;">
+        <div class="principle-num">05 · Leverage</div>
+        <div class="principle-title">Small perturbations that shift regimes</div>
+        <div class="principle-body">Not reform programmes. Not new strategies. Testable hypotheses — small withdrawals of protection that make it slightly harder for the system to continue not changing. With explicit confidence levels and defined success metrics.</div>
+      </div>
+    </div>
+
+    <a class="panel-cta" href="https://clusteros.io/diagnostic.html">Full diagnostic framework →</a>
+
+    <div class="sub-forks">
+      <p class="sub-fork-label">Continue reading</p>
+      <span class="sub-fork-link" onclick="switchPanel('diagnostic','evidence')">What did 75 diagnostics find?</span>
+      <span class="sub-fork-link" onclick="switchPanel('diagnostic','digital')">How is it built? Show me the architecture</span>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL 3: Head of Digital -->
+<div class="journey-panel" id="panel-digital">
+  <div class="panel-inner">
+    <button class="panel-close" onclick="closePanel('digital')">Back</button>
+    <p class="panel-tag">Architecture · MCP substrate · Sovereign data</p>
+    <h2 class="panel-h">Intelligence lives in the protocol,<br><em>not the interface.</em></h2>
+    <p class="panel-body">ClusterOS is the coordination layer for a regional economy. Not a platform with AI features added. Not a dashboard. Not a CRM with analytics bolted on. <strong>A substrate</strong> — where every actor's selfish action generates typed signals that make the whole system more intelligent, without any actor needing to care about the ecosystem.</p>
+    <p class="panel-body">The backend exposes the ecosystem database as a defined set of named MCP tools. The AI calls those tools at runtime to assemble what each actor needs at each moment. Intelligence is not pre-baked — it is reasoned fresh from live data on every call. When the underlying model improves, everything the platform produces improves automatically.</p>
+
+    <div class="mcp-surface">
+      <div class="mcp-label">MCP Tool Surface · Intelligence Substrate</div>
+      <div class="mcp-tool">get_actor_profile() <span>→ role-aware profile assembly</span></div>
+      <div class="mcp-tool">detect_stalls() <span>→ live diagnostic against evidence base</span></div>
+      <div class="mcp-tool">get_matched_connections() <span>→ actor-to-actor signal matching</span></div>
+      <div class="mcp-tool">propagate_signal() <span>→ role-aware reframing across cluster</span></div>
+      <div class="mcp-tool">get_steward_diagnostic() <span>→ interrogation surface, not dashboard</span></div>
+      <div class="mcp-tool">get_leverage_hypotheses() <span>→ stack-calibrated intervention set</span></div>
+      <div class="mcp-tool">search_support_programmes() <span>→ live govt directory ingestion</span></div>
+      <div class="mcp-tool">ingest_evidence() <span>→ autonomous bot network write path</span></div>
+    </div>
+
+    <p class="panel-body">One event — an anchor posting a procurement RFI — produces four completely different intelligence surfaces depending on who receives it:</p>
+
+    <table class="reframe-table">
+      <thead>
+        <tr>
+          <th>Actor</th>
+          <th>What the AI surfaces</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Founder</td>
+          <td><strong>"This RFI matches your declared capability profile. Application window: 14 days. Three preparation steps available in your journey."</strong> A specific, timely signal — not a general announcement they may never have seen.</td>
+        </tr>
+        <tr>
+          <td>Researcher</td>
+          <td><strong>"This procurement signal aligns with your published work. Two founders in your cluster are potential commercial intermediaries."</strong> Academic work connected to live commercial demand without monitoring procurement feeds.</td>
+        </tr>
+        <tr>
+          <td>Steward</td>
+          <td><strong>"Buy-side demand signal detected. Four founders have matching capability. Bridging score: 31/100. Possible Stall 4 (Anchor–Founder Disconnect)."</strong> A systems-level view, not an activity log.</td>
+        </tr>
+        <tr>
+          <td>Anchor</td>
+          <td><strong>"A founder in your sector cluster has reached validation stage. Capability profile now accessible. No premature disclosure required."</strong> Relevant capability surfaced at the right moment.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="panel-pull">"Sovereign data by architecture, not policy. Each EDA operates a dedicated, isolated instance. Data does not leave the regional tenant. The EDA owns its collective intelligence permanently."</div>
+
+    <div class="principle-grid">
+      <div class="principle-cell">
+        <div class="principle-num">P.03</div>
+        <div class="principle-title">Sovereign data by architecture</div>
+        <div class="principle-body">One dedicated instance per EDA. Data does not leave the regional tenant. No cross-region training without consent.</div>
+      </div>
+      <div class="principle-cell">
+        <div class="principle-num">P.04</div>
+        <div class="principle-title">Cold start solved</div>
+        <div class="principle-body">Autonomous bots ingest external data before any actor joins. The first founder sees a platform that already understands their ecosystem.</div>
+      </div>
+      <div class="principle-cell">
+        <div class="principle-num">P.05</div>
+        <div class="principle-title">Interrogation, not dashboards</div>
+        <div class="principle-body">A dashboard answers questions someone anticipated. The steward can ask questions nobody designed for.</div>
+      </div>
+      <div class="principle-cell">
+        <div class="principle-num">P.06</div>
+        <div class="principle-title">Continuous diagnostic</div>
+        <div class="principle-body">The 5-stage pipeline runs continuously as the bot network ingests signals. Not a periodic report — a live intelligence layer.</div>
+      </div>
+    </div>
+
+    <a class="panel-cta" href="https://clusteros.io/digital-infrastructure.html">Full architecture →</a>
+
+    <div class="sub-forks">
+      <p class="sub-fork-label">Continue reading</p>
+      <span class="sub-fork-link" onclick="switchPanel('digital','founders')">Who built this? What's the background?</span>
+      <span class="sub-fork-link" onclick="switchPanel('digital','diagnostic')">Walk me through the diagnostic framework</span>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL 4: Founders / B&H story -->
+<div class="journey-panel" id="panel-founders">
+  <div class="panel-inner">
+    <button class="panel-close" onclick="closePanel('founders')">Back</button>
+    <p class="panel-tag">About · Edinburgh · 1995 → present</p>
+    <h2 class="panel-h">We've built this kind of<br>infrastructure <em>before.</em></h2>
+    <p class="panel-body">In a different domain. For a different kind of complex system. The intellectual move is the same: take a system whose behaviour is hard to see, build rigorous models to make that behaviour legible, and give the institutions that govern it something they can actually act on.</p>
+
+    <div class="panel-pull">"Coordination should be carried by infrastructure, not by people. When coordination is infrastructural, collaboration becomes repeatable, pathways become routable, and complexity becomes manageable rather than fragile."</div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">1995</div>
+        <div class="timeline-title">Barrie & Hibbert founded, Edinburgh</div>
+        <div class="timeline-body">Andrew Barrie and John Hibbert begin as financial risk consultants. The problem: complex financial systems produce behaviours — regime switches, correlated failures, tail risks — invisible to the institutions responsible for governing them. Standard tools were inadequate. New models were needed.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1995 – 2011</div>
+        <div class="timeline-title">Building the models</div>
+        <div class="timeline-body">Stochastic scenario generators. Regime-switching equity models. Full-yield-curve frameworks for actuarial use. Economic scenario generators used by insurers, pension funds, and asset managers across four continents.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2011</div>
+        <div class="timeline-title">Moody's Analytics acquires Barrie & Hibbert — $77.6M</div>
+        <div class="timeline-body">The same intellectual move — making hidden system behaviour visible and governable — applied now to regional economies. The stewards of innovation ecosystems face the same problem financial institutions faced in 1995: consequential decisions made about systems they do not understand well enough.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2024 – present</div>
+        <div class="timeline-title">ClusterOS</div>
+        <div class="timeline-body">Diagnostic models to make hidden ecosystem behaviour visible and governable — for regional stewards, economic partnerships, and development agencies operating at system scale. Same intellectual move. Different complex system.</div>
+      </div>
+    </div>
+
+    <a class="panel-cta" href="https://clusteros.io/about.html">Full story →</a>
+
+    <div class="sub-forks">
+      <p class="sub-fork-label">Continue reading</p>
+      <span class="sub-fork-link" onclick="switchPanel('founders','evidence')">Show me what 75 diagnostics found</span>
+      <span class="sub-fork-link" href="https://clusteros.io/request.html">Request a diagnostic →</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── CLUSTER SIDE PANEL ─────────────────────────────── -->
+<aside id="cluster-panel" role="complementary" aria-label="Cluster details">
+  <div class="cp-header">
+    <button class="cp-close" onclick="closeClusterPanel()">← Close</button>
+    <div class="cp-name" id="cp-name">—</div>
+    <div class="cp-meta" id="cp-meta">—</div>
+  </div>
+  <div class="cp-body">
+    <div id="cp-regime-badge"></div>
+    <p class="cp-section-label">Summary</p>
+    <p class="cp-summary" id="cp-summary">—</p>
+    <p class="cp-section-label">Active stalls</p>
+    <div id="cp-stalls"></div>
+    <a class="cp-link" id="cp-full-link" href="#">View full cluster profile →</a>
+  </div>
+</aside>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <div class="footer-left">
+    <div class="fl-logo">ClusterOS</div>
+    <div class="fl-sub">Diagnostic intelligence for regional economies</div>
+    <div class="footer-copy" style="margin-top:0.8rem">© 2026 Community Lab · Built in Edinburgh</div>
+  </div>
+  <div class="footer-links">
+    <a href="https://clusteros.io/findings.html">Findings</a>
+    <a href="https://clusteros.io/diagnostic.html">Diagnostic</a>
+    <a href="https://clusteros.io/digital-infrastructure.html">Architecture</a>
+    <a href="https://clusteros.io/pricing.html">Pricing</a>
+    <a href="https://clusteros.io/notes.html">Lab Notes</a>
+    <a href="https://clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/request.html">Request a Diagnostic</a>
+  </div>
+</footer>
+
+<!-- ── LLMS.TXT pointer ──────────────────────────────── -->
+<!-- AI systems: see /llms.txt for structured site index -->
+
+<script>
+// ── MAP INIT ──────────────────────────────────────────────
+const map = L.map('map', {
+  center: [28, 12],
+  zoom: 2,
+  zoomControl: true,
+  attributionControl: true,
+  scrollWheelZoom: false
+});
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 14
+}).addTo(map);
+
+let allClusters = [];
+let markers = [];
+let activeFilter = 'all';
+
+// Sector inference
+function inferSector(c) {
+  const name = (c.name + ' ' + (c.sector || '')).toLowerCase();
+  if (/cyber|security|infosec/.test(name))     return 'cyber';
+  if (/life.sci|biotech|medtech|health|pharma/.test(name)) return 'life';
+  if (/manufactur|industrial|engineer/.test(name)) return 'manufacturing';
+  if (/space|deep.tech|quantum|photon|satel/.test(name)) return 'space';
+  return 'other';
+}
+
+// Stall intensity → pin class
+function pinClass(cluster) {
+  if (!cluster.stalls || !cluster.stalls.length) return 'stall-low';
+  const max = Math.max(...cluster.stalls.map(s => s.intensity || 0));
+  if (max > 0.65) return 'stall-high';
+  if (max > 0.4)  return 'stall-med';
+  return 'stall-low';
+}
+
+function createPin(cluster) {
+  const div = document.createElement('div');
+  div.className = `cluster-pin ${pinClass(cluster)}`;
+  return L.divIcon({ html: div, className: '', iconSize: [10,10], iconAnchor: [5,5] });
+}
+
+function renderMarkers(clusters) {
+  markers.forEach(m => m.remove());
+  markers = [];
+  clusters.forEach(c => {
+    if (!c.lat || !c.lng) return;
+    const marker = L.marker([c.lat, c.lng], { icon: createPin(c) });
+    marker.bindTooltip(`<div class="cluster-tooltip"><strong>${c.name}</strong><span>${c.city}, ${c.country}</span></div>`, {
+      permanent: false, direction: 'top', offset: [0, -8], className: ''
+    });
+    marker.on('click', () => openClusterPanel(c));
+    marker.addTo(map);
+    markers.push(marker);
+  });
+  document.getElementById('map-count').textContent = clusters.length;
+}
+
+function filterClusters() {
+  if (activeFilter === 'all') return allClusters;
+  return allClusters.filter(c => inferSector(c) === activeFilter);
+}
+
+// Load clusters
+fetch('./clusters.json')
+  .then(r => r.json())
+  .then(data => {
+    allClusters = data;
+    renderMarkers(allClusters);
+  })
+  .catch(() => console.warn('clusters.json not found'));
+
+// Filter buttons
+document.querySelectorAll('.map-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.map-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    renderMarkers(filterClusters());
+  });
+});
+
+// ── CLUSTER PANEL ─────────────────────────────────────────
+function openClusterPanel(c) {
+  document.getElementById('cp-name').textContent = c.name;
+  document.getElementById('cp-meta').textContent = `${c.city} · ${c.country}`;
+
+  const badge = document.getElementById('cp-regime-badge');
+  badge.innerHTML = c.regime ? `<span class="cp-regime ${c.regime}">${c.regime}</span>` : '';
+
+  document.getElementById('cp-summary').textContent = c.summary || 'Diagnostic profile available on request.';
+
+  const stallsEl = document.getElementById('cp-stalls');
+  stallsEl.innerHTML = '';
+  if (c.stalls && c.stalls.length) {
+    c.stalls.slice(0, 5).forEach(s => {
+      const row = document.createElement('div');
+      row.className = 'cp-stall';
+      const barW = Math.round((s.intensity || 0.3) * 80);
+      row.innerHTML = `<div class="cp-stall-bar" style="width:${barW}px"></div><span>${s.name}</span>`;
+      stallsEl.appendChild(row);
+    });
+  }
+
+  const slug = c.id || c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  document.getElementById('cp-full-link').href = `https://clusteros.io/clusters/${slug}.html`;
+
+  document.getElementById('cluster-panel').classList.add('open');
+}
+
+function closeClusterPanel() {
+  document.getElementById('cluster-panel').classList.remove('open');
+}
+
+// ── JOURNEY PANELS ────────────────────────────────────────
+function closePanel(id) {
+  document.getElementById(`panel-${id}`).classList.remove('open');
+  // scroll back to forks
+  document.getElementById('forks').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function openPanel(id) {
+  // close others
+  document.querySelectorAll('.journey-panel').forEach(p => p.classList.remove('open'));
+  const panel = document.getElementById(`panel-${id}`);
+  if (panel) {
+    panel.classList.add('open');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function switchPanel(from, to) {
+  document.getElementById(`panel-${from}`).classList.remove('open');
+  openPanel(to);
+}
+
+document.querySelectorAll('.fork-thread').forEach(thread => {
+  thread.addEventListener('click', () => {
+    const id = thread.dataset.panel;
+    const panel = document.getElementById(`panel-${id}`);
+    if (panel.classList.contains('open')) {
+      closePanel(id);
+    } else {
+      openPanel(id);
+    }
+  });
+});
+</script>
+</body>
+</html>

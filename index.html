@@ -1407,18 +1407,14 @@ Write 2-3 sentences that feel like the site has genuinely noticed something spec
     textEl.innerHTML = '<span class="adaptive-loading">Reading your path...</span>';
 
     try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('https://clusteros-v3-production.up.railway.app/api/intelligence', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{ role: 'user', content: this.buildPrompt(panelId) }]
-        })
+        body: JSON.stringify({ prompt: this.buildPrompt(panelId) })
       });
 
       const data = await response.json();
-      const text = data.content && data.content[0] && data.content[0].text;
+      const text = data.text;
       if (text) {
         textEl.textContent = text;
       } else {

@@ -1428,6 +1428,12 @@ function switchPanel(from, to) {
   openPanel(to);
 }
 
+// Expose to global scope for onclick attributes
+window.closePanel = closePanel;
+window.openPanel = openPanel;
+window.switchPanel = switchPanel;
+window.closeClusterPanel = closeClusterPanel;
+
 document.querySelectorAll('.fork-thread').forEach(thread => {
   thread.addEventListener('click', () => {
     const id = thread.dataset.panel;

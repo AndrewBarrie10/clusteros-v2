@@ -205,16 +205,22 @@ const dashboard = {
 
     const targetStalls = this.stallNames.map(s => s.toLowerCase());
 
+    // Keys are canonical stall names (from STALL_SCIENCE / pills).
+    // Values are substrings that appear in the actual cluster data stall names.
+    // Actual names: "Narrating instead of testing", "Re-proving instead of narrowing",
+    // "Coordinating instead of deciding", "Mediating instead of coupling",
+    // "Scaling activity instead of throughput", "Extracting without reinvesting",
+    // "Stabilising around incumbents", "Stabilizing around incumbents", "Waiting for permission"
     const STALL_ALIASES = {
-      'narrating':    ['narrat'],
-      'coordinating': ['coordinat'],
-      're-proving':   ['re-prov', 'reprov', 'proving'],
-      'scaling':      ['scal'],
-      'mediating':    ['mediat'],
-      'extracting':   ['extract'],
-      'forgiving':    ['forgiv'],
-      'stabilising':  ['stabilis', 'stabiliz'],
-      'waiting':      ['wait'],
+      'narrating':    ['narrating instead'],
+      'coordinating': ['coordinating instead'],
+      're-proving':   ['re-proving instead'],
+      'scaling':      ['scaling activity'],
+      'mediating':    ['mediating instead'],
+      'extracting':   ['extracting without'],
+      'forgiving':    ['forgiving instead'],
+      'stabilising':  ['stabilising around', 'stabilizing around'],
+      'waiting':      ['waiting for'],
     };
 
     return all
@@ -759,16 +765,22 @@ window.openSimilarClusters = function() {
     b.clusters.forEach(c => { if (c.topStall) targetStalls.add(c.topStall); });
 
     const ALIASES = {
-      'Narrating':'narrat','Coordinating':'coordinat','Re-proving':'re-prov',
-      'Scaling':'scal','Mediating':'mediat','Extracting':'extract',
-      'Forgiving':'forgiv','Stabilising':'stabilis','Waiting':'wait'
+      'Narrating':    ['narrating instead'],
+      'Coordinating': ['coordinating instead'],
+      'Re-proving':   ['re-proving instead'],
+      'Scaling':      ['scaling activity'],
+      'Mediating':    ['mediating instead'],
+      'Extracting':   ['extracting without'],
+      'Forgiving':    ['forgiving instead'],
+      'Stabilising':  ['stabilising around', 'stabilizing around'],
+      'Waiting':      ['waiting for']
     };
     scored = allClusters.map(c => {
       const names = (c.stalls||[]).map(s => s.name.toLowerCase());
       let score = 0;
       targetStalls.forEach(t => {
-        const alias = ALIASES[t] || t.toLowerCase();
-        if (names.some(n => n.includes(alias))) score += 1;
+        const aliasList = ALIASES[t] || [t.toLowerCase()];
+        if (names.some(n => aliasList.some(a => n.includes(a)))) score += 1;
       });
       return { cluster: c, score };
     })

@@ -643,6 +643,12 @@
     font-weight: 300;
   }
 
+  .adaptive-loading {
+    color: var(--ink-muted);
+    font-style: italic;
+    font-size: 13px;
+  }
+
   /* ── CLUSTER PANEL (from map click) ─────────────────── */
   #cluster-panel {
     display: none;
@@ -1362,43 +1368,79 @@ const behaviour = {
     return sorted.length ? sorted[0][0] : null;
   },
 
-  message(panelId) {
-    const p = this.persona();
-    const sector = this.dominantSector();
-    const stall = this.dominantStall();
-    const n = this.clusters.length;
-    const names = this.clusters.slice(0,2).map(c=>c.name).join(' and ');
+  // Build the prompt for Claude
+  buildPrompt(panelId) {
+    const forkLabels = {
+      evidence: 'Show me the evidence — what 75 diagnostics found',
+      diagnostic: 'How does the diagnostic work?',
+      digital: "I'm Head of Digital — show me the architecture",
+      founders: 'Who built this and why does it exist?'
+    };
+    const forksOpened = this.forks.map(f => forkLabels[f] || f).join(', then ');
+    const clusterSummaries = this.clusters.map(c =>
+      `${c.name} (${c.sector}, ${c.regime} regime, primary stall: ${c.topStall||'unknown'})`
+    ).join('; ');
 
-    if (p==='digital') {
-      if (n>=2) return `You've been looking at ${names}. Both run architectures where the intelligence layer and coordination layer are separate — which is exactly what MCP solves.`;
-      return `The architecture question isn't which AI model to use. It's whether the intelligence lives in the protocol or the interface. ClusterOS is built on the former.`;
+    const currentFork = forkLabels[panelId] || panelId;
+
+    return `You are the intelligence layer of ClusterOS — a diagnostic platform for regional innovation ecosystems. A visitor is navigating the site and you can see their path.
+
+VISITOR PATH:
+- Forks opened (in order): ${forksOpened || 'none yet'}
+- Clusters examined: ${clusterSummaries || 'none yet'}
+- Currently reading: "${currentFork}"
+
+CONTEXT ABOUT CLUSTEROS:
+ClusterOS identifies behavioural stalls in innovation clusters — patterns where rational individual actions combine to prevent systemic progress. There are 9 stall types. Stalls form stabilisation stacks that resist single interventions. The diagnostic runs 5 stages: Evidence → Patterns → Stalls → Stacks → Leverage.
+
+YOUR TASK:
+Write 2-3 sentences that feel like the site has genuinely noticed something specific about this visitor's path. Reference the actual clusters they looked at if any. Find a real pattern or tension in what they've been exploring. Do not be generic. Do not mention "your path" or "I notice". Just make an observation that would make them think "how did it know that?". Write in the voice of ClusterOS — precise, structural, slightly unexpected. No em-dashes.`;
+  },
+
+  async callClaudeAPI(panelId) {
+    const wrap = document.getElementById('adaptive-'+panelId);
+    const textEl = document.getElementById('adaptive-text-'+panelId);
+    if (!wrap || !textEl) return;
+
+    // Show loading state
+    wrap.classList.add('visible');
+    textEl.innerHTML = '<span class="adaptive-loading">Reading your path...</span>';
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          messages: [{ role: 'user', content: this.buildPrompt(panelId) }]
+        })
+      });
+
+      const data = await response.json();
+      const text = data.content && data.content[0] && data.content[0].text;
+      if (text) {
+        textEl.textContent = text;
+      } else {
+        wrap.classList.remove('visible');
+      }
+    } catch(e) {
+      wrap.classList.remove('visible');
     }
-    if (p==='sceptic') {
-      return `Barrie & Hibbert took sixteen years to build models that made financial system behaviour visible. ClusterOS applies the same intellectual move to regional economies — with the benefit of knowing what the destination looks like.`;
-    }
-    if (p==='steward') {
-      if (stall && n>=2) return `${stall} is appearing across the clusters you've been looking at. That's not coincidence — it's the most structurally embedded stall we find. The diagnostic tells you whether it's active in yours.`;
-      if (n>=1) return `The clusters you've looked at share more than geography. The diagnostic finds the structural pattern underneath — and whether it's present in yours.`;
-      return `75 diagnostics. The same three stalls appear in almost every one. The diagnostic tells you which are active in your cluster — and what's keeping them in place.`;
-    }
-    if (p==='explorer') {
-      if (sector) return `You've been moving across ${sector} clusters. The stall patterns are remarkably consistent across that sector — which makes the leverage hypotheses more transferable than you might expect.`;
-      return `You've covered a lot of ground. The diagnostic takes what you've been exploring and makes it specific to your cluster — your stalls, your stack, your leverage points.`;
-    }
-    if (n>=2) return `You've looked at ${names}. The diagnostic would tell you how yours compares — and what's structurally different.`;
-    return null;
   },
 
   updateAll() {
-    document.querySelectorAll('.journey-panel').forEach(panel => {
+    // Only trigger if we have at least one cluster clicked
+    if (this.clusters.length === 0) return;
+
+    document.querySelectorAll('.journey-panel.open').forEach(panel => {
       const id = panel.id.replace('panel-','');
       const wrap = document.getElementById('adaptive-'+id);
       const textEl = document.getElementById('adaptive-text-'+id);
       if (!wrap || !textEl) return;
-      const msg = this.message(id);
-      if (msg) {
-        textEl.textContent = msg;
-        wrap.classList.add('visible');
+      // Only call API if not already showing content
+      if (!wrap.classList.contains('visible')) {
+        this.callClaudeAPI(id);
       }
     });
   }

@@ -476,7 +476,7 @@ Rewrite steps ${this.currentStep + 2} through 4 only. Keep step 5 unchanged. Eve
       : science.leverage || 'The point of intervention is almost never where the stall is most visible.';
 
     this.steps = [
-      { id:1, title:'You've named it',        description:`The ${this.stallName} stall appears across ${matched.length > 0 ? matched.length + ' of our closest matches' : '67% of clusters diagnosed'}. It is not unique to yours.`, target:'evidence',   branches:['science','evidence'], complete:true },
+      { id:1, title:'You\'ve named it',        description:`The ${this.stallName} stall appears across ${matched.length > 0 ? matched.length + ' of our closest matches' : '67% of clusters diagnosed'}. It is not unique to yours.`, target:'evidence',   branches:['science','evidence'], complete:true },
       { id:2, title:'See it in the data',      description:step2desc, target:'clusters', branches:['science','evidence'], complete:false },
       { id:3, title:'Understand why it holds', description:stackDesc, target:'diagnostic', branches:['science','architecture','clusters'], complete:false },
       { id:4, title:'Find the leverage',       description:leverageDesc, target:'clusters', branches:['clusters','evidence'], complete:false },

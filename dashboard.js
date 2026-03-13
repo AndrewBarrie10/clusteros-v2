@@ -729,97 +729,34 @@ window.dashboard = dashboard;
 
 // ── GATE & ONBOARDING ────────────────────────────────────
 function initGate() {
-  const gate        = document.getElementById('onboarding-gate');
-  const descScreen  = document.getElementById('describe-screen');
-  const gateGuide   = document.getElementById('gate-guide');
-  const gateExplore = document.getElementById('gate-explore');
-  const descBack    = document.getElementById('describe-back');
-  const descSkip    = document.getElementById('describe-skip');
-  const descBuild   = document.getElementById('describe-build');
-  const textarea    = document.getElementById('describe-textarea');
-  const pillsRow    = document.getElementById('describe-pills-row');
-  const stackPrev   = document.getElementById('dpill-stack-preview');
+  const gate     = document.getElementById('onboarding-gate');
+  const textarea = document.getElementById('gate-textarea');
+  const submit   = document.getElementById('gate-submit');
+  const skip     = document.getElementById('gate-skip');
 
   if (!gate) return;
 
-  // Render pills into describe screen
-  if (pillsRow) {
-    pillsRow.innerHTML = PILLS.map(p =>
-      `<button class="dpill" data-key="${p.key}">${p.label}</button>`
-    ).join('');
+  // Enable submit once there's meaningful text
+  textarea?.addEventListener('input', () => {
+    submit.disabled = (textarea.value.trim().length < 20);
+  });
 
-    pillsRow.querySelectorAll('.dpill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('selected');
-        behaviour.togglePill(btn.dataset.key);
-        const stalls = behaviour.selectedPills.map(k => window.PILL_STALLS[k]?.stall).filter(Boolean);
-        const stack  = behaviour._detectStack(stalls);
-        if (stackPrev) stackPrev.textContent = stack ? stack.name + ' detected' : '';
-        _updateBuildBtn();
-      });
-    });
-  }
-
-  // Enable build button when pills selected OR textarea has content
-  function _updateBuildBtn() {
-    if (!descBuild) return;
-    const hasPills = behaviour.selectedPills.length > 0;
-    const hasText  = (textarea?.value.trim().length || 0) > 10;
-    descBuild.disabled = !hasPills && !hasText;
-  }
-  textarea?.addEventListener('input', _updateBuildBtn);
-
-  // Gate buttons
-  gateGuide?.addEventListener('click', () => {
+  // Submit — pass free text to behaviour layer
+  submit?.addEventListener('click', () => {
+    const text = textarea.value.trim();
+    if (!text) return;
     gate.classList.add('hidden');
-    descScreen.classList.add('visible');
+    behaviour.freeDescription = text;
+    behaviour.commitFreeText(text);
   });
 
-  gateExplore?.addEventListener('click', () => {
+  // Skip — dismiss gate, let them explore freely
+  skip?.addEventListener('click', () => {
     gate.classList.add('hidden');
-    // Show the bar cluster input
-    _activateBarMode();
-  });
-
-  // Describe screen back
-  descBack?.addEventListener('click', () => {
-    descScreen.classList.remove('visible');
-    gate.classList.remove('hidden');
-  });
-
-  // Skip — build pathway from pills only (or default)
-  descSkip?.addEventListener('click', () => {
-    descScreen.classList.remove('visible');
-    if (behaviour.selectedPills.length > 0) {
-      behaviour.commitPills();
-    } else {
-      // No selection — just dismiss and let them explore
-      _activateBarMode();
-    }
-  });
-
-  // Build — commit pills + free text
-  descBuild?.addEventListener('click', () => {
-    const freeText = textarea?.value.trim() || '';
-    if (freeText) behaviour.freeDescription = freeText;
-    descScreen.classList.remove('visible');
-    if (behaviour.selectedPills.length > 0) {
-      behaviour.commitPills();
-    } else {
-      // Free text only — treat as a freeform describe
-      behaviour.commitFreeText(freeText);
-    }
   });
 }
 
-function _activateBarMode() {
-  // Just show the bar input in normal mode — no dashboard
-  const input = document.getElementById('intel-bar-input');
-  if (input) input.placeholder = 'Name the cluster you\'re working with';
-}
-
-// Legacy no-op — pills now live in describe screen
-function initOpeningQuestion() {}
+function initOpeningQuestion() {} // legacy no-op
 
 // ── SIMILAR CLUSTERS PANEL ────────────────────────────────
 function buildClusterCards(clusters) {

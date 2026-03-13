@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Re-proving Instead of Narrowing — ClusterOS Lab Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-dim:    #5a5650;
+    --ink-muted:  #8c8780;
+    --page:       #f7f4ef;
+    --surface:    #f0ece4;
+    --border:     #ddd8cf;
+    --border-2:   #c8c2b7;
+    --green:      #2a7a4f;
+    --green-dim:  #1d5c3a;
+    --signal:     #c8f0d0;
+    --teal:       #7dd3c8;
+    --amber:      #f5d97a;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans:  'Geist', system-ui, sans-serif;
+    --font-mono:  'Geist Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 52px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+    background: rgba(247,244,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ink); }
+  .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
+  .nav-links > li { position: relative; }
+  .nav-links a {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
+    display: block; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-dropdown-toggle {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
+    cursor: pointer; white-space: nowrap; transition: color 0.15s;
+  }
+  .nav-dropdown-toggle:hover, .nav-dropdown-toggle.active { color: var(--ink); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0;
+    background: var(--page); border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    min-width: 220px; list-style: none; padding: 4px 0; z-index: 100;
+  }
+  .nav-dropdown-menu.open { display: block; }
+  .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
+    border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
+    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: transform 0.2s, opacity 0.2s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  @media(max-width:900px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
+  .nav-mobile-menu {
+    display: none; position: fixed; top: 52px; left: 0; right: 0;
+    background: var(--page); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1rem 2rem; z-index: 999;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a:hover { color: var(--ink); }
+  .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 1.5rem; margin-top: 5rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 3rem; padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  }
+  .footer-logo span { color: var(--ink); }
+  .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
+  .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .footer-col { display: flex; flex-direction: column; gap: 6px; }
+  .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
+</style>
+<style>
+
+/* Hamburger button */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink-muted);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-cta { display: none; } }
+/* Mobile menu panel */
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(247,244,239,0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,194,183,0.6);
+  padding: 16px 24px 24px;
+  flex-direction: column;
+  gap: 2px;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-muted);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(200,194,183,0.3);
+  transition: color 0.15s;
+}
+.nav-mobile-menu a:hover { color: var(--ink); }
+.nav-mobile-divider { height: 1px; background: rgba(200,194,183,0.6); margin: 8px 0; }
+.nav-mobile-cta { margin-top: 12px; color: var(--green) !important; border-bottom: none !important; font-weight: 600 !important; }
+
+
+@media (max-width: 900px) {
+  .substitution { grid-template-columns: 1fr !important; }
+  .sub-arrow { transform: rotate(90deg); margin: 8px auto; display: block; }
+  .related-grid { grid-template-columns: 1fr 1fr !important; }
+  .two-col-body, .article-layout { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .article-wrap, .body-wrap { padding: 80px 20px 80px !important; }
+  h1, .article-headline, .hero-h { font-size: clamp(24px, 7vw, 36px) !important; }
+  .lede, .article-lede { font-size: 16px !important; }
+  blockquote, .pull-quote { padding: 14px 16px 14px 18px; font-size: 17px; }
+  .evidence-grid, .stall-grid, .two-col { grid-template-columns: 1fr !important; }
+  .related-grid { grid-template-columns: 1fr !important; }
+  .tag-row { flex-wrap: wrap; gap: 6px; }
+  .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
+  p { font-size: 15px; line-height: 1.65; }
+}
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Product ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/digital-infrastructure.html">Digital Infrastructure</a></li>
+        <li><a href="/signals-systems.html">Signals &amp; Systems</a></li>
+        <li><a href="/diagnostic.html">The Diagnostic</a></li>
+        <li><a href="/leverage.html">Leverage</a></li>
+        <li><a href="/findings.html">Findings</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Lab Notes ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/notes.html">All Notes</a></li>
+        <li class="nav-dropdown-divider"></li>
+        <li><a href="/ln-01-coordinating.html">S2 · Coordinating instead of deciding</a></li>
+        <li><a href="/ln-02-narrating.html">S7 · Narrating instead of testing</a></li>
+        <li><a href="/ln-10-narrative-activity-stack.html">Narrative × Activity Stack</a></li>
+        <li><a href="/ln-12-leverage.html">What Leverage Looks Like</a></li>
+        <li><a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a></li>
+      </ul>
+    </li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+  <a href="/signals-systems.html">Signals &amp; Systems</a>
+  <a href="/diagnostic.html">The Diagnostic</a>
+  <a href="/leverage.html">Leverage</a>
+  <a href="/findings.html">Findings</a>
+  <a href="/pricing.html">Pricing</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<!-- Mobile nav menu -->
+
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+  <a href="/ln-02-narrating.html">S7 · Narrating</a>
+  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/about.html">About</a>
+  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
+</div>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="/">Home</a> › <a href="/notes.html">Lab Notes</a> › S1 · Re-proving Instead of Narrowing</div>
+  <div class="series">Lab Notes · Stall Series</div>
+  <h1>Re-proving <em>Instead of</em> Narrowing</h1>
+  <p class="deck">A region validates three technology pathways over five years. All show promise. All attract some investment. All produce credible results. No pathway becomes dominant. No resources shift decisively. The system remains option-rich long after there is enough evidence to commit.</p>
+  <div class="meta"><span>Andrew Barrie</span><span>March 2026</span><span>7 min read</span></div>
+
+  <p class="lead">There is a particular form of paralysis that does not look like paralysis. The system is working. Pilots succeed. Initiatives launch. Validation accumulates. The problem is that none of it forces a choice.</p>
+
+  <p>S1 is the stall where the system repeatedly demonstrates capability without allowing proof to collapse its options. Each successful validation is welcomed — and then the field resets. The next round of proof is commissioned. The system stays open, stays coherent, and stays in the same place.</p>
+
+  <h2>What the stall actually is</h2>
+
+  <div class="diagram">
+    <div class="diag-label">S1 · Substitution pattern</div>
+    <div class="sub">
+      <div class="box x">
+        <div class="tag x">X-side · What happens</div>
+        <div class="txt x">Pilots. Feasibility studies. Validation rounds. Proof-of-concept projects. Capability demonstrations. Credible results across multiple pathways.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="box y">
+        <div class="tag y">Y-side · What doesn't</div>
+        <div class="txt y">Commitment. Exclusion. Resources shifting decisively to fewer options. Some pathways being retired. Evidence forcing direction.</div>
+      </div>
+    </div>
+    <div class="diag-note">The stall is not the validation — it is the relationship between validation and commitment. Where proof accumulates without collapsing choice, the system has learned to use evidence to defer decisions rather than to make them.</div>
+  </div>
+
+  <p>The distinction matters because S1 ecosystems often look healthy. They produce results. They attract interest. They have credible technical achievements. What they do not have is a process by which those achievements concentrate resources and retire alternatives. The validation machinery is sophisticated. The decision machinery is absent.</p>
+
+  <h2>What protects optionality</h2>
+
+  <p>Keeping options open is often described as prudence. In many cases it genuinely is — early-stage systems need to explore before they can commit, and premature narrowing can close off pathways that would have proved valuable. S1 is not early-stage exploration. It is what happens when exploration has been going on long enough that commitment is overdue, but the system has developed interests in keeping all pathways alive.</p>
+
+  <p><strong>Each pathway has beneficiaries.</strong> Research teams, programme managers, funding allocations, and institutional identities become attached to specific trajectories. Narrowing would not just close an option — it would end something that people's careers depend on. The political cost of exclusion is real, and it falls on specific people in specific roles.</p>
+
+  <p><strong>Validation distributes success without forcing exclusion.</strong> A system that validates multiple pathways can celebrate everyone. A system that commits to one pathway has to explain why the others did not make the cut. The first is politically comfortable. The second is not.</p>
+
+  <div class="pullquote">
+    <p>Once a stall entangles with roles and reputations, it is actively defended. Removing it doesn't just change behaviour — it removes someone's position.</p>
+    <cite>Ecosystem Stewardship · Chapter 4</cite>
+  </div>
+
+  <p><strong>The incumbent effect amplifies it.</strong> In systems with a dominant anchor organisation, narrowing is doubly difficult: it requires both evidence that one pathway is stronger, and agreement from the anchor that its existing commitments should shift. S1 and S6 (Stabilising Around Incumbents) frequently appear together for this reason. The incumbent's existing trajectory becomes the default, and validation activity confirms its importance without forcing the system to choose between it and alternatives.</p>
+
+  <h2>Eindhoven as a worked example</h2>
+
+  <p>The book uses Eindhoven as its primary case for S1. For much of the twentieth century, Philips anchored the region with extraordinary technical capability across electronics, materials, lighting, and medical devices. Proof was abundant. Validation pathways were strong. The ecosystem produced ideas, talent, and firms continuously.</p>
+
+  <p>What it did not do quickly was narrow. As long as Philips could credibly operate across many paths, the system had no pressure to collapse choice. Novel ventures remained gravitationally bound to the incumbent orbit. The stack — Re-proving × Continuity — protected optionality and capability retention at the cost of earlier commitment to fewer, harder bets.</p>
+
+  <p>Narrowing eventually occurred — but only when the incumbent itself fragmented, through spin-outs like ASML and NXP, making continuity no longer sufficient to absorb pressure. The point is not that Eindhoven failed. The point is that the narrowing happened at the pace of the incumbent's internal decisions rather than at the pace of external market signals.</p>
+
+  <h2>The demand-side problem</h2>
+
+  <p>S1 is one of the stalls where the Y-side is hardest to observe. Commitment — the behaviour being displaced — requires seeing whether choices are actually being made, which depends on access to resource allocation decisions that are rarely public. You can see that multiple pathways are being validated. You cannot always see whether there is enough evidence to commit, because that depends on what the demand side would accept — and demand-side behaviour is often opaque.</p>
+
+  <p>This is why S1 claims should be held at medium confidence unless there is direct evidence of resource allocation across multiple pathways over multiple cycles, combined with evidence that individual pathways have reached a level of validation that would normally justify commitment in comparable contexts.</p>
+
+  <h2>Where leverage exists</h2>
+
+  <p>The leverage move for S1 is to introduce a single forcing question into one significant renewal decision: <strong>if this pathway continues to validate successfully for another 12 months, what will change?</strong> What resources will shift? What alternatives will be deprioritised? What commitment will follow?</p>
+
+  <p>If the answer is nothing — if another round of validation will be commissioned regardless of results — then the validation is not actually informing decisions. It is absorbing the pressure to make them. Naming that openly, in a funding renewal context, changes what continuation means.</p>
+
+  <p>The second move is to surface what the pathways look like when compared directly rather than separately. S1 systems typically report each pathway against its own objectives. Comparison across pathways — which has produced stronger results relative to investment, which is closest to commercial commitment, which has the clearest demand signal — is structurally avoided because it would force discrimination.</p>
+
+  <div class="epistemic">
+    <div class="ep-label">Epistemic note</div>
+    <p>S1 has moderate X-side observability — validation activity is generally visible in programme records, funding announcements, and academic output. The Y-side is harder: establishing that narrowing should have occurred requires observing the absence of commitment over a period long enough to be meaningful, and knowing enough about demand-side conditions to assess whether proof has been sufficient.</p>
+    <p>The framework is explicit that S1 should not be applied too early. Where the system is genuinely still in exploration, the absence of commitment is correct behaviour. Confidence in S1 increases with temporal depth: if the same pathways have been validated for three or more cycles without producing a commitment decision, the stall claim is warranted.</p>
+    <p>Where S1 is paired with S6, confidence increases further — incumbent gravitational pull provides a mechanism for why narrowing consistently fails to occur even when evidence is available.</p>
+  </div>
+
+  <div class="related">
+    <div class="rel-label">Related notes</div>
+    <div class="rel-grid">
+      <a href="/ln-05-incumbents.html" class="rel-card"><div class="rel-tag">S6 · Stall</div><div class="rel-title">Stabilising Around Incumbents</div></a>
+      <a href="/ln-11-validation-deadlock.html" class="rel-card"><div class="rel-tag">S1+S2 · Stack</div><div class="rel-title">The Validation Deadlock</div></a>
+      <a href="/ln-01-coordinating.html" class="rel-card"><div class="rel-tag">S2 · Stall</div><div class="rel-title">Coordinating Instead of Deciding</div></a>
+    </div>
+  </div>
+
+  <div class="cta">
+    <p>S1 is the stall where proof accumulates without forcing direction. The diagnostic identifies whether your cluster is validating or committing — and what the difference looks like in your specific configuration.</p>
+    <a href="/request.html">Request a Diagnostic →</a>
+  </div>
+</div>
+
+
+
+
+
+
+<style>
+@media (max-width: 900px) {
+  .substitution { grid-template-columns: 1fr !important; }
+  .sub-arrow { transform: rotate(90deg); margin: 8px auto; display: block; }
+  .related-grid { grid-template-columns: 1fr 1fr !important; }
+  .two-col-body, .article-layout { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .article-wrap, .body-wrap { padding: 80px 20px 80px !important; }
+  h1, .article-headline, .hero-h { font-size: clamp(24px, 7vw, 36px) !important; }
+  .lede, .article-lede { font-size: 16px !important; }
+  blockquote, .pull-quote { padding: 14px 16px 14px 18px; font-size: 17px; }
+  .evidence-grid, .stall-grid, .two-col { grid-template-columns: 1fr !important; }
+  .related-grid { grid-template-columns: 1fr !important; }
+  .tag-row { flex-wrap: wrap; gap: 6px; }
+  .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
+  p { font-size: 15px; line-height: 1.65; }
+}
+</style>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
+      <p class="footer-tagline">Regional economies need infrastructure.<br>Not more strategy.</p>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <div class="footer-col-label">Product</div>
+        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+        <a href="/signals-systems.html">Signals &amp; Systems</a>
+        <a href="/diagnostic.html">The Diagnostic</a>
+        <a href="/leverage.html">Leverage</a>
+        <a href="/findings.html">Findings</a>
+        <a href="/pricing.html">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Lab Notes</div>
+        <a href="/notes.html">All Notes</a>
+        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+        <a href="/ln-02-narrating.html">S7 · Narrating</a>
+        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
+        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Company</div>
+        <a href="/about.html">About</a>
+        <a href="/request.html">Request a Diagnostic</a>
+        <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 ClusterOS · Community Lab</span>
+    <span>Built in Edinburgh</span>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+// ── NAV
+document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+  var t = dd.querySelector('.nav-dropdown-toggle');
+  var m = dd.querySelector('.nav-dropdown-menu');
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = m.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+    if (!open) { m.classList.add('open'); t.classList.add('active'); }
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+});
+(function(){
+  var h = document.getElementById('nav-hamburger');
+  var m = document.getElementById('nav-mobile-menu');
+  if (!h || !m) return;
+  h.addEventListener('click', function(e){ e.stopPropagation(); var o=m.classList.contains('open'); m.classList.toggle('open',!o); h.classList.toggle('open',!o); });
+  document.addEventListener('click', function(){ m.classList.remove('open'); h.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>

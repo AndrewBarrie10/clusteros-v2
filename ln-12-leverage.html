@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Leverage Actually Looks Like — ClusterOS Lab Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-dim:    #5a5650;
+    --ink-muted:  #8c8780;
+    --page:       #f7f4ef;
+    --surface:    #f0ece4;
+    --border:     #ddd8cf;
+    --border-2:   #c8c2b7;
+    --green:      #2a7a4f;
+    --green-dim:  #1d5c3a;
+    --signal:     #c8f0d0;
+    --teal:       #7dd3c8;
+    --amber:      #f5d97a;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans:  'Geist', system-ui, sans-serif;
+    --font-mono:  'Geist Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 52px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+    background: rgba(247,244,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ink); }
+  .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
+  .nav-links > li { position: relative; }
+  .nav-links a {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
+    display: block; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-dropdown-toggle {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
+    cursor: pointer; white-space: nowrap; transition: color 0.15s;
+  }
+  .nav-dropdown-toggle:hover, .nav-dropdown-toggle.active { color: var(--ink); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0;
+    background: var(--page); border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    min-width: 220px; list-style: none; padding: 4px 0; z-index: 100;
+  }
+  .nav-dropdown-menu.open { display: block; }
+  .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
+    border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
+    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: transform 0.2s, opacity 0.2s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  @media(max-width:900px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
+  .nav-mobile-menu {
+    display: none; position: fixed; top: 52px; left: 0; right: 0;
+    background: var(--page); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1rem 2rem; z-index: 999;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a:hover { color: var(--ink); }
+  .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 1.5rem; margin-top: 5rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 3rem; padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  }
+  .footer-logo span { color: var(--ink); }
+  .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
+  .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .footer-col { display: flex; flex-direction: column; gap: 6px; }
+  .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
+</style>
+<style>
+
+/* Hamburger button */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink-muted);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-cta { display: none; } }
+/* Mobile menu panel */
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(247,244,239,0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,194,183,0.6);
+  padding: 16px 24px 24px;
+  flex-direction: column;
+  gap: 2px;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-muted);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(200,194,183,0.3);
+  transition: color 0.15s;
+}
+.nav-mobile-menu a:hover { color: var(--ink); }
+.nav-mobile-divider { height: 1px; background: rgba(200,194,183,0.6); margin: 8px 0; }
+.nav-mobile-cta { margin-top: 12px; color: var(--green) !important; border-bottom: none !important; font-weight: 600 !important; }
+
+
+@media (max-width: 900px) {
+  .substitution { grid-template-columns: 1fr !important; }
+  .sub-arrow { transform: rotate(90deg); margin: 8px auto; display: block; }
+  .related-grid { grid-template-columns: 1fr 1fr !important; }
+  .two-col-body, .article-layout { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .article-wrap, .body-wrap { padding: 80px 20px 80px !important; }
+  h1, .article-headline, .hero-h { font-size: clamp(24px, 7vw, 36px) !important; }
+  .lede, .article-lede { font-size: 16px !important; }
+  blockquote, .pull-quote { padding: 14px 16px 14px 18px; font-size: 17px; }
+  .evidence-grid, .stall-grid, .two-col { grid-template-columns: 1fr !important; }
+  .related-grid { grid-template-columns: 1fr !important; }
+  .tag-row { flex-wrap: wrap; gap: 6px; }
+  .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
+  p { font-size: 15px; line-height: 1.65; }
+}
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Product ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/digital-infrastructure.html">Digital Infrastructure</a></li>
+        <li><a href="/signals-systems.html">Signals &amp; Systems</a></li>
+        <li><a href="/diagnostic.html">The Diagnostic</a></li>
+        <li><a href="/leverage.html">Leverage</a></li>
+        <li><a href="/findings.html">Findings</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Lab Notes ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/notes.html">All Notes</a></li>
+        <li class="nav-dropdown-divider"></li>
+        <li><a href="/ln-01-coordinating.html">S2 · Coordinating instead of deciding</a></li>
+        <li><a href="/ln-02-narrating.html">S7 · Narrating instead of testing</a></li>
+        <li><a href="/ln-10-narrative-activity-stack.html">Narrative × Activity Stack</a></li>
+        <li><a href="/ln-12-leverage.html">What Leverage Looks Like</a></li>
+        <li><a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a></li>
+      </ul>
+    </li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+  <a href="/signals-systems.html">Signals &amp; Systems</a>
+  <a href="/diagnostic.html">The Diagnostic</a>
+  <a href="/leverage.html">Leverage</a>
+  <a href="/findings.html">Findings</a>
+  <a href="/pricing.html">Pricing</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<!-- Mobile nav menu -->
+
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+  <a href="/ln-02-narrating.html">S7 · Narrating</a>
+  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/about.html">About</a>
+  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
+</div>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="/">Home</a> › <a href="/notes.html">Lab Notes</a> › Leverage</div>
+  <div class="series">Lab Notes · Leverage</div>
+  <h1>What Leverage <em>Actually</em> Looks Like</h1>
+  <p class="deck">After a diagnosis, people expect leverage to follow from insight. They assume that naming the stall reveals a control point. It does not. Mature ecosystems are robust precisely because they have learned to absorb change. Even well-designed reforms are metabolised by the very behaviours they were meant to challenge.</p>
+  <div class="meta"><span>Andrew Barrie</span><span>March 2026</span><span>9 min read</span></div>
+
+  <p class="lead">New funding becomes more activity. New governance becomes more coordination. New metrics become more reporting. This is not resistance in the conventional sense. It is competence. The system is very good at remaining the same while appearing to change.</p>
+
+  <p>Genuine leverage points are uncommon. When they exist, they are rarely dramatic. They do not look like transformation. They look like a slight increase in discomfort — a small failure of the system's usual protective responses.</p>
+
+  <h2>Leverage is exposure, not power</h2>
+
+  <p>The most important reframing is this: leverage is not the ability to force the system to change. It is the ability to make it slightly harder for the system to continue not changing.</p>
+
+  <p>Stacks persist because they protect things that are genuinely worth protecting — legitimacy, relationships, careers, coalitions. A leverage move does not destroy those protections. It withdraws one of them, in one bounded domain, for long enough to see whether the system learns something it would not otherwise have learned.</p>
+
+  <div class="pullquote">
+    <p>Leverage is not a bigger push. It is a small withdrawal of protection — a perturbation that makes it slightly harder for the system to continue stabilising around the same equilibrium.</p>
+    <cite>Ecosystem Stewardship · Chapter 9</cite>
+  </div>
+
+  <p>This matters practically. A steward who tries to dismantle a stack directly will encounter resistance proportional to what the stack protects. A steward who withdraws one protection in one domain, and observes what happens, is doing something the stack cannot easily absorb — because the withdrawal is specific enough to produce a signal rather than a general enough to be managed away.</p>
+
+  <h2>Before intervening: the exposure test</h2>
+
+  <p>Before any leverage move, there is a prior question: is the system actually exposed to consequence? Where it is not, leverage does not yet exist. The correct move is observation — improving visibility before attempting change.</p>
+
+  <p>Seven questions diagnose exposure. Where does feedback land — at the decision point, or in an intermediary forum where it can be narrativised? What is the latency — do signals arrive in weeks, or years after actors have moved on? Is renewal defaulted? Is exit credible? What becomes binding? Is blame concentrated? Do weak signals survive to reach authority?</p>
+
+  <p>If the answer to most of these is no, the system is not exposed. Intervening in an unexposed system produces activity, not learning.</p>
+
+  <h2>Four repeatable leverage moves</h2>
+
+  <p>These are not prescriptions. They are patterns that appear across ecosystems where stewards have successfully shifted regimes. Each is a hypothesis for testing in a specific context — not a guaranteed outcome.</p>
+
+  <div class="moves">
+    <div class="move">
+      <div class="move-num">Move 01</div>
+      <div class="move-title">Make outcomes harder to ignore</div>
+      <p class="move-body">In most ecosystems, activity is public while outcomes are private, lagged, or diffuse. Require one high-status artefact — a flagship programme review, a funding renewal — to surface downstream conversion data alongside participation counts. Not as additional context. As a condition of continuation. The fund resists: these metrics are unfair to early-stage work. The steward does not argue. The requirement stands. This does not dictate performance. It removes the ability to rely on activity as a permanent proxy for success.</p>
+    </div>
+    <div class="move">
+      <div class="move-num">Move 02</div>
+      <div class="move-title">Introduce timing pressure rather than direction</div>
+      <p class="move-body">Stacks persist because renewal is safer than removal. Time-bound one coordination structure, or place a real sunset on one programme. Require explicit renewal criteria that are harder to meet than continued existence. The group protests: alignment takes time, relationships are fragile. The steward does not debate. The clock starts. This does not mandate a specific outcome. It removes the option of continuing indefinitely without having to prove value.</p>
+    </div>
+    <div class="move">
+      <div class="move-num">Move 03</div>
+      <div class="move-title">Restore contrast where narrative has flattened difference</div>
+      <p class="move-body">Narrative regimes reduce discrimination — everything becomes evidence of progress. Reintroduce contrast: compare independent and incumbent-integrated pathways, separate outcomes across programmes rather than aggregating them, place local performance against external benchmarks that cannot be explained away. The goal is not competition. It is consequence. The next report includes programme-level data. This does not prescribe which pathway wins. It prevents the system from avoiding comparison by aggregating everything into a single success story.</p>
+    </div>
+    <div class="move">
+      <div class="move-num">Move 04</div>
+      <div class="move-title">Selectively withdraw narrative cover</div>
+      <p class="move-body">In systems where explanation absorbs scrutiny, restraint can be leverage. Pause amplification in one bounded domain until behavioural evidence appears. A sector strategy claims regional leadership in a specific technology. Ask: what observable evidence supports this? Early-stage activity. Strong research. Growing interest. Respond: I will not reference this claim publicly until we can show repeat commercial adoption. This does not forbid the strategy. It removes the automatic conversion of articulation into legitimacy. Where the system continues without the story, confidence hardens. Where it does not, learning accelerates.</p>
+    </div>
+  </div>
+
+  <h2>Resistance as signal, not obstacle</h2>
+
+  <p>Where leverage exists, resistance follows. More time needed. Metrics are unfair. Conditions are exceptional. Reputational damage is at risk. Cohesion is fragile.</p>
+
+  <p>These responses are commonly interpreted as obstacles to overcome. They are better understood as diagnostic signals. They indicate what the system is protecting, which actors bear risk under exposure, and which regimes are load-bearing rather than peripheral.</p>
+
+  <p>Resistance does not mean the intervention is wrong. It means it has touched something consequential. This is one of the few ways stewards learn whether a regime is substitutive or necessary — by observing what happens when its protection weakens, even slightly.</p>
+
+  <h2>Where leverage does not exist</h2>
+
+  <div class="no-leverage">
+    <div class="no-leverage-label">Conditions where intervention is premature</div>
+    <div class="no-item">Demand-side behaviour is unobservable. If you cannot see whether actors are actually making decisions, you cannot target that behaviour without guessing.</div>
+    <div class="no-item">Power asymmetries are extreme. Where incumbents or institutions shape the rules, modest exposure may not shift the equilibrium. Change may require external shock or political intervention beyond stewardship.</div>
+    <div class="no-item">The Y-side is weakly confirmed. If you can observe X but cannot verify the absence of Y, the stall claim is provisional. Intervening on a provisional claim risks disrupting something that may not be a stall.</div>
+    <div class="no-item">The stack is still forming. Early coordination is scaffolding, not stabilisation. The lens requires patience — applied too quickly, it misreads necessary infrastructure as inertia.</div>
+  </div>
+
+  <p>In these conditions, the steward's responsibility is not reform. It is observation. Making specific signals visible so that future judgement is possible. This is not passivity — it is sequencing. Many ecosystem failures are caused by premature action in systems that had not yet revealed how they actually learn.</p>
+
+  <div class="epistemic">
+    <div class="ep-label">Epistemic note</div>
+    <p>Leverage hypotheses are testable perturbations, not prescriptions. The framework is explicit that the distance between identifying a leverage point and knowing whether an intervention will work is irreducibly uncertain. What the diagnostic provides is an evidence-based hypothesis about where the system is exposed to consequence and where small moves are most likely to produce learning rather than absorption.</p>
+    <p>Success metrics for leverage moves should be defined in advance: what would constitute evidence that the move is working, what would constitute evidence that it is being absorbed, and what would constitute evidence that the stall claim was wrong. Without pre-defined criteria, post-hoc rationalisation of results is structurally unavoidable.</p>
+  </div>
+
+  <div class="related">
+    <div class="rel-label">Related notes</div>
+    <div class="rel-grid">
+      <a href="/ln-10-narrative-activity-stack.html" class="rel-card"><div class="rel-tag">Stack</div><div class="rel-title">The Narrative × Activity Stack</div></a>
+      <a href="/ln-11-validation-deadlock.html" class="rel-card"><div class="rel-tag">Stack</div><div class="rel-title">The Validation Deadlock</div></a>
+      <a href="/ln-13-diagnosis.html" class="rel-card"><div class="rel-tag">Method</div><div class="rel-title">Why Your Diagnosis Keeps Failing</div></a>
+    </div>
+  </div>
+
+  <div class="cta">
+    <p>The ClusterOS diagnostic produces leverage hypotheses grounded in your specific stack configuration — not generic recommendations. That is where intervention design begins.</p>
+    <a href="/request.html">Request a Diagnostic →</a>
+  </div>
+</div>
+
+
+
+
+
+
+<style>
+@media (max-width: 900px) {
+  .substitution { grid-template-columns: 1fr !important; }
+  .sub-arrow { transform: rotate(90deg); margin: 8px auto; display: block; }
+  .related-grid { grid-template-columns: 1fr 1fr !important; }
+  .two-col-body, .article-layout { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .article-wrap, .body-wrap { padding: 80px 20px 80px !important; }
+  h1, .article-headline, .hero-h { font-size: clamp(24px, 7vw, 36px) !important; }
+  .lede, .article-lede { font-size: 16px !important; }
+  blockquote, .pull-quote { padding: 14px 16px 14px 18px; font-size: 17px; }
+  .evidence-grid, .stall-grid, .two-col { grid-template-columns: 1fr !important; }
+  .related-grid { grid-template-columns: 1fr !important; }
+  .tag-row { flex-wrap: wrap; gap: 6px; }
+  .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
+  p { font-size: 15px; line-height: 1.65; }
+}
+</style>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
+      <p class="footer-tagline">Regional economies need infrastructure.<br>Not more strategy.</p>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <div class="footer-col-label">Product</div>
+        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+        <a href="/signals-systems.html">Signals &amp; Systems</a>
+        <a href="/diagnostic.html">The Diagnostic</a>
+        <a href="/leverage.html">Leverage</a>
+        <a href="/findings.html">Findings</a>
+        <a href="/pricing.html">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Lab Notes</div>
+        <a href="/notes.html">All Notes</a>
+        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+        <a href="/ln-02-narrating.html">S7 · Narrating</a>
+        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
+        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Company</div>
+        <a href="/about.html">About</a>
+        <a href="/request.html">Request a Diagnostic</a>
+        <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 ClusterOS · Community Lab</span>
+    <span>Built in Edinburgh</span>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+// ── NAV
+document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+  var t = dd.querySelector('.nav-dropdown-toggle');
+  var m = dd.querySelector('.nav-dropdown-menu');
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = m.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+    if (!open) { m.classList.add('open'); t.classList.add('active'); }
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+});
+(function(){
+  var h = document.getElementById('nav-hamburger');
+  var m = document.getElementById('nav-mobile-menu');
+  if (!h || !m) return;
+  h.addEventListener('click', function(e){ e.stopPropagation(); var o=m.classList.contains('open'); m.classList.toggle('open',!o); h.classList.toggle('open',!o); });
+  document.addEventListener('click', function(){ m.classList.remove('open'); h.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>

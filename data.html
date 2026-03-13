@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostic Data — 75 Cluster Runs — ClusterOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-dim:    #5a5650;
+    --ink-muted:  #8c8780;
+    --page:       #f7f4ef;
+    --surface:    #f0ece4;
+    --border:     #ddd8cf;
+    --border-2:   #c8c2b7;
+    --green:      #2a7a4f;
+    --green-dim:  #1d5c3a;
+    --signal:     #c8f0d0;
+    --teal:       #7dd3c8;
+    --amber:      #f5d97a;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans:  'Geist', system-ui, sans-serif;
+    --font-mono:  'Geist Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 52px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+    background: rgba(247,244,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ink); }
+  .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
+  .nav-links > li { position: relative; }
+  .nav-links a {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
+    display: block; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-dropdown-toggle {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
+    cursor: pointer; white-space: nowrap; transition: color 0.15s;
+  }
+  .nav-dropdown-toggle:hover, .nav-dropdown-toggle.active { color: var(--ink); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0;
+    background: var(--page); border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    min-width: 220px; list-style: none; padding: 4px 0; z-index: 100;
+  }
+  .nav-dropdown-menu.open { display: block; }
+  .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
+    border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
+    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: transform 0.2s, opacity 0.2s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  @media(max-width:900px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
+  .nav-mobile-menu {
+    display: none; position: fixed; top: 52px; left: 0; right: 0;
+    background: var(--page); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1rem 2rem; z-index: 999;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a:hover { color: var(--ink); }
+  .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 1.5rem; margin-top: 5rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 3rem; padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  }
+  .footer-logo span { color: var(--ink); }
+  .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
+  .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .footer-col { display: flex; flex-direction: column; gap: 6px; }
+  .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
+</style>
+<style>
+
+/* ── UNIVERSAL MOBILE PATCH ── injected ── */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; }
+@media (max-width: 480px) {
+  nav { padding: 0 16px !important; }
+  
+  
+  
+}
+
+
+@media (max-width: 900px) {
+  .data-layout { grid-template-columns: 1fr !important; }
+  .filter-sidebar { display: none; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 80px 16px 60px !important; }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  th, td { white-space: nowrap; font-size: 12px; padding: 8px 10px; }
+  .stats-row { flex-wrap: wrap; gap: 8px; }
+  .stat-chip { font-size: 12px; }
+  .data-controls { flex-wrap: wrap; gap: 8px; }
+}
+
+
+@media (max-width: 400px) {
+  
+}
+@media (max-width: 480px) {
+  
+}
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Product ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/digital-infrastructure.html">Digital Infrastructure</a></li>
+        <li><a href="/signals-systems.html">Signals &amp; Systems</a></li>
+        <li><a href="/diagnostic.html">The Diagnostic</a></li>
+        <li><a href="/leverage.html">Leverage</a></li>
+        <li><a href="/findings.html">Findings</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Lab Notes ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/notes.html">All Notes</a></li>
+        <li class="nav-dropdown-divider"></li>
+        <li><a href="/ln-01-coordinating.html">S2 · Coordinating instead of deciding</a></li>
+        <li><a href="/ln-02-narrating.html">S7 · Narrating instead of testing</a></li>
+        <li><a href="/ln-10-narrative-activity-stack.html">Narrative × Activity Stack</a></li>
+        <li><a href="/ln-12-leverage.html">What Leverage Looks Like</a></li>
+        <li><a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a></li>
+      </ul>
+    </li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+  <a href="/signals-systems.html">Signals &amp; Systems</a>
+  <a href="/diagnostic.html">The Diagnostic</a>
+  <a href="/leverage.html">Leverage</a>
+  <a href="/findings.html">Findings</a>
+  <a href="/pricing.html">Pricing</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<!-- Mobile nav menu -->
+
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+  <a href="/ln-02-narrating.html">S7 · Narrating</a>
+  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/about.html">About</a>
+  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
+</div>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="page-tag">ClusterOS · Diagnostic Data</div>
+    <h1>75 Cluster Diagnostic Runs — Structured Data</h1>
+    <p class="page-desc">Each row represents a completed ClusterOS diagnostic run. The diagnostic identifies active stabilisation stalls (S1–S9), stack configurations, lifecycle stage, and anchor type. Evidence count reflects the number of sources reviewed per run. Methodology from <em>Ecosystem Stewardship</em> (Barrie, 2024).</p>
+    <div class="stats">
+      <div class="stat"><strong>75</strong>clusters assessed</div>
+      <div class="stat"><strong>18</strong>countries</div>
+      <div class="stat"><strong>6</strong>sector domains</div>
+      <div class="stat"><strong>50–86</strong>evidence items per run</div>
+      <div class="stat"><strong>Feb–Mar 2026</strong>diagnostic period</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Cluster</th>
+        <th>Geography</th>
+        <th>Sector</th>
+        <th>Stage</th>
+        <th>Anchor</th>
+        <th>Evidence</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td>Abu Dhabi HELM Life Sciences</td><td>Abu Dhabi UAE</td><td>Life Sciences</td><td>emerging</td><td>university</td><td>53</td></tr>
+<tr><td>Adelaide Space Technology</td><td>Adelaide South Australia</td><td>Space Technology</td><td>emerging</td><td>university</td><td>62</td></tr>
+<tr><td>Australia Canberra Cyber Security</td><td>Canberra Australia</td><td>Cyber Security</td><td>growing</td><td>government</td><td>53</td></tr>
+<tr><td>Basel Life Sciences</td><td>Basel Switzerland</td><td>Life Sciences</td><td>mature</td><td>university</td><td>65</td></tr>
+<tr><td>Basque Country Innovation Ecosystem</td><td>Bilbao Spain</td><td>Regional Economic Development</td><td>mature</td><td>government</td><td>68</td></tr>
+<tr><td>Belfast Cyber Security</td><td>Belfast Northern Ireland</td><td>Cyber Security</td><td>growing</td><td>university</td><td>54</td></tr>
+<tr><td>Bengaluru Space Technology</td><td>Bengaluru India</td><td>Space Technology</td><td>growing</td><td>university</td><td>72</td></tr>
+<tr><td>Birmingham Alabama Innovation Ecosystem</td><td>Birmingham AL USA</td><td>Regional Economic Development</td><td>emerging</td><td>university</td><td>61</td></tr>
+<tr><td>Bordeaux Metropolitan Innovation Ecosystem</td><td>Bordeaux France</td><td>Regional Economic Development</td><td>growing</td><td>government</td><td>60</td></tr>
+<tr><td>Boston-Cambridge Life Sciences</td><td>Boston MA USA</td><td>Life Sciences</td><td>mature</td><td>university</td><td>82</td></tr>
+<tr><td>Buffalo Niagara Innovation Ecosystem</td><td>Buffalo NY USA</td><td>Regional Economic Development</td><td>emerging</td><td>university</td><td>63</td></tr>
+<tr><td>Busan Innovation Ecosystem</td><td>Busan South Korea</td><td>Regional Economic Development</td><td>emerging</td><td>government</td><td>54</td></tr>
+<tr><td>Cambridge UK Life Sciences</td><td>Cambridge UK</td><td>Life Sciences</td><td>mature</td><td>university</td><td>62</td></tr>
+<tr><td>Cape Canaveral Space Coast</td><td>Cape Canaveral FL USA</td><td>Space Technology</td><td>mature</td><td>university</td><td>50</td></tr>
+<tr><td>Chattanooga Regional Innovation Ecosystem</td><td>Chattanooga TN USA</td><td>Regional Economic Development</td><td>emerging</td><td>government</td><td>71</td></tr>
+<tr><td>Cheltenham Cyber Security</td><td>Cheltenham UK</td><td>Cyber Security</td><td>mature</td><td>university</td><td>54</td></tr>
+<tr><td>Colorado Springs Space Technology</td><td>Colorado Springs CO USA</td><td>Space Technology</td><td>growing</td><td>university</td><td>60</td></tr>
+<tr><td>Copenhagen-Medicon Valley Life Sciences</td><td>Copenhagen Denmark</td><td>Life Sciences</td><td>mature</td><td>university</td><td>83</td></tr>
+<tr><td>Eindhoven Brainport Innovation Ecosystem</td><td>Eindhoven Netherlands</td><td>Regional Economic Development</td><td>mature</td><td>corporate</td><td>72</td></tr>
+<tr><td>Estonia Cyber Security</td><td>Tallinn Estonia</td><td>Cyber Security</td><td>growing</td><td>university</td><td>55</td></tr>
+<tr><td>Glasgow City Region Innovation Ecosystem</td><td>Glasgow Scotland UK</td><td>Regional Economic Development</td><td>growing</td><td>university</td><td>69</td></tr>
+<tr><td>Glasgow FinTech</td><td>Glasgow Scotland UK</td><td>FinTech</td><td>emerging</td><td>university</td><td>62</td></tr>
+<tr><td>Glasgow Health and Life Sciences</td><td>Glasgow Scotland UK</td><td>Health and Life Sciences</td><td>mature</td><td>university</td><td>72</td></tr>
+<tr><td>Greater Manchester Innovation Ecosystem</td><td>Manchester UK</td><td>Regional Economic Development</td><td>growing</td><td>government</td><td>76</td></tr>
+<tr><td>Harwell Space Technology</td><td>Harwell Oxfordshire UK</td><td>Space Technology</td><td>growing</td><td>university</td><td>55</td></tr>
+<tr><td>Houston Space Technology</td><td>Houston TX USA</td><td>Space Technology</td><td>mature</td><td>university</td><td>56</td></tr>
+<tr><td>Hyderabad Genome Valley Life Sciences</td><td>Hyderabad India</td><td>Life Sciences</td><td>growing</td><td>university</td><td>50</td></tr>
+<tr><td>Los Angeles Space Technology</td><td>Los Angeles CA USA</td><td>Space Technology</td><td>mature</td><td>university</td><td>54</td></tr>
+<tr><td>Madison Regional Innovation Ecosystem</td><td>Madison WI USA</td><td>Regional Economic Development</td><td>growing</td><td>university</td><td>60</td></tr>
+<tr><td>Medellin Innovation Ecosystem</td><td>Medellin Colombia</td><td>Regional Economic Development</td><td>growing</td><td>government</td><td>63</td></tr>
+<tr><td>Melbourne Life Sciences</td><td>Melbourne Australia</td><td>Life Sciences</td><td>growing</td><td>university</td><td>65</td></tr>
+<tr><td>Nashville Regional Innovation Ecosystem</td><td>Nashville TN USA</td><td>Regional Economic Development</td><td>growing</td><td>corporate</td><td>65</td></tr>
+<tr><td>New Zealand Space Technology</td><td>Mahia Peninsula New Zealand</td><td>Space Technology</td><td>growing</td><td>university</td><td>64</td></tr>
+<tr><td>Orlando Advanced Manufacturing</td><td>Orlando FL USA</td><td>Advanced Manufacturing</td><td>mature</td><td>corporate</td><td>58</td></tr>
+<tr><td>Orlando AgTech</td><td>Orlando FL USA</td><td>AgTech</td><td>emerging</td><td>university</td><td>54</td></tr>
+<tr><td>Orlando Aviation and Aerospace</td><td>Orlando FL USA</td><td>Aviation and Aerospace</td><td>mature</td><td>corporate</td><td>55</td></tr>
+<tr><td>Orlando Cybersecurity</td><td>Orlando FL USA</td><td>Cybersecurity</td><td>emerging</td><td>military</td><td>56</td></tr>
+<tr><td>Orlando Digital Media</td><td>Orlando FL USA</td><td>Digital Media</td><td>mature</td><td>corporate</td><td>58</td></tr>
+<tr><td>Orlando MedTech</td><td>Orlando FL USA</td><td>MedTech</td><td>emerging</td><td>university</td><td>57</td></tr>
+<tr><td>Orlando Photonics and Optics</td><td>Orlando FL USA</td><td>Photonics</td><td>emerging</td><td>university</td><td>58</td></tr>
+<tr><td>Orlando Simulation and Training</td><td>Orlando FL USA</td><td>Simulation and Training</td><td>mature</td><td>military</td><td>61</td></tr>
+<tr><td>Orlando SpaceTech</td><td>Orlando FL USA</td><td>Space Technology</td><td>mature</td><td>government</td><td>57</td></tr>
+<tr><td>Orlando Tourism Technology</td><td>Orlando FL USA</td><td>Tourism Technology</td><td>mature</td><td>corporate</td><td>68</td></tr>
+<tr><td>Pittsburgh Regional Innovation Ecosystem</td><td>Pittsburgh PA USA</td><td>Regional Economic Development</td><td>growing</td><td>university</td><td>75</td></tr>
+<tr><td>Porto Innovation Ecosystem</td><td>Porto Portugal</td><td>Regional Economic Development</td><td>emerging</td><td>university</td><td>59</td></tr>
+<tr><td>Quebec City Innovation Ecosystem</td><td>Quebec City Canada</td><td>Regional Economic Development</td><td>growing</td><td>university</td><td>57</td></tr>
+<tr><td>Research Triangle Innovation Ecosystem</td><td>Raleigh-Durham NC USA</td><td>Regional Economic Development</td><td>mature</td><td>university</td><td>76</td></tr>
+<tr><td>Research Triangle Life Sciences</td><td>Raleigh-Durham-Chapel Hill NC</td><td>Life Sciences</td><td>mature</td><td>university</td><td>62</td></tr>
+<tr><td>San Francisco Bay Area Cyber Security</td><td>San Francisco Bay Area CA</td><td>Cyber Security</td><td>mature</td><td>university</td><td>74</td></tr>
+<tr><td>San Francisco Bay Area Life Sciences</td><td>San Francisco Bay Area CA</td><td>Life Sciences</td><td>mature</td><td>university</td><td>55</td></tr>
+<tr><td>Scotland Advanced Manufacturing</td><td>Renfrewshire Glasgow and Central Belt Scotland</td><td>Advanced Manufacturing</td><td>growing</td><td>government</td><td>72</td></tr>
+<tr><td>Scotland Creative Industries</td><td>Glasgow Edinburgh Dundee Scotland</td><td>Creative Industries</td><td>growing</td><td>university</td><td>69</td></tr>
+<tr><td>Scotland Cyber Security</td><td>Edinburgh-Glasgow Scotland</td><td>Cyber Security</td><td>growing</td><td>university</td><td>55</td></tr>
+<tr><td>Scotland Data and AI</td><td>Edinburgh and Central Belt Scotland</td><td>Data and AI</td><td>growing</td><td>university</td><td>65</td></tr>
+<tr><td>Scotland Energy Transition</td><td>Aberdeen and North East Scotland</td><td>Energy Transition</td><td>transitioning</td><td>corporate</td><td>63</td></tr>
+<tr><td>Scotland FinTech</td><td>Edinburgh and Central Belt Scotland</td><td>FinTech</td><td>mature</td><td>corporate</td><td>61</td></tr>
+<tr><td>Scotland Food and Drink</td><td>Scotland UK</td><td>Food and Drink</td><td>mature</td><td>corporate</td><td>69</td></tr>
+<tr><td>Scotland Health Tech</td><td>Edinburgh Glasgow and Dundee Scotland</td><td>Health Tech</td><td>growing</td><td>university</td><td>69</td></tr>
+<tr><td>Scotland Life Sciences</td><td>Edinburgh Dundee and Glasgow Scotland</td><td>Life Sciences</td><td>mature</td><td>university</td><td>71</td></tr>
+<tr><td>Scotland Quantum and Photonics</td><td>Glasgow and Central Belt Scotland</td><td>Quantum and Photonics</td><td>emerging</td><td>university</td><td>57</td></tr>
+<tr><td>Scotland SpaceTech</td><td>Scotland UK</td><td>Space Technology</td><td>emerging</td><td>government</td><td>62</td></tr>
+<tr><td>Scotland Tourism and Hospitality Tech</td><td>Scotland UK</td><td>Tourism and Hospitality Tech</td><td>emerging</td><td>government</td><td>66</td></tr>
+<tr><td>Singapore Biopolis Life Sciences</td><td>Singapore</td><td>Life Sciences</td><td>mature</td><td>university</td><td>63</td></tr>
+<tr><td>Singapore Cyber Security</td><td>Singapore</td><td>Cyber Security</td><td>growing</td><td>government</td><td>74</td></tr>
+<tr><td>Tel Aviv Cyber Security</td><td>Tel Aviv Israel</td><td>Cyber Security</td><td>mature</td><td>university</td><td>70</td></tr>
+<tr><td>The Hague Cyber Security</td><td>The Hague Netherlands</td><td>Cyber Security</td><td>growing</td><td>university</td><td>52</td></tr>
+<tr><td>Toulouse Space Technology</td><td>Toulouse France</td><td>Space Technology</td><td>mature</td><td>university</td><td>60</td></tr>
+<tr><td>Tsukuba Space Technology</td><td>Tsukuba Japan</td><td>Space Technology</td><td>growing</td><td>university</td><td>55</td></tr>
+<tr><td>Tulsa Regional Innovation Ecosystem</td><td>Tulsa OK USA</td><td>Regional Economic Development</td><td>emerging</td><td>mixed</td><td>56</td></tr>
+<tr><td>UAE Cyber Security</td><td>Abu Dhabi Dubai UAE</td><td>Cyber Security</td><td>emerging</td><td>university</td><td>63</td></tr>
+<tr><td>UAE Space Technology</td><td>Abu Dhabi UAE</td><td>Space Technology</td><td>emerging</td><td>university</td><td>57</td></tr>
+<tr><td>Washington DC Cyber Security</td><td>Washington DC USA</td><td>Cyber Security</td><td>mature</td><td>university</td><td>68</td></tr>
+<tr><td>West Midlands Innovation Ecosystem</td><td>Birmingham UK</td><td>Regional Economic Development</td><td>growing</td><td>government</td><td>86</td></tr>
+<tr><td>Wichita Regional Innovation Ecosystem</td><td>Wichita KS USA</td><td>Regional Economic Development</td><td>emerging</td><td>corporate</td><td>59</td></tr>
+<tr><td>Zurich-Zug MedTech</td><td>Zurich and Zug Switzerland</td><td>MedTech</td><td>growing</td><td>university</td><td>66</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>Data notes:</strong> Stall codes (S1–S9) and stack configurations are reported in individual diagnostic outputs, not reproduced here. Lifecycle stage definitions: <em>emerging</em> — pre-commercial concentration; <em>growing</em> — active scaling with unresolved stalls; <em>mature</em> — established with compounding or stagnation risk; <em>transitioning</em> — anchor-driven sector shift underway. Anchor type reflects the dominant institutional actor in the diagnostic period, not a permanent designation. Evidence count reflects documents, interviews, and data sources reviewed; it is not a quality or confidence score.
+  </div>
+</div>
+
+
+
+<style>
+/* ── UNIVERSAL MOBILE PATCH ── injected ── */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; }
+@media (max-width: 480px) {
+  nav { padding: 0 16px !important; }
+  
+  
+  
+}
+</style>
+
+
+<style>
+@media (max-width: 900px) {
+  .data-layout { grid-template-columns: 1fr !important; }
+  .filter-sidebar { display: none; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 80px 16px 60px !important; }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  th, td { white-space: nowrap; font-size: 12px; padding: 8px 10px; }
+  .stats-row { flex-wrap: wrap; gap: 8px; }
+  .stat-chip { font-size: 12px; }
+  .data-controls { flex-wrap: wrap; gap: 8px; }
+}
+</style>
+
+
+<style>
+@media (max-width: 400px) {
+  
+}
+@media (max-width: 480px) {
+  
+}
+</style>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
+      <p class="footer-tagline">Regional economies need infrastructure.<br>Not more strategy.</p>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <div class="footer-col-label">Product</div>
+        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+        <a href="/signals-systems.html">Signals &amp; Systems</a>
+        <a href="/diagnostic.html">The Diagnostic</a>
+        <a href="/leverage.html">Leverage</a>
+        <a href="/findings.html">Findings</a>
+        <a href="/pricing.html">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Lab Notes</div>
+        <a href="/notes.html">All Notes</a>
+        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+        <a href="/ln-02-narrating.html">S7 · Narrating</a>
+        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
+        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Company</div>
+        <a href="/about.html">About</a>
+        <a href="/request.html">Request a Diagnostic</a>
+        <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 ClusterOS · Community Lab</span>
+    <span>Built in Edinburgh</span>
+  </div>
+</footer>
+
+<script>
+// ── NAV
+document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+  var t = dd.querySelector('.nav-dropdown-toggle');
+  var m = dd.querySelector('.nav-dropdown-menu');
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = m.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+    if (!open) { m.classList.add('open'); t.classList.add('active'); }
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+});
+(function(){
+  var h = document.getElementById('nav-hamburger');
+  var m = document.getElementById('nav-mobile-menu');
+  if (!h || !m) return;
+  h.addEventListener('click', function(e){ e.stopPropagation(); var o=m.classList.contains('open'); m.classList.toggle('open',!o); h.classList.toggle('open',!o); });
+  document.addEventListener('click', function(){ m.classList.remove('open'); h.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>

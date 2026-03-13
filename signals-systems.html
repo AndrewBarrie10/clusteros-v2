@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signals &amp; Systems — ClusterOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-dim:    #5a5650;
+    --ink-muted:  #8c8780;
+    --page:       #f7f4ef;
+    --surface:    #f0ece4;
+    --border:     #ddd8cf;
+    --border-2:   #c8c2b7;
+    --green:      #2a7a4f;
+    --green-dim:  #1d5c3a;
+    --signal:     #c8f0d0;
+    --teal:       #7dd3c8;
+    --amber:      #f5d97a;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans:  'Geist', system-ui, sans-serif;
+    --font-mono:  'Geist Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 52px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+    background: rgba(247,244,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ink); }
+  .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
+  .nav-links > li { position: relative; }
+  .nav-links a {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
+    display: block; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-dropdown-toggle {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
+    cursor: pointer; white-space: nowrap; transition: color 0.15s;
+  }
+  .nav-dropdown-toggle:hover, .nav-dropdown-toggle.active { color: var(--ink); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0;
+    background: var(--page); border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    min-width: 220px; list-style: none; padding: 4px 0; z-index: 100;
+  }
+  .nav-dropdown-menu.open { display: block; }
+  .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
+    border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
+    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: transform 0.2s, opacity 0.2s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  @media(max-width:900px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
+  .nav-mobile-menu {
+    display: none; position: fixed; top: 52px; left: 0; right: 0;
+    background: var(--page); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1rem 2rem; z-index: 999;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a:hover { color: var(--ink); }
+  .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 1.5rem; margin-top: 5rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 3rem; padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  }
+  .footer-logo span { color: var(--ink); }
+  .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
+  .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .footer-col { display: flex; flex-direction: column; gap: 6px; }
+  .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
+</style>
+<style>
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Product ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/digital-infrastructure.html">Digital Infrastructure</a></li>
+        <li><a href="/signals-systems.html">Signals &amp; Systems</a></li>
+        <li><a href="/diagnostic.html">The Diagnostic</a></li>
+        <li><a href="/leverage.html">Leverage</a></li>
+        <li><a href="/findings.html">Findings</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Lab Notes ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/notes.html">All Notes</a></li>
+        <li class="nav-dropdown-divider"></li>
+        <li><a href="/ln-01-coordinating.html">S2 · Coordinating instead of deciding</a></li>
+        <li><a href="/ln-02-narrating.html">S7 · Narrating instead of testing</a></li>
+        <li><a href="/ln-10-narrative-activity-stack.html">Narrative × Activity Stack</a></li>
+        <li><a href="/ln-12-leverage.html">What Leverage Looks Like</a></li>
+        <li><a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a></li>
+      </ul>
+    </li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+  <a href="/signals-systems.html">Signals &amp; Systems</a>
+  <a href="/diagnostic.html">The Diagnostic</a>
+  <a href="/leverage.html">Leverage</a>
+  <a href="/findings.html">Findings</a>
+  <a href="/pricing.html">Pricing</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<!-- NAV -->
+
+
+<!-- Mobile nav menu -->
+
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+  <a href="/ln-02-narrating.html">S7 · Narrating</a>
+  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/about.html">About</a>
+  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
+</div>
+
+<!-- HERO — split: copy left, flywheel right -->
+<section id="hero">
+  <div class="hero-copy">
+    <div class="hero-eyebrow">Digital Substrate</div>
+    <h1 class="hero-headline">
+      Four actors.<br>One system.<br>
+      <em>Every selfish action<br>feeds the whole.</em>
+    </h1>
+    <p class="hero-body">
+      ClusterOS isn't a networking platform. It's the layer beneath — where stewards, corporates, founders, and researchers each pursue their own goals and <strong>automatically generate intelligence</strong> that makes everyone else more effective.
+    </p>
+    <div class="hero-actions">
+      <a href="#demo" class="btn-primary">See your pathway</a>
+      <a href="#ripple" class="btn-ghost">How it cascades</a>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE DEMO -->
+<section id="demo">
+  <div class="demo-inner">
+    <div class="demo-intro">
+      <div class="section-label reveal">The platform</div>
+      <h2 class="section-headline reveal reveal-delay-1">Each actor sees a <em>different surface.</em><br>Same substrate beneath.</h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin-bottom:0">
+        Choose your role below. The system asks three questions, then builds your personalised pathway. This is what onboarding looks like from each seat.
+      </p>
+    </div>
+
+    <!-- Single app window -->
+    <div class="app-window reveal">
+
+      <!-- macOS-style window chrome -->
+      <div class="window-chrome">
+        <div class="chrome-dot red"></div>
+        <div class="chrome-dot amber"></div>
+        <div class="chrome-dot green"></div>
+        <div class="chrome-address">app.clusteros.io/onboarding</div>
+      </div>
+
+      <!-- Window body: left panel + right panel -->
+      <div class="window-body">
+
+        <!-- LEFT: role selector or chat -->
+        <div class="panel-left" id="panel-left">
+
+          <!-- Phase 0: role selector -->
+          <div class="role-selector" id="role-selector">
+            <div class="role-selector-label">Select your role to begin</div>
+            <div class="role-selector-title">Who are you in this ecosystem?</div>
+            <div class="role-selector-sub">ClusterOS looks different depending on where you sit. Choose your role to see your personalised onboarding.</div>
+            <div class="role-cards">
+              <div class="role-card steward" onclick="startActor('steward')">
+                <div class="role-card-icon">⚙</div>
+                <div>
+                  <div class="role-card-name">Cluster Steward</div>
+                  <div class="role-card-desc">Managing the ecosystem, accountable for its health</div>
+                </div>
+                <div class="role-card-arrow">→</div>
+              </div>
+              <div class="role-card corporate" onclick="startActor('corporate')">
+                <div class="role-card-icon">🏢</div>
+                <div>
+                  <div class="role-card-name">Corporate Partner</div>
+                  <div class="role-card-desc">Sourcing technology, validating startups, building pipeline</div>
+                </div>
+                <div class="role-card-arrow">→</div>
+              </div>
+              <div class="role-card founder" onclick="startActor('founder')">
+                <div class="role-card-icon">🚀</div>
+                <div>
+                  <div class="role-card-name">Startup Founder</div>
+                  <div class="role-card-desc">Seeking customers, validation and funding</div>
+                </div>
+                <div class="role-card-arrow">→</div>
+              </div>
+              <div class="role-card researcher" onclick="startActor('researcher')">
+                <div class="role-card-icon">🔬</div>
+                <div>
+                  <div class="role-card-name">Researcher</div>
+                  <div class="role-card-desc">Turning published research into commercial reach</div>
+                </div>
+                <div class="role-card-arrow">→</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 1+: chat -->
+          <div class="chat-panel" id="chat-panel" style="display:none;">
+            <div class="chat-actor-header">
+              <div class="chat-actor-dot" id="chat-actor-dot"></div>
+              <div>
+                <div class="chat-actor-name" id="chat-actor-name"></div>
+                <div class="chat-actor-role" id="chat-actor-role"></div>
+              </div>
+              <button class="chat-back" onclick="resetToSelector()">← Change role</button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div id="chat-options-wrap">
+              <div class="chat-prompt-hint" id="prompt-hint">Select your response</div>
+              <div class="chat-options" id="chat-options"></div>
+            </div>
+          </div>
+
+        </div><!-- /panel-left -->
+
+        <!-- RIGHT: waiting → building → dashboard -->
+        <div class="panel-right">
+
+          <!-- Waiting -->
+          <div class="panel-right-waiting" id="panel-waiting">
+            <div class="waiting-icon">⬡</div>
+            <div class="waiting-title">Your dashboard will appear here</div>
+            <div class="waiting-sub">Answer the questions on the left — the system builds your personalised ecosystem view as you go.</div>
+          </div>
+
+          <!-- Building -->
+          <div class="panel-right-building" id="panel-building">
+            <div class="building-spinner"></div>
+            <div class="building-lines">
+              <div class="building-line"></div>
+              <div class="building-line"></div>
+              <div class="building-line"></div>
+            </div>
+            <div class="building-label" id="building-label">Building your pathway...</div>
+          </div>
+
+          <!-- Dashboard -->
+          <div class="panel-right-dashboard" id="panel-dashboard">
+            <!-- populated by JS -->
+          </div>
+
+        </div><!-- /panel-right -->
+
+      </div><!-- /window-body -->
+
+      <!-- Switch strip — shown after dashboard reveals -->
+      <div class="switch-strip" id="switch-strip">
+        <span class="switch-strip-label">Try another role →</span>
+        <div class="switch-strip-btns">
+          <button class="switch-btn steward" onclick="switchActor('steward')">Steward</button>
+          <button class="switch-btn corporate" onclick="switchActor('corporate')">Corporate</button>
+          <button class="switch-btn founder" onclick="switchActor('founder')">Founder</button>
+          <button class="switch-btn researcher" onclick="switchActor('researcher')">Researcher</button>
+        </div>
+      </div>
+
+    </div><!-- /app-window -->
+
+  </div>
+</section>
+
+<!-- RIPPLE EVENT -->
+<section id="ripple">
+  <div class="ripple-inner">
+    <div class="ripple-intro">
+      <div class="section-label reveal">One event, many effects</div>
+      <h2 class="section-headline reveal reveal-delay-1">Watch a single action <em>cascade</em> through the substrate.</h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin-bottom:0">
+        A corporate partner posts a technology RFI. They're just trying to find a supplier. But in a connected substrate, that single selfish act triggers a chain that reshapes the whole cluster.
+      </p>
+    </div>
+    <div class="event-trigger reveal">
+      <div>
+        <div class="event-label">Corporate · Day 1</div>
+        <div class="event-text">Corporate partner posts open RFI: advanced sensing technology for autonomous systems, 6-month procurement window</div>
+        <div class="event-sub">Innovation Director · Regional Advanced Manufacturing cluster</div>
+      </div>
+    </div>
+    <div class="ripple-chain" id="ripple-chain">
+      <div class="ripple-step" data-delay="0">
+        <div class="ripple-node founder"></div>
+        <div class="ripple-content">
+          <div class="ripple-who founder">Founder receives market signal</div>
+          <div class="ripple-action">The system matches the RFI to three founders by technology type and readiness level</div>
+          <div class="ripple-effect">Each founder sees the RFI ranked by fit — not as a generic broadcast but as a personalised signal. The system tells them why they're a match and what the corporate needs to see to progress.</div>
+          <div class="ripple-badges">
+            <span class="ripple-badge founder">Founders: real procurement intent confirmed</span>
+            <span class="ripple-badge corporate">Corporate: 11 responses, 3 pre-screened</span>
+          </div>
+        </div>
+      </div>
+      <div class="ripple-step" data-delay="150">
+        <div class="ripple-node researcher"></div>
+        <div class="ripple-content">
+          <div class="ripple-who researcher">Researcher auto-surfaced</div>
+          <div class="ripple-action">A recently published paper on sensor fusion is matched to the RFI and distributed across three clusters</div>
+          <div class="ripple-effect">The researcher didn't network. Their paper did. ClusterOS detected the relevance match and surfaced the work as a Research Alert to the corporate's intelligence feed and to the three matched founders simultaneously.</div>
+          <div class="ripple-badges">
+            <span class="ripple-badge researcher">Researcher: paper reaches 19 industry readers</span>
+            <span class="ripple-badge corporate">Corporate: academic validation for procurement decision</span>
+            <span class="ripple-badge founder">Founders: technical grounding they didn't know existed</span>
+          </div>
+        </div>
+      </div>
+      <div class="ripple-step" data-delay="300">
+        <div class="ripple-node founder"></div>
+        <div class="ripple-content">
+          <div class="ripple-who founder">Founder connects with researcher</div>
+          <div class="ripple-action">One founder requests a connection with the researcher — 40-minute call, research mapped to product</div>
+          <div class="ripple-effect">The founder gets academic validation. The researcher gets a commercial application. A university-industry partnership that would never have formed through conference networking crystallises in four days.</div>
+          <div class="ripple-badges">
+            <span class="ripple-badge founder">Founder: technical credibility strengthened for RFI response</span>
+            <span class="ripple-badge researcher">Researcher: commercial partner, no cold outreach required</span>
+          </div>
+        </div>
+      </div>
+      <div class="ripple-step" data-delay="450">
+        <div class="ripple-node steward"></div>
+        <div class="ripple-content">
+          <div class="ripple-who steward">Steward sees the cluster health signal</div>
+          <div class="ripple-action">The substrate registers a research-to-industry connection forming — updates the cluster health score</div>
+          <div class="ripple-effect">The steward's dashboard shows a new university-industry link forming, a corporate engaged, three founders in active procurement conversations. Their board report writes itself. The cluster's health score moves.</div>
+          <div class="ripple-badges">
+            <span class="ripple-badge steward">Steward: evidence of ecosystem traction for funders</span>
+            <span class="ripple-badge corporate">Corporate: visible as a contributor, not just a buyer</span>
+          </div>
+        </div>
+      </div>
+      <div class="ripple-step" data-delay="600">
+        <div class="ripple-node founder"></div>
+        <div class="ripple-content">
+          <div class="ripple-who founder">Matching fund unlocked</div>
+          <div class="ripple-action">The founder-researcher collaboration qualifies for a government innovation partnership fund</div>
+          <div class="ripple-effect">The system identified the eligibility, surfaced the deadline, and pre-filled the application with the collaboration data it already holds. The fund requires a university-industry link — that link now exists because of the corporate's RFI seven days ago.</div>
+          <div class="ripple-badges">
+            <span class="ripple-badge founder">Founder: public funding without a specialist grant writer</span>
+            <span class="ripple-badge researcher">Researcher: equipment and student stipends funded</span>
+            <span class="ripple-badge steward">Steward: government investment leveraged from corporate signal</span>
+          </div>
+        </div>
+      </div>
+      <div class="ripple-step" data-delay="750">
+        <div class="ripple-node system"></div>
+        <div class="ripple-content">
+          <div class="ripple-who system">Substrate accumulates</div>
+          <div class="ripple-action">The system now knows more than it did before the RFI was posted</div>
+          <div class="ripple-effect">Procurement intent, founder readiness, research relevance, university-industry connection, government fund activation — all now structured data in the substrate. The next actor who joins finds a more intelligent, better-connected cluster than the one that existed ten days ago.</div>
+          <div class="ripple-badges">
+            <span class="ripple-badge system">7 new signals · 4 new relationships · 1 new funding pathway · cluster health +4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT ACCUMULATES -->
+<section id="accumulates">
+  <div class="accum-inner">
+    <div class="section-label reveal">What the substrate stores</div>
+    <h2 class="section-headline reveal reveal-delay-1">Three layers of <em>compounding intelligence.</em></h2>
+    <p class="section-sub reveal reveal-delay-2">
+      Unlike a CRM or a directory, the substrate doesn't record events — it accumulates structured intelligence that gets more precise with every actor, every action, every outcome.
+    </p>
+    <div class="accum-grid">
+      <div class="accum-col reveal">
+        <div class="accum-layer-label knowledge">Knowledge Layer</div>
+        <div class="accum-title">What the ecosystem knows</div>
+        <div class="accum-desc">Every RFI, publication, milestone, and evaluation updates a live map of what exists, what's needed, and where the gaps are.</div>
+        <div class="accum-examples">
+          <div class="accum-example"><div class="accum-dot knowledge"></div><div class="accum-text">Technology publications auto-matched to active procurement needs across the cluster</div></div>
+          <div class="accum-example"><div class="accum-dot knowledge"></div><div class="accum-text">Founder readiness levels — who's ready for corporate engagement vs. too early</div></div>
+          <div class="accum-example"><div class="accum-dot knowledge"></div><div class="accum-text">Research-to-market gap map: which lab capabilities have no commercial pathway yet</div></div>
+          <div class="accum-example"><div class="accum-dot knowledge"></div><div class="accum-text">Competitive signals: procurement intent before it becomes public knowledge</div></div>
+        </div>
+      </div>
+      <div class="accum-col reveal reveal-delay-1">
+        <div class="accum-layer-label relationship">Relationship Layer</div>
+        <div class="accum-title">Who connects to whom, and why</div>
+        <div class="accum-desc">Every introduction, collaboration, and rejection builds a structured graph of how the cluster actually functions — not how the org chart says it should.</div>
+        <div class="accum-examples">
+          <div class="accum-example"><div class="accum-dot relationship"></div><div class="accum-text">Bridge actors identified — who is connecting people across the cluster's structural gaps</div></div>
+          <div class="accum-example"><div class="accum-dot relationship"></div><div class="accum-text">Underutilised nodes: high-capability actors with low ecosystem reach</div></div>
+          <div class="accum-example"><div class="accum-dot relationship"></div><div class="accum-text">Corporate evaluations: what they rejected tells founders what not to build</div></div>
+          <div class="accum-example"><div class="accum-dot relationship"></div><div class="accum-text">Which government funds have activated, by whom, on what criteria</div></div>
+        </div>
+      </div>
+      <div class="accum-col reveal reveal-delay-2">
+        <div class="accum-layer-label ecosystem">Ecosystem Layer</div>
+        <div class="accum-title">The cluster's structural position</div>
+        <div class="accum-desc">Aggregated across all actors, the substrate maintains a live read of lifecycle stage, stall patterns, and trajectory — benchmarked against 75 global comparators.</div>
+        <div class="accum-examples">
+          <div class="accum-example"><div class="accum-dot ecosystem"></div><div class="accum-text">Lifecycle stage and trajectory: where the cluster sits and where it's heading</div></div>
+          <div class="accum-example"><div class="accum-dot ecosystem"></div><div class="accum-text">Comparable clusters: who resolved a similar stall and how</div></div>
+          <div class="accum-example"><div class="accum-dot ecosystem"></div><div class="accum-text">Health score with diagnostic breakdown: what's holding it back, what unlocks the next stage</div></div>
+          <div class="accum-example"><div class="accum-dot ecosystem"></div><div class="accum-text">Leverage hypothesis: the single intervention most likely to compound value across the whole system</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="section-label reveal" style="justify-content:center;">Build your substrate</div>
+    <h2 class="cta-headline reveal reveal-delay-1">
+      Your cluster has actors.<br>
+      <em>Does it have a substrate?</em>
+    </h2>
+    <p class="cta-sub reveal reveal-delay-2">
+      A ClusterOS diagnostic identifies which actors are present, what signal they're generating, and what coordination layer is missing. Then we build it.
+    </p>
+    <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+    <p class="cta-note reveal reveal-delay-3">Stall analysis · Actor mapping · Substrate design</p>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
+      <p class="footer-tagline">Regional economies need infrastructure.<br>Not more strategy.</p>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <div class="footer-col-label">Product</div>
+        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+        <a href="/signals-systems.html">Signals &amp; Systems</a>
+        <a href="/diagnostic.html">The Diagnostic</a>
+        <a href="/leverage.html">Leverage</a>
+        <a href="/findings.html">Findings</a>
+        <a href="/pricing.html">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Lab Notes</div>
+        <a href="/notes.html">All Notes</a>
+        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+        <a href="/ln-02-narrating.html">S7 · Narrating</a>
+        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
+        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Company</div>
+        <a href="/about.html">About</a>
+        <a href="/request.html">Request a Diagnostic</a>
+        <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 ClusterOS · Community Lab</span>
+    <span>Built in Edinburgh</span>
+  </div>
+</footer>
+<script>const ACTORS = {
+  steward: {
+    label: 'Cluster Steward',
+    color: '#7dd3c8',
+    markColor: '#0d9488',
+    badgeBg: '#f0fdfa',
+    badgeColor: '#0d9488',
+    avColor: '#0d9488',
+    initials: 'SM',
+    sub: 'Cluster Steward onboarding',
+    conv: [
+      {
+        ai: `Welcome to ClusterOS.\n\nI'm going to be direct: most cluster managers spend their time reporting on activity rather than driving it. This platform is built to change that ratio.\n\nTo set up your steward dashboard, I need to understand your current situation. What's your biggest challenge right now?`,
+        options: [
+          { text: "Proving impact to funders — I need better evidence of what the cluster is achieving", value: 'impact' },
+          { text: "Coordination gaps — the right people aren't finding each other and I can't force it", value: 'coordination' },
+          { text: "Attracting corporates — I have startups and researchers but not enough buy-side", value: 'corporate' },
+        ]
+      },
+      {
+        ai: (choice) => {
+          const responses = {
+            impact: `Clear. You need the evidence layer — structured data on connections formed, deals progressed, and funding leveraged, in a format funders can read.\n\nI've mapped what your cluster currently generates vs. what you need to demonstrate:\n\n→ 3 active corporate-founder connections (unmeasured)\n→ 2 research partnerships forming (undocumented)\n→ 1 government fund eligible — not yet applied for\n\nI can surface all of this automatically. What's your reporting cycle?`,
+            coordination: `Understood. Coordination failure is a structural problem, not a relationship one — you can't solve it with more events.\n\nHere's what I can see in your cluster right now:\n\n→ 4 researchers with no industry connections despite relevant work\n→ 2 corporates with active RFIs — no founders have seen them\n→ 3 founders at the right stage for pilot conversations — no introductions made\n\nI'll start fixing the matching layer. What sectors matter most to you?`,
+            corporate: `Noted. Corporate engagement is the hardest part to manufacture — and the most valuable signal in the ecosystem.\n\nWhat I can do: make your cluster visible to corporates before they look elsewhere, and give them a reason to engage that isn't just "come to our event."\n\nI've identified 3 corporates with relevant procurement needs who haven't engaged with a cluster yet. Should I build outreach intelligence for them?`,
+          };
+          return responses[choice] || responses.impact;
+        },
+        options: [
+          { text: "Monthly — show me what the dashboard will look like", value: 'show' },
+          { text: "Quarterly — but I need it to be compelling enough to secure renewal", value: 'show' },
+        ]
+      },
+      {
+        ai: (choice) => `Good. Here's how I'll set up your reporting layer.
+
+Every connection, collaboration, and deal that passes through the platform generates structured evidence automatically. You don't chase it — it accumulates.
+
+Before I build your dashboard, one more question: which of these best describes your cluster's current stage?
+`,
+        options: [
+          { text: "Early — we're building the actor base, most connections are still being made for the first time", value: 'early' },
+          { text: "Growing — we have the actors but they're not connecting as efficiently as they should", value: 'growing' },
+          { text: "Established — we need to show compounding value, not just activity", value: 'established' },
+        ]
+      }
+    ],
+    building: { label: 'Building your steward dashboard...', sub: 'Mapping cluster actors, health signals, and reporting structure' },
+    dashboard: {
+      appColor: '#0d9488',
+      roleLabel: 'Cluster Steward',
+      roleBadgeBg: '#f0fdfa',
+      roleBadgeColor: '#0d9488',
+      aiStrip: { bg: '#f0fdfa', border: '#99f6e4', text: '<strong>Board briefing ready.</strong> Buy-side demand emerging in 2 clusters. Conversion pipeline has a gap at stage 3. One cluster is cycling — intervention recommended before your next funder meeting.' },
+      tab: 'Morning Briefing',
+      metrics: [
+        { num: '74', label: 'Ecosystem health', color: '#0d9488' },
+        { num: '23', label: 'In pipeline', color: '#7dd3c8' },
+        { num: '4', label: 'Need action', color: '#f5d97a' },
+      ],
+      steps: [
+        { status: 'complete', title: 'SpaceTech · emerging (72, +8)', sub: 'Buy-side signal from L3Harris — first genuine procurement in 8 months. Pipeline moving.' },
+        { status: 'complete', title: 'FinTech · active (81, +2)', sub: '4 founders in deep-dive. 2 corporate LOIs in progress. Conversion tracking above baseline.' },
+        { status: 'active', title: 'Defence · cycling (64, −3) · intervene', sub: 'Same 8 founders, 6 weeks, no new entrants. Don\'t add events — bridge 2 founders to SpaceTech.' },
+        { status: 'upcoming', title: 'Government fund · 3 actors eligible', sub: 'Innovation partnership fund closes in 3 weeks. System has identified qualifying matches — act now.' },
+        { status: 'upcoming', title: 'Board report · auto-generated', sub: 'Not activity metrics. Diagnostic intelligence: conversions, buy-side signals, pipeline progression.' },
+      ]
+    }
+  },
+
+  corporate: {
+    label: 'Corporate Innovation Director',
+    color: '#c8f0d0',
+    markColor: '#16a34a',
+    badgeBg: '#f0fdf4',
+    badgeColor: '#16a34a',
+    avColor: '#2563eb',
+    initials: 'JW',
+    sub: 'Corporate partner onboarding',
+    conv: [
+      {
+        ai: `Welcome to ClusterOS.\n\nI understand your time is limited, so let me be direct: this platform exists to put the right startups, researchers, and technologies in front of you — before your competitors find them.\n\nTo build your procurement intelligence layer, I need to understand your current priorities. What are you looking for right now?`,
+        options: [
+          { text: "Emerging technology suppliers — early-stage, pre-commercial, but technically credible", value: 'suppliers' },
+          { text: "Research partnerships — university labs we could sponsor or license IP from", value: 'research' },
+          { text: "Talent pipeline — graduate and PhD-level hires into our R&D function", value: 'talent' },
+        ]
+      },
+      {
+        ai: (choice) => {
+          const responses = {
+            suppliers: `Clear. Technology procurement at early stage — you need TRL filtering, not just a startup list.\n\nI've scanned the cluster against your profile:\n\n→ 6 startups in relevant technology areas\n→ 3 are at the right readiness level for pilot conversations\n→ 1 has already engaged with a comparable corporate — their approach might be instructive\n→ 2 university labs doing directly relevant work\n\nShould I post an open RFI or send curated introductions to the shortlist?`,
+            research: `Understood. Sponsored research and IP licensing — you need academic credibility and a pathway to rights, not just publications.\n\nHere's what I've found:\n\n→ 4 research groups with work directly relevant to your stated areas\n→ 2 have expressed interest in sponsored research agreements\n→ 1 has a patent application in progress — early conversation could secure licensing terms\n→ The cluster's matching fund programme requires a corporate partner — you'd qualify\n\nWant curated introductions to all four groups?`,
+            talent: `Noted. Graduate and PhD pipeline — you want first access before other corporates post competing offers.\n\nCurrent visibility:\n\n→ 34 relevant graduates finishing this academic year\n→ 8 are propulsion or sensing focused — your stated areas\n→ 3 PhD students seeking industry placements — 6-12 month timelines\n→ The cluster runs a talent showcase in 6 weeks\n\nShould I flag you as an active recruiter to the talent pipeline coordinator?`,
+          };
+          return responses[choice] || responses.suppliers;
+        },
+        options: [
+          { text: "Send curated introductions — I don't want to cold-review everything", value: 'show' },
+          { text: "Post an open RFI first, then shortlist from responses", value: 'show' },
+        ]
+      },
+      {
+        ai: (choice) => `Understood. One last thing before I configure your procurement dashboard.
+
+How do you want the ongoing intelligence brief structured? I'll filter everything to your stated priorities — but the format matters for adoption inside your organisation.
+`,
+        options: [
+          { text: "Weekly digest — new startups, research alerts, talent signals, competitor activity", value: 'weekly' },
+          { text: "Trigger-based — only notify me when something directly matches my active searches", value: 'trigger' },
+          { text: "Both — digest for awareness, triggers for action", value: 'both' },
+        ]
+      }
+    ],
+    building: { label: 'Scanning ecosystem for your priorities...', sub: 'Matching startups, researchers, and opportunities to your profile' },
+    dashboard: {
+      appColor: '#16a34a',
+      roleLabel: 'Corporate Partner',
+      roleBadgeBg: '#f0fdf4',
+      roleBadgeColor: '#16a34a',
+      aiStrip: { bg: '#eff6ff', border: '#dbeafe', text: '<strong>Priority:</strong> One of your shortlisted founders has a competing corporate conversation in progress. Schedule your technical review before the week is out.' },
+      tab: 'Engagement Plan',
+      metrics: [
+        { num: '3', label: 'Shortlisted', color: '#2563eb' },
+        { num: '12', label: 'RFI responses', color: '#16a34a' },
+        { num: '2', label: 'Research alerts', color: '#8b5cf6' },
+      ],
+      steps: [
+        { status: 'complete', title: 'Technology priorities configured', sub: '3 domains · TRL filters set · budget range indicated' },
+        { status: 'complete', title: 'RFI distributed across cluster', sub: '4 groups · 12 responses · 3 pre-screened by system' },
+        { status: 'active', title: 'Technical review — shortlisted founders', sub: '3 companies · curated by TRL and domain fit' },
+        { status: 'upcoming', title: 'Research lab introductions', sub: '2 groups · sponsored research agreement potential' },
+        { status: 'upcoming', title: 'Pilot scoping conversation', sub: 'Top shortlisted company · LOI pathway if successful' },
+      ]
+    }
+  },
+
+  founder: {
+    label: 'Startup Founder',
+    color: '#f5d97a',
+    markColor: '#b45309',
+    badgeBg: '#fffbeb',
+    badgeColor: '#b45309',
+    avColor: '#16a34a',
+    initials: 'MR',
+    sub: 'Founder onboarding',
+    conv: [
+      {
+        ai: `Welcome to ClusterOS.\n\nI'm here to help you navigate this ecosystem — not just show you a list of groups to join.\n\nBefore I build your personalised pathway, I need to understand where you are. What's your most pressing challenge right now?`,
+        options: [
+          { text: "Customer validation — I need a corporate to say they'd buy this, or at least pilot it", value: 'customers' },
+          { text: "Funding — grants, matching funds, or pre-seed investors who understand deep tech", value: 'funding' },
+          { text: "Technical credibility — I need research partnerships or academic validation to compete with larger teams", value: 'technical' },
+        ]
+      },
+      {
+        ai: (choice) => {
+          const responses = {
+            customers: `Clear. You need a real buyer signal, not just interest.\n\nI've mapped your position against active procurement in this cluster:\n\n→ 2 corporates have posted RFIs in your technology area in the last 30 days\n→ 1 is actively shortlisting — the window is 12 days\n→ 1 research group has published directly relevant work that would strengthen your RFI response\n→ 1 peer founder has been through the corporate engagement process — happy to share their approach\n\nShould I match you to both RFIs and flag your profile to the procurement contacts?`,
+            funding: `Understood. Funding pathway — let me show you what you actually qualify for right now.\n\n→ Government innovation fund: you're eligible if you establish a university partnership (I can match you to one)\n→ Cluster matching fund: requires a corporate LOI — one corporate has expressed interest in your area\n→ Pre-seed investors: 2 are active in this cluster, both have backed similar stage companies\n→ Grant: closes in 3 weeks — your technology area is explicitly in scope\n\nWhich pathway is most urgent?`,
+            technical: `Noted. Academic validation is often the fastest way to close credibility gaps with corporates.\n\nHere's what I've found in this cluster:\n\n→ 3 research groups working on directly relevant problems\n→ 1 has published results that validate your core technical approach — you should know this exists\n→ 1 has 2 PhD students looking for industry placements — this is cheap expertise\n→ A research partnership here qualifies you for the government matching fund\n\nShould I set up introductions to all three groups?`,
+          };
+          return responses[choice] || responses.customers;
+        },
+        options: [
+          { text: "Yes — and show me the full picture of where I sit in this ecosystem", value: 'show' },
+          { text: "Start with the most urgent — I'll deal with the rest once this is moving", value: 'show' },
+        ]
+      },
+      {
+        ai: (choice) => `Good. Last question — this shapes how I prioritise your pathway.
+
+How long do you have before you need to show traction? This changes what I put at the top of your plan.
+`,
+        options: [
+          { text: "Under 3 months — I need a customer conversation or LOI before my runway runs out", value: 'urgent' },
+          { text: "3–9 months — I'm building towards a raise and need the ecosystem behind me", value: 'medium' },
+          { text: "I have time — I want to build the right relationships, not just the fastest ones", value: 'patient' },
+        ]
+      }
+    ],
+    building: { label: 'Building your ecosystem view...', sub: 'Mapping connections, opportunities, and your pathway to first customers' },
+    dashboard: {
+      appColor: '#b45309',
+      roleLabel: 'Founder',
+      roleBadgeBg: '#fffbeb',
+      roleBadgeColor: '#b45309',
+      aiStrip: { bg: '#fef3c7', border: '#fde68a', text: '<strong>Corporate RFI closes in 12 days.</strong> Your profile has been viewed by the procurement lead. A direct message now has context.' },
+      tab: 'My Pathway',
+      metrics: [
+        { num: '2', label: 'RFI matches', color: '#b45309' },
+        { num: '3', label: 'Research leads', color: '#8b5cf6' },
+        { num: '£150k', label: 'Fund eligible', color: '#16a34a' },
+      ],
+      steps: [
+        { status: 'complete', title: 'Founder profile live', sub: 'Visible to 186 cluster members · 4 profile views today' },
+        { status: 'complete', title: 'Matched to 2 active RFIs', sub: 'Corporate procurement · technology and readiness fit confirmed' },
+        { status: 'active', title: 'Respond to priority RFI', sub: 'Closes in 12 days · procurement lead has viewed your profile' },
+        { status: 'upcoming', title: 'Connect with research group', sub: 'Lab has directly relevant published results — technical validation' },
+        { status: 'upcoming', title: 'Apply to matching fund', sub: 'University partnership required — system has identified your match' },
+      ]
+    }
+  },
+
+  researcher: {
+    label: 'Research Lab Director',
+    color: '#f08080',
+    markColor: '#dc2626',
+    badgeBg: '#fff1f2',
+    badgeColor: '#dc2626',
+    avColor: '#8b5cf6',
+    initials: 'WC',
+    sub: 'Researcher onboarding',
+    conv: [
+      {
+        ai: `Welcome to ClusterOS.\n\nI know you didn't sign up for a networking platform — so let me explain what this actually does for you.\n\nYour lab has published significant work that people in this cluster need but can't find. At least 2 companies are working on problems your research has already solved. A corporate partner posted an RFI last week that your lab is directly relevant to.\n\nWhat would make this worth your time?`,
+        options: [
+          { text: "Sponsored research income — my lab needs commercial funding for the next phase", value: 'funding' },
+          { text: "Industry application for my research — I publish, but nobody in industry reads it", value: 'visibility' },
+          { text: "PhD student placements — my students need industry exposure and I need the pipeline to attract good candidates", value: 'students' },
+        ]
+      },
+      {
+        ai: (choice) => {
+          const responses = {
+            funding: `Clear. Sponsored research is the cleanest pathway — you keep the IP, they get first-look at results.\n\nHere's what I've found:\n\n→ 1 corporate has posted an RFI in your exact research area — their procurement lead is looking for academic validation\n→ A cluster matching fund requires a university partner — you would qualify 3 startups\n→ A government innovation programme has a call specifically for university-industry partnerships — closes in 5 weeks\n→ Your most recent paper has been viewed by 2 corporate innovation teams who don't know you're available to partner\n\nShould I flag your lab as open to sponsored research to the relevant actors?`,
+            visibility: `Understood. Your research needs to reach the people working on the same problems — not just the journals that index it.\n\nHere's what I can see right now:\n\n→ 2 startups in this cluster are building products your research directly optimises — they don't know your work exists\n→ 1 corporate RFI references the exact technical challenge your last paper addressed\n→ 3 cluster members have saved papers citing your work — they just don't know who wrote the primary research\n\nI'll make your publications findable by the people who need them. No networking required — your work does the talking.`,
+            students: `Noted. Student placements — you need industry partners who understand research timelines and can offer substantive projects.\n\n→ 2 startups are looking for research-level technical expertise they can't hire permanently\n→ 1 corporate has a structured placement programme — PhD students in relevant areas are explicitly welcome\n→ A 6-month placement at the right company would significantly strengthen your students' academic job market position\n→ The cluster's talent showcase in 6 weeks is a natural introduction point\n\nShould I flag your students as available to the relevant companies?`,
+          };
+          return responses[choice] || responses.visibility;
+        },
+        options: [
+          { text: "Yes — and show me the impact dashboard so I can see what my research generates", value: 'show' },
+          { text: "Start with the most immediate opportunity — I'll expand from there", value: 'show' },
+        ]
+      },
+      {
+        ai: (choice) => `Understood. One more thing — this shapes how I present your lab to industry actors.
+
+When a corporate or founder sees your research profile, what's the single most important thing they should understand about how you like to work?
+`,
+        options: [
+          { text: "I'm open to sponsored research — industry funds the work, we retain IP and publish freely", value: 'sponsored' },
+          { text: "I prefer consultancy and technical advisory — targeted engagement, not long contracts", value: 'advisory' },
+          { text: "Student placements first — it's lower friction and usually leads to deeper partnerships", value: 'placements' },
+        ]
+      }
+    ],
+    building: { label: 'Surfacing your research across the cluster...', sub: 'Matching publications, lab capabilities, and student profiles to ecosystem needs' },
+    dashboard: {
+      appColor: '#8b5cf6',
+      roleLabel: 'Researcher',
+      roleBadgeBg: '#fdf4ff',
+      roleBadgeColor: '#8b5cf6',
+      aiStrip: { bg: '#fdf4ff', border: '#f3e8ff', text: "<strong>Corporate partner flagged your recent publication</strong> as relevant to their procurement decision. They're exploring a sponsored research agreement." },
+      tab: 'Research Impact',
+      metrics: [
+        { num: '47', label: 'Paper views', color: '#8b5cf6' },
+        { num: '3', label: 'Clusters reached', color: '#0d9488' },
+        { num: '2', label: 'Enquiries', color: '#16a34a' },
+      ],
+      steps: [
+        { status: 'complete', title: 'Research profile published', sub: '18 papers surfaced · lab capabilities listed · 2 students available' },
+        { status: 'complete', title: 'Latest paper auto-distributed', sub: '3 clusters · 47 views · 8 saved · 3 connection requests' },
+        { status: 'active', title: 'Corporate partner enquiry', sub: 'Sponsored research agreement — 2-year funding potential' },
+        { status: 'upcoming', title: 'Startup connection', sub: 'Founder matched to your research — technical collaboration' },
+        { status: 'upcoming', title: 'PhD student placement', sub: '6-month industry placement · qualifying for matching fund' },
+      ]
+    }
+  }
+};
+
+
+// --- STATE ----------------------------------------------------
+let currentActor = null;
+let convStep = 0;
+let lastChoice = null;
+let choiceHistory = [];
+
+// --- HELPERS -------------------------------------------------
+function showPanel(id) {
+  ['panel-waiting','panel-building','panel-dashboard'].forEach(p => {
+    const el = document.getElementById(p);
+    el.style.display = p === id ? 'flex' : 'none';
+  });
+}
+
+// --- ROLE SELECTOR -------------------------------------------
+function resetToSelector() {
+  currentActor = null; convStep = 0; lastChoice = null; choiceHistory = [];
+  document.getElementById('role-selector').style.display = 'flex';
+  document.getElementById('chat-panel').style.display = 'none';
+  document.getElementById('chat-messages').innerHTML = '';
+  document.getElementById('chat-options').innerHTML = '';
+  document.getElementById('switch-strip').style.display = 'none';
+  showPanel('panel-waiting');
+}
+
+// --- START ACTOR ---------------------------------------------
+function startActor(actor) {
+  currentActor = actor;
+  convStep = 0; lastChoice = null; choiceHistory = [];
+  const a = ACTORS[actor];
+
+  // Switch left panel to chat
+  document.getElementById('role-selector').style.display = 'none';
+  const chatPanel = document.getElementById('chat-panel');
+  chatPanel.style.display = 'flex';
+
+  // Set actor header
+  document.getElementById('chat-actor-dot').style.background = a.color;
+  document.getElementById('chat-actor-name').textContent = a.label;
+  document.getElementById('chat-actor-role').textContent = a.sub;
+
+  // Clear
+  document.getElementById('chat-messages').innerHTML = '';
+  document.getElementById('chat-options').innerHTML = '';
+  document.getElementById('switch-strip').style.display = 'none';
+  showPanel('panel-waiting');
+
+  // Start conversation
+  setTimeout(() => showAIMessage(0), 300);
+}
+
+// --- CONVERSATION ---------------------------------------------
+function showAIMessage(step) {
+  const actor = ACTORS[currentActor];
+  const conv = actor.conv[step];
+  if (!conv) return;
+
+  const msgs = document.getElementById('chat-messages');
+  const optWrap = document.getElementById('chat-options-wrap');
+  optWrap.style.visibility = 'hidden';
+
+  // Typing indicator
+  const typing = document.createElement('div');
+  typing.className = 'typing';
+  typing.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  const aiText = typeof conv.ai === 'function' ? conv.ai(lastChoice) : conv.ai;
+  const delay = Math.min(600 + aiText.length * 1.2, 2000);
+
+  setTimeout(() => {
+    typing.remove();
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-ai-bubble';
+    bubble.innerHTML = aiText.replace(/→/g, '<span class="arr">→</span>');
+    msgs.appendChild(bubble);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    // Options
+    const optContainer = document.getElementById('chat-options');
+    optContainer.innerHTML = '';
+    document.getElementById('prompt-hint').textContent =
+      step === 0 ? 'What describes your situation?' : 'Choose your response';
+
+    conv.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'chat-option';
+      btn.textContent = opt.text;
+      btn.onclick = () => selectOption(opt, step);
+      optContainer.appendChild(btn);
+    });
+
+    optWrap.style.visibility = 'visible';
+  }, delay);
+}
+
+function selectOption(opt, step) {
+  lastChoice = opt.value;
+  choiceHistory.push(opt.value);
+
+  const msgs = document.getElementById('chat-messages');
+  document.getElementById('chat-options-wrap').style.visibility = 'hidden';
+
+  // User bubble
+  const userBubble = document.createElement('div');
+  userBubble.className = 'msg-user-bubble';
+  userBubble.textContent = opt.text;
+  msgs.appendChild(userBubble);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  const nextStep = step + 1;
+  const actor = ACTORS[currentActor];
+
+  if (nextStep < actor.conv.length) {
+    convStep = nextStep;
+    setTimeout(() => showAIMessage(nextStep), 350);
+  } else {
+    setTimeout(() => beginBuilding(), 500);
+  }
+}
+
+// --- BUILDING -------------------------------------------------
+function beginBuilding() {
+  const actor = ACTORS[currentActor];
+  const msgs = document.getElementById('chat-messages');
+  document.getElementById('chat-options-wrap').style.visibility = 'hidden';
+
+  // Final AI message
+  const typing = document.createElement('div');
+  typing.className = 'typing';
+  typing.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  setTimeout(() => {
+    typing.remove();
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-ai-bubble';
+    bubble.innerHTML = "Your pathway is building now. I'm mapping your position in the ecosystem and identifying the highest-value connections for you.";
+    msgs.appendChild(bubble);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    // Show spinner on right
+    showPanel('panel-building');
+    document.getElementById('building-label').textContent = actor.building.label;
+
+    setTimeout(() => revealDashboard(), 2000);
+  }, 1200);
+}
+
+// --- TAB CONTENT ---------------------------------------------
+const TAB_FEED = {
+  steward: [
+    { dot: '#7dd3c8', label: 'Cluster alert', time: '2h ago', text: 'Corporate partner posted an RFI in advanced sensing — 4 cluster members qualify. No introductions made yet.', tag: '→ Fix matching gap', tagColor: '#0d9488' },
+    { dot: '#c8f0d0', label: 'New member', time: '5h ago', text: 'Startup founder joined — electric propulsion, seed stage. Matches 2 active corporate technology searches.', tag: '→ Introduce', tagColor: '#16a34a' },
+    { dot: '#f5d97a', label: 'Fund alert', time: '1d ago', text: "Government innovation partnership fund deadline in 18 days. 3 cluster members qualify but haven't applied.", tag: '→ Notify members', tagColor: '#b45309' },
+    { dot: '#f08080', label: 'Research signal', time: '2d ago', text: 'University lab published paper directly relevant to 2 active RFIs. Paper not yet circulated to relevant corporates.', tag: '→ Distribute', tagColor: '#dc2626' },
+  ],
+  corporate: [
+    { dot: '#f5d97a', label: 'Shortlisted startup', time: '1h ago', text: 'Founder you shortlisted has a competing corporate conversation in progress — 12-day window before they commit elsewhere.', tag: '⚡ Action required', tagColor: '#b45309' },
+    { dot: '#f08080', label: 'Research alert', time: '4h ago', text: 'New paper published on sensor fusion directly relevant to your active RFI. Lab open to sponsored research.', tag: '→ Review paper', tagColor: '#dc2626' },
+    { dot: '#7dd3c8', label: 'Cluster update', time: '1d ago', text: 'Pitch Night #4 confirmed for next month. 6 companies presenting, 2 in your stated technology areas.', tag: '→ Register interest', tagColor: '#0d9488' },
+    { dot: '#c8f0d0', label: 'Intelligence brief', time: '2d ago', text: '3 new startups joined the cluster this week in your technology areas. 1 has raised pre-seed from a firm you know.', tag: '→ See profiles', tagColor: '#16a34a' },
+  ],
+  founder: [
+    { dot: '#c8f0d0', label: 'RFI match', time: '30m ago', text: 'Corporate partner posted technology RFI — your product is a direct match. Procurement window is 45 days.', tag: '⚡ Respond now', tagColor: '#16a34a' },
+    { dot: '#f08080', label: 'Research connection', time: '3h ago', text: 'A lab working on a directly complementary problem has expressed interest in connecting. Their work strengthens your technical case.', tag: '→ Accept connection', tagColor: '#dc2626' },
+    { dot: '#f5d97a', label: 'Funding alert', time: '1d ago', text: 'Matching fund deadline in 18 days. You qualify if you establish a university partnership — one has been identified.', tag: '→ See eligibility', tagColor: '#b45309' },
+    { dot: '#7dd3c8', label: 'Peer activity', time: '2d ago', text: 'Founder building complementary technology posted their intro. The system suggests a collaboration conversation.', tag: '→ Connect', tagColor: '#0d9488' },
+  ],
+  researcher: [
+    { dot: '#c8f0d0', label: 'Commercial interest', time: '2h ago', text: "Corporate innovation team has flagged your latest paper as relevant to their active procurement. They're exploring a sponsored research agreement.", tag: '→ Respond', tagColor: '#16a34a' },
+    { dot: '#f5d97a', label: 'Startup connection', time: '6h ago', text: 'A founder building in your research area has requested a 30-minute technical conversation. Their technology builds directly on your published method.', tag: '→ Accept', tagColor: '#b45309' },
+    { dot: '#7dd3c8', label: 'Cluster distribution', time: '1d ago', text: 'Your paper on sensor fusion has been distributed across 3 clusters and reached 47 industry readers this week.', tag: '→ View analytics', tagColor: '#0d9488' },
+    { dot: '#f08080', label: 'Student opportunity', time: '3d ago', text: 'Corporate partner has a structured placement for PhD students in your area. 6-month programme starting next quarter.', tag: '→ Nominate student', tagColor: '#dc2626' },
+  ],
+};
+
+const TAB_CONNECTIONS = {
+  steward: [
+    { av: '#0d9488', initials: 'CP', name: 'Corporate Partner', role: 'Innovation Director · joined 3 weeks ago', badge: '2 RFIs posted', badgeBg: '#f0fdf4', badgeColor: '#16a34a' },
+    { av: '#16a34a', initials: 'SF', name: 'Startup Founder', role: 'Deep tech · seed stage · propulsion', badge: 'Matched to RFI', badgeBg: '#eff6ff', badgeColor: '#2563eb' },
+    { av: '#8b5cf6', initials: 'RL', name: 'Research Lab', role: 'University · sensing & materials', badge: 'Paper circulated', badgeBg: '#fdf4ff', badgeColor: '#8b5cf6' },
+    { av: '#b45309', initials: 'F2', name: 'Second Founder', role: 'Early stage · thermal management', badge: 'Fund eligible', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+  ],
+  corporate: [
+    { av: '#16a34a', initials: 'SF', name: 'Shortlisted Founder', role: 'Electric propulsion · TRL 5 · seeking pilot', badge: '12 days left', badgeBg: '#fef3c7', badgeColor: '#b45309' },
+    { av: '#8b5cf6', initials: 'RL', name: 'Research Lab', role: 'Sensor fusion · UCF-equivalent · open to sponsored research', badge: 'New contact', badgeBg: '#eff6ff', badgeColor: '#2563eb' },
+    { av: '#0d9488', initials: 'CS', name: 'Cluster Steward', role: 'Programme coordinator', badge: 'Introduced you', badgeBg: '#f0fdfa', badgeColor: '#0d9488' },
+    { av: '#dc2626', initials: 'F2', name: 'Second Founder', role: 'Thermal management · complementary technology', badge: 'Suggested', badgeBg: '#fff1f2', badgeColor: '#dc2626' },
+  ],
+  founder: [
+    { av: '#16a34a', initials: 'CP', name: 'Corporate Contact', role: 'Innovation Director · active RFI in your area', badge: 'RFI open', badgeBg: '#fef3c7', badgeColor: '#b45309' },
+    { av: '#8b5cf6', initials: 'RL', name: 'Research Lab', role: 'University lab · technical validation match', badge: 'Connect now', badgeBg: '#f0fdfa', badgeColor: '#0d9488' },
+    { av: '#0d9488', initials: 'CS', name: 'Cluster Steward', role: 'Managing your onboarding', badge: 'Your contact', badgeBg: '#f0fdf4', badgeColor: '#16a34a' },
+    { av: '#2563eb', initials: 'F2', name: 'Peer Founder', role: 'Complementary technology · open to collaboration', badge: 'Suggested', badgeBg: '#eff6ff', badgeColor: '#2563eb' },
+  ],
+  researcher: [
+    { av: '#16a34a', initials: 'CP', name: 'Corporate Partner', role: 'Innovation Director · interested in sponsored research', badge: 'Respond now', badgeBg: '#fef3c7', badgeColor: '#b45309' },
+    { av: '#b45309', initials: 'SF', name: 'Startup Founder', role: 'Building on your research area', badge: 'Connection req.', badgeBg: '#fff1f2', badgeColor: '#dc2626' },
+    { av: '#0d9488', initials: 'CS', name: 'Cluster Steward', role: 'Distributed your paper across 3 clusters', badge: 'Your champion', badgeBg: '#f0fdfa', badgeColor: '#0d9488' },
+    { av: '#2563eb', initials: 'PD', name: 'PhD Student', role: 'Your lab · placement opportunity identified', badge: 'Eligble', badgeBg: '#eff6ff', badgeColor: '#2563eb' },
+  ],
+};
+
+// --- DASHBOARD ------------------------------------------------
+function switchTab(tabIndex) {
+  const tabs = document.querySelectorAll('#panel-dashboard .dash-tab');
+  const panes = document.querySelectorAll('#panel-dashboard .dash-tab-pane');
+  tabs.forEach((t, i) => t.classList.toggle('active', i === tabIndex));
+  panes.forEach((p, i) => p.classList.toggle('active', i === tabIndex));
+}
+
+function revealDashboard() {
+  const actor = ACTORS[currentActor];
+  const d = actor.dashboard;
+  const dash = document.getElementById('panel-dashboard');
+
+  const stepsHTML = d.steps.map(s => `
+    <div class="dash-step ${s.status}">
+      <div class="dash-dot ${s.status}"></div>
+      <div style="flex:1;min-width:0">
+        <div class="dash-step-title">${s.title}</div>
+        <div class="dash-step-sub">${s.sub}</div>
+      </div>
+      <div class="dash-step-badge" style="color:${s.status==='complete'?'#8b5cf6':s.status==='active'?'#3b82f6':'#d1d5db'}">${s.status==='complete'?'✓':s.status==='active'?'●':'○'}</div>
+    </div>`).join('');
+
+  const metricsHTML = d.metrics.map(m => `
+    <div class="dash-metric">
+      <div class="dash-metric-num" style="color:${m.color}">${m.num}</div>
+      <div class="dash-metric-label">${m.label}</div>
+    </div>`).join('');
+
+  const feedHTML = (TAB_FEED[currentActor] || []).map(f => `
+    <div class="feed-item" style="border-left-color:${f.dot}">
+      <div class="feed-meta"><div class="feed-dot" style="background:${f.dot}"></div>${f.label} · <span>${f.time}</span></div>
+      <div class="feed-text">${f.text}</div>
+      <div class="feed-tag" style="color:${f.tagColor}">${f.tag}</div>
+    </div>`).join('');
+
+  const connsHTML = (TAB_CONNECTIONS[currentActor] || []).map(c => `
+    <div class="conn-item">
+      <div class="conn-av" style="background:${c.av}">${c.initials}</div>
+      <div>
+        <div class="conn-name">${c.name}</div>
+        <div class="conn-role">${c.role}</div>
+      </div>
+      <div class="conn-badge" style="background:${c.badgeBg};color:${c.badgeColor}">${c.badge}</div>
+    </div>`).join('');
+
+  dash.innerHTML = `
+    <div class="dash-chrome">
+      <div class="dash-chrome-left">
+        <div class="dash-app-mark" style="background:${d.appColor}">C</div>
+        <span class="dash-app-name">ClusterOS</span>
+        <span class="dash-role-badge" style="background:${d.roleBadgeBg};color:${d.roleBadgeColor}">${d.roleLabel}</span>
+      </div>
+      <div class="dash-avatar" style="background:${actor.avColor}">${actor.initials}</div>
+    </div>
+    <div class="dash-ai-strip" style="background:${d.aiStrip.bg};border-bottom:1px solid ${d.aiStrip.border}">
+      <span style="font-size:11px;flex-shrink:0;color:${d.appColor}">✦</span>
+      <span style="font-family:Geist,sans-serif;font-size:11px;color:#374151;line-height:1.5">${d.aiStrip.text}</span>
+    </div>
+    <div class="dash-tabs">
+      <div class="dash-tab clickable active" onclick="switchTab(0)">${d.tab}</div>
+      <div class="dash-tab clickable" onclick="switchTab(1)">Intelligence Feed</div>
+      <div class="dash-tab clickable" onclick="switchTab(2)">Connections</div>
+    </div>
+    <div class="dash-body">
+      <div class="dash-metrics">${metricsHTML}</div>
+
+      <div class="dash-tab-pane active">
+        <div class="dash-section-label">Your AI-built pathway</div>
+        ${stepsHTML}
+      </div>
+
+      <div class="dash-tab-pane">
+        <div class="dash-section-label" style="margin-top:4px">Recent signals</div>
+        ${feedHTML}
+      </div>
+
+      <div class="dash-tab-pane">
+        <div class="dash-section-label" style="margin-top:4px">Your ecosystem connections</div>
+        ${connsHTML}
+      </div>
+    </div>`;
+
+  showPanel('panel-dashboard');
+
+  // Show switch strip with current actor marked
+  const strip = document.getElementById('switch-strip');
+  strip.style.display = 'flex';
+  strip.querySelectorAll('.switch-btn').forEach(btn => {
+    btn.classList.toggle('active-role', btn.classList.contains(currentActor));
+  });
+}
+
+// --- SWITCH ---------------------------------------------------
+function switchActor(actor) {
+  if (actor === currentActor) return;
+  startActor(actor);
+}
+
+// --- SCROLL REVEAL --------------------------------------------
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// --- RIPPLE CHAIN ---------------------------------------------
+const rippleObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.ripple-step').forEach((step, i) => {
+        const delay = parseInt(step.dataset.delay || 0);
+        setTimeout(() => step.classList.add('visible'), delay + i * 180);
+      });
+      rippleObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('#ripple-chain').forEach(el => rippleObs.observe(el));
+</script>
+<script>
+// ── NAV
+document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+  var t = dd.querySelector('.nav-dropdown-toggle');
+  var m = dd.querySelector('.nav-dropdown-menu');
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = m.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+    if (!open) { m.classList.add('open'); t.classList.add('active'); }
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+});
+(function(){
+  var h = document.getElementById('nav-hamburger');
+  var m = document.getElementById('nav-mobile-menu');
+  if (!h || !m) return;
+  h.addEventListener('click', function(e){ e.stopPropagation(); var o=m.classList.contains('open'); m.classList.toggle('open',!o); h.classList.toggle('open',!o); });
+  document.addEventListener('click', function(){ m.classList.remove('open'); h.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>

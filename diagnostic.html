@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Diagnostic — ClusterOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-dim:    #5a5650;
+    --ink-muted:  #8c8780;
+    --page:       #f7f4ef;
+    --surface:    #f0ece4;
+    --border:     #ddd8cf;
+    --border-2:   #c8c2b7;
+    --green:      #2a7a4f;
+    --green-dim:  #1d5c3a;
+    --signal:     #c8f0d0;
+    --teal:       #7dd3c8;
+    --amber:      #f5d97a;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans:  'Geist', system-ui, sans-serif;
+    --font-mono:  'Geist Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 52px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+    background: rgba(247,244,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ink); }
+  .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
+  .nav-links > li { position: relative; }
+  .nav-links a {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
+    display: block; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-dropdown-toggle {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
+    cursor: pointer; white-space: nowrap; transition: color 0.15s;
+  }
+  .nav-dropdown-toggle:hover, .nav-dropdown-toggle.active { color: var(--ink); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0;
+    background: var(--page); border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    min-width: 220px; list-style: none; padding: 4px 0; z-index: 100;
+  }
+  .nav-dropdown-menu.open { display: block; }
+  .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
+    border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
+    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: transform 0.2s, opacity 0.2s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  @media(max-width:900px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
+  .nav-mobile-menu {
+    display: none; position: fixed; top: 52px; left: 0; right: 0;
+    background: var(--page); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1rem 2rem; z-index: 999;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a:hover { color: var(--ink); }
+  .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 1.5rem; margin-top: 5rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 3rem; padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  }
+  .footer-logo span { color: var(--ink); }
+  .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
+  .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .footer-col { display: flex; flex-direction: column; gap: 6px; }
+  .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
+</style>
+<style>
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Product ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/digital-infrastructure.html">Digital Infrastructure</a></li>
+        <li><a href="/signals-systems.html">Signals &amp; Systems</a></li>
+        <li><a href="/diagnostic.html">The Diagnostic</a></li>
+        <li><a href="/leverage.html">Leverage</a></li>
+        <li><a href="/findings.html">Findings</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Lab Notes ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/notes.html">All Notes</a></li>
+        <li class="nav-dropdown-divider"></li>
+        <li><a href="/ln-01-coordinating.html">S2 · Coordinating instead of deciding</a></li>
+        <li><a href="/ln-02-narrating.html">S7 · Narrating instead of testing</a></li>
+        <li><a href="/ln-10-narrative-activity-stack.html">Narrative × Activity Stack</a></li>
+        <li><a href="/ln-12-leverage.html">What Leverage Looks Like</a></li>
+        <li><a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a></li>
+      </ul>
+    </li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+  <a href="/signals-systems.html">Signals &amp; Systems</a>
+  <a href="/diagnostic.html">The Diagnostic</a>
+  <a href="/leverage.html">Leverage</a>
+  <a href="/findings.html">Findings</a>
+  <a href="/pricing.html">Pricing</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<!-- Mobile nav menu -->
+
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+  <a href="/ln-02-narrating.html">S7 · Narrating</a>
+  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/about.html">About</a>
+  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
+</div>
+
+<!-- NAV -->
+
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="section-eyebrow">The Diagnostic</div>
+      <h1 class="hero-headline">The substrate flows freely.<br><em>Until it doesn't.</em></h1>
+      <p class="hero-body">
+        On a healthy substrate, every actor's selfish action feeds the system. Signals travel. Value compounds. Connections form without anyone managing them.<br><br>
+        Then the system stabilises. Actors adopt <strong>locally rational behaviours that prevent compounding.</strong> Not because they fail — because they're responding sensibly to the incentives they face.<br><br>
+        These stabilisations are called stalls. When stalls reinforce each other, they form stacks. Stacks are why your cluster works hard and goes nowhere.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#stalls" class="btn-primary">See the 9 stalls</a>
+        <a href="#stacks" class="btn-ghost">Build a stack →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BRIDGE: CAS framing -->
+<section id="bridge">
+  <div class="bridge-inner">
+    <div>
+      <div class="section-eyebrow reveal">Complex adaptive systems</div>
+      <h2 class="section-headline reveal reveal-d1">The system isn't broken.<br><em>It's stabilising.</em></h2>
+      <div class="bridge-quote reveal reveal-d2">
+        <p>"Every behaviour makes sense from the actor's perspective. Stalls are not failures — they are the system finding equilibria. Understanding them is the precondition for changing them."</p>
+        <cite>ClusterOS Diagnostic Framework</cite>
+      </div>
+    </div>
+    <div class="cas-pillars reveal reveal-d1">
+      <div class="cas-pillar">
+        <div class="cas-pillar-num">01</div>
+        <div class="cas-pillar-text"><strong>Actors are locally rational</strong>Every behaviour that looks like dysfunction makes perfect sense from inside the actor's constraints. Stalls are sensible responses, not mistakes.</div>
+      </div>
+      <div class="cas-pillar">
+        <div class="cas-pillar-num">02</div>
+        <div class="cas-pillar-text"><strong>The system learns what reduces discomfort</strong>Coordination reduces friction, so the system coordinates more. Narrative restores confidence, so the system narrates more. Each stall is a learned response that became a default.</div>
+      </div>
+      <div class="cas-pillar">
+        <div class="cas-pillar-num">03</div>
+        <div class="cas-pillar-text"><strong>Stalls serve interests, not just learning</strong>Once a stall entangles with roles and reputations, it is actively defended. Removing it doesn't just change behaviour — it removes someone's position.</div>
+      </div>
+      <div class="cas-pillar">
+        <div class="cas-pillar-num">04</div>
+        <div class="cas-pillar-text"><strong>Leverage means small perturbations that shift regimes</strong>Not large programmes. The goal is identifying the minimal intervention that changes the operating conditions — not fixing everything at once.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STALLS SECTION -->
+<section id="stalls">
+  <div class="stalls-inner">
+    <div class="stalls-header">
+      <div>
+        <div class="section-eyebrow reveal">Stage 3 · Stall detection</div>
+        <h2 class="section-headline reveal reveal-d1">Nine ways a cluster<br><em>stops compounding</em></h2>
+        <p class="section-body reveal reveal-d2">Each stall is a behavioural substitution — the system doing something observable (X) instead of something harder (Y). Click any stall to see the full pattern. Then add it to the stack builder.</p>
+      </div>
+      <div class="stalls-note reveal reveal-d1">
+        <strong>On the stack builder below:</strong> Stalls rarely operate alone. Once you understand each one, add two or three to the stack builder — and see what kind of cluster that combination describes, why single interventions fail to break it, and what the diagnostic looks for.
+      </div>
+    </div>
+
+    <div class="stalls-grid" id="stalls-grid">
+      <!-- Stall cards rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- STACK BUILDER -->
+<section id="stacks">
+  <div class="stacks-inner">
+    <div class="stacks-header">
+      <div class="section-eyebrow reveal">Stage 4 · Stack analysis</div>
+      <h2 class="section-headline reveal reveal-d1">Stacks are why single fixes fail.<br><em class="amber">Build one and see why.</em></h2>
+      <p class="section-body reveal reveal-d2" style="max-width:680px">A stack forms when one stall lowers the cost of another. Once that happens, stabilisation becomes anticipatory — pressure enters, the same configuration activates, and the system doesn't consciously choose the response. It's already structured to produce it.<br><br>Select 2–3 stalls from the cards above (use the "Add to stack" button), or click any stall name below.</p>
+    </div>
+
+    <div class="stacks-layout">
+      <!-- RESULT (shown first on mobile via CSS order) -->
+      <!-- RESULT -->
+      <div class="stack-result reveal reveal-d2" id="stack-result">
+        <div class="stack-empty-state" id="stack-empty">
+          <div class="stack-empty-icon">⬡</div>
+          <div class="stack-empty-text">Add at least 2 stalls to see<br>the stack analysis and reinforcement logic.</div>
+        </div>
+        <div id="stack-output" style="display:none"></div>
+      </div>
+
+      <!-- TRAY -->
+      <!-- TRAY -->
+      <div class="stack-tray reveal">
+        <div class="stack-tray-head">
+          <div class="stack-tray-title">Stack composition</div>
+          <div class="stack-tray-count" id="tray-count">0 / 3 stalls</div>
+        </div>
+        <div class="stack-tray-hint">↑ Add stalls from the grid above</div>
+        <div class="stack-slots" id="stack-slots">
+          <div class="stack-slot empty" id="slot-0">
+            <div class="slot-num">01</div>
+            <div class="slot-empty-text">Select a stall...</div>
+          </div>
+          <div class="stack-slot empty" id="slot-1">
+            <div class="slot-num">02</div>
+            <div class="slot-empty-text">Select a stall...</div>
+          </div>
+          <div class="stack-slot empty" id="slot-2">
+            <div class="slot-num">03</div>
+            <div class="slot-empty-text">Select a stall... (optional)</div>
+          </div>
+        </div>
+
+        <!-- Quick-pick -->
+        <div style="padding:14px 20px; border-top:1px solid #1e2d42;">
+          <div style="font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#7a9bb5;margin-bottom:10px;">Quick pick</div>
+          <div id="quick-picks" style="display:flex;flex-direction:column;gap:6px;"></div>
+        </div>
+
+        <button class="stack-reset-btn" onclick="resetStack()">Clear stack</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KNOWN STACKS FROM REAL ECOSYSTEMS -->
+<section id="known-stacks">
+  <div class="known-stacks-inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:56px">
+      <div>
+        <div class="section-eyebrow reveal">From 75 diagnostics</div>
+        <h2 class="section-headline reveal reveal-d1">Stacks we've seen<br><em>in the field</em></h2>
+      </div>
+      <p class="section-body reveal reveal-d1" style="margin-bottom:0">These three configurations appear repeatedly across geographies and sectors. They have different names in different ecosystems — but the reinforcement logic is the same. Recognising your stack is the first step to targeting it.</p>
+    </div>
+    <div class="known-stacks-grid">
+      <div class="known-stack-card reveal">
+        <div class="known-stack-top">
+          <div class="known-stack-name">Narrative × Activity</div>
+          <div class="known-stack-components">
+            <span class="known-stack-tag s7">S7 Narrating</span>
+            <span class="known-stack-tag s8">S8 Scaling Activity</span>
+          </div>
+          <div class="known-stack-desc">External scrutiny rises. The system responds with strategy documents and programme launches. Each legitimises the other. The ecosystem becomes excellent at demonstrating vitality — while deferring the learning that would collapse choice.</div>
+        </div>
+        <div class="known-stack-bottom">
+          <div class="known-stack-region">Seen in: Science clusters, innovation districts</div>
+          <div class="known-stack-quote">"More programmes producing more activity — but what's actually converting?"</div>
+        </div>
+      </div>
+      <div class="known-stack-card reveal reveal-d1">
+        <div class="known-stack-top">
+          <div class="known-stack-name">Coordination × Mediation</div>
+          <div class="known-stack-components">
+            <span class="known-stack-tag s2">S2 Coordinating</span>
+            <span class="known-stack-tag s1">S5 Mediating</span>
+          </div>
+          <div class="known-stack-desc">Alignment mechanisms create demand for intermediaries. Intermediaries make alignment manageable. Friction is absorbed through process rather than forcing decisions that would concentrate responsibility. The system coheres but never narrows.</div>
+        </div>
+        <div class="known-stack-bottom">
+          <div class="known-stack-region">Seen in: Manufacturing clusters, regional partnerships</div>
+          <div class="known-stack-quote">"Everybody's coordinating. Nobody's deciding."</div>
+        </div>
+      </div>
+      <div class="known-stack-card reveal reveal-d2">
+        <div class="known-stack-top">
+          <div class="known-stack-name">Incumbent × Extraction</div>
+          <div class="known-stack-components">
+            <span class="known-stack-tag s6">S6 Stabilising</span>
+            <span class="known-stack-tag s4">S4 Extracting</span>
+          </div>
+          <div class="known-stack-desc">Innovation pathways route through large incumbents, which absorb and filter demand signals. New entrants that can't attach to the incumbent orbit find their value (talent, capital, companies) exits the ecosystem rather than reinvesting.</div>
+        </div>
+        <div class="known-stack-bottom">
+          <div class="known-stack-region">Seen in: Defence, aerospace, energy clusters</div>
+          <div class="known-stack-quote">"We scale to Series A, then they leave for London."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="section-eyebrow reveal" style="justify-content:center">Stage 5 · Leverage</div>
+    <h2 class="cta-headline reveal reveal-d1">Your cluster has a stack.<br><em>The diagnostic names it.</em></h2>
+    <p class="cta-body reveal reveal-d2">The ClusterOS diagnostic runs evidence through all five stages. It doesn't score your cluster or rank it. It identifies the specific behavioural substitutions operating in your ecosystem — and the stack they form. That's the starting point for interventions that actually shift regimes.</p>
+    <div class="cta-actions reveal reveal-d2">
+      <a href="/request.html" class="btn-primary">Request a diagnostic</a>
+      <a href="/signals-systems.html" class="btn-ghost">← Back to Signals &amp; Systems</a>
+    </div>
+    <div class="cta-note reveal reveal-d3">Testable leverage hypotheses · Calibrated to your specific configuration</div>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
+      <p class="footer-tagline">Regional economies need infrastructure.<br>Not more strategy.</p>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <div class="footer-col-label">Product</div>
+        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+        <a href="/signals-systems.html">Signals &amp; Systems</a>
+        <a href="/diagnostic.html">The Diagnostic</a>
+        <a href="/leverage.html">Leverage</a>
+        <a href="/findings.html">Findings</a>
+        <a href="/pricing.html">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Lab Notes</div>
+        <a href="/notes.html">All Notes</a>
+        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+        <a href="/ln-02-narrating.html">S7 · Narrating</a>
+        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
+        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Company</div>
+        <a href="/about.html">About</a>
+        <a href="/request.html">Request a Diagnostic</a>
+        <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 ClusterOS · Community Lab</span>
+    <span>Built in Edinburgh</span>
+  </div>
+</footer>
+<script>
+// =====================================================================
+// DATA
+// =====================================================================
+const STALLS = [
+  {
+    id: 'S1', code: 's1',
+    name: 'Re-proving instead of narrowing',
+    sub: '<em>Validating</em> multiple options rather than committing to one',
+    xSide: 'Continuously running pilots, working groups, and validation cycles across several strategic options simultaneously.',
+    ySide: 'Making exclusionary bets that collapse the option space and force compounding on a single path.',
+    example: 'A cluster runs three parallel "priority sector" programmes for five years. Each receives modest support. None reaches critical mass. The absence of a bet is the stall.',
+    color: '#f08080',
+    stackable: true,
+  },
+  {
+    id: 'S2', code: 's2',
+    name: 'Coordinating instead of deciding',
+    sub: '<em>Building alignment</em> rather than making choices with real consequences',
+    xSide: 'Partnership announcements, steering committees, memoranda of understanding, multi-stakeholder frameworks that distribute responsibility.',
+    ySide: 'Making exclusionary choices — selecting, excluding, committing — where consequences are real and visible.',
+    example: 'Every cluster in a region has a "joint working group." They meet quarterly. Agendas are produced. No cluster has ever been defunded, merged, or declared a priority over another.',
+    color: '#7dd3c8',
+    stackable: true,
+  },
+  {
+    id: 'S3', code: 's3',
+    name: 'Forgiving instead of redesigning',
+    sub: '<em>Continuing programmes</em> despite evidence they are not working',
+    xSide: 'Renewing funding for programmes that miss targets, extending timelines, reframing KPIs to show progress.',
+    ySide: 'Structural redesign based on evidence of non-performance — changing the model, not the metrics.',
+    example: 'An accelerator has run 8 cohorts. Average revenue of graduates after 3 years is flat. The response is a new mentoring module and a revised application process. The model is unchanged.',
+    color: '#c8f0d0',
+    stackable: true,
+  },
+  {
+    id: 'S4', code: 's4',
+    name: 'Extracting without reinvesting',
+    sub: '<em>Value leaves</em> the ecosystem without recirculating',
+    xSide: 'Talent, capital, and companies that reach growth stage exit to larger cities or markets. The ecosystem produces but doesn\'t retain.',
+    ySide: 'Reinvestment mechanisms — angel networks, LP commitments, anchor procurement — that recirculate value back into the substrate.',
+    example: 'The cluster produces strong Series A companies. Three out of four then raise their Series B from out-of-region investors and relocate their commercial operations. More early-stage programmes are launched.',
+    color: '#b4a0ff',
+    stackable: true,
+  },
+  {
+    id: 'S5', code: 's5',
+    name: 'Mediating instead of coupling',
+    sub: '<em>Intermediaries broker</em> all connections rather than enabling direct ties',
+    xSide: 'Every connection between actors routes through a cluster organisation, innovation hub, or programme manager. Intermediaries control access.',
+    ySide: 'Direct actor-to-actor coupling — founders talking to corporate procurement directly, researchers publishing to commercial audiences without a broker.',
+    example: 'A startup can only meet a corporate through a formal "matchmaking" event run by the cluster body. The cluster body schedules 4 events a year. The corporate has procurement decisions every 6 weeks.',
+    color: '#f08080',
+    stackable: true,
+  },
+  {
+    id: 'S6', code: 's6',
+    name: 'Stabilising around incumbents',
+    sub: '<em>Innovation pathways</em> concentrate around large organisations',
+    xSide: 'All significant innovation activity — funding, talent, partnerships, procurement — routes through or depends on a small number of anchor organisations.',
+    ySide: 'Emergence paths independent of incumbent strategies — new companies forming, growing, and reaching market on their own trajectory.',
+    example: 'Three large defence primes control access to every significant programme in the cluster. Startups are told to "get into the supply chain." The primes decide what gets built. New entrants adapt to them.',
+    color: '#ffb482',
+    stackable: true,
+  },
+  {
+    id: 'S7', code: 's7',
+    name: 'Narrating instead of testing',
+    sub: '<em>Strategy documents</em> substitute for behavioural proof',
+    xSide: 'Roadmaps, vision statements, published strategies, and success narratives that describe where the cluster is heading.',
+    ySide: 'Behavioural proof through testable interventions with explicit success criteria — hypotheses that could fail.',
+    example: 'The cluster produces a 5-year strategy document every 3 years. Each one describes a compelling future. None names a specific intervention, a specific target, and a specific consequence if the target is missed.',
+    color: '#f5d97a',
+    stackable: true,
+  },
+  {
+    id: 'S8', code: 's8',
+    name: 'Scaling activity instead of throughput',
+    sub: '<em>Event counts grow</em> while commercial conversion stays flat',
+    xSide: 'Growing member numbers, event attendance, programme launches, and cohort sizes. What can be counted, grows.',
+    ySide: 'Improving conversion rates from ecosystem activity to commercial outcome — fewer companies, further along, with real market traction.',
+    example: 'The cluster runs 40 events this year vs 22 last year. Membership has doubled. The number of companies with a paying customer after 18 months is unchanged. The response is a new events programme.',
+    color: '#c8f0d0',
+    stackable: true,
+  },
+  {
+    id: 'S9', code: 's9',
+    name: 'Waiting for permission',
+    sub: '<em>Grant-seeking and approval-waiting</em> substitute for autonomous action',
+    xSide: 'Commercial decisions delayed pending government programme decisions, grant approvals, or regulatory sign-off. Action is conditional on external sanction.',
+    ySide: 'Autonomous commercial action — moving without waiting, testing without asking, building without a programme to attach to.',
+    example: 'A cluster\'s next phase is "subject to securing Innovate UK funding." The funding decision is 9 months away. No actor is building anything in the meantime. The window for the market opportunity closes.',
+    color: '#7dd3c8',
+    stackable: true,
+  },
+];
+
+// Stack intelligence — what combinations mean
+const STACK_INTELLIGENCE = {
+  // 2-stall combinations
+  'S1+S2': {
+    name: 'The Validation Deadlock',
+    desc: 'The cluster continuously validates options and builds alignment around the validation process itself. Coordination structures are created to manage the option set — which keeps the option set alive. <strong>No bets are made because coordination distributes responsibility for not making them.</strong>',
+    reinforcement: [
+      { from: 'Re-proving', to: 'Coordinating', logic: 'Multiple options require aligned stakeholders — coordination justifies keeping all options open' },
+      { from: 'Coordinating', to: 'Re-proving', logic: 'Coordination bodies need validation data to justify continued operation — which extends re-proving cycles' },
+    ],
+    protects: ['Stakeholder relationships', 'Institutional budgets', 'Reputational safety for all parties'],
+    absorbs: ['Urgency signals', 'Competitive pressure', 'External calls to commit'],
+    clusterType: 'This is a cluster that looks busy, is well-governed, and has produced no defining bets in five years.',
+  },
+  'S1+S7': {
+    name: 'The Strategy Mirage',
+    desc: 'Options are kept alive through narrative. Each new strategy document reframes the absence of commitment as deliberate flexibility. <strong>The cluster appears to know where it is going — while deferring every moment of actually going there.</strong>',
+    reinforcement: [
+      { from: 'Re-proving', to: 'Narrating', logic: 'Continued validation provides fresh content for strategy documents — the search is productive-looking' },
+      { from: 'Narrating', to: 'Re-proving', logic: 'Narrative legitimises further exploration — the roadmap says "we\'re still learning"' },
+    ],
+    protects: ['Leadership credibility', 'Funder confidence', 'Inclusive stakeholder coalitions'],
+    absorbs: ['Calls for clearer focus', 'Evidence that competitors have already committed', 'Market timing pressure'],
+    clusterType: 'This is a cluster with excellent branding, a compelling story, and no defensible competitive position.',
+  },
+  'S2+S5': {
+    name: 'Coordination × Mediation',
+    desc: 'Alignment mechanisms create demand for intermediaries. Intermediaries make alignment manageable. Friction is absorbed through process. <strong>The system coheres without ever narrowing — and both stalls protect the roles that depend on them continuing.</strong>',
+    reinforcement: [
+      { from: 'Coordinating', to: 'Mediating', logic: 'Coordination bodies create demand for professionals who manage the relationships they convene' },
+      { from: 'Mediating', to: 'Coordinating', logic: 'Intermediaries reduce the cost of coordination — making more coordination feasible and expected' },
+    ],
+    protects: ['Institutional roles', 'Network gatekeeping positions', 'Political legitimacy'],
+    absorbs: ['Direct actor connections', 'Decisions that would bypass intermediaries', 'Any intervention that routes around the convening infrastructure'],
+    clusterType: 'This is a cluster with many "ecosystem builders" and few commercial outcomes. Everybody knows everybody. Nothing closes.',
+  },
+  'S2+S7': {
+    name: 'The Governance Theatre',
+    desc: 'Coordination produces documents. Documents legitimate coordination. <strong>The cluster appears both well-governed and strategically coherent — while systematically absorbing every pressure that might force a real decision.</strong>',
+    reinforcement: [
+      { from: 'Coordinating', to: 'Narrating', logic: 'Coordination processes generate alignment artefacts — reports, roadmaps, shared visions' },
+      { from: 'Narrating', to: 'Coordinating', logic: 'Narrative legitimises the coordination structures that produced it' },
+    ],
+    protects: ['Senior leader reputations', 'Coalition stability', 'Institutional funding bases'],
+    absorbs: ['Accountability demands', 'Evidence of underperformance', 'Calls for structural change'],
+    clusterType: 'This cluster has produced more strategy documents than commercial outcomes. Its governance is impeccable. Its results are diffuse.',
+  },
+  'S7+S8': {
+    name: 'Narrative × Activity',
+    desc: 'The ecosystem\'s ability to describe itself legitimises the expansion of programmes. Those programmes generate material for the next cycle of narrative. <strong>Visibility is sustained even when outcome signals remain diffuse. Neither component requires actors to narrow, exclude, or expose themselves to market consequence.</strong>',
+    reinforcement: [
+      { from: 'Narrating', to: 'Scaling Activity', logic: 'Narrative makes activity legible and defensible — justifies programme investment' },
+      { from: 'Scaling Activity', to: 'Narrating', logic: 'Activity supplies narrative with fresh material — events, launches, member numbers' },
+    ],
+    protects: ['Confidence and momentum', 'Participation and inclusion', 'Reputational safety'],
+    absorbs: ['Hard outcome comparisons', 'Conversion rate scrutiny', 'Questions about what is actually compounding'],
+    clusterType: 'This is a cluster that is excellent at demonstrating vitality while deferring learning that would collapse choice. Cambridge pre-2015. Many innovation districts today.',
+  },
+  'S4+S6': {
+    name: 'Incumbent × Extraction',
+    desc: 'Innovation pathways concentrate around large incumbents, which filter what the system can become. New entrants that can\'t attach to the incumbent orbit find that their value exits the ecosystem rather than reinvesting. <strong>The incumbents set the ceiling. Extraction keeps it low.</strong>',
+    reinforcement: [
+      { from: 'Stabilising around incumbents', to: 'Extracting', logic: 'Incumbent-dependent startups can\'t raise growth capital locally — the orbit doesn\'t include investors who back independent exits' },
+      { from: 'Extracting', to: 'Stabilising', logic: 'Talent and capital extraction weakens independent pathways — makes attachment to incumbents even more rational' },
+    ],
+    protects: ['Incumbent market positions', 'Supply chain control', 'Existing investment theses'],
+    absorbs: ['New market entrants', 'Alternative pathways to scale', 'Growth-stage capital formation'],
+    clusterType: 'This cluster produces capable companies that leave. The incumbents are strong. The ecosystem around them is thin.',
+  },
+  'S4+S8': {
+    name: 'The Activity Trap',
+    desc: 'Value is extracted at the point where it becomes investable. The system responds by generating more early-stage activity. <strong>The funnel widens at the top because no one is addressing the hole at the bottom.</strong>',
+    reinforcement: [
+      { from: 'Extracting', to: 'Scaling Activity', logic: 'Extracting growth-stage value creates pressure to justify the ecosystem — more programmes signal continued relevance' },
+      { from: 'Scaling Activity', to: 'Extracting', logic: 'Activity-scaling delays the reckoning with extraction — the metric of success becomes activity, not retention' },
+    ],
+    protects: ['Programme justification', 'Institutional continuity', 'Early-stage supporter networks'],
+    absorbs: ['Growth-stage retention strategies', 'Questions about why companies leave', 'Investor base development'],
+    clusterType: 'This cluster has a permanent pipeline problem. Lots in. Very little through. More programmes are always the answer.',
+  },
+  'S5+S6': {
+    name: 'The Gatekeeper Regime',
+    desc: 'Incumbents control the access points. Intermediaries manage the routing. <strong>New entrants must route through both to reach anything of value — and both benefit from that remaining true.</strong>',
+    reinforcement: [
+      { from: 'Mediating', to: 'Stabilising', logic: 'Intermediaries route connections through established actors — reinforcing incumbent centrality' },
+      { from: 'Stabilising', to: 'Mediating', logic: 'Incumbent concentration creates a need for managed access — intermediaries become essential translators' },
+    ],
+    protects: ['Incumbent market position', 'Intermediary role relevance', 'Controlled information flows'],
+    absorbs: ['Direct procurement', 'Open innovation pathways', 'Self-organising actor connections'],
+    clusterType: 'This cluster has a very active intermediary layer and very few direct founder-to-corporate relationships. Everyone is busy managing access.',
+  },
+  'S3+S8': {
+    name: 'The Continuity Stack',
+    desc: 'Programmes that do not perform are forgiven rather than redesigned. The activity they generate continues to be counted. <strong>The system is optimised for continuation, not performance — and it measures itself only in ways that continuation produces.</strong>',
+    reinforcement: [
+      { from: 'Forgiving', to: 'Scaling Activity', logic: 'Continued programmes keep generating activity counts — activity becomes the proof that forgiveness was right' },
+      { from: 'Scaling Activity', to: 'Forgiving', logic: 'Activity metrics obscure non-performance — high counts make forgiveness feel safe' },
+    ],
+    protects: ['Programme teams and budgets', 'Institutional relationships with programme partners', 'Funder confidence'],
+    absorbs: ['Evidence of underperformance', 'Calls for structural change', 'Alternative models'],
+    clusterType: 'This cluster has been running the same programmes for a decade. The metrics look reasonable. The underlying model has never been tested.',
+  },
+  'S2+S9': {
+    name: 'The Permission Loop',
+    desc: 'The cluster waits for external sanction. Coordination structures are built to manage the waiting. <strong>The act of coordinating provides productive cover for inaction — and inaction generates a need for more coordination to manage the pressure that builds.</strong>',
+    reinforcement: [
+      { from: 'Waiting for permission', to: 'Coordinating', logic: 'While waiting, actors coordinate — alignment becomes the activity of the waiting period' },
+      { from: 'Coordinating', to: 'Waiting', logic: 'Coordination distributes the responsibility for waiting — no single actor is blamed for delay' },
+    ],
+    protects: ['Risk exposure', 'Institutional relationships with funders', 'Political neutrality'],
+    absorbs: ['Urgency', 'Market window signals', 'Autonomous commercial action'],
+    clusterType: 'This cluster has several strategies "subject to" external decisions. Commercial actors are waiting to see what programmes emerge. No one is building anything.',
+  },
+  // 3-stall combinations (key ones)
+  'S2+S7+S8': {
+    name: 'The Full Legitimacy Stack',
+    desc: 'Coordination, narrative, and activity lock together into a system that is self-perpetuating and self-defending. <strong>Coordination produces documents, documents legitimate activity, activity justifies continued coordination. Each absorbs the pressure the others expose. This is the most common stack in established regional innovation ecosystems.</strong>',
+    reinforcement: [
+      { from: 'Coordinating', to: 'Narrating', logic: 'Coordination generates reports and shared visions' },
+      { from: 'Narrating', to: 'Activity', logic: 'Narrative justifies programme expansion' },
+      { from: 'Activity', to: 'Coordinating', logic: 'Activity creates complexity that requires coordination to manage' },
+    ],
+    protects: ['All institutional positions', 'Funder confidence', 'Political legitimacy'],
+    absorbs: ['Commercial accountability', 'Performance scrutiny', 'Structural change pressure'],
+    clusterType: 'This is the stack of a mature, well-resourced ecosystem that has been busy for a decade and is quietly wondering why the companies keep leaving.',
+  },
+  'S2+S5+S6': {
+    name: 'The Concentrated Authority Stack',
+    desc: 'Incumbents anchor the system, intermediaries manage access to them, and coordination structures distribute the responsibility for that arrangement continuing. <strong>The stack does not require anyone to intend it. It is the emergent outcome of three rational responses to the same asymmetry of power.</strong>',
+    reinforcement: [
+      { from: 'Stabilising', to: 'Mediating', logic: 'Incumbent centrality requires managed introductions' },
+      { from: 'Mediating', to: 'Coordinating', logic: 'Intermediaries create alignment structures to justify their role' },
+      { from: 'Coordinating', to: 'Stabilising', logic: 'Coordination defers decisions that would redistribute authority away from incumbents' },
+    ],
+    protects: ['Incumbent strategic position', 'Intermediary revenue', 'Political relationships'],
+    absorbs: ['New market entrants', 'Direct actor connections', 'Disruptive procurement'],
+    clusterType: 'This cluster has a dominant anchor, a busy intermediary layer, and many working groups. Startups spend their time trying to get meetings.',
+  },
+  'S1+S7+S9': {
+    name: 'The Indefinite Deferral Stack',
+    desc: 'Options are kept open through narrative, and action is deferred pending permission. <strong>The three stalls together produce a system that is perpetually almost ready — with a compelling story about why now is not quite the moment.</strong>',
+    reinforcement: [
+      { from: 'Re-proving', to: 'Narrating', logic: 'Continued validation feeds the narrative of rigorous preparation' },
+      { from: 'Narrating', to: 'Waiting', logic: 'Narrative produces the content that makes waiting feel productive' },
+      { from: 'Waiting', to: 'Re-proving', logic: 'Waiting for permission delays commitment — which justifies more validation in the meantime' },
+    ],
+    protects: ['Risk exposure', 'Leadership reputation', 'Stakeholder consensus'],
+    absorbs: ['Market timing pressure', 'Competitive urgency', 'Evidence that the window is closing'],
+    clusterType: 'This cluster has been "preparing to launch" its defining initiative for three years. The strategy is compelling. The timing is never quite right.',
+  },
+};
+
+// =====================================================================
+// STATE
+// =====================================================================
+let stackSlots = [null, null, null];
+let expandedStall = null;
+
+// =====================================================================
+// RENDER STALLS
+// =====================================================================
+function renderStalls() {
+  const grid = document.getElementById('stalls-grid');
+  grid.innerHTML = STALLS.map(s => `
+    <div class="stall-card reveal" id="stall-card-${s.id}" onclick="toggleStall('${s.id}')">
+      <div class="stall-card-head">
+        <div class="stall-id">${s.id}</div>
+        <div class="stall-title">${s.name}</div>
+        <div class="stall-sub">${s.sub}</div>
+      </div>
+      <div class="stall-chevron">
+        <span class="stall-expand-label">See the pattern</span>
+        <span class="stall-expand-icon">▾</span>
+      </div>
+      <div class="stall-body">
+        <div class="stall-sides">
+          <div class="stall-side x">
+            <div class="stall-side-label">What you see (X)</div>
+            <div class="stall-side-text">${s.xSide}</div>
+          </div>
+          <div class="stall-side y">
+            <div class="stall-side-label">What it replaces (Y)</div>
+            <div class="stall-side-text">${s.ySide}</div>
+          </div>
+        </div>
+        <div class="stall-example">
+          <div class="stall-example-label">In the field</div>
+          <div class="stall-example-text">${s.example}</div>
+        </div>
+        <button class="stall-add-btn" id="add-btn-${s.id}" onclick="addToStack(event, '${s.id}')">+ Add to stack</button>
+      </div>
+    </div>
+  `).join('');
+
+  // Render quick picks
+  const qp = document.getElementById('quick-picks');
+  qp.innerHTML = STALLS.map(s => `
+    <button onclick="quickAdd('${s.id}')" id="qp-${s.id}" style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(255,255,255,0.02);border:1px solid #1e2d42;border-radius:4px;cursor:pointer;transition:all 0.15s;text-align:left;width:100%">
+      <span style="font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;color:#7a9bb5;flex-shrink:0;width:22px">${s.id}</span>
+      <span style="font-size:11px;color:#7a9bb5;font-family:'Geist',sans-serif">${s.name}</span>
+    </button>
+  `).join('');
+
+  // Trigger reveal observer
+  setTimeout(observeReveals, 50);
+}
+
+// =====================================================================
+// STALL INTERACTIONS
+// =====================================================================
+function toggleStall(id) {
+  const card = document.getElementById('stall-card-' + id);
+  if (card.classList.contains('expanded')) {
+    card.classList.remove('expanded');
+  } else {
+    if (expandedStall) {
+      const prev = document.getElementById('stall-card-' + expandedStall);
+      if (prev) prev.classList.remove('expanded');
+    }
+    card.classList.add('expanded');
+    expandedStall = id;
+    setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  }
+}
+
+// =====================================================================
+// STACK LOGIC
+// =====================================================================
+function addToStack(event, id) {
+  event.stopPropagation();
+  // Expand card first if not expanded
+  const card = document.getElementById('stall-card-' + id);
+  if (!card.classList.contains('expanded')) {
+    toggleStall(id);
+    return;
+  }
+  quickAdd(id);
+}
+
+function quickAdd(id) {
+  if (stackSlots.includes(id)) {
+    // Already in — remove it
+    removeFromStack(id);
+    return;
+  }
+  const emptyIdx = stackSlots.indexOf(null);
+  if (emptyIdx === -1) return; // full
+  stackSlots[emptyIdx] = id;
+  updateStack();
+  // Scroll to stack builder
+  document.getElementById('stacks').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function removeFromStack(id) {
+  const idx = stackSlots.indexOf(id);
+  if (idx === -1) return;
+  stackSlots[idx] = null;
+  // Compact: remove gaps
+  stackSlots = [...stackSlots.filter(x => x !== null), null, null, null].slice(0, 3);
+  updateStack();
+}
+
+function resetStack() {
+  stackSlots = [null, null, null];
+  updateStack();
+}
+
+function updateStack() {
+  const filled = stackSlots.filter(Boolean);
+  const count = filled.length;
+
+  // Update count
+  document.getElementById('tray-count').textContent = count + ' / 3 stalls';
+
+  // Update slot UI
+  for (let i = 0; i < 3; i++) {
+    const slot = document.getElementById('slot-' + i);
+    const id = stackSlots[i];
+    if (id) {
+      const stall = STALLS.find(s => s.id === id);
+      slot.className = 'stack-slot active';
+      slot.innerHTML = `
+        <div class="slot-num active">${String(i+1).padStart(2,'0')}</div>
+        <div class="slot-pill">
+          <div class="slot-pill-name">${stall.name}</div>
+          <div class="slot-pill-sub">${stall.id}</div>
+        </div>
+        <button class="slot-remove" onclick="removeFromStack('${id}')" title="Remove">✕</button>
+      `;
+    } else {
+      slot.className = 'stack-slot empty';
+      slot.innerHTML = `
+        <div class="slot-num">${String(i+1).padStart(2,'0')}</div>
+        <div class="slot-empty-text">${i === 2 ? 'Select a stall... (optional)' : 'Select a stall...'}</div>
+      `;
+    }
+  }
+
+  // Update stall card selection state
+  STALLS.forEach(s => {
+    const card = document.getElementById('stall-card-' + s.id);
+    const addBtn = document.getElementById('add-btn-' + s.id);
+    const qpBtn = document.getElementById('qp-' + s.id);
+    const inStack = stackSlots.includes(s.id);
+    if (card) card.classList.toggle('selected-for-stack', inStack);
+    if (addBtn) {
+      addBtn.textContent = inStack ? '✓ In stack' : '+ Add to stack';
+      addBtn.classList.toggle('added', inStack);
+    }
+    if (qpBtn) {
+      qpBtn.style.borderColor = inStack ? '#f5d97a' : '';
+      qpBtn.style.background = inStack ? 'rgba(245,217,122,0.06)' : '';
+      qpBtn.querySelector('span:last-child').style.color = inStack ? '#f5d97a' : '';
+    }
+  });
+
+  // Render result
+  renderStackResult(filled);
+  // On mobile, scroll result into view
+  if (window.innerWidth <= 768 && filled.length >= 2) {
+    const result = document.getElementById('stack-result');
+    if (result) setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+}
+
+function renderStackResult(filled) {
+  const emptyEl = document.getElementById('stack-empty');
+  const outputEl = document.getElementById('stack-output');
+
+  if (filled.length < 2) {
+    emptyEl.style.display = 'flex';
+    outputEl.style.display = 'none';
+    return;
+  }
+
+  // Look up stack intelligence
+  const key = lookupStack(filled);
+  const intel = STACK_INTELLIGENCE[key];
+
+  emptyEl.style.display = 'none';
+  outputEl.style.display = 'block';
+
+  if (!intel) {
+    // Partial — show generic reinforcement logic
+    outputEl.innerHTML = `
+      <div class="stack-output">
+        <div class="stack-output-header">
+          <div class="stack-output-dot" style="background:#7a9bb5"></div>
+          <div class="stack-output-label">Stack · ${filled.length} stalls</div>
+          <div class="stack-output-name" style="font-size:16px;color:#7a9bb5">Unnamed combination</div>
+        </div>
+        <div class="stack-partial-hint">
+          <p>This combination doesn't match a named stack in our library — but the reinforcement logic is real.<br><br>
+          <strong>Any two stalls that share infrastructure, political cover, or reporting cycles will reinforce each other.</strong><br><br>
+          The diagnostic identifies your specific configuration from evidence, not from a menu.</p>
+        </div>
+        ${renderGenericReinforcement(filled)}
+      </div>
+    `;
+    return;
+  }
+
+  const reinforceHTML = intel.reinforcement.map((r, i) => `
+    <div class="reinforce-row">
+      <div class="reinforce-pill">${r.from}</div>
+      <div class="reinforce-arrow">→</div>
+      <div class="reinforce-logic">${r.logic}</div>
+    </div>
+    ${i < intel.reinforcement.length - 1 ? '<div class="reinforce-row"><div class="reinforce-arrow" style="margin-left:12px;color:#7a9bb5">↓</div></div>' : ''}
+  `).join('');
+
+  outputEl.innerHTML = `
+    <div class="stack-output">
+      <div class="stack-output-header">
+        <div class="stack-output-dot"></div>
+        <div class="stack-output-label">Named stack · ${filled.length} stalls detected</div>
+        <div class="stack-output-name">${intel.name}</div>
+      </div>
+      <div class="stack-output-body">
+        <p class="stack-desc">${intel.desc}</p>
+
+        <div class="reinforcement-diagram">
+          <div class="reinforce-label">How the stalls reinforce each other</div>
+          <div class="reinforce-chain">${reinforceHTML}</div>
+        </div>
+
+        <div class="stack-meta-grid">
+          <div class="stack-meta-card protects">
+            <div class="stack-meta-label">This stack protects</div>
+            <div class="stack-meta-list">${intel.protects.map(p => '· ' + p).join('<br>')}</div>
+          </div>
+          <div class="stack-meta-card absorbs">
+            <div class="stack-meta-label">This stack absorbs</div>
+            <div class="stack-meta-list">${intel.absorbs.map(a => '· ' + a).join('<br>')}</div>
+          </div>
+        </div>
+
+        <div class="stack-cluster-type">
+          <div class="stack-cluster-label">What this cluster looks like from outside</div>
+          <div class="stack-cluster-text">${intel.clusterType}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function lookupStack(filled) {
+  // Try all orderings
+  const sorted = [...filled].sort();
+  const keys = [
+    sorted.join('+'),
+    filled.join('+'),
+    // Try pairs within a triple
+    ...( filled.length === 3 ? [
+      [filled[0],filled[1]].sort().join('+'),
+      [filled[0],filled[2]].sort().join('+'),
+      [filled[1],filled[2]].sort().join('+'),
+    ] : [] )
+  ];
+  for (const k of keys) {
+    if (STACK_INTELLIGENCE[k]) return k;
+  }
+  // Also try with S prefix normalization
+  const altKey = filled.map(f => f.replace('S','S')).sort().join('+');
+  if (STACK_INTELLIGENCE[altKey]) return altKey;
+  return null;
+}
+
+function renderGenericReinforcement(filled) {
+  const stalls = filled.map(id => STALLS.find(s => s.id === id));
+  return `
+    <div class="stack-output-body" style="padding-top:0">
+      <div class="reinforcement-diagram">
+        <div class="reinforce-label">Stalls in this combination</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          ${stalls.map(s => `
+            <div style="padding:10px 14px;background:rgba(245,217,122,0.05);border:1px solid rgba(245,217,122,0.15);border-radius:4px">
+              <div style="font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;color:#f5d97a;margin-bottom:4px">${s.id}</div>
+              <div style="font-family:'Instrument Serif',serif;font-size:14px;color:var(--ink)">${s.name}</div>
+              <div style="font-size:11px;color:#7a9bb5;margin-top:4px">${s.sub.replace(/<[^>]+>/g,'')}</div>
+            </div>
+          `).join('<div style="text-align:center;color:#f5d97a;font-size:12px">↕</div>')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// =====================================================================
+// SCROLL REVEAL
+// =====================================================================
+function observeReveals() {
+  const els = document.querySelectorAll('.reveal:not(.observed)');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => { el.classList.add('observed'); observer.observe(el); });
+}
+
+// =====================================================================
+// INIT
+// =====================================================================
+renderStalls();
+observeReveals();
+</script>
+<script>
+// ── NAV
+document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+  var t = dd.querySelector('.nav-dropdown-toggle');
+  var m = dd.querySelector('.nav-dropdown-menu');
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = m.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+    if (!open) { m.classList.add('open'); t.classList.add('active'); }
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+});
+(function(){
+  var h = document.getElementById('nav-hamburger');
+  var m = document.getElementById('nav-mobile-menu');
+  if (!h || !m) return;
+  h.addEventListener('click', function(e){ e.stopPropagation(); var o=m.classList.contains('open'); m.classList.toggle('open',!o); h.classList.toggle('open',!o); });
+  document.addEventListener('click', function(){ m.classList.remove('open'); h.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>

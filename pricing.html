@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — ClusterOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-dim:    #5a5650;
+    --ink-muted:  #8c8780;
+    --page:       #f7f4ef;
+    --surface:    #f0ece4;
+    --border:     #ddd8cf;
+    --border-2:   #c8c2b7;
+    --green:      #2a7a4f;
+    --green-dim:  #1d5c3a;
+    --signal:     #c8f0d0;
+    --teal:       #7dd3c8;
+    --amber:      #f5d97a;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans:  'Geist', system-ui, sans-serif;
+    --font-mono:  'Geist Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 52px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+    background: rgba(247,244,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ink); }
+  .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
+  .nav-links > li { position: relative; }
+  .nav-links a {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
+    display: block; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-dropdown-toggle {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
+    cursor: pointer; white-space: nowrap; transition: color 0.15s;
+  }
+  .nav-dropdown-toggle:hover, .nav-dropdown-toggle.active { color: var(--ink); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0;
+    background: var(--page); border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    min-width: 220px; list-style: none; padding: 4px 0; z-index: 100;
+  }
+  .nav-dropdown-menu.open { display: block; }
+  .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
+    border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
+    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: transform 0.2s, opacity 0.2s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  @media(max-width:900px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
+  .nav-mobile-menu {
+    display: none; position: fixed; top: 52px; left: 0; right: 0;
+    background: var(--page); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1rem 2rem; z-index: 999;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a:hover { color: var(--ink); }
+  .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 1.5rem; margin-top: 5rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 3rem; padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  }
+  .footer-logo span { color: var(--ink); }
+  .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
+  .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .footer-col { display: flex; flex-direction: column; gap: 6px; }
+  .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
+</style>
+<style>
+
+/* Hamburger button */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink-muted);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-cta { display: none; } }
+/* Mobile menu panel */
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(247,244,239,0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,194,183,0.6);
+  padding: 16px 24px 24px;
+  flex-direction: column;
+  gap: 2px;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-muted);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(200,194,183,0.3);
+  transition: color 0.15s;
+}
+.nav-mobile-menu a:hover { color: var(--ink); }
+.nav-mobile-divider { height: 1px; background: rgba(200,194,183,0.6); margin: 8px 0; }
+.nav-mobile-cta { margin-top: 12px; color: var(--green) !important; border-bottom: none !important; font-weight: 600 !important; }
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Product ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/digital-infrastructure.html">Digital Infrastructure</a></li>
+        <li><a href="/signals-systems.html">Signals &amp; Systems</a></li>
+        <li><a href="/diagnostic.html">The Diagnostic</a></li>
+        <li><a href="/leverage.html">Leverage</a></li>
+        <li><a href="/findings.html">Findings</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Lab Notes ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/notes.html">All Notes</a></li>
+        <li class="nav-dropdown-divider"></li>
+        <li><a href="/ln-01-coordinating.html">S2 · Coordinating instead of deciding</a></li>
+        <li><a href="/ln-02-narrating.html">S7 · Narrating instead of testing</a></li>
+        <li><a href="/ln-10-narrative-activity-stack.html">Narrative × Activity Stack</a></li>
+        <li><a href="/ln-12-leverage.html">What Leverage Looks Like</a></li>
+        <li><a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a></li>
+      </ul>
+    </li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+  <a href="/signals-systems.html">Signals &amp; Systems</a>
+  <a href="/diagnostic.html">The Diagnostic</a>
+  <a href="/leverage.html">Leverage</a>
+  <a href="/findings.html">Findings</a>
+  <a href="/pricing.html">Pricing</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<!-- Mobile nav menu -->
+
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+  <a href="/ln-02-narrating.html">S7 · Narrating</a>
+  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/about.html">About</a>
+  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
+</div>
+
+
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag rev">Pricing</div>
+  <h1 class="hero-h rev d1">Three ways in.<br><em>One direction.</em></h1>
+  <p class="hero-p rev d2">Every engagement starts with a diagnostic. The question is how much of your own data goes in. <strong>The Cluster Snapshot — public data pipeline plus a structured actor questionnaire — is the entry point. Each tier above it adds depth, not a different product.</strong></p>
+</div>
+
+<!-- PHILOSOPHY STRIP -->
+<div class="phil">
+  <div class="phil-inner">
+    <div class="phil-icon">◎</div>
+    <div class="phil-text">Pricing is discussed directly after an initial scoping conversation. What we can tell you here is the structure: two phases, each with a defined scope and deliverable, sequenced so that the diagnostic informs the platform. The diagnostic is the right starting point for every engagement, regardless of where it leads.</div>
+  </div>
+</div>
+
+<!-- SNAPSHOT -->
+<div class="snapshot">
+  <div class="sec-tag" style="max-width:640px;margin:0 auto 20px;">The three tiers</div>
+
+  <div class="snap-card rev">
+    <div class="snap-head">
+      <div class="snap-head-left">
+        <div class="snap-tier">SNAPSHOT</div>
+        <div>
+          <div class="snap-title">Cluster Snapshot</div>
+          <div class="snap-meta">
+            <span class="snap-badge">4–5 weeks</span>
+            <span class="snap-badge">Public data + actor questionnaire</span>
+            <span class="snap-badge">Single cluster</span>
+          </div>
+        </div>
+      </div>
+      <div class="snap-price">
+        <div class="snap-price-val">£5k</div>
+        <div class="snap-price-note">fixed fee</div>
+      </div>
+    </div>
+    <div class="snap-body">
+      <div class="snap-col">
+        <div class="col-label yours" style="color:#f5d97a">What you provide</div>
+        <div class="item-list">
+          <div class="item"><div class="item-dot" style="background:rgba(245,217,122,0.4)"></div><div class="item-text"><strong>Cluster name, geography, sector</strong> — boundary definition and a short description to calibrate the pipeline</div></div>
+          <div class="item"><div class="item-dot" style="background:rgba(245,217,122,0.4)"></div><div class="item-text"><strong>Questionnaire distribution</strong> — you send the ClusterOS Diagnostic Instrument to actors across your cluster. Founders, anchors, researchers, and stewards each receive a role-specific version. We handle the rest</div></div>
+        </div>
+      </div>
+      <div class="snap-col">
+        <div class="col-label ours" style="color:#c8f0d0">What you receive</div>
+        <div class="item-list">
+          <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>50–70 verified evidence items</strong> from public records, sourced and confidence-tiered</div></div>
+          <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Actor signal data</strong> — questionnaire responses processed against the stall framework, surfacing buy-side demand, sell-side capability, and cross-actor bridging signals invisible to public data</div></div>
+          <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Stall identification</strong> — X-side and Y-side evidence combined, with meaningfully higher confidence than public data alone</div></div>
+          <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Stack analysis</strong> — the mutually reinforcing configuration your cluster has stabilised around, and why single interventions have been failing</div></div>
+          <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Structural resemblances</strong> — 2–3 comparable ecosystems from the database with similar configurations, and what shifted them</div></div>
+          <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Leverage hypotheses</strong> — testable perturbations calibrated to your stack and informed by comparable ecosystems</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONNAIRE CALLOUT -->
+    <div style="padding:18px 24px;border-top:1px solid rgba(245,217,122,0.15);background:rgba(245,217,122,0.03);">
+      <div style="font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#f5d97a;margin-bottom:10px;">The ClusterOS Diagnostic Instrument</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="font-size:12px;color:var(--dim);line-height:1.6;">Role-segmented questions for founders, anchors, researchers, and stewards — each designed to surface the specific stall dynamics relevant to that actor type. Short enough to complete in under 10 minutes.</div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.6;">Questions are designed against the 9-stall framework from the start — not a generic survey retrofitted to the analysis. Responses are anonymous to the steward and aggregated as signals, not individual opinions.</div>
+      </div>
+    </div>
+
+    <div class="snap-caveat">
+      <div class="snap-caveat-icon">◎</div>
+      <div class="snap-caveat-text">The questionnaire is what takes the Snapshot beyond what public data alone can produce. <strong>Reported actor behaviour — processed against the stall framework — is the closest proxy to Y-side observability without a full collaborative engagement.</strong> Confidence levels are still stated explicitly. The Snapshot is a starting structure, not a final diagnosis. It is designed to stand alone and to make the path to Phase 1 obvious if the findings warrant it.</div>
+    </div>
+    <div class="snap-cta">
+      <div class="snap-cta-text">Delivered as a structured report. <strong>No working sessions. Fixed fee. Natural path to Phase 1 if the findings warrant it.</strong></div>
+      <a href="/request.html" class="snap-btn">Order a Snapshot</a>
+    </div>
+  </div>
+</div>
+
+<!-- PHASES HEADER -->
+<div style="max-width:640px;margin:48px auto 0;padding:0 24px;">
+  <div class="sec-tag">Deeper engagements</div>
+</div>
+
+<!-- PHASES -->
+<div class="phases">
+
+  <!-- PHASE 1 -->
+  <div class="phase-card p1 rev">
+    <div class="phase-head">
+      <div class="phase-num">PHASE 01</div>
+      <div class="phase-title-wrap">
+        <div class="phase-title">Collaborative Diagnostic</div>
+        <div class="phase-meta">
+          <span class="phase-badge time">4–6 weeks</span>
+          <span class="phase-badge scope">Your evidence + our technology</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-col">
+        <div class="col-label yours">What you bring</div>
+        <div class="item-list">
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>A working session</strong> with your steward team — what you see, what you don't, where the gaps are</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Programme documentation</strong> — existing reports, strategy documents, membership data, event records</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>One or two anchor contacts</strong> willing to share their perspective on ecosystem engagement</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Your cluster map</strong> — how you segment the ecosystem, who is in each cluster, where the boundaries are</div></div>
+        </div>
+      </div>
+      <div class="phase-col">
+        <div class="col-label ours">What you get back</div>
+        <div class="item-list">
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Full evidence base</strong> — 50–170 verified items per cluster, tiered by confidence, sourced and classified</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Pattern map</strong> — systems map of reinforcing and balancing feedback loops across your ecosystem</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Stall identification</strong> — which of the 9 canonical stalls are operating, with X-side and Y-side evidence and confidence levels</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Stack analysis</strong> — which stalls are reinforcing each other, why single interventions have been failing</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Leverage hypotheses</strong> — testable perturbations targeting your specific stack, with cascade predictions and success metrics</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Board-ready output</strong> — the first report your board has seen built on diagnostic intelligence rather than activity metrics</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deliverable rev">
+    <div class="del-label">Deliverable</div>
+    <div class="del-text">A complete canonical diagnostic of your ecosystem — <strong>the clearest picture of what your ecosystem is actually doing, why it is doing it, and where the specific leverage points are</strong>. Standalone value regardless of what follows.</div>
+  </div>
+
+  <div class="phase-arrow rev">↓</div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-card p2 rev">
+    <div class="phase-head">
+      <div class="phase-num">PHASE 02</div>
+      <div class="phase-title-wrap">
+        <div class="phase-title">Platform Deployment</div>
+        <div class="phase-meta">
+          <span class="phase-badge time">Alongside or following Phase 1</span>
+          <span class="phase-badge scope">Continuous ecosystem intelligence</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="phase-col">
+        <div class="col-label yours">The platform layer</div>
+        <div class="item-list">
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Steward dashboard</strong> — real-time view of cluster health, conversion pipeline, pattern alerts, and intervention tracking</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Actor journeys</strong> — AI-guided onboarding and pathways for founders, anchors, researchers, and talent. Role-aware, personalised, continuously updated</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Evidence ingestor</strong> — your team uploads documents and data; AI extracts structured facts and updates the diagnostic continuously</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Sovereign deployment</strong> — your data stays in your regional instance. No cross-region model training without explicit consent</div></div>
+        </div>
+      </div>
+      <div class="phase-col">
+        <div class="col-label ours">What runs continuously</div>
+        <div class="item-list">
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Weekly intelligence briefings</strong> — AI-generated, diagnostic-intelligence-based, not manually assembled</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Live pattern detection</strong> — alerts when reinforcing loops are forming, when clusters are cycling, when anchor engagement is declining</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Intervention recommendations</strong> — specific, evidence-based, with cascade predictions. Not generic advice</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Board-ready reporting</strong> — automated reports built on throughput metrics, not activity counts. Generated from live diagnostic intelligence</div></div>
+          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Diagnostic refinement</strong> — stall confidence improves as actor behaviour generates more signal. The system gets smarter over time</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deliverable rev" style="border-color:rgba(200,240,208,0.1);background:rgba(200,240,208,0.02);">
+    <div class="del-label">What this becomes</div>
+    <div class="del-text">The cognitive infrastructure layer for your region — <strong>a system that gets smarter as actors use it, surfaces what the board needs before they ask, and makes complexity manageable rather than fragile</strong>. Not a report. Not a tool. Infrastructure.</div>
+  </div>
+
+</div>
+
+<!-- WHAT'S REQUIRED -->
+<div class="required">
+  <div class="sec-tag">Starting point</div>
+  <h2 class="sec-h">What we need from <em>you</em></h2>
+  <p class="sec-p">The diagnostic is more powerful when it combines our AI pipeline with your institutional knowledge. We can run a preliminary diagnostic on public evidence alone — we did exactly this for Orlando across 582 evidence items. <strong>But steward-held data is what moves stall confidence from LOW to MEDIUM or HIGH, and what reveals dynamics that public evidence cannot see.</strong></p>
+
+  <div class="req-list">
+    <div class="req rev">
+      <div class="req-num">01</div>
+      <div class="req-body">
+        <div class="req-h">A working session with your steward team</div>
+        <div class="req-p">What you see, what you don't, where the gaps are, and what the board is asking for. This calibrates the diagnostic before it runs — and prevents it from surfacing findings you already have in a drawer somewhere.</div>
+      </div>
+    </div>
+    <div class="req rev">
+      <div class="req-num">02</div>
+      <div class="req-body">
+        <div class="req-h">Programme documentation and internal data</div>
+        <div class="req-p">Existing reports, strategy documents, membership data, event records. The evidence base you already hold. We combine it with public data to build a richer picture. Confidentiality is maintained throughout — steward-held data is not shared with actors or other ecosystems.</div>
+      </div>
+    </div>
+    <div class="req rev">
+      <div class="req-num">03</div>
+      <div class="req-body">
+        <div class="req-h">One or two anchor contacts</div>
+        <div class="req-p">An introduction to one or two anchor organisations willing to share their perspective on ecosystem engagement. This is the hardest data to get from public sources, and the most valuable for Y-side observability.</div>
+      </div>
+    </div>
+    <div class="req rev">
+      <div class="req-num">04</div>
+      <div class="req-body">
+        <div class="req-h">Your cluster map</div>
+        <div class="req-p">Your view of how the ecosystem is segmented, which clusters exist, who's in them, and where the boundaries are. The diagnostic derives cluster boundaries from evidence — but your institutional knowledge validates and sharpens them.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY DIAGNOSTIC FIRST -->
+<div class="why">
+  <div class="why-box">
+    <div class="why-head">Why start with the diagnostic</div>
+    <div class="why-list">
+      <div class="why-item">
+        <div class="why-item-mark">→</div>
+        <div class="why-item-text"><strong>It de-risks the platform commitment.</strong> The diagnostic tells you exactly what your platform needs to address. You don't configure ClusterOS for a generic ecosystem — you configure it for yours, based on what the diagnostic found.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-item-mark">→</div>
+        <div class="why-item-text"><strong>It is standalone valuable.</strong> The full canonical diagnostic — evidence base, pattern map, stall identification, stack analysis, leverage hypotheses — is a deliverable your board will not have seen before. It has value regardless of whether Phase 1 follows.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-item-mark">→</div>
+        <div class="why-item-text"><strong>It builds the evidence base Phase 1 runs on.</strong> The platform is only as good as the diagnostic intelligence underneath it. Starting with a rigorous diagnostic means Phase 1 begins with high-confidence data, not assumptions.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-item-mark">→</div>
+        <div class="why-item-text"><strong>It gives you something to take to your board immediately.</strong> Most stewards need to build the case for infrastructure investment. A board-ready diagnostic report — built on evidence, not activity metrics — is that case.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <div class="sec-tag">Common questions</div>
+  <h2 class="sec-h">Before you <em>get in touch</em></h2>
+  <div class="faq-list" id="faq-list"></div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section" id="cta">
+  <div class="cta-box rev">
+    <h2 class="cta-h">Not sure where<br>to <em>start</em>?</h2>
+    <p class="cta-p">The Cluster Snapshot is the lowest-friction entry point — fixed fee, no working sessions, 3–4 weeks. Or get in touch directly and we'll work out which tier fits where you are.</p>
+    <div class="cta-btns">
+      <a href="/request.html" class="btn-primary">Order a Snapshot</a>
+      <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+    </div>
+    <div class="cta-note"><a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a> · Community Lab · Edinburgh</div>
+  </div>
+</div>
+
+<div class="footer-pad"></div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
+      <p class="footer-tagline">Regional economies need infrastructure.<br>Not more strategy.</p>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <div class="footer-col-label">Product</div>
+        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+        <a href="/signals-systems.html">Signals &amp; Systems</a>
+        <a href="/diagnostic.html">The Diagnostic</a>
+        <a href="/leverage.html">Leverage</a>
+        <a href="/findings.html">Findings</a>
+        <a href="/pricing.html">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Lab Notes</div>
+        <a href="/notes.html">All Notes</a>
+        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+        <a href="/ln-02-narrating.html">S7 · Narrating</a>
+        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
+        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Company</div>
+        <a href="/about.html">About</a>
+        <a href="/request.html">Request a Diagnostic</a>
+        <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 ClusterOS · Community Lab</span>
+    <span>Built in Edinburgh</span>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+const FAQS = [
+  {
+    q: 'What does the Cluster Snapshot cost and what do I need to provide?',
+    a: 'The Cluster Snapshot is £5,000 fixed fee. You provide the cluster name, geography, sector, and a short description — and you distribute the ClusterOS Diagnostic Instrument to actors across your cluster. The instrument is role-segmented: founders, anchors, researchers, and stewards each receive a short version tailored to their actor type. You distribute it, they complete it, we process the responses alongside the public data pipeline. No working sessions, no internal documents required. Turnaround is 4–5 weeks.'
+  },
+  {
+    q: 'Why does the Snapshot include a questionnaire rather than just running on public data?',
+    a: 'Public data captures what the system looks like from the outside — X-side behaviour, observable dynamics, what actors are visibly doing. The questionnaire captures what actors inside the system experience — which is where Y-side observability lives. Without it, stall confidence is LOW throughout and the analysis tells you what the system is doing but not reliably why. The questionnaire processes reported actor behaviour against the 9-stall framework, surfacing buy-side demand, sell-side capability, and cross-actor bridging signals that no public dataset contains. It is what takes the Snapshot beyond what a good consultant with public data could produce.'
+  },
+  {
+    q: 'How does the Snapshot relate to Phase 1 (Collaborative Diagnostic)?',
+    a: 'The Snapshot is the starting structure. Phase 2 adds your institutional knowledge — programme data, anchor interviews, steward working sessions — which moves stall confidence further and reveals dynamics that even the questionnaire cannot fully surface. Many stewards use the Snapshot to build the internal case for a full engagement: it gives the board something concrete to react to, and it identifies which findings warrant deeper investigation.'
+  },
+  {
+    q: 'Do you publish prices for Phase 1 and Phase 2?',
+    a: 'Not on this page. Engagements vary in scope depending on the number of clusters, the depth of steward data available, and the platform configuration required. We scope each engagement in a conversation and price accordingly. Get in touch and we will give you a clear number quickly.'
+  },
+  {
+    q: 'We already have a strategy and plenty of reports. Why do we need a diagnostic?',
+    a: 'Strategy documents describe where you want to go. The diagnostic describes what the system is actually doing. These are different things, and most strategies we have encountered were written without visibility into the second question. The diagnostic does not replace your strategy — it tells you which parts of it are already being absorbed by the system, and where the leverage points are.'
+  },
+  {
+    q: 'How long does Phase 1 actually take?',
+    a: 'The 4–6 week timeline is driven by the working sessions, data collection, steward review, and the time needed to validate cluster boundaries and interpret findings with your team. We do not deliver a report and disappear — the diagnostic is a collaborative output.'
+  },
+  {
+    q: 'What happens to our data?',
+    a: 'Steward-held data — your programme records, internal documents, membership data — is used only for your diagnostic and platform configuration. It is not shared with other ecosystems, not used to train models across regions, and not visible to actors within your platform unless you configure it to be. Each regional deployment is sovereign. Your data stays yours.'
+  },
+  {
+    q: 'We are a small team. Can we actually do this?',
+    a: 'The working session and cluster map are typically a few hours with one or two people. The documentation you share is what you already have — we do not expect you to generate new materials. The diagnostic does most of the analytical work. The main thing we need from your team is institutional knowledge, not bandwidth.'
+  },
+  {
+    q: 'What is ClusterOS exactly — a diagnostic tool or a platform?',
+    a: 'ClusterOS is a regional operating system: the full infrastructure layer for a regional economy to run on. It has three integrated functions — diagnose (the 5-stage AI pipeline that identifies what the ecosystem is doing and where the leverage is), orchestrate (AI-guided journeys for every actor type: founders, anchors, researchers, talent), and steward intelligence (the real-time dashboard that gives the steward visibility into cluster health, conversion pipeline, and emerging patterns). The diagnostic is the evidence foundation the whole system runs on — but ClusterOS is the operating system, not just the diagnostic.'
+  },
+];
+
+let openFaq = null;
+function renderFaqs() {
+  const list = document.getElementById('faq-list');
+  list.innerHTML = FAQS.map((f, i) => `
+    <div class="faq-item" id="faq-${i}">
+      <div class="faq-q" onclick="toggleFaq(${i})">
+        <div class="faq-q-text">${f.q}</div>
+        <div class="faq-chevron">▾</div>
+      </div>
+      <div class="faq-a">${f.a}</div>
+    </div>
+  `).join('');
+}
+
+function toggleFaq(i) {
+  const item = document.getElementById('faq-' + i);
+  if (!item) return;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(el) { el.classList.remove('open'); });
+  if (!isOpen) item.classList.add('open');
+}
+
+document.addEventListener('DOMContentLoaded', function() { renderFaqs(); });
+</script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+// ── NAV
+document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+  var t = dd.querySelector('.nav-dropdown-toggle');
+  var m = dd.querySelector('.nav-dropdown-menu');
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = m.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+    if (!open) { m.classList.add('open'); t.classList.add('active'); }
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+});
+(function(){
+  var h = document.getElementById('nav-hamburger');
+  var m = document.getElementById('nav-mobile-menu');
+  if (!h || !m) return;
+  h.addEventListener('click', function(e){ e.stopPropagation(); var o=m.classList.contains('open'); m.classList.toggle('open',!o); h.classList.toggle('open',!o); });
+  document.addEventListener('click', function(){ m.classList.remove('open'); h.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>

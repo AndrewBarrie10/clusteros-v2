@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Validation Deadlock — ClusterOS Lab Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-dim:    #5a5650;
+    --ink-muted:  #8c8780;
+    --page:       #f7f4ef;
+    --surface:    #f0ece4;
+    --border:     #ddd8cf;
+    --border-2:   #c8c2b7;
+    --green:      #2a7a4f;
+    --green-dim:  #1d5c3a;
+    --signal:     #c8f0d0;
+    --teal:       #7dd3c8;
+    --amber:      #f5d97a;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans:  'Geist', system-ui, sans-serif;
+    --font-mono:  'Geist Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 52px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+    background: rgba(247,244,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ink); }
+  .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
+  .nav-links > li { position: relative; }
+  .nav-links a {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
+    display: block; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-dropdown-toggle {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
+    cursor: pointer; white-space: nowrap; transition: color 0.15s;
+  }
+  .nav-dropdown-toggle:hover, .nav-dropdown-toggle.active { color: var(--ink); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0;
+    background: var(--page); border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    min-width: 220px; list-style: none; padding: 4px 0; z-index: 100;
+  }
+  .nav-dropdown-menu.open { display: block; }
+  .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
+    border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
+    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: transform 0.2s, opacity 0.2s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  @media(max-width:900px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
+  .nav-mobile-menu {
+    display: none; position: fixed; top: 52px; left: 0; right: 0;
+    background: var(--page); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1rem 2rem; z-index: 999;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a:hover { color: var(--ink); }
+  .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 1.5rem; margin-top: 5rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 3rem; padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  }
+  .footer-logo span { color: var(--ink); }
+  .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
+  .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .footer-col { display: flex; flex-direction: column; gap: 6px; }
+  .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
+</style>
+<style>
+
+/* Hamburger button */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink-muted);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-cta { display: none; } }
+/* Mobile menu panel */
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(247,244,239,0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,194,183,0.6);
+  padding: 16px 24px 24px;
+  flex-direction: column;
+  gap: 2px;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-muted);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(200,194,183,0.3);
+  transition: color 0.15s;
+}
+.nav-mobile-menu a:hover { color: var(--ink); }
+.nav-mobile-divider { height: 1px; background: rgba(200,194,183,0.6); margin: 8px 0; }
+.nav-mobile-cta { margin-top: 12px; color: var(--green) !important; border-bottom: none !important; font-weight: 600 !important; }
+
+
+@media (max-width: 900px) {
+  .substitution { grid-template-columns: 1fr !important; }
+  .sub-arrow { transform: rotate(90deg); margin: 8px auto; display: block; }
+  .related-grid { grid-template-columns: 1fr 1fr !important; }
+  .two-col-body, .article-layout { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .article-wrap, .body-wrap { padding: 80px 20px 80px !important; }
+  h1, .article-headline, .hero-h { font-size: clamp(24px, 7vw, 36px) !important; }
+  .lede, .article-lede { font-size: 16px !important; }
+  blockquote, .pull-quote { padding: 14px 16px 14px 18px; font-size: 17px; }
+  .evidence-grid, .stall-grid, .two-col { grid-template-columns: 1fr !important; }
+  .related-grid { grid-template-columns: 1fr !important; }
+  .tag-row { flex-wrap: wrap; gap: 6px; }
+  .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
+  p { font-size: 15px; line-height: 1.65; }
+}
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Product ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/digital-infrastructure.html">Digital Infrastructure</a></li>
+        <li><a href="/signals-systems.html">Signals &amp; Systems</a></li>
+        <li><a href="/diagnostic.html">The Diagnostic</a></li>
+        <li><a href="/leverage.html">Leverage</a></li>
+        <li><a href="/findings.html">Findings</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Lab Notes ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/notes.html">All Notes</a></li>
+        <li class="nav-dropdown-divider"></li>
+        <li><a href="/ln-01-coordinating.html">S2 · Coordinating instead of deciding</a></li>
+        <li><a href="/ln-02-narrating.html">S7 · Narrating instead of testing</a></li>
+        <li><a href="/ln-10-narrative-activity-stack.html">Narrative × Activity Stack</a></li>
+        <li><a href="/ln-12-leverage.html">What Leverage Looks Like</a></li>
+        <li><a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a></li>
+      </ul>
+    </li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+  <a href="/signals-systems.html">Signals &amp; Systems</a>
+  <a href="/diagnostic.html">The Diagnostic</a>
+  <a href="/leverage.html">Leverage</a>
+  <a href="/findings.html">Findings</a>
+  <a href="/pricing.html">Pricing</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<!-- Mobile nav menu -->
+
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+  <a href="/ln-02-narrating.html">S7 · Narrating</a>
+  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/about.html">About</a>
+  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
+</div>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="/">Home</a> › <a href="/notes.html">Lab Notes</a> › Stack · Validation Deadlock</div>
+  <div class="series">Lab Notes · Stack Series</div>
+  <h1>The Validation <em>Deadlock</em></h1>
+  <p class="deck">Re-proving and coordinating reinforce each other. There is always more to validate, and always a forum in which to discuss it. The system stays option-rich indefinitely — not because evidence is insufficient, but because the configuration has made commitment structurally unavailable.</p>
+  <div class="meta"><span>Andrew Barrie</span><span>March 2026</span><span>8 min read</span></div>
+  <div class="stack-badge"><strong>S1 + S2</strong> · Re-proving × Coordinating · Common in capability-rich ecosystems facing strategic choice</div>
+
+  <p class="lead">The most dangerous version of this stack is the one that looks like diligence. Evidence is being gathered. Stakeholders are being consulted. Pathways are being validated carefully. Decisions are being approached responsibly. Everything looks like governance. Nothing is being decided.</p>
+
+  <h2>The two components</h2>
+
+  <div class="stack-diagram">
+    <div class="sd-label">Stack composition · S1 + S2</div>
+    <div class="comps">
+      <div class="comp s1">
+        <div class="comp-id">S1</div>
+        <div class="comp-name">Re-proving Instead of Narrowing</div>
+        <div class="comp-desc">Validation accumulates across multiple pathways without collapsing choice. Each proof point creates demand for more proof rather than triggering decisions.</div>
+      </div>
+      <div class="comp s2">
+        <div class="comp-id">S2</div>
+        <div class="comp-name">Coordinating Instead of Deciding</div>
+        <div class="comp-desc">When commitment pressure rises, alignment structures are convened. Coordination distributes responsibility without concentrating it.</div>
+      </div>
+    </div>
+    <svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;display:block;margin:0 auto;">
+      <rect x="20" y="50" width="160" height="60" rx="6" fill="rgba(200,240,208,0.07)" stroke="rgba(200,240,208,0.25)" stroke-width="1"/>
+      <text x="100" y="76" text-anchor="middle" font-family="Geist Mono,monospace" font-size="9" fill="#c8f0d0" font-weight="700" letter-spacing="1">RE-PROVING</text>
+      <text x="100" y="94" text-anchor="middle" font-family="Geist,sans-serif" font-size="11" fill="var(--ink-muted)">needs alignment</text>
+      <text x="100" y="108" text-anchor="middle" font-family="Geist,sans-serif" font-size="11" fill="var(--ink-muted)">to share results</text>
+      <rect x="420" y="50" width="160" height="60" rx="6" fill="rgba(125,211,200,0.07)" stroke="rgba(125,211,200,0.25)" stroke-width="1"/>
+      <text x="500" y="76" text-anchor="middle" font-family="Geist Mono,monospace" font-size="9" fill="#7dd3c8" font-weight="700" letter-spacing="1">COORDINATING</text>
+      <text x="500" y="94" text-anchor="middle" font-family="Geist,sans-serif" font-size="11" fill="var(--ink-muted)">requires evidence</text>
+      <text x="500" y="108" text-anchor="middle" font-family="Geist,sans-serif" font-size="11" fill="var(--ink-muted)">to justify process</text>
+      <path d="M 180 70 C 280 30, 320 30, 420 70" stroke="rgba(200,240,208,0.4)" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+      <text x="300" y="24" text-anchor="middle" font-family="Geist,sans-serif" font-size="11" fill="#5a7299">validation feeds the forum</text>
+      <path d="M 420 90 C 320 130, 280 130, 180 90" stroke="rgba(125,211,200,0.4)" stroke-width="1.5" fill="none" marker-end="url(#a2)"/>
+      <text x="300" y="148" text-anchor="middle" font-family="Geist,sans-serif" font-size="11" fill="#5a7299">alignment defers commitment</text>
+      <defs>
+        <marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="rgba(200,240,208,0.5)"/></marker>
+        <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="rgba(125,211,200,0.5)"/></marker>
+      </defs>
+    </svg>
+    <p class="loop-caption">Validation feeds the coordination forum. The forum defers commitment pending further validation. The loop closes.</p>
+  </div>
+
+  <h2>The mechanism of reinforcement</h2>
+
+  <p>S1 alone produces optionality without commitment. It is uncomfortable — eventually, someone notices that pathways have been validated for years without decisions following. The response to that pressure is where S2 enters.</p>
+
+  <p>When commitment pressure rises, the natural response is to convene: to bring together the stakeholders who would need to align for a decision to be legitimate, to share the validation evidence, to discuss the implications. This is rational — decisions of this kind genuinely require alignment to be durable. But the coordination structure that is convened to enable the decision ends up absorbing the pressure to make it.</p>
+
+  <p>The forum creates its own schedule. The evidence needs to be reviewed. The pathways need to be presented fairly. The stakeholders need to be heard. Each of these is legitimate. Together, they constitute a process that can absorb commitment pressure indefinitely — because a new round of process can always be justified as responsible governance.</p>
+
+  <div class="pullquote">
+    <p>A stack forms when one stall lowers the cost of another. Once that happens, stabilisation becomes anticipatory. Pressure enters. The same configuration activates.</p>
+    <cite>Ecosystem Stewardship · Chapter 5</cite>
+  </div>
+
+  <p><strong>The reinforcement is bidirectional.</strong> S1 supplies S2 with fresh evidence to process. S2 supplies S1 with a legitimate reason to produce more evidence — the forum has questions, the pathways need further validation, the stakeholders are not yet convinced. Each stall makes the other more durable.</p>
+
+  <h2>What the stack protects — and what it displaces</h2>
+
+  <div class="protects-grid">
+    <div class="pb p">
+      <div class="pb-label">What it protects</div>
+      <div class="pb-item">Optionality — no pathway is foreclosed</div>
+      <div class="pb-item">Inclusion — all stakeholders remain engaged</div>
+      <div class="pb-item">Legitimacy — decisions are being approached responsibly</div>
+      <div class="pb-item">Individual positions — no team's work is declared inferior</div>
+    </div>
+    <div class="pb d">
+      <div class="pb-label">What it displaces</div>
+      <div class="pb-item">Commitment — choices that concentrate resources</div>
+      <div class="pb-item">Exclusion — the willingness to retire weaker pathways</div>
+      <div class="pb-item">Speed — the ability to move at the pace of evidence</div>
+      <div class="pb-item">Learning — the feedback that only commitment produces</div>
+    </div>
+  </div>
+
+  <h2>Why single interventions fail</h2>
+
+  <p>If you introduce a deadline for a commitment decision without addressing S1, the deadline is met by commissioning another validation round. There is always more evidence to gather before a responsible decision can be made. The deadline absorbs the pressure and produces a new evidence-gathering process.</p>
+
+  <p>If you introduce comparison across pathways without addressing S2, the comparison is discussed in the coordination forum. Each pathway's advocates present their case. The forum notes the comparison, acknowledges its complexity, and convenes a working group to explore the implications. The comparison produces more alignment activity rather than a decision.</p>
+
+  <p>The leverage point for this stack is not to attack either component directly. It is to introduce a single condition where both components fail simultaneously: <strong>a commitment decision with a fixed date, a defined evidence threshold, and a process that does not have a validation round or a new coordination structure as a permitted output.</strong></p>
+
+  <p>The resistance this produces is the stack defending itself. More time is needed. The threshold is unfair. The process is too rushed. These are the signals that the configuration has been touched — and that the intervention has found something real.</p>
+
+  <div class="epistemic">
+    <div class="ep-label">Epistemic note</div>
+    <p>Validation Deadlock has higher stack confidence than many combinations because the reinforcement mechanism is visible: validation output and coordination activity can both be documented, and the temporal relationship between commitment pressure and process expansion is traceable in programme records and governance minutes.</p>
+    <p>The Y-side claim — that commitment is being displaced rather than deferred responsibly — requires temporal depth. Where the same pathways have been under validation for three or more cycles, and where each commitment deadline has produced a new process rather than a decision, the stack claim is warranted. Where the system is genuinely early-stage, the absence of commitment may be correct behaviour rather than stall behaviour.</p>
+  </div>
+
+  <div class="related">
+    <div class="rel-label">Related notes</div>
+    <div class="rel-grid">
+      <a href="/ln-04-reproving.html" class="rel-card"><div class="rel-tag">S1 · Stall</div><div class="rel-title">Re-proving Instead of Narrowing</div></a>
+      <a href="/ln-01-coordinating.html" class="rel-card"><div class="rel-tag">S2 · Stall</div><div class="rel-title">Coordinating Instead of Deciding</div></a>
+      <a href="/ln-12-leverage.html" class="rel-card"><div class="rel-tag">Leverage</div><div class="rel-title">What Leverage Actually Looks Like</div></a>
+    </div>
+  </div>
+
+  <div class="cta">
+    <p>The Validation Deadlock is common in capability-rich ecosystems where the evidence for commitment exists but the structure for making decisions does not. The diagnostic identifies whether you are in this configuration — and where the stack is load-bearing.</p>
+    <a href="/request.html">Request a Diagnostic →</a>
+  </div>
+</div>
+
+
+
+
+
+
+<style>
+@media (max-width: 900px) {
+  .substitution { grid-template-columns: 1fr !important; }
+  .sub-arrow { transform: rotate(90deg); margin: 8px auto; display: block; }
+  .related-grid { grid-template-columns: 1fr 1fr !important; }
+  .two-col-body, .article-layout { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .article-wrap, .body-wrap { padding: 80px 20px 80px !important; }
+  h1, .article-headline, .hero-h { font-size: clamp(24px, 7vw, 36px) !important; }
+  .lede, .article-lede { font-size: 16px !important; }
+  blockquote, .pull-quote { padding: 14px 16px 14px 18px; font-size: 17px; }
+  .evidence-grid, .stall-grid, .two-col { grid-template-columns: 1fr !important; }
+  .related-grid { grid-template-columns: 1fr !important; }
+  .tag-row { flex-wrap: wrap; gap: 6px; }
+  .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
+  p { font-size: 15px; line-height: 1.65; }
+}
+</style>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
+      <p class="footer-tagline">Regional economies need infrastructure.<br>Not more strategy.</p>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <div class="footer-col-label">Product</div>
+        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+        <a href="/signals-systems.html">Signals &amp; Systems</a>
+        <a href="/diagnostic.html">The Diagnostic</a>
+        <a href="/leverage.html">Leverage</a>
+        <a href="/findings.html">Findings</a>
+        <a href="/pricing.html">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Lab Notes</div>
+        <a href="/notes.html">All Notes</a>
+        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+        <a href="/ln-02-narrating.html">S7 · Narrating</a>
+        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
+        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Company</div>
+        <a href="/about.html">About</a>
+        <a href="/request.html">Request a Diagnostic</a>
+        <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 ClusterOS · Community Lab</span>
+    <span>Built in Edinburgh</span>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+// ── NAV
+document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+  var t = dd.querySelector('.nav-dropdown-toggle');
+  var m = dd.querySelector('.nav-dropdown-menu');
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = m.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+    if (!open) { m.classList.add('open'); t.classList.add('active'); }
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+});
+(function(){
+  var h = document.getElementById('nav-hamburger');
+  var m = document.getElementById('nav-mobile-menu');
+  if (!h || !m) return;
+  h.addEventListener('click', function(e){ e.stopPropagation(); var o=m.classList.contains('open'); m.classList.toggle('open',!o); h.classList.toggle('open',!o); });
+  document.addEventListener('click', function(){ m.classList.remove('open'); h.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>

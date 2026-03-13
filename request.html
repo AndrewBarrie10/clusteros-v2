@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Diagnostic — ClusterOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #1a1a1a;
+    --ink-dim:    #5a5650;
+    --ink-muted:  #8c8780;
+    --page:       #f7f4ef;
+    --surface:    #f0ece4;
+    --border:     #ddd8cf;
+    --border-2:   #c8c2b7;
+    --green:      #2a7a4f;
+    --green-dim:  #1d5c3a;
+    --signal:     #c8f0d0;
+    --teal:       #7dd3c8;
+    --amber:      #f5d97a;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans:  'Geist', system-ui, sans-serif;
+    --font-mono:  'Geist Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 52px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+    background: rgba(247,244,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ink); }
+  .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
+  .nav-links > li { position: relative; }
+  .nav-links a {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
+    display: block; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-dropdown-toggle {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
+    cursor: pointer; white-space: nowrap; transition: color 0.15s;
+  }
+  .nav-dropdown-toggle:hover, .nav-dropdown-toggle.active { color: var(--ink); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0;
+    background: var(--page); border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    min-width: 220px; list-style: none; padding: 4px 0; z-index: 100;
+  }
+  .nav-dropdown-menu.open { display: block; }
+  .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
+  .nav-cta {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
+    border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
+    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+  }
+  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: transform 0.2s, opacity 0.2s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  @media(max-width:900px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
+  .nav-mobile-menu {
+    display: none; position: fixed; top: 52px; left: 0; right: 0;
+    background: var(--page); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1rem 2rem; z-index: 999;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a:hover { color: var(--ink); }
+  .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 1.5rem; margin-top: 5rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 3rem; padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  }
+  .footer-logo span { color: var(--ink); }
+  .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
+  .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .footer-col { display: flex; flex-direction: column; gap: 6px; }
+  .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
+</style>
+<style>
+
+/* Hamburger button */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink-muted);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-cta { display: none; } }
+/* Mobile menu panel */
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(247,244,239,0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,194,183,0.6);
+  padding: 16px 24px 24px;
+  flex-direction: column;
+  gap: 2px;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-muted);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(200,194,183,0.3);
+  transition: color 0.15s;
+}
+.nav-mobile-menu a:hover { color: var(--ink); }
+.nav-mobile-divider { height: 1px; background: rgba(200,194,183,0.6); margin: 8px 0; }
+.nav-mobile-cta { margin-top: 12px; color: var(--green) !important; border-bottom: none !important; font-weight: 600 !important; }
+
+
+/* ── UNIVERSAL MOBILE PATCH ── injected ── */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; }
+@media (max-width: 480px) {
+  nav { padding: 0 16px !important; }
+  
+  
+  
+}
+
+
+@media (max-width: 640px) {
+  .hero { padding: 80px 20px 48px !important; }
+  .hero-h { font-size: clamp(28px, 8vw, 42px) !important; }
+  .form-wrap, .request-wrap { padding: 0 20px 80px; }
+  .step-indicators { flex-wrap: wrap; gap: 8px; }
+  .engagement-grid, .option-grid { grid-template-columns: 1fr !important; }
+  .btn-row { flex-direction: column; gap: 12px; }
+  .btn-row button { width: 100%; }
+}
+
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Product ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/digital-infrastructure.html">Digital Infrastructure</a></li>
+        <li><a href="/signals-systems.html">Signals &amp; Systems</a></li>
+        <li><a href="/diagnostic.html">The Diagnostic</a></li>
+        <li><a href="/leverage.html">Leverage</a></li>
+        <li><a href="/findings.html">Findings</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <span class="nav-dropdown-toggle">Lab Notes ▾</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="/notes.html">All Notes</a></li>
+        <li class="nav-dropdown-divider"></li>
+        <li><a href="/ln-01-coordinating.html">S2 · Coordinating instead of deciding</a></li>
+        <li><a href="/ln-02-narrating.html">S7 · Narrating instead of testing</a></li>
+        <li><a href="/ln-10-narrative-activity-stack.html">Narrative × Activity Stack</a></li>
+        <li><a href="/ln-12-leverage.html">What Leverage Looks Like</a></li>
+        <li><a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a></li>
+      </ul>
+    </li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+  <a href="/signals-systems.html">Signals &amp; Systems</a>
+  <a href="/diagnostic.html">The Diagnostic</a>
+  <a href="/leverage.html">Leverage</a>
+  <a href="/findings.html">Findings</a>
+  <a href="/pricing.html">Pricing</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/about.html">About</a>
+  <a href="/request.html">Request a Diagnostic</a>
+</div>
+<!-- Mobile nav menu -->
+
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+  <a href="/ln-02-narrating.html">S7 · Narrating</a>
+  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+  <div class="nav-mobile-divider"></div>
+  <a href="/about.html">About</a>
+  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
+</div>
+
+
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero-tag">Get started</div>
+  <h1 class="hero-h">Request a<br><em>Diagnostic</em>.</h1>
+  <p class="hero-p">Three questions. Two minutes. We'll route you to the right starting point — a Cluster Snapshot or a scoping conversation with Andrew.</p>
+
+  <!-- STEP INDICATOR -->
+  <div class="step-indicator" id="step-indicator">
+    <div class="step-dot active" id="dot-0"></div>
+    <div class="step-dot" id="dot-1"></div>
+    <div class="step-dot" id="dot-2"></div>
+    <span class="step-label" id="step-label">Step 1 of 3</span>
+  </div>
+
+  <!-- STEP 1: CLUSTER -->
+  <div class="form-step active" id="step-1">
+    <div class="q-label">Question 01</div>
+    <h2 class="q-title">Which cluster are<br>you <em>asking about</em>?</h2>
+    <p class="q-sub">Sector, geography, and a short description. This calibrates the diagnostic before it runs.</p>
+
+    <div class="field-group">
+      <label class="field-label">Cluster name or description</label>
+      <input type="text" class="field" id="cluster-name" placeholder="e.g. Edinburgh FinTech, Orlando SpaceTech, Basque Country Advanced Manufacturing" />
+      <div class="field-hint">Be as specific or as broad as feels right. We'll refine boundaries together.</div>
+    </div>
+
+    <div class="field-group" style="margin-top:16px;">
+      <label class="field-label">Organisation (optional)</label>
+      <input type="text" class="field" id="org-name" placeholder="Your organisation or programme name" />
+    </div>
+
+    <div class="btn-row" style="margin-top:24px;">
+      <button class="btn-primary" id="step1-next" onclick="goToStep(2)" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: ENGAGEMENT TYPE -->
+  <div class="form-step" id="step-2">
+    <div class="q-label">Question 02</div>
+    <h2 class="q-title">What kind of<br>engagement <em>fits</em>?</h2>
+    <p class="q-sub">This tells us how to route your request and what to prepare.</p>
+
+    <div class="options" id="engagement-options">
+
+      <div class="option" id="opt-snapshot" onclick="selectOption('snapshot')">
+        <div class="option-header">
+          <div class="option-radio"></div>
+          <div>
+            <div class="option-title">
+              <strong>Cluster Snapshot</strong>
+              <span class="option-badge badge-amber">£5k · Fixed fee</span>
+            </div>
+            <div class="option-desc">Public data pipeline + actor questionnaire. 4–5 weeks, no working sessions. You distribute the instrument, we run the analysis. Stall identification, stack analysis, structural resemblances.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="option" id="opt-full" onclick="selectOption('full')">
+        <div class="option-header">
+          <div class="option-radio"></div>
+          <div>
+            <div class="option-title">
+              <strong>Collaborative Diagnostic</strong>
+              <span class="option-badge badge-signal">Scoped conversation</span>
+            </div>
+            <div class="option-desc">Your data + working sessions + anchor interviews. Higher confidence, board-ready output. Priced after a scoping call — typically 4–6 weeks.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="option" id="opt-unsure" onclick="selectOption('unsure')">
+        <div class="option-header">
+          <div class="option-radio"></div>
+          <div>
+            <div class="option-title"><strong>Not sure yet</strong></div>
+            <div class="option-desc">Tell us where you are and what the board is asking for. Andrew will suggest the right starting point.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="step2-next" onclick="goToStep(3)" disabled>Continue →</button>
+      <button class="btn-back" onclick="goToStep(1)">Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: CONTACT -->
+  <div class="form-step" id="step-3">
+    <div class="q-label">Question 03</div>
+    <h2 class="q-title" id="step3-title">Last thing —<br><em>who are you</em>?</h2>
+    <p class="q-sub" id="step3-sub">We'll confirm your request and tell you exactly what happens next.</p>
+
+    <div class="context-strip" id="context-strip" style="display:none;">
+      <div class="context-icon">◎</div>
+      <div class="context-text" id="context-text"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label">First name</label>
+        <input type="text" class="field" id="first-name" placeholder="First name" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Last name</label>
+        <input type="text" class="field" id="last-name" placeholder="Last name" />
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Email address</label>
+      <input type="email" class="field" id="email" placeholder="you@organisation.com" />
+    </div>
+
+    <div class="field-group" id="message-group">
+      <label class="field-label" id="message-label">Anything else we should know?</label>
+      <textarea class="field" id="message" rows="3" style="resize:vertical;min-height:80px;" placeholder="What the board is asking for, where you're stuck, what you've already tried — anything useful."></textarea>
+    </div>
+
+    <div class="btn-row" style="margin-top:8px;">
+      <button class="btn-primary" id="step3-submit" onclick="submitForm()" disabled>Send request</button>
+      <button class="btn-back" onclick="goToStep(2)">Back</button>
+    </div>
+
+    <div style="margin-top:20px;">
+      <p style="font-size:12px;color:var(--muted);line-height:1.6;">Or email Andrew directly at <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a></p>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION: SNAPSHOT -->
+  <div class="form-step" id="confirm-snapshot">
+    <div class="confirm-wrap">
+      <div class="confirm-icon">✦</div>
+      <h2 class="confirm-h">Snapshot<br><em>requested</em>.</h2>
+      <p class="confirm-p">Andrew will be in touch within one working day to confirm your Cluster Snapshot and send the next steps.</p>
+    </div>
+    <div class="confirm-box">
+      <div class="confirm-box-title">What happens next</div>
+      <div class="confirm-item"><div class="confirm-item-mark">01</div><div>Andrew confirms your cluster scope and sends the ClusterOS Diagnostic Instrument — the actor questionnaire you'll distribute across your cluster.</div></div>
+      <div class="confirm-item"><div class="confirm-item-mark">02</div><div>You distribute the questionnaire to founders, anchors, researchers, and stewards. Responses come back to us directly.</div></div>
+      <div class="confirm-item"><div class="confirm-item-mark">03</div><div>We run the public data pipeline alongside the questionnaire responses. 4–5 weeks from instrument distribution.</div></div>
+      <div class="confirm-item"><div class="confirm-item-mark">04</div><div>You receive the full Snapshot — stall identification, stack analysis, structural resemblances, leverage hypotheses. With explicit confidence levels throughout.</div></div>
+    </div>
+    <p class="confirm-note" style="text-align:center;">Questions in the meantime? <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a></p>
+  </div>
+
+  <!-- CONFIRMATION: FULL / UNSURE -->
+  <div class="form-step" id="confirm-full">
+    <div class="confirm-wrap">
+      <div class="confirm-icon">✦</div>
+      <h2 class="confirm-h">Request<br><em>received</em>.</h2>
+      <p class="confirm-p" id="confirm-full-p">Andrew will be in touch within one working day to arrange a scoping conversation.</p>
+    </div>
+    <div class="confirm-box">
+      <div class="confirm-box-title">What happens next</div>
+      <div class="confirm-item"><div class="confirm-item-mark">01</div><div>Andrew reviews your request and reaches out to arrange a 30-minute scoping call.</div></div>
+      <div class="confirm-item"><div class="confirm-item-mark">02</div><div>The scoping call covers what you see, what you don't, and what the board is asking for. This calibrates the diagnostic before it runs.</div></div>
+      <div class="confirm-item"><div class="confirm-item-mark">03</div><div>Andrew scopes the engagement and gives you a clear timeline and price. No obligation at this stage.</div></div>
+      <div class="confirm-item"><div class="confirm-item-mark">04</div><div>If it's the right fit, you'll receive a proposal within a few days of the call.</div></div>
+    </div>
+    <p class="confirm-note" style="text-align:center;">Can't wait? Email directly: <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a></p>
+  </div>
+
+</div>
+
+<div class="footer-pad"></div>
+
+
+
+
+<style>
+/* ── UNIVERSAL MOBILE PATCH ── injected ── */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; }
+@media (max-width: 480px) {
+  nav { padding: 0 16px !important; }
+  
+  
+  
+}
+</style>
+
+
+<style>
+@media (max-width: 640px) {
+  .hero { padding: 80px 20px 48px !important; }
+  .hero-h { font-size: clamp(28px, 8vw, 42px) !important; }
+  .form-wrap, .request-wrap { padding: 0 20px 80px; }
+  .step-indicators { flex-wrap: wrap; gap: 8px; }
+  .engagement-grid, .option-grid { grid-template-columns: 1fr !important; }
+  .btn-row { flex-direction: column; gap: 12px; }
+  .btn-row button { width: 100%; }
+}
+</style>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
+      <p class="footer-tagline">Regional economies need infrastructure.<br>Not more strategy.</p>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <div class="footer-col-label">Product</div>
+        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+        <a href="/signals-systems.html">Signals &amp; Systems</a>
+        <a href="/diagnostic.html">The Diagnostic</a>
+        <a href="/leverage.html">Leverage</a>
+        <a href="/findings.html">Findings</a>
+        <a href="/pricing.html">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Lab Notes</div>
+        <a href="/notes.html">All Notes</a>
+        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+        <a href="/ln-02-narrating.html">S7 · Narrating</a>
+        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
+        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Company</div>
+        <a href="/about.html">About</a>
+        <a href="/request.html">Request a Diagnostic</a>
+        <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 ClusterOS · Community Lab</span>
+    <span>Built in Edinburgh</span>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+// ── NAV
+document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+  var t = dd.querySelector('.nav-dropdown-toggle');
+  var m = dd.querySelector('.nav-dropdown-menu');
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = m.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+    if (!open) { m.classList.add('open'); t.classList.add('active'); }
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){ x.classList.remove('active'); });
+});
+(function(){
+  var h = document.getElementById('nav-hamburger');
+  var m = document.getElementById('nav-mobile-menu');
+  if (!h || !m) return;
+  h.addEventListener('click', function(e){ e.stopPropagation(); var o=m.classList.contains('open'); m.classList.toggle('open',!o); h.classList.toggle('open',!o); });
+  document.addEventListener('click', function(){ m.classList.remove('open'); h.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>

@@ -6,26 +6,25 @@
 <title>Mediating Instead of Coupling — ClusterOS Lab Notes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --ink:        #1a1a1a;
-    --ink-dim:    #5a5650;
-    --ink-muted:  #8c8780;
-    --page:       #f7f4ef;
-    --surface:    #f0ece4;
-    --border:     #ddd8cf;
-    --border-2:   #c8c2b7;
-    --green:      #2a7a4f;
-    --green-dim:  #1d5c3a;
-    --signal:     #c8f0d0;
-    --teal:       #7dd3c8;
-    --amber:      #f5d97a;
+    --ink:       #1a1a1a;
+    --ink-dim:   #5a5650;
+    --ink-muted: #8c8780;
+    --page:      #f7f4ef;
+    --surface:   #f0ece4;
+    --border:    #ddd8cf;
+    --border-2:  #c8c2b7;
+    --green:     #2a7a4f;
+    --green-dim: #1d5c3a;
+    --signal:    #c8f0d0;
+    --teal:      #7dd3c8;
+    --amber:     #f5d97a;
     --font-serif: 'Instrument Serif', Georgia, serif;
     --font-sans:  'Geist', system-ui, sans-serif;
     --font-mono:  'Geist Mono', monospace;
-    /* legacy aliases so old page CSS still resolves */
     --bg:      #f7f4ef;
     --chalk:   #1a1a1a;
     --dim:     #5a5650;
@@ -44,88 +43,83 @@
     font-weight: 300;
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
     padding-top: 52px;
   }
   a { color: inherit; text-decoration: none; }
-  /* ── NAV ── */
+  /* Typography overrides — match index scale & ink colours */
+  .hero-tag, .sec-tag, .section-eyebrow, .eyebrow, .tag {
+    font-family: var(--font-mono) !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    color: var(--ink-muted) !important;
+  }
+  .hero-h, .hero-headline, h1 {
+    font-family: var(--font-serif) !important;
+    font-size: clamp(2rem, 4.5vw, 3.4rem) !important;
+    font-weight: 400 !important;
+    line-height: 1.12 !important;
+    color: var(--ink) !important;
+  }
+  .hero-h em, .hero-headline em, h1 em { font-style: italic !important; color: var(--green) !important; }
+  .sec-h, .section-headline, h2 {
+    font-family: var(--font-serif) !important;
+    font-size: clamp(1.5rem, 3vw, 2.2rem) !important;
+    font-weight: 400 !important;
+    line-height: 1.18 !important;
+    color: var(--ink) !important;
+  }
+  .sec-h em, .section-headline em, h2 em { font-style: italic !important; color: var(--green) !important; }
+  /* Body text — not too faint */
+  .hero-p, .hero-body, .lede, .sec-p, p {
+    font-weight: 300 !important;
+    color: var(--ink-dim) !important;
+    line-height: 1.75 !important;
+  }
+  strong { font-weight: 500 !important; color: var(--ink) !important; }
+  /* Buttons */
+  .btn-primary, .cta-btn { background: var(--green) !important; color: #fff !important; border-color: var(--green) !important; }
+  .btn-secondary, .btn-ghost { color: var(--green) !important; border-color: var(--green) !important; background: transparent !important; }
+  .btn-secondary:hover, .btn-ghost:hover { background: var(--green) !important; color: #fff !important; }
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 2rem; height: 52px;
-    background: rgba(247,244,239,0.95);
+    background: rgba(247,244,239,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo {
-    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
-    color: var(--green); letter-spacing: 0.12em; text-decoration: none;
-    text-transform: uppercase;
-  }
+  .nav-logo { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--green); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; }
   .nav-logo span { color: var(--ink); }
   .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
   .nav-links > li { position: relative; }
-  .nav-links a {
-    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
-    color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
-    display: block; transition: color 0.15s;
-  }
+  .nav-links a { font-family: var(--font-sans); font-size: 13px; font-weight: 400; color: var(--ink-dim); text-decoration: none; padding: 6px 14px; display: block; transition: color 0.15s; }
   .nav-links a:hover { color: var(--ink); }
-  .nav-dropdown-toggle {
-    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
-    color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
-    cursor: pointer; white-space: nowrap; transition: color 0.15s;
-  }
+  .nav-dropdown-toggle { font-family: var(--font-sans); font-size: 13px; font-weight: 400; color: var(--ink-dim); padding: 6px 14px; background: none; border: none; cursor: pointer; white-space: nowrap; transition: color 0.15s; }
   .nav-dropdown-toggle:hover, .nav-dropdown-toggle.active { color: var(--ink); }
-  .nav-dropdown-menu {
-    display: none; position: absolute; top: calc(100% + 4px); left: 0;
-    background: var(--page); border: 1px solid var(--border);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    min-width: 220px; list-style: none; padding: 4px 0; z-index: 100;
-  }
+  .nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 4px); left: 0; background: var(--page); border: 1px solid var(--border); box-shadow: 0 8px 24px rgba(0,0,0,0.08); min-width: 220px; list-style: none; padding: 4px 0; z-index: 100; }
   .nav-dropdown-menu.open { display: block; }
   .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
   .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); }
   .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
-  .nav-cta {
-    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
-    color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
-    border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
-    transition: background 0.15s, color 0.15s !important;
-  }
+  .nav-cta { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em; border: 1px solid var(--green); padding: 5px 14px; border-radius: 2px; margin-left: 0.5rem; transition: background 0.15s, color 0.15s !important; text-decoration: none; }
   .nav-cta:hover { background: var(--green); color: #fff !important; }
-  .nav-hamburger {
-    display: none; flex-direction: column; gap: 5px;
-    background: none; border: none; cursor: pointer; padding: 4px;
-  }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
   .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: transform 0.2s, opacity 0.2s; }
   .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   .nav-hamburger.open span:nth-child(2) { opacity: 0; }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
   @media(max-width:900px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
-  .nav-mobile-menu {
-    display: none; position: fixed; top: 52px; left: 0; right: 0;
-    background: var(--page); border-bottom: 1px solid var(--border);
-    flex-direction: column; padding: 1rem 2rem; z-index: 999;
-  }
+  .nav-mobile-menu { display: none; position: fixed; top: 52px; left: 0; right: 0; background: var(--page); border-bottom: 1px solid var(--border); flex-direction: column; padding: 1rem 2rem; z-index: 999; }
   .nav-mobile-menu.open { display: flex; }
   .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); }
   .nav-mobile-menu a:hover { color: var(--ink); }
   .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
-  /* ── FOOTER ── */
-  footer {
-    background: var(--surface); border-top: 1px solid var(--border);
-    padding: 3rem 2rem 1.5rem; margin-top: 5rem;
-  }
-  .footer-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 2fr;
-    gap: 3rem; padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
-  }
-  .footer-logo {
-    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
-    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase;
-  }
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding: 3rem 2rem 1.5rem; margin-top: 5rem; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+  .footer-logo { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; }
   .footer-logo span { color: var(--ink); }
   .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
   .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
@@ -134,11 +128,12 @@
   .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); transition: color 0.15s; }
   .footer-col a:hover { color: var(--ink); }
   .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); }
-  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
+  /* ── Page styles ── */
 html{scroll-behavior:smooth}body{background:#f7f4ef;color:#1a1a1a;font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden;margin:0}
 
     .wrap{max-width:720px;margin:0 auto;padding:108px 32px 100px}
-    .breadcrumb{font-family:'Geist Mono', monospace;font-size:11px;color:#7a9bb5;margin-bottom:32px;display:flex;align-items:center;gap:8px}.breadcrumb a{color:#8c8780;text-decoration:none}.breadcrumb a:hover{color:#1a1a1a}
+    .breadcrumb{font-family:'Geist Mono', monospace;font-size:11px;color:#8c8780;margin-bottom:32px;display:flex;align-items:center;gap:8px}.breadcrumb a{color:#8c8780;text-decoration:none}.breadcrumb a:hover{color:#1a1a1a}
     .series{font-family:'Geist Mono', monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#c8f0d0;margin-bottom:20px;display:flex;align-items:center;gap:12px}.series::before{content:'';display:block;width:24px;height:1px;background:#c8f0d0}
     h1{font-family:'Instrument Serif', serif;font-size:clamp(32px,5vw,50px);line-height:1.1;letter-spacing:-.02em;color:#1a1a1a;margin:0 0 20px}h1 em{font-style:italic;color:#f5d97a}
     .deck{font-size:18px;color:#c4cdd9;line-height:1.6;font-weight:300;margin:0 0 28px;border-left:2px solid #ddd8cf;padding-left:20px}
@@ -146,12 +141,12 @@ html{scroll-behavior:smooth}body{background:#f7f4ef;color:#1a1a1a;font-family:va
     h2{font-family:'Instrument Serif', serif;font-size:26px;color:#1a1a1a;margin:52px 0 16px;letter-spacing:-.01em;line-height:1.2}
     p{margin:0 0 22px;color:#c4cdd9;font-size:16px}p strong{color:#1a1a1a;font-weight:500}.lead{font-size:18px;color:#1a1a1a}
     .pullquote{margin:40px 0;padding:28px 32px;border-left:3px solid #f5d97a;background:rgba(245,217,122,0.04);border-radius:0 6px 6px 0}.pullquote p{font-family:'Instrument Serif', serif;font-size:20px;color:#1a1a1a;line-height:1.5;margin:0;font-style:italic}.pullquote cite{display:block;margin-top:12px;font-family:'Geist Mono', monospace;font-size:10px;color:#8c8780;letter-spacing:.1em;font-style:normal;text-transform:uppercase}
-    .diagram{margin:40px 0;padding:32px;background:#0f1829;border:1px solid #f0ece4;border-radius:8px}.diag-label{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#7a9bb5;margin-bottom:28px}
-    .sub{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:16px;margin-bottom:24px}.box{padding:18px 20px;border-radius:6px}.box.x{background:rgba(200,240,208,0.06);border:1px solid rgba(200,240,208,0.2)}.box.y{background:rgba(240,128,128,0.06);border:1px solid rgba(240,128,128,0.2)}.tag{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}.tag.x{color:#c8f0d0}.tag.y{color:#f08080}.txt{font-size:14px;line-height:1.4}.txt.x{color:#c8f0d0}.txt.y{color:#f08080}.arrow{text-align:center;color:#7a9bb5;font-size:22px}.diag-note{font-size:13px;color:#8c8780;border-top:1px solid #f0ece4;padding-top:16px;margin-top:8px}
-    .epistemic{margin:56px 0 0;padding:24px 28px;background:rgba(200,194,183,0.15);border:1px solid #f0ece4;border-radius:6px}.ep-label{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#7a9bb5;margin-bottom:12px}.epistemic p{font-size:13px;color:#8c8780;margin:0 0 8px;line-height:1.6}.epistemic p:last-child{margin:0}
-    .related{margin:56px 0 0;padding-top:40px;border-top:1px solid #f0ece4}.rel-label{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#7a9bb5;margin-bottom:20px}.rel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.rel-card{padding:16px 20px;border-radius:6px;border:1px solid #f0ece4;text-decoration:none;transition:border-color .2s;display:block}.rel-card:hover{border-color:#ddd8cf}.rel-tag{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7a9bb5;margin-bottom:6px}.rel-title{font-size:14px;color:#c4cdd9;line-height:1.3}
+    .diagram{margin:40px 0;padding:32px;background:#0f1829;border:1px solid #f0ece4;border-radius:8px}.diag-label{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8c8780;margin-bottom:28px}
+    .sub{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:16px;margin-bottom:24px}.box{padding:18px 20px;border-radius:6px}.box.x{background:rgba(200,240,208,0.06);border:1px solid rgba(200,240,208,0.2)}.box.y{background:rgba(240,128,128,0.06);border:1px solid rgba(240,128,128,0.2)}.tag{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}.tag.x{color:#c8f0d0}.tag.y{color:#f08080}.txt{font-size:14px;line-height:1.4}.txt.x{color:#c8f0d0}.txt.y{color:#f08080}.arrow{text-align:center;color:#8c8780;font-size:22px}.diag-note{font-size:13px;color:#8c8780;border-top:1px solid #f0ece4;padding-top:16px;margin-top:8px}
+    .epistemic{margin:56px 0 0;padding:24px 28px;background:rgba(200,194,183,0.15);border:1px solid #f0ece4;border-radius:6px}.ep-label{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8c8780;margin-bottom:12px}.epistemic p{font-size:13px;color:#8c8780;margin:0 0 8px;line-height:1.6}.epistemic p:last-child{margin:0}
+    .related{margin:56px 0 0;padding-top:40px;border-top:1px solid #f0ece4}.rel-label{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8c8780;margin-bottom:20px}.rel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.rel-card{padding:16px 20px;border-radius:6px;border:1px solid #f0ece4;text-decoration:none;transition:border-color .2s;display:block}.rel-card:hover{border-color:#ddd8cf}.rel-tag{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8c8780;margin-bottom:6px}.rel-title{font-size:14px;color:#c4cdd9;line-height:1.3}
     .cta{margin:56px 0 0;padding:36px 40px;background:#0f1829;border:1px solid #f0ece4;border-radius:8px;text-align:center}.cta p{font-size:15px;color:#c4cdd9;margin:0 0 20px}.cta a{display:inline-block;padding:10px 24px;background:#c8f0d0;color:#1a6640;font-size:13px;font-weight:500;letter-spacing:.04em;border-radius:4px;text-decoration:none;transition:opacity .2s}.cta a:hover{opacity:.85}
-    .fl{font-family:var(--sans);font-weight:400;font-size:14px;color:#8c8780;text-decoration:none}.fl span{font-family:'Geist Mono', monospace;font-weight:600;color:#c8f0d0}.flinks{display:flex;gap:24px}.flinks a{font-size:13px;color:#8c8780;text-decoration:none;transition:color .2s}.flinks a:hover{color:#1a1a1a}.fcopy{font-size:12px;color:#7a9bb5}
+    .fl{font-family:var(--sans);font-weight:400;font-size:14px;color:#8c8780;text-decoration:none}.fl span{font-family:'Geist Mono', monospace;font-weight:600;color:#c8f0d0}.flinks{display:flex;gap:24px}.flinks a{font-size:13px;color:#8c8780;text-decoration:none;transition:color .2s}.flinks a:hover{color:#1a1a1a}.fcopy{font-size:12px;color:#8c8780}
     @media(max-width:640px){nav{padding:0 20px}.wrap{padding:88px 20px 80px}.sub{grid-template-columns:1fr}.arrow{transform:rotate(90deg);margin:8px auto}.pullquote{padding:20px}}
   
 /* ── SITE FOOTER ─────────────────────────────────────────────────── */
@@ -163,11 +158,11 @@ html{scroll-behavior:smooth}body{background:#f7f4ef;color:#1a1a1a;font-family:va
 .footer-tagline { font-size: 13px; color: #8c8780; line-height: 1.5; margin: 0; }
 .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .footer-col { display: flex; flex-direction: column; gap: 8px; }
-.footer-col-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #7a9bb5; margin-bottom: 4px; }
+.footer-col-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #8c8780; margin-bottom: 4px; }
 .footer-col a { font-size: 13px; color: #8c8780; text-decoration: none; transition: color .2s; line-height: 1.4; }
 .footer-col a:hover { color: #1a1a1a; }
 .footer-base { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid #ddd8cf; flex-wrap: wrap; gap: 8px; }
-.footer-copy { font-size: 12px; color: #7a9bb5; }
+.footer-copy { font-size: 12px; color: #8c8780; }
 @media (max-width: 640px) {
   .footer-inner { grid-template-columns: 1fr; gap: 32px; }
   .footer-nav { grid-template-columns: 1fr 1fr; }
@@ -179,7 +174,7 @@ html{scroll-behavior:smooth}body{background:#f7f4ef;color:#1a1a1a;font-family:va
 
 
 
-.nav-links a { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: #7a9bb5; transition: color 0.2s; }
+.nav-links a { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: #8c8780; transition: color 0.2s; }
 .nav-links a:hover { color: #1a1a1a; }
 
 
@@ -241,7 +236,7 @@ html{scroll-behavior:smooth}body{background:#f7f4ef;color:#1a1a1a;font-family:va
   left: 0;
   right: 0;
   z-index: 999;
-  background: rgba(247,244,239,0.98);
+  background: rgba(247,244,239,0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(200,194,183,0.6);
@@ -333,7 +328,105 @@ html{scroll-behavior:smooth}body{background:#f7f4ef;color:#1a1a1a;font-family:va
   <a href="/about.html">About</a>
   <a href="/request.html">Request a Diagnostic</a>
 </div>
+<!-- Mobile nav menu -->
 
+  <a href="/notes.html">Lab Notes</a>
+  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+  <a href="/ln-02-narrating.html">S7 · Narrating</a>
+  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+  
+  <a href="/about.html">About</a>
+  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
+</div>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="/index.html">Home</a> › <a href="/notes.html">Lab Notes</a> › S5 · Mediating Instead of Coupling</div>
+  <div class="series">Lab Notes · Stall Series</div>
+  <h1>Mediating <em>Instead of</em> Coupling</h1>
+  <p class="deck">A startup programme connects entrepreneurs to potential customers through structured events and facilitated introductions. Deals are announced. Relationships are celebrated. Three years later, few entrepreneurs have direct, ongoing commercial relationships with those customers. New cohorts route through the same intermediary.</p>
+  <div class="meta"><span>Andrew Barrie</span><span>March 2026</span><span>7 min read</span></div>
+  <p class="lead">The connector who never stops being needed is not creating connections. They are managing the absence of them.</p>
+  <h2>What the stall actually is</h2>
+  <div class="diagram">
+    <div class="diag-label">S5 · Substitution pattern</div>
+    <div class="sub">
+      <div class="box x"><div class="tag x">X-side · What happens</div><div class="txt x">Intermediaries smooth interaction between buyers and producers. Facilitated introductions. Managed events. Brokered relationships. Programme operators who remain permanently in the loop.</div></div>
+      <div class="arrow">→</div>
+      <div class="box y"><div class="tag y">Y-side · What doesn't</div><div class="txt y">Direct, repeat, unmediated relationships between actors. Buyers and producers who transact without a connector in the middle. The feedback loops that come from direct exposure to consequence.</div></div>
+    </div>
+    <div class="diag-note">The stall is not the presence of intermediaries — it is whether direct coupling ever forms. Where every relationship passes through an intermediary indefinitely, the intermediary is substituting for the coupling rather than enabling it.</div>
+  </div>
+  
+<h2>Why intermediaries persist</h2>
+<p>S5 is one of the most politically sensitive stalls to name, because it implies that organisations whose stated purpose is connection are preventing it. That framing is unfair and usually inaccurate. Intermediaries exist because they solve real problems. Transaction costs are high. Information is asymmetric. Trust takes time to build. A well-run connector organisation reduces these frictions genuinely.</p>
+<p>The stall appears not because the intermediary is bad at its job, but because it has become structurally necessary. When actors cannot transact without passing through the connector, the connector controls access. That control creates value — for the connector. It also creates dependency — for the actors. The dependency is rational on both sides: the buyer benefits from pre-screened introductions, the producer benefits from warm referrals. Neither has an incentive to invest in the direct relationship that would make the connector optional.</p>
+<div class="pullquote"><p>Removing intermediaries does not just enable direct coupling. It removes the positions that gain advantage from remaining in the loop.</p><cite>Ecosystem Stewardship · Chapter 6</cite></div>
+<p>Over time, the connector's position is load-bearing. The ecosystem's coordination capacity runs through their relationships, their events, their introductions. This is not capture — it is what successful intermediation produces when it is not designed with an exit condition.</p>
+
+<h2>The demand-side visibility problem</h2>
+<p>S5 is the stall where the Y-side is hardest to observe. Whether direct coupling is forming — whether buyers and producers are developing unmediated relationships — requires seeing what happens outside the intermediary's view. That data is rarely available from public sources.</p>
+<p>This is why S5 claims should be held at medium confidence unless there is direct evidence of the substitution: intermediary relationships that persist across multiple cycles, actors who report no direct commercial relationships outside the programme structure, or connector organisations that explicitly position continued involvement as the success metric rather than relationship independence.</p>
+
+<h2>Where leverage exists — carefully</h2>
+<p>The leverage move for S5 requires more caution than for most stalls. Where direct coupling is genuinely not yet viable — because trust is insufficient, because actors are too early-stage, because the market is not yet thick enough — withdrawing intermediaries before the conditions for coupling exist will simply destroy the connections rather than transform them.</p>
+<p>Where coupling is viable but not forming, the move is to introduce one structured programme where the explicit success metric is relationship independence: the number of actors who are transacting directly 12 months after introduction, without intermediary involvement. This does not eliminate the connector. It changes what success looks like — and begins to reveal whether the mediation is enabling coupling or substituting for it.</p>
+
+  <div class="epistemic">
+    <div class="ep-label">Epistemic note</div>
+    <p>S5 has the lowest observability of any stall in the framework. The X-side — intermediary presence and activity — is visible. The Y-side — the absence of direct coupling — requires seeing what is not happening, which depends on data that intermediaries rarely produce about their own limitations. Claims should be held at medium or low confidence unless there is explicit evidence of persistent intermediary dependency across multiple relationship cycles, or direct testimony from actors about the absence of unmediated commercial relationships.</p>
+  </div>
+  <div class="related">
+    <div class="rel-label">Related notes</div>
+    <div class="rel-grid"><a href="/ln-01-coordinating.html" class="rel-card"><div class="rel-tag">S2 · Stall</div><div class="rel-title">Coordinating Instead of Deciding</div></a><a href="/ln-07-forgiving.html" class="rel-card"><div class="rel-tag">S3 · Stall</div><div class="rel-title">Forgiving Instead of Redesigning</div></a><a href="/ln-12-leverage.html" class="rel-card"><div class="rel-tag">Leverage</div><div class="rel-title">What Leverage Actually Looks Like</div></a></div>
+  </div>
+  <div class="cta">
+    <p>The diagnostic identifies which stalls are operating in your cluster — and which stacks they form. That is where intervention design begins.</p>
+    <a href="/request.html">Request a Diagnostic →</a>
+  </div>
+</div>
+
+
+
+
+
+
+<style>
+@media (max-width: 900px) {
+  .substitution { grid-template-columns: 1fr !important; }
+  .sub-arrow { transform: rotate(90deg); margin: 8px auto; display: block; }
+  .related-grid { grid-template-columns: 1fr 1fr !important; }
+  .two-col-body, .article-layout { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .article-wrap, .body-wrap { padding: 80px 20px 80px !important; }
+  h1, .article-headline, .hero-h { font-size: clamp(24px, 7vw, 36px) !important; }
+  .lede, .article-lede { font-size: 16px !important; }
+  blockquote, .pull-quote { padding: 14px 16px 14px 18px; font-size: 17px; }
+  .evidence-grid, .stall-grid, .two-col { grid-template-columns: 1fr !important; }
+  .related-grid { grid-template-columns: 1fr !important; }
+  .tag-row { flex-wrap: wrap; gap: 6px; }
+  .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
+  p { font-size: 15px; line-height: 1.65; }
+}
+</style>
+
+
+
+
+
+<script>
+// Hamburger menu
+const _navHamburger = document.getElementById('nav-hamburger');
+const _navMobileMenu = document.getElementById('nav-mobile-menu');
+if (_navHamburger && _navMobileMenu) {
+  _navHamburger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const isOpen = _navMobileMenu.classList.contains('open');
+    _navMobileMenu.classList.toggle('open', !isOpen);
+    _navHamburger.classList.toggle('open', !isOpen);
+  });
+  document.addEventL
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">

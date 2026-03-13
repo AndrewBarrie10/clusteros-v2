@@ -133,6 +133,13 @@ const behaviour = {
     if (window.dashboard) window.dashboard.init([pillKey]);
   },
 
+  commitFreeText(text) {
+    // No pills selected — generate pathway from description alone
+    this.freeDescription = text;
+    this.declaredProblem = 'freetext';
+    if (window.dashboard) window.dashboard.initFromFreeText(text);
+  },
+
   declareCluster(text) {
     this.declaredCluster = text;
     this.updateAdaptive();
@@ -182,16 +189,22 @@ const behaviour = {
   Summary: ${c.fullData.summary || ''}`;
     }).join('\n\n');
 
-    const declaredProblemLine = this.declaredProblem
+    const declaredProblemLine = this.declaredProblem && this.declaredProblem !== 'freetext'
       ? `DECLARED PROBLEM: Visitor selected "${this.declaredProblem}" — maps to the ${this.declaredStall} stall.`
       : '';
+
     const declaredClusterLine = this.declaredCluster
       ? `DECLARED CLUSTER: Visitor works with "${this.declaredCluster}". Weight this heavily.`
+      : '';
+
+    const freeDescLine = this.freeDescription
+      ? `VISITOR DESCRIPTION (their own words): "${this.freeDescription}"`
       : '';
 
     return `You are the diagnostic intelligence layer of ClusterOS — a platform that identifies why regional innovation ecosystems stall. A stall is a behavioural substitution: the system doing something observable instead of something harder. There are 9 stall types. Stalls form stabilisation stacks that resist single interventions.
 
 ${declaredProblemLine}
+${freeDescLine}
 ${declaredClusterLine}
 
 VISITOR PATH:

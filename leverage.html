@@ -83,14 +83,7 @@
   .btn-primary, .cta-btn { background: var(--green) !important; color: #fff !important; border-color: var(--green) !important; }
   .btn-secondary, .btn-ghost { color: var(--green) !important; border-color: var(--green) !important; background: transparent !important; }
   .btn-secondary:hover, .btn-ghost:hover { background: var(--green) !important; color: #fff !important; }
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem; height: 52px;
-    background: rgba(247,244,239,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
+  
   .nav-logo { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--green); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; }
   .nav-logo span { color: var(--ink); }
   .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
@@ -413,7 +406,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 </head>
 <body>
 <nav>
-  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <a class="nav-logo" href="/">ClusterOS</a>
   <ul class="nav-links">
     <li class="nav-dropdown">
       <span class="nav-dropdown-toggle">Product ▾</span>
@@ -457,20 +450,8 @@ hr { border: none; border-top: 1px solid var(--border); }
   <a href="/about.html">About</a>
   <a href="/request.html">Request a Diagnostic</a>
 </div>
-<!-- Mobile nav menu -->
-
-  <a href="/notes.html">Lab Notes</a>
-  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
-  <a href="/ln-02-narrating.html">S7 · Narrating</a>
-  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
-  
-  <a href="/about.html">About</a>
-  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
 </div>
 
-
-
-<!-- HERO -->
 <div class="hero">
   <div class="hero-tag rev">Stage 5 · Leverage</div>
   <h1 class="hero-h rev d1">The system doesn't need fixing.<br><em>It needs exposure.</em></h1>
@@ -543,7 +524,6 @@ hr { border: none; border-top: 1px solid var(--border); }
 <div class="cta" id="cta">
   <h2 class="cta-h rev">Your stack has a <em>leverage point</em>.</h2>
   <p class="cta-p rev d1">The diagnostic identifies which stalls are operating in your ecosystem, names the stack they form, and generates testable leverage hypotheses specific to that configuration — with confidence levels, cascade predictions, and observable success metrics. Not a strategy. A starting point.</p>
-  <a href="/request.html" class="cta-btn rev d2">Request a diagnostic</a>
   <div class="cta-note rev d3">Testable leverage hypotheses · Calibrated to your specific stack</div>
 </div>
 
@@ -579,26 +559,13 @@ hr { border: none; border-top: 1px solid var(--border); }
     <div class="footer-nav">
       <div class="footer-col">
         <div class="footer-col-label">Product</div>
-        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
-        <a href="/signals-systems.html">Signals &amp; Systems</a>
-        <a href="/diagnostic.html">The Diagnostic</a>
         <a href="/leverage.html">Leverage</a>
-        <a href="/findings.html">Findings</a>
-        <a href="/pricing.html">Pricing</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-label">Lab Notes</div>
-        <a href="/notes.html">All Notes</a>
-        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
-        <a href="/ln-02-narrating.html">S7 · Narrating</a>
-        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
-        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
-        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-label">Company</div>
-        <a href="/about.html">About</a>
-        <a href="/request.html">Request a Diagnostic</a>
         <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
       </div>
     </div>
@@ -608,164 +575,7 @@ hr { border: none; border-top: 1px solid var(--border); }
     <span>Built in Edinburgh</span>
   </div>
 </footer>
-<script>
-const MOVES = [
-  {
-    num: '01',
-    name: 'Make outcomes harder to ignore',
-    sub: 'Force high-status artefacts to surface downstream effects alongside participation',
-    what: 'In many ecosystems, <strong>activity is public while outcomes are private, lagged, or diffuse</strong>. A leverage move is to force one flagship programme, report, or funding cycle to surface downstream effects alongside participation and visibility. This does not guarantee improvement. It prevents indefinite continuation without learning.',
-    targets: ['S7 Narrating', 'S8 Scaling Activity', 'S3 Forgiving'],
-    examples: [
-      {
-        region: 'Innovation fund',
-        scene: 'An innovation fund publishes annual reports highlighting number of startups funded, events convened, and partnerships formed.',
-        move: 'A steward requires the next report to also include repeat revenue rates, follow-on funding conversion, and survival at 24 months. The fund resists: "Market conditions vary. These metrics don\'t capture early-stage value." The steward does not argue. The requirement stands.',
-        effect: 'It does not dictate performance. It removes the ability to rely solely on activity as a proxy for success.',
-      },
-      {
-        region: 'Orlando diagnostic',
-        scene: 'Multiple clusters showing abundant early-stage support alongside weak evidence of growth-stage outcomes. Activity metrics looking strong across the board.',
-        move: 'Replace activity metrics — companies supported, events held — with throughput metrics: companies reaching $10M revenue, Series B raised locally, jobs in scaled companies. ClusterOS makes the conversion gap visible and trackable in real time.',
-        effect: 'Activity metrics create pressure to scale activity. Throughput metrics create pressure to improve conversion.',
-      },
-    ],
-  },
-  {
-    num: '02',
-    name: 'Introduce timing pressure',
-    sub: 'Time-bound coordination structures and require explicit renewal criteria',
-    what: 'Stacks persist because <strong>renewal is safer than removal</strong>. A leverage move is to time-bound a coordination structure, require explicit renewal criteria, or place a real sunset on a programme. This forces a decision without dictating the answer. In many systems, timing pressure produces more learning than strategy ever does.',
-    targets: ['S2 Coordinating', 'S3 Forgiving', 'S9 Waiting'],
-    examples: [
-      {
-        region: 'Regional working group',
-        scene: 'A multi-stakeholder working group has met quarterly for four years. Its mandate is "to align priorities and ensure coordination."',
-        move: 'A steward announces: "This group will sunset in 12 months unless it can demonstrate that its continuation is earning more than its opportunity cost." The group protests: "Alignment takes time. Relationships are fragile." The steward does not debate. The clock starts.',
-        effect: 'It does not mandate a specific outcome. It removes the option of continuing indefinitely without having to prove value.',
-      },
-      {
-        region: 'Programme renewal',
-        scene: 'An accelerator programme renews automatically each funding cycle. KPIs are renegotiated rather than evaluated against the original model.',
-        move: 'Set a genuine sunset: the programme continues if it can show that its model is producing different outcomes than the baseline — not just more activity. Require a specific conversion metric, not a redefined one.',
-        effect: 'Forces a decision about whether the model works, rather than whether the programme is valued.',
-      },
-    ],
-  },
-  {
-    num: '03',
-    name: 'Restore contrast',
-    sub: 'Reintroduce comparison where narrative has flattened difference',
-    what: 'Narrative regimes reduce discrimination — they aggregate success, explain away variance, and prevent one pathway from being judged better than another. <strong>A leverage move is to reintroduce contrast</strong>: programme-level outcomes rather than aggregated totals, external benchmarks that cannot be explained away, independent pathways tracked alongside incumbent-integrated ones.',
-    targets: ['S7 Narrating', 'S6 Stabilising', 'S1 Re-proving'],
-    examples: [
-      {
-        region: 'Ecosystem reporting',
-        scene: 'An ecosystem reports aggregate success: "Our startups have raised £50M and created 200 jobs." The number looks reasonable and the narrative is positive.',
-        move: 'A steward asks: "How much of that came from the accelerator versus the corporate partnership programme? How do our numbers compare to similar-sized ecosystems?" The response: "Comparison would be misleading." The steward does not argue. The next report includes programme-level data and external benchmarks.',
-        effect: 'It does not prescribe which programme should win. It prevents the system from avoiding comparison by aggregating everything into a single success story.',
-      },
-      {
-        region: 'Orlando / Incumbent tracks',
-        scene: 'Innovation activity in multiple clusters routes primarily through incumbent anchor organisations. Independent pathways exist but are not tracked separately.',
-        move: 'Track outcomes for incumbent-integrated routes alongside independent ones — without asserting which should dominate. Identify spillovers from incumbents that could be commercialised independently. Make the comparison visible.',
-        effect: 'Reveals whether the incumbent orbit is producing different outcomes than independent paths. Creates evidence for or against the stabilisation claim.',
-      },
-    ],
-  },
-  {
-    num: '04',
-    name: 'Withdraw narrative cover selectively',
-    sub: 'Pause amplification in one domain until behavioural evidence appears',
-    what: 'In systems where explanation absorbs scrutiny, <strong>restraint can be leverage</strong>. A leverage move is to pause narrative amplification in one bounded domain until behavioural evidence appears. This tests whether belief or reality is doing the work. It does not condemn the claim — it suspends endorsement until the claim can be demonstrated.',
-    targets: ['S7 Narrating', 'S2 Coordinating', 'S8 Scaling Activity'],
-    examples: [
-      {
-        region: 'Sector positioning',
-        scene: 'A sector strategy claims the region is becoming a "global leader" in a specific technology. Evidence: early-stage activity, strong research, growing interest.',
-        move: 'A steward says: "I will not reference this claim publicly until we can show repeat commercial adoption or inbound investment driven by this positioning." The strategy team protests. The restraint holds.',
-        effect: 'Tests whether the positioning is producing outcomes or simply being repeated. If real, evidence will appear. If not, the narrative was doing work that reality was not.',
-      },
-      {
-        region: 'Programme success stories',
-        scene: 'A cluster organisation routinely amplifies success stories from its programmes — case studies, press releases, social media. Outcomes look strong from the outside.',
-        move: 'Require that success stories include the metric that mattered most to the company — not the metric that looks best for the programme. Pause amplification for any programme where conversion data is unavailable.',
-        effect: 'Shifts the selection criterion for what gets amplified from "reflects well on us" to "demonstrates what the programme actually produces".',
-      },
-    ],
-  },
-];
 
-function renderMoves() {
-  const list = document.getElementById('moves-list');
-  list.innerHTML = MOVES.map((m, i) => `
-    <div class="move" id="move-${i}">
-      <button class="move-row" onclick="toggleMove(${i})">
-        <div class="move-num">${m.num}</div>
-        <div class="move-main">
-          <div class="move-name">${m.name}</div>
-          <div class="move-sub">${m.sub}</div>
-        </div>
-        <div class="move-chevron">▾</div>
-      </button>
-      <div class="move-detail">
-        <div class="move-inner">
-
-          <div class="what-it-does">
-            <div class="what-label">The logic</div>
-            <div class="what-text">${m.what}</div>
-          </div>
-
-          <div class="targets">
-            <span class="target-label">Targets stalls:</span>
-            ${m.targets.map(t => `<span class="target-tag">${t}</span>`).join('')}
-          </div>
-
-          <div style="margin-top:16px">
-            <div class="what-label" style="margin-bottom:12px">In practice</div>
-            ${m.examples.map(ex => `
-              <div class="example-block" style="margin-bottom:10px">
-                <div class="ex-head">
-                  <div class="ex-dot"></div>
-                  <div class="ex-label">Example</div>
-                  <div class="ex-region">${ex.region}</div>
-                </div>
-                <div class="ex-body">
-                  <div class="ex-scene">${ex.scene}</div>
-                  <div class="ex-move">${ex.move}</div>
-                  <div class="ex-effect">${ex.effect}</div>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-let openMove = null;
-function toggleMove(i) {
-  const el = document.getElementById('move-' + i);
-  if (openMove === i) {
-    el.classList.remove('open');
-    openMove = null;
-  } else {
-    if (openMove !== null) document.getElementById('move-' + openMove).classList.remove('open');
-    el.classList.add('open');
-    openMove = i;
-  }
-}
-
-// Reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.rev').forEach(el => obs.observe(el));
-
-renderMoves();
-</script>
 <script>
 document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
   var t = dd.querySelector('.nav-dropdown-toggle');

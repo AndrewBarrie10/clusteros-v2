@@ -107,6 +107,70 @@ const dashboard = {
   inBranch:      false,
   currentBranch: null,
 
+  // ── INIT FROM FREE TEXT (no pills selected) ─────────────
+  async initFromFreeText(text) {
+    this.active     = true;
+    this.pillKeys   = [];
+    this.stallName  = null;
+    this.stallNames = [];
+    this.stack      = null;
+
+    this._showPanel();
+    this._renderSkeleton();
+
+    const input  = document.getElementById('intel-bar-input');
+    const submit = document.getElementById('intel-bar-submit');
+    const status = document.getElementById('intel-bar-status');
+    if (input)  input.style.display  = 'none';
+    if (submit) submit.style.display = 'none';
+    if (status) {
+      status.style.display = 'block';
+      status.textContent   = 'Reading your situation — building pathway';
+    }
+
+    // Match clusters even without stall declaration — use free text signals
+    this.matchedClusters = this._matchClusters(4);
+    const clusterEvidence = this.matchedClusters.length
+      ? this.matchedClusters.map(c => this._serializeCluster(c)).join('\n\n')
+      : '';
+
+    const prompt = `You are generating a personalised learning pathway for the ClusterOS diagnostic platform.
+
+VISITOR DESCRIPTION (their own words):
+"${text}"
+
+MATCHED CLUSTERS (based on available signals):
+${clusterEvidence || 'No strong cluster match yet — generate pathway from description.'}
+
+Based on the visitor's description, identify the most likely stall type(s) from this list:
+- Narrating instead of testing (reporting substitutes for impact)
+- Coordinating instead of deciding (meetings substitute for commitment)
+- Re-proving instead of narrowing (justification substitutes for execution)
+- Scaling activity instead of throughput (starts celebrated over outcomes)
+- Mediating instead of coupling (relationships substitute for transactions)
+- Extracting without reinvesting (anchors take more than they circulate)
+
+Then generate a 5-step pathway. Reference specific matched clusters by name where possible.
+
+${this._pathwayJsonSpec()}`;
+
+    try {
+      const response = await fetch(`${window.RAILWAY}/api/intelligence`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      const data   = await response.json();
+      const text2  = data.text || '';
+      const parsed = JSON.parse(text2.replace(/```json|```/g, '').trim());
+      this.steps       = parsed.steps;
+      this.currentStep = 1;
+      this._renderOpening(parsed.opening);
+      this._render();
+    } catch(e) {
+      this._fallbackPathway();
+    }
+  },
+
   // ── INIT ─────────────────────────────────────────────────
   async init(pillKeys) {
     // Accept single key or array
@@ -194,6 +258,27 @@ const dashboard = {
   },
 
   // ── API CALLS ─────────────────────────────────────────────
+
+  // ── SHARED PATHWAY JSON SPEC ─────────────────────────────
+  _pathwayJsonSpec() {
+    return `STRICT RULES:
+- Every description is EXACTLY one sentence. Maximum 25 words. No exceptions.
+- Name a real cluster from the matched data in steps 2, 3, and 4.
+- No hedging. No "suggests", "may", "often". State facts.
+- No em-dashes. No semicolons. Short, direct, specific.
+
+Return ONLY valid JSON, no markdown:
+{
+  "opening": "One sentence. Name a real cluster if possible. Make the visitor feel seen. Under 18 words. No em-dashes.",
+  "steps": [
+    { "id": 1, "title": "3-4 words", "description": "Name the stall and a prevalence number. Max 25 words.", "target": "evidence", "branches": ["science","evidence"], "complete": true },
+    { "id": 2, "title": "3-4 words", "description": "Name a real matched cluster with a specific data point. Max 25 words.", "target": "clusters", "branches": ["science","evidence"], "complete": false },
+    { "id": 3, "title": "3-4 words", "description": "Name the stack and which clusters share it. Max 25 words.", "target": "diagnostic", "branches": ["science","architecture","clusters"], "complete": false },
+    { "id": 4, "title": "3-4 words", "description": "State the leverage entry point from a named cluster. Max 25 words.", "target": "clusters", "branches": ["clusters","evidence"], "complete": false },
+    { "id": 5, "title": "Confirm it in yours", "description": "A snapshot diagnostic takes 4-5 weeks at a fixed price and tells you where leverage sits in your ecosystem.", "target": "snapshot", "branches": ["contact"], "complete": false }
+  ]
+}`;
+  },
 
   // ── CLUSTER MATCHING ─────────────────────────────────────
   // Run before pathway generation. Returns top N clusters scored
@@ -642,77 +727,99 @@ Rewrite steps ${this.currentStep + 2} through 4 only. Keep step 5 unchanged. STR
 
 window.dashboard = dashboard;
 
-// ── OPENING QUESTION & PILLS ──────────────────────────────
-function initOpeningQuestion() {
-  const input = document.getElementById('intel-bar-input');
-  if (input) {
-    input.placeholder = 'Name your cluster, or pick what your ecosystem keeps doing below';
+// ── GATE & ONBOARDING ────────────────────────────────────
+function initGate() {
+  const gate        = document.getElementById('onboarding-gate');
+  const descScreen  = document.getElementById('describe-screen');
+  const gateGuide   = document.getElementById('gate-guide');
+  const gateExplore = document.getElementById('gate-explore');
+  const descBack    = document.getElementById('describe-back');
+  const descSkip    = document.getElementById('describe-skip');
+  const descBuild   = document.getElementById('describe-build');
+  const textarea    = document.getElementById('describe-textarea');
+  const pillsRow    = document.getElementById('describe-pills-row');
+  const stackPrev   = document.getElementById('dpill-stack-preview');
+
+  if (!gate) return;
+
+  // Render pills into describe screen
+  if (pillsRow) {
+    pillsRow.innerHTML = PILLS.map(p =>
+      `<button class="dpill" data-key="${p.key}">${p.label}</button>`
+    ).join('');
+
+    pillsRow.querySelectorAll('.dpill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('selected');
+        behaviour.togglePill(btn.dataset.key);
+        const stalls = behaviour.selectedPills.map(k => window.PILL_STALLS[k]?.stall).filter(Boolean);
+        const stack  = behaviour._detectStack(stalls);
+        if (stackPrev) stackPrev.textContent = stack ? stack.name + ' detected' : '';
+        _updateBuildBtn();
+      });
+    });
   }
 
-  const bar = document.getElementById('intel-bar');
-  if (!bar) return;
+  // Enable build button when pills selected OR textarea has content
+  function _updateBuildBtn() {
+    if (!descBuild) return;
+    const hasPills = behaviour.selectedPills.length > 0;
+    const hasText  = (textarea?.value.trim().length || 0) > 10;
+    descBuild.disabled = !hasPills && !hasText;
+  }
+  textarea?.addEventListener('input', _updateBuildBtn);
 
-  const pillsEl = document.createElement('div');
-  pillsEl.id = 'intel-pills';
-  pillsEl.innerHTML = `
-    <div class="pills-label">Your ecosystem keeps… <span id="pills-hint" style="color:var(--green);margin-left:8px;display:none">Pick all that apply</span></div>
-    <div class="pills-row">
-      ${PILLS.map(p =>
-        `<button class="pill" data-key="${p.key}">${p.label}</button>`
-      ).join('')}
-      <button class="pill pill-other" data-key="other">Something else →</button>
-    </div>
-    <div id="pills-commit-row" style="display:none;margin-top:0.6rem;">
-      <button id="pills-commit">Build my pathway →</button>
-      <span id="pills-stack-preview" style="font-family:var(--font-mono);font-size:10px;color:var(--green);margin-left:12px;text-transform:uppercase;letter-spacing:0.08em;"></span>
-    </div>`;
-
-  bar.parentNode.insertBefore(pillsEl, bar);
-
-  // Add commit button style
-  const style = document.createElement('style');
-  style.textContent = '#pills-commit{background:var(--green);color:#fff;border:none;font-family:var(--font-mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;padding:6px 16px;cursor:pointer;transition:background 0.15s;}#pills-commit:hover{background:var(--green-dim);}';
-  document.head.appendChild(style);
-
-  const commitRow  = document.getElementById('pills-commit-row');
-  const commitBtn  = document.getElementById('pills-commit');
-  const stackPrev  = document.getElementById('pills-stack-preview');
-  const hint       = document.getElementById('pills-hint');
-
-  // Wire up pills — multi-select
-  document.querySelectorAll('.pill').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.dataset.key;
-      if (key === 'other') {
-        document.getElementById('intel-bar-input')?.focus();
-        return;
-      }
-      btn.classList.toggle('selected');
-      behaviour.togglePill(key);
-
-      const selected = behaviour.selectedPills;
-      if (selected.length === 0) {
-        commitRow.style.display = 'none';
-        hint.style.display = 'none';
-        stackPrev.textContent = '';
-      } else {
-        commitRow.style.display = 'block';
-        hint.style.display = 'inline';
-        // Preview stack if detectable
-        const stalls = selected.map(k => window.PILL_STALLS[k]?.stall).filter(Boolean);
-        const stack  = behaviour._detectStack(stalls);
-        stackPrev.textContent = stack ? stack.name + ' detected' : '';
-      }
-    });
+  // Gate buttons
+  gateGuide?.addEventListener('click', () => {
+    gate.classList.add('hidden');
+    descScreen.classList.add('visible');
   });
 
-  // Commit
-  commitBtn?.addEventListener('click', () => {
-    if (!behaviour.selectedPills.length) return;
-    pillsEl.classList.add('dismissed');
-    behaviour.commitPills();
+  gateExplore?.addEventListener('click', () => {
+    gate.classList.add('hidden');
+    // Show the bar cluster input
+    _activateBarMode();
+  });
+
+  // Describe screen back
+  descBack?.addEventListener('click', () => {
+    descScreen.classList.remove('visible');
+    gate.classList.remove('hidden');
+  });
+
+  // Skip — build pathway from pills only (or default)
+  descSkip?.addEventListener('click', () => {
+    descScreen.classList.remove('visible');
+    if (behaviour.selectedPills.length > 0) {
+      behaviour.commitPills();
+    } else {
+      // No selection — just dismiss and let them explore
+      _activateBarMode();
+    }
+  });
+
+  // Build — commit pills + free text
+  descBuild?.addEventListener('click', () => {
+    const freeText = textarea?.value.trim() || '';
+    if (freeText) behaviour.freeDescription = freeText;
+    descScreen.classList.remove('visible');
+    if (behaviour.selectedPills.length > 0) {
+      behaviour.commitPills();
+    } else {
+      // Free text only — treat as a freeform describe
+      behaviour.commitFreeText(freeText);
+    }
   });
 }
+
+function _activateBarMode() {
+  // Just show the bar input in normal mode — no dashboard
+  const input = document.getElementById('intel-bar-input');
+  if (input) input.placeholder = 'Name the cluster you\'re working with';
+}
+
+// Legacy no-op — pills now live in describe screen
+function initOpeningQuestion() {}
 
 // ── SIMILAR CLUSTERS PANEL ────────────────────────────────
 function buildClusterCards(clusters) {
@@ -815,5 +922,5 @@ window.openSimilarClusters = function() {
 
 // ── BOOT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  initOpeningQuestion();
+  initGate();
 });

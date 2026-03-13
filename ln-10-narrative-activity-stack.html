@@ -83,14 +83,7 @@
   .btn-primary, .cta-btn { background: var(--green) !important; color: #fff !important; border-color: var(--green) !important; }
   .btn-secondary, .btn-ghost { color: var(--green) !important; border-color: var(--green) !important; background: transparent !important; }
   .btn-secondary:hover, .btn-ghost:hover { background: var(--green) !important; color: #fff !important; }
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem; height: 52px;
-    background: rgba(247,244,239,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
+  
   .nav-logo { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--green); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; }
   .nav-logo span { color: var(--ink); }
   .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
@@ -354,7 +347,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
 </head>
 <body>
 <nav>
-  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <a class="nav-logo" href="/">ClusterOS</a>
   <ul class="nav-links">
     <li class="nav-dropdown">
       <span class="nav-dropdown-toggle">Product ▾</span>
@@ -398,24 +391,12 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
   <a href="/about.html">About</a>
   <a href="/request.html">Request a Diagnostic</a>
 </div>
-<!-- Mobile nav menu -->
-
-  <a href="/notes.html">Lab Notes</a>
-  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
-  <a href="/ln-02-narrating.html">S7 · Narrating</a>
-  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
-  
-  <a href="/about.html">About</a>
-  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
 </div>
-
-
 
 <div class="article-wrap">
 
   <div class="breadcrumb">
-    <a href="/index.html">Home</a> ›
-    <a href="/notes.html">Lab Notes</a> ›
+    <a href="/index.html">Home</a> › ›
     Stack · Narrative × Activity
   </div>
 
@@ -604,26 +585,13 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
     <div class="footer-nav">
       <div class="footer-col">
         <div class="footer-col-label">Product</div>
-        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
-        <a href="/signals-systems.html">Signals &amp; Systems</a>
-        <a href="/diagnostic.html">The Diagnostic</a>
         <a href="/leverage.html">Leverage</a>
-        <a href="/findings.html">Findings</a>
-        <a href="/pricing.html">Pricing</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-label">Lab Notes</div>
-        <a href="/notes.html">All Notes</a>
-        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
-        <a href="/ln-02-narrating.html">S7 · Narrating</a>
-        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
-        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
-        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-label">Company</div>
-        <a href="/about.html">About</a>
-        <a href="/request.html">Request a Diagnostic</a>
         <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
       </div>
     </div>
@@ -633,6 +601,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
     <span>Built in Edinburgh</span>
   </div>
 </footer>
+
 
 <script>
 document.querySelectorAll('.nav-dropdown').forEach(function(dd) {

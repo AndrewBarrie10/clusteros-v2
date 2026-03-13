@@ -83,14 +83,7 @@
   .btn-primary, .cta-btn { background: var(--green) !important; color: #fff !important; border-color: var(--green) !important; }
   .btn-secondary, .btn-ghost { color: var(--green) !important; border-color: var(--green) !important; background: transparent !important; }
   .btn-secondary:hover, .btn-ghost:hover { background: var(--green) !important; color: #fff !important; }
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem; height: 52px;
-    background: rgba(247,244,239,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
+  
   .nav-logo { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--green); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; }
   .nav-logo span { color: var(--ink); }
   .nav-links { display: flex; gap: 0; align-items: center; list-style: none; }
@@ -439,7 +432,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 </head>
 <body>
 <nav>
-  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <a class="nav-logo" href="/">ClusterOS</a>
   <ul class="nav-links">
     <li class="nav-dropdown">
       <span class="nav-dropdown-toggle">Product ▾</span>
@@ -483,20 +476,8 @@ hr { border: none; border-top: 1px solid var(--border); }
   <a href="/about.html">About</a>
   <a href="/request.html">Request a Diagnostic</a>
 </div>
-<!-- Mobile nav menu -->
-
-  <a href="/notes.html">Lab Notes</a>
-  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
-  <a href="/ln-02-narrating.html">S7 · Narrating</a>
-  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
-  
-  <a href="/about.html">About</a>
-  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
 </div>
 
-
-
-<!-- HERO -->
 <div class="hero">
   <div class="hero-tag rev">Pricing</div>
   <h1 class="hero-h rev d1">Three ways in.<br><em>One direction.</em></h1>
@@ -569,7 +550,6 @@ hr { border: none; border-top: 1px solid var(--border); }
     </div>
     <div class="snap-cta">
       <div class="snap-cta-text">Delivered as a structured report. <strong>No working sessions. Fixed fee. Natural path to Phase 1 if the findings warrant it.</strong></div>
-      <a href="/request.html" class="snap-btn">Order a Snapshot</a>
     </div>
   </div>
 </div>
@@ -743,7 +723,6 @@ hr { border: none; border-top: 1px solid var(--border); }
     <h2 class="cta-h">Not sure where<br>to <em>start</em>?</h2>
     <p class="cta-p">The Cluster Snapshot is the lowest-friction entry point — fixed fee, no working sessions, 3–4 weeks. Or get in touch directly and we'll work out which tier fits where you are.</p>
     <div class="cta-btns">
-      <a href="/request.html" class="btn-primary">Order a Snapshot</a>
       <a href="/cdn-cgi/l/email-protection#1879767c6a7d6f587b7775756d76716c6174797a36796868" class="btn-secondary">Talk to Andrew</a>
     </div>
     <div class="cta-note"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aecfc0cadccbd9eecdc1c3c3dbc0c7dad7c2cfcc80cfdede">[email&#160;protected]</a> · Community Lab · Edinburgh</div>
@@ -779,115 +758,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 
 
-<script>
-// Hamburger menu
-const _navHamburger = document.getElementById('nav-hamburger');
-const _navMobileMenu = document.getElementById('nav-mobile-menu');
-if (_navHamburger
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
-      <p class="footer-tagline">Regional economies need infrastructure.<br>Not more strategy.</p>
-    </div>
-    <div class="footer-nav">
-      <div class="footer-col">
-        <div class="footer-col-label">Product</div>
-        <a href="/digital-infrastructure.html">Digital Infrastructure</a>
-        <a href="/signals-systems.html">Signals &amp; Systems</a>
-        <a href="/diagnostic.html">The Diagnostic</a>
-        <a href="/leverage.html">Leverage</a>
-        <a href="/findings.html">Findings</a>
-        <a href="/pricing.html">Pricing</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-label">Lab Notes</div>
-        <a href="/notes.html">All Notes</a>
-        <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
-        <a href="/ln-02-narrating.html">S7 · Narrating</a>
-        <a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a>
-        <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
-        <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-label">Company</div>
-        <a href="/about.html">About</a>
-        <a href="/request.html">Request a Diagnostic</a>
-        <a href="mailto:andrew@communitylab.app">andrew@communitylab.app</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-base">
-    <span>© 2026 ClusterOS · Community Lab</span>
-    <span>Built in Edinburgh</span>
-  </div>
-</footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script>
-const FAQS = [
-  {
-    q: 'What does the Cluster Snapshot cost and what do I need to provide?',
-    a: 'The Cluster Snapshot is £5,000 fixed fee. You provide the cluster name, geography, sector, and a short description — and you distribute the ClusterOS Diagnostic Instrument to actors across your cluster. The instrument is role-segmented: founders, anchors, researchers, and stewards each receive a short version tailored to their actor type. You distribute it, they complete it, we process the responses alongside the public data pipeline. No working sessions, no internal documents required. Turnaround is 4–5 weeks.'
-  },
-  {
-    q: 'Why does the Snapshot include a questionnaire rather than just running on public data?',
-    a: 'Public data captures what the system looks like from the outside — X-side behaviour, observable dynamics, what actors are visibly doing. The questionnaire captures what actors inside the system experience — which is where Y-side observability lives. Without it, stall confidence is LOW throughout and the analysis tells you what the system is doing but not reliably why. The questionnaire processes reported actor behaviour against the 9-stall framework, surfacing buy-side demand, sell-side capability, and cross-actor bridging signals that no public dataset contains. It is what takes the Snapshot beyond what a good consultant with public data could produce.'
-  },
-  {
-    q: 'How does the Snapshot relate to Phase 1 (Collaborative Diagnostic)?',
-    a: 'The Snapshot is the starting structure. Phase 2 adds your institutional knowledge — programme data, anchor interviews, steward working sessions — which moves stall confidence further and reveals dynamics that even the questionnaire cannot fully surface. Many stewards use the Snapshot to build the internal case for a full engagement: it gives the board something concrete to react to, and it identifies which findings warrant deeper investigation.'
-  },
-  {
-    q: 'Do you publish prices for Phase 1 and Phase 2?',
-    a: 'Not on this page. Engagements vary in scope depending on the number of clusters, the depth of steward data available, and the platform configuration required. We scope each engagement in a conversation and price accordingly. Get in touch and we will give you a clear number quickly.'
-  },
-  {
-    q: 'We already have a strategy and plenty of reports. Why do we need a diagnostic?',
-    a: 'Strategy documents describe where you want to go. The diagnostic describes what the system is actually doing. These are different things, and most strategies we have encountered were written without visibility into the second question. The diagnostic does not replace your strategy — it tells you which parts of it are already being absorbed by the system, and where the leverage points are.'
-  },
-  {
-    q: 'How long does Phase 1 actually take?',
-    a: 'The 4–6 week timeline is driven by the working sessions, data collection, steward review, and the time needed to validate cluster boundaries and interpret findings with your team. We do not deliver a report and disappear — the diagnostic is a collaborative output.'
-  },
-  {
-    q: 'What happens to our data?',
-    a: 'Steward-held data — your programme records, internal documents, membership data — is used only for your diagnostic and platform configuration. It is not shared with other ecosystems, not used to train models across regions, and not visible to actors within your platform unless you configure it to be. Each regional deployment is sovereign. Your data stays yours.'
-  },
-  {
-    q: 'We are a small team. Can we actually do this?',
-    a: 'The working session and cluster map are typically a few hours with one or two people. The documentation you share is what you already have — we do not expect you to generate new materials. The diagnostic does most of the analytical work. The main thing we need from your team is institutional knowledge, not bandwidth.'
-  },
-  {
-    q: 'What is ClusterOS exactly — a diagnostic tool or a platform?',
-    a: 'ClusterOS is a regional operating system: the full infrastructure layer for a regional economy to run on. It has three integrated functions — diagnose (the 5-stage AI pipeline that identifies what the ecosystem is doing and where the leverage is), orchestrate (AI-guided journeys for every actor type: founders, anchors, researchers, talent), and steward intelligence (the real-time dashboard that gives the steward visibility into cluster health, conversion pipeline, and emerging patterns). The diagnostic is the evidence foundation the whole system runs on — but ClusterOS is the operating system, not just the diagnostic.'
-  },
-];
 
-let openFaq = null;
-function renderFaqs() {
-  const list = document.getElementById('faq-list');
-  list.innerHTML = FAQS.map((f, i) => `
-    <div class="faq-item" id="faq-${i}">
-      <div class="faq-q" onclick="toggleFaq(${i})">
-        <div class="faq-q-text">${f.q}</div>
-        <div class="faq-chevron">▾</div>
-      </div>
-      <div class="faq-a">${f.a}</div>
-    </div>
-  `).join('');
-}
-
-function toggleFaq(i) {
-  const item = document.getElementById('faq-' + i);
-  if (!item) return;
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(function(el) { el.classList.remove('open'); });
-  if (!isOpen) item.classList.add('open');
-}
-
-document.addEventListener('DOMContentLoaded', function() { renderFaqs(); });
-</script>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
 document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
   var t = dd.querySelector('.nav-dropdown-toggle');

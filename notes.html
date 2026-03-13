@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --ink:        #1a1a1a;
@@ -24,6 +25,15 @@
     --font-serif: 'Instrument Serif', Georgia, serif;
     --font-sans:  'Geist', system-ui, sans-serif;
     --font-mono:  'Geist Mono', monospace;
+    /* legacy aliases so old page CSS still resolves */
+    --bg:      #f7f4ef;
+    --chalk:   #1a1a1a;
+    --dim:     #5a5650;
+    --muted:   #8c8780;
+    --border2: #ddd8cf;
+    --sans:    'Geist', system-ui, sans-serif;
+    --serif:   'Instrument Serif', Georgia, serif;
+    --mono:    'Geist Mono', monospace;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -36,8 +46,7 @@
     overflow-x: hidden;
     padding-top: 52px;
   }
-  a { color: var(--green); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  a { color: inherit; text-decoration: none; }
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
@@ -60,7 +69,7 @@
     color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
     display: block; transition: color 0.15s;
   }
-  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-links a:hover { color: var(--ink); }
   .nav-dropdown-toggle {
     font-family: var(--font-sans); font-size: 13px; font-weight: 400;
     color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
@@ -75,15 +84,15 @@
   }
   .nav-dropdown-menu.open { display: block; }
   .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
-  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); }
   .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
   .nav-cta {
     font-family: var(--font-mono); font-size: 12px; font-weight: 600;
     color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
     border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
-    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+    transition: background 0.15s, color 0.15s !important;
   }
-  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-cta:hover { background: var(--green); color: #fff !important; }
   .nav-hamburger {
     display: none; flex-direction: column; gap: 5px;
     background: none; border: none; cursor: pointer; padding: 4px;
@@ -99,7 +108,7 @@
     flex-direction: column; padding: 1rem 2rem; z-index: 999;
   }
   .nav-mobile-menu.open { display: flex; }
-  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); }
   .nav-mobile-menu a:hover { color: var(--ink); }
   .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
   /* ── FOOTER ── */
@@ -115,19 +124,142 @@
   }
   .footer-logo {
     font-family: var(--font-mono); font-size: 13px; font-weight: 600;
-    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase;
   }
   .footer-logo span { color: var(--ink); }
   .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
   .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
   .footer-col { display: flex; flex-direction: column; gap: 6px; }
   .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
-  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); transition: color 0.15s; }
   .footer-col a:hover { color: var(--ink); }
-  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
-  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
-</style>
-<style>
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } }
+html { scroll-behavior: smooth; background: #f7f4ef; color: #1a1a1a; }
+    html { overflow-x: hidden; }
+body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; margin: 0; }
+    
+    
+    
+    
+    
+    
+    
+
+    /* HERO */
+    .hero { max-width: 960px; margin: 0 auto; padding: 120px 32px 64px; border-bottom: 1px solid #f0ece4; }
+    .hero-tag { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #c8f0d0; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: #c8f0d0; }
+    .hero h1 { font-family: 'Instrument Serif', serif; font-size: clamp(36px, 5vw, 58px); line-height: 1.1; letter-spacing: -0.02em; color: #1a1a1a; margin: 0 0 20px; }
+    .hero h1 em { font-style: italic; color: #f5d97a; }
+    .hero-sub { font-size: 18px; color: #c4cdd9; max-width: 560px; line-height: 1.6; margin: 0 0 32px; }
+    .hero-meta { font-family: 'Geist Mono', monospace; font-size: 11px; color: #8c8780; display: flex; gap: 24px; flex-wrap: wrap; }
+
+    /* CONTENT WRAP */
+    .content-wrap { max-width: 960px; margin: 0 auto; padding: 64px 32px 100px; }
+
+    /* FILTER TABS */
+    .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+    .filter-tab { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 4px; border: 1px solid #f0ece4; color: #8c8780; cursor: pointer; transition: all 0.2s; background: none; }
+    .filter-tab:hover { border-color: #ddd8cf; color: #1a1a1a; }
+    .filter-tab.active { background: #c8f0d0; color: #1a6640; border-color: #c8f0d0; }
+
+    /* SECTION LABEL */
+    .section-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #7a9bb5; margin: 52px 0 24px; display: flex; align-items: center; gap: 12px; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: #f0ece4; }
+
+    /* NOTE GRID */
+    .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: #f0ece4; border: 1px solid #f0ece4; border-radius: 8px; overflow: hidden; }
+    .note-card { background: #f7f4ef; padding: 28px; text-decoration: none; transition: background 0.2s; display: block; }
+    .note-card:hover { background: #0f1829; }
+    .note-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .note-tag { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 8px; border-radius: 3px; flex-shrink: 0; }
+    .note-tag.stall { background: rgba(200,240,208,0.1); color: #c8f0d0; border: 1px solid rgba(200,240,208,0.2); }
+    .note-tag.stack { background: rgba(245,217,122,0.1); color: #f5d97a; border: 1px solid rgba(245,217,122,0.2); }
+    .note-tag.leverage { background: rgba(125,211,200,0.1); color: #7dd3c8; border: 1px solid rgba(125,211,200,0.2); }
+    .note-tag.coming { background: rgba(200,194,183,0.3); color: #7a9bb5; border: 1px solid #f0ece4; }
+    .note-freq { font-family: 'Geist Mono', monospace; font-size: 11px; color: #8c8780; }
+    .note-title { font-family: 'Instrument Serif', serif; font-size: 20px; color: #1a1a1a; line-height: 1.2; margin: 0 0 10px; letter-spacing: -0.01em; }
+    .note-title em { font-style: italic; color: #8c8780; }
+    .note-deck { font-size: 13px; color: #8c8780; line-height: 1.5; margin: 0; }
+    .note-card.coming-soon { opacity: 0.4; pointer-events: none; }
+    .note-card.coming-soon .note-title { color: #8c8780; }
+
+    /* ABOUT STRIP */
+    .about-strip { margin: 64px 0 0; padding: 36px 40px; background: #0f1829; border: 1px solid #f0ece4; border-radius: 8px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .about-strip p { font-size: 15px; color: #c4cdd9; margin: 0; line-height: 1.6; }
+    .about-strip p strong { color: #1a1a1a; }
+    .about-strip a { display: inline-block; padding: 10px 24px; background: #c8f0d0; color: #1a6640; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; white-space: nowrap; }
+    .about-strip a:hover { opacity: 0.85; }
+
+    
+    .footer-logo { font-family: var(--sans); font-weight: 400; font-size: 14px; color: #8c8780; text-decoration: none; }
+    .footer-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; color: #c8f0d0; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: #8c8780; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #1a1a1a; }
+    .footer-copy { font-size: 12px; color: #7a9bb5; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 100px 20px 48px; }
+      .content-wrap { padding: 48px 20px 80px; }
+      .notes-grid { grid-template-columns: 1fr; }
+      .about-strip { grid-template-columns: 1fr; gap: 20px; }
+      
+    }
+  
+/* ── SITE FOOTER ─────────────────────────────────────────────────── */
+
+.footer-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 48px; margin-bottom: 40px; }
+.footer-brand { display: flex; flex-direction: column; gap: 12px; }
+.footer-logo { font-family: 'Geist', system-ui, sans-serif; font-weight: 400; font-size: 15px; color: #1a1a1a; text-decoration: none; }
+.footer-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; color: #c8f0d0; }
+.footer-tagline { font-size: 13px; color: #8c8780; line-height: 1.5; margin: 0; }
+.footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.footer-col { display: flex; flex-direction: column; gap: 8px; }
+.footer-col-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #7a9bb5; margin-bottom: 4px; }
+.footer-col a { font-size: 13px; color: #8c8780; text-decoration: none; transition: color .2s; line-height: 1.4; }
+.footer-col a:hover { color: #1a1a1a; }
+.footer-base { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid #ddd8cf; flex-wrap: wrap; gap: 8px; }
+.footer-copy { font-size: 12px; color: #7a9bb5; }
+@media (max-width: 640px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-nav { grid-template-columns: 1fr 1fr; }
+}
+
+  
+
+
+
+
+
+.nav-links a { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: #7a9bb5; transition: color 0.2s; }
+.nav-links a:hover { color: #1a1a1a; }
+
+
+
+/* ── NAV ── */
+
+.nav-logo { font-family: 'Instrument Serif', serif; font-size: 18px; text-decoration: none; color: #1a1a1a; letter-spacing: -0.01em; flex-shrink: 0; }
+.nav-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; color: #c8f0d0; }
+.nav-links { display: flex; align-items: center; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.nav-links > li > a,
+.nav-dropdown-toggle { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: #8c8780; padding: 6px 12px; border-radius: 4px; transition: color 0.2s, background 0.2s; cursor: pointer; white-space: nowrap; }
+.nav-links > li > a:hover,
+.nav-dropdown-toggle:hover,
+.nav-dropdown-toggle.active { color: #1a1a1a; background: rgba(0,0,0,0.04); }
+.nav-dropdown { position: relative; }
+.nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 8px); left: 0; background: #f0ece4; border: 1px solid rgba(200,194,183,0.8); border-radius: 6px; padding: 6px; min-width: 200px; list-style: none; margin: 0; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.nav-dropdown-menu.open { display: block; }
+.nav-dropdown-menu li a { display: block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; color: #8c8780; text-decoration: none; padding: 7px 12px; border-radius: 4px; transition: color 0.15s, background 0.15s; white-space: nowrap; }
+.nav-dropdown-menu li a:hover { color: #1a1a1a; background: rgba(200,240,208,0.08); }
+.nav-dropdown-divider { height: 1px; background: rgba(200,194,183,0.6); margin: 4px 8px; }
+.nav-cta { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: #f7f4ef; background: #c8f0d0; padding: 8px 18px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; transition: opacity 0.2s; }
+.nav-cta:hover { opacity: 0.85; }
+@media (max-width: 1024px) { .nav-links { display: none; } }
+@media (max-width: 480px) { nav { padding: 0 16px; } .nav-logo { font-size: 15px; } .nav-cta { font-size: 10px; padding: 6px 12px; } }
+
 
 /* ── FILTER BAR ── */
 .filter-bar { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
@@ -139,14 +271,14 @@
   text-transform: uppercase;
   padding: 7px 16px;
   border-radius: 4px;
-  border: 1px solid var(--slate, #1e2d42);
+  border: 1px solid var(--slate, #f0ece4);
   background: transparent;
-  color: var(--ink-muted);
+  color: #8c8780;
   cursor: pointer;
   transition: all 0.15s;
 }
-.filter-pill:hover { border-color: var(--ink-muted); color: var(--ink); }
-.filter-pill.active { background: #c8f0d0; border-color: var(--green); color: var(--ink, var(--page)); }
+.filter-pill:hover { border-color: #8c8780; color: #1a1a1a; }
+.filter-pill.active { background: #c8f0d0; border-color: #c8f0d0; color: var(--ink, #f7f4ef); }
 
 /* Hidden cards */
 .note-card.hidden { display: none; }
@@ -174,7 +306,7 @@
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--ink-muted);
+  background: #8c8780;
   border-radius: 2px;
   transition: all 0.25s;
 }
@@ -206,14 +338,14 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--ink-muted);
+  color: #8c8780;
   padding: 10px 0;
   border-bottom: 1px solid rgba(200,194,183,0.3);
   transition: color 0.15s;
 }
-.nav-mobile-menu a:hover { color: var(--ink); }
+.nav-mobile-menu a:hover { color: #1a1a1a; }
 .nav-mobile-divider { height: 1px; background: rgba(200,194,183,0.6); margin: 8px 0; }
-.nav-mobile-cta { margin-top: 12px; color: var(--green) !important; border-bottom: none !important; font-weight: 600 !important; }
+.nav-mobile-cta { margin-top: 12px; color: #c8f0d0 !important; border-bottom: none !important; font-weight: 600 !important; }
 
 
 @media (max-width: 640px) {
@@ -225,7 +357,6 @@
   .about-strip { grid-template-columns: 1fr !important; }
   .note-card { padding: 20px 16px; }
 }
-
 </style>
 </head>
 <body>
@@ -274,189 +405,7 @@
   <a href="/about.html">About</a>
   <a href="/request.html">Request a Diagnostic</a>
 </div>
-<!-- Mobile nav menu -->
 
-  <a href="/notes.html">Lab Notes</a>
-  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
-  <a href="/ln-02-narrating.html">S7 · Narrating</a>
-  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
-  <div class="nav-mobile-divider"></div>
-  <a href="/about.html">About</a>
-  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
-</div>
-
-
-
-<div class="hero">
-  <div class="hero-tag">Lab Notes · Andrew Barrie</div>
-  <h1>Why effort fails to<br><em>compound</em></h1>
-  <p class="hero-sub">Short pieces on how regional innovation clusters stall, what stabilisation stacks look like, and where leverage actually exists. Written from 75+ diagnostic runs across 8 countries.</p>
-  <div class="hero-meta">
-    <span>13 notes</span>
-    <span>All published</span>
-    <span>Updated March 2026</span>
-  </div>
-</div>
-
-<div class="content-wrap">
-
-  <div class="filter-bar">
-    <button class="filter-pill active" data-filter="all">All</button>
-    <button class="filter-pill" data-filter="stall">Stalls</button>
-    <button class="filter-pill" data-filter="stack">Stacks</button>
-    <button class="filter-pill" data-filter="leverage">Leverage</button>
-  </div>
-
-  <div class="section-label">Stall Series · Nine ways a cluster stops compounding</div>
-
-  <div class="notes-grid">
-    <a href="/ln-01-coordinating.html" class="note-card" data-type="stall">
-      <div class="note-card-header">
-        <span class="note-tag stall"<span class="note-tag stall">S2 · Stall</span>
-        <span class="note-freq">97%</span>
-      </div>
-      <div class="note-title">Coordinating <em>Instead of</em> Deciding</div>
-      <p class="note-deck">The working group that meets quarterly for four years. No one is obstructing. What no one asks is what has stopped happening because this meeting works so well.</p>
-    </a>
-
-    <a href="/ln-02-narrating.html" class="note-card" data-type="stall">
-      <div class="note-card-header">
-        <span class="note-tag stall"<span class="note-tag stall">S7 · Stall</span>
-        <span class="note-freq">91%</span>
-      </div>
-      <div class="note-title">Narrating <em>Instead of</em> Testing</div>
-      <p class="note-deck">Strategy documents that restore confidence without exposing anything. The system grows articulate without becoming decisive.</p>
-    </a>
-
-    <a href="/ln-03-activity.html" class="note-card" data-type="stall">
-      <div class="note-card-header">
-        <span class="note-tag stall"<span class="note-tag stall">S8 · Stall</span>
-        <span class="note-freq">88%</span>
-      </div>
-      <div class="note-title">Scaling Activity <em>Instead of</em> Throughput</div>
-      <p class="note-deck">The accelerator that can't tell you its 24-month survival rate. What can be counted expands. What compounds is harder to trace.</p>
-    </a>
-
-    <a href="/ln-04-reproving.html" class="note-card" data-type="stall">
-      <div class="note-card-header">
-        <span class="note-tag stall"<span class="note-tag stall">S1 · Stall</span>
-        <span class="note-freq">—</span>
-      </div>
-      <div class="note-title">Re-proving <em>Instead of</em> Narrowing</div>
-      <p class="note-deck">Every pathway shows promise. No pathway becomes dominant. The system remains option-rich long after there is enough evidence to commit.</p>
-    </a>
-
-    <a href="/ln-05-incumbents.html" class="note-card" data-type="stall">
-      <div class="note-card-header">
-        <span class="note-tag stall"<span class="note-tag stall">S6 · Stall</span>
-        <span class="note-freq">—</span>
-      </div>
-      <div class="note-title">Stabilising <em>Around</em> Incumbents</div>
-      <p class="note-deck">How continuity selects on behalf of the system. New ideas are assessed by whether they complement the existing trajectory. Alternatives exist — but take longer to become inevitable.</p>
-    </a>
-
-    <a href="/ln-06-mediating.html" class="note-card" data-type="stall">
-      <div class="note-card-header">
-        <span class="note-tag stall"<span class="note-tag stall">S5 · Stall</span>
-        <span class="note-freq">—</span>
-      </div>
-      <div class="note-title">Mediating <em>Instead of</em> Coupling</div>
-      <p class="note-deck">Why your connectors may be preventing connection. Intermediaries smooth interaction — while the direct coupling that creates compounding relationships remains limited.</p>
-    </a>
-
-    <a href="/ln-07-forgiving.html" class="note-card" data-type="stall">
-      <div class="note-card-header">
-        <span class="note-tag stall"<span class="note-tag stall">S3 · Stall</span>
-        <span class="note-freq">—</span>
-      </div>
-      <div class="note-title">Forgiving <em>Instead of</em> Redesigning</div>
-      <p class="note-deck">When accommodation becomes the design. Underperforming actors are preserved. Relationships are maintained. The system continues — in the same shape.</p>
-    </a>
-
-    <a href="/ln-08-extracting.html" class="note-card" data-type="stall">
-      <div class="note-card-header">
-        <span class="note-tag stall"<span class="note-tag stall">S4 · Stall</span>
-        <span class="note-freq">—</span>
-      </div>
-      <div class="note-title">Extracting <em>Without</em> Reinvesting</div>
-      <p class="note-deck">Talent, capital, and credibility flows out. Individual success is celebrated. Alumni networks exist. Nothing systematically channels value back.</p>
-    </a>
-
-    <a href="/ln-09-permission.html" class="note-card" data-type="stall">
-      <div class="note-card-header">
-        <span class="note-tag stall"<span class="note-tag stall">S9 · Stall</span>
-        <span class="note-freq">—</span>
-      </div>
-      <div class="note-title">Waiting <em>for</em> Permission</div>
-      <p class="note-deck">Initiative deferred to endorsement. The cluster organisation identifies an opportunity, then waits for ministerial sign-off. By the time it arrives, the window has closed.</p>
-    </a>
-  </div>
-
-  <div class="section-label">Stack Series · When stalls reinforce each other</div>
-
-  <div class="notes-grid">
-    <a href="/ln-10-narrative-activity-stack.html" class="note-card" data-type="stack">
-      <div class="note-card-header">
-        <span class="note-tag stack"<span class="note-tag stack">S7 + S8 · Stack</span>
-      </div>
-      <div class="note-title">The Narrative <em>×</em> Activity Stack</div>
-      <p class="note-deck">The most common stack across all diagnostics. Narrative makes activity legible. Activity supplies narrative with fresh material. Neither requires outcomes to sustain the loop.</p>
-    </a>
-
-    <a href="/ln-11-validation-deadlock.html" class="note-card" data-type="stack">
-      <div class="note-card-header">
-        <span class="note-tag stack"<span class="note-tag stack">S1 + S2 · Stack</span>
-      </div>
-      <div class="note-title">The Validation Deadlock</div>
-      <p class="note-deck">Re-proving and coordinating reinforce each other. The system stays option-rich indefinitely. There is always more to validate, and always a forum in which to discuss it.</p>
-    </a>
-  </div>
-
-  <div class="section-label">Leverage & Method</div>
-
-  <div class="notes-grid">
-    <a href="/ln-12-leverage.html" class="note-card" data-type="leverage">
-      <div class="note-card-header">
-        <span class="note-tag leverage"<span class="note-tag leverage">Leverage</span>
-      </div>
-      <div class="note-title">What Leverage Actually Looks Like</div>
-      <p class="note-deck">Large interventions fail because the stack absorbs them. Leverage is not a bigger push. It is a small withdrawal of protection.</p>
-    </a>
-
-    <a href="/ln-13-diagnosis.html" class="note-card" data-type="leverage">
-      <div class="note-card-header">
-        <span class="note-tag leverage"<span class="note-tag leverage">Method</span>
-      </div>
-      <div class="note-title">Why Your Diagnosis Keeps Failing</div>
-      <p class="note-deck">The framework that becomes what it criticises. It is possible to read this and recognise your ecosystem perfectly — and then commission a working group to discuss the findings.</p>
-    </a>
-  </div>
-
-  <div class="about-strip">
-    <p>These notes are written from 75+ diagnostic runs across cyber security, advanced manufacturing, space technology, life sciences, and regional innovation ecosystems. <strong>Andrew Barrie</strong> is co-founder of Barrie & Hibbert (acquired by Moody's Analytics, 2011) and founder of ClusterOS.</p>
-    <a href="/about.html">About ClusterOS →</a>
-  </div>
-
-</div>
-
-
-
-
-
-
-
-
-<style>
-@media (max-width: 640px) {
-  .hero { padding: 80px 20px 48px !important; }
-  .content-wrap { padding: 40px 20px 80px; }
-  .filter-bar { flex-wrap: wrap; gap: 8px; }
-  .filter-pill { font-size: 11px; padding: 5px 12px; }
-  .notes-grid { grid-template-columns: 1fr !important; }
-  .about-strip { grid-template-columns: 1fr !important; }
-  .note-card { padding: 20px 16px; }
-}
-</style>
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -540,53 +489,7 @@
   });
 })();
 </script>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-(function() {
-  const pills = document.querySelectorAll('.filter-pill');
-  const cards = document.querySelectorAll('.note-card[data-type]');
-
-  // Wrap each section-label + following notes-grid in a section-block div
-  // so we can hide empty sections
-  document.querySelectorAll('.section-label').forEach(label => {
-    const block = document.createElement('div');
-    block.className = 'section-block';
-    label.parentNode.insertBefore(block, label);
-    block.appendChild(label);
-    let next = block.nextSibling;
-    while (next && !(next.classList && next.classList.contains('section-label')) && 
-           !(next.classList && next.classList.contains('about-strip'))) {
-      const after = next.nextSibling;
-      block.appendChild(next);
-      next = after;
-    }
-  });
-
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      const filter = pill.dataset.filter;
-
-      cards.forEach(card => {
-        if (filter === 'all' || card.dataset.type === filter) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-
-      // Hide section blocks where all cards are hidden
-      document.querySelectorAll('.section-block').forEach(block => {
-        const visible = block.querySelectorAll('.note-card:not(.hidden)');
-        block.classList.toggle('hidden', visible.length === 0);
-      });
-    });
-  });
-})();
-</script>
-<script>
-// ── NAV
 document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
   var t = dd.querySelector('.nav-dropdown-toggle');
   var m = dd.querySelector('.nav-dropdown-menu');

@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --ink:        #1a1a1a;
@@ -24,6 +25,15 @@
     --font-serif: 'Instrument Serif', Georgia, serif;
     --font-sans:  'Geist', system-ui, sans-serif;
     --font-mono:  'Geist Mono', monospace;
+    /* legacy aliases so old page CSS still resolves */
+    --bg:      #f7f4ef;
+    --chalk:   #1a1a1a;
+    --dim:     #5a5650;
+    --muted:   #8c8780;
+    --border2: #ddd8cf;
+    --sans:    'Geist', system-ui, sans-serif;
+    --serif:   'Instrument Serif', Georgia, serif;
+    --mono:    'Geist Mono', monospace;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -36,8 +46,7 @@
     overflow-x: hidden;
     padding-top: 52px;
   }
-  a { color: var(--green); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  a { color: inherit; text-decoration: none; }
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
@@ -60,7 +69,7 @@
     color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
     display: block; transition: color 0.15s;
   }
-  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .nav-links a:hover { color: var(--ink); }
   .nav-dropdown-toggle {
     font-family: var(--font-sans); font-size: 13px; font-weight: 400;
     color: var(--ink-dim); padding: 6px 14px; background: none; border: none;
@@ -75,15 +84,15 @@
   }
   .nav-dropdown-menu.open { display: block; }
   .nav-dropdown-menu li a { font-size: 13px; color: var(--ink-dim); padding: 7px 16px; display: block; }
-  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
+  .nav-dropdown-menu li a:hover { color: var(--ink); background: var(--surface); }
   .nav-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
   .nav-cta {
     font-family: var(--font-mono); font-size: 12px; font-weight: 600;
     color: var(--green) !important; text-transform: uppercase; letter-spacing: 0.08em;
     border: 1px solid var(--green); padding: 5px 14px; margin-left: 0.5rem;
-    transition: background 0.15s, color 0.15s !important; text-decoration: none !important;
+    transition: background 0.15s, color 0.15s !important;
   }
-  .nav-cta:hover { background: var(--green); color: #fff !important; text-decoration: none !important; }
+  .nav-cta:hover { background: var(--green); color: #fff !important; }
   .nav-hamburger {
     display: none; flex-direction: column; gap: 5px;
     background: none; border: none; cursor: pointer; padding: 4px;
@@ -99,7 +108,7 @@
     flex-direction: column; padding: 1rem 2rem; z-index: 999;
   }
   .nav-mobile-menu.open { display: flex; }
-  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .nav-mobile-menu a { font-size: 14px; color: var(--ink-dim); padding: 8px 0; border-bottom: 1px solid var(--border); }
   .nav-mobile-menu a:hover { color: var(--ink); }
   .nav-mobile-divider { height: 1px; background: var(--border); margin: 4px 0; }
   /* ── FOOTER ── */
@@ -115,19 +124,89 @@
   }
   .footer-logo {
     font-family: var(--font-mono); font-size: 13px; font-weight: 600;
-    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase;
   }
   .footer-logo span { color: var(--ink); }
   .footer-tagline { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; }
   .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
   .footer-col { display: flex; flex-direction: column; gap: 6px; }
   .footer-col-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 0.4rem; }
-  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-col a { font-size: 12px; font-weight: 300; color: var(--ink-dim); transition: color 0.15s; }
   .footer-col a:hover { color: var(--ink); }
-  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.08em; }
-  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } .footer-base { flex-direction: column; gap: 4px; } }
-</style>
-<style>
+  .footer-base { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); }
+  @media(max-width:680px) { .footer-inner { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr 1fr; } }
+html{scroll-behavior:smooth}body{background:#f7f4ef;color:#1a1a1a;font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden;margin:0}
+
+    .wrap{max-width:720px;margin:0 auto;padding:108px 32px 100px}
+    .breadcrumb{font-family:'Geist Mono', monospace;font-size:11px;color:#7a9bb5;margin-bottom:32px;display:flex;align-items:center;gap:8px}.breadcrumb a{color:#8c8780;text-decoration:none}.breadcrumb a:hover{color:#1a1a1a}
+    .series{font-family:'Geist Mono', monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#c8f0d0;margin-bottom:20px;display:flex;align-items:center;gap:12px}.series::before{content:'';display:block;width:24px;height:1px;background:#c8f0d0}
+    h1{font-family:'Instrument Serif', serif;font-size:clamp(32px,5vw,50px);line-height:1.1;letter-spacing:-.02em;color:#1a1a1a;margin:0 0 20px}h1 em{font-style:italic;color:#f5d97a}
+    .deck{font-size:18px;color:#c4cdd9;line-height:1.6;font-weight:300;margin:0 0 28px;border-left:2px solid #ddd8cf;padding-left:20px}
+    .meta{font-family:'Geist Mono', monospace;font-size:11px;color:#8c8780;display:flex;gap:24px;flex-wrap:wrap;margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid #f0ece4}
+    h2{font-family:'Instrument Serif', serif;font-size:26px;color:#1a1a1a;margin:52px 0 16px;letter-spacing:-.01em;line-height:1.2}
+    p{margin:0 0 22px;color:#c4cdd9;font-size:16px}p strong{color:#1a1a1a;font-weight:500}.lead{font-size:18px;color:#1a1a1a}
+    .pullquote{margin:40px 0;padding:28px 32px;border-left:3px solid #f5d97a;background:rgba(245,217,122,0.04);border-radius:0 6px 6px 0}.pullquote p{font-family:'Instrument Serif', serif;font-size:20px;color:#1a1a1a;line-height:1.5;margin:0;font-style:italic}.pullquote cite{display:block;margin-top:12px;font-family:'Geist Mono', monospace;font-size:10px;color:#8c8780;letter-spacing:.1em;font-style:normal;text-transform:uppercase}
+    .diagram{margin:40px 0;padding:32px;background:#0f1829;border:1px solid #f0ece4;border-radius:8px}.diag-label{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#7a9bb5;margin-bottom:28px}
+    .sub{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:16px;margin-bottom:24px}.box{padding:18px 20px;border-radius:6px}.box.x{background:rgba(200,240,208,0.06);border:1px solid rgba(200,240,208,0.2)}.box.y{background:rgba(240,128,128,0.06);border:1px solid rgba(240,128,128,0.2)}.tag{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}.tag.x{color:#c8f0d0}.tag.y{color:#f08080}.txt{font-size:14px;line-height:1.4}.txt.x{color:#c8f0d0}.txt.y{color:#f08080}.arrow{text-align:center;color:#7a9bb5;font-size:22px}.diag-note{font-size:13px;color:#8c8780;border-top:1px solid #f0ece4;padding-top:16px;margin-top:8px}
+    /* loop diagram */
+    .loop-caption{font-size:12px;color:#8c8780;text-align:center;margin-top:12px}
+    .epistemic{margin:56px 0 0;padding:24px 28px;background:rgba(200,194,183,0.15);border:1px solid #f0ece4;border-radius:6px}.ep-label{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#7a9bb5;margin-bottom:12px}.epistemic p{font-size:13px;color:#8c8780;margin:0 0 8px;line-height:1.6}.epistemic p:last-child{margin:0}
+    .related{margin:56px 0 0;padding-top:40px;border-top:1px solid #f0ece4}.rel-label{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#7a9bb5;margin-bottom:20px}.rel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.rel-card{padding:16px 20px;border-radius:6px;border:1px solid #f0ece4;text-decoration:none;transition:border-color .2s;display:block}.rel-card:hover{border-color:#ddd8cf}.rel-tag{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7a9bb5;margin-bottom:6px}.rel-title{font-size:14px;color:#c4cdd9;line-height:1.3}
+    .cta{margin:56px 0 0;padding:36px 40px;background:#0f1829;border:1px solid #f0ece4;border-radius:8px;text-align:center}.cta p{font-size:15px;color:#c4cdd9;margin:0 0 20px}.cta a{display:inline-block;padding:10px 24px;background:#c8f0d0;color:#1a6640;font-size:13px;font-weight:500;letter-spacing:.04em;border-radius:4px;text-decoration:none;transition:opacity .2s}.cta a:hover{opacity:.85}
+    .fl{font-family:var(--sans);font-weight:400;font-size:14px;color:#8c8780;text-decoration:none}.fl span{font-family:'Geist Mono', monospace;font-weight:600;color:#c8f0d0}.flinks{display:flex;gap:24px}.flinks a{font-size:13px;color:#8c8780;text-decoration:none;transition:color .2s}.flinks a:hover{color:#1a1a1a}.fcopy{font-size:12px;color:#7a9bb5}
+    @media(max-width:640px){nav{padding:0 20px}.wrap{padding:88px 20px 80px}.sub{grid-template-columns:1fr}.arrow{transform:rotate(90deg);margin:8px auto}.pullquote{padding:20px}}
+  
+/* ── SITE FOOTER ─────────────────────────────────────────────────── */
+
+.footer-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 48px; margin-bottom: 40px; }
+.footer-brand { display: flex; flex-direction: column; gap: 12px; }
+.footer-logo { font-family: 'Geist', system-ui, sans-serif; font-weight: 400; font-size: 15px; color: #1a1a1a; text-decoration: none; }
+.footer-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; color: #c8f0d0; }
+.footer-tagline { font-size: 13px; color: #8c8780; line-height: 1.5; margin: 0; }
+.footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.footer-col { display: flex; flex-direction: column; gap: 8px; }
+.footer-col-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #7a9bb5; margin-bottom: 4px; }
+.footer-col a { font-size: 13px; color: #8c8780; text-decoration: none; transition: color .2s; line-height: 1.4; }
+.footer-col a:hover { color: #1a1a1a; }
+.footer-base { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid #ddd8cf; flex-wrap: wrap; gap: 8px; }
+.footer-copy { font-size: 12px; color: #7a9bb5; }
+@media (max-width: 640px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-nav { grid-template-columns: 1fr 1fr; }
+}
+
+  
+
+
+
+
+
+.nav-links a { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: #7a9bb5; transition: color 0.2s; }
+.nav-links a:hover { color: #1a1a1a; }
+
+
+
+/* ── NAV ── */
+
+.nav-logo { font-family: 'Instrument Serif', serif; font-size: 18px; text-decoration: none; color: #1a1a1a; letter-spacing: -0.01em; flex-shrink: 0; }
+.nav-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; color: #c8f0d0; }
+.nav-links { display: flex; align-items: center; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.nav-links > li > a,
+.nav-dropdown-toggle { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: #8c8780; padding: 6px 12px; border-radius: 4px; transition: color 0.2s, background 0.2s; cursor: pointer; white-space: nowrap; }
+.nav-links > li > a:hover,
+.nav-dropdown-toggle:hover,
+.nav-dropdown-toggle.active { color: #1a1a1a; background: rgba(0,0,0,0.04); }
+.nav-dropdown { position: relative; }
+.nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 8px); left: 0; background: #f0ece4; border: 1px solid rgba(200,194,183,0.8); border-radius: 6px; padding: 6px; min-width: 200px; list-style: none; margin: 0; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.nav-dropdown-menu.open { display: block; }
+.nav-dropdown-menu li a { display: block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; color: #8c8780; text-decoration: none; padding: 7px 12px; border-radius: 4px; transition: color 0.15s, background 0.15s; white-space: nowrap; }
+.nav-dropdown-menu li a:hover { color: #1a1a1a; background: rgba(200,240,208,0.08); }
+.nav-dropdown-divider { height: 1px; background: rgba(200,194,183,0.6); margin: 4px 8px; }
+.nav-cta { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: #f7f4ef; background: #c8f0d0; padding: 8px 18px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; transition: opacity 0.2s; }
+.nav-cta:hover { opacity: 0.85; }
+@media (max-width: 1024px) { .nav-links { display: none; } }
+@media (max-width: 480px) { nav { padding: 0 16px; } .nav-logo { font-size: 15px; } .nav-cta { font-size: 10px; padding: 6px 12px; } }
+
 
 /* Hamburger button */
 .nav-hamburger {
@@ -148,7 +227,7 @@
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--ink-muted);
+  background: #8c8780;
   border-radius: 2px;
   transition: all 0.25s;
 }
@@ -180,14 +259,14 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--ink-muted);
+  color: #8c8780;
   padding: 10px 0;
   border-bottom: 1px solid rgba(200,194,183,0.3);
   transition: color 0.15s;
 }
-.nav-mobile-menu a:hover { color: var(--ink); }
+.nav-mobile-menu a:hover { color: #1a1a1a; }
 .nav-mobile-divider { height: 1px; background: rgba(200,194,183,0.6); margin: 8px 0; }
-.nav-mobile-cta { margin-top: 12px; color: var(--green) !important; border-bottom: none !important; font-weight: 600 !important; }
+.nav-mobile-cta { margin-top: 12px; color: #c8f0d0 !important; border-bottom: none !important; font-weight: 600 !important; }
 
 
 @media (max-width: 900px) {
@@ -208,7 +287,6 @@
   .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
   p { font-size: 15px; line-height: 1.65; }
 }
-
 </style>
 </head>
 <body>
@@ -257,132 +335,7 @@
   <a href="/about.html">About</a>
   <a href="/request.html">Request a Diagnostic</a>
 </div>
-<!-- Mobile nav menu -->
 
-  <a href="/notes.html">Lab Notes</a>
-  <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
-  <a href="/ln-02-narrating.html">S7 · Narrating</a>
-  <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
-  <div class="nav-mobile-divider"></div>
-  <a href="/about.html">About</a>
-  <a href="/request.html" class="nav-mobile-cta">Request a Diagnostic →</a>
-</div>
-
-<div class="wrap">
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/notes.html">Lab Notes</a> › S1 · Re-proving Instead of Narrowing</div>
-  <div class="series">Lab Notes · Stall Series</div>
-  <h1>Re-proving <em>Instead of</em> Narrowing</h1>
-  <p class="deck">A region validates three technology pathways over five years. All show promise. All attract some investment. All produce credible results. No pathway becomes dominant. No resources shift decisively. The system remains option-rich long after there is enough evidence to commit.</p>
-  <div class="meta"><span>Andrew Barrie</span><span>March 2026</span><span>7 min read</span></div>
-
-  <p class="lead">There is a particular form of paralysis that does not look like paralysis. The system is working. Pilots succeed. Initiatives launch. Validation accumulates. The problem is that none of it forces a choice.</p>
-
-  <p>S1 is the stall where the system repeatedly demonstrates capability without allowing proof to collapse its options. Each successful validation is welcomed — and then the field resets. The next round of proof is commissioned. The system stays open, stays coherent, and stays in the same place.</p>
-
-  <h2>What the stall actually is</h2>
-
-  <div class="diagram">
-    <div class="diag-label">S1 · Substitution pattern</div>
-    <div class="sub">
-      <div class="box x">
-        <div class="tag x">X-side · What happens</div>
-        <div class="txt x">Pilots. Feasibility studies. Validation rounds. Proof-of-concept projects. Capability demonstrations. Credible results across multiple pathways.</div>
-      </div>
-      <div class="arrow">→</div>
-      <div class="box y">
-        <div class="tag y">Y-side · What doesn't</div>
-        <div class="txt y">Commitment. Exclusion. Resources shifting decisively to fewer options. Some pathways being retired. Evidence forcing direction.</div>
-      </div>
-    </div>
-    <div class="diag-note">The stall is not the validation — it is the relationship between validation and commitment. Where proof accumulates without collapsing choice, the system has learned to use evidence to defer decisions rather than to make them.</div>
-  </div>
-
-  <p>The distinction matters because S1 ecosystems often look healthy. They produce results. They attract interest. They have credible technical achievements. What they do not have is a process by which those achievements concentrate resources and retire alternatives. The validation machinery is sophisticated. The decision machinery is absent.</p>
-
-  <h2>What protects optionality</h2>
-
-  <p>Keeping options open is often described as prudence. In many cases it genuinely is — early-stage systems need to explore before they can commit, and premature narrowing can close off pathways that would have proved valuable. S1 is not early-stage exploration. It is what happens when exploration has been going on long enough that commitment is overdue, but the system has developed interests in keeping all pathways alive.</p>
-
-  <p><strong>Each pathway has beneficiaries.</strong> Research teams, programme managers, funding allocations, and institutional identities become attached to specific trajectories. Narrowing would not just close an option — it would end something that people's careers depend on. The political cost of exclusion is real, and it falls on specific people in specific roles.</p>
-
-  <p><strong>Validation distributes success without forcing exclusion.</strong> A system that validates multiple pathways can celebrate everyone. A system that commits to one pathway has to explain why the others did not make the cut. The first is politically comfortable. The second is not.</p>
-
-  <div class="pullquote">
-    <p>Once a stall entangles with roles and reputations, it is actively defended. Removing it doesn't just change behaviour — it removes someone's position.</p>
-    <cite>Ecosystem Stewardship · Chapter 4</cite>
-  </div>
-
-  <p><strong>The incumbent effect amplifies it.</strong> In systems with a dominant anchor organisation, narrowing is doubly difficult: it requires both evidence that one pathway is stronger, and agreement from the anchor that its existing commitments should shift. S1 and S6 (Stabilising Around Incumbents) frequently appear together for this reason. The incumbent's existing trajectory becomes the default, and validation activity confirms its importance without forcing the system to choose between it and alternatives.</p>
-
-  <h2>Eindhoven as a worked example</h2>
-
-  <p>The book uses Eindhoven as its primary case for S1. For much of the twentieth century, Philips anchored the region with extraordinary technical capability across electronics, materials, lighting, and medical devices. Proof was abundant. Validation pathways were strong. The ecosystem produced ideas, talent, and firms continuously.</p>
-
-  <p>What it did not do quickly was narrow. As long as Philips could credibly operate across many paths, the system had no pressure to collapse choice. Novel ventures remained gravitationally bound to the incumbent orbit. The stack — Re-proving × Continuity — protected optionality and capability retention at the cost of earlier commitment to fewer, harder bets.</p>
-
-  <p>Narrowing eventually occurred — but only when the incumbent itself fragmented, through spin-outs like ASML and NXP, making continuity no longer sufficient to absorb pressure. The point is not that Eindhoven failed. The point is that the narrowing happened at the pace of the incumbent's internal decisions rather than at the pace of external market signals.</p>
-
-  <h2>The demand-side problem</h2>
-
-  <p>S1 is one of the stalls where the Y-side is hardest to observe. Commitment — the behaviour being displaced — requires seeing whether choices are actually being made, which depends on access to resource allocation decisions that are rarely public. You can see that multiple pathways are being validated. You cannot always see whether there is enough evidence to commit, because that depends on what the demand side would accept — and demand-side behaviour is often opaque.</p>
-
-  <p>This is why S1 claims should be held at medium confidence unless there is direct evidence of resource allocation across multiple pathways over multiple cycles, combined with evidence that individual pathways have reached a level of validation that would normally justify commitment in comparable contexts.</p>
-
-  <h2>Where leverage exists</h2>
-
-  <p>The leverage move for S1 is to introduce a single forcing question into one significant renewal decision: <strong>if this pathway continues to validate successfully for another 12 months, what will change?</strong> What resources will shift? What alternatives will be deprioritised? What commitment will follow?</p>
-
-  <p>If the answer is nothing — if another round of validation will be commissioned regardless of results — then the validation is not actually informing decisions. It is absorbing the pressure to make them. Naming that openly, in a funding renewal context, changes what continuation means.</p>
-
-  <p>The second move is to surface what the pathways look like when compared directly rather than separately. S1 systems typically report each pathway against its own objectives. Comparison across pathways — which has produced stronger results relative to investment, which is closest to commercial commitment, which has the clearest demand signal — is structurally avoided because it would force discrimination.</p>
-
-  <div class="epistemic">
-    <div class="ep-label">Epistemic note</div>
-    <p>S1 has moderate X-side observability — validation activity is generally visible in programme records, funding announcements, and academic output. The Y-side is harder: establishing that narrowing should have occurred requires observing the absence of commitment over a period long enough to be meaningful, and knowing enough about demand-side conditions to assess whether proof has been sufficient.</p>
-    <p>The framework is explicit that S1 should not be applied too early. Where the system is genuinely still in exploration, the absence of commitment is correct behaviour. Confidence in S1 increases with temporal depth: if the same pathways have been validated for three or more cycles without producing a commitment decision, the stall claim is warranted.</p>
-    <p>Where S1 is paired with S6, confidence increases further — incumbent gravitational pull provides a mechanism for why narrowing consistently fails to occur even when evidence is available.</p>
-  </div>
-
-  <div class="related">
-    <div class="rel-label">Related notes</div>
-    <div class="rel-grid">
-      <a href="/ln-05-incumbents.html" class="rel-card"><div class="rel-tag">S6 · Stall</div><div class="rel-title">Stabilising Around Incumbents</div></a>
-      <a href="/ln-11-validation-deadlock.html" class="rel-card"><div class="rel-tag">S1+S2 · Stack</div><div class="rel-title">The Validation Deadlock</div></a>
-      <a href="/ln-01-coordinating.html" class="rel-card"><div class="rel-tag">S2 · Stall</div><div class="rel-title">Coordinating Instead of Deciding</div></a>
-    </div>
-  </div>
-
-  <div class="cta">
-    <p>S1 is the stall where proof accumulates without forcing direction. The diagnostic identifies whether your cluster is validating or committing — and what the difference looks like in your specific configuration.</p>
-    <a href="/request.html">Request a Diagnostic →</a>
-  </div>
-</div>
-
-
-
-
-
-
-<style>
-@media (max-width: 900px) {
-  .substitution { grid-template-columns: 1fr !important; }
-  .sub-arrow { transform: rotate(90deg); margin: 8px auto; display: block; }
-  .related-grid { grid-template-columns: 1fr 1fr !important; }
-  .two-col-body, .article-layout { grid-template-columns: 1fr !important; }
-}
-@media (max-width: 640px) {
-  nav { padding: 0 16px; }
-  .article-wrap, .body-wrap { padding: 80px 20px 80px !important; }
-  h1, .article-headline, .hero-h { font-size: clamp(24px, 7vw, 36px) !important; }
-  .lede, .article-lede { font-size: 16px !important; }
-  blockquote, .pull-quote { padding: 14px 16px 14px 18px; font-size: 17px; }
-  .evidence-grid, .stall-grid, .two-col { grid-template-columns: 1fr !important; }
-  .related-grid { grid-template-columns: 1fr !important; }
-  .tag-row { flex-wrap: wrap; gap: 6px; }
-  .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
-  p { font-size: 15px; line-height: 1.65; }
-}
-</style>
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -422,9 +375,7 @@
   </div>
 </footer>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-// ── NAV
 document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
   var t = dd.querySelector('.nav-dropdown-toggle');
   var m = dd.querySelector('.nav-dropdown-menu');

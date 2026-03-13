@@ -75,7 +75,154 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 @media (max-width: 768px) { .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; } }
 @media (max-width: 480px) { .footer-inner { grid-template-columns: 1fr; } footer { padding: 40px 20px 24px; } }
 /* ── END FOOTER ─────────────────────────────────────────── */
-/* ── END NAV ─────────────────────────────────────────────── */
+
+  /* ── ONBOARDING GATE ─────────────────────────────────── */
+  #onboarding-gate {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(26,26,26,0.82); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    transition: opacity 0.3s;
+  }
+  #onboarding-gate.hidden { opacity: 0; pointer-events: none; }
+  .gate-card {
+    background: var(--page); border: 1px solid var(--border);
+    border-radius: 8px; padding: 40px 44px; max-width: 520px; width: 100%;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  }
+  .gate-eyebrow {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--green);
+    margin-bottom: 16px;
+  }
+  .gate-heading {
+    font-family: var(--font-serif); font-size: clamp(22px,4vw,28px);
+    line-height: 1.15; color: var(--ink); margin-bottom: 12px;
+  }
+  .gate-heading em { font-style: italic; color: var(--green); }
+  .gate-sub {
+    font-size: 14px; color: var(--ink-dim); line-height: 1.6;
+    margin-bottom: 32px; font-weight: 300;
+  }
+  .gate-actions { display: flex; flex-direction: column; gap: 10px; }
+  #gate-guide {
+    background: var(--green); color: #fff; border: none;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 20px; border-radius: 3px; cursor: pointer;
+    transition: background 0.15s; text-align: left;
+  }
+  #gate-guide:hover { background: var(--green-dim); }
+  #gate-guide span {
+    display: block; font-family: var(--font-sans); font-size: 13px;
+    font-weight: 300; text-transform: none; letter-spacing: 0;
+    color: rgba(255,255,255,0.75); margin-top: 3px;
+  }
+  #gate-explore {
+    background: transparent; color: var(--ink-dim); border: 1px solid var(--border);
+    font-family: var(--font-mono); font-size: 12px; font-weight: 400;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 20px; border-radius: 3px; cursor: pointer;
+    transition: color 0.15s, border-color 0.15s; text-align: left;
+  }
+  #gate-explore:hover { color: var(--ink); border-color: var(--border-2); }
+  #gate-explore span {
+    display: block; font-family: var(--font-sans); font-size: 13px;
+    font-weight: 300; text-transform: none; letter-spacing: 0;
+    color: var(--ink-muted); margin-top: 3px;
+  }
+
+  /* ── DESCRIBE SCREEN ─────────────────────────────────── */
+  #describe-screen {
+    position: fixed; inset: 0; z-index: 2001;
+    background: rgba(26,26,26,0.82); backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  #describe-screen.visible { display: flex; }
+  .describe-card {
+    background: var(--page); border: 1px solid var(--border);
+    border-radius: 8px; padding: 36px 40px; max-width: 580px; width: 100%;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18); max-height: 90vh; overflow-y: auto;
+  }
+  .describe-back {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-muted); background: none;
+    border: none; cursor: pointer; padding: 0; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .describe-back:hover { color: var(--ink); }
+  .describe-heading {
+    font-family: var(--font-serif); font-size: clamp(18px,3vw,22px);
+    color: var(--ink); margin-bottom: 6px; line-height: 1.2;
+  }
+  .describe-sub {
+    font-size: 13px; color: var(--ink-dim); margin-bottom: 24px;
+    font-weight: 300; line-height: 1.5;
+  }
+  .describe-section-label {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted);
+    margin-bottom: 10px;
+  }
+  #describe-pills-row {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+  }
+  .dpill {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 400;
+    color: var(--ink-dim); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 8px 14px; cursor: pointer; transition: all 0.15s;
+    line-height: 1.3; text-align: left;
+  }
+  .dpill:hover { border-color: var(--green); color: var(--ink); }
+  .dpill.selected {
+    background: rgba(42,122,79,0.1); border-color: var(--green);
+    color: var(--green);
+  }
+  #dpill-stack-preview {
+    font-family: var(--font-mono); font-size: 10px; color: var(--green);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    min-height: 16px; margin-bottom: 16px; display: block;
+  }
+  .describe-or {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--ink-muted); font-size: 12px; margin-bottom: 16px;
+  }
+  .describe-or::before, .describe-or::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  #describe-textarea {
+    width: 100%; min-height: 80px; padding: 12px 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 3px; font-family: var(--font-sans); font-size: 13px;
+    font-weight: 300; color: var(--ink); line-height: 1.5; resize: vertical;
+    transition: border-color 0.15s; margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+  #describe-textarea:focus { outline: none; border-color: var(--green); }
+  #describe-textarea::placeholder { color: var(--ink-muted); }
+  .describe-actions { display: flex; gap: 10px; align-items: center; }
+  #describe-build {
+    background: var(--green); color: #fff; border: none;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 12px 20px; border-radius: 3px; cursor: pointer;
+    transition: background 0.15s;
+  }
+  #describe-build:hover:not(:disabled) { background: var(--green-dim); }
+  #describe-build:disabled {
+    opacity: 0.4; cursor: not-allowed;
+  }
+  #describe-skip {
+    background: none; border: none; color: var(--ink-muted);
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; cursor: pointer; padding: 0;
+    transition: color 0.15s;
+  }
+  #describe-skip:hover { color: var(--ink); }
+  /* ── END GATE/DESCRIBE ───────────────────────────────── */
+  /* ── END NAV ─────────────────────────────────────────────── */
 
 
 
@@ -1226,6 +1373,17 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 
 </style>
 </head>
+
+    <div id="describe-pills-row"></div>
+    <span id="dpill-stack-preview"></span>
+    <div class="describe-or">or describe it in your own words</div>
+    <textarea id="describe-textarea" placeholder="e.g. We keep commissioning reports and strategies that never change what anyone actually does. Anchors attend every meeting but never commit to anything."></textarea>
+    <div class="describe-actions">
+      <button id="describe-build" disabled>Build my pathway →</button>
+      <button id="describe-skip">Skip — just show me the evidence</button>
+    </div>
+  </div>
+</div>
 <body>
 <nav>
   <a href="/" class="nav-logo">Cluster<span>OS</span></a>
@@ -1278,6 +1436,33 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 
 <!-- ── NAV ─────────────────────────────────────────────── -->
 </div>
+
+<!-- ── ONBOARDING GATE ────────────────────────────────── -->
+<div id="onboarding-gate">
+  <div class="gate-card">
+    <div class="gate-eyebrow">ClusterOS · Diagnostic Intelligence</div>
+    <h2 class="gate-heading">Your cluster has a stall.<br><em>Strategy won't fix it.</em></h2>
+    <p class="gate-sub">75 clusters diagnosed across 18 countries. The same 9 behavioural patterns appear everywhere. Tell us what your ecosystem keeps doing — we'll show you what's structurally behind it.</p>
+    <div class="gate-actions">
+      <button id="gate-guide">
+        Guide me through the evidence →
+        <span>Tell us what your ecosystem keeps doing and we'll build a personalised pathway</span>
+      </button>
+      <button id="gate-explore">
+        I'll find my own way
+        <span>Explore the map, the stall science, and the diagnostic model directly</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── DESCRIBE SCREEN ────────────────────────────────── -->
+<div id="describe-screen">
+  <div class="describe-card">
+    <button class="describe-back" id="describe-back">← Back</button>
+    <h3 class="describe-heading">What does your ecosystem keep doing?</h3>
+    <p class="describe-sub">Select all that apply. We'll match you to clusters that share the same configuration and build a pathway through the evidence.</p>
+    <div class="describe-section-label">Your ecosystem keeps…</div>
 
 <div id="page-wrap">
 

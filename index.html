@@ -1291,6 +1291,52 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   }
   #gate-skip:hover { color: var(--ink); }
   /* ── END GATE ────────────────────────────────────────── */
+
+  /* ── INTEL BAR PATHWAY MODE ──────────────────────────── */
+  #intel-bar.ib-pathway-mode {
+    height: auto; min-height: 56px; padding: 0;
+    align-items: stretch;
+  }
+  .ib-loading {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 24px; height: 56px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-muted); letter-spacing: 0.06em;
+  }
+  .ib-loading-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    animation: ib-pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes ib-pulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50%       { opacity: 1;   transform: scale(1); }
+  }
+  .ib-thread {
+    display: flex; align-items: center; gap: 20px;
+    padding: 12px 24px; flex-wrap: wrap;
+    width: 100%; box-sizing: border-box;
+  }
+  .ib-observation {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 300;
+    color: var(--ink-dim); line-height: 1.4; margin: 0;
+    flex: 1; min-width: 200px; max-width: 500px;
+  }
+  .ib-invitations {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  }
+  .ib-inv {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--green); background: rgba(42,122,79,0.08);
+    border: 1px solid rgba(42,122,79,0.25); border-radius: 2px;
+    padding: 7px 12px; cursor: pointer; white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .ib-inv:hover {
+    background: rgba(42,122,79,0.15); border-color: var(--green);
+  }
+  /* ── END INTEL BAR PATHWAY ───────────────────────────── */
 </style>
 </head>
 

@@ -97,6 +97,330 @@ const STEP_TARGETS = {
   snapshot:    () => window.location.href = 'https://clusteros.io/request.html'
 };
 
+
+// ── PATHWAY SCRIPTS ───────────────────────────────────────
+// One script per visitor frame. Each defines:
+//   opening    — first bar line (makes them feel seen)
+//   beats[]    — sequence of {observation, invitations[]}
+//   cta        — final action
+// Invitations: { label, action } where action is a function name or url
+
+const PATHWAY_SCRIPTS = {
+
+  steward: {
+    opening: "Most strategies don't fail at execution. They fail because the structural blocker was never named.",
+    beats: [
+      {
+        observation: null, // opening beat — invitations only
+        invitations: [
+          { label: "The same patterns, everywhere →",  action: "page:findings.html" },
+          { label: "Why your diagnosis keeps failing →", action: "page:ln-13-diagnosis.html" },
+          { label: "Show me a cluster →",               action: "action:map" }
+        ]
+      },
+      {
+        observation: "The leverage point is almost never where the stall is most visible.",
+        invitations: [
+          { label: "What leverage actually looks like →", action: "page:leverage.html" },
+          { label: "Walk me through the diagnostic →",    action: "page:diagnostic.html" },
+          { label: "The Narrative × Activity stack →",    action: "page:ln-10-narrative-activity-stack.html" }
+        ]
+      },
+      {
+        observation: "A single intervention rarely breaks a stack. Two levers, applied in sequence, usually do.",
+        invitations: [
+          { label: "See the stall science →",   action: "page:notes.html" },
+          { label: "What does it cost? →",      action: "page:pricing.html" }
+        ]
+      },
+      {
+        observation: null,
+        invitations: [
+          { label: "Request a snapshot diagnostic →", action: "page:request.html" },
+          { label: "Speak to Andrew →",               action: "action:email:Steward conversation" }
+        ]
+      }
+    ]
+  },
+
+  digital: {
+    opening: "This isn't a community platform with AI features added. The architecture is the product.",
+    beats: [
+      {
+        observation: null,
+        invitations: [
+          { label: "How the intelligence layer works →", action: "page:digital-infrastructure.html" },
+          { label: "Four actors. One system. →",         action: "page:signals-systems.html" },
+          { label: "Why not a dashboard? →",             action: "page:ln-13-diagnosis.html" }
+        ]
+      },
+      {
+        observation: "The key design decision is where intelligence lives — in the interface, or in the protocol. Those produce completely different systems.",
+        invitations: [
+          { label: "The MCP substrate →",          action: "page:digital-infrastructure.html" },
+          { label: "How actor journeys are built →", action: "page:signals-systems.html" },
+          { label: "The data model →",              action: "page:data.html" }
+        ]
+      },
+      {
+        observation: "Every actor experience is generated at runtime from live data. Nothing is hardcoded into the interface.",
+        invitations: [
+          { label: "How we've built this before →", action: "page:about.html" },
+          { label: "Platform pricing →",            action: "page:pricing.html" }
+        ]
+      },
+      {
+        observation: null,
+        invitations: [
+          { label: "Talk to Andrew about the architecture →", action: "action:email:Architecture conversation" }
+        ]
+      }
+    ]
+  },
+
+  investor: {
+    opening: "The ecosystem a company operates in predicts its trajectory. Most investors don't have a way to read it.",
+    beats: [
+      {
+        observation: null,
+        invitations: [
+          { label: "What 75 diagnostics actually found →", action: "page:findings.html" },
+          { label: "The structured dataset →",             action: "page:data.html" },
+          { label: "What regime type predicts →",          action: "page:ln-05-incumbents.html" }
+        ]
+      },
+      {
+        observation: "Cycling ecosystems and anchored ecosystems produce different company trajectories. The difference is structural, not sectoral.",
+        invitations: [
+          { label: "How extracting without reinvesting works →", action: "page:ln-08-extracting.html" },
+          { label: "What the leverage data shows →",             action: "page:leverage.html" },
+          { label: "See the cluster map →",                      action: "action:map" }
+        ]
+      },
+      {
+        observation: "The question isn't whether an ecosystem is active. It's whether activity is converting to structural change.",
+        invitations: [
+          { label: "How a diagnostic works →",  action: "page:diagnostic.html" },
+          { label: "Pricing and access →",      action: "page:pricing.html" }
+        ]
+      },
+      {
+        observation: null,
+        invitations: [
+          { label: "Request a cluster diagnostic →", action: "page:request.html" },
+          { label: "Speak to Andrew →",              action: "action:email:Investor conversation" }
+        ]
+      }
+    ]
+  },
+
+  consultant: {
+    opening: "The strategy isn't the problem. The structural blocker that makes strategies irrelevant is.",
+    beats: [
+      {
+        observation: null,
+        invitations: [
+          { label: "Why diagnosis keeps failing →",     action: "page:ln-13-diagnosis.html" },
+          { label: "What a diagnostic produces →",      action: "page:diagnostic.html" },
+          { label: "The validation deadlock →",         action: "page:ln-11-validation-deadlock.html" }
+        ]
+      },
+      {
+        observation: "Most consultants diagnose at the wrong layer. The stall is behavioural — but it looks structural from the outside.",
+        invitations: [
+          { label: "The 9 stall types →",           action: "page:notes.html" },
+          { label: "What leverage looks like →",    action: "page:leverage.html" },
+          { label: "Coordinating instead of deciding →", action: "page:ln-01-coordinating.html" }
+        ]
+      },
+      {
+        observation: "A diagnostic names the blocker in a way a strategy can't. That's a different kind of deliverable.",
+        invitations: [
+          { label: "Three ways in →",         action: "page:pricing.html" }
+        ]
+      },
+      {
+        observation: null,
+        invitations: [
+          { label: "Talk to Andrew about using this in an engagement →", action: "action:email:Consultant conversation" }
+        ]
+      }
+    ]
+  },
+
+  anchor: {
+    opening: "Anchors generate more signal than any other actor in an ecosystem. Most of it disappears.",
+    beats: [
+      {
+        observation: null,
+        invitations: [
+          { label: "Four actors. One system. →",         action: "page:signals-systems.html" },
+          { label: "How signals cascade →",              action: "page:signals-systems.html" },
+          { label: "What extracting without reinvesting looks like →", action: "page:ln-08-extracting.html" }
+        ]
+      },
+      {
+        observation: "The same procurement signal reaches a founder, a researcher, and a steward — but each sees a completely different surface. That's not broadcast. That's coordination.",
+        invitations: [
+          { label: "The intelligence layer →",     action: "page:digital-infrastructure.html" },
+          { label: "What mediating instead of coupling costs →", action: "page:ln-06-mediating.html" },
+          { label: "See the cluster data →",        action: "page:data.html" }
+        ]
+      },
+      {
+        observation: "The platform doesn't ask anchors to behave differently. It changes what their existing behaviour produces.",
+        invitations: [
+          { label: "How it's priced →",           action: "page:pricing.html" }
+        ]
+      },
+      {
+        observation: null,
+        invitations: [
+          { label: "Request a diagnostic of your cluster →", action: "page:request.html" },
+          { label: "Speak to Andrew →",                      action: "action:email:Anchor conversation" }
+        ]
+      }
+    ]
+  },
+
+  politician: {
+    opening: "Economic transformation stalls for structural reasons, not political ones. The blockers are nameable — and that changes what's possible.",
+    beats: [
+      {
+        observation: null,
+        invitations: [
+          { label: "Why effort fails to compound →",    action: "page:notes.html" },
+          { label: "The same patterns, everywhere →",  action: "page:findings.html" },
+          { label: "What stabilising around incumbents looks like →", action: "page:ln-05-incumbents.html" }
+        ]
+      },
+      {
+        observation: "The clusters that transformed fastest weren't the best resourced. They had the clearest diagnosis of what was holding them back.",
+        invitations: [
+          { label: "What leverage actually looks like →", action: "page:leverage.html" },
+          { label: "Waiting for permission →",            action: "page:ln-09-permission.html" },
+          { label: "See the evidence →",                  action: "page:data.html" }
+        ]
+      },
+      {
+        observation: "A diagnostic doesn't produce a report. It produces a named, evidenced intervention point — something you can act on and explain publicly.",
+        invitations: [
+          { label: "How it works →",    action: "page:diagnostic.html" },
+          { label: "What it costs →",   action: "page:pricing.html" }
+        ]
+      },
+      {
+        observation: null,
+        invitations: [
+          { label: "Request a diagnostic briefing →", action: "page:request.html" },
+          { label: "Speak to Andrew →",               action: "action:email:Political briefing" }
+        ]
+      }
+    ]
+  },
+
+  government: {
+    opening: "EDA investment without diagnostic infrastructure is flying blind. You're funding activity. That's not the same as funding outcomes.",
+    beats: [
+      {
+        observation: null,
+        invitations: [
+          { label: "What the platform surfaces for stewards →", action: "page:signals-systems.html" },
+          { label: "How clusters are compared →",               action: "page:findings.html" },
+          { label: "The 75-cluster evidence base →",            action: "page:data.html" }
+        ]
+      },
+      {
+        observation: "The question isn't whether your EDAs are active. It's whether activity is converting to structural change. Those require different measurements.",
+        invitations: [
+          { label: "How health signals work →",         action: "page:diagnostic.html" },
+          { label: "What leverage hypotheses surface →", action: "page:leverage.html" },
+          { label: "Re-proving instead of narrowing →",  action: "page:ln-04-reproving.html" }
+        ]
+      },
+      {
+        observation: "A sovereign database means your EDA's data stays jurisdictional. The intelligence layer improves centrally. The data never leaves the region.",
+        invitations: [
+          { label: "The infrastructure model →",  action: "page:digital-infrastructure.html" },
+          { label: "Procurement and pricing →",   action: "page:pricing.html" }
+        ]
+      },
+      {
+        observation: null,
+        invitations: [
+          { label: "Request a policy briefing →", action: "page:request.html" },
+          { label: "Speak to Andrew →",           action: "action:email:Government procurement conversation" }
+        ]
+      }
+    ]
+  },
+
+  unknown: {
+    opening: "75 clusters diagnosed. 18 countries. The same 9 behavioural patterns appear everywhere — regardless of sector, geography, or funding.",
+    beats: [
+      {
+        observation: null,
+        invitations: [
+          { label: "The finding that surprised us most →", action: "page:findings.html" },
+          { label: "Why diagnosis keeps failing →",        action: "page:ln-13-diagnosis.html" },
+          { label: "Explore the clusters →",               action: "action:map" }
+        ]
+      },
+      {
+        observation: "Every cluster thinks its situation is unique. The structural patterns say otherwise.",
+        invitations: [
+          { label: "The 9 stall types →",         action: "page:notes.html" },
+          { label: "What leverage looks like →",  action: "page:leverage.html" },
+          { label: "The intelligence layer →",    action: "page:digital-infrastructure.html" }
+        ]
+      },
+      {
+        observation: null,
+        invitations: [
+          { label: "See how it's priced →",          action: "page:pricing.html" },
+          { label: "Request a diagnostic →",          action: "page:request.html" },
+          { label: "Speak to Andrew →",               action: "action:email:ClusterOS conversation" }
+        ]
+      }
+    ]
+  }
+};
+
+// ── FRAME CLASSIFIER ──────────────────────────────────────
+// Classifies gate input into a frame key.
+// Returns { frame, confidence, signal }
+async function classifyFrame(text) {
+  const prompt = `You are classifying a visitor to the ClusterOS platform based on their self-description.
+
+VISITOR SAID: "${text}"
+
+Classify them into exactly one of these frames:
+- steward       (EDA lead, cluster manager, innovation agency director)
+- digital       (head of digital, CTO, technical architect, developer)
+- investor      (VC, fund manager, growth equity, angel, analyst)
+- consultant    (strategy consultant, advisor, researcher hired to advise)
+- anchor        (university, NHS, large employer, anchor institution representative)
+- politician    (elected official, minister, councillor, political advisor)
+- government    (civil servant, policy officer, government buyer, public sector procurement)
+- unknown       (anything else, or too ambiguous to classify)
+
+Return ONLY valid JSON, no markdown:
+{"frame":"steward","confidence":"high","signal":"EDA director, ecosystem not working"}`;
+
+  try {
+    const response = await fetch(`${window.RAILWAY}/api/intelligence`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    });
+    const data = await response.json();
+    const text2 = (data.text || '').replace(/```json|```/g, '').trim();
+    return JSON.parse(text2);
+  } catch(e) {
+    return { frame: 'unknown', confidence: 'low', signal: '' };
+  }
+}
+
 // ── DASHBOARD STATE ───────────────────────────────────────
 const dashboard = {
   active:        false,
@@ -107,68 +431,24 @@ const dashboard = {
   inBranch:      false,
   currentBranch: null,
 
-  // ── INIT FROM FREE TEXT (no pills selected) ─────────────
+  // ── INIT FROM FREE TEXT ─────────────────────────────────
   async initFromFreeText(text) {
-    this.active     = true;
-    this.pillKeys   = [];
-    this.stallName  = null;
-    this.stallNames = [];
-    this.stack      = null;
+    this.active       = true;
+    this.freeText     = text;
+    this.frame        = null;
+    this.beatIndex    = 0;
 
-    this._showPanel();
-    this._renderSkeleton();
+    // Show bar loading state
+    window.intelBar && window.intelBar.setLoading('Reading your situation...');
 
-    const input  = document.getElementById('intel-bar-input');
-    const submit = document.getElementById('intel-bar-submit');
-    const status = document.getElementById('intel-bar-status');
-    if (input)  input.style.display  = 'none';
-    if (submit) submit.style.display = 'none';
-    if (status) {
-      status.style.display = 'block';
-      status.textContent   = 'Reading your situation — building pathway';
-    }
+    // Classify frame
+    const classification = await classifyFrame(text);
+    this.frame    = classification.frame || 'unknown';
+    this.signal   = classification.signal || '';
+    this.script   = PATHWAY_SCRIPTS[this.frame] || PATHWAY_SCRIPTS.unknown;
 
-    // Match clusters even without stall declaration — use free text signals
-    this.matchedClusters = this._matchClusters(4);
-    const clusterEvidence = this.matchedClusters.length
-      ? this.matchedClusters.map(c => this._serializeCluster(c)).join('\n\n')
-      : '';
-
-    const prompt = `You are generating a personalised learning pathway for the ClusterOS diagnostic platform.
-
-VISITOR DESCRIPTION (their own words):
-"${text}"
-
-MATCHED CLUSTERS (based on available signals):
-${clusterEvidence || 'No strong cluster match yet — generate pathway from description.'}
-
-Based on the visitor's description, identify the most likely stall type(s) from this list:
-- Narrating instead of testing (reporting substitutes for impact)
-- Coordinating instead of deciding (meetings substitute for commitment)
-- Re-proving instead of narrowing (justification substitutes for execution)
-- Scaling activity instead of throughput (starts celebrated over outcomes)
-- Mediating instead of coupling (relationships substitute for transactions)
-- Extracting without reinvesting (anchors take more than they circulate)
-
-Then generate a 5-step pathway. Reference specific matched clusters by name where possible.
-
-${this._pathwayJsonSpec()}`;
-
-    try {
-      const response = await fetch(`${window.RAILWAY}/api/intelligence`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt })
-      });
-      const data   = await response.json();
-      const text2  = data.text || '';
-      const parsed = JSON.parse(text2.replace(/```json|```/g, '').trim());
-      this.steps       = parsed.steps;
-      this.currentStep = 1;
-      this._renderOpening(parsed.opening);
-      this._render();
-    } catch(e) {
-      this._fallbackPathway();
-    }
+    // Show opening line and first beat
+    window.intelBar && window.intelBar.showBeat(this.script, 0, text);
   },
 
   // ── INIT ─────────────────────────────────────────────────
@@ -856,6 +1136,100 @@ window.openSimilarClusters = function() {
   // Open the panel
   if (window.openPanel) window.openPanel('clusters');
 };
+
+
+// ── INTEL BAR PATHWAY CONTROLLER ─────────────────────────
+// Drives the bottom bar as a living pathway thread.
+// After gate submission it becomes the guide — not a text input.
+
+const intelBar = {
+
+  // ── LOADING STATE ──────────────────────────────────────
+  setLoading(message) {
+    const bar = document.getElementById('intel-bar');
+    if (!bar) return;
+    bar.innerHTML = `
+      <div class="ib-loading">
+        <span class="ib-loading-dot"></span>
+        <span class="ib-loading-text">${message}</span>
+      </div>`;
+    bar.classList.add('ib-pathway-mode');
+  },
+
+  // ── SHOW A BEAT ────────────────────────────────────────
+  showBeat(script, beatIndex, visitorText) {
+    const bar  = document.getElementById('intel-bar');
+    if (!bar) return;
+
+    const beat = script.beats[beatIndex];
+    if (!beat) return;
+
+    // First beat uses script opening, subsequent use beat observation
+    const line = beatIndex === 0
+      ? script.opening
+      : beat.observation;
+
+    const invHtml = (beat.invitations || []).map(inv =>
+      `<button class="ib-inv" data-action="${inv.action}">${inv.label}</button>`
+    ).join('');
+
+    bar.innerHTML = `
+      <div class="ib-thread">
+        ${line ? `<p class="ib-observation">${line}</p>` : ''}
+        <div class="ib-invitations">${invHtml}</div>
+      </div>`;
+
+    bar.classList.add('ib-pathway-mode');
+
+    // Wire invitation buttons
+    bar.querySelectorAll('.ib-inv').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this._executeAction(btn.dataset.action);
+        this._advance(script, beatIndex);
+      });
+    });
+  },
+
+  // ── ADVANCE TO NEXT BEAT ───────────────────────────────
+  _advance(script, currentBeat) {
+    const next = currentBeat + 1;
+    if (next >= script.beats.length) return;
+    // Small delay — let the page action happen first
+    setTimeout(() => {
+      this.showBeat(script, next);
+    }, 1800);
+  },
+
+  // ── EXECUTE INVITATION ACTION ──────────────────────────
+  _executeAction(action) {
+    if (!action) return;
+
+    if (action.startsWith('page:')) {
+      const page = action.replace('page:', '');
+      window.open('/' + page, '_blank');
+      return;
+    }
+
+    if (action === 'action:map') {
+      document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    if (action.startsWith('action:email:')) {
+      const subject = action.replace('action:email:', '');
+      window.location.href = `mailto:andrew@communitylab.app?subject=${encodeURIComponent(subject)}`;
+      return;
+    }
+
+    if (action.startsWith('action:panel:')) {
+      const panelId = action.replace('action:panel:', '');
+      window.openPanel && window.openPanel(panelId);
+      return;
+    }
+  }
+};
+
+window.intelBar = intelBar;
 
 // ── BOOT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {

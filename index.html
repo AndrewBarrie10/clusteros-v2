@@ -1337,6 +1337,106 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     background: rgba(42,122,79,0.15); border-color: var(--green);
   }
   /* ── END INTEL BAR PATHWAY ───────────────────────────── */
+
+  /* ── BRIEFING PRINT STYLES ───────────────────────────── */
+  #briefing-print-container { display: none; }
+
+  @media print {
+    /* Hide everything except the briefing */
+    body > *:not(#briefing-print-container) { display: none !important; }
+    #briefing-print-container { display: block !important; }
+
+    @page {
+      size: A4;
+      margin: 18mm 18mm 18mm 18mm;
+    }
+
+    .bp-page {
+      font-family: 'Geist', 'DM Sans', sans-serif;
+      color: #1a1a1a;
+      max-width: 100%;
+    }
+    .bp-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      border-bottom: 1.5px solid #1a1a1a; padding-bottom: 10px;
+      margin-bottom: 28px;
+    }
+    .bp-brand {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 18px; font-weight: 400; letter-spacing: -0.01em;
+    }
+    .bp-brand span {
+      font-family: 'Geist Mono', monospace;
+      font-size: 13px; font-weight: 600; color: #2a7a4f;
+    }
+    .bp-meta {
+      font-family: 'Geist Mono', monospace;
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #8c8780;
+    }
+    .bp-title-block { margin-bottom: 20px; }
+    .bp-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 26px; font-weight: 400; line-height: 1.15;
+      margin: 0 0 6px; letter-spacing: -0.02em;
+    }
+    .bp-subtitle {
+      font-size: 11px; color: #5a5650; margin: 0;
+      font-family: 'Geist Mono', monospace; letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .bp-visitor-input {
+      background: #f0ece4; border-left: 2px solid #2a7a4f;
+      padding: 10px 14px; margin-bottom: 22px;
+    }
+    .bp-input-label {
+      font-family: 'Geist Mono', monospace; font-size: 8px;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: #2a7a4f; display: block; margin-bottom: 4px;
+    }
+    .bp-input-text {
+      font-size: 12px; color: #1a1a1a; margin: 0;
+      font-style: italic; line-height: 1.5;
+    }
+    .bp-sections { margin-bottom: 28px; }
+    .bp-section { margin-bottom: 18px; }
+    .bp-section-heading {
+      font-family: 'Geist Mono', monospace; font-size: 9px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em;
+      color: #2a7a4f; margin: 0 0 6px;
+    }
+    .bp-section-body {
+      font-size: 12px; line-height: 1.65; color: #1a1a1a;
+      margin: 0; font-weight: 300;
+    }
+    .bp-footer {
+      border-top: 1px solid #ddd8cf; padding-top: 12px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .bp-cta {
+      font-family: 'Geist Mono', monospace; font-size: 10px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      color: #2a7a4f; text-decoration: none;
+    }
+    .bp-footer-note {
+      font-family: 'Geist Mono', monospace; font-size: 9px;
+      color: #8c8780; letter-spacing: 0.08em;
+    }
+  }
+  /* ── END BRIEFING PRINT ──────────────────────────────── */
+  /* ── BRIEFING DOWNLOAD BUTTON ────────────────────────── */
+  #briefing-btn {
+    display: none;
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-dim); background: transparent;
+    border: 1px solid var(--border-2); border-radius: 2px;
+    padding: 8px 14px; cursor: pointer; white-space: nowrap;
+    transition: all 0.15s; margin-left: auto;
+  }
+  #briefing-btn.visible { display: block; }
+  #briefing-btn:hover { color: var(--ink); border-color: var(--ink-dim); }
+  /* ── END BRIEFING BUTTON ─────────────────────────────── */
 </style>
 </head>
 
@@ -1814,6 +1914,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     <span id="intel-bar-status"></span>
   </div>
   <div class="bar-actions">
+    <button id="briefing-btn" onclick="window.briefing && window.briefing.generate()">↓ Briefing</button>
     <a class="bar-action bar-action-secondary" href="/cdn-cgi/l/email-protection#bddcd3d9cfd8cafdded2d0d0c8d3d4c9c4d1dcdf93dccdcd82cec8dfd7d8dec980fed1c8cec9d8cff2ee988f8dded2d3cbd8cfcedcc9d4d2d3">Speak to Andrew →</a>
     <a class="bar-action bar-action-primary" href="/request.html">Snapshot diagnostic →</a>
   </div>

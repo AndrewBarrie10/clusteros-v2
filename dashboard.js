@@ -1138,6 +1138,199 @@ window.openSimilarClusters = function() {
 };
 
 
+
+// ── BRIEFING GENERATOR ───────────────────────────────────
+// Generates a frame-specific one-pager from session data.
+// Renders into a hidden print div — visitor prints to PDF.
+
+const briefing = {
+
+  // ── CONTENT TEMPLATES BY FRAME ───────────────────────
+  _templates: {
+
+    steward: {
+      title:    "Diagnostic Briefing",
+      subtitle: "ClusterOS · Structural Diagnosis for Regional Economies",
+      sections: [
+        { heading: "Why strategy isn't working",
+          content: "Development agencies commission strategies. They produce roadmaps, priority sectors, and action plans. Then the cluster keeps doing what it was doing — because the structural blocker was never named. The blocker is not a gap in the strategy. It is a behavioural substitution: the ecosystem doing something observable instead of something harder. ClusterOS calls these stalls." },
+        { heading: "What the diagnostic found across 75 clusters",
+          content: "75 clusters diagnosed across 18 countries. 9 canonical stall types appear repeatedly — regardless of sector, geography, or funding level. The most common: Coordinating Instead of Deciding (97% frequency), Narrating Instead of Testing (89%), and Re-proving Instead of Narrowing (81%). Stalls rarely travel alone. They form stabilisation stacks that resist single interventions." },
+        { heading: "Where leverage sits",
+          content: "The leverage point is almost never where the stall is most visible. A coordination stall is rarely fixed by more coordination — it breaks when one actor's constraint changes. A narrating stall breaks when what gets reported changes, not who reports it. A snapshot diagnostic identifies the structural configuration, names the stack, and surfaces a specific leverage hypothesis in 4–5 weeks." },
+        { heading: "What a diagnostic produces",
+          content: "A structured evidence review across five stages: Evidence → Patterns → Stalls → Stacks → Leverage. Output is a named intervention point — something specific, evidenced, and actionable. Not a strategy. Not a roadmap. A diagnosis." }
+      ],
+      cta: { text: "Request a Snapshot Diagnostic", url: "/request.html" }
+    },
+
+    digital: {
+      title:    "Architecture Brief",
+      subtitle: "ClusterOS · Coordination Infrastructure for Regional Economies",
+      sections: [
+        { heading: "What ClusterOS actually is",
+          content: "Not a community platform with AI features added. Not a dashboard system. ClusterOS is coordination infrastructure — the substrate through which a complex adaptive system of selfish actors generates collective intelligence without being asked to. Its defining purpose: making complexity cheaper to operate." },
+        { heading: "The intelligence layer",
+          content: "Model Context Protocol (MCP) is the substrate. The backend exposes the ecosystem database as a defined set of named tools. The AI calls those tools at runtime to assemble actor experiences from live data, on demand. Intelligence is not hardcoded into the interface — it is reasoned fresh on every call. When the AI model improves, everything the platform produces improves automatically." },
+        { heading: "Why not a dashboard",
+          content: "Dashboards embed intelligence in code — frozen, role-generic, unable to answer questions nobody designed for. MCP keeps intelligence in the protocol layer — live, role-aware, improving automatically. A dashboard can tell you what happened. An MCP-driven system can tell each actor what it means for them specifically, at the moment they need to know." },
+        { heading: "The data model",
+          content: "One sovereign database per regional EDA. Supercluster → Cluster → Group → Actor hierarchy. Full role-based access control. Data residency is jurisdictional — it does not leave the region. The intelligence layer improves centrally via model updates. The platform arrives pre-populated via autonomous bots before any actor joins." }
+      ],
+      cta: { text: "Talk to Andrew about the architecture", url: "mailto:andrew@communitylab.app?subject=Architecture%20conversation" }
+    },
+
+    investor: {
+      title:    "Ecosystem Health as an Investment Signal",
+      subtitle: "ClusterOS · Diagnostic Intelligence for Regional Economies",
+      sections: [
+        { heading: "The problem with ecosystem-blind investing",
+          content: "The ecosystem a company operates in predicts its trajectory more than most investors account for. An anchor-dominated ecosystem extracts talent, IP, and capital rather than circulating it. A cycling ecosystem compounds — early-stage activity converts to scale, relationships convert to transactions, knowledge stays local. Most investors have no instrument for reading this." },
+        { heading: "What the data shows",
+          content: "75 clusters diagnosed across 18 countries. Regime type — the structural configuration of power and incentive — is the strongest predictor of ecosystem behaviour. Anchored ecosystems show Extracting Without Reinvesting at 73% frequency. Cycling ecosystems show higher founder survival rates and faster time-to-scale. The difference is not sector or geography — it is structural." },
+        { heading: "The 9 stall types as investment signals",
+          content: "Coordinating Instead of Deciding means no actor will commit to anything — deals stall, partnerships dissolve, nothing closes. Re-proving Instead of Narrowing means the investment case will be remade repeatedly without execution. Scaling Activity Instead of Throughput means the headline numbers are inputs, not outcomes. Each stall type has a predictable effect on portfolio company trajectory." },
+        { heading: "What a diagnostic tells you",
+          content: "A snapshot diagnostic identifies the structural configuration of a specific cluster, names the active stalls and stacks, and surfaces a leverage hypothesis. For investors, it answers: is this ecosystem structurally capable of producing the outcomes we're backing this company to achieve?" }
+      ],
+      cta: { text: "Request a cluster diagnostic", url: "/request.html" }
+    },
+
+    consultant: {
+      title:    "The Diagnostic as a Deliverable",
+      subtitle: "ClusterOS · Structural Diagnosis for Regional Economies",
+      sections: [
+        { heading: "Why strategy engagements don't produce change",
+          content: "The strategy is rarely the problem. The structural blocker that makes strategies irrelevant is the problem — and it operates at a layer most strategy engagements don't reach. A Narrating stall means the ecosystem produces reports about progress instead of evidence of change. The strategy becomes another report. Commissioning a better strategy without diagnosing the stall produces a better report that also won't be implemented." },
+        { heading: "What a stall is",
+          content: "A stall is a behavioural substitution: the system doing something observable instead of something harder. 9 canonical stall types appear across 75 clusters worldwide. They form stabilisation stacks — combinations of two or more stalls that reinforce each other and resist single interventions. The stack is what makes ecosystems feel intractable. A single-stall ecosystem is fixable. A stacked ecosystem needs two levers applied in sequence." },
+        { heading: "What the diagnostic produces",
+          content: "A structured evidence review across five stages: Evidence → Patterns → Stalls → Stacks → Leverage. Output is a named intervention point — specific, evidenced, and actionable. Delivered in 4–5 weeks at a fixed price. The diagnostic doesn't tell the client what to do. It tells them what is structurally blocking everything they're already trying to do." },
+        { heading: "Using ClusterOS in an engagement",
+          content: "The diagnostic can be commissioned directly, white-labelled as part of a wider engagement, or used as a scoping instrument before a larger piece of work. The 75-cluster dataset provides comparative context — your client's configuration measured against analogous clusters that have been through the full diagnostic." }
+      ],
+      cta: { text: "Talk to Andrew about using this in an engagement", url: "mailto:andrew@communitylab.app?subject=Consultant%20conversation" }
+    },
+
+    anchor: {
+      title:    "What Anchor Participation Actually Produces",
+      subtitle: "ClusterOS · Coordination Infrastructure for Regional Economies",
+      sections: [
+        { heading: "The anchor problem",
+          content: "Anchor institutions generate more signal than any other actor in an ecosystem. Most of it disappears. A procurement need goes unmatched. A research output finds no commercial route. A talent pipeline feeds competitors rather than the local cluster. Not because anchors aren't engaged — but because there is no infrastructure to route their signals to the right actors at the right moment." },
+        { heading: "How the platform changes this",
+          content: "A single event — an anchor posting a procurement RFI — is reframed by the AI for each actor type. A founder sees a specific capability match with a 14-day deadline. A researcher sees two founders who could intermediate their published work. A steward sees a systems-level bridging opportunity with a current score and an intervention available. Same signal. Different intelligence surfaces." },
+        { heading: "What anchors get back",
+          content: "Capability visibility without premature disclosure. Supply chain intelligence from within the cluster. Research partner matching against live commercial demand. The platform doesn't ask anchors to behave differently — it changes what their existing behaviour produces. Every RFI, every milestone, every connection generates typed signals that make the system more useful for everyone." },
+        { heading: "The coordination infrastructure model",
+          content: "ClusterOS is not a network platform. It is coordination infrastructure — the substrate through which selfish actors generate collective intelligence without being asked to care about the ecosystem. Anchors participate in their own interest. The ecosystem benefits structurally and automatically." }
+      ],
+      cta: { text: "Request a diagnostic of your cluster", url: "/request.html" }
+    },
+
+    politician: {
+      title:    "Why Economic Transformation Is So Difficult — and What Changes That",
+      subtitle: "ClusterOS · Diagnostic Intelligence for Regional Economies",
+      sections: [
+        { heading: "The structural answer to a political question",
+          content: "Economic transformation stalls for structural reasons, not political ones. The blockers are nameable — behavioural substitutions that operate below the level of strategy. Ecosystems coordinate instead of committing. They narrate progress instead of generating it. They wait for permission instead of moving. These are not culture problems. They are structural configurations that respond to specific interventions." },
+        { heading: "What the evidence shows",
+          content: "75 clusters diagnosed across 18 countries. The clusters that transformed fastest were not the best resourced — they had the clearest diagnosis of what was holding them back. Removing the right structural blocker produces compounding change. Adding more resource to a stalled system produces more activity, not more outcomes." },
+        { heading: "What a diagnostic tells you publicly",
+          content: "A diagnostic names the blocker in a way a strategy cannot. It produces a specific, evidenced intervention point — something that can be explained to a board, a minister, or a public audience. Not 'we are investing in the ecosystem.' But 'we identified the specific configuration holding this cluster back, and here is the intervention that addresses it.'" },
+        { heading: "The policy lever",
+          content: "ClusterOS operates as infrastructure for EDAs — giving stewards the diagnostic capability to identify where intervention will compound, and the platform to coordinate actors around it. A diagnostic commissioned before a significant public investment tells you whether the structural conditions exist for that investment to produce outcomes." }
+      ],
+      cta: { text: "Request a diagnostic briefing", url: "/request.html" }
+    },
+
+    government: {
+      title:    "Maximising Return on EDA Investment",
+      subtitle: "ClusterOS · Diagnostic Infrastructure for Regional Economies",
+      sections: [
+        { heading: "The measurement problem",
+          content: "EDA investment without diagnostic infrastructure is flying blind. Activity is measurable — meetings held, companies supported, events run. Structural change is not. The question is not whether your EDAs are active. It is whether activity is converting to structural change. Those require different measurements, and most public investment frameworks only have instruments for the first." },
+        { heading: "What ClusterOS measures",
+          content: "Four health signals per cluster, updated continuously: bridging score (are anchors and founders transacting?), signal velocity (is new information entering the system?), stall intensity (which behavioural substitutions are active?), and leverage position (where would a specific intervention have compounding effect?). These are systems-level measurements — not activity counts." },
+        { heading: "How clusters are compared",
+          content: "75 clusters diagnosed across 18 countries provide the comparative baseline. Your EDAs' clusters can be positioned against analogous configurations worldwide — same sector, similar regime, comparable maturity. The diagnostic identifies whether a cluster is ahead of, behind, or structurally different from its comparators — and why." },
+        { heading: "The procurement model",
+          content: "ClusterOS operates as sovereign infrastructure — one dedicated instance per regional EDA. Data residency is jurisdictional; it does not leave the region. The intelligence layer improves centrally via model updates. Platform procurement includes the diagnostic capability, the coordination infrastructure, and the bot network for continuous signal ingestion. Diagnostic runs are available separately as a scoping instrument before platform procurement." }
+      ],
+      cta: { text: "Request a policy briefing", url: "/request.html" }
+    },
+
+    unknown: {
+      title:    "ClusterOS — Platform Overview",
+      subtitle: "Diagnostic Intelligence for Regional Economies",
+      sections: [
+        { heading: "What ClusterOS is",
+          content: "Coordination infrastructure for regional innovation ecosystems. Not a community platform. Not a dashboard system. ClusterOS gives Economic Development Agencies the diagnostic capability to identify why their clusters stall — and the platform infrastructure to coordinate actors around the intervention." },
+        { heading: "What the diagnostic found",
+          content: "75 clusters diagnosed across 18 countries. 9 canonical stall types appear regardless of sector, geography, or funding level. Stalls are behavioural substitutions — the ecosystem doing something observable instead of something harder. They form stabilisation stacks that resist single interventions. The diagnosis names the stack and surfaces a specific leverage hypothesis." },
+        { heading: "The intelligence layer",
+          content: "Model Context Protocol is the substrate. Actor experiences are generated at runtime from live data — not hardcoded into an interface. Founders get personalised pathways. Anchors get capability matching. Researchers get demand signal translation. Stewards get structural interrogation. Every selfish action by every actor generates typed signals that make the system more intelligent for everyone else." },
+        { heading: "Three ways in",
+          content: "A snapshot diagnostic (4–5 weeks, fixed price) identifies the structural configuration of your cluster and surfaces a leverage hypothesis. A full diagnostic run produces the complete five-stage analysis. Platform procurement gives your EDA the full coordination infrastructure — diagnostic capability, actor journeys, signal ingestion, and the sovereign database." }
+      ],
+      cta: { text: "See how it's priced", url: "/pricing.html" }
+    }
+  },
+
+  // ── GENERATE ──────────────────────────────────────────
+  async generate() {
+    const frame  = window.dashboard?.frame || 'unknown';
+    const input  = window.behaviour?.freeDescription || '';
+    const tmpl   = this._templates[frame] || this._templates.unknown;
+
+    // Build the print HTML
+    const sectionsHtml = tmpl.sections.map(s => `
+      <div class="bp-section">
+        <h3 class="bp-section-heading">${s.heading}</h3>
+        <p class="bp-section-body">${s.content}</p>
+      </div>`).join('');
+
+    const inputBlock = input
+      ? `<div class="bp-visitor-input">
+           <span class="bp-input-label">Your situation</span>
+           <p class="bp-input-text">"${input}"</p>
+         </div>`
+      : '';
+
+    const html = `
+      <div class="bp-page">
+        <div class="bp-header">
+          <div class="bp-brand">Cluster<span>OS</span></div>
+          <div class="bp-meta">clusteros.io · ${new Date().toLocaleDateString('en-GB', {month:'long', year:'numeric'})}</div>
+        </div>
+        <div class="bp-title-block">
+          <h1 class="bp-title">${tmpl.title}</h1>
+          <p class="bp-subtitle">${tmpl.subtitle}</p>
+        </div>
+        ${inputBlock}
+        <div class="bp-sections">${sectionsHtml}</div>
+        <div class="bp-footer">
+          <a class="bp-cta" href="${tmpl.cta.url}">${tmpl.cta.text} →</a>
+          <span class="bp-footer-note">clusteros.io · andrew@communitylab.app</span>
+        </div>
+      </div>`;
+
+    // Inject into print container
+    let container = document.getElementById('briefing-print-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'briefing-print-container';
+      document.body.appendChild(container);
+    }
+    container.innerHTML = html;
+
+    // Trigger print
+    window.print();
+  }
+};
+
+window.briefing = briefing;
+
 // ── INTEL BAR PATHWAY CONTROLLER ─────────────────────────
 // Drives the bottom bar as a living pathway thread.
 // After gate submission it becomes the guide — not a text input.
@@ -1180,6 +1373,9 @@ const intelBar = {
       </div>`;
 
     bar.classList.add('ib-pathway-mode');
+
+    // Show briefing download button
+    document.getElementById('briefing-btn')?.classList.add('visible');
 
     // Wire invitation buttons
     bar.querySelectorAll('.ib-inv').forEach(btn => {

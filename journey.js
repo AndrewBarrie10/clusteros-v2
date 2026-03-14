@@ -113,7 +113,7 @@ const journey = {
       <p class="jnav-context">Select everything that sounds familiar. Combinations reveal stacks.</p>
       ${this._nav(0)}
       <div class="jnav-actions">
-        <button class="jnav-btn-primary" id="jnav-next-1" disabled onclick="journey._commitBehaviours()">This is what I see →</button>
+        <button class="jnav-btn-primary" id="jnav-next-1" disabled onclick="journey._commitBehaviours()">Name my stalls →</button>
         <button class="jnav-btn-secondary" onclick="journey._renderIntro()">← Overview</button>
       </div>`);
     this._setFrame(`
@@ -121,12 +121,22 @@ const journey = {
       <p class="jf-stage-sub">Select all the patterns that sound familiar. These are observable behaviours — not diagnoses. The system names what's beneath them.</p>
       <div class="jf-behaviour-grid">
         ${BEHAVIOURS.map(b=>`<button class="jf-behaviour ${this.selectedKeys.includes(b.key)?'selected':''}" data-key="${b.key}">${b.label}</button>`).join('')}
+      </div>
+      <div class="jf-sticky-bottom">
+        <button class="jnav-btn-primary" id="jf-next-1" disabled onclick="journey._commitBehaviours()" style="padding:12px 28px;font-size:12px">Name my stalls →</button>
+        <span id="jf-select-count" style="font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);letter-spacing:0.08em;text-transform:uppercase"></span>
       </div>`);
     document.querySelectorAll('.jf-behaviour').forEach(btn=>{
       btn.addEventListener('click',()=>{
         btn.classList.toggle('selected');
         this.selectedKeys=[...document.querySelectorAll('.jf-behaviour.selected')].map(b=>b.dataset.key);
-        const nb=document.getElementById('jnav-next-1'); if(nb) nb.disabled=this.selectedKeys.length===0;
+        const nb1=document.getElementById('jnav-next-1');
+        const nb2=document.getElementById('jf-next-1');
+        const count=document.getElementById('jf-select-count');
+        const disabled=this.selectedKeys.length===0;
+        if(nb1) nb1.disabled=disabled;
+        if(nb2) nb2.disabled=disabled;
+        if(count) count.textContent=this.selectedKeys.length>0?`${this.selectedKeys.length} selected`:'';
       });
     });
   },
@@ -150,7 +160,11 @@ const journey = {
       <h2 class="jf-stage-heading">Here's what<br><em>that means.</em></h2>
       <p class="jf-stage-sub">These are the structural patterns beneath the behaviours you selected. Each is a substitution — the ecosystem doing something observable instead of something harder.</p>
       <div class="jf-stall-grid">${this.selectedStalls.map(n=>{const sc=window.STALL_SCIENCE_DATA[n]||{};return`<div class="jf-stall-card"><div class="jf-stall-name">${n}</div><p class="jf-stall-def">${sc.definition||''}</p></div>`;}).join('')}</div>
-      ${this.selectedStalls.length>1?`<div class="jf-multi-note">You've identified ${this.selectedStalls.length} stalls. Stalls rarely travel alone — they form stabilisation stacks that resist single interventions. The next stage shows you the combination.</div>`:''}`);
+      ${this.selectedStalls.length>1?`<div class="jf-multi-note">You've identified ${this.selectedStalls.length} stalls. Stalls rarely travel alone — they form stabilisation stacks that resist single interventions. The next stage shows you the combination.</div>`:''}
+      <div class="jf-sticky-bottom">
+        <button class="jnav-btn-primary" onclick="journey._toStage3()" style="padding:12px 28px;font-size:12px">${this.selectedStalls.length>1?'See how they interact →':'See where leverage sits →'}</button>
+        <button class="jnav-btn-secondary" onclick="journey._renderStage1()">← Back</button>
+      </div>`);
   },
 
   _toStage3() {
@@ -178,6 +192,10 @@ const journey = {
           <div class="jf-stack-name">${stack.name}</div>
           <div class="jf-stack-tags">${this.selectedStalls.map(s=>`<span class="jf-stack-tag">${s}</span>`).join('<span class="jf-stack-plus">+</span>')}</div>
           <p class="jf-stack-desc">${stack.description}</p>
+        </div>
+        <div class="jf-sticky-bottom">
+          <button class="jnav-btn-primary" id="jnav-next-3" onclick="journey._toStage35()" style="padding:12px 28px;font-size:12px">Who else has been here →</button>
+          <button class="jnav-btn-secondary" onclick="journey._renderStage2()">← Back</button>
         </div>`);
     } else {
       this._setFrame(`
@@ -206,6 +224,10 @@ const journey = {
           <div class="jf-stack-name">${parsed.name}</div>
           <div class="jf-stack-tags">${this.selectedStalls.map(s=>`<span class="jf-stack-tag">${s}</span>`).join('<span class="jf-stack-plus">+</span>')}</div>
           <p class="jf-stack-desc">${parsed.description}</p>
+        </div>
+        <div class="jf-sticky-bottom">
+          <button class="jnav-btn-primary" onclick="journey._toStage35()" style="padding:12px 28px;font-size:12px">Who else has been here →</button>
+          <button class="jnav-btn-secondary" onclick="journey._renderStage2()">← Back</button>
         </div>`);
       const nb=document.getElementById('jnav-next-3'); if(nb) nb.disabled=false;
     } catch(e) {
@@ -242,7 +264,11 @@ const journey = {
     this._setFrame(`
       <h2 class="jf-stage-heading">Who else has<br><em>been here.</em></h2>
       <p class="jf-stage-sub">These clusters from the dataset share your stall configuration. Each has been through the full diagnostic — stalls, stacks, and leverage hypotheses are live data.</p>
-      <div class="jf-cluster-grid">${cards}</div>`);
+      <div class="jf-cluster-grid">${cards}</div>
+      <div class="jf-sticky-bottom">
+        <button class="jnav-btn-primary" onclick="journey._toStage4()" style="padding:12px 28px;font-size:12px">Where does leverage sit? →</button>
+        <button class="jnav-btn-secondary" onclick="journey.${this.selectedStalls.length>1?'_renderStage3':'_renderStage2'}()">← Back</button>
+      </div>`);
     // Draw radar charts after frame renders
     setTimeout(() => {
       matched.forEach(c => {
@@ -268,7 +294,11 @@ const journey = {
       <h2 class="jf-stage-heading">The entry point<br><em>that shifts the configuration.</em></h2>
       <p class="jf-stage-sub">Stacks stabilise because each element provides cover for the other. The leverage point is the element that, if changed, removes that cover — not the element that feels most urgent.</p>
       <p class="jf-leverage-text">${lev}</p>
-      <div class="jf-leverage-principle"><div class="jf-lev-label">Why this works</div><p class="jf-lev-body">Most interventions fail because they address the most visible symptom. The diagnostic looks for the element whose removal makes the stack structurally unavailable — the load-bearing stall. Change that, and the others lose their function.</p></div>`);
+      <div class="jf-leverage-principle"><div class="jf-lev-label">Why this works</div><p class="jf-lev-body">Most interventions fail because they address the most visible symptom. The diagnostic looks for the element whose removal makes the stack structurally unavailable — the load-bearing stall. Change that, and the others lose their function.</p></div>
+      <div class="jf-sticky-bottom">
+        <button class="jnav-btn-primary" onclick="journey._toStage5()" style="padding:12px 28px;font-size:12px">Diagnostic or infrastructure? →</button>
+        <button class="jnav-btn-secondary" onclick="journey._renderStage35()">← Back</button>
+      </div>`);
   },
 
   _toStage5() { this.stepsComplete.push(4); this.stage=5; this._renderStage5Fork(); },

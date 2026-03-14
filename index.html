@@ -2129,12 +2129,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     font-size: 14px; color: var(--ink-dim); line-height: 1.7;
     margin: 0; font-weight: 300;
   }
-  .jf-multi-note {
-    font-family: var(--font-mono); font-size: 11px; color: var(--amber);
-    letter-spacing: 0.04em; margin: 0 0 24px; line-height: 1.5;
-    padding: 10px 14px; background: rgba(245,217,122,0.08);
-    border: 1px solid rgba(245,217,122,0.2); border-radius: 3px;
-  }
+
 
   /* Stack — Stage 3 */
   .jf-stack-card {
@@ -2473,6 +2468,21 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   #journey-frame .panel-left { background: var(--surface); }
   #journey-frame .role-card { border-radius: 4px; }
   /* ── END COMPAT VARS ─────────────────────────────────── */
+
+  /* ── JOURNEY FRAME STICKY BOTTOM ─────────────────────── */
+  .jf-sticky-bottom {
+    position: sticky;
+    bottom: 0;
+    background: var(--page);
+    border-top: 1px solid var(--border);
+    padding: 16px 0;
+    margin-top: 32px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    z-index: 10;
+  }
+  /* ── END STICKY BOTTOM ───────────────────────────────── */
 </style>
 </head>
 <body>

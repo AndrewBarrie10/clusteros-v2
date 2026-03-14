@@ -1797,20 +1797,12 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     pointer-events: none;
     transition: filter 0.5s, opacity 0.5s;
   }
+  #pathway-trigger.collapsed {
+    display: none;
+  }
   /* ── END PATHWAY TRIGGER ─────────────────────────────── */
 </style>
 </head>
-
-    <div id="describe-pills-row"></div>
-    <span id="dpill-stack-preview"></span>
-    <div class="describe-or">or describe it in your own words</div>
-    <textarea id="describe-textarea" placeholder="e.g. We keep commissioning reports and strategies that never change what anyone actually does. Anchors attend every meeting but never commit to anything."></textarea>
-    <div class="describe-actions">
-      <button id="describe-build" disabled>Build my pathway →</button>
-      <button id="describe-skip">Skip — just show me the evidence</button>
-    </div>
-  </div>
-</div>
 <body>
 <nav>
   <a href="/" class="nav-logo">Cluster<span>OS</span></a>
@@ -2323,21 +2315,24 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
         var text = textarea.value.trim();
         if (!text) return;
         section.classList.remove('triggered');
+        section.classList.add('collapsed');
         document.body.classList.remove('pathway-active');
         if (window.behaviour) {
           window.behaviour.freeDescription = text;
           window.behaviour.commitFreeText(text);
         }
         window.journey && window.journey.start();
+      });ey.start();
       });
     }
 
     if (skip) {
       skip.addEventListener('click', function() {
         section.classList.remove('triggered');
+        section.classList.add('collapsed');
         document.body.classList.remove('pathway-active');
         window.journey && window.journey.start();
-      });
+      });     });
     }
   }
 

@@ -474,24 +474,18 @@ const dashboard = {
     this.freeText = text;
     this.frame    = null;
 
-    // Update bar
-    const status = document.getElementById('intel-bar-status');
-    const input  = document.getElementById('intel-bar-input');
-    const submit = document.getElementById('intel-bar-submit');
-    if (input)  input.style.display  = 'none';
-    if (submit) submit.style.display = 'none';
-    if (status) { status.style.display = 'block'; status.textContent = 'Reading your situation...'; }
-
-    // Classify frame silently
+    // Classify frame silently in background
+    // journey.start() already called by pathway submit handler
     const classification = await classifyFrame(text);
     this.frame  = classification.frame  || 'unknown';
     this.signal = classification.signal || '';
 
-    if (status) status.textContent = this._frameLabel(this.frame) + ' — building your pathway';
+    // Update bar label once classification is done
+    const status = document.getElementById('intel-bar-status');
+    if (status && status.style.display !== 'none') {
+      status.textContent = this._frameLabel(this.frame) + ' pathway';
+    }
     document.getElementById('briefing-btn')?.classList.add('visible');
-
-    // Hand off to journey — it owns the panel from here
-    window.journey && window.journey.start();
   },
 
   _defaultTitle(index, total) {

@@ -1437,6 +1437,26 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   #briefing-btn.visible { display: block; }
   #briefing-btn:hover { color: var(--ink); border-color: var(--ink-dim); }
   /* ── END BRIEFING BUTTON ─────────────────────────────── */
+
+  /* ── PATHWAY INVITATION BUTTONS ─────────────────────── */
+  .db-invitations {
+    display: flex; flex-direction: column; gap: 6px;
+    margin-top: 10px;
+  }
+  .db-inv-btn {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--green); background: rgba(42,122,79,0.06);
+    border: 1px solid rgba(42,122,79,0.2); border-radius: 2px;
+    padding: 8px 12px; cursor: pointer; text-align: left;
+    transition: background 0.15s, border-color 0.15s;
+    line-height: 1.3;
+  }
+  .db-inv-btn:hover {
+    background: rgba(42,122,79,0.12);
+    border-color: var(--green);
+  }
+  /* ── END INVITATION BUTTONS ──────────────────────────── */
 </style>
 </head>
 

@@ -474,11 +474,7 @@ const dashboard = {
     this.freeText = text;
     this.frame    = null;
 
-    // Open panel immediately with skeleton
-    this._showPanel();
-    this._renderSkeleton();
-
-    // Update bar to loading state
+    // Update bar
     const status = document.getElementById('intel-bar-status');
     const input  = document.getElementById('intel-bar-input');
     const submit = document.getElementById('intel-bar-submit');
@@ -486,33 +482,16 @@ const dashboard = {
     if (submit) submit.style.display = 'none';
     if (status) { status.style.display = 'block'; status.textContent = 'Reading your situation...'; }
 
-    // Classify frame
+    // Classify frame silently
     const classification = await classifyFrame(text);
     this.frame  = classification.frame  || 'unknown';
     this.signal = classification.signal || '';
 
-    // Load scripted pathway for this frame
-    const script = PATHWAY_SCRIPTS[this.frame] || PATHWAY_SCRIPTS.unknown;
-
-    // Convert pathway script beats into panel steps
-    this.steps = script.beats.map((beat, i) => ({
-      id:          i + 1,
-      title:       beat.title || this._defaultTitle(i, script.beats.length),
-      description: beat.observation || (i === 0 ? script.opening : ''),
-      invitations: beat.invitations || [],
-      target:      beat.invitations?.[0]?.action || null,
-      complete:    i === 0,   // first step auto-complete (opening)
-    }));
-    this.currentStep = 1;
-
-    // Render opening + frame label
-    this._renderOpening(script.opening);
-    this._renderFrameLabel(this.frame);
-    this._render();
-
-    // Update bar status
-    if (status) status.textContent = this._frameLabel(this.frame) + ' pathway active';
+    if (status) status.textContent = this._frameLabel(this.frame) + ' — building your pathway';
     document.getElementById('briefing-btn')?.classList.add('visible');
+
+    // Hand off to journey — it owns the panel from here
+    window.journey && window.journey.start();
   },
 
   _defaultTitle(index, total) {
@@ -1105,18 +1084,21 @@ function initGate() {
     submit.disabled = (textarea.value.trim().length < 20);
   });
 
-  // Submit — pass free text to behaviour layer
+  // Submit — classify frame silently, then start journey
   submit?.addEventListener('click', () => {
     const text = textarea.value.trim();
     if (!text) return;
     gate.classList.add('hidden');
     behaviour.freeDescription = text;
+    // Classify in background — journey starts immediately
     behaviour.commitFreeText(text);
+    window.journey && window.journey.start();
   });
 
-  // Skip — dismiss gate, let them explore freely
+  // Skip — start journey directly
   skip?.addEventListener('click', () => {
     gate.classList.add('hidden');
+    window.journey && window.journey.start();
   });
 }
 

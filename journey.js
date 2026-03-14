@@ -318,10 +318,101 @@ Return ONLY valid JSON, no markdown:
     }
   },
 
-  // ── STAGE 3 → 4 ───────────────────────────────────────
+  // ── STAGE 3 → 3.5 (MATCHING CLUSTERS) ───────────────────
   _toStage4() {
+    this.stage = 3.5;
+    this._renderStage35();
+  },
+
+  // ── STAGE 3.5: MATCHING CLUSTERS ─────────────────────
+  _renderStage35() {
+    this._setHeader('Who else has been here', 'Real clusters with the same configuration — already diagnosed.');
+    const body = document.getElementById('dashboard-body');
+    if (!body) return;
+
+    const matched = this._matchClusters(4);
+
+    if (!matched.length) {
+      // No matches — skip straight to leverage
+      this.stage = 4;
+      this._renderStage4();
+      return;
+    }
+
+    const cardsHtml = matched.map(c => {
+      const topStalls = (c.stalls || [])
+        .sort((a,b) => (b.intensity||0) - (a.intensity||0))
+        .slice(0, 2)
+        .map(s => {
+          const pct = Math.round((s.intensity||0.3) * 100);
+          const col = pct > 65 ? 'var(--red,#d4695a)' : pct > 40 ? 'var(--amber)' : 'var(--green)';
+          const w   = Math.round(pct * 0.6);
+          return `<div class="jny-cc-stall">
+            <div class="jny-cc-bar" style="width:${w}px;background:${col}"></div>
+            <span class="jny-cc-stall-name">${s.name?.replace(/ instead of.*/i,'').replace(/ without.*/i,'').replace(/ around.*/i,'') || s.name}</span>
+          </div>`;
+        }).join('');
+
+      const regime = c.regime
+        ? `<span class="jny-cc-regime">${c.regime}</span>` : '';
+
+      return `<a class="jny-cluster-card" href="/clusters/${c.id || ''}.html" target="_blank">
+        <div class="jny-cc-name">${c.name}</div>
+        <div class="jny-cc-meta">${c.city || ''} · ${c.country || ''} ${regime}</div>
+        <div class="jny-cc-stalls">${topStalls}</div>
+        <span class="jny-cc-link">Full profile →</span>
+      </a>`;
+    }).join('');
+
+    body.innerHTML = `
+      <p class="jny-clusters-intro">These clusters share your stall configuration. Each has been through the full diagnostic — stalls, stacks, and leverage hypotheses are live data.</p>
+      <div class="jny-cluster-grid">${cardsHtml}</div>
+      <div class="jny-actions">
+        <button class="jny-back" onclick="journey._back(3)">← Back</button>
+        <button class="jny-next" onclick="journey._toLeverage()">Where does leverage sit? →</button>
+      </div>`;
+  },
+
+  _toLeverage() {
     this.stage = 4;
     this._renderStage4();
+  },
+
+  // ── CLUSTER MATCHING ──────────────────────────────────
+  _matchClusters(limit) {
+    const all = window._allClusters || [];
+    if (!all.length) return [];
+
+    const targetStalls = this.selectedStalls.map(s => s.toLowerCase());
+
+    const ALIASES = {
+      'narrating':    ['narrating instead'],
+      'coordinating': ['coordinating instead'],
+      're-proving':   ['re-proving instead'],
+      'scaling':      ['scaling activity'],
+      'mediating':    ['mediating instead'],
+      'extracting':   ['extracting without'],
+      'forgiving':    ['forgiving instead'],
+      'stabilising':  ['stabilising around', 'stabilizing around'],
+      'waiting':      ['waiting for'],
+    };
+
+    return all
+      .map(c => {
+        const clusterStalls = (c.stalls || []).map(s => s.name?.toLowerCase() || '');
+        let score = 0;
+        targetStalls.forEach(target => {
+          const aliases = ALIASES[target] || [target];
+          clusterStalls.forEach(cs => {
+            if (aliases.some(a => cs.includes(a))) score += 1;
+          });
+        });
+        return { cluster: c, score };
+      })
+      .filter(x => x.score > 0)
+      .sort((a,b) => b.score - a.score)
+      .slice(0, limit)
+      .map(x => x.cluster);
   },
 
   // ── STAGE 4: LEVERAGE ─────────────────────────────────
@@ -348,7 +439,7 @@ Return ONLY valid JSON, no markdown:
         </div>
       </div>
       <div class="jny-actions">
-        <button class="jny-back" onclick="journey._back(${this.selectedStalls.length > 1 ? 3 : 2})">← Back</button>
+        <button class="jny-back" onclick="journey._back(journey.selectedStalls.length > 1 ? 3.5 : 2)">← Back</button>
         <button class="jny-next" onclick="journey._toStage5()">How ClusterOS addresses this →</button>
       </div>`;
   },
@@ -379,7 +470,7 @@ Return ONLY valid JSON, no markdown:
         </div>
       </div>
       <div class="jny-actions">
-        <button class="jny-back" onclick="journey._back(4)">← Back</button>
+        <button class="jny-back" onclick="journey._back(3.5)">← Back</button>
         <button class="jny-next" onclick="journey._toStage6()">What happens next →</button>
       </div>`;
   },
@@ -442,10 +533,11 @@ Return ONLY valid JSON, no markdown:
   // ── BACK NAVIGATION ───────────────────────────────────
   _back(toStage) {
     this.stage = toStage;
-    if (toStage === 1) this._renderStage1();
-    else if (toStage === 2) this._renderStage2();
-    else if (toStage === 3) this._renderStage3();
-    else if (toStage === 4) this._renderStage4();
+    if (toStage === 1)   this._renderStage1();
+    else if (toStage === 2)   this._renderStage2();
+    else if (toStage === 3)   this._renderStage3();
+    else if (toStage === 3.5) this._renderStage35();
+    else if (toStage === 4)   this._renderStage4();
   },
 
   // ── HELPERS ───────────────────────────────────────────

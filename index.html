@@ -1642,6 +1642,50 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   }
   .jny-back:hover { color: var(--ink); border-color: var(--border-2); }
   /* ── END JOURNEY STYLES ──────────────────────────────── */
+
+  /* ── JOURNEY CLUSTER CARDS ───────────────────────────── */
+  .jny-clusters-intro {
+    font-size: 12px; color: var(--ink-dim); line-height: 1.6;
+    margin: 0 0 12px; font-weight: 300;
+  }
+  .jny-cluster-grid {
+    display: flex; flex-direction: column; gap: 6px;
+    margin-bottom: 16px;
+  }
+  .jny-cluster-card {
+    display: block; padding: 12px 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 3px; text-decoration: none;
+    transition: border-color 0.15s;
+  }
+  .jny-cluster-card:hover { border-color: var(--green); }
+  .jny-cc-name {
+    font-size: 13px; font-weight: 500; color: var(--ink);
+    margin-bottom: 2px; line-height: 1.3;
+  }
+  .jny-cc-meta {
+    font-size: 11px; color: var(--ink-muted);
+    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  }
+  .jny-cc-regime {
+    font-family: var(--font-mono); font-size: 8px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--teal); background: rgba(125,211,200,0.1);
+    border: 1px solid rgba(125,211,200,0.2);
+    padding: 2px 6px; border-radius: 2px;
+  }
+  .jny-cc-stalls { display: flex; flex-direction: column; gap: 3px; margin-bottom: 8px; }
+  .jny-cc-stall  { display: flex; align-items: center; gap: 8px; }
+  .jny-cc-bar    { height: 3px; border-radius: 2px; flex-shrink: 0; }
+  .jny-cc-stall-name {
+    font-size: 10px; color: var(--ink-muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .jny-cc-link {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--green);
+  }
+  /* ── END CLUSTER CARDS ───────────────────────────────── */
 </style>
 </head>
 

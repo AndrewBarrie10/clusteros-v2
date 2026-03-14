@@ -131,10 +131,72 @@ const journey = {
       panel?.classList.remove('open');
       document.body.classList.remove('dashboard-open');
     });
-    this.stage          = 1;
+    this.stage          = 0;
     this.selectedKeys   = [];
     this.selectedStalls = [];
     this.stackResult    = null;
+    this._renderIntro();
+  },
+
+  // ── INTRO ─────────────────────────────────────────────
+  _renderIntro() {
+    const frame     = window.dashboard?.frame || null;
+    const frameText = this._frameGreeting(frame);
+
+    this._setHeader('Your pathway', '');
+
+    const body = document.getElementById('dashboard-body');
+    if (!body) return;
+
+    body.innerHTML = `
+      <div class="jny-intro">
+        ${frameText ? `<p class="jny-intro-frame">${frameText}</p>` : ''}
+        <p class="jny-intro-what">This panel guides you through the platform. It stays open as you explore — use it to navigate, go deeper, or change direction at any point.</p>
+        <div class="jny-intro-steps">
+          <div class="jny-intro-step">
+            <span class="jny-intro-step-num">1</span>
+            <span class="jny-intro-step-label">Identify what you're seeing</span>
+          </div>
+          <div class="jny-intro-step">
+            <span class="jny-intro-step-num">2</span>
+            <span class="jny-intro-step-label">Name the structural pattern</span>
+          </div>
+          <div class="jny-intro-step">
+            <span class="jny-intro-step-num">3</span>
+            <span class="jny-intro-step-label">See who else has been here</span>
+          </div>
+          <div class="jny-intro-step">
+            <span class="jny-intro-step-num">4</span>
+            <span class="jny-intro-step-label">Find where leverage sits</span>
+          </div>
+          <div class="jny-intro-step">
+            <span class="jny-intro-step-num">5</span>
+            <span class="jny-intro-step-label">Understand the technical response</span>
+          </div>
+        </div>
+        <p class="jny-intro-note">The main area hosts full interactions — maps, actor journeys, architecture. This panel tells you what to look at and why.</p>
+        <div class="jny-actions">
+          <button class="jny-next" onclick="journey._startDiagnostic()">Start the walkthrough →</button>
+        </div>
+      </div>`;
+  },
+
+  _frameGreeting(frame) {
+    const greetings = {
+      steward:     'You\'re a steward or EDA lead. This walkthrough is built around what you\'re likely observing in your ecosystem.',
+      digital:     'You\'re coming at this from a technical angle. The walkthrough covers the diagnostic first — the infrastructure story comes at Stage 5.',
+      investor:    'You\'re looking at ecosystems as an investor. The walkthrough shows you what structural health actually looks like in the data.',
+      consultant:  'You\'re a consultant. The walkthrough covers the diagnostic framework — what it produces and how it\'s different from strategy.',
+      anchor:      'You represent an anchor institution. The walkthrough covers ecosystem dynamics from the anchor perspective.',
+      politician:  'You\'re thinking about this at a policy level. The walkthrough shows the structural evidence behind ecosystem transformation.',
+      government:  'You\'re looking at this as a potential infrastructure investment. The walkthrough covers the diagnostic before the platform story.',
+      unknown:     null
+    };
+    return greetings[frame] || null;
+  },
+
+  _startDiagnostic() {
+    this.stage = 1;
     this._renderStage1();
   },
 
@@ -444,9 +506,41 @@ Return ONLY valid JSON, no markdown:
       </div>`;
   },
 
-  // ── STAGE 5: TECH CONFIGURATION ───────────────────────
+  // ── STAGE 5: FORK ────────────────────────────────────
   _toStage5() {
     this.stage = 5;
+    this._renderStage5Fork();
+  },
+
+  _renderStage5Fork() {
+    this._setHeader('Two ways to go deeper', '');
+    const body = document.getElementById('dashboard-body');
+    if (!body) return;
+
+    body.innerHTML = `
+      <p class="jny-fork-intro">You've seen the diagnostic layer — stalls, stacks, leverage. ClusterOS goes further than diagnosis. Choose what matters most to you right now.</p>
+      <div class="jny-fork-cards">
+        <button class="jny-fork-card" onclick="journey._toStage5Diagnostic()">
+          <div class="jny-fork-card-label">The diagnostic</div>
+          <div class="jny-fork-card-title">How ClusterOS identifies and addresses your specific configuration</div>
+          <div class="jny-fork-card-sub">The 5-stage pipeline, what it produces, what a snapshot diagnostic delivers</div>
+          <div class="jny-fork-card-cta">Show me →</div>
+        </button>
+        <button class="jny-fork-card jny-fork-card-infra" onclick="journey._toStage5Infra()">
+          <div class="jny-fork-card-label">The infrastructure</div>
+          <div class="jny-fork-card-title">ClusterOS as the operating substrate for your entire ecosystem</div>
+          <div class="jny-fork-card-sub">Actor journeys, signal routing, sovereign database, coordination at scale</div>
+          <div class="jny-fork-card-cta">Show me →</div>
+        </button>
+      </div>
+      <div class="jny-actions" style="margin-top:8px">
+        <button class="jny-back" onclick="journey._back(4)">← Back</button>
+      </div>`;
+  },
+
+  // ── STAGE 5A: DIAGNOSTIC PATH ─────────────────────────
+  _toStage5Diagnostic() {
+    this.stage = 5.1;
     this._renderStage5();
   },
 
@@ -470,9 +564,127 @@ Return ONLY valid JSON, no markdown:
         </div>
       </div>
       <div class="jny-actions">
-        <button class="jny-back" onclick="journey._back(3.5)">← Back</button>
+        <button class="jny-back" onclick="journey._toStage5()">← Back</button>
         <button class="jny-next" onclick="journey._toStage6()">What happens next →</button>
       </div>`;
+  },
+
+  // ── STAGE 5B: INFRASTRUCTURE PATH ────────────────────
+  _toStage5Infra() {
+    this.stage = 5.2;
+    this._renderStage5Infra1();
+  },
+
+  _renderStage5Infra1() {
+    this._setHeader('Not a platform. A substrate.', 'The infrastructure your ecosystem runs on.');
+    const body = document.getElementById('dashboard-body');
+    if (!body) return;
+
+    body.innerHTML = `
+      <div class="jny-infra">
+        <p class="jny-infra-text">ClusterOS isn't a tool you use to manage an ecosystem. It's the layer the ecosystem runs on — where every selfish action by every actor automatically generates intelligence that makes everyone else more effective.</p>
+        <div class="jny-infra-contrast">
+          <div class="jny-infra-col jny-infra-col-bad">
+            <div class="jny-infra-col-label">Community platform</div>
+            <p>Actors log in to add value. Intelligence is in the interface. Dashboards show what happened. Data is generic.</p>
+          </div>
+          <div class="jny-infra-col jny-infra-col-good">
+            <div class="jny-infra-col-label">ClusterOS substrate</div>
+            <p>Actors pursue their own goals. Intelligence is in the protocol. The system reasons from live data. Every actor sees a different surface.</p>
+          </div>
+        </div>
+        <p class="jny-infra-pull">"No actor needs to care about the ecosystem for the ecosystem to function as a system."</p>
+      </div>
+      <div class="jny-actions">
+        <button class="jny-back" onclick="journey._toStage5()">← Back</button>
+        <button class="jny-next" onclick="journey._renderStage5Infra2()">How signals work →</button>
+      </div>`;
+  },
+
+  _renderStage5Infra2() {
+    this._setHeader('One event. Four reframings.', 'Same signal. Different intelligence for each actor.');
+    const body = document.getElementById('dashboard-body');
+    if (!body) return;
+
+    body.innerHTML = `
+      <div class="jny-infra">
+        <p class="jny-infra-text">A corporate posts a procurement RFI. They're just trying to find a supplier. In a connected substrate, that single selfish act cascades.</p>
+        <div class="jny-reframings">
+          <div class="jny-reframing">
+            <span class="jny-reframing-actor jny-actor-founder">Founder</span>
+            <span class="jny-reframing-text">Sees a specific capability match with a 14-day deadline and three preparation steps</span>
+          </div>
+          <div class="jny-reframing">
+            <span class="jny-reframing-actor jny-actor-researcher">Researcher</span>
+            <span class="jny-reframing-text">Their published paper is matched to the RFI and surfaced to the corporate and three founders simultaneously</span>
+          </div>
+          <div class="jny-reframing">
+            <span class="jny-reframing-actor jny-actor-steward">Steward</span>
+            <span class="jny-reframing-text">Sees a bridging opportunity, current score, and an intervention — not an activity log</span>
+          </div>
+          <div class="jny-reframing">
+            <span class="jny-reframing-actor jny-actor-anchor">Anchor</span>
+            <span class="jny-reframing-text">Learns a founder has reached validation stage — no premature disclosure of commercial intent required</span>
+          </div>
+        </div>
+      </div>
+      <div class="jny-actions">
+        <button class="jny-back" onclick="journey._renderStage5Infra1()">← Back</button>
+        <button class="jny-next" onclick="journey._renderStage5Infra3()">The intelligence layer →</button>
+      </div>`;
+  },
+
+  _renderStage5Infra3() {
+    this._setHeader('Intelligence at the protocol layer.', 'Not hardcoded. Not a dashboard. Reasoned fresh on every call.');
+    const body = document.getElementById('dashboard-body');
+    if (!body) return;
+
+    body.innerHTML = `
+      <div class="jny-infra">
+        <p class="jny-infra-text">Model Context Protocol is the substrate. The AI calls structured tools against the live database at runtime — assembling each actor's experience from real data at the moment they need it.</p>
+        <div class="jny-mcp-tools">
+          <div class="jny-mcp-label">What the AI calls</div>
+          ${[
+            'get_actor_profile()',
+            'get_cluster_signals()',
+            'detect_stalls()',
+            'get_matched_connections()',
+            'propagate_signal()',
+            'get_steward_diagnostic()',
+            'search_support_programmes()',
+            'get_leverage_hypotheses()'
+          ].map(t => `<span class="jny-mcp-tool">${t}</span>`).join('')}
+        </div>
+        <p class="jny-infra-pull">When the AI model improves, everything the platform produces improves automatically. No rebuild required.</p>
+        <div class="jny-infra-sovereign">
+          <span class="jny-infra-sov-label">Sovereign by design</span>
+          One dedicated database per regional EDA. Data never leaves the region. Intelligence improves centrally. Full role-based access control.
+        </div>
+      </div>
+      <div class="jny-actions">
+        <button class="jny-back" onclick="journey._renderStage5Infra2()">← Back</button>
+        <button class="jny-next" onclick="journey._toStage6Infra()">What this costs →</button>
+      </div>`;
+  },
+
+  _toStage6Infra() {
+    this.stage = 6;
+    this._renderStage6Infra();
+  },
+
+  _renderStage6Infra() {
+    this._setHeader('What next', '');
+    const body = document.getElementById('dashboard-body');
+    if (!body) return;
+
+    body.innerHTML = `
+      <div class="jny-final">
+        <p class="jny-final-text">ClusterOS is procurement infrastructure — one sovereign instance per EDA, pre-populated via bot network before any actor joins, generating compounding intelligence from day one.</p>
+        <p class="jny-final-sub">Pricing reflects the scope: snapshot diagnostic, full diagnostic run, or platform procurement. Three ways in, one direction.</p>
+        <a class="jny-cta" href="/pricing.html" target="_blank">See how it's priced →</a>
+        <button class="jny-restart" onclick="journey.start()">Start again</button>
+      </div>`;
+  },
   },
 
   _defaultTech() {

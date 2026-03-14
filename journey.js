@@ -94,7 +94,10 @@ const journey = {
           {n:3,title:'Who else has been here',desc:'Real clusters from the dataset that share your configuration — stalls, regimes, leverage hypotheses.'},
           {n:4,title:'Where leverage sits',desc:'The specific entry point that shifts the configuration. Not the most visible problem — the most load-bearing one.'},
           {n:5,title:'Diagnostic or infrastructure',desc:'Two paths forward. The diagnostic names your configuration. The infrastructure story shows what ClusterOS runs on.'}
-        ].map((s,i)=>`<div class="jf-timeline-step ${i===0?'active':''}"><div class="jf-tl-num">${s.n}</div><div class="jf-tl-content"><div class="jf-tl-title">${s.title}</div><div class="jf-tl-desc">${s.desc}</div></div></div>`).join('')}
+        ].map((s,i)=>{
+          const fn=['_startJourney','_renderStage2','_renderStage35','_renderStage4','_renderStage5Fork'][i];
+          return`<div class="jf-timeline-step ${i===0?'active':''}" onclick="journey.${fn}&&journey.${fn}()"><div class="jf-tl-num">${s.n}</div><div class="jf-tl-content"><div class="jf-tl-title">${s.title}</div><div class="jf-tl-desc">${s.desc}</div></div></div>`;
+        }).join('')}
       </div>
       <div class="jf-intro-cta">
         <button class="jnav-btn-primary" style="font-size:12px;padding:14px 28px" onclick="journey._startJourney()">Start the walkthrough →</button>
@@ -234,12 +237,18 @@ const journey = {
         const nm=(s.name||'').replace(/ instead of.*/i,'').replace(/ without.*/i,'').replace(/ around.*/i,'');
         return`<div class="jf-cc-stall"><div class="jf-cc-bar" style="width:${w}px;background:${col}"></div><span class="jf-cc-stall-name">${nm}</span></div>`;
       }).join('');
-      return`<div class="jf-cluster-card"><div class="jf-cc-name">${c.name}</div><div class="jf-cc-meta">${c.city||''} · ${c.country||''} ${c.regime?`<span class="jf-cc-regime">${c.regime}</span>`:''}</div><div class="jf-cc-stalls">${top}</div><a class="jf-cc-link" href="/clusters/${c.id||''}.html" target="_blank">Full profile →</a></div>`;
+      return`<div class="jf-cluster-card"><div class="jf-cc-name">${c.name}</div><div class="jf-cc-meta">${c.city||''} · ${c.country||''} ${c.regime?`<span class="jf-cc-regime">${c.regime}</span>`:''}</div><div class="jf-cc-stalls">${top}</div><canvas id="radar-${c.id}" width="120" height="120" style="display:block;margin:8px 0"></canvas><a class="jf-cc-link" href="/clusters/${c.id||''}.html" target="_blank">Full profile →</a></div>`;
     }).join('');
     this._setFrame(`
       <h2 class="jf-stage-heading">Who else has<br><em>been here.</em></h2>
       <p class="jf-stage-sub">These clusters from the dataset share your stall configuration. Each has been through the full diagnostic — stalls, stacks, and leverage hypotheses are live data.</p>
       <div class="jf-cluster-grid">${cards}</div>`);
+    // Draw radar charts after frame renders
+    setTimeout(() => {
+      matched.forEach(c => {
+        if (window.drawRadar) window.drawRadar(c, `radar-${c.id}`);
+      });
+    }, 50);
   },
 
   _toStage4() { this.stepsComplete.push(3); this.stage=4; this._renderStage4(); },
@@ -483,16 +492,143 @@ const journey = {
       <div class="jnav-actions"><button class="jnav-btn-primary" onclick="journey._renderInfra4()">The intelligence layer →</button><button class="jnav-btn-secondary" onclick="journey._renderInfra2()">← Back</button></div>`);
     this._setFrame(`
       <h2 class="jf-stage-heading">Each actor sees<br><em>a different surface.</em></h2>
-      <p class="jf-stage-sub">Same substrate beneath. Every actor experiences the platform through their own goals — and every selfish action feeds the system for everyone else. Select a seat to see what their journey looks like.</p>
-      <div class="jf-actor-grid">
-        ${[
-          {id:'steward',   icon:'⚙', name:'Cluster Steward',   desc:'Diagnostic interrogation, health signals, stall detection, leverage hypothesis surfacing — not a dashboard.'},
-          {id:'corporate', icon:'🏢', name:'Corporate Partner', desc:'Procurement visibility, capability matching, RFI signal management, no premature disclosure.'},
-          {id:'founder',   icon:'🚀', name:'Startup Founder',   desc:'Personalised pathway, step unlock logic, matched connections, support programme alerts.'},
-          {id:'researcher',icon:'🔬', name:'Researcher',        desc:'Demand signal translation, commercial opportunity map, IP boundary controls, research partner matching.'}
-        ].map(a=>`<button class="jf-actor-card" data-actor="${a.id}" onclick="journey._showActorJourney('${a.id}',this)"><span class="jf-actor-icon">${a.icon}</span><div class="jf-actor-name">${a.name}</div><div class="jf-actor-desc">${a.desc}</div></button>`).join('')}
+      <p class="jf-stage-sub">Same substrate beneath. Select your role below to see what onboarding and the platform experience looks like from that seat. This is the actual onboarding interface.</p>
+      <div style="margin-top:24px;border:1px solid var(--border);border-radius:6px;overflow:hidden">
+        <section id="demo">
+  <div class="demo-inner">
+    <div class="demo-intro">
+      <div class="section-label reveal">The platform</div>
+      <h2 class="section-headline reveal reveal-delay-1">Each actor sees a <em>different surface.</em><br>Same substrate beneath.</h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin-bottom:0">
+        Choose your role below. The system asks three questions, then builds your personalised pathway. This is what onboarding looks like from each seat.
+      </p>
+    </div>
+
+    <!-- Single app window -->
+    <div class="app-window reveal">
+
+      <!-- macOS-style window chrome -->
+      <div class="window-chrome">
+        <div class="chrome-dot red"></div>
+        <div class="chrome-dot amber"></div>
+        <div class="chrome-dot green"></div>
+        <div class="chrome-address">app.clusteros-v2.vercel.app/onboarding</div>
       </div>
-      <div id="jf-actor-journey-content"></div>`);
+
+      <!-- Window body: left panel + right panel -->
+      <div class="window-body">
+
+        <!-- LEFT: role selector or chat -->
+        <div class="panel-left" id="panel-left">
+
+          <!-- Phase 0: role selector -->
+          <div class="role-selector" id="role-selector">
+            <div class="role-selector-label">Select your role to begin</div>
+            <div class="role-selector-title">Who are you in this ecosystem?</div>
+            <div class="role-selector-sub">ClusterOS looks different depending on where you sit. Choose your role to see your personalised onboarding.</div>
+            <div class="role-cards">
+              <div class="role-card steward" onclick="startActor('steward')">
+                <div class="role-card-icon">⚙</div>
+                <div>
+                  <div class="role-card-name">Cluster Steward</div>
+                  <div class="role-card-desc">Managing the ecosystem, accountable for its health</div>
+                </div>
+                <div class="role-card-arrow">→</div>
+              </div>
+              <div class="role-card corporate" onclick="startActor('corporate')">
+                <div class="role-card-icon">🏢</div>
+                <div>
+                  <div class="role-card-name">Corporate Partner</div>
+                  <div class="role-card-desc">Sourcing technology, validating startups, building pipeline</div>
+                </div>
+                <div class="role-card-arrow">→</div>
+              </div>
+              <div class="role-card founder" onclick="startActor('founder')">
+                <div class="role-card-icon">🚀</div>
+                <div>
+                  <div class="role-card-name">Startup Founder</div>
+                  <div class="role-card-desc">Seeking customers, validation and funding</div>
+                </div>
+                <div class="role-card-arrow">→</div>
+              </div>
+              <div class="role-card researcher" onclick="startActor('researcher')">
+                <div class="role-card-icon">🔬</div>
+                <div>
+                  <div class="role-card-name">Researcher</div>
+                  <div class="role-card-desc">Turning published research into commercial reach</div>
+                </div>
+                <div class="role-card-arrow">→</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 1+: chat -->
+          <div class="chat-panel" id="chat-panel" style="display:none;">
+            <div class="chat-actor-header">
+              <div class="chat-actor-dot" id="chat-actor-dot"></div>
+              <div>
+                <div class="chat-actor-name" id="chat-actor-name"></div>
+                <div class="chat-actor-role" id="chat-actor-role"></div>
+              </div>
+              <button class="chat-back" onclick="resetToSelector()">← Change role</button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div id="chat-options-wrap">
+              <div class="chat-prompt-hint" id="prompt-hint">Select your response</div>
+              <div class="chat-options" id="chat-options"></div>
+            </div>
+          </div>
+
+        </div><!-- /panel-left -->
+
+        <!-- RIGHT: waiting → building → dashboard -->
+        <div class="panel-right">
+
+          <!-- Waiting -->
+          <div class="panel-right-waiting" id="panel-waiting">
+            <div class="waiting-icon">⬡</div>
+            <div class="waiting-title">Your dashboard will appear here</div>
+            <div class="waiting-sub">Answer the questions on the left — the system builds your personalised ecosystem view as you go.</div>
+          </div>
+
+          <!-- Building -->
+          <div class="panel-right-building" id="panel-building">
+            <div class="building-spinner"></div>
+            <div class="building-lines">
+              <div class="building-line"></div>
+              <div class="building-line"></div>
+              <div class="building-line"></div>
+            </div>
+            <div class="building-label" id="building-label">Building your pathway...</div>
+          </div>
+
+          <!-- Dashboard -->
+          <div class="panel-right-dashboard" id="panel-dashboard">
+            <!-- populated by JS -->
+          </div>
+
+        </div><!-- /panel-right -->
+
+      </div><!-- /window-body -->
+
+      <!-- Switch strip — shown after dashboard reveals -->
+      <div class="switch-strip" id="switch-strip">
+        <span class="switch-strip-label">Try another role →</span>
+        <div class="switch-strip-btns">
+          <button class="switch-btn steward" onclick="switchActor('steward')">Steward</button>
+          <button class="switch-btn corporate" onclick="switchActor('corporate')">Corporate</button>
+          <button class="switch-btn founder" onclick="switchActor('founder')">Founder</button>
+          <button class="switch-btn researcher" onclick="switchActor('researcher')">Researcher</button>
+        </div>
+      </div>
+
+    </div><!-- /app-window -->
+
+  </div>
+</section>
+      </div>`);
+    // Init the demo JS after frame renders
+    setTimeout(() => { if(typeof resetToSelector === 'function') resetToSelector(); else if(typeof startActor === 'function') { /* ready */ } }, 150);
   },
 
   _showActorJourney(id, btn) {
@@ -547,9 +683,219 @@ const journey = {
       <h2 class="jf-stage-heading">Intelligence at<br><em>the protocol layer.</em></h2>
       <p class="jf-stage-sub">The key architectural decision: where does intelligence live? In the interface (hardcoded, frozen, role-generic) or in the protocol (live, role-aware, improving automatically)?</p>
       <p class="jf-pull">When the AI model improves, everything the platform produces improves automatically. No rebuild required.</p>
-      <div style="margin-bottom:24px">
-        <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--ink-muted);margin-bottom:10px">What the AI calls at runtime</div>
-        <div class="jf-mcp-grid">${['get_actor_profile()','get_cluster_signals()','detect_stalls()','get_matched_connections()','propagate_signal()','get_steward_diagnostic()','search_support_programmes()','get_leverage_hypotheses()','ingest_evidence()','enrich_actor_profile()','get_open_funding()','get_journey_state()'].map(t=>`<span class="jf-mcp-tool">${t}</span>`).join('')}</div>
+      <div style="margin-bottom:24px;overflow-x:auto">
+        <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--ink-muted);margin-bottom:12px">Architecture overview — read from bottom up</div>
+        <div style="background:#09101f;border-radius:6px;padding:16px;overflow-x:auto">
+          <svg viewBox="0 0 960 680" xmlns="http://www.w3.org/2000/svg" font-family="'Geist Mono', monospace">
+      <defs>
+        <marker id="arrow-signal" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c8f0d0"/></marker>
+        <marker id="arrow-chalk" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1a1a1a"/></marker>
+        <marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7a95b0"/></marker>
+      </defs>
+
+      <rect x="0" y="0" width="960" height="680" fill="#f7f4ef"/>
+      <rect x="0" y="10" width="960" height="110" fill="#111c2e" opacity="0.7"/>
+      <rect x="0" y="130" width="960" height="110" fill="#0d1625" opacity="0.9"/>
+      <rect x="0" y="250" width="960" height="110" fill="#111c2e" opacity="0.7"/>
+      <rect x="0" y="370" width="960" height="110" fill="#0d1625" opacity="0.9"/>
+      <rect x="0" y="490" width="960" height="110" fill="#111c2e" opacity="0.7"/>
+      <rect x="0" y="600" width="960" height="80" fill="#0d1625" opacity="0.9"/>
+
+      <text x="14" y="76" fill="#3a5570" font-size="8.5" letter-spacing="1.5" text-anchor="start" transform="rotate(-90,14,76)">ACTOR EXPERIENCE</text>
+      <text x="14" y="196" fill="#3a5570" font-size="8.5" letter-spacing="1.5" text-anchor="start" transform="rotate(-90,14,196)">INTELLIGENCE</text>
+      <text x="14" y="316" fill="#3a5570" font-size="8.5" letter-spacing="1.5" text-anchor="start" transform="rotate(-90,14,316)">PROTOCOL</text>
+      <text x="14" y="436" fill="#3a5570" font-size="8.5" letter-spacing="1.5" text-anchor="start" transform="rotate(-90,14,436)">DATA LAYER</text>
+      <text x="14" y="556" fill="#3a5570" font-size="8.5" letter-spacing="1.5" text-anchor="start" transform="rotate(-90,14,556)">EXTERNAL SIGNALS</text>
+      <text x="14" y="656" fill="#3a5570" font-size="8.5" letter-spacing="1.5" text-anchor="start" transform="rotate(-90,14,656)">GOVERNANCE</text>
+      <line x1="30" y1="10" x2="30" y2="670" stroke="#ddd8cf" stroke-width="0.5"/>
+
+      <!-- Actor experience cards -->
+      <rect x="50" y="22" width="170" height="96" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
+      <rect x="50" y="22" width="170" height="18" rx="2" fill="#1e3a28"/>
+      <rect x="50" y="34" width="170" height="6" fill="#1e3a28"/>
+      <text x="135" y="34" fill="#c8f0d0" font-size="7.5" font-weight="500" letter-spacing="0.8" text-anchor="middle">FOUNDER JOURNEY</text>
+      <text x="60" y="58" fill="#c2cfe0" font-size="7.5">Personalised pathway</text>
+      <text x="60" y="72" fill="#c2cfe0" font-size="7.5">Step unlock logic</text>
+      <text x="60" y="86" fill="#c2cfe0" font-size="7.5">Matched connections</text>
+      <text x="60" y="100" fill="#c2cfe0" font-size="7.5">Support programme alerts</text>
+      <text x="60" y="113" fill="#3a5570" font-size="7" font-style="italic">Generated at runtime</text>
+
+      <rect x="240" y="22" width="170" height="96" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
+      <rect x="240" y="22" width="170" height="18" rx="2" fill="#2e2a14"/>
+      <rect x="240" y="34" width="170" height="6" fill="#2e2a14"/>
+      <text x="325" y="34" fill="#f5d97a" font-size="7.5" font-weight="500" letter-spacing="0.8" text-anchor="middle">ANCHOR JOURNEY</text>
+      <text x="250" y="58" fill="#c2cfe0" font-size="7.5">Capability scouting</text>
+      <text x="250" y="72" fill="#c2cfe0" font-size="7.5">RFI signal management</text>
+      <text x="250" y="86" fill="#c2cfe0" font-size="7.5">Supply chain visibility</text>
+      <text x="250" y="100" fill="#c2cfe0" font-size="7.5">No premature disclosure</text>
+      <text x="250" y="113" fill="#3a5570" font-size="7" font-style="italic">Generated at runtime</text>
+
+      <rect x="430" y="22" width="170" height="96" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
+      <rect x="430" y="22" width="170" height="18" rx="2" fill="#162e2d"/>
+      <rect x="430" y="34" width="170" height="6" fill="#162e2d"/>
+      <text x="515" y="34" fill="#7dd3c8" font-size="7.5" font-weight="500" letter-spacing="0.8" text-anchor="middle">RESEARCHER JOURNEY</text>
+      <text x="440" y="58" fill="#c2cfe0" font-size="7.5">Demand signal translation</text>
+      <text x="440" y="72" fill="#c2cfe0" font-size="7.5">Commercial opportunity map</text>
+      <text x="440" y="86" fill="#c2cfe0" font-size="7.5">IP boundary controls</text>
+      <text x="440" y="100" fill="#c2cfe0" font-size="7.5">Research partner matching</text>
+      <text x="440" y="113" fill="#3a5570" font-size="7" font-style="italic">Generated at runtime</text>
+
+      <rect x="620" y="22" width="310" height="96" rx="2" fill="#111c2e" stroke="#c8f0d0" stroke-width="1.5"/>
+      <rect x="620" y="22" width="310" height="18" rx="2" fill="#f0ece4"/>
+      <rect x="620" y="34" width="310" height="6" fill="#f0ece4"/>
+      <text x="775" y="34" fill="#1a1a1a" font-size="7.5" font-weight="500" letter-spacing="0.8" text-anchor="middle">STEWARD INTERROGATION</text>
+      <text x="630" y="58" fill="#c2cfe0" font-size="7.5">System health signals (4 per cluster)</text>
+      <text x="630" y="72" fill="#c2cfe0" font-size="7.5">Stall detection · Stack analysis</text>
+      <text x="630" y="86" fill="#c2cfe0" font-size="7.5">Open-ended diagnostic interrogation</text>
+      <text x="630" y="100" fill="#c2cfe0" font-size="7.5">Leverage hypothesis surfacing</text>
+      <text x="630" y="113" fill="#3a5570" font-size="7" font-style="italic">Not a dashboard — questions nobody designed for</text>
+
+      <!-- AI Reasoning -->
+      <rect x="50" y="142" width="880" height="88" rx="2" fill="#1a3a28"/>
+      <text x="490" y="163" fill="#c8f0d0" font-size="8" font-weight="500" letter-spacing="1.5" text-anchor="middle">AI REASONING ENGINE</text>
+      <line x1="50" y1="170" x2="930" y2="170" stroke="#2a5038" stroke-width="0.5"/>
+      <text x="140" y="190" fill="#7ecf96" font-size="7.5" text-anchor="middle">Journey Construction</text>
+      <text x="280" y="190" fill="#7ecf96" font-size="7.5" text-anchor="middle">Signal Propagation</text>
+      <text x="420" y="190" fill="#7ecf96" font-size="7.5" text-anchor="middle">Role-Aware Reframing</text>
+      <text x="560" y="190" fill="#7ecf96" font-size="7.5" text-anchor="middle">Actor Matching</text>
+      <text x="700" y="190" fill="#7ecf96" font-size="7.5" text-anchor="middle">Stall Detection</text>
+      <text x="840" y="190" fill="#7ecf96" font-size="7.5" text-anchor="middle">Steward Interrogation</text>
+      <line x1="210" y1="174" x2="210" y2="220" stroke="#2a5038" stroke-width="0.5"/>
+      <line x1="350" y1="174" x2="350" y2="220" stroke="#2a5038" stroke-width="0.5"/>
+      <line x1="490" y1="174" x2="490" y2="220" stroke="#2a5038" stroke-width="0.5"/>
+      <line x1="630" y1="174" x2="630" y2="220" stroke="#2a5038" stroke-width="0.5"/>
+      <line x1="770" y1="174" x2="770" y2="220" stroke="#2a5038" stroke-width="0.5"/>
+      <text x="490" y="223" fill="#c8f0d0" font-size="7" text-anchor="middle">The AI is the runtime, not a feature. Every actor experience is constructed here, from live data, on demand.</text>
+
+      <!-- MCP Protocol -->
+      <rect x="50" y="262" width="880" height="98" rx="2" fill="#111c2e" stroke="#1a1a1a" stroke-width="1.5"/>
+      <rect x="50" y="262" width="880" height="16" rx="2" fill="#f0ece4"/>
+      <rect x="50" y="272" width="880" height="6" fill="#f0ece4"/>
+      <text x="490" y="273" fill="#1a1a1a" font-size="7.5" font-weight="500" letter-spacing="1.5" text-anchor="middle">MODEL CONTEXT PROTOCOL (MCP) — INTELLIGENCE SUBSTRATE</text>
+      <rect x="65" y="288" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="130" y="301" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">get_actor_profile()</text>
+      <rect x="205" y="288" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="270" y="301" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">get_cluster_signals()</text>
+      <rect x="345" y="288" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="410" y="301" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">detect_stalls()</text>
+      <rect x="485" y="288" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="550" y="301" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">get_matched_connections()</text>
+      <rect x="625" y="288" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="690" y="301" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">propagate_signal()</text>
+      <rect x="765" y="288" width="150" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="840" y="301" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">get_steward_diagnostic()</text>
+      <rect x="65" y="316" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="130" y="329" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">get_journey_state()</text>
+      <rect x="205" y="316" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="270" y="329" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">search_support_programmes()</text>
+      <rect x="345" y="316" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="410" y="329" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">get_open_funding()</text>
+      <rect x="485" y="316" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="550" y="329" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">ingest_evidence()</text>
+      <rect x="625" y="316" width="130" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="690" y="329" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">enrich_actor_profile()</text>
+      <rect x="765" y="316" width="150" height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="840" y="329" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">get_leverage_hypotheses()</text>
+      <text x="490" y="354" fill="#3a5570" font-size="7" text-anchor="middle">Each tool is a structured call from the AI to the live database. Intelligence is not pre-baked — it is assembled from real data, at the moment it is needed.</text>
+
+      <!-- Data Layer -->
+      <rect x="50" y="382" width="450" height="98" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
+      <rect x="50" y="382" width="450" height="16" rx="2" fill="#f0ece4"/>
+      <rect x="50" y="392" width="450" height="6" fill="#f0ece4"/>
+      <text x="275" y="393" fill="#1a1a1a" font-size="7.5" font-weight="500" letter-spacing="1" text-anchor="middle">SOVEREIGN ECOSYSTEM DATABASE</text>
+      <text x="65" y="414" fill="#c2cfe0" font-size="7.5">Supercluster  ·  Clusters  ·  Groups  ·  Actors</text>
+      <text x="65" y="428" fill="#c2cfe0" font-size="7.5">Actor profiles  ·  Signal history  ·  Journey state  ·  Evidence base</text>
+      <text x="65" y="442" fill="#c2cfe0" font-size="7.5">Diagnostic outputs  ·  Stall records  ·  Leverage hypotheses</text>
+      <text x="65" y="460" fill="#3a5570" font-size="7">One dedicated instance per regional EDA. Data does not leave the regional tenant.</text>
+      <text x="65" y="472" fill="#3a5570" font-size="7">No cross-region model training without explicit consent. Full role-based access control.</text>
+
+      <rect x="515" y="382" width="415" height="98" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
+      <rect x="515" y="382" width="415" height="16" rx="2" fill="#1e3a28"/>
+      <rect x="515" y="392" width="415" height="6" fill="#1e3a28"/>
+      <text x="722" y="393" fill="#c8f0d0" font-size="7.5" font-weight="500" letter-spacing="1" text-anchor="middle">AUTONOMOUS BOT NETWORK</text>
+      <rect x="528" y="406" width="90" height="34" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="573" y="420" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">Evidence</text>
+      <text x="573" y="431" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">Ingestion Bot</text>
+      <rect x="628" y="406" width="90" height="34" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="673" y="420" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">Signal</text>
+      <text x="673" y="431" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">Monitoring Bot</text>
+      <rect x="728" y="406" width="90" height="34" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="773" y="420" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">Actor</text>
+      <text x="773" y="431" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">Enrichment Bot</text>
+      <rect x="828" y="406" width="90" height="34" rx="2" fill="#0d1625" stroke="#ddd8cf" stroke-width="0.8"/>
+      <text x="873" y="420" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">Health</text>
+      <text x="873" y="431" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">Monitoring Bot</text>
+      <text x="722" y="460" fill="#3a5570" font-size="7" text-anchor="middle">Scheduled AI agents. Write structured signals into the database on a defined cadence.</text>
+      <text x="722" y="472" fill="#3a5570" font-size="7" text-anchor="middle">Cold-start solved: the platform knows the ecosystem before any actor joins.</text>
+
+      <!-- External Signals -->
+      <rect x="50" y="502" width="200" height="88" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
+      <rect x="50" y="502" width="200" height="14" rx="2" fill="#ddd8cf"/>
+      <text x="150" y="512" fill="#7a95b0" font-size="7" font-weight="500" letter-spacing="0.8" text-anchor="middle">GOVT SUPPORT DIRECTORY</text>
+      <text x="62" y="530" fill="#c2cfe0" font-size="7.5">Live programme listings</text>
+      <text x="62" y="543" fill="#c2cfe0" font-size="7.5">Funding routes by stage</text>
+      <text x="62" y="556" fill="#c2cfe0" font-size="7.5">Advisor networks</text>
+      <text x="62" y="570" fill="#3a5570" font-size="7">Ingested weekly via scrape · Open licence</text>
+
+      <rect x="265" y="502" width="200" height="88" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
+      <rect x="265" y="502" width="200" height="14" rx="2" fill="#ddd8cf"/>
+      <text x="365" y="512" fill="#7a95b0" font-size="7" font-weight="500" letter-spacing="0.8" text-anchor="middle">COMMUNITY SERVICES API</text>
+      <text x="277" y="530" fill="#c2cfe0" font-size="7.5">Wellbeing services by location</text>
+      <text x="277" y="543" fill="#c2cfe0" font-size="7.5">Founder peer networks</text>
+      <text x="277" y="556" fill="#c2cfe0" font-size="7.5">Community assets</text>
+      <text x="277" y="570" fill="#3a5570" font-size="7">REST API · CC BY 4.0</text>
+
+      <rect x="480" y="502" width="200" height="88" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
+      <rect x="480" y="502" width="200" height="14" rx="2" fill="#ddd8cf"/>
+      <text x="580" y="512" fill="#7a95b0" font-size="7" font-weight="500" letter-spacing="0.8" text-anchor="middle">PUBLICATION DATABASES</text>
+      <text x="492" y="530" fill="#c2cfe0" font-size="7.5">Research outputs</text>
+      <text x="492" y="543" fill="#c2cfe0" font-size="7.5">Grant announcements</text>
+      <text x="492" y="556" fill="#c2cfe0" font-size="7.5">Patent filings</text>
+      <text x="492" y="570" fill="#3a5570" font-size="7">Feeds researcher journey signals</text>
+
+      <rect x="695" y="502" width="235" height="88" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
+      <rect x="695" y="502" width="235" height="14" rx="2" fill="#ddd8cf"/>
+      <text x="812" y="512" fill="#7a95b0" font-size="7" font-weight="500" letter-spacing="0.8" text-anchor="middle">PROFESSIONAL IDENTITY</text>
+      <text x="707" y="530" fill="#c2cfe0" font-size="7.5">Professional profile import</text>
+      <text x="707" y="543" fill="#c2cfe0" font-size="7.5">Research identity (ORCID)</text>
+      <text x="707" y="556" fill="#c2cfe0" font-size="7.5">Behavioural enrichment</text>
+      <text x="707" y="570" fill="#3a5570" font-size="7">Progressive — never compulsory</text>
+
+      <!-- Governance -->
+      <rect x="50" y="610" width="880" height="58" rx="2" fill="#f0ece4"/>
+      <text x="490" y="630" fill="#1a1a1a" font-size="7.5" font-weight="500" letter-spacing="1.5" text-anchor="middle">FEDERATED GOVERNANCE LAYER</text>
+      <line x1="50" y1="636" x2="930" y2="636" stroke="#ddd8cf" stroke-width="0.5"/>
+      <text x="220" y="650" fill="#3a5570" font-size="7" text-anchor="middle">Supercluster  ›  Cluster  ›  Group  ›  Actor</text>
+      <text x="490" y="650" fill="#3a5570" font-size="7" text-anchor="middle">Identity-first · Role-based access · Full audit trail</text>
+      <text x="760" y="650" fill="#3a5570" font-size="7" text-anchor="middle">Institutional autonomy preserved at every level</text>
+      <text x="490" y="662" fill="#c8f0d0" font-size="7" text-anchor="middle">Data residency is jurisdictional. Each EDA operates a sovereign instance. The platform does not centralise regional data.</text>
+
+      <!-- Wires -->
+      <line x1="135" y1="118" x2="135" y2="142" stroke="#c8f0d0" stroke-width="1.5" marker-end="url(#arrow-signal)"/>
+      <line x1="325" y1="118" x2="325" y2="142" stroke="#c8f0d0" stroke-width="1.5" marker-end="url(#arrow-signal)"/>
+      <line x1="515" y1="118" x2="515" y2="142" stroke="#c8f0d0" stroke-width="1.5" marker-end="url(#arrow-signal)"/>
+      <line x1="775" y1="118" x2="775" y2="142" stroke="#1a1a1a" stroke-width="2" marker-end="url(#arrow-chalk)"/>
+      <line x1="490" y1="230" x2="490" y2="262" stroke="#c8f0d0" stroke-width="1.5" marker-end="url(#arrow-signal)"/>
+      <line x1="480" y1="262" x2="480" y2="232" stroke="#c8f0d0" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow-signal)"/>
+      <line x1="275" y1="360" x2="275" y2="382" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow-chalk)"/>
+      <line x1="265" y1="382" x2="265" y2="362" stroke="#7a95b0" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow-muted)"/>
+      <line x1="700" y1="360" x2="700" y2="382" stroke="#c8f0d0" stroke-width="1.5" marker-end="url(#arrow-signal)"/>
+      <line x1="573" y1="480" x2="573" y2="502" stroke="#7a95b0" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow-muted)"/>
+      <line x1="690" y1="480" x2="690" y2="502" stroke="#7a95b0" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow-muted)"/>
+      <line x1="810" y1="480" x2="810" y2="502" stroke="#7a95b0" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow-muted)"/>
+      <line x1="150" y1="502" x2="150" y2="480" stroke="#c8f0d0" stroke-width="1.2" marker-end="url(#arrow-signal)"/>
+      <line x1="365" y1="502" x2="365" y2="480" stroke="#c8f0d0" stroke-width="1.2" marker-end="url(#arrow-signal)"/>
+      <line x1="275" y1="480" x2="275" y2="610" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-chalk)"/>
+
+      <!-- Legend -->
+      <line x1="52" y1="132" x2="62" y2="132" stroke="#c8f0d0" stroke-width="2"/>
+      <text x="66" y="135" fill="#3a5570" font-size="6.5">Active signal flow</text>
+      <line x1="140" y1="132" x2="150" y2="132" stroke="#7a95b0" stroke-width="1" stroke-dasharray="2,1.5"/>
+      <text x="154" y="135" fill="#3a5570" font-size="6.5">Data retrieval (MCP call)</text>
+      <line x1="265" y1="132" x2="275" y2="132" stroke="#1a1a1a" stroke-width="2"/>
+      <text x="279" y="135" fill="#3a5570" font-size="6.5">Governance / auth boundary</text>
+    </svg>
+        </div>
       </div>
       <div class="jf-sovereign">
         <span class="jf-sovereign-label">Sovereign by design</span>

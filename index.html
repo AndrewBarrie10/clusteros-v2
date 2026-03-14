@@ -1696,6 +1696,108 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     letter-spacing: 0.08em; text-transform: uppercase; color: var(--green);
   }
   /* ── END CLUSTER CARDS ───────────────────────────────── */
+
+  /* ── PATHWAY TRIGGER SECTION ─────────────────────────── */
+  #pathway-trigger {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+    min-height: 320px;
+  }
+
+  /* The blurred background content */
+  #pathway-blur-target {
+    transition: filter 0.5s ease, opacity 0.5s ease;
+  }
+  #pathway-trigger.triggered #pathway-blur-target {
+    filter: blur(4px);
+    opacity: 0.35;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* The prompt — hidden until triggered */
+  #pathway-prompt {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(480px, 90%);
+    background: var(--page);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 36px 40px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translate(-50%, -46%);
+    z-index: 10;
+  }
+  #pathway-trigger.triggered #pathway-prompt {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%);
+  }
+
+  .pathway-prompt-eyebrow {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin: 0 0 14px;
+  }
+  .pathway-prompt-heading {
+    font-family: var(--font-serif); font-size: clamp(20px, 3vw, 26px);
+    line-height: 1.15; color: var(--ink); margin: 0 0 8px;
+  }
+  .pathway-prompt-heading em { font-style: italic; color: var(--green); }
+  .pathway-prompt-sub {
+    font-size: 13px; color: var(--ink-dim); line-height: 1.6;
+    margin: 0 0 20px; font-weight: 300;
+  }
+  .pathway-prompt-label {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 8px; display: block;
+  }
+  #pathway-textarea {
+    width: 100%; min-height: 80px; padding: 12px 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 3px; font-family: var(--font-sans); font-size: 13px;
+    font-weight: 300; color: var(--ink); line-height: 1.6;
+    resize: none; transition: border-color 0.15s;
+    margin-bottom: 14px; box-sizing: border-box;
+  }
+  #pathway-textarea:focus { outline: none; border-color: var(--green); }
+  #pathway-textarea::placeholder { color: var(--ink-muted); font-style: italic; }
+  .pathway-prompt-actions {
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 10px;
+  }
+  #pathway-submit {
+    background: var(--green); color: #fff; border: none;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 12px 18px; border-radius: 3px; cursor: pointer;
+    transition: background 0.15s; white-space: nowrap;
+  }
+  #pathway-submit:hover:not(:disabled) { background: var(--green-dim); }
+  #pathway-submit:disabled { opacity: 0.35; cursor: not-allowed; }
+  #pathway-skip {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-muted); background: none;
+    border: none; cursor: pointer; transition: color 0.15s;
+    white-space: nowrap;
+  }
+  #pathway-skip:hover { color: var(--ink); }
+
+  /* Full-page blur when prompt is active */
+  body.pathway-active #page-wrap > *:not(#pathway-trigger):not(#map-section):not(#opening) {
+    filter: blur(3px);
+    opacity: 0.4;
+    pointer-events: none;
+    transition: filter 0.5s, opacity 0.5s;
+  }
+  /* ── END PATHWAY TRIGGER ─────────────────────────────── */
 </style>
 </head>
 
@@ -1756,20 +1858,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   <a href="/request.html">Request a Diagnostic</a>
 </div>
 
-<!-- ── ONBOARDING GATE ────────────────────────────────── -->
-<div id="onboarding-gate">
-  <div class="gate-card">
-    <p class="gate-eyebrow">ClusterOS · Diagnostic Intelligence</p>
-    <h2 class="gate-heading">Who are you,<br>and <em>why are you here?</em></h2>
-    <p class="gate-sub">We'll build a pathway through the platform that's specific to your situation — not a generic tour.</p>
-    <label class="gate-field-label" for="gate-textarea">Tell us in your own words</label>
-    <textarea id="gate-textarea" placeholder="e.g. I'm a partner at a growth equity fund. We back deep tech companies and I want to understand whether the ecosystems they operate in are structurally functional — or just busy."></textarea>
-    <div class="gate-actions">
-      <button id="gate-submit" disabled>Build my pathway →</button>
-      <button id="gate-skip">Skip — I'll explore</button>
-    </div>
-  </div>
-</div>
+
+
 
 <div id="page-wrap">
 
@@ -1796,40 +1886,39 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 </section>
 
 <!-- ── FORKS ────────────────────────────────────────────── -->
-<section id="forks">
-  <p class="fork-label">Where do you want to go?</p>
-  <div class="fork-threads">
-
-    <div class="fork-thread fork-thread-journey" onclick="window.journey && window.journey.start()">
-      <span class="fork-num">→</span>
-      <span class="fork-title">Identify your stalls — guided walkthrough</span>
-      <span class="fork-arrow">Start</span>
+<section id="pathway-trigger">
+  <div id="pathway-blur-target">
+    <!-- Fork threads visible behind blur -->
+    <div class="fork-threads fork-threads-blurred">
+      <div class="fork-thread">
+        <span class="fork-num">01</span>
+        <span class="fork-title">Show me the evidence — what 75 diagnostics actually found</span>
+        <span class="fork-arrow">→</span>
+      </div>
+      <div class="fork-thread">
+        <span class="fork-num">02</span>
+        <span class="fork-title">How does the diagnostic work? Walk me through it</span>
+        <span class="fork-arrow">→</span>
+      </div>
+      <div class="fork-thread">
+        <span class="fork-num">03</span>
+        <span class="fork-title">I'm Head of Digital — show me the architecture</span>
+        <span class="fork-arrow">→</span>
+      </div>
     </div>
+  </div>
 
-    <div class="fork-thread" data-panel="evidence">
-      <span class="fork-num">01</span>
-      <span class="fork-title">Show me the evidence — what 75 diagnostics actually found</span>
-      <span class="fork-arrow">→</span>
+  <!-- Pathway prompt — appears over the blur -->
+  <div id="pathway-prompt">
+    <p class="pathway-prompt-eyebrow">ClusterOS · Build your pathway</p>
+    <h2 class="pathway-prompt-heading">Who are you,<br>and <em>why are you here?</em></h2>
+    <p class="pathway-prompt-sub">We'll build a pathway through the platform specific to your situation.</p>
+    <label class="pathway-prompt-label" for="pathway-textarea">Tell us in your own words</label>
+    <textarea id="pathway-textarea" placeholder="e.g. I'm a partner at a growth equity fund. We back deep tech companies and I want to understand whether the ecosystems they operate in are structurally functional — or just busy."></textarea>
+    <div class="pathway-prompt-actions">
+      <button id="pathway-submit" disabled>Build my pathway →</button>
+      <button id="pathway-skip">Skip — start the guided walkthrough</button>
     </div>
-
-    <div class="fork-thread" data-panel="diagnostic">
-      <span class="fork-num">02</span>
-      <span class="fork-title">How does the diagnostic work? Walk me through it</span>
-      <span class="fork-arrow">→</span>
-    </div>
-
-    <div class="fork-thread" data-panel="digital">
-      <span class="fork-num">03</span>
-      <span class="fork-title">I'm Head of Digital — show me the architecture</span>
-      <span class="fork-arrow">→</span>
-    </div>
-
-    <div class="fork-thread" data-panel="founders">
-      <span class="fork-num">04</span>
-      <span class="fork-title">Who built this, and why does it exist?</span>
-      <span class="fork-arrow">→</span>
-    </div>
-
   </div>
 </section>
 
@@ -2193,4 +2282,74 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 <script src="/map.js"></script>
 <script src="/dashboard.js"></script>
 
-<script data-cfasync="false" src="/cdn-cgi/sc
+
+<script>
+
+// ── PATHWAY SCROLL TRIGGER ────────────────────────────
+(function() {
+  function initPathway() {
+    var section  = document.getElementById('pathway-trigger');
+    var textarea = document.getElementById('pathway-textarea');
+    var submit   = document.getElementById('pathway-submit');
+    var skip     = document.getElementById('pathway-skip');
+    if (!section) return;
+
+    var triggered = false;
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.intersectionRatio >= 0.35 && !triggered) {
+          triggered = true;
+          section.classList.add('triggered');
+          document.body.classList.add('pathway-active');
+        } else if (entry.intersectionRatio < 0.1 && triggered) {
+          triggered = false;
+          section.classList.remove('triggered');
+          document.body.classList.remove('pathway-active');
+        }
+      });
+    }, { threshold: [0.1, 0.35] });
+
+    observer.observe(section);
+
+    if (textarea) {
+      textarea.addEventListener('input', function() {
+        submit.disabled = textarea.value.trim().length < 20;
+      });
+    }
+
+    if (submit) {
+      submit.addEventListener('click', function() {
+        var text = textarea.value.trim();
+        if (!text) return;
+        section.classList.remove('triggered');
+        document.body.classList.remove('pathway-active');
+        if (window.behaviour) {
+          window.behaviour.freeDescription = text;
+          window.behaviour.commitFreeText(text);
+        }
+        window.journey && window.journey.start();
+      });
+    }
+
+    if (skip) {
+      skip.addEventListener('click', function() {
+        section.classList.remove('triggered');
+        document.body.classList.remove('pathway-active');
+        window.journey && window.journey.start();
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPathway);
+  } else {
+    initPathway();
+  }
+})();
+
+</script>
+
+</div><!-- end page-wrap -->
+</body>
+</html>

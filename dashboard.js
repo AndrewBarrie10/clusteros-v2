@@ -1072,34 +1072,8 @@ window.dashboard = dashboard;
 
 // ── GATE & ONBOARDING ────────────────────────────────────
 function initGate() {
-  const gate     = document.getElementById('onboarding-gate');
-  const textarea = document.getElementById('gate-textarea');
-  const submit   = document.getElementById('gate-submit');
-  const skip     = document.getElementById('gate-skip');
-
-  if (!gate) return;
-
-  // Enable submit once there's meaningful text
-  textarea?.addEventListener('input', () => {
-    submit.disabled = (textarea.value.trim().length < 20);
-  });
-
-  // Submit — classify frame silently, then start journey
-  submit?.addEventListener('click', () => {
-    const text = textarea.value.trim();
-    if (!text) return;
-    gate.classList.add('hidden');
-    behaviour.freeDescription = text;
-    // Classify in background — journey starts immediately
-    behaviour.commitFreeText(text);
-    window.journey && window.journey.start();
-  });
-
-  // Skip — start journey directly
-  skip?.addEventListener('click', () => {
-    gate.classList.add('hidden');
-    window.journey && window.journey.start();
-  });
+  // Gate removed — entry now via scroll-triggered pathway prompt
+  // Kept as no-op for compatibility
 }
 
 function initOpeningQuestion() {} // legacy no-op

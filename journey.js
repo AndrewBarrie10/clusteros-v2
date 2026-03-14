@@ -356,12 +356,12 @@ Return ONLY valid JSON, no markdown:
       const regime = c.regime
         ? `<span class="jny-cc-regime">${c.regime}</span>` : '';
 
-      return `<a class="jny-cluster-card" href="/clusters/${c.id || ''}.html" target="_blank">
+      return `<div class="jny-cluster-card">
         <div class="jny-cc-name">${c.name}</div>
         <div class="jny-cc-meta">${c.city || ''} · ${c.country || ''} ${regime}</div>
         <div class="jny-cc-stalls">${topStalls}</div>
-        <span class="jny-cc-link">Full profile →</span>
-      </a>`;
+        <a class="jny-cc-link" href="/clusters/${c.id || ''}.html" target="_blank" onclick="event.stopPropagation()">Full profile →</a>
+      </div>`;
     }).join('');
 
     body.innerHTML = `

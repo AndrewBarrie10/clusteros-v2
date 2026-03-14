@@ -1048,6 +1048,9 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   body.dashboard-open #page-wrap {
     margin-left: 280px;
   }
+  body.dashboard-open {
+    overflow-x: hidden;
+  }
   .db-header {
     padding: 1.2rem 1.2rem 0.8rem;
     border-bottom: 1px solid var(--border);
@@ -1100,7 +1103,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     letter-spacing: 0.1em; padding: 2px 0;
   }
   .db-close:hover { color: var(--ink); }
-  #dashboard-body { padding: 1rem 1.2rem; flex: 1; }
+  #dashboard-body { padding: 1rem 1.2rem; flex: 1; overflow-y: auto; }
 
   /* Steps */
   .db-step {
@@ -1576,14 +1579,18 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     color: var(--ink-muted); margin-bottom: 4px;
   }
   .jny-tech-component {
-    display: flex; gap: 10px; padding: 8px 12px;
+    display: block; padding: 10px 12px;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 2px; align-items: baseline;
+    border-radius: 2px;
   }
   .jny-tech-component-name {
     font-family: var(--font-mono); font-size: 10px; font-weight: 600;
     letter-spacing: 0.06em; color: var(--green);
-    white-space: nowrap; flex-shrink: 0;
+    display: block; margin-bottom: 3px;
+  }
+  .jny-tech-component-desc {
+    font-size: 11px; color: var(--ink-muted); line-height: 1.45;
+    display: block;
   }
   .jny-tech-component-desc {
     font-size: 11px; color: var(--ink-muted); line-height: 1.4;
@@ -1655,11 +1662,14 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   .jny-cluster-card {
     display: block; padding: 12px 14px;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 3px; text-decoration: none;
-    transition: border-color 0.15s;
+    border-radius: 3px;
   }
-  .jny-cluster-card:hover { border-color: var(--green); }
-  .jny-cc-name {
+  .jny-cc-link {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--green);
+    text-decoration: none; display: inline-block; margin-top: 4px;
+  }
+  .jny-cc-link:hover { text-decoration: underline; }  .jny-cc-name {
     font-size: 13px; font-weight: 500; color: var(--ink);
     margin-bottom: 2px; line-height: 1.3;
   }

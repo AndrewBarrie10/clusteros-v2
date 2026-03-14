@@ -685,7 +685,6 @@ Return ONLY valid JSON, no markdown:
         <button class="jny-restart" onclick="journey.start()">Start again</button>
       </div>`;
   },
-  },
 
   _defaultTech() {
     return 'The platform addresses this configuration at the substrate level — not by changing actor behaviour directly, but by changing what their existing behaviour produces. Signal routing, journey construction and steward interrogation are all calibrated to the specific stall pattern present.';

@@ -259,7 +259,7 @@ const journey = {
         const nm=(s.name||'').replace(/ instead of.*/i,'').replace(/ without.*/i,'').replace(/ around.*/i,'');
         return`<div class="jf-cc-stall"><div class="jf-cc-bar" style="width:${w}px;background:${col}"></div><span class="jf-cc-stall-name">${nm}</span></div>`;
       }).join('');
-      return`<div class="jf-cluster-card"><div class="jf-cc-name">${c.name}</div><div class="jf-cc-meta">${c.city||''} · ${c.country||''} ${c.regime?`<span class="jf-cc-regime">${c.regime}</span>`:''}</div><div class="jf-cc-stalls">${top}</div><canvas id="radar-${c.id}" width="120" height="120" style="display:block;margin:8px 0"></canvas><a class="jf-cc-link" href="/clusters/${c.id||''}.html" target="_blank">Full profile →</a></div>`;
+      return`<div class="jf-cluster-card"><div class="jf-cc-name">${c.name}</div><div class="jf-cc-meta">${c.city||''} · ${c.country||''} ${c.regime?`<span class="jf-cc-regime">${c.regime}</span>`:''}</div><div class="jf-cc-stalls">${top}</div><div id="radar-${c.id}" style="margin:8px 0"></div><a class="jf-cc-link" href="/clusters/${c.id||''}.html" target="_blank">Full profile →</a></div>`;
     }).join('');
     this._setFrame(`
       <h2 class="jf-stage-heading">Who else has<br><em>been here.</em></h2>
@@ -269,12 +269,21 @@ const journey = {
         <button class="jnav-btn-primary" onclick="journey._toStage4()" style="padding:12px 28px;font-size:12px">Where does leverage sit? →</button>
         <button class="jnav-btn-secondary" onclick="journey.${this.selectedStalls.length>1?'_renderStage3':'_renderStage2'}()">← Back</button>
       </div>`);
-    // Draw radar charts after frame renders
-    setTimeout(() => {
+    // Draw radar charts — wait for map.js to be ready
+    const _drawRadars = () => {
       matched.forEach(c => {
-        if (window.drawRadar) window.drawRadar(c, `radar-${c.id}`);
+        if (window.drawRadar) window.drawRadar(c, 'radar-' + c.id);
       });
-    }, 50);
+    };
+    if (window.drawRadar) {
+      setTimeout(_drawRadars, 80);
+    } else {
+      // map.js not yet loaded — wait for it
+      const _radarCheck = setInterval(() => {
+        if (window.drawRadar) { clearInterval(_radarCheck); _drawRadars(); }
+      }, 100);
+      setTimeout(() => clearInterval(_radarCheck), 5000);
+    }
   },
 
   _toStage4() { this.stepsComplete.push(3); this.stage=4; this._renderStage4(); },
@@ -658,7 +667,19 @@ const journey = {
 </section>
       </div>`);
     // Init the demo JS after frame renders
-    setTimeout(() => { if(typeof resetToSelector === 'function') resetToSelector(); else if(typeof startActor === 'function') { /* ready */ } }, 150);
+    // Re-init demo after frame renders
+    const _initDemo = () => {
+      if (typeof resetToSelector === 'function') resetToSelector();
+      // Ensure role cards fire startActor
+      document.querySelectorAll('#journey-frame .role-card').forEach(card => {
+        ['steward','corporate','founder','researcher'].forEach(role => {
+          if (card.classList.contains(role)) {
+            card.onclick = () => typeof startActor === 'function' && startActor(role);
+          }
+        });
+      });
+    };
+    setTimeout(_initDemo, 200);
   },
 
   _showActorJourney(id, btn) {

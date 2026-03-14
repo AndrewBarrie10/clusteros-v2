@@ -2483,6 +2483,303 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     z-index: 10;
   }
   /* ── END STICKY BOTTOM ───────────────────────────────── */
+
+  /* ── SIGNALS-SYSTEMS DEMO CSS (scoped to journey frame) ── */
+  #journey-frame .demo-inner {
+    max-width: 1100px; margin: 0 auto;
+  }
+  #journey-frame .demo-intro {
+    max-width: 680px; margin-bottom: 56px;
+  }
+  #journey-frame .app-window {
+    border: 1px solid var(--slate-2);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1a1a1a;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+  }
+  #journey-frame .window-chrome {
+    background: #1a1a1a;
+  border-bottom: 1px solid #d1d3d8;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 8px;
+  flex-shrink: 0;
+  }
+  #journey-frame .chrome-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+  }
+  #journey-frame .chrome-dot.red {
+    background: #ff5f57;
+  }
+  #journey-frame .chrome-dot.amber {
+    background: #febc2e;
+  }
+  #journey-frame .chrome-dot.green {
+    background: #28c840;
+  }
+  #journey-frame .chrome-address {
+    flex: 1; margin: 0 12px;
+  background: #fff; border: 1px solid #c8c9cc;
+  border-radius: 4px; height: 22px;
+  display: flex; align-items: center; padding: 0 10px;
+  font-family: var(--mono); font-size: 10px; color: #8c8780;
+  }
+  #journey-frame .window-body {
+    display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+  }
+  #journey-frame .panel-left {
+    background: #f0ece4;
+  display: flex; flex-direction: column;
+  border-right: 1px solid rgba(0,0,0,0.04);
+  }
+  #journey-frame .role-selector {
+    padding: 28px 24px;
+  flex: 1;
+  display: flex; flex-direction: column;
+  }
+  #journey-frame .role-selector-label {
+    font-family: var(--mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--signal);
+  margin-bottom: 16px;
+  }
+  #journey-frame .role-selector-title {
+    font-family: var(--serif); font-size: 22px; color: var(--chalk);
+  line-height: 1.2; margin-bottom: 8px;
+  }
+  #journey-frame .role-selector-sub {
+    font-size: 12px; color: var(--slate-3); line-height: 1.6; margin-bottom: 24px;
+  }
+  #journey-frame .role-cards {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  #journey-frame .role-card {
+    background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 8px; padding: 14px 16px; cursor: pointer;
+  transition: all 0.15s; display: flex; align-items: center; gap: 12px;
+  position: relative; overflow: hidden;
+  }
+  #journey-frame .role-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  opacity: 0; transition: opacity 0.15s;
+  }
+  #journey-frame .role-card:hover {
+    background: rgba(0,0,0,0.04);
+  }
+  #journey-frame .role-card:hover::before {
+    opacity: 1;
+  }
+  #journey-frame .role-card.steward::before {
+    background: var(--steward);
+  }
+  #journey-frame .role-card.corporate::before {
+    background: var(--corporate);
+  }
+  #journey-frame .role-card.founder::before {
+    background: var(--founder);
+  }
+  #journey-frame .role-card.researcher::before {
+    background: var(--researcher);
+  }
+  #journey-frame .role-card-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+  }
+  #journey-frame .role-card.steward .role-card-icon {
+    background: rgba(125,211,200,0.15);
+  }
+  #journey-frame .role-card.corporate .role-card-icon {
+    background: rgba(200,240,208,0.15);
+  }
+  #journey-frame .role-card.founder .role-card-icon {
+    background: rgba(245,217,122,0.15);
+  }
+  #journey-frame .role-card.researcher .role-card-icon {
+    background: rgba(240,128,128,0.15);
+  }
+  #journey-frame .role-card-name {
+    font-size: 13px; font-weight: 600; color: var(--chalk);
+  }
+  #journey-frame .role-card-desc {
+    font-size: 11px; color: var(--slate-3); margin-top: 2px;
+  }
+  #journey-frame .role-card-arrow {
+    margin-left: auto; font-size: 14px; color: var(--slate-3); opacity: 0; transition: opacity 0.15s;
+  }
+  #journey-frame .role-card:hover .role-card-arrow {
+    opacity: 1;
+  }
+  #journey-frame .chat-panel {
+    padding: 20px;
+  flex: 1; display: flex; flex-direction: column;
+  overflow: hidden;
+  }
+  #journey-frame .chat-actor-header {
+    display: flex; align-items: center; gap: 10px;
+  padding-bottom: 14px; margin-bottom: 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  #journey-frame .chat-actor-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  #journey-frame .chat-actor-name {
+    font-size: 12px; font-weight: 600; color: var(--chalk);
+  }
+  #journey-frame .chat-actor-role {
+    font-size: 11px; color: var(--slate-3); font-family: var(--mono);
+  }
+  #journey-frame .chat-back {
+    margin-left: auto; font-family: var(--mono); font-size: 9px;
+  color: var(--slate-3); background: none; border: none;
+  cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 8px; border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+  }
+  #journey-frame .chat-back:hover {
+    color: var(--chalk); background: rgba(0,0,0,0.04);
+  }
+  #journey-frame .chat-messages {
+    flex: 1; overflow-y: auto; display: flex; flex-direction: column;
+  gap: 10px; margin-bottom: 14px;
+  scrollbar-width: thin; scrollbar-color: var(--slate-2) transparent;
+  }
+  #journey-frame .msg-ai-bubble {
+    background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 4px 12px 12px 12px; padding: 12px 14px;
+  font-size: 12px; color: #5a5650; line-height: 1.7; white-space: pre-line;
+  max-width: 90%;
+  }
+  #journey-frame .msg-ai-bubble .arr {
+    color: var(--signal);
+  }
+  #journey-frame .msg-user-bubble {
+    align-self: flex-end;
+  background: rgba(200,240,208,0.08); border: 1px solid rgba(200,240,208,0.15);
+  border-radius: 12px 4px 12px 12px; padding: 10px 14px;
+  font-size: 12px; color: #2a7a4f; line-height: 1.6;
+  max-width: 88%;
+  }
+  #journey-frame .chat-options {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  #journey-frame .chat-option {
+    background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 12px; color: #5a5650; cursor: pointer;
+  text-align: left; transition: all 0.15s; line-height: 1.5;
+  font-family: 'Geist', sans-serif;
+  }
+  #journey-frame .chat-option:hover {
+    background: rgba(200,240,208,0.08); border-color: rgba(200,240,208,0.35); color: var(--chalk);
+  }
+  #journey-frame .chat-option:hover::before {
+    content: '→ '; color: var(--signal);
+  }
+  #journey-frame .chat-prompt-hint {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--signal); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+  }
+  #journey-frame .chat-prompt-hint::before {
+    display: inline-block; width: 14px; height: 1px; background: var(--signal);
+  }
+  #journey-frame .panel-right {
+    background: #1a1a1a;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  }
+  #journey-frame .panel-right-waiting {
+    flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 32px; text-align: center; gap: 12px;
+  }
+  #journey-frame .panel-right-building {
+    flex: 1; display: none; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 32px; gap: 16px;
+  }
+  #journey-frame .building-spinner {
+    width: 40px; height: 40px; border-radius: 50%;
+  border: 2px solid #5a5650; border-top-color: #6366f1;
+  animation: spin 0.9s linear infinite;
+  }
+  #journey-frame }
+.building-lines {
+    display: flex; flex-direction: column; gap: 8px; width: 180px;
+  }
+  #journey-frame .building-line {
+    height: 8px; border-radius: 4px; background: #5a5650;
+  animation: shimmer 1.5s ease-in-out infinite;
+  }
+  #journey-frame .building-line:nth-child(2) {
+    width: 75%; animation-delay: 0.2s;
+  }
+  #journey-frame .building-line:nth-child(3) {
+    width: 55%; animation-delay: 0.4s;
+  }
+  #journey-frame }
+.building-label {
+    font-size: 12px; color: #8c8780; font-family: 'Geist', sans-serif; font-weight: 500;
+  }
+  #journey-frame .panel-right-dashboard {
+    flex: 1; display: none; flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  }
+  #journey-frame .dash-chrome-left {
+    display: flex; align-items: center; gap: 6px;
+  }
+  #journey-frame .dash-tab-pane {
+    display: none;
+  }
+  #journey-frame .dash-tab-pane.active {
+    display: block;
+  }
+  #journey-frame .switch-strip {
+    display: none;
+  background: var(--ink-2); border-top: 1px solid var(--slate);
+  padding: 12px 20px; align-items: center; gap: 12px; flex-shrink: 0;
+  }
+  #journey-frame .switch-strip-label {
+    font-family: var(--mono); font-size: 9px; color: var(--slate-3);
+  letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
+  }
+  #journey-frame .switch-strip-btns {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  #journey-frame .window-body {
+    grid-template-columns: 1fr;
+  }
+  #journey-frame .panel-right {
+    min-height: 400px; border-top: 1px solid #1a1a1a;
+  }
+  #journey-frame .switch-strip {
+    flex-wrap: wrap;
+  }
+  #journey-frame .demo-stage {
+    grid-template-columns: 1fr;
+  }
+  #journey-frame .demo-output {
+    min-height: 400px;
+  }
+  #journey-frame .window-body {
+    grid-template-columns: 1fr; min-height: auto;
+  }
+  #journey-frame .panel-left {
+    min-height: 420px;
+  }
+  #journey-frame .panel-right {
+    min-height: 0; max-height: 480px; overflow-y: auto; border-top: 1px solid #1a1a1a;
+  }
+  #journey-frame .switch-strip {
+    flex-wrap: wrap;
+  }
+  /* ── END DEMO CSS ────────────────────────────────────────── */
 </style>
 </head>
 <body>

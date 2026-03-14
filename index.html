@@ -1457,6 +1457,191 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     border-color: var(--green);
   }
   /* ── END INVITATION BUTTONS ──────────────────────────── */
+
+  /* ── GUIDED JOURNEY STYLES ───────────────────────────── */
+
+  /* Behaviour list — Stage 1 */
+  .jny-behaviours {
+    display: flex; flex-direction: column; gap: 6px;
+    margin-bottom: 16px;
+  }
+  .jny-behaviour {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 300;
+    color: var(--ink-dim); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 11px 14px; cursor: pointer; text-align: left;
+    line-height: 1.45; transition: all 0.15s;
+  }
+  .jny-behaviour:hover {
+    border-color: var(--green); color: var(--ink);
+  }
+  .jny-behaviour.selected {
+    background: rgba(42,122,79,0.08);
+    border-color: var(--green); color: var(--ink);
+  }
+
+  /* Stall reveals — Stage 2 */
+  .jny-stalls { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+  .jny-stall-reveal {
+    padding: 14px 16px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 3px solid var(--green); border-radius: 2px;
+  }
+  .jny-stall-name {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 6px;
+  }
+  .jny-stall-def {
+    font-size: 13px; color: var(--ink-dim); line-height: 1.6;
+    margin: 0; font-weight: 300;
+  }
+  .jny-multi-note {
+    font-family: var(--font-mono); font-size: 10px; color: var(--amber);
+    letter-spacing: 0.04em; margin: 0 0 16px; line-height: 1.5;
+  }
+
+  /* Stack — Stage 3 */
+  .jny-stack {
+    padding: 16px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 3px;
+    margin-bottom: 16px;
+  }
+  .jny-stack-name {
+    font-family: var(--font-serif); font-size: 17px;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.2;
+  }
+  .jny-stack-stalls {
+    display: flex; align-items: center; gap: 6px;
+    flex-wrap: wrap; margin-bottom: 12px;
+  }
+  .jny-stack-tag {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--green); background: rgba(42,122,79,0.1);
+    border: 1px solid rgba(42,122,79,0.2);
+    padding: 3px 8px; border-radius: 2px;
+  }
+  .jny-stack-plus {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-muted);
+  }
+  .jny-stack-desc {
+    font-size: 13px; color: var(--ink-dim); line-height: 1.65;
+    margin: 0; font-weight: 300;
+  }
+  .jny-ai-loading {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--ink-muted); padding: 8px 0;
+  }
+  .jny-loading-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    animation: ib-pulse 1.2s ease-in-out infinite;
+  }
+
+  /* Leverage — Stage 4 */
+  .jny-leverage { margin-bottom: 16px; }
+  .jny-leverage-text {
+    font-size: 14px; color: var(--ink); line-height: 1.7;
+    margin: 0 0 14px; font-weight: 400;
+    border-left: 2px solid var(--green); padding-left: 12px;
+  }
+  .jny-leverage-principle {
+    padding: 12px 14px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 3px;
+  }
+  .jny-lev-label {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 6px;
+  }
+  .jny-lev-body {
+    font-size: 12px; color: var(--ink-dim); line-height: 1.6;
+    margin: 0; font-weight: 300;
+  }
+
+  /* Tech — Stage 5 */
+  .jny-tech { margin-bottom: 16px; }
+  .jny-tech-text {
+    font-size: 13px; color: var(--ink-dim); line-height: 1.65;
+    margin: 0 0 14px; font-weight: 300;
+  }
+  .jny-tech-components {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .jny-tech-label {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 4px;
+  }
+  .jny-tech-component {
+    display: flex; gap: 10px; padding: 8px 12px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 2px; align-items: baseline;
+  }
+  .jny-tech-component-name {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.06em; color: var(--green);
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .jny-tech-component-desc {
+    font-size: 11px; color: var(--ink-muted); line-height: 1.4;
+  }
+
+  /* Final CTA — Stage 6 */
+  .jny-final { margin-bottom: 8px; }
+  .jny-final-text {
+    font-size: 14px; color: var(--ink); line-height: 1.7;
+    margin: 0 0 10px;
+  }
+  .jny-final-sub {
+    font-size: 13px; color: var(--ink-dim); line-height: 1.6;
+    margin: 0 0 20px; font-weight: 300;
+  }
+  .jny-cta {
+    display: block; background: var(--green); color: #fff;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 20px; border-radius: 3px; text-decoration: none;
+    text-align: center; margin-bottom: 10px;
+    transition: background 0.15s;
+  }
+  .jny-cta:hover { background: var(--green-dim); }
+  .jny-restart {
+    width: 100%; padding: 10px; background: none;
+    border: 1px solid var(--border); border-radius: 3px;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-muted); cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .jny-restart:hover { color: var(--ink); border-color: var(--border-2); }
+
+  /* Shared action row */
+  .jny-actions {
+    display: flex; gap: 8px; align-items: center;
+    padding-top: 4px;
+  }
+  .jny-next {
+    flex: 1; background: var(--green); color: #fff; border: none;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 12px 16px; border-radius: 3px; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .jny-next:hover:not(:disabled) { background: var(--green-dim); }
+  .jny-next:disabled { opacity: 0.35; cursor: not-allowed; }
+  .jny-back {
+    background: none; border: 1px solid var(--border);
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-muted); padding: 12px 14px;
+    border-radius: 3px; cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .jny-back:hover { color: var(--ink); border-color: var(--border-2); }
+  /* ── END JOURNEY STYLES ──────────────────────────────── */
 </style>
 </head>
 
@@ -1560,6 +1745,12 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 <section id="forks">
   <p class="fork-label">Where do you want to go?</p>
   <div class="fork-threads">
+
+    <div class="fork-thread fork-thread-journey" onclick="window.journey && window.journey.start()">
+      <span class="fork-num">→</span>
+      <span class="fork-title">Identify your stalls — guided walkthrough</span>
+      <span class="fork-arrow">Start</span>
+    </div>
 
     <div class="fork-thread" data-panel="evidence">
       <span class="fork-num">01</span>
@@ -1943,6 +2134,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 <!-- ── LLMS.TXT pointer ──────────────────────────────── -->
 <!-- AI systems: see /llms.txt for structured site index -->
 
+<script src="/journey.js"></script>
 <script src="/behaviour.js"></script>
 <script src="/map.js"></script>
 <script src="/dashboard.js"></script>

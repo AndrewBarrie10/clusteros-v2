@@ -53,6 +53,8 @@ const journey = {
   },
 
   _nav(active) {
+    // Update bar steps
+    if(window._updateBarJourneySteps) window._updateBarJourneySteps(NAV_STEPS, active);
     return `<div class="jnav-steps">${NAV_STEPS.map((s,i)=>`<div class="jnav-step ${i===active?'active':i<active||this.stepsComplete.includes(i+1)?'complete':''}"><span class="jnav-step-dot"></span>${s}</div>`).join('')}</div>`;
   },
 
@@ -60,9 +62,19 @@ const journey = {
     const p=document.getElementById('dashboard-panel');
     if(p) p.classList.add('open');
     document.body.classList.add('dashboard-open','journey-active');
+    // Switch bar to journey mode
+    if(window._setBarMode) window._setBarMode('journey');
+    if(window._updateBarJourneySteps) window._updateBarJourneySteps(
+      ['Intro','Behaviours','Stalls','Stack','Clusters','Leverage','Fork'],0
+    );
+    // Remove close handler first to avoid duplicates
+    const closeBtn = document.getElementById('dashboard-close');
+    const newClose = closeBtn?.cloneNode(true);
+    if(closeBtn && newClose) closeBtn.parentNode.replaceChild(newClose, closeBtn);
     document.getElementById('dashboard-close')?.addEventListener('click',()=>{
       p?.classList.remove('open');
       document.body.classList.remove('dashboard-open','journey-active');
+      if(window._setBarMode) window._setBarMode('default');
     });
     this.stage=0; this.fork=null; this.selectedKeys=[]; this.selectedStalls=[]; this.stackResult=null; this.stepsComplete=[];
     this._renderIntro();

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnostic Data — 75 Cluster Runs — ClusterOS</title>
+<title>Diagnostic Data — 200+ Cluster Runs — ClusterOS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -68,8 +68,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     --green:     #2a7a4f;
     --green-dim: #1d5c3a;
     --signal:    #c8f0d0;
-    --teal:      #7dd3c8;
-    --amber:     #f5d97a;
+    --teal:      #0c9488;
+    --amber:     #d97706;
     --font-serif: 'Instrument Serif', Georgia, serif;
     --font-sans:  'Geist', system-ui, sans-serif;
     --font-mono:  'Geist Mono', monospace;
@@ -172,12 +172,12 @@ body{background:#f7f4ef;color:#1a1a1a;font-family:var(--sans);font-weight:300;li
 
     .wrap{max-width:1100px;margin:0 auto;padding:88px 32px 80px}
     .page-header{margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid #f0ece4}
-    .page-tag{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#c8f0d0;margin-bottom:12px}
+    .page-tag{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
     h1{font-size:28px;font-weight:400;color:#1a1a1a;margin:0 0 12px;letter-spacing:-.01em}
     .page-desc{font-size:14px;color:#8c8780;line-height:1.6;max-width:700px;margin:0 0 20px}
     .stats{display:flex;gap:32px;flex-wrap:wrap}
     .stat{font-family:'Geist Mono', monospace;font-size:11px;color:#8c8780}
-    .stat strong{color:#c8f0d0;font-size:16px;display:block;font-weight:700}
+    .stat strong{color:var(--green);font-size:16px;display:block;font-weight:700}
     table{width:100%;border-collapse:collapse;font-size:13px}
     thead tr{border-bottom:1px solid #f0ece4}
     th{font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8c8780;padding:10px 12px;text-align:left}
@@ -187,13 +187,13 @@ body{background:#f7f4ef;color:#1a1a1a;font-family:var(--sans);font-weight:300;li
     td:nth-child(4){font-family:'Geist Mono', monospace;font-size:11px}
     td:nth-child(6){font-family:'Geist Mono', monospace;font-size:11px;color:#8c8780}
     .badge{display:inline-block;padding:2px 8px;border-radius:3px;font-family:'Geist Mono', monospace;font-size:10px;font-weight:700;letter-spacing:.06em}
-    .badge.emerging{background:rgba(245,217,122,0.1);color:#f5d97a;border:1px solid rgba(245,217,122,0.2)}
-    .badge.growing{background:rgba(200,240,208,0.1);color:#c8f0d0;border:1px solid rgba(200,240,208,0.2)}
-    .badge.mature{background:rgba(125,211,200,0.1);color:#7dd3c8;border:1px solid rgba(125,211,200,0.2)}
+    .badge.emerging{background: rgba(217,119,6,0.1);color:var(--amber);border:1px solid rgba(245,217,122,0.2)}
+    .badge.growing{background:rgba(200,240,208,0.1);color:var(--green);border:1px solid rgba(200,240,208,0.2)}
+    .badge.mature{background:rgba(12,148,136,0.1);color:var(--teal);border:1px solid rgba(12,148,136,0.2)}
     .badge.transitioning{background:rgba(240,128,128,0.1);color:#f08080;border:1px solid rgba(240,128,128,0.2)}
     .note{margin-top:40px;padding:20px 24px;background:rgba(200,194,183,0.15);border:1px solid #f0ece4;border-radius:6px;font-size:12px;color:#8c8780;line-height:1.6}
     
-    .fl{font-family:var(--sans);font-weight:400;font-size:14px;color:#8c8780;text-decoration:none}.fl span{font-family:'Geist Mono', monospace;font-weight:600;color:#c8f0d0}.fcopy{font-size:12px;color:#8c8780}
+    .fl{font-family:var(--sans);font-weight:400;font-size:14px;color:#8c8780;text-decoration:none}.fl span{font-family:'Geist Mono', monospace;font-weight:600;color:var(--green)}.fcopy{font-size:12px;color:#8c8780}
     @media(max-width:640px){nav{padding:0 20px}.wrap{padding:72px 16px 60px}table{display:block;overflow-x:auto}}
   
 /* ── SITE FOOTER ─────────────────────────────────────────────────── */
@@ -316,7 +316,7 @@ body { overflow-x: hidden; }
 <div class="wrap">
   <div class="page-header">
     <div class="page-tag">ClusterOS · Diagnostic Data</div>
-    <h1>75 Cluster Diagnostic Runs — Structured Data</h1>
+    <h1>200+ Cluster Diagnostic Runs — Structured Data</h1>
     <p class="page-desc">Each row represents a completed ClusterOS diagnostic run. The diagnostic identifies active stabilisation stalls (S1–S9), stack configurations, lifecycle stage, and anchor type. Evidence count reflects the number of sources reviewed per run. Methodology from <em>Ecosystem Stewardship</em> (Barrie, 2024).</p>
     <div class="stats">
       <div class="stat"><strong>75</strong>clusters assessed</div>
@@ -524,5 +524,32 @@ body { overflow-x: hidden; }
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  document.querySelectorAll('.nav-dropdown').forEach(function(dd){
+    var t=dd.querySelector('.nav-dropdown-toggle');
+    var m=dd.querySelector('.nav-dropdown-menu');
+    if(!t||!m) return;
+    t.addEventListener('click',function(e){
+      e.stopPropagation();
+      var open=m.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
+      document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
+      if(!open){m.classList.add('open');t.classList.add('active');}
+    });
+  });
+  document.addEventListener('click',function(){
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
+  });
+  var h=document.getElementById('nav-hamburger');
+  var mob=document.getElementById('nav-mobile-menu');
+  if(h&&mob){
+    h.addEventListener('click',function(e){e.stopPropagation();var o=mob.classList.contains('open');mob.classList.toggle('open',!o);h.classList.toggle('open',!o);});
+    document.addEventListener('click',function(){mob.classList.remove('open');h.classList.remove('open');});
+  }
+})();
+</script>
 </body>
 </html>

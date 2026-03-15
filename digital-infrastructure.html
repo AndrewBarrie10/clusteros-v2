@@ -68,8 +68,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     --green:     #2a7a4f;
     --green-dim: #1d5c3a;
     --signal:    #c8f0d0;
-    --teal:      #7dd3c8;
-    --amber:     #f5d97a;
+    --teal:      #0c9488;
+    --amber:     #d97706;
     --font-serif: 'Instrument Serif', Georgia, serif;
     --font-sans:  'Geist', system-ui, sans-serif;
     --font-mono:  'Geist Mono', monospace;
@@ -213,9 +213,10 @@ p + p { margin-top: 16px; }
 
 /* HERO */
 .hero { padding: 100px 24px 64px; max-width: 960px; margin: 0 auto; }
-.hero-tag { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
-.hero-h { font-family: 'Instrument Serif', serif; font-size: clamp(36px, 6vw, 56px); line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 24px; }
-.hero-h em { font-style: italic; color: #c8f0d0; }
+.hero-eyebrow { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 20px; }
+.hero-h { font-family: 'Instrument Serif', serif; font-size: clamp(40px, 6vw, 64px); line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 24px; font-weight: 400; color: var(--ink); }
+.hero-h em { font-style: italic; color: var(--green); }
+.hero-h em { font-style: italic; color: var(--green); }
 .hero-sub { font-size: 17px; color: var(--dim); line-height: 1.7; max-width: 600px; }
 .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: end; margin-top: 0; }
 .hero-grid .hero-right p { font-size: 15px; color: var(--dim); line-height: 1.75; }
@@ -225,15 +226,16 @@ p + p { margin-top: 16px; }
 /* SECTION */
 .section { padding: 56px 24px; max-width: 960px; margin: 0 auto; }
 .section + .section { border-top: 1px solid var(--border); }
-.sec-num { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.15em; margin-bottom: 14px; }
-.sec-h { font-family: 'Instrument Serif', serif; font-size: clamp(24px, 3.5vw, 34px); line-height: 1.1; color: #1a1a1a; margin-bottom: 16px; }
-.sec-h em { font-style: italic; color: var(--signal); }
+.sec-num { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--green); letter-spacing: 0.15em; margin-bottom: 14px; }
+.sec-h { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px; font-weight: 400; color: var(--ink); }
+.sec-h em { font-style: italic; color: var(--green); }
+.sec-h em { font-style: italic; color: var(--green); }
 .sec-intro { font-size: 15px; color: var(--dim); line-height: 1.75; max-width: 660px; margin-bottom: 32px; }
 
 /* ANNOTATION GRID */
 .anno-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 28px; }
 .anno { background: var(--surface); border: 1px solid var(--border); padding: 22px 22px; border-radius: 2px; }
-.anno-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--signal); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.anno-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
 .anno p { font-size: 13px; color: var(--dim); line-height: 1.72; }
 @media (max-width: 640px) { .anno-grid { grid-template-columns: 1fr; } }
 
@@ -248,33 +250,33 @@ p + p { margin-top: 16px; }
 /* SIGNAL CASCADE TABLE */
 .flow-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); overflow: hidden; font-size: 13px; }
 .flow-table thead tr { background: var(--surface); }
-.flow-table thead th { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 12px 16px; text-align: left; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border2); }
-.flow-table thead th:first-child { color: var(--signal); }
+.flow-table thead th { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); padding: 12px 16px; text-align: left; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border2); }
+.flow-table thead th:first-child { color: var(--green); }
 .flow-table tbody tr { border-bottom: 1px solid var(--border); }
 .flow-table tbody tr:last-child { border-bottom: none; }
 .flow-table tbody tr:nth-child(even) td { background: rgba(17,28,46,0.5); }
 .flow-table tbody td { padding: 14px 16px; vertical-align: top; color: var(--dim); line-height: 1.65; border-right: 1px solid var(--border); }
 .flow-table tbody td:last-child { border-right: none; }
-.flow-table tbody td:first-child { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 600; color: var(--signal); background: rgba(200,240,208,0.04); white-space: nowrap; letter-spacing: 0.04em; }
+.flow-table tbody td:first-child { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 600; color: var(--green); background: rgba(200,240,208,0.04); white-space: nowrap; letter-spacing: 0.04em; }
 @media (max-width: 700px) { .flow-table thead th:nth-child(2), .flow-table tbody td:nth-child(2) { display: none; } }
 
 /* PRINCIPLES GRID */
 .principles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
 .principle-card { background: var(--surface); border: 1px solid var(--border); padding: 28px 26px; border-radius: 2px; }
-.p-num { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 10px; }
+.p-num { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--green); letter-spacing: 0.1em; margin-bottom: 10px; }
 .principle-card h3 { font-family: 'Instrument Serif', serif; font-size: 18px; font-weight: 400; line-height: 1.25; margin-bottom: 10px; color: #1a1a1a; }
-.principle-card h3 em { font-style: italic; color: var(--signal); }
-.principle-card p { font-size: 13px; color: var(--muted); line-height: 1.72; }
+.principle-card h3 em { font-style: italic; color: var(--green); }
+.principle-card p { font-size: 13px; color: var(--ink-dim); line-height: 1.72; }
 @media (max-width: 640px) { .principles-grid { grid-template-columns: 1fr; } }
 
 /* CLOSING */
 .closing { padding: 56px 24px 0; max-width: 960px; margin: 0 auto; }
 .closing-inner { background: var(--surface); border: 1px solid var(--border2); border-radius: 6px; padding: 40px 44px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
 .closing-quote { font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 24px); font-style: italic; line-height: 1.5; color: var(--dim); }
-.closing-quote strong { font-style: normal; color: var(--signal); font-weight: 400; }
-.closing-mark { font-family: 'Geist Mono', monospace; font-size: 10px; color: var(--muted); line-height: 1.9; text-align: right; flex-shrink: 0; letter-spacing: 0.05em; }
+.closing-quote strong { font-style: normal; color: var(--green); font-weight: 400; }
+.closing-mark { font-family: 'Geist Mono', monospace; font-size: 10px; color: var(--ink-dim); line-height: 1.9; text-align: right; flex-shrink: 0; letter-spacing: 0.05em; }
 .closing-cta { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
-.btn-primary { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: #f7f4ef; background: #c8f0d0; padding: 10px 22px; border-radius: 3px; transition: opacity 0.2s; }
+.btn-primary { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: #fff; background: var(--green); padding: 10px 22px; border-radius: 3px; transition: opacity 0.2s; }
 .btn-primary:hover { opacity: 0.85; }
 .btn-ghost { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: #8c8780; border: 1px solid rgba(200,194,183,0.8); padding: 10px 22px; border-radius: 3px; transition: color 0.2s, border-color 0.2s; }
 .btn-ghost:hover { color: #1a1a1a; border-color: #8c8780; }
@@ -294,6 +296,122 @@ p + p { margin-top: 16px; }
 
 
 @media (max-width: 640px) {   }
+
+  /* ── SIGNAL CASCADE ──────────────────────────────────── */
+  .cascade-event {
+    max-width: 580px; margin-bottom: 0;
+  }
+  .cascade-event-label {
+    font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 10px;
+  }
+  .cascade-event-body {
+    padding: 18px 22px; background: var(--surface);
+    border: 1px solid var(--border-2); border-radius: 4px;
+    margin-bottom: 0;
+  }
+  .cascade-event-actor {
+    font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 8px;
+  }
+  .cascade-event-text {
+    font-size: 15px; color: var(--ink); line-height: 1.6; font-weight: 400;
+  }
+  .cascade-arrow {
+    font-size: 28px; color: var(--border-2);
+    text-align: left; padding: 8px 0 8px 30px; line-height: 1;
+  }
+  .cascade-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-bottom: 20px;
+  }
+  @media (max-width: 720px) { .cascade-grid { grid-template-columns: 1fr; } }
+  .cascade-card {
+    padding: 18px 20px; border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--page);
+  }
+  .cascade-card-founder  { border-left: 3px solid #d4a94a; }
+  .cascade-card-researcher { border-left: 3px solid #c0392b; }
+  .cascade-card-steward  { border-left: 3px solid var(--teal); }
+  .cascade-card-anchor   { border-left: 3px solid var(--green); }
+  .cascade-card-who {
+    font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .cascade-who-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .cascade-dot-founder    { background: #d4a94a; }
+  .cascade-dot-researcher { background: #c0392b; }
+  .cascade-dot-steward    { background: var(--teal); }
+  .cascade-dot-anchor     { background: var(--green); }
+  .cascade-card-surface {
+    font-size: 13px; color: var(--ink); line-height: 1.65;
+    font-style: italic; margin-bottom: 10px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .cascade-card-why {
+    font-size: 12px; color: var(--ink-muted); line-height: 1.55;
+    font-weight: 300;
+  }
+  .cascade-footer {
+    padding: 14px 18px; background: rgba(42,122,79,0.06);
+    border: 1px solid rgba(42,122,79,0.2); border-radius: 3px;
+    font-size: 13px; color: var(--ink-dim); line-height: 1.6;
+    max-width: 580px;
+  }
+  .cascade-footer-label {
+    font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 5px;
+  }
+
+  /* ── SOVEREIGN DB CALLOUT ─────────────────────────────── */
+  .sovereign-callout {
+    margin: 32px 0; padding: 36px 40px;
+    background: var(--green-dim);
+    border: none;
+    border-radius: 4px; max-width: 780px;
+  }
+  .sovereign-callout-eyebrow {
+    font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 14px; display: flex;
+    align-items: center; gap: 8px;
+  }
+  .sovereign-callout-eyebrow::before {
+    content: '★'; font-size: 11px; color: var(--green);
+  }
+  .sovereign-callout h3 {
+    font-family: 'Instrument Serif', serif; font-size: 26px;
+    color: #fff; line-height: 1.15; margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .sovereign-callout h3 em { font-style: italic; color: var(--green); }
+  .sovereign-callout p {
+    font-size: 14px; color: rgba(255,255,255,0.82) !important; line-height: 1.75;
+    margin-bottom: 16px; font-weight: 300 !important; max-width: 620px;
+  }
+  .sovereign-callout p:last-child { margin-bottom: 0; }
+  .sovereign-callout strong { color: #fff !important; font-weight: 500 !important; }
+  .sovereign-structure {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;
+    padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .sovereign-node {
+    font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 2px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+  }
+  .sovereign-node-arrow { color: rgba(255,255,255,0.35); font-size: 12px; line-height: 26px; }
+  /* ── END SOVEREIGN/CASCADE CSS ───────────────────────── */
 </style>
 </head>
 <body>
@@ -352,10 +470,10 @@ p + p { margin-top: 16px; }
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">Architecture Overview</div>
+  <p class="hero-eyebrow">Architecture overview</p>
   <div class="hero-grid">
     <div>
-      <h1 class="hero-h">How the intelligence<br><em>layer works</em></h1>
+      <h1 class="hero-h">The intelligence layer.<br><em>How it works.</em></h1>
     </div>
     <div class="hero-right">
       <p>ClusterOS is coordination infrastructure for regional economies. Not a platform with AI features added. Not an intelligence network. Not an operating system in the software sense. Its defining purpose is a single one: <strong>making complexity cheaper to operate.</strong></p>
@@ -504,16 +622,22 @@ p + p { margin-top: 16px; }
       <text x="840" y="329" fill="#c8f0d0" font-size="7" text-anchor="middle" font-weight="500">get_leverage_hypotheses()</text>
       <text x="490" y="354" fill="#3a5570" font-size="7" text-anchor="middle">Each tool is a structured call from the AI to the live database. Intelligence is not pre-baked — it is assembled from real data, at the moment it is needed.</text>
 
-      <!-- Data Layer -->
-      <rect x="50" y="382" width="450" height="98" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
-      <rect x="50" y="382" width="450" height="16" rx="2" fill="#f0ece4"/>
-      <rect x="50" y="392" width="450" height="6" fill="#f0ece4"/>
-      <text x="275" y="393" fill="#1a1a1a" font-size="7.5" font-weight="500" letter-spacing="1" text-anchor="middle">SOVEREIGN ECOSYSTEM DATABASE</text>
-      <text x="65" y="414" fill="#c2cfe0" font-size="7.5">Supercluster  ·  Clusters  ·  Groups  ·  Actors</text>
-      <text x="65" y="428" fill="#c2cfe0" font-size="7.5">Actor profiles  ·  Signal history  ·  Journey state  ·  Evidence base</text>
-      <text x="65" y="442" fill="#c2cfe0" font-size="7.5">Diagnostic outputs  ·  Stall records  ·  Leverage hypotheses</text>
-      <text x="65" y="460" fill="#3a5570" font-size="7">One dedicated instance per regional EDA. Data does not leave the regional tenant.</text>
-      <text x="65" y="472" fill="#3a5570" font-size="7">No cross-region model training without explicit consent. Full role-based access control.</text>
+      <!-- Data Layer — SOVEREIGN ECOSYSTEM DATABASE (central to ClusterOS) -->
+      <!-- Outer highlight ring -->
+      <rect x="46" y="378" width="458" height="106" rx="4" fill="none" stroke="#c8f0d0" stroke-width="1.5" opacity="0.6"/>
+      <rect x="50" y="382" width="450" height="98" rx="2" fill="#0d1f14" stroke="#2a7a4f" stroke-width="1.5"/>
+      <!-- Header bar — signal green -->
+      <rect x="50" y="382" width="450" height="20" rx="2" fill="#1e3a28"/>
+      <rect x="50" y="396" width="450" height="6" fill="#1e3a28"/>
+      <!-- Star marker left -->
+      <text x="62" y="395" fill="#c8f0d0" font-size="9" font-weight="700">★</text>
+      <text x="295" y="396" fill="#c8f0d0" font-size="8.5" font-weight="700" letter-spacing="1.5" text-anchor="middle">SOVEREIGN ECOSYSTEM DATABASE</text>
+      <!-- Content rows -->
+      <text x="65" y="416" fill="#c8f0d0" font-size="7.5" font-weight="500">Supercluster  ·  Clusters  ·  Groups  ·  Actors</text>
+      <text x="65" y="430" fill="#a8c4b0" font-size="7.5">Actor profiles  ·  Signal history  ·  Journey state  ·  Evidence base</text>
+      <text x="65" y="444" fill="#a8c4b0" font-size="7.5">Diagnostic outputs  ·  Stall records  ·  Leverage hypotheses</text>
+      <text x="65" y="460" fill="#5a8a6a" font-size="7">One dedicated instance per regional EDA. Data does not leave the regional tenant.</text>
+      <text x="65" y="472" fill="#5a8a6a" font-size="7">No cross-region data sharing. Full role-based access control. Sovereign by design.</text>
 
       <rect x="515" y="382" width="415" height="98" rx="2" fill="#111c2e" stroke="#ddd8cf" stroke-width="1"/>
       <rect x="515" y="382" width="415" height="16" rx="2" fill="#1e3a28"/>
@@ -604,61 +728,105 @@ p + p { margin-top: 16px; }
   </div>
 </div>
 
+
+<div class="section" style="padding-top:0;padding-bottom:48px">
+  <div class="sovereign-callout">
+    <div class="sovereign-callout-eyebrow">The load-bearing structure</div>
+    <h3>The Sovereign Ecosystem Database.<br><em>Everything else depends on it.</em></h3>
+    <p>Every actor journey, every diagnostic output, every signal, every stall record — all of it lives in a single, dedicated database per regional EDA. This is not a shared multi-tenant cloud service where your data sits alongside everyone else's. <strong>Each regional deployment is a sovereign instance.</strong> Data does not leave the regional tenant. Intelligence is generated locally from local data.</p>
+    <p>The hierarchical structure of that database is what makes the rest of the platform possible. Superclusters contain clusters. Clusters contain groups. Groups contain actors. Actors generate content and signals. Every relationship, every interaction, every piece of evidence is stored with full provenance — who created it, when, in what context, with what permissions.</p>
+    <p>This structure is why the platform can route a procurement RFI from an anchor to three matched founders without broadcasting it to four hundred cluster members. The database knows the relationships. The AI reasons against them. The result is intelligence, not noise.</p>
+    <div class="sovereign-structure">
+      <span class="sovereign-node">Supercluster</span>
+      <span class="sovereign-node-arrow">→</span>
+      <span class="sovereign-node">Cluster</span>
+      <span class="sovereign-node-arrow">→</span>
+      <span class="sovereign-node">Group</span>
+      <span class="sovereign-node-arrow">→</span>
+      <span class="sovereign-node">Actor</span>
+      <span class="sovereign-node-arrow">→</span>
+      <span class="sovereign-node">Signal</span>
+      <span class="sovereign-node-arrow">+</span>
+      <span class="sovereign-node">Journey state</span>
+      <span class="sovereign-node-arrow">+</span>
+      <span class="sovereign-node">Evidence base</span>
+    </div>
+  </div>
+</div>
+
 <hr>
 
 <!-- SECTION 02: SIGNAL CASCADE -->
 <div class="section">
   <div class="sec-num">02</div>
   <h2 class="sec-h">One event. <em>Four reframings.</em></h2>
-  <p class="sec-intro">This is the core of why ClusterOS is coordination infrastructure rather than a community platform. A single event — an anchor posting a procurement need — is not broadcast to everyone. It is reframed by the AI for each actor type based on what that signal means to them specifically. The same underlying data. Different intelligence surfaces.</p>
+  <p class="sec-intro">A single actor does something selfish. In a broadcast system that signal goes to everyone and is ignored by most. In the ClusterOS infrastructure, the same signal is typed, matched, and reframed for each actor based on what it actually means to them. Same underlying data. Four different intelligence surfaces.</p>
 
-  <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-  <table class="flow-table" style="min-width:560px;">
-    <thead>
-      <tr>
-        <th>Receiving actor</th>
-        <th>Event</th>
-        <th>What the AI surfaces</th>
-        <th>Why this matters</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Founder</td>
-        <td>Anchor posts procurement RFI for advanced manufacturing capability</td>
-        <td>"This RFI matches your declared capability profile. The application window closes in 14 days. Three preparation steps are available in your journey."</td>
-        <td>The founder acts on a specific, timely signal — not a general announcement they may never have seen.</td>
-      </tr>
-      <tr>
-        <td>Researcher</td>
-        <td>Same event</td>
-        <td>"This procurement signal aligns with your published work. Two founders in your cluster are potential commercial intermediaries. A collaboration pathway is available."</td>
-        <td>Academic work is connected to live commercial demand without the researcher having to monitor procurement feeds.</td>
-      </tr>
-      <tr>
-        <td>Steward</td>
-        <td>Same event</td>
-        <td>"Buy-side demand signal detected in Advanced Manufacturing cluster. Four founders have matching capability. Current bridging score: 31/100. Possible Stall 4 (Anchor–Founder Disconnect). Intervention available."</td>
-        <td>The steward sees a systems-level opportunity, not just an activity log. The diagnostic framework is live, not retrospective.</td>
-      </tr>
-      <tr>
-        <td>Anchor</td>
-        <td>Founder reaches market validation milestone</td>
-        <td>"A founder in your sector cluster has reached validation stage. Their capability profile is now accessible to matched anchors. No disclosure of commercial intent required at this stage."</td>
-        <td>The anchor learns about relevant capability without the awkwardness of premature commitment. Timing is managed by the system.</td>
-      </tr>
-      <tr>
-        <td>Steward</td>
-        <td>Same founder milestone</td>
-        <td>"Sell-side capability signal in SpaceTech: three founders now at validation stage. Regional support programme deadline in 11 days — uptake currently low. Pattern matches Stall 2 (Visibility Without Conversion)."</td>
-        <td>The steward can act before the opportunity closes, with a named diagnostic pattern rather than a vague sense that something is underperforming.</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- TRIGGERING EVENT -->
+  <div class="cascade-event">
+    <div class="cascade-event-label">The triggering event</div>
+    <div class="cascade-event-body">
+      <div class="cascade-event-actor">Anchor · Rolls-Royce Scotland</div>
+      <div class="cascade-event-text">Posts an open RFI: seeking advanced composite materials capability for next-generation turbine component. 90-day procurement window.</div>
+    </div>
+    <div class="cascade-arrow">↓</div>
   </div>
-</div>
 
-<hr>
+  <!-- FOUR REFRAMINGS -->
+  <div class="cascade-grid">
+
+    <div class="cascade-card cascade-card-founder">
+      <div class="cascade-card-who">
+        <span class="cascade-who-dot cascade-dot-founder"></span>
+        Founder · composite materials startup
+      </div>
+      <div class="cascade-card-surface">
+        "You match this RFI. The application window closes in 47 days. Two preparation steps are available in your journey before you're ready to respond."
+      </div>
+      <div class="cascade-card-why">Acts on a specific, timely signal — not a general announcement buried in a newsletter.</div>
+    </div>
+
+    <div class="cascade-card cascade-card-researcher">
+      <div class="cascade-card-who">
+        <span class="cascade-who-dot cascade-dot-researcher"></span>
+        Researcher · materials science, University of Glasgow
+      </div>
+      <div class="cascade-card-surface">
+        "This procurement need aligns with your published work on fibre-reinforced polymers. Two founders in your cluster are potential commercial routes. A collaboration pathway is available."
+      </div>
+      <div class="cascade-card-why">Published research reaches live commercial demand without the researcher monitoring procurement feeds.</div>
+    </div>
+
+    <div class="cascade-card cascade-card-steward">
+      <div class="cascade-card-who">
+        <span class="cascade-who-dot cascade-dot-steward"></span>
+        Steward · Scottish Advanced Manufacturing cluster
+      </div>
+      <div class="cascade-card-surface">
+        "Buy-side demand signal in Advanced Manufacturing. Three founders have matching capability. Bridging score: 34/100. Possible Mediating stall — direct connections are not forming. Intervention available."
+      </div>
+      <div class="cascade-card-why">Sees a systems-level opportunity with a named diagnostic pattern — not just an activity log.</div>
+    </div>
+
+    <div class="cascade-card cascade-card-anchor">
+      <div class="cascade-card-who">
+        <span class="cascade-who-dot cascade-dot-anchor"></span>
+        Second anchor · BAE Systems
+      </div>
+      <div class="cascade-card-surface">
+        "A founder in your adjacent capability area has reached validation stage. Their composite materials profile is now visible to matched anchors. No commercial disclosure required at this stage."
+      </div>
+      <div class="cascade-card-why">Learns about relevant capability without premature commitment — timing managed by the infrastructure.</div>
+    </div>
+
+  </div>
+
+  <div class="cascade-footer">
+    <span class="cascade-footer-label">Result</span>
+    One event. Four actors. Four different intelligence surfaces. Zero additional effort from Rolls-Royce. No broadcast. No noise.
+  </div>
+
+</div>
 
 <!-- SECTION 03: PRINCIPLES -->
 <div class="section">

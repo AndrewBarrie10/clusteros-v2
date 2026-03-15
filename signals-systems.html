@@ -68,8 +68,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     --green:     #2a7a4f;
     --green-dim: #1d5c3a;
     --signal:    #c8f0d0;
-    --teal:      #7dd3c8;
-    --amber:     #f5d97a;
+    --teal:      #0c9488;
+    --amber:     #d97706;
     --font-serif: 'Instrument Serif', Georgia, serif;
     --font-sans:  'Geist', system-ui, sans-serif;
     --font-mono:  'Geist Mono', monospace;
@@ -81,6 +81,11 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     --sans:    'Geist', system-ui, sans-serif;
     --serif:   'Instrument Serif', Georgia, serif;
     --mono:    'Geist Mono', monospace;
+    /* Actor text colours — solid, readable */
+    --col-steward:    #0d7377;
+    --col-corporate:  #2a7a4f;
+    --col-founder:    #92400e;
+    --col-researcher: #991b1b;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -195,7 +200,7 @@ body {
 }
 .hero-eyebrow {
   font-family: var(--mono); font-size: 10px; font-weight: 600;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--signal);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--green);
   margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
 }
 .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--signal); }
@@ -204,7 +209,7 @@ body {
   line-height: 1.05; letter-spacing: -0.02em; color: var(--chalk);
   margin-bottom: 24px;
 }
-.hero-headline em { font-style: italic; color: var(--signal); }
+.hero-headline em { font-style: italic; color: var(--green); }
 .hero-body { font-size: 16px; color: #5a5650; line-height: 1.75; max-width: 420px; margin-bottom: 48px; }
 .hero-body strong { color: var(--chalk); font-weight: 400; }
 .hero-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
@@ -292,7 +297,7 @@ body {
 }
 .role-selector-label {
   font-family: var(--mono); font-size: 9px; font-weight: 600;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--signal);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--green);
   margin-bottom: 16px;
 }
 .role-selector-title {
@@ -324,9 +329,9 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-size: 14px; flex-shrink: 0;
 }
-.role-card.steward .role-card-icon { background: rgba(125,211,200,0.15); }
+.role-card.steward .role-card-icon { background: rgba(12,148,136,0.15); }
 .role-card.corporate .role-card-icon { background: rgba(200,240,208,0.15); }
-.role-card.founder .role-card-icon { background: rgba(245,217,122,0.15); }
+.role-card.founder .role-card-icon { background: rgba(217,119,6,0.15); }
 .role-card.researcher .role-card-icon { background: rgba(240,128,128,0.15); }
 .role-card-name { font-size: 13px; font-weight: 600; color: var(--chalk); }
 .role-card-desc { font-size: 11px; color: var(--slate-3); margin-top: 2px; }
@@ -367,7 +372,7 @@ body {
   font-size: 12px; color: #5a5650; line-height: 1.7; white-space: pre-line;
   max-width: 90%;
 }
-.msg-ai-bubble .arr { color: var(--signal); }
+.msg-ai-bubble .arr { color: var(--green); }
 .msg-user-bubble {
   align-self: flex-end;
   background: rgba(200,240,208,0.08); border: 1px solid rgba(200,240,208,0.15);
@@ -384,10 +389,10 @@ body {
   font-family: 'Geist', sans-serif;
 }
 .chat-option:hover { background: rgba(200,240,208,0.08); border-color: rgba(200,240,208,0.35); color: var(--chalk); }
-.chat-option:hover::before { content: '→ '; color: var(--signal); }
+.chat-option:hover::before { content: '→ '; color: var(--green); }
 .chat-prompt-hint {
   font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--signal); margin-bottom: 8px;
+  text-transform: uppercase; color: var(--green); margin-bottom: 8px;
   display: flex; align-items: center; gap: 8px;
 }
 .chat-prompt-hint::before {
@@ -491,7 +496,7 @@ body {
 .dash-metric-label { font-size: 9px; color: #8c8780; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1px; }
 .dash-step { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 5px; margin-bottom: 3px; border: 1px solid transparent; font-family: 'Geist', sans-serif; }
 .dash-step.complete { background: #1a1a1a; }
-.dash-step.active { background: #f0ece4; border-color: #c8f0d0; }
+.dash-step.active { background: #f0ece4; border-color: var(--green); }
 .dash-step.upcoming { opacity: 0.5; }
 .dash-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .dash-dot.complete { background: #8b5cf6; }
@@ -534,13 +539,13 @@ body {
   border-radius: 3px; border: 1px solid; cursor: pointer;
   background: transparent; transition: all 0.15s;
 }
-.switch-btn.steward { color: var(--steward); border-color: rgba(125,211,200,0.3); }
-.switch-btn.steward:hover { background: rgba(125,211,200,0.1); }
-.switch-btn.corporate { color: var(--corporate); border-color: rgba(200,240,208,0.3); }
+.switch-btn.steward { color: var(--col-steward); border-color: rgba(12,148,136,0.3); }
+.switch-btn.steward:hover { background: rgba(12,148,136,0.1); }
+.switch-btn.corporate { color: var(--col-corporate); border-color: rgba(200,240,208,0.3); }
 .switch-btn.corporate:hover { background: rgba(200,240,208,0.1); }
-.switch-btn.founder { color: var(--founder); border-color: rgba(245,217,122,0.3); }
-.switch-btn.founder:hover { background: rgba(245,217,122,0.1); }
-.switch-btn.researcher { color: var(--researcher); border-color: rgba(240,128,128,0.3); }
+.switch-btn.founder { color: var(--col-founder); border-color: rgba(245,217,122,0.3); }
+.switch-btn.founder:hover { background: rgba(217,119,6,0.1); }
+.switch-btn.researcher { color: var(--col-researcher); border-color: rgba(240,128,128,0.3); }
 .switch-btn.researcher:hover { background: rgba(240,128,128,0.1); }
 .switch-btn.active-role { opacity: 0.35; pointer-events: none; }
 
@@ -565,7 +570,7 @@ body {
   content: '↓'; position: absolute; bottom: -36px; left: 24px;
   font-family: var(--mono); font-size: 16px; color: var(--slate-3);
 }
-.event-label { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--steward); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+.event-label { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--col-steward); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
 .event-text { font-size: 15px; color: var(--chalk); line-height: 1.4; }
 .event-sub { font-size: 12px; color: var(--slate-3); margin-top: 4px; font-family: var(--mono); }
 
@@ -585,17 +590,17 @@ body {
   margin-top: 4px; position: relative; left: -40px; margin-right: -16px;
   border: 1.5px solid;
 }
-.ripple-node.steward { border-color: var(--steward); background: rgba(125,211,200,0.2); }
-.ripple-node.corporate { border-color: var(--corporate); background: rgba(200,240,208,0.2); }
-.ripple-node.founder { border-color: var(--founder); background: rgba(245,217,122,0.2); }
-.ripple-node.researcher { border-color: var(--researcher); background: rgba(240,128,128,0.2); }
-.ripple-node.system { border-color: var(--signal); background: rgba(200,240,208,0.3); }
+.ripple-node.steward { border-color: var(--col-steward); background: rgba(12,148,136,0.2); }
+.ripple-node.corporate { border-color: var(--col-corporate); background: rgba(200,240,208,0.2); }
+.ripple-node.founder { border-color: var(--col-founder); background: rgba(217,119,6,0.2); }
+.ripple-node.researcher { border-color: var(--col-researcher); background: rgba(240,128,128,0.2); }
+.ripple-node.system { border-color: var(--green); background: rgba(200,240,208,0.3); }
 .ripple-who { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
-.ripple-who.steward { color: var(--steward); }
-.ripple-who.corporate { color: var(--corporate); }
-.ripple-who.founder { color: var(--founder); }
-.ripple-who.researcher { color: var(--researcher); }
-.ripple-who.system { color: var(--signal); }
+.ripple-who.steward { color: var(--col-steward); }
+.ripple-who.corporate { color: var(--col-corporate); }
+.ripple-who.founder { color: var(--col-founder); }
+.ripple-who.researcher { color: var(--col-researcher); }
+.ripple-who.system { color: var(--green); }
 .ripple-action { font-size: 16px; color: var(--chalk); margin-bottom: 6px; line-height: 1.4; }
 .ripple-effect { font-size: 13px; color: #5a5650; line-height: 1.65; }
 .ripple-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
@@ -603,11 +608,11 @@ body {
   font-family: var(--mono); font-size: 10px; padding: 3px 10px;
   border-radius: 2px; border: 1px solid;
 }
-.ripple-badge.steward { color: var(--steward); border-color: rgba(125,211,200,0.3); background: rgba(125,211,200,0.06); }
-.ripple-badge.corporate { color: var(--corporate); border-color: rgba(200,240,208,0.3); background: rgba(200,240,208,0.06); }
-.ripple-badge.founder { color: var(--founder); border-color: rgba(245,217,122,0.3); background: rgba(245,217,122,0.06); }
-.ripple-badge.researcher { color: var(--researcher); border-color: rgba(240,128,128,0.3); background: rgba(240,128,128,0.06); }
-.ripple-badge.system { color: var(--signal); border-color: rgba(200,240,208,0.3); background: rgba(200,240,208,0.06); }
+.ripple-badge.steward { color: var(--col-steward); border-color: rgba(12,148,136,0.3); background: rgba(12,148,136,0.06); }
+.ripple-badge.corporate { color: var(--col-corporate); border-color: rgba(200,240,208,0.3); background: rgba(200,240,208,0.06); }
+.ripple-badge.founder { color: var(--col-founder); border-color: rgba(245,217,122,0.3); background: rgba(217,119,6,0.06); }
+.ripple-badge.researcher { color: var(--col-researcher); border-color: rgba(240,128,128,0.3); background: rgba(240,128,128,0.06); }
+.ripple-badge.system { color: var(--green); border-color: rgba(200,240,208,0.3); background: rgba(200,240,208,0.06); }
 
 /* -- WHAT ACCUMULATES -- */
 #accumulates { background: var(--slate); padding: 100px 64px; }
@@ -616,7 +621,7 @@ body {
 .accum-col { background: #f7f4ef; padding: 44px 36px; }
 .accum-layer-label { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
 .accum-layer-label.knowledge { color: var(--teal); }
-.accum-layer-label.relationship { color: var(--signal); }
+.accum-layer-label.relationship { color: var(--green); }
 .accum-layer-label.ecosystem { color: var(--amber); }
 .accum-title { font-family: var(--serif); font-size: 22px; color: var(--chalk); margin-bottom: 20px; line-height: 1.2; }
 .accum-desc { font-size: 14px; color: #5a5650; line-height: 1.7; margin-bottom: 28px; }
@@ -638,7 +643,7 @@ body {
 }
 .cta-inner { max-width: 640px; margin: 0 auto; position: relative; }
 .cta-headline { font-family: var(--serif); font-size: clamp(30px, 3.5vw, 50px); line-height: 1.1; letter-spacing: -0.02em; color: var(--chalk); margin-bottom: 20px; }
-.cta-headline em { font-style: italic; color: var(--signal); }
+.cta-headline em { font-style: italic; color: var(--green); }
 .cta-sub { font-size: 15px; color: #5a5650; line-height: 1.75; margin-bottom: 44px; }
 .cta-note { margin-top: 20px; font-family: var(--mono); font-size: 10px; color: var(--slate-3); letter-spacing: 0.08em; }
 
@@ -695,13 +700,13 @@ body {
   border-radius: 3px; border: 1px solid; cursor: pointer;
   background: transparent; transition: all 0.15s;
 }
-.steward-sw { color: var(--steward); border-color: rgba(125,211,200,0.3); }
-.steward-sw:hover { background: rgba(125,211,200,0.1); }
-.corporate-sw { color: var(--corporate); border-color: rgba(200,240,208,0.3); }
+.steward-sw { color: var(--col-steward); border-color: rgba(12,148,136,0.3); }
+.steward-sw:hover { background: rgba(12,148,136,0.1); }
+.corporate-sw { color: var(--col-corporate); border-color: rgba(200,240,208,0.3); }
 .corporate-sw:hover { background: rgba(200,240,208,0.1); }
-.founder-sw { color: var(--founder); border-color: rgba(245,217,122,0.3); }
-.founder-sw:hover { background: rgba(245,217,122,0.1); }
-.researcher-sw { color: var(--researcher); border-color: rgba(240,128,128,0.3); }
+.founder-sw { color: var(--col-founder); border-color: rgba(245,217,122,0.3); }
+.founder-sw:hover { background: rgba(217,119,6,0.1); }
+.researcher-sw { color: var(--col-researcher); border-color: rgba(240,128,128,0.3); }
 .researcher-sw:hover { background: rgba(240,128,128,0.1); }
 
 
@@ -783,7 +788,7 @@ body {
       ClusterOS isn't a networking platform. It's the layer beneath — where stewards, corporates, founders, and researchers each pursue their own goals and <strong>automatically generate intelligence</strong> that makes everyone else more effective.
     </p>
     <div class="hero-actions">
-      <a href="#demo" class="btn-primary">See your pathway</a>
+      <a href="#demo" class="btn-primary">See how it works</a>
       <a href="#ripple" class="btn-ghost">How it cascades</a>
     </div>
   </div>
@@ -794,7 +799,7 @@ body {
   <div class="demo-inner">
     <div class="demo-intro">
       <div class="section-label reveal">The platform</div>
-      <h2 class="section-headline reveal reveal-delay-1">Each actor sees a <em>different surface.</em><br>Same substrate beneath.</h2>
+      <h2 class="section-headline reveal reveal-delay-1">Each actor sees a <em>different surface.</em><br>Same infrastructure beneath.</h2>
       <p class="section-sub reveal reveal-delay-2" style="margin-bottom:0">
         Choose your role below. The system asks three questions, then builds your personalised pathway. This is what onboarding looks like from each seat.
       </p>
@@ -895,7 +900,7 @@ body {
               <div class="building-line"></div>
               <div class="building-line"></div>
             </div>
-            <div class="building-label" id="building-label">Building your pathway...</div>
+            <div class="building-label" id="building-label">Building your experience...</div>
           </div>
 
           <!-- Dashboard -->
@@ -928,7 +933,7 @@ body {
   <div class="ripple-inner">
     <div class="ripple-intro">
       <div class="section-label reveal">One event, many effects</div>
-      <h2 class="section-headline reveal reveal-delay-1">Watch a single action <em>cascade</em> through the substrate.</h2>
+      <h2 class="section-headline reveal reveal-delay-1">Watch a single action <em>cascade</em> through the infrastructure.</h2>
       <p class="section-sub reveal reveal-delay-2" style="margin-bottom:0">
         A corporate partner posts a technology RFI. They're just trying to find a supplier. But in a connected substrate, that single selfish act triggers a chain that reshapes the whole cluster.
       </p>
@@ -982,7 +987,7 @@ body {
         <div class="ripple-node steward"></div>
         <div class="ripple-content">
           <div class="ripple-who steward">Steward sees the cluster health signal</div>
-          <div class="ripple-action">The substrate registers a research-to-industry connection forming — updates the cluster health score</div>
+          <div class="ripple-action">The infrastructure registers a research-to-industry connection forming — updates the cluster health score</div>
           <div class="ripple-effect">The steward's dashboard shows a new university-industry link forming, a corporate engaged, three founders in active procurement conversations. Their board report writes itself. The cluster's health score moves.</div>
           <div class="ripple-badges">
             <span class="ripple-badge steward">Steward: evidence of ecosystem traction for funders</span>
@@ -1008,7 +1013,7 @@ body {
         <div class="ripple-content">
           <div class="ripple-who system">Substrate accumulates</div>
           <div class="ripple-action">The system now knows more than it did before the RFI was posted</div>
-          <div class="ripple-effect">Procurement intent, founder readiness, research relevance, university-industry connection, government fund activation — all now structured data in the substrate. The next actor who joins finds a more intelligent, better-connected cluster than the one that existed ten days ago.</div>
+          <div class="ripple-effect">Procurement intent, founder readiness, research relevance, university-industry connection, government fund activation — all now structured data in the infrastructure. The next actor who joins finds a more intelligent, better-connected cluster than the one that existed ten days ago.</div>
           <div class="ripple-badges">
             <span class="ripple-badge system">7 new signals · 4 new relationships · 1 new funding pathway · cluster health +4</span>
           </div>
@@ -1021,10 +1026,10 @@ body {
 <!-- WHAT ACCUMULATES -->
 <section id="accumulates">
   <div class="accum-inner">
-    <div class="section-label reveal">What the substrate stores</div>
+    <div class="section-label reveal">What the infrastructure stores</div>
     <h2 class="section-headline reveal reveal-delay-1">Three layers of <em>compounding intelligence.</em></h2>
     <p class="section-sub reveal reveal-delay-2">
-      Unlike a CRM or a directory, the substrate doesn't record events — it accumulates structured intelligence that gets more precise with every actor, every action, every outcome.
+      Unlike a CRM or a directory, the infrastructure doesn't record events — it accumulates structured intelligence that gets more precise with every actor, every action, every outcome.
     </p>
     <div class="accum-grid">
       <div class="accum-col reveal">
@@ -1052,7 +1057,7 @@ body {
       <div class="accum-col reveal reveal-delay-2">
         <div class="accum-layer-label ecosystem">Ecosystem Layer</div>
         <div class="accum-title">The cluster's structural position</div>
-        <div class="accum-desc">Aggregated across all actors, the substrate maintains a live read of lifecycle stage, stall patterns, and trajectory — benchmarked against 75 global comparators.</div>
+        <div class="accum-desc">Aggregated across all actors, the infrastructure maintains a live read of lifecycle stage, stall patterns, and trajectory — benchmarked against 200+ global comparators.</div>
         <div class="accum-examples">
           <div class="accum-example"><div class="accum-dot ecosystem"></div><div class="accum-text">Lifecycle stage and trajectory: where the cluster sits and where it's heading</div></div>
           <div class="accum-example"><div class="accum-dot ecosystem"></div><div class="accum-text">Comparable clusters: who resolved a similar stall and how</div></div>
@@ -1067,10 +1072,10 @@ body {
 <!-- CTA -->
 <section id="cta">
   <div class="cta-inner">
-    <div class="section-label reveal" style="justify-content:center;">Build your substrate</div>
+    <div class="section-label reveal" style="justify-content:center;">Build your infrastructure</div>
     <h2 class="cta-headline reveal reveal-delay-1">
       Your cluster has actors.<br>
-      <em>Does it have a substrate?</em>
+      <em>Does it have an infrastructure layer?</em>
     </h2>
     <p class="cta-sub reveal reveal-delay-2">
       A ClusterOS diagnostic identifies which actors are present, what signal they're generating, and what coordination layer is missing. Then we build it.
@@ -1740,6 +1745,33 @@ const rippleObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.06 });
 document.querySelectorAll('#ripple-chain').forEach(el => rippleObs.observe(el));
+</script>
+
+<script>
+(function(){
+  document.querySelectorAll('.nav-dropdown').forEach(function(dd){
+    var t=dd.querySelector('.nav-dropdown-toggle');
+    var m=dd.querySelector('.nav-dropdown-menu');
+    if(!t||!m) return;
+    t.addEventListener('click',function(e){
+      e.stopPropagation();
+      var open=m.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
+      document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
+      if(!open){m.classList.add('open');t.classList.add('active');}
+    });
+  });
+  document.addEventListener('click',function(){
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
+  });
+  var h=document.getElementById('nav-hamburger');
+  var mob=document.getElementById('nav-mobile-menu');
+  if(h&&mob){
+    h.addEventListener('click',function(e){e.stopPropagation();var o=mob.classList.contains('open');mob.classList.toggle('open',!o);h.classList.toggle('open',!o);});
+    document.addEventListener('click',function(){mob.classList.remove('open');h.classList.remove('open');});
+  }
+})();
 </script>
 </body>
 </html>

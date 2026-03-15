@@ -653,7 +653,7 @@ p + p { margin-top: 16px; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 // Findings map renderer — runs after page loads
-window.addEventListener('load', function() {
+setTimeout(function() {
   var mapEl = document.getElementById('map');
   if (!mapEl || !window.L) return;
   var fmap = L.map('map', { center:[28,12], zoom:2, scrollWheelZoom:false });
@@ -685,7 +685,7 @@ window.addEventListener('load', function() {
       btn.classList.add('active');
     });
   });
-});
+}, 1500);
 </script>
 
 <nav>

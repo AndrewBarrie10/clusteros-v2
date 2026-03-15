@@ -688,9 +688,9 @@ setTimeout(function() {
   function inferSector(c) {
     var name = (c.name + ' ' + (c.sector || '')).toLowerCase();
     if (/cyber|security|infosec/.test(name)) return 'cyber';
-    if (/life.sci|biotech|medtech|health|pharma/.test(name)) return 'life';
-    if (/manufactur|industrial|engineer/.test(name)) return 'manufacturing';
-    if (/space|deep.tech|quantum|photon|satel/.test(name)) return 'space';
+    if (/life.sci|biotech|medtech|health|pharma|medical/.test(name)) return 'life';
+    if (/manufactur|industrial|engineer|brainport|agtech|agri|food|simulation|training|aviation|aerospace|photon|optic/.test(name)) return 'manufacturing';
+    if (/space|deep.tech|quantum|satel/.test(name)) return 'space';
     return 'other';
   }
 

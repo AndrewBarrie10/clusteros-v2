@@ -129,7 +129,7 @@ const journey = {
           <div class="jf-fork-intro-title">What ClusterOS runs on</div>
           <p class="jf-fork-intro-desc">MCP substrate, sovereign database, actor journeys generated at runtime. Not a community platform with AI features added. The architecture is the product.</p>
           <div class="jf-fork-intro-steps">
-            <span>Platform vs substrate</span><span>›</span>
+            <span>Platform vs infrastructure</span><span>›</span>
             <span>Signal cascade</span><span>›</span>
             <span>Actor journeys</span>
           </div>
@@ -412,11 +412,11 @@ const journey = {
       </div>
       ${this._escape()}`);
     this._setFrame(`
-      <h2 class="jf-stage-heading">Not a platform.<br><em>A substrate.</em></h2>
-      <p class="jf-stage-sub">The distinction matters because it determines what's possible. A platform is a place you go to. A substrate is what your ecosystem runs on.</p>
+      <h2 class="jf-stage-heading">Not a platform.<br><em>An infrastructure layer.</em></h2>
+      <p class="jf-stage-sub">The distinction matters because it determines what's possible. A platform is a place you go to. An infrastructure layer is what your ecosystem runs on.</p>
       <div class="jf-contrast">
         <div class="jf-contrast-col jf-contrast-bad"><span class="jf-contrast-label">Community platform</span><p>Actors log in to add value. Intelligence is built into the interface — frozen at build time. Dashboards show what happened. Everyone sees the same surface. Value depends on active participation.</p></div>
-        <div class="jf-contrast-col jf-contrast-good"><span class="jf-contrast-label">ClusterOS substrate</span><p>Actors pursue their own goals. Intelligence lives in the protocol layer — assembled at runtime from live data. Every actor sees a different surface. Value compounds from selfish behaviour. The system improves whenever the AI model improves.</p></div>
+        <div class="jf-contrast-col jf-contrast-good"><span class="jf-contrast-label">ClusterOS infrastructure</span><p>Actors pursue their own goals. Intelligence lives in the protocol layer — assembled at runtime from live data. Every actor sees a different surface. Value compounds from selfish behaviour. The system improves whenever the AI model improves.</p></div>
       </div>
       <p class="jf-pull">"No actor needs to care about the ecosystem for the ecosystem to function as a system."</p>
       <div style="padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:4px">
@@ -451,7 +451,7 @@ const journey = {
         ${[
           {a:'founder',    l:'Founder',    t:"The system matches the RFI to three founders by technology type and readiness level. Each sees why they're a match and what the corporate needs to see to progress."},
           {a:'researcher', l:'Researcher', t:"A recently published paper on sensor fusion is matched to the RFI and distributed across three clusters. The researcher didn't network. Their paper did."},
-          {a:'steward',    l:'Steward',    t:"The substrate registers a research-to-industry connection forming — updates the cluster health score. The steward sees a bridging opportunity and an available intervention. Not an activity log — a diagnostic signal."},
+          {a:'steward',    l:'Steward',    t:"The infrastructure registers a research-to-industry connection forming — updates the cluster health score. The steward sees a bridging opportunity and an available intervention. Not an activity log — a diagnostic signal."},
           {a:'anchor',     l:'Anchor',     t:"A founder-researcher collaboration qualifies for a government innovation fund. The system identified the eligibility, surfaced the deadline, and pre-filled the application."}
         ].map(r=>`<div class="jf-reframing"><span class="jf-reframing-actor jf-actor-${r.a}">${r.l}</span><p class="jf-reframing-text">${r.t}</p></div>`).join('')}
       </div>
@@ -475,13 +475,13 @@ const journey = {
       ${this._escape()}`);
     this._setFrame(`
       <h2 class="jf-stage-heading">Each actor sees<br><em>a different surface.</em></h2>
-      <p class="jf-stage-sub">Same substrate beneath. Select a role to see what onboarding and the platform experience looks like from that seat. This is the actual onboarding interface.</p>
+      <p class="jf-stage-sub">Same infrastructure beneath. Select a role to see what onboarding and the platform experience looks like from that seat. This is the actual onboarding interface.</p>
       <div style="margin-top:24px;border:1px solid var(--border);border-radius:6px;overflow:hidden">
         <section id="demo">
   <div class="demo-inner">
     <div class="demo-intro">
       <div class="section-label reveal">The platform</div>
-      <h2 class="section-headline reveal reveal-delay-1">Each actor sees a <em>different surface.</em><br>Same substrate beneath.</h2>
+      <h2 class="section-headline reveal reveal-delay-1">Each actor sees a <em>different surface.</em><br>Same infrastructure beneath.</h2>
       <p class="section-sub reveal reveal-delay-2" style="margin-bottom:0">
         Choose your role below. The system asks three questions, then builds your personalised pathway. This is what onboarding looks like from each seat.
       </p>
@@ -913,7 +913,7 @@ const journey = {
           {title:'What makes a CAS',body:'Actors are autonomous. They respond to local incentives, not central direction. The system\'s behaviour emerges from millions of local decisions — not from a plan. No actor can see the whole system. No actor controls it.'},
           {title:'Why top-down fails',body:'When you try to manage a CAS as if it were an organisation, you produce compliance, not change. Actors learn to report what you want to hear. The system adapts around your intervention. The stall survives the strategy.'},
           {title:'The diagnostic implication',body:'Stalls aren\'t failures of management. They\'re rational adaptations by actors responding sensibly to local incentives. Understanding why each actor benefits from the current arrangement is the precondition for changing it.'},
-          {title:'Why ClusterOS is different',body:'ClusterOS doesn\'t try to coordinate actors. It changes what their self-interested behaviour produces. Every actor pursues their own goals. The substrate captures that as compounding intelligence. No actor needs to care about the ecosystem for the ecosystem to function as a system.'}
+          {title:'Why ClusterOS is different',body:'ClusterOS doesn\'t try to coordinate actors. It changes what their self-interested behaviour produces. Every actor pursues their own goals. The infrastructure captures that as compounding intelligence. No actor needs to care about the ecosystem for the ecosystem to function as a system.'}
         ].map(s=>`<div style="padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:4px"><div style="font-family:var(--font-mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--green);margin-bottom:8px">${s.title}</div><p style="font-size:13px;color:var(--ink-dim);line-height:1.65;margin:0;font-weight:300">${s.body}</p></div>`).join('')}
       </div>
       <div class="jf-sticky-bottom">
@@ -947,7 +947,7 @@ const journey = {
       </div>
       <div style="padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:4px;border-left:3px solid var(--green)">
         <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--green);margin-bottom:8px">The membrane principle</div>
-        <p style="font-size:13px;color:var(--ink-dim);line-height:1.65;margin:0;font-weight:300">The ecosystem has a membrane — the boundary between what's inside the system and what's outside. Outside actors (investors, diaspora, global clients, knowledge institutions) are participants, not visitors. Their signals matter. The substrate captures them.</p>
+        <p style="font-size:13px;color:var(--ink-dim);line-height:1.65;margin:0;font-weight:300">The ecosystem has a membrane — the boundary between what's inside the system and what's outside. Outside actors (investors, diaspora, global clients, knowledge institutions) are participants, not visitors. Their signals matter. The infrastructure captures them.</p>
       </div>
       <div class="jf-sticky-bottom">
         <button class="jnav-btn-primary" onclick="journey._renderCAS3()" style="padding:12px 28px;font-size:12px">Signal propagation →</button>
@@ -960,7 +960,7 @@ const journey = {
     const steps=['Why CAS matters','The selfishness principle','Signal propagation','Steward interrogation','What this means'];
     this._setPanel(`
       <span class="jnav-stage">Stage 3 · Signal propagation</span>
-      <p class="jnav-context">How a single typed signal cascades through the substrate — and why that's different from broadcast.</p>
+      <p class="jnav-context">How a single typed signal cascades through the infrastructure — and why that's different from broadcast.</p>
       ${this._casNav(steps,2)}
       <div class="jnav-actions">
         <button class="jnav-btn-primary" onclick="journey._renderCAS4()">Steward interrogation →</button>
@@ -969,16 +969,16 @@ const journey = {
       ${this._escape()}`);
     this._setFrame(`
       <h2 class="jf-stage-heading">Signals propagate.<br><em>They don't broadcast.</em></h2>
-      <p class="jf-stage-sub">In a broadcast system, one message goes to everyone. In the ClusterOS substrate, a single signal is typed, matched, and reframed for each actor based on what it means to them specifically. The same underlying data. Different intelligence surfaces.</p>
+      <p class="jf-stage-sub">In a broadcast system, one message goes to everyone. In the ClusterOS infrastructure, a single signal is typed, matched, and reframed for each actor based on what it means to them specifically. The same underlying data. Different intelligence surfaces.</p>
       <div style="padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin-bottom:20px">
-        <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-muted);margin-bottom:12px">Signal types the substrate captures</div>
+        <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-muted);margin-bottom:12px">Signal types the infrastructure captures</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
           ${['Procurement intent','Research output','Funding eligibility','Capability gap','Partnership formation','Hiring signal','Milestone progression','IP disclosure level','Support programme match','Stall indicator','Health score change','Leverage position'].map(s=>`<div style="font-family:var(--font-mono);font-size:10px;color:var(--green);padding:4px 8px;background:rgba(42,122,79,0.06);border:1px solid rgba(42,122,79,0.15);border-radius:2px">${s}</div>`).join('')}
         </div>
       </div>
       <div style="padding:18px 20px;background:rgba(42,122,79,0.06);border:1px solid rgba(42,122,79,0.2);border-radius:4px;margin-bottom:20px">
         <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--green);margin-bottom:8px">Why propagation beats broadcast</div>
-        <p style="font-size:13px;color:var(--ink-dim);line-height:1.65;margin:0;font-weight:300">A procurement RFI broadcast to 400 cluster members produces noise. The same RFI propagated through the substrate reaches 3 matched founders, 2 relevant researchers, the steward with a bridging score update, and the anchor with a supply chain intelligence note. Same signal. Four times the value. Zero additional effort from the sender.</p>
+        <p style="font-size:13px;color:var(--ink-dim);line-height:1.65;margin:0;font-weight:300">A procurement RFI broadcast to 400 cluster members produces noise. The same RFI propagated through the infrastructure reaches 3 matched founders, 2 relevant researchers, the steward with a bridging score update, and the anchor with a supply chain intelligence note. Same signal. Four times the value. Zero additional effort from the sender.</p>
       </div>
       <div class="jf-sticky-bottom">
         <button class="jnav-btn-primary" onclick="journey._renderCAS4()" style="padding:12px 28px;font-size:12px">Steward interrogation →</button>

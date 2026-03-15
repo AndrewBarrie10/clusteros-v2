@@ -1203,9 +1203,9 @@ const briefing = {
       subtitle: "ClusterOS · Coordination Infrastructure for Regional Economies",
       sections: [
         { heading: "What ClusterOS actually is",
-          content: "Not a community platform with AI features added. Not a dashboard system. ClusterOS is coordination infrastructure — the substrate through which a complex adaptive system of selfish actors generates collective intelligence without being asked to. Its defining purpose: making complexity cheaper to operate." },
+          content: "Not a community platform with AI features added. Not a dashboard system. ClusterOS is coordination infrastructure — the infrastructure through which a complex adaptive system of selfish actors generates collective intelligence without being asked to. Its defining purpose: making complexity cheaper to operate." },
         { heading: "The intelligence layer",
-          content: "Model Context Protocol (MCP) is the substrate. The backend exposes the ecosystem database as a defined set of named tools. The AI calls those tools at runtime to assemble actor experiences from live data, on demand. Intelligence is not hardcoded into the interface — it is reasoned fresh on every call. When the AI model improves, everything the platform produces improves automatically." },
+          content: "Model Context Protocol (MCP) is the infrastructure. The backend exposes the ecosystem database as a defined set of named tools. The AI calls those tools at runtime to assemble actor experiences from live data, on demand. Intelligence is not hardcoded into the interface — it is reasoned fresh on every call. When the AI model improves, everything the platform produces improves automatically." },
         { heading: "Why not a dashboard",
           content: "Dashboards embed intelligence in code — frozen, role-generic, unable to answer questions nobody designed for. MCP keeps intelligence in the protocol layer — live, role-aware, improving automatically. A dashboard can tell you what happened. An MCP-driven system can tell each actor what it means for them specifically, at the moment they need to know." },
         { heading: "The data model",
@@ -1257,7 +1257,7 @@ const briefing = {
         { heading: "What anchors get back",
           content: "Capability visibility without premature disclosure. Supply chain intelligence from within the cluster. Research partner matching against live commercial demand. The platform doesn't ask anchors to behave differently — it changes what their existing behaviour produces. Every RFI, every milestone, every connection generates typed signals that make the system more useful for everyone." },
         { heading: "The coordination infrastructure model",
-          content: "ClusterOS is not a network platform. It is coordination infrastructure — the substrate through which selfish actors generate collective intelligence without being asked to care about the ecosystem. Anchors participate in their own interest. The ecosystem benefits structurally and automatically." }
+          content: "ClusterOS is not a network platform. It is coordination infrastructure — the infrastructure through which selfish actors generate collective intelligence without being asked to care about the ecosystem. Anchors participate in their own interest. The ecosystem benefits structurally and automatically." }
       ],
       cta: { text: "Request a diagnostic of your cluster", url: "/request.html" }
     },
@@ -1303,7 +1303,7 @@ const briefing = {
         { heading: "What the diagnostic found",
           content: "75 clusters diagnosed across 18 countries. 9 canonical stall types appear regardless of sector, geography, or funding level. Stalls are behavioural substitutions — the ecosystem doing something observable instead of something harder. They form stabilisation stacks that resist single interventions. The diagnosis names the stack and surfaces a specific leverage hypothesis." },
         { heading: "The intelligence layer",
-          content: "Model Context Protocol is the substrate. Actor experiences are generated at runtime from live data — not hardcoded into an interface. Founders get personalised pathways. Anchors get capability matching. Researchers get demand signal translation. Stewards get structural interrogation. Every selfish action by every actor generates typed signals that make the system more intelligent for everyone else." },
+          content: "Model Context Protocol is the infrastructure. Actor experiences are generated at runtime from live data — not hardcoded into an interface. Founders get personalised pathways. Anchors get capability matching. Researchers get demand signal translation. Stewards get structural interrogation. Every selfish action by every actor generates typed signals that make the system more intelligent for everyone else." },
         { heading: "Three ways in",
           content: "A snapshot diagnostic (4–5 weeks, fixed price) identifies the structural configuration of your cluster and surfaces a leverage hypothesis. A full diagnostic run produces the complete five-stage analysis. Platform procurement gives your EDA the full coordination infrastructure — diagnostic capability, actor journeys, signal ingestion, and the sovereign database." }
       ],

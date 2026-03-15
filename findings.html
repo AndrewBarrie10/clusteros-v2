@@ -666,10 +666,8 @@ setTimeout(function() {
     .then(function(data){
       data.forEach(function(c){
         if (!c.lat || !c.lng) return;
-        var div = document.createElement('div');
-        div.className = 'cluster-pin stall-low';
         L.marker([c.lat, c.lng], {
-          icon: L.divIcon({ html: div, className: '', iconSize:[10,10], iconAnchor:[5,5] })
+          icon: L.divIcon({ html: '<div class="cluster-pin stall-low"></div>', className: '', iconSize:[10,10], iconAnchor:[5,5] })
         })
         .bindTooltip('<div class="cluster-tooltip"><strong>'+c.name+'</strong><span>'+c.city+', '+c.country+'</span></div>',
           { permanent:false, direction:'top', offset:[0,-8] })

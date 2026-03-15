@@ -154,9 +154,9 @@ window.drawRadar = drawRadar;
 // ── END RADAR ───────────────────────────────────────────────
 
 function openClusterPanel(c) {
-  document.getElementById('cp-name').textContent    = c.name;
-  document.getElementById('cp-meta').textContent    = `${c.city} · ${c.country}`;
-  document.getElementById('cp-summary').textContent = c.summary || 'Diagnostic profile available on request.';
+  document.getElementById('cp-name')?.textContent    = c.name;
+  document.getElementById('cp-meta')?.textContent    = `${c.city} · ${c.country}`;
+  document.getElementById('cp-summary')?.textContent = c.summary || 'Diagnostic profile available on request.';
 
   const badge = document.getElementById('cp-regime-badge');
   if (badge) badge.innerHTML = c.regime
@@ -181,14 +181,14 @@ function openClusterPanel(c) {
   const link = document.getElementById('cp-full-link');
   if (link) link.href = `/clusters/${slug}.html`;
 
-  document.getElementById('cluster-panel').classList.add('open');
+  document.getElementById('cluster-panel')?.classList.add('open');
 
   // Signal to behaviour layer
   if (window.behaviour) window.behaviour.recordCluster(c);
 }
 
 function closeClusterPanel() {
-  document.getElementById('cluster-panel').classList.remove('open');
+  document.getElementById('cluster-panel')?.classList.remove('open');
 }
 
 // ── JOURNEY PANELS ────────────────────────────────────────

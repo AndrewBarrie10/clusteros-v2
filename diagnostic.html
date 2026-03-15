@@ -205,12 +205,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: 'Geist', sans-serif; fo
 .btn-primary { font-family: 'Geist Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--green); padding: 14px 28px; border-radius: 3px; text-decoration: none; transition: opacity 0.2s; }
 .btn-primary:hover { opacity: 0.85; }
 .btn-ghost { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8c8780; text-decoration: none; transition: color 0.2s; }
-.btn-ghost:hover { color: #1a1a1a; }
-
-/* SUBSTRATE BRIDGE — animated signal that gets interrupted */
-
-/* Hero bg texture */
-#hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(30,45,66,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(30,45,66,0.18) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+.btn-ghost:hover {
 
 /* INTRO BRIDGE SECTION */
 #bridge { padding: 80px 0; border-bottom: 1px solid #f0ece4; }
@@ -233,7 +228,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: 'Geist', sans-serif; fo
 
 /* Stall grid */
 .stalls-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.stall-card { background: rgba(255,255,255,0.025); border: 1px solid #f0ece4; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, background 0.2s, transform 0.15s; overflow: hidden; }
+.stall-card { background: rgba(255,255,255,0.06); border: 1px solid #f0ece4; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, background 0.2s, transform 0.15s; overflow: hidden; }
 .stall-card:hover { border-color: #8c8780; background: rgba(0,0,0,0.03); transform: translateY(-1px); }
 .stall-card.expanded { border-color: #f08080; background: rgba(240,128,128,0.04); }
 .stall-card.selected-for-stack { border-color: var(--amber) !important; background: rgba(217,119,6,0.06) !important; }
@@ -264,7 +259,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: 'Geist', sans-serif; fo
 .stall-add-btn.added { border-color: var(--amber); color: var(--amber); background: rgba(217,119,6,0.08); }
 
 /* STACKS SECTION */
-#stacks { padding: 100px 0; background: #0f1829; border-bottom: 1px solid #f0ece4; }
+#stacks { padding: 100px 0; background: var(--green-dim); border-bottom: 1px solid #f0ece4; }
 .stacks-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
 .stacks-header { margin-bottom: 56px; }
 .stacks-layout { display: grid; grid-template-columns: 380px 1fr; gap: 40px; align-items: start; }
@@ -341,7 +336,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: 'Geist', sans-serif; fo
 #known-stacks { padding: 100px 0; border-bottom: 1px solid #f0ece4; }
 .known-stacks-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
 .known-stacks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
-.known-stack-card { border: 1px solid #f0ece4; border-radius: 10px; overflow: hidden; }
+.known-stack-card { border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; overflow: hidden; }
 .known-stack-top { padding: 22px 22px 18px; background: rgba(0,0,0,0.02); border-bottom: 1px solid #f0ece4; }
 .known-stack-name { font-family: 'Instrument Serif', serif; font-size: 19px; color: #1a1a1a; margin-bottom: 6px; }
 .known-stack-components { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }

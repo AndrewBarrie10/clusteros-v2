@@ -652,6 +652,20 @@ p + p { margin-top: 16px; }
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="/map.js"></script>
+<script>
+setTimeout(function() {
+  fetch('/clusters.json')
+    .then(r => r.json())
+    .then(data => {
+      var el = document.getElementById('map-count');
+      if (el) el.textContent = 'FETCH OK: ' + data.length + ' clusters';
+    })
+    .catch(err => {
+      var el = document.getElementById('map-count');
+      if (el) el.textContent = 'FETCH FAILED: ' + err;
+    });
+}, 2000);
+</script>
 
 <nav>
   <a href="/" class="nav-logo">Cluster<span>OS</span></a>

@@ -501,10 +501,10 @@ p + p { margin-top: 16px; }
 /* Resemblances */
 .resemblances { display: flex; flex-direction: column; gap: 6px; margin-bottom: 28px; }
 .res-pair     { padding: 14px 18px; border: 1px solid var(--border); border-radius: 4px;
-  display: flex; align-items: center; gap: 14px; background: var(--page);
-  transition: border-color 0.15s; }
+  display: grid; grid-template-columns: 1fr 80px 1fr; align-items: center; gap: 0;
+  background: var(--page); transition: border-color 0.15s; }
 .res-pair:hover { border-color: var(--green); }
-.res-node     { flex: 1; }
+.res-node     { min-width: 0; }
 .res-node-region { font-family: var(--font-mono); font-size: 10px; font-weight: 700;
   color: var(--green); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
 .res-node-sector { font-size: 13px; color: var(--ink-dim); font-weight: 300; }
@@ -642,8 +642,14 @@ p + p { margin-top: 16px; }
   border-radius: 2px; border: 1px solid var(--border-2);
   color: var(--ink-muted); background: var(--surface); }
 /* ── END STACKS LIST ──────────────────────────────────── */
+
+.res-pair .res-node:last-child { text-align: right; }
+.res-note { font-size: 12px; color: var(--ink-muted); font-style: italic;
+  margin-top: 16px; line-height: 1.6; font-weight: 300; }
 </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="/map.js" defer></script>
 </head>
 <body>
 
@@ -1011,8 +1017,6 @@ setTimeout(() => {
 
 
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="/map.js"></script>
 <script>
 (function(){
   document.querySelectorAll('.nav-dropdown').forEach(function(dd){

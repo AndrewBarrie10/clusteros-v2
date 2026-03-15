@@ -498,30 +498,6 @@ p + p { margin-top: 16px; }
   font-weight: 400; line-height: 1.25; margin-bottom: 10px; }
 .finding-p    { font-size: 13px; color: var(--ink-dim); line-height: 1.72; font-weight: 300; }
 
-/* Stacks list */
-.stacks-list  { display: flex; flex-direction: column; gap: 8px; }
-.stack-item   { border: 1px solid var(--border); border-radius: 4px;
-  overflow: hidden; cursor: pointer; transition: border-color 0.15s; background: var(--page); }
-.stack-item:hover { border-color: var(--green); }
-.stack-item.open  { border-color: var(--green); }
-.stack-head   { display: flex; align-items: center; gap: 14px; padding: 16px 20px; }
-.stack-pills  { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
-.stack-pill   { font-family: var(--font-mono); font-size: 9px; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px;
-  border-radius: 2px; border: 1px solid var(--border-2);
-  color: var(--ink-muted); background: var(--surface); }
-.stack-name   { font-family: var(--font-serif); font-size: 16px; color: var(--ink); font-weight: 400; }
-.stack-chevron { color: var(--ink-muted); font-size: 11px; transition: transform 0.2s; flex-shrink: 0; }
-.stack-item.open .stack-chevron { transform: rotate(180deg); }
-.stack-body   { display: none; padding: 0 20px 20px; border-top: 1px solid var(--border); }
-.stack-item.open .stack-body { display: block; padding-top: 16px; }
-.stack-desc   { font-size: 14px; color: var(--ink-dim); line-height: 1.7;
-  margin-bottom: 12px; font-weight: 300; }
-.stack-ecosystems { display: flex; gap: 6px; flex-wrap: wrap; }
-.stack-eco    { font-family: var(--font-mono); font-size: 9px; padding: 3px 8px;
-  border: 1px solid var(--border); border-radius: 2px;
-  color: var(--ink-muted); background: var(--surface); }
-
 /* Resemblances */
 .resemblances { display: flex; flex-direction: column; gap: 6px; margin-bottom: 28px; }
 .res-pair     { padding: 14px 18px; border: 1px solid var(--border); border-radius: 4px;
@@ -572,7 +548,7 @@ p + p { margin-top: 16px; }
 /* Animations */
 .anim { opacity: 0; transform: translateY(12px);
   transition: opacity 0.5s ease, transform 0.5s ease; }
-.anim.visible { opacity: 1; transform: none; }
+.anim.visible, .anim.in { opacity: 1; transform: none; }
 .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
 
 /* Responsive */
@@ -634,6 +610,38 @@ p + p { margin-top: 16px; }
 .freq-sub     { font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted);
   font-weight: 400; letter-spacing: 0.03em; }
 /* ── END FREQ CHART ───────────────────────────────────── */
+
+/* ── STACKS LIST ──────────────────────────────────────── */
+.stacks-list  { display: flex; flex-direction: column; gap: 8px; }
+.stack-row    { padding: 16px 20px; border: 1px solid var(--border);
+  border-radius: 4px; display: flex; gap: 16px; align-items: flex-start;
+  cursor: pointer; transition: border-color 0.15s; background: var(--page); }
+.stack-row:hover { border-color: var(--green); }
+.stack-row.open  { border-color: var(--green); background: var(--surface); }
+.stack-ids    { flex-shrink: 0; display: flex; gap: 4px; flex-wrap: wrap; width: 80px; padding-top: 2px; }
+.stack-id     { font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+  padding: 3px 7px; border-radius: 2px;
+  background: rgba(42,122,79,0.08); border: 1px solid rgba(42,122,79,0.25); color: var(--green); }
+.stack-body   { flex: 1; min-width: 0; }
+.stack-name   { font-family: var(--font-serif); font-size: 17px; color: var(--ink);
+  margin-bottom: 4px; font-weight: 400; }
+.stack-freq   { font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; }
+.stack-freq.very-common { color: var(--green); }
+.stack-freq.common      { color: var(--amber); }
+.stack-chevron { font-size: 10px; color: var(--ink-muted);
+  transition: transform 0.2s; flex-shrink: 0; padding-top: 4px; }
+.stack-row.open .stack-chevron { transform: rotate(180deg); }
+.stack-detail { display: none; margin-top: 14px;
+  padding-top: 14px; border-top: 1px solid var(--border); }
+.stack-row.open .stack-detail { display: block; }
+.stack-detail-text { font-size: 14px; color: var(--ink-dim); line-height: 1.7; font-weight: 300; }
+.stack-detail-text strong { color: var(--ink); font-weight: 500; }
+.stack-geo    { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+.stack-geo-tag { font-family: var(--font-mono); font-size: 9px; padding: 3px 8px;
+  border-radius: 2px; border: 1px solid var(--border-2);
+  color: var(--ink-muted); background: var(--surface); }
+/* ── END STACKS LIST ──────────────────────────────────── */
 </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 </head>
@@ -937,7 +945,6 @@ function toggleStack(i) {
   }
 }
 
-// ── STRUCTURAL RESEMBLANCES ───────────────────────────────────────────
 const RESEMBLANCES = [
   { a: { region: 'Orlando SpaceTech', sector: 'Space · Florida' }, b: { region: 'Adelaide Space Tech', sector: 'Space · Australia' }, pattern: 'Validation-Coordination' },
   { a: { region: 'Orlando Simulation', sector: 'Defence Simulation · Florida' }, b: { region: 'Bengaluru Space', sector: 'Space · India' }, pattern: 'Government Anchor Legitimacy' },
@@ -994,6 +1001,13 @@ if (document.getElementById('resemblances')) renderResemblances();
 
 // Observe animated elements
 document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+// Make any .anim already in viewport visible immediately
+setTimeout(() => {
+  document.querySelectorAll('.anim').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight) el.classList.add('visible');
+  });
+}, 50);
 
 
 </script>

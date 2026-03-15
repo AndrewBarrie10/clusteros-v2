@@ -2932,6 +2932,97 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     .bar-default-links { display: none; }
   }
   /* ══ END NEW INDEX CSS ══════════════════════════════════ */
+
+  /* ── INTRO FORK CARDS ────────────────────────────────── */
+  .jf-fork-grid-intro {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px; margin-bottom: 32px;
+  }
+  @media (max-width: 900px) { .jf-fork-grid-intro { grid-template-columns: 1fr; } }
+  .jf-fork-intro-card {
+    text-align: left; padding: 24px 26px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; cursor: pointer; width: 100%;
+    transition: all 0.15s; display: flex; flex-direction: column;
+  }
+  .jf-fork-intro-card:hover { border-color: var(--green); background: rgba(42,122,79,0.04); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .jf-fork-intro-card-infra:hover { border-color: var(--teal); background: rgba(125,211,200,0.04); }
+  .jf-fork-intro-card-cas:hover { border-color: var(--amber); background: rgba(245,217,122,0.04); }
+  .jf-fork-intro-num {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+    color: var(--green); margin-bottom: 10px; display: block;
+  }
+  .jf-fork-intro-card-infra .jf-fork-intro-num { color: var(--teal); }
+  .jf-fork-intro-card-cas .jf-fork-intro-num { color: #8b6914; }
+  .jf-fork-intro-label {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .jf-fork-intro-card-infra .jf-fork-intro-label { color: var(--teal); }
+  .jf-fork-intro-card-cas .jf-fork-intro-label { color: #8b6914; }
+  .jf-fork-intro-title {
+    font-family: var(--font-serif); font-size: 17px;
+    color: var(--ink); line-height: 1.2; margin-bottom: 10px;
+  }
+  .jf-fork-intro-desc {
+    font-size: 12px; color: var(--ink-muted); line-height: 1.6;
+    margin-bottom: 14px; font-weight: 300; flex: 1;
+  }
+  .jf-fork-intro-steps {
+    display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .jf-fork-intro-steps span {
+    font-family: var(--font-mono); font-size: 9px;
+    color: var(--ink-muted); letter-spacing: 0.04em;
+  }
+  .jf-fork-intro-cta {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--green);
+    margin-top: auto;
+  }
+  .jf-fork-intro-card-infra .jf-fork-intro-cta { color: var(--teal); }
+  .jf-fork-intro-card-cas .jf-fork-intro-cta { color: #8b6914; }
+
+  /* ── PANEL FORK LIST ─────────────────────────────────── */
+  .jnav-fork-list {
+    display: flex; flex-direction: column; gap: 4px;
+    margin-bottom: 16px;
+  }
+  .jnav-fork-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 3px;
+    cursor: pointer; text-align: left; width: 100%;
+    transition: all 0.15s;
+  }
+  .jnav-fork-item:hover { border-color: var(--green); }
+  .jnav-fork-infra:hover { border-color: var(--teal); }
+  .jnav-fork-cas:hover { border-color: var(--amber); }
+  .jnav-fork-num {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+    color: var(--green); flex-shrink: 0;
+  }
+  .jnav-fork-infra .jnav-fork-num { color: var(--teal); }
+  .jnav-fork-cas .jnav-fork-num { color: #8b6914; }
+  .jnav-fork-name {
+    font-size: 12px; font-weight: 500; color: var(--ink);
+  }
+
+  /* ── ESCAPE HATCH ────────────────────────────────────── */
+  .jnav-escape {
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .jnav-escape-btn {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-muted); background: none; border: none;
+    cursor: pointer; padding: 0; transition: color 0.15s;
+  }
+  .jnav-escape-btn:hover { color: var(--ink); }
+  /* ── END FORK/ESCAPE CSS ─────────────────────────────── */
 </style>
 </head>
 <body>
@@ -3005,9 +3096,9 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 <!-- ── HERO ──────────────────────────────────────────────── -->
 <section id="hero">
   <div class="hero-inner">
-    <p class="hero-eyebrow">200+ clusters · 18 countries · 9 structural patterns</p>
-    <h1 class="hero-heading">Regional economies are complex.<br><em>Most of the infrastructure built to manage them isn't.</em></h1>
-    <p class="hero-lede">ClusterOS is diagnostic intelligence and coordination infrastructure for the ecosystems that development agencies, anchor institutions and investors are trying to make work. It identifies why clusters stall — and provides the substrate to address it.</p>
+    <p class="hero-eyebrow">200+ clusters diagnosed · 18 countries · 9 structural patterns</p>
+    <h1 class="hero-heading">ClusterOS identifies why clusters stall.<br><em>And provides the infrastructure to change it.</em></h1>
+    <p class="hero-lede">Diagnostic intelligence and coordination infrastructure for regional innovation ecosystems. We've diagnosed 200+ clusters across 18 countries. The same 9 structural patterns appear everywhere — regardless of sector, geography or funding. ClusterOS names the pattern, finds the leverage, and gives your ecosystem the substrate to compound.</p>
     <div class="hero-choice">
       <button class="hero-btn-primary" id="hero-pathway-btn">
         Build your pathway

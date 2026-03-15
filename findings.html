@@ -1018,6 +1018,9 @@ setTimeout(() => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="/map.js"></script>
 <script>
+if(window.initMap) window.initMap();
+</script>
+<script>
 (function(){
   document.querySelectorAll('.nav-dropdown').forEach(function(dd){
     var t=dd.querySelector('.nav-dropdown-toggle');

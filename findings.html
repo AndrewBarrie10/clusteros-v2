@@ -651,20 +651,41 @@ p + p { margin-top: 16px; }
 </head>
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="/map.js"></script>
 <script>
-setTimeout(function() {
+// Findings map renderer — runs after page loads
+window.addEventListener('load', function() {
+  var mapEl = document.getElementById('map');
+  if (!mapEl || !window.L) return;
+  var fmap = L.map('map', { center:[28,12], zoom:2, scrollWheelZoom:false });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors © CARTO',
+    subdomains: 'abcd', maxZoom: 14
+  }).addTo(fmap);
   fetch('/clusters.json')
-    .then(r => r.json())
-    .then(data => {
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      data.forEach(function(c){
+        if (!c.lat || !c.lng) return;
+        var div = document.createElement('div');
+        div.className = 'cluster-pin stall-low';
+        L.marker([c.lat, c.lng], {
+          icon: L.divIcon({ html: div, className: '', iconSize:[10,10], iconAnchor:[5,5] })
+        })
+        .bindTooltip('<div class="cluster-tooltip"><strong>'+c.name+'</strong><span>'+c.city+', '+c.country+'</span></div>',
+          { permanent:false, direction:'top', offset:[0,-8] })
+        .addTo(fmap);
+      });
       var el = document.getElementById('map-count');
-      if (el) el.textContent = 'FETCH OK: ' + data.length + ' clusters';
-    })
-    .catch(err => {
-      var el = document.getElementById('map-count');
-      if (el) el.textContent = 'FETCH FAILED: ' + err;
+      if (el) el.textContent = data.length;
     });
-}, 2000);
+  // Filter buttons
+  document.querySelectorAll('.map-filter').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.map-filter').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+    });
+  });
+});
 </script>
 
 <nav>

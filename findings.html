@@ -680,26 +680,57 @@ setTimeout(function() {
     attribution: '© OpenStreetMap contributors © CARTO',
     subdomains: 'abcd', maxZoom: 14
   }).addTo(fmap);
+
+  var allClusters = [];
+  var markers = [];
+  var activeFilter = 'all';
+
+  function inferSector(c) {
+    var name = (c.name + ' ' + (c.sector || '')).toLowerCase();
+    if (/cyber|security|infosec/.test(name)) return 'cyber';
+    if (/life.sci|biotech|medtech|health|pharma/.test(name)) return 'life';
+    if (/manufactur|industrial|engineer/.test(name)) return 'manufacturing';
+    if (/space|deep.tech|quantum|photon|satel/.test(name)) return 'space';
+    return 'other';
+  }
+
+  function pinClass(c) {
+    if (!c.stalls || !c.stalls.length) return 'stall-low';
+    var max = Math.max.apply(null, c.stalls.map(function(s){ return s.intensity || 0; }));
+    return max > 0.65 ? 'stall-high' : max > 0.4 ? 'stall-med' : 'stall-low';
+  }
+
+  function renderMarkers(clusters) {
+    markers.forEach(function(m){ m.remove(); });
+    markers = [];
+    clusters.forEach(function(c){
+      if (!c.lat || !c.lng) return;
+      var m = L.marker([c.lat, c.lng], {
+        icon: L.divIcon({ html: '<div class="cluster-pin '+pinClass(c)+'"></div>', className: '', iconSize:[10,10], iconAnchor:[5,5] })
+      }).bindTooltip('<div class="cluster-tooltip"><strong>'+c.name+'</strong><span>'+c.city+', '+c.country+'</span></div>',
+        { permanent:false, direction:'top', offset:[0,-8] });
+      m.addTo(fmap);
+      markers.push(m);
+    });
+    var el = document.getElementById('map-count');
+    if (el) el.textContent = clusters.length;
+  }
+
   fetch('/clusters.json')
     .then(function(r){ return r.json(); })
     .then(function(data){
-      data.forEach(function(c){
-        if (!c.lat || !c.lng) return;
-        L.marker([c.lat, c.lng], {
-          icon: L.divIcon({ html: '<div class="cluster-pin stall-low"></div>', className: '', iconSize:[10,10], iconAnchor:[5,5] })
-        })
-        .bindTooltip('<div class="cluster-tooltip"><strong>'+c.name+'</strong><span>'+c.city+', '+c.country+'</span></div>',
-          { permanent:false, direction:'top', offset:[0,-8] })
-        .addTo(fmap);
-      });
-      var el = document.getElementById('map-count');
-      if (el) el.textContent = data.length;
+      allClusters = data;
+      renderMarkers(allClusters);
     });
-  // Filter buttons
+
   document.querySelectorAll('.map-filter').forEach(function(btn){
     btn.addEventListener('click', function(){
       document.querySelectorAll('.map-filter').forEach(function(b){ b.classList.remove('active'); });
       btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      var filtered = activeFilter === 'all' ? allClusters :
+        allClusters.filter(function(c){ return inferSector(c) === activeFilter; });
+      renderMarkers(filtered);
     });
   });
 }, 1500);

@@ -650,6 +650,8 @@ p + p { margin-top: 16px; }
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 </head>
 <body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="/map.js"></script>
 
 <nav>
   <a href="/" class="nav-logo">Cluster<span>OS</span></a>
@@ -1015,25 +1017,6 @@ setTimeout(() => {
 
 
 </script>
-<script>
-// Ensure map.js DOMContentLoaded listener fires even if DOM already loaded
-(function(){
-  var _orig = document.addEventListener.bind(document);
-  document.addEventListener = function(type, fn, opts) {
-    if (type === 'DOMContentLoaded') {
-      if (document.readyState === 'loading') {
-        _orig(type, fn, opts);
-      } else {
-        setTimeout(fn, 0);
-      }
-    } else {
-      _orig(type, fn, opts);
-    }
-  };
-})();
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="/map.js"></script>
 <script>
 if(window.initMap) window.initMap();
 </script>

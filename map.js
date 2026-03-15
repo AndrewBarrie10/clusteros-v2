@@ -2,10 +2,9 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-// Guard — only run if map element exists
-if (!document.getElementById('map')) return;
-
 // ── MAP INIT ──────────────────────────────────────────────
+const mapEl = document.getElementById('map');
+if (!mapEl) return;
 const map = L.map('map', {
   center: [28, 12],
   zoom: 2,

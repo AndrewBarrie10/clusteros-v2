@@ -1,8 +1,63 @@
+const RADAR_AXES = [
+  'Coordinating','Narrating','Forgiving','Reproving',
+  'Extracting','Validating','Mediating','Incumbents','Permission'
+];
+
+function drawRadar(c, containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+
+  const stalls = c.stalls || [];
+  // Map stall names → intensity (fuzzy match on first word)
+  const vals = RADAR_AXES.map(axis => {
+    const match = stalls.find(s =>
+      s.name && s.name.toLowerCase().includes(axis.toLowerCase().slice(0,5))
+    );
+    return match ? Math.min(1, match.intensity || 0.3) : 0;
+  });
+
+  const N   = RADAR_AXES.length;
+  const cx  = 90, cy = 88, r = 64;
+  const step = (2 * Math.PI) / N;
+  const offset = -Math.PI / 2;
+
+  function pt(i, radius) {
+    const a = offset + i * step;
+    return [cx + radius * Math.cos(a), cy + radius * Math.sin(a)];
+  }
+
+  // Grid rings
+  let rings = '';
+  [0.25, 0.5, 0.75, 1].forEach(t => {
+    const pts = RADAR_AXES.map((_, i) => pt(i, r * t).join(',')).join(' ');
+    rings += `<polygon points="${pts}" fill="none" stroke="#ddd8cf" stroke-width="0.8"/>`;
+  });
+
+  // Axes
+  let axes = '';
+  RADAR_AXES.forEach((label, i) => {
+    const [x2, y2] = pt(i, r);
+    const [lx, ly] = pt(i, r + 14);
+    const anchor = lx < cx - 4 ? 'end' : lx > cx + 4 ? 'start' : 'middle';
+    axes += `<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#ddd8cf" stroke-width="0.8"/>`;
+    axes += `<text x="${lx.toFixed(1)}" y="${(ly+3).toFixed(1)}" text-anchor="${anchor}" font-family="Geist Mono,monospace" font-size="6.5" fill="#8c8780" letter-spacing="0.02em">${label.toUpperCase()}</text>`;
+  });
+
+  // Data polygon
+  const dataPts = vals.map((v, i) => pt(i, r * v).join(',')).join(' ');
+
+  el.innerHTML = `<svg viewBox="0 0 180 176" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px;display:block;margin:0 auto">
+    ${rings}${axes}
+    <polygon points="${dataPts}" fill="rgba(42,122,79,0.18)" stroke="#2a7a4f" stroke-width="1.5" stroke-linejoin="round"/>
+    ${vals.map((v,i) => { const [px,py]=pt(i,r*v); return v>0?`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="2.5" fill="#2a7a4f"/>`:'' }).join('')}
+  </svg>`;
+}
+window.drawRadar = drawRadar;
+
+
 // ── ClusterOS Map & Panel Logic ───────────────────────────
 
 document.addEventListener('DOMContentLoaded', function () {
-
-// Guard — only run if map element exists
 if (!document.getElementById('map')) return;
 
 // ── MAP INIT ──────────────────────────────────────────────
@@ -96,61 +151,6 @@ document.querySelectorAll('.map-filter').forEach(btn => {
 // ── CLUSTER SIDE PANEL ────────────────────────────────────
 
 // ── RADAR CHART ────────────────────────────────────────────
-const RADAR_AXES = [
-  'Coordinating','Narrating','Forgiving','Reproving',
-  'Extracting','Validating','Mediating','Incumbents','Permission'
-];
-
-function drawRadar(c, containerId) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-
-  const stalls = c.stalls || [];
-  // Map stall names → intensity (fuzzy match on first word)
-  const vals = RADAR_AXES.map(axis => {
-    const match = stalls.find(s =>
-      s.name && s.name.toLowerCase().includes(axis.toLowerCase().slice(0,5))
-    );
-    return match ? Math.min(1, match.intensity || 0.3) : 0;
-  });
-
-  const N   = RADAR_AXES.length;
-  const cx  = 90, cy = 88, r = 64;
-  const step = (2 * Math.PI) / N;
-  const offset = -Math.PI / 2;
-
-  function pt(i, radius) {
-    const a = offset + i * step;
-    return [cx + radius * Math.cos(a), cy + radius * Math.sin(a)];
-  }
-
-  // Grid rings
-  let rings = '';
-  [0.25, 0.5, 0.75, 1].forEach(t => {
-    const pts = RADAR_AXES.map((_, i) => pt(i, r * t).join(',')).join(' ');
-    rings += `<polygon points="${pts}" fill="none" stroke="#ddd8cf" stroke-width="0.8"/>`;
-  });
-
-  // Axes
-  let axes = '';
-  RADAR_AXES.forEach((label, i) => {
-    const [x2, y2] = pt(i, r);
-    const [lx, ly] = pt(i, r + 14);
-    const anchor = lx < cx - 4 ? 'end' : lx > cx + 4 ? 'start' : 'middle';
-    axes += `<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#ddd8cf" stroke-width="0.8"/>`;
-    axes += `<text x="${lx.toFixed(1)}" y="${(ly+3).toFixed(1)}" text-anchor="${anchor}" font-family="Geist Mono,monospace" font-size="6.5" fill="#8c8780" letter-spacing="0.02em">${label.toUpperCase()}</text>`;
-  });
-
-  // Data polygon
-  const dataPts = vals.map((v, i) => pt(i, r * v).join(',')).join(' ');
-
-  el.innerHTML = `<svg viewBox="0 0 180 176" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px;display:block;margin:0 auto">
-    ${rings}${axes}
-    <polygon points="${dataPts}" fill="rgba(42,122,79,0.18)" stroke="#2a7a4f" stroke-width="1.5" stroke-linejoin="round"/>
-    ${vals.map((v,i) => { const [px,py]=pt(i,r*v); return v>0?`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="2.5" fill="#2a7a4f"/>`:'' }).join('')}
-  </svg>`;
-}
-window.drawRadar = drawRadar;
 // ── END RADAR ───────────────────────────────────────────────
 
 function openClusterPanel(c) {

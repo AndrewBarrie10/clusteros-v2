@@ -269,31 +269,130 @@ const journey = {
     }
   },
 
-  async _generateStack() {
-    const details=this.selectedStalls.map(s=>{const sc=window.STALL_SCIENCE_DATA[s]||{};return`${s}: ${sc.definition} Leverage: ${sc.leverage}`;}).join('\n');
-    const prompt=`You are ClusterOS diagnostic intelligence. Analyse this stall combination.\n\nSTALLS:\n${details}\n\nReturn ONLY valid JSON:\n{"name":"Short name (3-5 words)","description":"2-3 sentences on how these reinforce each other. No em-dashes.","leverage":"2 sentences on the specific entry point. No em-dashes.","tech":"2 sentences on what ClusterOS does about this. No em-dashes."}`;
-    try {
-      const res=await fetch(`${window.RAILWAY}/api/intelligence`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
-      const data=await res.json();
-      const parsed=JSON.parse((data.text||'').replace(/```json|```/g,'').trim());
-      this.stackResult={named:false,...parsed};
-      this._setFrame(`
-        <h2 class="jf-stage-heading">This is why<br><em>single fixes fail.</em></h2>
-        <p class="jf-stage-sub">Two or more stalls reinforcing each other form a stack.</p>
-        <div class="jf-stack-card">
-          <div class="jf-stack-name">${parsed.name}</div>
-          <div class="jf-stack-tags">${this.selectedStalls.map(s=>`<span class="jf-stack-tag">${s}</span>`).join('<span class="jf-stack-plus">+</span>')}</div>
-          <p class="jf-stack-desc">${parsed.description}</p>
-        </div>
-        <div class="jf-sticky-bottom">
-          <button class="jnav-btn-primary" onclick="journey._renderDiagClusters()" style="padding:12px 28px;font-size:12px">See real examples →</button>
-          <button class="jnav-btn-secondary" onclick="journey._renderDiagStalls()">← Back</button>
-        </div>`);
-      const nb=document.getElementById('jnav-stack-next'); if(nb) nb.disabled=false;
-    } catch(e) {
-      const f=this.frame(); const l=f?.querySelector('.jf-ai-loading'); if(l) l.textContent='Analysis unavailable — continue to examples.';
-      const nb=document.getElementById('jnav-stack-next'); if(nb) nb.disabled=false;
+  _generateStack() {
+    // Stack lookup — no API required
+    const stalls = this.selectedStalls.slice().sort();
+    const key = stalls.join('+');
+
+    const STACKS = {
+      // ── PAIRS ──────────────────────────────────────────────
+      'Narrating+Scaling': {
+        name: 'Narrative × Activity',
+        description: 'The ecosystem produces stories about activity and activity that generates stories. Each legitimises the other — neither requires narrowing, committing, or exposing anyone to market consequence. It is the most stable of all stall combinations.',
+        leverage: 'Change what gets reported, not who reports it. Introduce one metric that cannot be gamed by activity — revenue, retention, or market validation — and the stack begins to destabilise.'
+      },
+      'Coordinating+Mediating': {
+        name: 'Coordination × Mediation',
+        description: 'Alignment mechanisms create demand for intermediaries. Intermediaries make alignment manageable. The system coheres without ever narrowing — and both stalls protect the roles that depend on them continuing.',
+        leverage: 'Introduce direct coupling between two actors who currently only connect through the intermediary. One direct relationship breaks the dependency loop faster than any governance change.'
+      },
+      'Coordinating+Stabilising': {
+        name: 'Incumbent Anchor Lock-In',
+        description: 'Large incumbents define what coordination is for, and coordination structures form around their needs. New entrants optimise for incumbent partnership. Emergence outside the incumbent orbit remains structurally weak.',
+        leverage: 'Fund one thing that does not require incumbent validation to proceed. The goal is not to displace incumbents — it is to demonstrate that the system can produce value without routing through them.'
+      },
+      'Extracting+Scaling': {
+        name: 'Activity-Extraction Regime',
+        description: 'Programmes expand and activity metrics grow, but value — talent, companies, IP — exits the ecosystem. More programmes are launched to compensate. Activity scales but throughput does not.',
+        leverage: 'Target the retention constraint directly. The hole is at the bottom of the funnel — more early-stage activity widens the top while the bottom stays open.'
+      },
+      'Coordinating+Re-proving': {
+        name: 'Legitimacy Loop',
+        description: 'Every decision requires alignment, and alignment requires demonstrating the case again. Re-proving feeds the coordination requirement — nothing can move until everyone agrees, and agreement requires re-establishing the rationale.',
+        leverage: 'Find one decision that can be made unilaterally without consensus. Execute it visibly. A single completed action carries more legitimacy than any number of aligned strategies.'
+      },
+      'Narrating+Re-proving': {
+        name: 'Strategy-Validation Stack',
+        description: 'Documents are produced to make the case, and the case is made in documents. Neither produces market evidence. The system mistakes internal persuasion for external validation.',
+        leverage: 'Replace one report with a test. A small, bounded market experiment produces evidence that no strategy document can — and breaks the loop that substitutes narrative for proof.'
+      },
+      'Mediating+Stabilising': {
+        name: 'Gatekeeping Configuration',
+        description: 'Established actors control access and intermediaries manage flow. New entrants must demonstrate fit with existing priorities before getting traction. The configuration is stable precisely because it rewards incumbents and intermediaries equally.',
+        leverage: 'Create one pathway that bypasses the intermediary layer entirely. Even a single direct connection — founder to corporate, researcher to market — demonstrates the dependency is structural, not necessary.'
+      },
+      'Coordinating+Forgiving': {
+        name: 'Alignment Without Accountability',
+        description: 'Programmes keep running because stopping them requires a conversation nobody wants to have, and coordination structures make that conversation even harder. The system protects everyone from difficult decisions.',
+        leverage: 'Introduce a sunset clause on one programme. Not a review — a date. The prospect of an automatic end forces the evidence conversation that ongoing renewal avoids.'
+      },
+      'Waiting+Re-proving': {
+        name: 'Permission Deadlock',
+        description: 'The ecosystem waits for a signal before moving, and re-proves the case while waiting. Each iteration of the case restarts the waiting period. Nothing accumulates except documents.',
+        leverage: 'Identify one action that does not require the awaited signal. Execute it. The waiting is structural — breaking it requires demonstrating that movement is possible before permission arrives.'
+      },
+      'Extracting+Mediating': {
+        name: 'Value Leakage Through Intermediation',
+        description: 'Value is brokered out of the ecosystem before it compounds locally. Intermediaries facilitate connections but the resulting relationships — talent, capital, partnerships — benefit other places.',
+        leverage: 'Map where value goes after the introduction is made. The leakage point is usually a single structural gap — a missing late-stage investor, an absent anchor customer — not a general intermediary problem.'
+      },
+      'Forgiving+Scaling': {
+        name: 'Proliferation Without Pruning',
+        description: 'Programmes multiply and activity grows, but nothing is stopped. The system cannot distinguish between what is working and what is not because nothing is ever tested against a meaningful threshold.',
+        leverage: 'Introduce one explicit discontinuation. The goal is not to save money — it is to demonstrate that the system can make a negative decision. That capacity changes what the positive decisions mean.'
+      },
+      'Narrating+Waiting': {
+        name: 'Documented Paralysis',
+        description: 'The ecosystem produces increasingly detailed accounts of its situation while waiting for conditions to change. Documents accumulate. Action does not. The narrative of readiness substitutes for readiness itself.',
+        leverage: 'Set a deadline. Not for the awaited signal — for the first action that does not require it. Paralysis is partly a coordination problem: nobody wants to move first.'
+      },
+      // ── TRIPLES ────────────────────────────────────────────
+      'Coordinating+Narrating+Scaling': {
+        name: 'Full Legitimacy Stack',
+        description: 'Coordination produces documents. Documents legitimate activity. Activity justifies continued coordination. Each stall absorbs the pressure the others expose — and the system coheres without anyone needing to narrow, commit, or expose themselves to market consequence.',
+        leverage: 'The entry point is almost never where the stack is most visible. Introduce one metric that tracks throughput rather than activity, and apply it to the highest-profile programme first.'
+      },
+      'Coordinating+Re-proving+Waiting': {
+        name: 'Consensus-Permission Deadlock',
+        description: 'Nothing moves without alignment, alignment requires making the case, and making the case triggers a wait for the signal that justifies proceeding. Three stalls each providing cover for the other — a closed loop.',
+        leverage: 'Break the sequence at its weakest point. Find one actor with the authority to proceed without consensus and give them a small, bounded mandate. One completed action dissolves the loop faster than any governance reform.'
+      },
+      'Extracting+Mediating+Scaling': {
+        name: 'Growth Without Retention',
+        description: 'Activity and connections scale but value exits the ecosystem through the same intermediary layer that facilitates growth. The system looks healthy by activity metrics while systematically exporting its best outcomes.',
+        leverage: 'Target the first exit point — usually a growth-stage capital gap. The intermediary and activity stalls are symptoms; extraction is the structural problem that makes the others self-reinforcing.'
+      },
+    };
+
+    // Find best match
+    let match = STACKS[key];
+
+    // If no exact match, find the closest (most overlapping stalls)
+    if (!match) {
+      let bestScore = 0;
+      let bestKey = null;
+      Object.keys(STACKS).forEach(k => {
+        const kStalls = k.split('+');
+        const overlap = stalls.filter(s => kStalls.includes(s)).length;
+        const score = overlap / Math.max(stalls.length, kStalls.length);
+        if (score > bestScore) { bestScore = score; bestKey = k; }
+      });
+      if (bestKey && bestScore >= 0.5) match = STACKS[bestKey];
     }
+
+    // Fallback
+    if (!match) {
+      match = {
+        name: stalls.length === 1 ? stalls[0] : `${stalls[0]} × ${stalls[1]}`,
+        description: 'These stalls reinforce each other by providing mutual cover — addressing one without the other produces temporary change. The combination is more stable than either stall alone.',
+        leverage: 'Identify which stall is providing the most cover for the others. That is the entry point. Removing it does not require the others to change — it removes the protection that makes them self-sustaining.'
+      };
+    }
+
+    this.stackResult = { named: false, ...match };
+    this._setFrame(`
+      <h2 class="jf-stage-heading">This is why<br><em>single fixes fail.</em></h2>
+      <p class="jf-stage-sub">Two or more stalls reinforcing each other form a stack.</p>
+      <div class="jf-stack-card">
+        <div class="jf-stack-name">${match.name}</div>
+        <div class="jf-stack-tags">${this.selectedStalls.map(s=>`<span class="jf-stack-tag">${s}</span>`).join('<span class="jf-stack-plus">+</span>')}</div>
+        <p class="jf-stack-desc">${match.description}</p>
+      </div>
+      <div class="jf-sticky-bottom">
+        <button class="jnav-btn-primary" onclick="journey._renderDiagClusters()" style="padding:12px 28px;font-size:12px">See real examples →</button>
+        <button class="jnav-btn-secondary" onclick="journey._renderDiagStalls()">← Back</button>
+      </div>`);
+    const nb=document.getElementById('jnav-stack-next'); if(nb) nb.disabled=false;
   },
 
   _renderDiagClusters() {

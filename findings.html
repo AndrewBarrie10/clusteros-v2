@@ -652,6 +652,29 @@ p + p { margin-top: 16px; }
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="/map.js"></script>
+<script>
+// Direct map init for findings page — bypasses DOMContentLoaded timing
+window.addEventListener('load', function() {
+  if (!window._map) return;
+  fetch('/clusters.json')
+    .then(r => r.json())
+    .then(data => {
+      data.forEach(c => {
+        if (!c.lat || !c.lng) return;
+        const div = document.createElement('div');
+        div.className = 'cluster-pin stall-low';
+        const icon = L.divIcon({ html: div, className: '', iconSize: [10,10], iconAnchor: [5,5] });
+        L.marker([c.lat, c.lng], { icon: icon })
+          .bindTooltip('<div class="cluster-tooltip"><strong>' + c.name + '</strong><span>' + c.city + ', ' + c.country + '</span></div>',
+            { permanent: false, direction: 'top', offset: [0,-8] })
+          .addTo(window._map);
+      });
+      const el = document.getElementById('map-count');
+      if (el) el.textContent = data.length;
+    })
+    .catch(err => console.warn('map init error:', err));
+});
+</script>
 
 <nav>
   <a href="/" class="nav-logo">Cluster<span>OS</span></a>

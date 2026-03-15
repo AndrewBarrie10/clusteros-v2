@@ -147,6 +147,7 @@ function drawRadar(c, containerId) {
     ${vals.map((v,i) => { const [px,py]=pt(i,r*v); return v>0?`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="2.5" fill="#2a7a4f"/>`:'' }).join('')}
   </svg>`;
 }
+window.drawRadar = drawRadar;
 // ── END RADAR ───────────────────────────────────────────────
 
 function openClusterPanel(c) {

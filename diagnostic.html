@@ -699,6 +699,100 @@ p + p { margin-top: 16px; }
 #stalls .stalls-note { color: rgba(255,255,255,0.78) !important; }
 #stalls .stalls-note strong { color: #fff !important; font-weight: 500; }
 /* ── END STALLS HEADER ─────────────────────────────────── */
+
+/* ── STALL CARD: JS-generated class names ─────────────── */
+.stall-card {
+  background: rgba(255,255,255,0.11);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 4px; cursor: pointer; overflow: hidden;
+  transition: border-color 0.15s, background 0.15s;
+}
+.stall-card:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.38); }
+.stall-card.expanded { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.14); }
+.stall-card.selected-for-stack { border-color: var(--amber) !important; background: rgba(217,119,6,0.12) !important; }
+
+.stall-card-head { padding: 16px 16px 12px; }
+.stall-id {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+  color: rgba(255,255,255,0.5); letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 5px;
+}
+.stall-title {
+  font-family: var(--font-serif); font-size: 15px; color: #fff;
+  line-height: 1.2; margin-bottom: 4px;
+}
+.stall-sub {
+  font-size: 11px; color: rgba(255,255,255,0.65);
+  font-family: var(--font-sans); line-height: 1.4; font-weight: 300;
+}
+.stall-sub em { font-style: italic; color: rgba(255,255,255,0.8); }
+
+.stall-chevron {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px; border-top: 1px solid rgba(255,255,255,0.08);
+}
+.stall-expand-label {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+  color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase;
+}
+.stall-expand-icon { color: rgba(255,255,255,0.4); font-size: 12px; transition: transform 0.2s; }
+.stall-card.expanded .stall-expand-icon { transform: rotate(180deg); }
+.stall-card.expanded .stall-expand-label { color: rgba(255,255,255,0.7); }
+
+/* Collapsed: body hidden; expanded: shown */
+.stall-body { display: none; padding: 0 16px 16px; }
+.stall-card.expanded .stall-body { display: block; }
+
+.stall-sides { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.stall-side { padding: 10px 12px; border-radius: 3px; }
+.stall-side.x { background: rgba(12,148,136,0.28); border: 1px solid rgba(12,148,136,0.55); }
+.stall-side.y { background: rgba(217,119,6,0.22); border: 1px solid rgba(217,119,6,0.5); }
+.stall-side-label {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px;
+}
+.stall-side.x .stall-side-label { color: #5eead4; }
+.stall-side.y .stall-side-label { color: #fbbf24; }
+.stall-side-text { font-size: 12px; color: rgba(255,255,255,0.88); line-height: 1.55; font-weight: 300; }
+
+.stall-example { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+.stall-example-label {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+  color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;
+}
+.stall-example-text { font-size: 12px; color: rgba(255,255,255,0.78); line-height: 1.6; font-weight: 300; font-style: italic; }
+
+.stall-add-btn {
+  display: inline-block !important; margin-top: 14px;
+  font-family: var(--font-mono) !important; font-size: 9px !important;
+  font-weight: 700 !important; letter-spacing: 0.1em !important;
+  text-transform: uppercase !important; padding: 7px 14px !important;
+  border: 1px solid rgba(255,255,255,0.25) !important; border-radius: 2px !important;
+  background: transparent !important; color: rgba(255,255,255,0.75) !important;
+  cursor: pointer; transition: all 0.15s;
+}
+.stall-add-btn:hover { background: var(--green) !important; border-color: var(--green) !important; color: #fff !important; }
+.stall-add-btn.added { background: var(--amber) !important; border-color: var(--amber) !important; color: #fff !important; }
+
+/* ── QUICK PICK BUTTONS (cream stacks section) ─────────── */
+.quick-pick-btn {
+  display: flex !important; align-items: center; gap: 8px;
+  padding: 8px 12px !important; background: var(--page) !important;
+  border: 1px solid var(--border) !important; border-radius: 3px !important;
+  cursor: pointer; transition: all 0.15s; text-align: left; width: 100%;
+  margin-bottom: 4px;
+}
+.quick-pick-btn:hover { border-color: var(--green) !important; background: rgba(42,122,79,0.04) !important; }
+.qp-id {
+  font-family: var(--font-mono) !important; font-size: 9px !important;
+  font-weight: 700 !important; color: var(--green) !important;
+  flex-shrink: 0; width: 24px;
+}
+.qp-name { font-size: 11px !important; color: var(--ink-dim) !important; font-family: var(--font-sans) !important; }
+
+/* ── STALL OVERRIDE: remove old conflicting rules ──────── */
+.stall-name, .stall-num { display: none; } /* Old class names — JS doesn't generate these */
+/* ── END STALL CARD CSS ─────────────────────────────────── */
 </style>
 </head>
 <body>
@@ -1319,9 +1413,9 @@ function renderStalls() {
   // Render quick picks
   const qp = document.getElementById('quick-picks');
   qp.innerHTML = STALLS.map(s => `
-    <button onclick="quickAdd('${s.id}')" id="qp-${s.id}" style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(255,255,255,0.02);border:1px solid #1e2d42;border-radius:4px;cursor:pointer;transition:all 0.15s;text-align:left;width:100%">
-      <span style="font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;color:#7a9bb5;flex-shrink:0;width:22px">${s.id}</span>
-      <span style="font-size:11px;color:#7a9bb5;font-family:'Geist',sans-serif">${s.name}</span>
+    <button onclick="quickAdd('${s.id}')" id="qp-${s.id}" class="quick-pick-btn">
+      <span class="qp-id">${s.id}</span>
+      <span class="qp-name">${s.name}</span>
     </button>
   `).join('');
 
@@ -1586,8 +1680,10 @@ function observeReveals() {
 // =====================================================================
 // INIT
 // =====================================================================
-renderStalls();
-observeReveals();
+if (document.getElementById('stalls-grid')) {
+  renderStalls();
+  observeReveals();
+}
 
 </script>
 <script>

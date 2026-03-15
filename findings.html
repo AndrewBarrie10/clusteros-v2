@@ -74,7 +74,7 @@ body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; 
 .geo-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
 .world-map-canvas-wrap {
   position: relative; width: 100%; aspect-ratio: 16/7;
-  background: #060c18; border: 1px solid var(--border);
+  background: var(--green-dim); border: 1px solid var(--border);
   border-radius: 8px; overflow: hidden; margin-bottom: 16px;
 }
 #findings-world-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
@@ -253,6 +253,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; 
 .nav-mobile-menu a { font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: var(--ink-dim); padding: 10px 0; border-bottom: 1px solid var(--border); transition: color 0.15s; }
 .nav-mobile-menu a:hover { color: var(--ink); }
 .nav-mobile-divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+.section-h em, .section-headline em, h2 em { font-style: italic; color: var(--green); }
 </style>
 </head>
 <body>
@@ -550,6 +552,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; 
   .finding { gap: 10px; padding: 16px 14px; }
   .finding-num { font-size: 24px; width: 28px; }
 }
+
+.section-h em, .section-headline em, h2 em { font-style: italic; color: var(--green); }
 </style>
 <footer>
   <div class="footer-inner">
@@ -583,18 +587,10 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; 
     </div>
   </div>
 </footer>
-<script>
-(function(){
-  document.querySelectorAll('.nav-dropdown').forEach(function(dd){
-    var t=dd.querySelector('.nav-dropdown-toggle');var m=dd.querySelector('.nav-dropdown-menu');
-    if(!t||!m) return;
-    t.addEventListener('click',function(e){e.stopPropagation();var open=m.classList.contains('open');document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});if(!open){m.classList.add('open');t.classList.add('active');}});
-  });
-  document.addEventListener('click',function(){document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});});
-  var h=document.getElementById('nav-hamburger');var mob=document.getElementById('nav-mobile-menu');
-  if(h&&mob){h.addEventListener('click',function(e){e.stopPropagation();var o=mob.classList.contains('open');mob.classList.toggle('open',!o);h.classList.toggle('open',!o);});document.addEventListener('click',function(){mob.classList.remove('open');h.classList.remove('open');});}
-})();
-</script>
+
+
+
+
 
 <script>
 (function(){

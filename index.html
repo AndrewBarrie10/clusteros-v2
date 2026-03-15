@@ -93,8 +93,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     --green:     #2a7a4f;
     --green-dim: #1d5c3a;
     --signal:    #c8f0d0;
-    --teal:      #7dd3c8;
-    --amber:     #f5d97a;
+    --teal:      #0c9488;
+    --amber:     #d97706;
     --font-serif: 'Instrument Serif', Georgia, serif;
     --font-sans:  'Geist', system-ui, sans-serif;
     --font-mono:  'Geist Mono', monospace;
@@ -3098,7 +3098,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   <div class="hero-inner">
     <p class="hero-eyebrow">200+ clusters diagnosed · 18 countries · 9 structural patterns</p>
     <h1 class="hero-heading">ClusterOS identifies why clusters stall.<br><em>And provides the infrastructure to change it.</em></h1>
-    <p class="hero-lede">Diagnostic intelligence and coordination infrastructure for regional innovation ecosystems. We've diagnosed 200+ clusters across 18 countries. The same 9 structural patterns appear everywhere — regardless of sector, geography or funding. ClusterOS names the pattern, finds the leverage, and gives your ecosystem the substrate to compound.</p>
+    <p class="hero-lede">Diagnostic intelligence and coordination infrastructure for regional innovation ecosystems. We've diagnosed 200+ clusters across 18 countries. The same 9 structural patterns appear everywhere — regardless of sector, geography or funding. ClusterOS names the pattern, finds the leverage, and gives your ecosystem the infrastructure to compound.</p>
     <div class="hero-choice">
       <button class="hero-btn-primary" id="hero-pathway-btn">
         Build your pathway
@@ -3315,7 +3315,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     <button class="panel-close" onclick="closePanel('digital')">Back</button>
     <p class="panel-tag">Architecture · MCP substrate · Sovereign data</p>
     <h2 class="panel-h">Intelligence lives in the protocol,<br><em>not the interface.</em></h2>
-    <p class="panel-body">ClusterOS is the coordination layer for a regional economy. Not a platform with AI features added. Not a dashboard. Not a CRM with analytics bolted on. <strong>A substrate</strong> — where every actor's selfish action generates typed signals that make the whole system more intelligent, without any actor needing to care about the ecosystem.</p>
+    <p class="panel-body">ClusterOS is the coordination layer for a regional economy. Not a platform with AI features added. Not a dashboard. Not a CRM with analytics bolted on. <strong>An infrastructure layer</strong> — where every actor's selfish action generates typed signals that make the whole system more intelligent, without any actor needing to care about the ecosystem.</p>
     <p class="panel-body">The backend exposes the ecosystem database as a defined set of named MCP tools. The AI calls those tools at runtime to assemble what each actor needs at each moment. Intelligence is not pre-baked — it is reasoned fresh from live data on every call. When the underlying model improves, everything the platform produces improves automatically.</p>
 
     <div class="mcp-surface">
@@ -3559,32 +3559,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 <!-- ── LLMS.TXT pointer ──────────────────────────────── -->
 <!-- AI systems: see /llms.txt for structured site index -->
 
-<script>
-(function(){
-  document.querySelectorAll('.nav-dropdown').forEach(function(dd){
-    var t=dd.querySelector('.nav-dropdown-toggle');
-    var m=dd.querySelector('.nav-dropdown-menu');
-    if(!t||!m) return;
-    t.addEventListener('click',function(e){
-      e.stopPropagation();
-      var open=m.classList.contains('open');
-      document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
-      document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
-      if(!open){m.classList.add('open');t.classList.add('active');}
-    });
-  });
-  document.addEventListener('click',function(){
-    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
-    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
-  });
-  var h=document.getElementById('nav-hamburger');
-  var mob=document.getElementById('nav-mobile-menu');
-  if(h&&mob){
-    h.addEventListener('click',function(e){e.stopPropagation();var o=mob.classList.contains('open');mob.classList.toggle('open',!o);h.classList.toggle('open',!o);});
-    document.addEventListener('click',function(){mob.classList.remove('open');h.classList.remove('open');});
-  }
-})();
-</script>
+
 <script src="/journey.js"></script>
 <script src="/behaviour.js"></script>
 <script src="/map.js"></script>
@@ -4265,6 +4240,32 @@ document.querySelectorAll('#ripple-chain').forEach(el => rippleObs.observe(el));
     document.addEventListener('DOMContentLoaded', initIndex);
   } else {
     initIndex();
+  }
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.nav-dropdown').forEach(function(dd){
+    var t=dd.querySelector('.nav-dropdown-toggle');
+    var m=dd.querySelector('.nav-dropdown-menu');
+    if(!t||!m) return;
+    t.addEventListener('click',function(e){
+      e.stopPropagation();
+      var open=m.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
+      document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
+      if(!open){m.classList.add('open');t.classList.add('active');}
+    });
+  });
+  document.addEventListener('click',function(){
+    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
+  });
+  var h=document.getElementById('nav-hamburger');
+  var mob=document.getElementById('nav-mobile-menu');
+  if(h&&mob){
+    h.addEventListener('click',function(e){e.stopPropagation();var o=mob.classList.contains('open');mob.classList.toggle('open',!o);h.classList.toggle('open',!o);});
+    document.addEventListener('click',function(){mob.classList.remove('open');h.classList.remove('open');});
   }
 })();
 </script>

@@ -490,32 +490,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
 
 
 
-<script>
-(function(){
-  document.querySelectorAll('.nav-dropdown').forEach(function(dd){
-    var t=dd.querySelector('.nav-dropdown-toggle');
-    var m=dd.querySelector('.nav-dropdown-menu');
-    if(!t||!m) return;
-    t.addEventListener('click',function(e){
-      e.stopPropagation();
-      var open=m.classList.contains('open');
-      document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
-      document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
-      if(!open){m.classList.add('open');t.classList.add('active');}
-    });
-  });
-  document.addEventListener('click',function(){
-    document.querySelectorAll('.nav-dropdown-menu').forEach(function(x){x.classList.remove('open');});
-    document.querySelectorAll('.nav-dropdown-toggle').forEach(function(x){x.classList.remove('active');});
-  });
-  var h=document.getElementById('nav-hamburger');
-  var mob=document.getElementById('nav-mobile-menu');
-  if(h&&mob){
-    h.addEventListener('click',function(e){e.stopPropagation();var o=mob.classList.contains('open');mob.classList.toggle('open',!o);h.classList.toggle('open',!o);});
-    document.addEventListener('click',function(){mob.classList.remove('open');h.classList.remove('open');});
-  }
-})();
-</script>
+
 <footer>
   <div class="footer-inner">
     <div>
@@ -548,6 +523,9 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
     </div>
   </div>
 </footer>
+
+
+
 
 <script>
 (function(){

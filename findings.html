@@ -1015,6 +1015,23 @@ setTimeout(() => {
 
 
 </script>
+<script>
+// Ensure map.js DOMContentLoaded listener fires even if DOM already loaded
+(function(){
+  var _orig = document.addEventListener.bind(document);
+  document.addEventListener = function(type, fn, opts) {
+    if (type === 'DOMContentLoaded') {
+      if (document.readyState === 'loading') {
+        _orig(type, fn, opts);
+      } else {
+        setTimeout(fn, 0);
+      }
+    } else {
+      _orig(type, fn, opts);
+    }
+  };
+})();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="/map.js"></script>
 <script>

@@ -1,8 +1,9 @@
 // ── ClusterOS Map & Panel Logic ───────────────────────────
 
-(document.readyState === 'loading'
-  ? document.addEventListener.bind(document, 'DOMContentLoaded')
-  : function(fn) { fn(); })(function () {
+document.addEventListener('DOMContentLoaded', function () {
+
+// Guard — only run if map element exists
+if (!document.getElementById('map')) return;
 
 // ── MAP INIT ──────────────────────────────────────────────
 const map = L.map('map', {
@@ -291,4 +292,4 @@ window.dashboardReopen = function() {
   document.getElementById('dashboard-tab')?.classList.remove('visible');
 };
 
-}); // end init
+}); // end DOMContentLoaded

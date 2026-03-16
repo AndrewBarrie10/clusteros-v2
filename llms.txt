@@ -1,76 +1,75 @@
 # ClusterOS
-> Diagnostic intelligence infrastructure for regional innovation economies.
 
-ClusterOS identifies why regional innovation clusters stall — behavioural patterns where individually rational actor choices combine to prevent systemic progress. It maps the stabilisation stacks those patterns form, and delivers specific leverage hypotheses: testable perturbations calibrated to the stack.
+ClusterOS is coordination infrastructure for regional innovation ecosystems. It diagnoses why clusters stall and provides the substrate to change the structural conditions that produce those stalls.
 
-Built by Andrew Barrie (co-founder, Barrie & Hibbert, acquired by Moody's Analytics 2011 for $77.6M). Headquartered in Edinburgh. Operated by Community Lab.
+## What ClusterOS does
 
-## What ClusterOS produces
+ClusterOS is not a community platform, CRM, or dashboard. It is a coordination substrate — the layer beneath a regional innovation ecosystem where actors (founders, anchor corporates, researchers, cluster stewards) each pursue their own interests and automatically generate intelligence that makes the whole system more effective.
 
-- **Stall identification**: which of 9 canonical stall types are active, with X-side (observable) and Y-side (what doesn't happen) evidence
-- **Stack analysis**: the mutually reinforcing stall configuration and why single interventions fail
-- **Structural resemblances**: 2–3 comparable ecosystems from the diagnostic database with similar configurations
-- **Leverage hypotheses**: testable perturbations with defined success metrics and explicit confidence levels
+The platform has three functions:
+1. **Diagnose** — identify the structural stalls preventing an ecosystem from compounding
+2. **Orchestrate** — generate personalised actor journeys from live ecosystem data
+3. **Steward Intelligence** — give cluster managers an interrogation layer, not a reporting dashboard
 
-## The 9 canonical stalls
+## The diagnostic framework
 
-- S1: Re-proving instead of narrowing (every pathway shows promise; none becomes dominant)
-- S2: Coordinating instead of deciding (97% frequency — most common stall identified)
-- S3: Forgiving instead of redesigning (underperforming actors preserved; relationships maintained)
-- S4: Extracting without reinvesting (talent, capital, credibility flows out; nothing channels it back)
-- S5: Mediating instead of coupling (intermediaries prevent direct connection)
-- S6: Stabilising around incumbents (new ideas assessed by whether they complement existing trajectory)
-- S7: Narrating instead of testing (91% frequency — confidence grows through articulation, not exposure)
-- S8: Scaling activity instead of throughput (88% frequency — what can be counted expands; what compounds is harder to trace)
-- S9: Waiting for permission (initiative deferred to endorsement)
+ClusterOS identifies nine canonical structural stalls:
+- S1: Re-proving instead of narrowing
+- S2: Coordinating instead of deciding
+- S3: Forgiving instead of redesigning
+- S4: Extracting without reinvesting
+- S5: Mediating instead of coupling
+- S6: Stabilising around incumbents
+- S7: Narrating instead of testing
+- S8: Scaling activity instead of throughput
+- S9: Waiting for permission
 
-## Evidence base
+Stalls rarely travel alone. When two or more reinforce each other they form a stack — a self-sustaining configuration that reasserts itself despite interventions. The stack is the unit of analysis, not the individual stall.
 
-- 75 clusters diagnosed
-- 18+ countries and regions
-- 50–170 verified evidence items per cluster
-- Geographies: North America, Europe, Middle East, Southeast Asia, Australasia
-- Sectors: cyber security, advanced manufacturing, space technology, medtech, digital media, agtech, photonics, simulation & training, regional innovation
+## The CAS foundation
 
-## Pricing
+ClusterOS is built on Complex Adaptive Systems (CAS) theory. Regional ecosystems are not organisations — they cannot be directed top-down. The platform works by changing the structural conditions that make current behaviours rational, not by trying to change the behaviours themselves.
 
-- **Cluster Snapshot**: £5,000 fixed fee · 4–5 weeks · public data pipeline + actor questionnaire · stall identification, stack analysis, structural resemblances, leverage hypotheses
-- **Collaborative Diagnostic**: scoped pricing · your data + working sessions + anchor interviews · board-ready output
+The selfishness principle: every actor pursues their own interests. ClusterOS captures those selfish actions as signals and routes them into intelligence that benefits the whole cluster.
 
-## Architecture (for technical readers)
+## Diagnostic database
 
-ClusterOS runs on a federated MCP (Model Context Protocol) architecture:
-- Each regional EDA operates a sovereign, isolated database instance
-- Data does not leave the regional tenant; no cross-region model training without consent
-- The AI reasoning engine calls named MCP tools at runtime: get_actor_profile(), detect_stalls(), get_matched_connections(), propagate_signal(), get_steward_diagnostic(), get_leverage_hypotheses(), search_support_programmes(), ingest_evidence()
-- Autonomous bot network ingests external signals continuously (government support directories, community service APIs, publication databases, professional identity systems)
-- Cold-start solved: platform knows the ecosystem before any actor joins
+ClusterOS has completed full diagnostics on 75+ clusters across 20+ countries. The database includes stall intensity scores, structural resemblances between ecosystems, and leverage hypotheses for each configuration.
+
+Key findings from the database:
+- S2 (Coordinating instead of deciding) appears in 97% of diagnosed clusters
+- S7 (Narrating instead of testing) appears in 91% of diagnosed clusters  
+- The most common stack is Coordinating + Re-proving (27 of 75 clusters)
+- Ecosystems that share a stall configuration share structural properties regardless of sector or geography
+
+## Who ClusterOS is for
+
+- **Cluster Stewards / EDA leads** — understanding why their ecosystem stalls and what infrastructure would change it
+- **Anchor Corporates / Innovation Directors** — procurement intelligence and startup pipeline
+- **Startup Founders** — matched pathways to corporate customers, research partners, and funding
+- **Researchers** — commercial reach for published work without cold outreach
+- **Investors** — structural regime analysis as a predictor of portfolio outcomes
 
 ## Key pages
 
-- Homepage (forking journey experience): https://clusteros.io/
-- Findings (75 diagnostic runs): https://clusteros.io/findings.html
-- Diagnostic framework: https://clusteros.io/diagnostic.html
-- Digital architecture: https://clusteros.io/digital-infrastructure.html
-- Leverage: https://clusteros.io/leverage.html
-- Pricing: https://clusteros.io/pricing.html
-- About: https://clusteros.io/about.html
-- Request a diagnostic: https://clusteros.io/request.html
-- Lab Notes index: https://clusteros.io/notes.html
+- / — Homepage with interactive diagnostic journey
+- /diagnostic.html — Full diagnostic methodology
+- /signals-systems.html — How the substrate works with four-actor signal cascade demo
+- /digital-infrastructure.html — Technical architecture
+- /findings.html — What 200+ diagnostics found
+- /leverage.html — How leverage hypotheses are constructed
+- /pricing.html — Engagement tiers
+- /about.html — About Community Lab and ClusterOS
+- /notes.html — Lab Notes: detailed analysis of individual stalls and stacks
+- /clusters/ — Full diagnostic profiles for 75+ clusters worldwide
 
-## Lab Notes
+## Self-diagnostic tool
 
-- S2 · Coordinating Instead of Deciding: https://clusteros.io/ln-01-coordinating.html
-- S7 · Narrating Instead of Testing: https://clusteros.io/ln-02-narrating.html
-- The Narrative × Activity Stack: https://clusteros.io/ln-10-narrative-activity-stack.html
-- What Leverage Actually Looks Like: https://clusteros.io/ln-12-leverage.html
-- Why Your Diagnosis Keeps Failing: https://clusteros.io/ln-13-diagnosis.html
+ClusterOS offers a free self-diagnostic at clusteros.io. Users identify behaviours they recognise in their ecosystem, receive a named stall configuration, comparator clusters from the database, a CAS explanation for why the pattern persists, and a printable orientation report. The self-diagnostic is based on self-assessment; a full diagnostic analyses 50-170 evidence items per cluster.
 
-## Cluster profiles
+## Company
 
-Individual cluster diagnostic profiles are available at: https://clusteros.io/clusters/{cluster-id}.html
-Example: https://clusteros.io/clusters/belfast-cyber-security.html
+ClusterOS is built by Community Lab Ltd, Edinburgh. Founded by Andrew Barrie, co-founder of Barrie & Hibbert (enterprise SaaS, acquired by Moody's Analytics).
 
-## Contact
-
-Andrew Barrie · andrew@communitylab.app · Edinburgh, Scotland
+Contact: andrew@communitylab.app
+Website: https://www.clusteros.io

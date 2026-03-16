@@ -3,6 +3,14 @@
 // Panel = navigator. Frame = content. Escape always visible.
 
 // ── STALL SCIENCE ─────────────────────────────────────────
+
+// ── ANALYTICS ─────────────────────────────────────────────
+function _track(event, props) {
+  try {
+    if (window.va) window.va('event', { name: event, ...props });
+  } catch(e) {}
+}
+
 window.STALL_SCIENCE_DATA = {
   Narrating:    { definition:'The ecosystem produces stories about progress instead of evidence of change. Reporting substitutes for impact — the story of activity becomes the activity.', leverage:'Changing what gets reported — not who reports it — breaks this faster than any governance reform. Require evidence of decisions made and options closed, not events held.' },
   Coordinating: { definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', leverage:'Identify the actor with the most to lose from the current arrangement and change their constraint. The leverage is never more coordination — it is one actor making an exclusionary choice.' },
@@ -80,6 +88,7 @@ const journey = {
 
   // ── INTRO + FORK CHOICE ───────────────────────────────
   _renderIntro() {
+    _track('journey_started');
     this._setPanelHeader('Your pathway');
     const frame=window.dashboard?.frame||null;
     const greet=this._frameGreeting(frame);
@@ -157,6 +166,7 @@ const journey = {
   // ══ FORK 1: DIAGNOSTIC ════════════════════════════════
 
   _startDiag() {
+    _track('fork_selected', { fork: 'diagnostic' });
     this.fork='diagnostic';
     this.selectedKeys=[]; this.selectedStalls=[]; this.stackResult=null;
     this._renderDiagBehaviours();
@@ -201,6 +211,7 @@ const journey = {
   },
 
   _commitDiagBehaviours() {
+    _track('behaviours_selected', { count: this.selectedKeys.length });
     this.selectedStalls=[...new Set(this.selectedKeys.map(k=>BEHAVIOURS.find(b=>b.key===k)?.stall).filter(Boolean))];
     this._renderDiagStalls();
   },
@@ -230,6 +241,7 @@ const journey = {
   },
 
   _renderDiagStack() {
+    _track('stack_reached', { stalls: this.selectedStalls.join('+') });
     this._setPanelHeader('01 · The Diagnostic');
     const steps=['Pick behaviours','Name stalls','Build stack','See examples','Leverage','Next steps'];
     const stack=this._findStack(this.selectedStalls); this.stackResult=stack;
@@ -432,6 +444,7 @@ const journey = {
   },
 
   _renderDiagClusters() {
+    _track('comparators_reached');
     this._setPanelHeader('01 · The Diagnostic');
     const steps=['Pick behaviours','Name stalls','Build stack','See examples','Leverage','Next steps'];
     const matched=this._matchClusters(4);
@@ -477,6 +490,7 @@ const journey = {
   },
 
   _renderDiagLeverage() {
+    _track('leverage_reached');
     this._setPanelHeader('01 · The Diagnostic');
     const steps=['Pick behaviours','Name stalls','Build stack','See examples','Leverage','Next steps'];
     const lev=this.stackResult?.leverage||(this.selectedStalls.length===1?(window.STALL_SCIENCE_DATA[this.selectedStalls[0]]?.leverage||''):'');
@@ -604,6 +618,7 @@ const journey = {
   },
 
   _renderDiagCTA() {
+    _track('diagnostic_complete', { stack: this.stackResult?.name || this.selectedStalls.join('+') });
     const sn=this.stackResult?.name||this.selectedStalls.join(' + ');
     this._setPanelHeader('01 · The Diagnostic');
     const steps=['Pick behaviours','Name stalls','Build stack','See examples','Leverage','Next steps'];
@@ -644,6 +659,7 @@ const journey = {
   },
 
   _openReport() {
+    _track('report_opened', { stack: this.stackResult?.name || this.selectedStalls.join('+'), stall_count: this.selectedStalls.length });
     const report = this._buildReport();
     try {
       localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report));
@@ -654,6 +670,7 @@ const journey = {
   // ══ FORK 2: INFRASTRUCTURE ════════════════════════════
 
   _startInfra() {
+    _track('fork_selected', { fork: 'infrastructure' });
     this.fork='infrastructure';
     this._renderInfra1();
   },
@@ -757,7 +774,7 @@ const journey = {
         <div class="chrome-dot red"></div>
         <div class="chrome-dot amber"></div>
         <div class="chrome-dot green"></div>
-        <div class="chrome-address">app.clusteros-v2.vercel.app/onboarding</div>
+        <div class="chrome-address">app.clusteros.io/onboarding</div>
       </div>
 
       <!-- Window body: left panel + right panel -->
@@ -1148,6 +1165,7 @@ const journey = {
   // ══ FORK 3: COMPLEX ADAPTIVE SYSTEMS ═════════════════
 
   _startCAS() {
+    _track('fork_selected', { fork: 'cas' });
     this.fork='cas';
     this._renderCAS1();
   },

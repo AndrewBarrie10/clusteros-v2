@@ -83,7 +83,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     --mono:    'Geist Mono', monospace;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth;  overflow-x: hidden;
+    max-width: 100vw; }
   body {
     font-family: var(--font-sans);
     background: var(--page);
@@ -170,7 +171,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   /* ── Page styles ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; background: #f7f4ef; color: #1a1a1a; }
+html { scroll-behavior: smooth; background: #f7f4ef; color: #1a1a1a;  overflow-x: hidden; }
 html, body { overflow-x: hidden; }
 body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
@@ -324,6 +325,7 @@ p + p { margin-top: 16px; }
 
 
 </style>
+<script defer src="/_vercel/insights/script.js"></script>
 <meta name="description" content="ClusterOS is built by Community Lab Ltd, Edinburgh. Founded by Andrew Barrie, co-founder of Barrie & Hibbert (acquired by Moody's Analytics). Coordination infrastructure for regional economies.">
 </head>
 <body>
@@ -492,7 +494,7 @@ p + p { margin-top: 16px; }
       </div>
       <div class="profile-links">
         <a href="https://www.communitylab.app" class="profile-link" target="_blank">Community Lab ↗</a>
-        <a href="/cdn-cgi/l/email-protection#670609031502102704080a0a12090e131e0b060549061717" class="profile-link"><span class="__cf_email__" data-cfemail="a2c3ccc6d0c7d5e2c1cdcfcfd7cccbd6dbcec3c08cc3d2d2">[email&#160;protected]</span></a>
+        <a href="mailto:andrew@communitylab.app" style="color:#c8f0d0;text-decoration:none">andrew@communitylab.app</a>
       </div>
     </div>
   </div>
@@ -587,6 +589,19 @@ p + p { margin-top: 16px; }
   .tl-item { gap: 14px; }
   .pullquote { padding: 18px 16px; }
   .cta { padding: 48px 16px 64px; }
+}
+
+/* ── MOBILE OVERFLOW FIX ─────────────────────────────── */
+img, video, svg, canvas, iframe { max-width: 100%; }
+table { width: 100%; }
+pre, code { white-space: pre-wrap; word-break: break-all; }
+
+/* ── NAV MOBILE FIX ─────────────────────────────────── */
+@media (max-width: 480px) {
+  nav { padding: 0 16px !important; }
+  .nav-logo { font-size: 16px !important; }
+  .nav-cta { display: none !important; }
+  .nav-hamburger { display: flex !important; margin-left: auto; }
 }
 </style>
 

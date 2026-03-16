@@ -201,7 +201,7 @@ const journey = {
   },
 
   _commitDiagBehaviours() {
-    this.selectedStalls=this.selectedKeys.map(k=>BEHAVIOURS.find(b=>b.key===k)?.stall).filter(Boolean);
+    this.selectedStalls=[...new Set(this.selectedKeys.map(k=>BEHAVIOURS.find(b=>b.key===k)?.stall).filter(Boolean))];
     this._renderDiagStalls();
   },
 
@@ -537,7 +537,7 @@ const journey = {
       ecosystem: document.getElementById('jf-eco-name')?.value?.trim() || 'Your Ecosystem',
       sector:    '',
       geography: '',
-      role:      document.getElementById('jf-eco-role')?.value?.trim() || 'Cluster Steward',
+      role:      document.getElementById('jf-eco-role')?.value?.trim() || '',
       stalls:    stalls.map(s => ({
         id:   STALL_CODES[s] || s,
         name: STALL_NAMES[s] || s,
@@ -557,7 +557,6 @@ const journey = {
   },
 
   _renderDiagCTA() {
-    this._buildReport();
     const sn=this.stackResult?.name||this.selectedStalls.join(' + ');
     this._setPanelHeader('01 · The Diagnostic');
     const steps=['Pick behaviours','Name stalls','Build stack','See examples','Leverage','Next steps'];
@@ -595,6 +594,7 @@ const journey = {
   },
 
   _openReport() {
+    this._buildReport();
     window.open('/diagnostic-report.html', '_blank');
   },
 

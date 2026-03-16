@@ -380,6 +380,7 @@ function init() {
   // Ecosystem
   document.getElementById('ecosystem-name').textContent = d.ecosystem;
   document.getElementById('ecosystem-tags').innerHTML = [d.sector, d.geography, d.role]
+    .filter(t => t && t.trim())
     .map(t => `<span class="doc-tag">${t}</span>`).join('');
 
   // Stalls

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.clusteros.io/sitemap.xml
+
+# Keep diagnostic report out of index - it's a generated personal document
+Disallow: /diagnostic-report.html

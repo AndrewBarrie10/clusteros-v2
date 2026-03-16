@@ -594,7 +594,10 @@ const journey = {
   },
 
   _openReport() {
-    this._buildReport();
+    const report = this._buildReport();
+    try {
+      localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report));
+    } catch(e) {}
     window.open('/diagnostic-report.html', '_blank');
   },
 

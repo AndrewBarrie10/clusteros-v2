@@ -342,7 +342,9 @@ const STALL_NAMES = {
 
 // ── RENDER ─────────────────────────────────────────────────
 function init() {
-  const d = window.CLUSTEROS_REPORT || {
+  let _stored = null;
+  try { _stored = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
+  const d = _stored || window.CLUSTEROS_REPORT || {
     ecosystem: 'Belfast Cyber Security Cluster',
     sector: 'Cyber Security',
     geography: 'Northern Ireland, UK',

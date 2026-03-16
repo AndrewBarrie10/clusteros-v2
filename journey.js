@@ -414,12 +414,17 @@ const journey = {
       return;
     }
     const cards=matched.map(c=>{
-      const top=(c.stalls||[]).sort((a,b)=>(b.intensity||0)-(a.intensity||0)).slice(0,2).map(s=>{
+      // Handle both full cluster objects (with stalls array) and static lookup objects
+      const hasStalls = c.stalls && c.stalls.length;
+      const top = hasStalls ? c.stalls.sort((a,b)=>(b.intensity||0)-(a.intensity||0)).slice(0,2).map(s=>{
         const pct=Math.round((s.intensity||0.3)*100),col=pct>65?'#d4695a':pct>40?'#d4a94a':'#2a7a4f',w=Math.round(pct*0.7);
         const nm=(s.name||'').replace(/ instead of.*/i,'').replace(/ without.*/i,'').replace(/ around.*/i,'');
         return`<div class="jf-cc-stall"><div class="jf-cc-bar" style="width:${w}px;background:${col}"></div><span class="jf-cc-stall-name">${nm}</span></div>`;
-      }).join('');
-      return`<div class="jf-cluster-card"><div class="jf-cc-name">${c.name}</div><div class="jf-cc-meta">${c.city||''} · ${c.country||''} ${c.regime?`<span class="jf-cc-regime">${c.regime}</span>`:''}</div><div class="jf-cc-stalls">${top}</div><div id="radar-${c.id}" style="margin:8px 0"></div><a class="jf-cc-link" href="/clusters/${c.id||''}.html" target="_blank">Full profile →</a></div>`;
+      }).join('') : `<div class="jf-cc-stall"><span class="jf-cc-stall-name" style="color:var(--teal)">${c.sector||'Innovation ecosystem'}</span></div>`;
+      const loc = [c.city, c.country].filter(Boolean).join(' · ');
+      const profileLink = c.id ? `<a class="jf-cc-link" href="/clusters/${c.id}.html" target="_blank">Full profile →</a>` : '';
+      const radarDiv = c.id ? `<div id="radar-${c.id}" style="margin:8px 0"></div>` : '';
+      return`<div class="jf-cluster-card"><div class="jf-cc-name">${c.name}</div><div class="jf-cc-meta">${loc} ${c.regime?`<span class="jf-cc-regime">${c.regime}</span>`:''}</div><div class="jf-cc-stalls">${top}</div>${radarDiv}${profileLink}</div>`;
     }).join('');
     this._setFrame(`
       <h2 class="jf-stage-heading">Who else has<br><em>been here.</em></h2>
@@ -430,7 +435,7 @@ const journey = {
         <button class="jnav-btn-secondary" onclick="journey._renderDiagStack()">← Back</button>
       </div>`);
     // Draw radars
-    const _draw=()=>{ matched.forEach(c=>{ if(window.drawRadar) window.drawRadar(c,'radar-'+c.id); }); };
+    const _draw=()=>{ matched.forEach(c=>{ if(window.drawRadar && c.id && c.stalls) window.drawRadar(c,'radar-'+c.id); }); };
     if(window.drawRadar) setTimeout(_draw,80);
     else { const _t=setInterval(()=>{ if(window.drawRadar){clearInterval(_t);_draw();} },100); setTimeout(()=>clearInterval(_t),5000); }
   },

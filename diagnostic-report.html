@@ -385,12 +385,12 @@ function init() {
     .filter(t => t && t.trim())
     .map(t => `<span class="doc-tag">${t}</span>`).join('');
 
-  // Stalls
+  // Stalls — d.stalls are already {id, name, freq} objects from _buildReport
   document.getElementById('stall-grid').innerHTML = d.stalls.map(s => `
     <div class="stall-item">
-      <div class="stall-item-id">${STALL_CODES[s] || s}</div>
-      <div class="stall-item-name">${STALL_NAMES[s] || s}</div>
-      <div class="stall-item-freq">Appears in <span>${STALL_FREQ[s] || '—'}%</span> of diagnostics</div>
+      <div class="stall-item-id">${s.id || s}</div>
+      <div class="stall-item-name">${s.name || s}</div>
+      <div class="stall-item-freq">Appears in <span>${s.freq || '—'}%</span> of diagnostics</div>
     </div>`).join('');
 
   // Stack
@@ -412,7 +412,7 @@ function init() {
     </div>`).join('');
 
   // CAS + Infrastructure content
-  const stackKey = d.stalls.slice().sort().join('+');
+  const stackKey = (d.stack.stalls || d.stalls.map(s => s.name || s)).slice().sort().join('+');
   const content = STACK_CONTENT[stackKey] || STACK_CONTENT.default;
 
   document.getElementById('cas-block').innerHTML = `

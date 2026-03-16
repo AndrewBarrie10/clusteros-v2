@@ -272,6 +272,8 @@ const journey = {
   _generateStack() {
     // Stack lookup — no API required
     const stalls = this.selectedStalls.slice().sort();
+    // Try top 2 stalls first for named stack lookup, fall back to full combo
+    const top2key = stalls.slice(0,2).join('+');
     const key = stalls.join('+');
 
     const STACKS = {
@@ -355,7 +357,7 @@ const journey = {
     };
 
     // Find best match
-    let match = STACKS[key];
+    let match = STACKS[key] || STACKS[top2key];
 
     // If no exact match, find the closest (most overlapping stalls)
     if (!match) {

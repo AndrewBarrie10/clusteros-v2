@@ -274,7 +274,7 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
         <div class="next-step-label">The next step</div>
         <div class="next-step-heading">Your ecosystem is in here.<br><em>Let's find it properly.</em></div>
       </div>
-      <a href="https://clusteros.io/request.html" class="next-step-action">Request a full diagnostic</a>
+      <a href="/request.html" class="next-step-action">Request a full diagnostic</a>
     </div>
 
     <!-- ── APPENDIX ─────────────────────────────────────────── -->
@@ -455,7 +455,7 @@ function init() {
   // 3. Comparators — compact cards with "what shifted" sales magnet
   document.getElementById('comparator-list').innerHTML = (d.comparators || []).map(c => {
     const shifted = WHAT_SHIFTED[c.id] || null;
-    const profileUrl = c.id ? `https://clusteros.io/clusters/${c.id}.html` : null;
+    const profileUrl = c.id ? `/clusters/${c.id}.html` : null;
     return `
     <div class="comparator-card">
       <div class="comp-card-main">
@@ -482,7 +482,8 @@ function init() {
   }).join('');
 
   // 4. CAS
-  const stackKey = (stack.stalls || []).slice().sort().join('+');
+  // Use top 2 stalls for content lookup — 3+ stall combos don't have bespoke content
+  const stackKey = (stack.stalls || []).slice(0,2).sort().join('+');
   const content = STACK_CONTENT[stackKey] || STACK_CONTENT.default;
   document.getElementById('cas-block').innerHTML = `
     <div class="cas-block-label">Complex Adaptive Systems — why this pattern is structural</div>

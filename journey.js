@@ -532,19 +532,15 @@ const journey = {
     const fullDiagAdds = FULL_DIAG[stackKey] || FULL_DIAG.default;
 
     // Build comparators from matched clusters
-    const pattern = stalls.slice(0,2).join(' × ');
-    const comparators = matched.slice(0,4).reduce((acc, c, i, arr) => {
-      if (i % 2 === 0) {
-        const partner = arr[i+1];
-        acc.push({
-          a: { region: c.name,        sector: [c.city, c.country].filter(Boolean).join(' · ') },
-          b: { region: partner ? partner.name : (document.getElementById('jf-eco-name')?.value?.trim() || 'Your Ecosystem'),
-               sector: partner ? [partner.city, partner.country].filter(Boolean).join(' · ') : 'Self-diagnostic' },
-          pattern
-        });
-      }
-      return acc;
-    }, []);
+    const pattern = stalls.slice(0,2).join('+');
+    const comparators = matched.slice(0,4).map(c => ({
+      region:  c.name,
+      loc:     [c.city, c.country].filter(Boolean).join(' · '),
+      sector:  c.sector || '',
+      id:      c.id || '',
+      stalls:  c.stalls || [],
+      pattern
+    }));
 
     window.CLUSTEROS_REPORT = {
       ecosystem: document.getElementById('jf-eco-name')?.value?.trim() || 'Your Ecosystem',
@@ -552,9 +548,11 @@ const journey = {
       geography: '',
       role:      document.getElementById('jf-eco-role')?.value?.trim() || '',
       stalls:    stalls.map(s => ({
-        id:   STALL_CODES[s] || s,
-        name: STALL_NAMES[s] || s,
-        freq: STALL_FREQ[s]  || 50
+        id:         STALL_CODES[s] || s,
+        name:       STALL_NAMES[s] || s,
+        freq:       STALL_FREQ[s]  || 50,
+        definition: (window.STALL_SCIENCE_DATA[s] || {}).definition || '',
+        leverage:   (window.STALL_SCIENCE_DATA[s] || {}).leverage   || ''
       })),
       stack: {
         name:        stack.name        || stalls.join(' + '),
@@ -1292,115 +1290,113 @@ const journey = {
   },
 
   _matchClusters(limit) {
-    // Static comparator map built directly from diagnostic database
-    // Keyed by sorted stall pair — returns real clusters with correct locations
     const COMPARATORS = {
       'Coordinating+Re-proving': [
-        { name:'Abu Dhabi HELM Life Sciences',            city:'Abu Dhabi',       country:'UAE',         sector:'Life Sciences' },
-        { name:'Australia Canberra Cyber Security',       city:'Canberra',        country:'Australia',   sector:'Cyber Security' },
-        { name:'Copenhagen-Medicon Valley Life Sciences', city:'Copenhagen',      country:'Denmark',     sector:'Life Sciences' },
-        { name:'Glasgow City Region Innovation',          city:'Glasgow',         country:'Scotland',    sector:'Innovation' },
-        { name:'Madrid Innovation Ecosystem',             city:'Madrid',          country:'Spain',       sector:'Innovation' },
-        { name:'Osaka-Kobe Life Sciences',                city:'Osaka',           country:'Japan',       sector:'Life Sciences' },
+        { id:'abu-dhabi-helm-life-sciences', name:'Abu Dhabi HELM Life Sciences', city:'Abu Dhabi', country:'UAE', sector:'Life Sciences', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.7},{"name":"Coordinating instead of deciding","intensity":0.5},{"name":"Mediating instead of coupling","intensity":0.5}] },
+        { id:'australia-canberra-cyber-security', name:'Australia Canberra Cyber Security', city:'Canberra', country:'Australia', sector:'Cyber Security', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.5},{"name":"Coordinating instead of deciding","intensity":0.5},{"name":"Extracting without reinvesting","intensity":0.3}] },
+        { id:'copenhagen-medicon-valley-life-sciences', name:'Copenhagen-Medicon Valley Life Sciences', city:'Copenhagen', country:'Denmark', sector:'Life Sciences', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.5},{"name":"Coordinating instead of deciding","intensity":0.5},{"name":"Mediating instead of coupling","intensity":0.4}] },
+        { id:'glasgow-city-region-innovation-ecosystem', name:'Glasgow City Region Innovation Ecosystem', city:'Glasgow', country:'Scotland', sector:'Innovation', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.7},{"name":"Coordinating instead of deciding","intensity":0.7},{"name":"Extracting without reinvesting","intensity":0.3}] },
+        { id:'harwell-space-technology', name:'Harwell Space Technology', city:'Harwell', country:'England', sector:'Space & Aerospace', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.7},{"name":"Coordinating instead of deciding","intensity":0.5},{"name":"Extracting without reinvesting","intensity":0.4}] },
       ],
       'Coordinating+Stabilising': [
-        { name:'Birmingham Alabama Innovation',           city:'Birmingham AL',   country:'USA',         sector:'Innovation' },
-        { name:'Chattanooga Regional Innovation',         city:'Chattanooga TN',  country:'USA',         sector:'Innovation' },
-        { name:'Colorado Springs Space Technology',       city:'Colorado Springs',country:'USA',         sector:'Space & Aerospace' },
-        { name:'Madison Regional Innovation',             city:'Madison WI',      country:'USA',         sector:'Innovation' },
-        { name:'São Paulo Life Sciences',                 city:'São Paulo',       country:'Brazil',      sector:'Life Sciences' },
-        { name:'Nagoya Advanced Manufacturing',           city:'Nagoya',          country:'Japan',       sector:'Advanced Manufacturing' },
+        { id:'birmingham-alabama-innovation-ecosystem', name:'Birmingham Alabama Innovation Ecosystem', city:'Birmingham AL', country:'USA', sector:'Innovation', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'chattanooga-regional-innovation-ecosystem', name:'Chattanooga Regional Innovation Ecosystem', city:'Chattanooga TN', country:'USA', sector:'Innovation', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Stabilizing around incumbents","intensity":0.4},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
+        { id:'colorado-springs-space-technology', name:'Colorado Springs Space Technology', city:'Colorado Springs', country:'USA', sector:'Space & Aerospace', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'madison-regional-innovation-ecosystem', name:'Madison Regional Innovation Ecosystem', city:'Madison WI', country:'USA', sector:'Innovation', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Stabilizing around incumbents","intensity":0.4},{"name":"Waiting for permission","intensity":0.4}] },
+        { id:'medellin-innovation-ecosystem', name:'Medellin Innovation Ecosystem', city:'Medellin', country:'Colombia', sector:'Innovation', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Stabilising around incumbents","intensity":0.4}] },
       ],
       'Coordinating+Mediating': [
-        { name:'Bengaluru Space Technology',              city:'Bengaluru',       country:'India',       sector:'Space & Aerospace' },
-        { name:'Glasgow FinTech',                         city:'Glasgow',         country:'Scotland',    sector:'FinTech' },
-        { name:'Quebec City Innovation',                  city:'Quebec City',     country:'Canada',      sector:'Innovation' },
-        { name:'Scotland Life Sciences',                  city:'Edinburgh',       country:'Scotland',    sector:'Life Sciences' },
+        { id:'bengaluru-space-technology', name:'Bengaluru Space Technology', city:'Bengaluru', country:'India', sector:'Space & Aerospace', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Mediating instead of coupling","intensity":0.4},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'glasgow-fintech', name:'Glasgow FinTech', city:'Glasgow', country:'Scotland', sector:'FinTech', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Mediating instead of coupling","intensity":0.4},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'quebec-city-innovation-ecosystem', name:'Quebec City Innovation Ecosystem', city:'Quebec City', country:'Canada', sector:'Innovation', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Mediating instead of coupling","intensity":0.4}] },
+        { id:'scotland-life-sciences', name:'Scotland Life Sciences', city:'Edinburgh', country:'Scotland', sector:'Life Sciences', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Mediating instead of coupling","intensity":0.4}] },
       ],
       'Coordinating+Extracting': [
-        { name:'Adelaide Space Technology',               city:'Adelaide',        country:'Australia',   sector:'Space & Aerospace' },
-        { name:'Cape Canaveral Space Coast',              city:'Cape Canaveral',  country:'USA',         sector:'Space & Aerospace' },
-        { name:'Orlando Digital Media',                   city:'Orlando FL',      country:'USA',         sector:'Digital Media' },
-        { name:'Tel Aviv Cyber Security',                 city:'Tel Aviv',        country:'Israel',      sector:'Cyber Security' },
-      ],
-      'Extracting+Stabilising': [
-        { name:'Belfast Cyber Security',                  city:'Belfast',         country:'N. Ireland',  sector:'Cyber Security' },
-        { name:'Orlando Photonics & Optics',              city:'Orlando FL',      country:'USA',         sector:'Deep Tech' },
-        { name:'Scotland Energy Transition',              city:'Aberdeen',        country:'Scotland',    sector:'Energy' },
-        { name:'Orlando Simulation & Training',           city:'Orlando FL',      country:'USA',         sector:'Defence Tech' },
+        { id:'adelaide-space-technology', name:'Adelaide Space Technology', city:'Adelaide', country:'Australia', sector:'Space & Aerospace', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Extracting without reinvesting","intensity":0.4},{"name":"Stabilizing around incumbents","intensity":0.4}] },
+        { id:'cape-canaveral-space-coast', name:'Cape Canaveral Space Coast', city:'Cape Canaveral', country:'USA', sector:'Space & Aerospace', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Extracting without reinvesting","intensity":0.6},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'orlando-digital-media', name:'Orlando Digital Media', city:'Orlando FL', country:'USA', sector:'Digital Media', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Extracting without reinvesting","intensity":0.4},{"name":"Mediating instead of coupling","intensity":0.4}] },
+        { id:'tel-aviv-cyber-security', name:'Tel Aviv Cyber Security', city:'Tel Aviv', country:'Israel', sector:'Cyber Security', stalls:[{"name":"Coordinating instead of deciding","intensity":0.4},{"name":"Extracting without reinvesting","intensity":0.4}] },
       ],
       'Re-proving+Stabilising': [
-        { name:'Basel Life Sciences',                     city:'Basel',           country:'Switzerland', sector:'Life Sciences' },
-        { name:'Cheltenham Cyber Security',               city:'Cheltenham',      country:'England',     sector:'Cyber Security' },
-        { name:'Orlando MedTech',                         city:'Orlando FL',      country:'USA',         sector:'MedTech' },
-        { name:'Orlando Tourism Technology',              city:'Orlando FL',      country:'USA',         sector:'Tourism Tech' },
+        { id:'basel-life-sciences', name:'Basel Life Sciences', city:'Basel', country:'Switzerland', sector:'Life Sciences', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.5},{"name":"Stabilising around incumbents","intensity":0.5},{"name":"Mediating instead of coupling","intensity":0.5}] },
+        { id:'cheltenham-cyber-security', name:'Cheltenham Cyber Security', city:'Cheltenham', country:'England', sector:'Cyber Security', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.7},{"name":"Stabilising around incumbents","intensity":0.5},{"name":"Mediating instead of coupling","intensity":0.4}] },
+        { id:'orlando-medtech', name:'Orlando MedTech', city:'Orlando FL', country:'USA', sector:'Life Sciences', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.5},{"name":"Stabilising around incumbents","intensity":0.4},{"name":"Mediating instead of coupling","intensity":0.4}] },
+        { id:'orlando-tourism-technology', name:'Orlando Tourism Technology', city:'Orlando FL', country:'USA', sector:'Tourism Tech', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.5},{"name":"Stabilising around incumbents","intensity":0.5},{"name":"Mediating instead of coupling","intensity":0.5}] },
+      ],
+      'Extracting+Stabilising': [
+        { id:'orlando-photonics-and-optics', name:'Orlando Photonics & Optics', city:'Orlando FL', country:'USA', sector:'Deep Tech', stalls:[{"name":"Extracting without reinvesting","intensity":0.4},{"name":"Stabilizing around incumbents","intensity":0.4}] },
+        { id:'orlando-simulation-and-training', name:'Orlando Simulation & Training', city:'Orlando FL', country:'USA', sector:'Defence Tech', stalls:[{"name":"Extracting without reinvesting","intensity":0.4},{"name":"Stabilizing around incumbents","intensity":0.4}] },
+        { id:'scotland-energy-transition', name:'Scotland Energy Transition', city:'Aberdeen', country:'Scotland', sector:'Energy', stalls:[{"name":"Extracting without reinvesting","intensity":0.4},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'belfast-cyber-security', name:'Belfast Cyber Security', city:'Belfast', country:'N. Ireland', sector:'Cyber Security', stalls:[{"name":"Extracting without reinvesting","intensity":0.4},{"name":"Stabilising around incumbents","intensity":0.4},{"name":"Waiting for permission","intensity":0.4}] },
       ],
       'Mediating+Stabilising': [
-        { name:'Boston-Cambridge Life Sciences',          city:'Cambridge',       country:'England',     sector:'Life Sciences' },
-        { name:'Eindhoven Brainport',                     city:'Eindhoven',       country:'Netherlands', sector:'Advanced Manufacturing' },
-        { name:'Orlando Cybersecurity',                   city:'Orlando FL',      country:'USA',         sector:'Cyber Security' },
-        { name:'Zurich-Zug MedTech',                     city:'Zurich',          country:'Switzerland', sector:'MedTech' },
+        { id:'boston-cambridge-life-sciences', name:'Boston-Cambridge Life Sciences', city:'Cambridge', country:'England', sector:'Life Sciences', stalls:[{"name":"Mediating instead of coupling","intensity":0.5},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'eindhoven-brainport-innovation-ecosystem', name:'Eindhoven Brainport Innovation Ecosystem', city:'Eindhoven', country:'Netherlands', sector:'Advanced Manufacturing', stalls:[{"name":"Mediating instead of coupling","intensity":0.4},{"name":"Stabilizing around incumbents","intensity":0.4}] },
+        { id:'orlando-cybersecurity', name:'Orlando Cybersecurity', city:'Orlando FL', country:'USA', sector:'Cyber Security', stalls:[{"name":"Mediating instead of coupling","intensity":0.4},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'zurich-zug-medtech', name:'Zurich-Zug MedTech', city:'Zurich', country:'Switzerland', sector:'Life Sciences', stalls:[{"name":"Mediating instead of coupling","intensity":0.4},{"name":"Stabilizing around incumbents","intensity":0.4}] },
       ],
       'Scaling+Stabilising': [
-        { name:'San Francisco Bay Area Life Sciences',    city:'San Francisco',   country:'USA',         sector:'Life Sciences' },
-        { name:'Toulouse Space Technology',               city:'Toulouse',        country:'France',      sector:'Space & Aerospace' },
-        { name:'Tulsa Regional Innovation',               city:'Tulsa OK',        country:'USA',         sector:'Innovation' },
+        { id:'san-francisco-bay-area-life-sciences', name:'San Francisco Bay Area Life Sciences', city:'San Francisco Bay Area', country:'USA', sector:'Life Sciences', stalls:[{"name":"Scaling activity instead of throughput","intensity":0.5},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'toulouse-space-technology', name:'Toulouse Space Technology', city:'Toulouse', country:'France', sector:'Space & Aerospace', stalls:[{"name":"Scaling activity instead of throughput","intensity":0.5},{"name":"Stabilising around incumbents","intensity":0.4}] },
+        { id:'tulsa-regional-innovation-ecosystem', name:'Tulsa Regional Innovation Ecosystem', city:'Tulsa OK', country:'USA', sector:'Innovation', stalls:[{"name":"Scaling activity instead of throughput","intensity":0.5},{"name":"Stabilising around incumbents","intensity":0.4}] },
       ],
       'Mediating+Waiting': [
-        { name:'Bordeaux Metropolitan Innovation',        city:'Bordeaux',        country:'France',      sector:'Innovation' },
-        { name:'Buffalo Niagara Innovation',              city:'Buffalo NY',      country:'USA',         sector:'Innovation' },
+        { id:'bordeaux-metropolitan-innovation-ecosystem', name:'Bordeaux Metropolitan Innovation Ecosystem', city:'Bordeaux', country:'France', sector:'Innovation', stalls:[{"name":"Mediating instead of coupling","intensity":0.4},{"name":"Waiting for permission","intensity":0.4}] },
+        { id:'buffalo-niagara-innovation-ecosystem', name:'Buffalo Niagara Innovation Ecosystem', city:'Buffalo NY', country:'USA', sector:'Innovation', stalls:[{"name":"Mediating instead of coupling","intensity":0.4},{"name":"Waiting for permission","intensity":0.4}] },
       ],
       'Extracting+Narrating': [
-        { name:'Busan Innovation Ecosystem',              city:'Busan',           country:'South Korea', sector:'Innovation' },
-        { name:'Estonia Cyber Security',                  city:'Tallinn',         country:'Estonia',     sector:'Cyber Security' },
+        { id:'busan-innovation-ecosystem', name:'Busan Innovation Ecosystem', city:'Busan', country:'South Korea', sector:'Innovation', stalls:[{"name":"Extracting without reinvesting","intensity":0.4},{"name":"Narrating instead of testing","intensity":0.4}] },
+        { id:'estonia-cyber-security', name:'Estonia Cyber Security', city:'Tallinn', country:'Estonia', sector:'Cyber Security', stalls:[{"name":"Extracting without reinvesting","intensity":0.4},{"name":"Narrating instead of testing","intensity":0.4}] },
       ],
       'Mediating+Scaling': [
-        { name:'Hyderabad Genome Valley Life Sciences',   city:'Hyderabad',       country:'India',       sector:'Life Sciences' },
-        { name:'Scotland Tourism & Hospitality Tech',     city:'Scotland',        country:'Scotland',    sector:'Tourism Tech' },
+        { id:'hyderabad-genome-valley-life-sciences', name:'Hyderabad Genome Valley Life Sciences', city:'Hyderabad', country:'India', sector:'Life Sciences', stalls:[{"name":"Mediating instead of coupling","intensity":0.7},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
+        { id:'scotland-tourism-and-hospitality-tech', name:'Scotland Tourism and Hospitality Tech', city:'Scotland', country:'Scotland', sector:'Tourism Tech', stalls:[{"name":"Mediating instead of coupling","intensity":0.7},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
       ],
       'Re-proving+Scaling': [
-        { name:'Tsukuba Space Technology',                city:'Tsukuba',         country:'Japan',       sector:'Space & Aerospace' },
-        { name:'West Midlands Innovation',                city:'Birmingham',      country:'England',     sector:'Innovation' },
+        { id:'tsukuba-space-technology', name:'Tsukuba Space Technology', city:'Tsukuba', country:'Japan', sector:'Space & Aerospace', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.5},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
+        { id:'west-midlands-innovation-ecosystem', name:'West Midlands Innovation Ecosystem', city:'Birmingham', country:'England', sector:'Innovation', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.5},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
       ],
       'Coordinating+Scaling': [
-        { name:'Houston Space Technology',                city:'Houston TX',      country:'USA',         sector:'Space & Aerospace' },
+        { id:'houston-space-technology', name:'Houston Space Technology', city:'Houston TX', country:'USA', sector:'Space & Aerospace', stalls:[{"name":"Coordinating instead of deciding","intensity":0.5},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
       ],
       'Mediating+Narrating': [
-        { name:'Scotland Advanced Manufacturing',         city:'Renfrewshire',    country:'Scotland',    sector:'Advanced Manufacturing' },
+        { id:'scotland-advanced-manufacturing', name:'Scotland Advanced Manufacturing', city:'Renfrewshire', country:'Scotland', sector:'Advanced Manufacturing', stalls:[{"name":"Mediating instead of coupling","intensity":0.4},{"name":"Narrating instead of testing","intensity":0.4}] },
       ],
       'Extracting+Scaling': [
-        { name:'Singapore Biopolis Life Sciences',        city:'Singapore',       country:'Singapore',   sector:'Life Sciences' },
+        { id:'singapore-biopolis-life-sciences', name:'Singapore Biopolis Life Sciences', city:'Singapore', country:'Singapore', sector:'Life Sciences', stalls:[{"name":"Extracting without reinvesting","intensity":0.4},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
       ],
       'Narrating+Scaling': [
-        { name:'Orlando SpaceTech',                       city:'Orlando FL',      country:'USA',         sector:'Space & Aerospace' },
-        { name:'Bordeaux Metropolitan Innovation',        city:'Bordeaux',        country:'France',      sector:'Innovation' },
-        { name:'West Midlands Innovation',                city:'Birmingham',      country:'England',     sector:'Innovation' },
+        { id:'bordeaux-metropolitan-innovation-ecosystem', name:'Bordeaux Metropolitan Innovation Ecosystem', city:'Bordeaux', country:'France', sector:'Innovation', stalls:[{"name":"Narrating instead of testing","intensity":0.4},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
+        { id:'west-midlands-innovation-ecosystem', name:'West Midlands Innovation Ecosystem', city:'Birmingham', country:'England', sector:'Innovation', stalls:[{"name":"Narrating instead of testing","intensity":0.4},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
+        { id:'buffalo-niagara-innovation-ecosystem', name:'Buffalo Niagara Innovation Ecosystem', city:'Buffalo NY', country:'USA', sector:'Innovation', stalls:[{"name":"Narrating instead of testing","intensity":0.5},{"name":"Scaling activity instead of throughput","intensity":0.4}] },
       ],
     };
 
     const stalls = this.selectedStalls.slice().sort();
-    // Try exact pair first
+    const ecoName = (document.getElementById('jf-eco-name')?.value?.trim() || '').toLowerCase();
     const pairKey = stalls.slice(0,2).sort().join('+');
-    let matches = COMPARATORS[pairKey] || [];
+    let matches = (COMPARATORS[pairKey] || [])
+      .filter(c => !ecoName || !c.name.toLowerCase().includes(ecoName));
 
-    // If no exact match, try each stall individually and merge
-    if (!matches.length) {
-      const seen = new Set();
+    // Try broader match if < 2 results
+    if (matches.length < 2) {
+      const seen = new Set(matches.map(m => m.id));
       stalls.forEach(s => {
         Object.entries(COMPARATORS).forEach(([k, cs]) => {
-          if (k.includes(s)) cs.forEach(c => { if (!seen.has(c.name)) { seen.add(c.name); matches.push(c); } });
+          if (k.includes(s)) cs.forEach(c => {
+            if (!seen.has(c.id) && (!ecoName || !c.name.toLowerCase().includes(ecoName))) {
+              seen.add(c.id); matches.push(c);
+            }
+          });
         });
       });
     }
 
-    // Fallback — return a cross-section
-    if (!matches.length) {
-      matches = [
-        { name:'Glasgow City Region Innovation', city:'Glasgow', country:'Scotland',    sector:'Innovation' },
-        { name:'Eindhoven Brainport',             city:'Eindhoven',country:'Netherlands',sector:'Advanced Manufacturing' },
-        { name:'Copenhagen-Medicon Valley',       city:'Copenhagen',country:'Denmark',   sector:'Life Sciences' },
-      ];
-    }
+    // Fallback
+    if (!matches.length) matches = [
+      { id:'glasgow-city-region-innovation-ecosystem', name:'Glasgow City Region Innovation Ecosystem', city:'Glasgow', country:'Scotland', sector:'Innovation', stalls:[{"name":"Re-proving instead of narrowing","intensity":0.6},{"name":"Coordinating instead of deciding","intensity":0.6}] },
+      { id:'eindhoven-brainport-innovation-ecosystem', name:'Eindhoven Brainport Innovation Ecosystem', city:'Eindhoven', country:'Netherlands', sector:'Advanced Manufacturing', stalls:[{"name":"Mediating instead of coupling","intensity":0.5},{"name":"Stabilizing around incumbents","intensity":0.4}] },
+    ];
 
     return matches.slice(0, limit || 4);
   }

@@ -272,9 +272,17 @@ const journey = {
   _generateStack() {
     // Stack lookup — no API required
     const stalls = this.selectedStalls.slice().sort();
-    // Try top 2 stalls first for named stack lookup, fall back to full combo
-    const top2key = stalls.slice(0,2).join('+');
     const key = stalls.join('+');
+    // Try all pair combinations for named stack lookup
+    let top2key = key;
+    if (stalls.length > 2) {
+      for (let i = 0; i < stalls.length && top2key === key; i++) {
+        for (let j = i+1; j < stalls.length && top2key === key; j++) {
+          const pk = [stalls[i], stalls[j]].sort().join('+');
+          if (STACKS[pk]) top2key = pk;
+        }
+      }
+    }
 
     const STACKS = {
       // ── PAIRS ──────────────────────────────────────────────
@@ -353,6 +361,32 @@ const journey = {
         name: 'Growth Without Retention',
         description: 'Activity and connections scale but value exits the ecosystem through the same intermediary layer that facilitates growth. The system looks healthy by activity metrics while systematically exporting its best outcomes.',
         leverage: 'Target the first exit point — usually a growth-stage capital gap. The intermediary and activity stalls are symptoms; extraction is the structural problem that makes the others self-reinforcing.'
+      },
+
+      'Coordinating+Re-proving': {
+        name: 'The Legitimacy Loop',
+        description: 'Coordination and re-proving serve the same underlying function: generating legitimacy without committing to a narrowing that would expose anyone to risk. The case is never quite complete enough to act on, and acting would require the kind of exclusionary choice that the coordination structure exists to avoid. This is the most common configuration in the ClusterOS database.',
+        leverage: 'An external commitment — a named anchor investing, a government fund activated without requiring full alignment — breaks both stalls simultaneously. Find the actor with the least to lose from going first publicly.'
+      },
+      'Extracting+Narrating': {
+        name: 'Extraction-Narrative Cover',
+        description: 'The ecosystem produces compelling accounts of its progress while value consistently exits. The narrative makes the ecosystem look healthy by the metrics that matter to funders. That legitimacy protects the conditions that allow extraction to continue. Changing the narrative is part of how the extraction persists.',
+        leverage: 'Introduce a metric that tracks value retention, not activity. When the narrative has to account for what stayed rather than what happened, the extraction dynamic becomes visible as a structural problem rather than a natural market outcome.'
+      },
+      'Mediating+Narrating': {
+        name: 'The Brokered Story',
+        description: 'Intermediaries need stories to justify their role. Narrators need intermediaries to produce the events that generate content. Neither requires throughput. Together they produce a coherent account of ecosystem activity that is structurally insulated from market consequence.',
+        leverage: 'Require evidence of commercial outcomes from intermediary-facilitated introductions. One conversion metric applied to the highest-profile intermediary programme changes what the story has to be about.'
+      },
+      'Extracting+Scaling': {
+        name: 'Activity-Extraction Regime',
+        description: 'Programmes expand and activity metrics grow, but value — talent, companies, IP — exits the ecosystem. More programmes are launched to compensate. Activity scales but throughput does not. The system is producing exactly what it is designed to produce.',
+        leverage: 'Target the retention constraint directly. The hole is at the bottom of the funnel — more early-stage activity widens the top while the bottom stays open. The intervention is a growth-stage instrument, not another early-stage programme.'
+      },
+      'Mediating+Waiting': {
+        name: 'Permission-Mediation Hold',
+        description: 'The ecosystem meets, aligns, and builds relationships while waiting for the signal that will allow it to act. The intermediary layer manages these holding activities productively. Both stalls protect each other: waiting creates demand for intermediation, intermediation normalises waiting.',
+        leverage: 'Surface one actor who can act now without the awaited permission. One unilateral move creates a path others can follow. The waiting is structural — breaking it requires demonstrating that movement is possible before the signal arrives.'
       },
     };
 

@@ -527,11 +527,19 @@ const journey = {
     const fullDiagAdds = FULL_DIAG[stackKey] || FULL_DIAG.default;
 
     // Build comparators from matched clusters
-    const comparators = matched.slice(0,2).map(c => ({
-      a: { region: c.name, sector: (c.sector||c.country||'') },
-      b: { region: 'Your ecosystem', sector: 'Self-diagnostic' },
-      pattern: stalls.slice(0,2).join('-')
-    }));
+    const pattern = stalls.slice(0,2).join(' × ');
+    const comparators = matched.slice(0,4).reduce((acc, c, i, arr) => {
+      if (i % 2 === 0) {
+        const partner = arr[i+1];
+        acc.push({
+          a: { region: c.name,        sector: [c.city, c.country].filter(Boolean).join(' · ') },
+          b: { region: partner ? partner.name : (document.getElementById('jf-eco-name')?.value?.trim() || 'Your Ecosystem'),
+               sector: partner ? [partner.city, partner.country].filter(Boolean).join(' · ') : 'Self-diagnostic' },
+          pattern
+        });
+      }
+      return acc;
+    }, []);
 
     window.CLUSTEROS_REPORT = {
       ecosystem: document.getElementById('jf-eco-name')?.value?.trim() || 'Your Ecosystem',
@@ -574,13 +582,16 @@ const journey = {
       <div class="jf-cta-stage">
         <h2 class="jf-cta-heading">Your report<br><em>is ready.</em></h2>
         <p class="jf-cta-body">You've identified a <strong>${sn}</strong> configuration. Name your ecosystem and get your self-diagnostic report — stalls named, stack described, comparator clusters, leverage hypothesis, and what a full diagnostic would add.</p>
-        <div style="margin:20px 0;display:flex;flex-direction:column;gap:8px">
-          <input id="jf-eco-name" type="text" placeholder="Ecosystem name (e.g. Belfast Cyber Cluster)"
-            style="padding:12px 14px;border:1px solid var(--border-2);border-radius:3px;font-family:var(--font-sans);font-size:14px;color:var(--ink);background:var(--surface);width:100%;outline:none"
-            onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border-2)'">
-          <input id="jf-eco-role" type="text" placeholder="Your role (e.g. Cluster Manager)"
-            style="padding:12px 14px;border:1px solid var(--border-2);border-radius:3px;font-family:var(--font-sans);font-size:14px;color:var(--ink);background:var(--surface);width:100%;outline:none"
-            onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border-2)'">
+        <div style="margin:20px 0;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:3px">
+          <p style="font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Name your report first</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <input id="jf-eco-name" type="text" placeholder="Ecosystem name (e.g. Belfast Cyber Cluster)"
+              style="padding:12px 14px;border:1px solid var(--border-2);border-radius:3px;font-family:var(--font-sans);font-size:14px;color:var(--ink);background:#fff;width:100%;outline:none"
+              onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border-2)'">
+            <input id="jf-eco-role" type="text" placeholder="Your role (e.g. Cluster Manager)"
+              style="padding:12px 14px;border:1px solid var(--border-2);border-radius:3px;font-family:var(--font-sans);font-size:14px;color:var(--ink);background:#fff;width:100%;outline:none"
+              onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border-2)'">
+          </div>
         </div>
         <p class="jf-cta-sub">Printable · Shareable · Yours to keep</p>
         <button class="jf-cta-btn" onclick="journey._openReport()" style="cursor:pointer;border:none">Get your report →</button>
@@ -1276,14 +1287,117 @@ const journey = {
   },
 
   _matchClusters(limit) {
-    const all=window._allClusters||[]; if(!all.length) return[];
-    const targets=this.selectedStalls.map(s=>s.toLowerCase());
-    const A={'narrating':['narrating instead'],'coordinating':['coordinating instead'],'re-proving':['re-proving instead'],'scaling':['scaling activity'],'mediating':['mediating instead'],'extracting':['extracting without'],'forgiving':['forgiving instead'],'stabilising':['stabilising around','stabilizing around'],'waiting':['waiting for']};
-    return all.map(c=>{
-      const ns=(c.stalls||[]).map(s=>(s.name||'').toLowerCase());
-      let sc=0; targets.forEach(t=>{const al=A[t]||[t];if(ns.some(n=>al.some(a=>n.includes(a))))sc++;});
-      return{cluster:c,score:sc};
-    }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,limit).map(x=>x.cluster);
+    // Static comparator map built directly from diagnostic database
+    // Keyed by sorted stall pair — returns real clusters with correct locations
+    const COMPARATORS = {
+      'Coordinating+Re-proving': [
+        { name:'Abu Dhabi HELM Life Sciences',            city:'Abu Dhabi',       country:'UAE',         sector:'Life Sciences' },
+        { name:'Australia Canberra Cyber Security',       city:'Canberra',        country:'Australia',   sector:'Cyber Security' },
+        { name:'Copenhagen-Medicon Valley Life Sciences', city:'Copenhagen',      country:'Denmark',     sector:'Life Sciences' },
+        { name:'Glasgow City Region Innovation',          city:'Glasgow',         country:'Scotland',    sector:'Innovation' },
+        { name:'Madrid Innovation Ecosystem',             city:'Madrid',          country:'Spain',       sector:'Innovation' },
+        { name:'Osaka-Kobe Life Sciences',                city:'Osaka',           country:'Japan',       sector:'Life Sciences' },
+      ],
+      'Coordinating+Stabilising': [
+        { name:'Birmingham Alabama Innovation',           city:'Birmingham AL',   country:'USA',         sector:'Innovation' },
+        { name:'Chattanooga Regional Innovation',         city:'Chattanooga TN',  country:'USA',         sector:'Innovation' },
+        { name:'Colorado Springs Space Technology',       city:'Colorado Springs',country:'USA',         sector:'Space & Aerospace' },
+        { name:'Madison Regional Innovation',             city:'Madison WI',      country:'USA',         sector:'Innovation' },
+        { name:'São Paulo Life Sciences',                 city:'São Paulo',       country:'Brazil',      sector:'Life Sciences' },
+        { name:'Nagoya Advanced Manufacturing',           city:'Nagoya',          country:'Japan',       sector:'Advanced Manufacturing' },
+      ],
+      'Coordinating+Mediating': [
+        { name:'Bengaluru Space Technology',              city:'Bengaluru',       country:'India',       sector:'Space & Aerospace' },
+        { name:'Glasgow FinTech',                         city:'Glasgow',         country:'Scotland',    sector:'FinTech' },
+        { name:'Quebec City Innovation',                  city:'Quebec City',     country:'Canada',      sector:'Innovation' },
+        { name:'Scotland Life Sciences',                  city:'Edinburgh',       country:'Scotland',    sector:'Life Sciences' },
+      ],
+      'Coordinating+Extracting': [
+        { name:'Adelaide Space Technology',               city:'Adelaide',        country:'Australia',   sector:'Space & Aerospace' },
+        { name:'Cape Canaveral Space Coast',              city:'Cape Canaveral',  country:'USA',         sector:'Space & Aerospace' },
+        { name:'Orlando Digital Media',                   city:'Orlando FL',      country:'USA',         sector:'Digital Media' },
+        { name:'Tel Aviv Cyber Security',                 city:'Tel Aviv',        country:'Israel',      sector:'Cyber Security' },
+      ],
+      'Extracting+Stabilising': [
+        { name:'Belfast Cyber Security',                  city:'Belfast',         country:'N. Ireland',  sector:'Cyber Security' },
+        { name:'Orlando Photonics & Optics',              city:'Orlando FL',      country:'USA',         sector:'Deep Tech' },
+        { name:'Scotland Energy Transition',              city:'Aberdeen',        country:'Scotland',    sector:'Energy' },
+        { name:'Orlando Simulation & Training',           city:'Orlando FL',      country:'USA',         sector:'Defence Tech' },
+      ],
+      'Re-proving+Stabilising': [
+        { name:'Basel Life Sciences',                     city:'Basel',           country:'Switzerland', sector:'Life Sciences' },
+        { name:'Cheltenham Cyber Security',               city:'Cheltenham',      country:'England',     sector:'Cyber Security' },
+        { name:'Orlando MedTech',                         city:'Orlando FL',      country:'USA',         sector:'MedTech' },
+        { name:'Orlando Tourism Technology',              city:'Orlando FL',      country:'USA',         sector:'Tourism Tech' },
+      ],
+      'Mediating+Stabilising': [
+        { name:'Boston-Cambridge Life Sciences',          city:'Cambridge',       country:'England',     sector:'Life Sciences' },
+        { name:'Eindhoven Brainport',                     city:'Eindhoven',       country:'Netherlands', sector:'Advanced Manufacturing' },
+        { name:'Orlando Cybersecurity',                   city:'Orlando FL',      country:'USA',         sector:'Cyber Security' },
+        { name:'Zurich-Zug MedTech',                     city:'Zurich',          country:'Switzerland', sector:'MedTech' },
+      ],
+      'Scaling+Stabilising': [
+        { name:'San Francisco Bay Area Life Sciences',    city:'San Francisco',   country:'USA',         sector:'Life Sciences' },
+        { name:'Toulouse Space Technology',               city:'Toulouse',        country:'France',      sector:'Space & Aerospace' },
+        { name:'Tulsa Regional Innovation',               city:'Tulsa OK',        country:'USA',         sector:'Innovation' },
+      ],
+      'Mediating+Waiting': [
+        { name:'Bordeaux Metropolitan Innovation',        city:'Bordeaux',        country:'France',      sector:'Innovation' },
+        { name:'Buffalo Niagara Innovation',              city:'Buffalo NY',      country:'USA',         sector:'Innovation' },
+      ],
+      'Extracting+Narrating': [
+        { name:'Busan Innovation Ecosystem',              city:'Busan',           country:'South Korea', sector:'Innovation' },
+        { name:'Estonia Cyber Security',                  city:'Tallinn',         country:'Estonia',     sector:'Cyber Security' },
+      ],
+      'Mediating+Scaling': [
+        { name:'Hyderabad Genome Valley Life Sciences',   city:'Hyderabad',       country:'India',       sector:'Life Sciences' },
+        { name:'Scotland Tourism & Hospitality Tech',     city:'Scotland',        country:'Scotland',    sector:'Tourism Tech' },
+      ],
+      'Re-proving+Scaling': [
+        { name:'Tsukuba Space Technology',                city:'Tsukuba',         country:'Japan',       sector:'Space & Aerospace' },
+        { name:'West Midlands Innovation',                city:'Birmingham',      country:'England',     sector:'Innovation' },
+      ],
+      'Coordinating+Scaling': [
+        { name:'Houston Space Technology',                city:'Houston TX',      country:'USA',         sector:'Space & Aerospace' },
+      ],
+      'Mediating+Narrating': [
+        { name:'Scotland Advanced Manufacturing',         city:'Renfrewshire',    country:'Scotland',    sector:'Advanced Manufacturing' },
+      ],
+      'Extracting+Scaling': [
+        { name:'Singapore Biopolis Life Sciences',        city:'Singapore',       country:'Singapore',   sector:'Life Sciences' },
+      ],
+      'Narrating+Scaling': [
+        { name:'Orlando SpaceTech',                       city:'Orlando FL',      country:'USA',         sector:'Space & Aerospace' },
+        { name:'Bordeaux Metropolitan Innovation',        city:'Bordeaux',        country:'France',      sector:'Innovation' },
+        { name:'West Midlands Innovation',                city:'Birmingham',      country:'England',     sector:'Innovation' },
+      ],
+    };
+
+    const stalls = this.selectedStalls.slice().sort();
+    // Try exact pair first
+    const pairKey = stalls.slice(0,2).sort().join('+');
+    let matches = COMPARATORS[pairKey] || [];
+
+    // If no exact match, try each stall individually and merge
+    if (!matches.length) {
+      const seen = new Set();
+      stalls.forEach(s => {
+        Object.entries(COMPARATORS).forEach(([k, cs]) => {
+          if (k.includes(s)) cs.forEach(c => { if (!seen.has(c.name)) { seen.add(c.name); matches.push(c); } });
+        });
+      });
+    }
+
+    // Fallback — return a cross-section
+    if (!matches.length) {
+      matches = [
+        { name:'Glasgow City Region Innovation', city:'Glasgow', country:'Scotland',    sector:'Innovation' },
+        { name:'Eindhoven Brainport',             city:'Eindhoven',country:'Netherlands',sector:'Advanced Manufacturing' },
+        { name:'Copenhagen-Medicon Valley',       city:'Copenhagen',country:'Denmark',   sector:'Life Sciences' },
+      ];
+    }
+
+    return matches.slice(0, limit || 4);
   }
 };
 

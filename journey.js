@@ -459,7 +459,105 @@ const journey = {
       </div>`);
   },
 
+
+  _buildReport() {
+    const matched = this._matchClusters(3);
+    const stack   = this.stackResult || {};
+    const stalls  = this.selectedStalls;
+
+    const STALL_CODES = {
+      'Coordinating':'S2','Narrating':'S7','Scaling':'S8',
+      'Stabilising':'S6','Mediating':'S5','Extracting':'S4',
+      'Forgiving':'S3','Re-proving':'S1','Waiting':'S9'
+    };
+    const STALL_FREQ = {
+      'Coordinating':97,'Narrating':91,'Scaling':88,
+      'Stabilising':76,'Mediating':68,'Extracting':61,
+      'Forgiving':54,'Re-proving':47,'Waiting':38
+    };
+    const STALL_NAMES = {
+      'Coordinating':'Coordinating instead of deciding',
+      'Narrating':'Narrating instead of testing',
+      'Scaling':'Scaling activity instead of throughput',
+      'Stabilising':'Stabilising around incumbents',
+      'Mediating':'Mediating instead of coupling',
+      'Extracting':'Extracting without reinvesting',
+      'Forgiving':'Forgiving instead of redesigning',
+      'Re-proving':'Re-proving instead of narrowing',
+      'Waiting':'Waiting for permission'
+    };
+
+    // Full-diag adds per stack
+    const FULL_DIAG = {
+      'Coordinating+Mediating': [
+        'Verification of coordination structure depth — layers, tenure, decision authority',
+        'Intermediary volume analysis — brokered vs direct connections over time',
+        'Decision record analysis — which decisions required full alignment',
+        'Confidence tier for each stall (Tier 1 / 2 / 3)',
+        'Cross-cluster synthesis if the pattern spans multiple clusters',
+        'Leverage hypothesis tested against comparable ecosystem evidence'
+      ],
+      'Narrating+Scaling': [
+        'Document production analysis — strategy volume vs output evidence',
+        'Programme throughput analysis — what scaled vs what produced market outcomes',
+        'Funder incentive mapping — what the reporting structure rewards',
+        'Confidence tier for each stall (Tier 1 / 2 / 3)',
+        'Comparator ecosystem evidence — where Narrative × Activity has shifted and how',
+        'Leverage hypothesis with specific metric recommendations'
+      ],
+      'Coordinating+Stabilising': [
+        'Incumbent network mapping — who controls access to what',
+        'New entrant traction analysis — conversion rates inside vs outside incumbent orbit',
+        'Procurement flow analysis — where RFIs originate and who they reach',
+        'Confidence tier for each stall (Tier 1 / 2 / 3)',
+        'Comparator ecosystem evidence — how similar configurations have opened',
+        'Leverage hypothesis with specific direct-coupling recommendations'
+      ],
+      default: [
+        'Evidence collection across 50-170 structured items per cluster',
+        'Confidence tier rating for each stall (Tier 1: Robust / Tier 2: Adequate / Tier 3: Indicative)',
+        'Cross-actor signal analysis — what each actor type is generating',
+        'Comparator ecosystem evidence specific to your configuration',
+        'Verified leverage hypothesis with comparable ecosystem precedent',
+        'Full configuration document for ClusterOS substrate setup'
+      ]
+    };
+
+    const stackKey = stalls.slice().sort().join('+');
+    const fullDiagAdds = FULL_DIAG[stackKey] || FULL_DIAG.default;
+
+    // Build comparators from matched clusters
+    const comparators = matched.slice(0,2).map(c => ({
+      a: { region: c.name, sector: (c.sector||c.country||'') },
+      b: { region: 'Your ecosystem', sector: 'Self-diagnostic' },
+      pattern: stalls.slice(0,2).join('-')
+    }));
+
+    window.CLUSTEROS_REPORT = {
+      ecosystem: document.getElementById('jf-eco-name')?.value?.trim() || 'Your Ecosystem',
+      sector:    '',
+      geography: '',
+      role:      document.getElementById('jf-eco-role')?.value?.trim() || 'Cluster Steward',
+      stalls:    stalls.map(s => ({
+        id:   STALL_CODES[s] || s,
+        name: STALL_NAMES[s] || s,
+        freq: STALL_FREQ[s]  || 50
+      })),
+      stack: {
+        name:        stack.name        || stalls.join(' + '),
+        stalls:      stalls,
+        description: stack.description || '',
+        leverage:    stack.leverage    || ''
+      },
+      comparators,
+      fullDiagAdds
+    };
+
+    return window.CLUSTEROS_REPORT;
+  },
+
   _renderDiagCTA() {
+    this._buildReport();
     const sn=this.stackResult?.name||this.selectedStalls.join(' + ');
     this._setPanelHeader('01 · The Diagnostic');
     const steps=['Pick behaviours','Name stalls','Build stack','See examples','Leverage','Next steps'];
@@ -467,25 +565,37 @@ const journey = {
       <span class="jnav-stage">Step 6 · Next steps</span>
       ${this._diagNav(steps,5)}
       <div class="jnav-actions">
-        <a class="jnav-btn-primary" href="/pricing.html" target="_blank" style="display:block;text-align:center;text-decoration:none">See pricing →</a>
-        <a class="jnav-btn-primary" href="/request.html" target="_blank" style="display:block;text-align:center;text-decoration:none;background:transparent;color:var(--green);border:1px solid var(--green)">Request a diagnostic →</a>
+        <button class="jnav-btn-primary" onclick="journey._openReport()" style="background:var(--green-dim)">Get your report →</button>
+        <a class="jnav-btn-primary" href="/request.html" target="_blank" style="display:block;text-align:center;text-decoration:none;background:transparent;color:var(--green);border:1px solid var(--green)">Request a full diagnostic →</a>
         <button class="jnav-btn-secondary" onclick="journey._startInfra()">02 · The Infrastructure</button>
         <button class="jnav-btn-secondary" onclick="journey._startCAS()">03 · Complex Adaptive Systems</button>
       </div>
       ${this._escape()}`);
     this._setFrame(`
       <div class="jf-cta-stage">
-        <h2 class="jf-cta-heading">Confirm it<br><em>in yours.</em></h2>
-        <p class="jf-cta-body">You've identified a <strong>${sn}</strong> in your ecosystem. A snapshot diagnostic confirms it — names the specific configuration active in your cluster and surfaces a testable leverage hypothesis calibrated to your context.</p>
-        <p class="jf-cta-sub">4–5 weeks · Fixed price · Structured briefing included</p>
-        <a class="jf-cta-btn" href="/pricing.html" target="_blank">See how it's priced →</a>
-        <a class="jf-cta-btn" href="/request.html" target="_blank" style="background:transparent;color:var(--green);border:2px solid var(--green);display:inline-block;margin-top:10px">Request a snapshot diagnostic →</a>
+        <h2 class="jf-cta-heading">Your report<br><em>is ready.</em></h2>
+        <p class="jf-cta-body">You've identified a <strong>${sn}</strong> configuration. Name your ecosystem and get your self-diagnostic report — stalls named, stack described, comparator clusters, leverage hypothesis, and what a full diagnostic would add.</p>
+        <div style="margin:20px 0;display:flex;flex-direction:column;gap:8px">
+          <input id="jf-eco-name" type="text" placeholder="Ecosystem name (e.g. Belfast Cyber Cluster)"
+            style="padding:12px 14px;border:1px solid var(--border-2);border-radius:3px;font-family:var(--font-sans);font-size:14px;color:var(--ink);background:var(--surface);width:100%;outline:none"
+            onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border-2)'">
+          <input id="jf-eco-role" type="text" placeholder="Your role (e.g. Cluster Manager)"
+            style="padding:12px 14px;border:1px solid var(--border-2);border-radius:3px;font-family:var(--font-sans);font-size:14px;color:var(--ink);background:var(--surface);width:100%;outline:none"
+            onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border-2)'">
+        </div>
+        <p class="jf-cta-sub">Printable · Shareable · Yours to keep</p>
+        <button class="jf-cta-btn" onclick="journey._openReport()" style="cursor:pointer;border:none">Get your report →</button>
+        <a class="jf-cta-btn" href="/request.html" target="_blank" style="background:transparent;color:var(--green);border:2px solid var(--green);display:inline-block;margin-top:10px">Request a full diagnostic →</a>
         <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--border)">
-          <p style="font-size:13px;color:var(--ink-muted);margin:0 0 12px;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Continue exploring</p>
+          <p style="font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-muted);margin:0 0 12px">Continue exploring</p>
           <button class="jnav-btn-secondary" style="width:100%;margin-bottom:8px" onclick="journey._startInfra()">02 · The Infrastructure →</button>
           <button class="jnav-btn-secondary" style="width:100%" onclick="journey._startCAS()">03 · Complex Adaptive Systems →</button>
         </div>
       </div>`);
+  },
+
+  _openReport() {
+    window.open('/diagnostic-report.html', '_blank');
   },
 
   // ══ FORK 2: INFRASTRUCTURE ════════════════════════════

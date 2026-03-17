@@ -241,10 +241,10 @@ footer a:hover{color:var(--green);}
     </div>
   </div>
   <div class="section comparator">
-    <div class="section-label">Stall intensity · vs 219-cluster global average</div>
+    <div class="section-label">Stall intensity · vs 221-cluster global average</div>
     <div class="comparator-legend">
       <div class="legend-item"><div class="legend-swatch" style="background:#2a7a4f"></div>This cluster</div>
-      <div class="legend-item"><div class="legend-swatch" style="background:#8c8780"></div>Global avg · 219 clusters · zeros included</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#8c8780"></div>Global avg · 221 clusters · zeros included</div>
     </div>
     <div id="comparator-rows"></div>
   </div>
@@ -272,7 +272,7 @@ footer a:hover{color:var(--green);}
 </footer>
 <script>
 (function(){
-  var stalls = [{name:"Re-proving instead of narrowing",code:"S1",cluster:0.3,global:0.3},{name:"Coordinating instead of deciding",code:"S2",cluster:0.5,global:0.3785},{name:"Extracting without reinvesting",code:"S4",cluster:0.5,global:0.2306},{name:"Mediating instead of coupling",code:"S5",cluster:0.3,global:0.3767},{name:"Stabilizing around incumbents",code:"S6",cluster:0.8,global:0.2009},{name:"Narrating instead of testing",code:"S7",cluster:0.3,global:0.2849},{name:"Scaling activity instead of throughput",code:"S8",cluster:0.3,global:0.3155},{name:"Waiting for permission",code:"S9",cluster:0.5,global:0.2648}];
+  var stalls = [{name:"Re-proving instead of narrowing",code:"S1",cluster:0.3,global:0.3},{name:"Coordinating instead of deciding",code:"S2",cluster:0.5,global:0.3778},{name:"Extracting without reinvesting",code:"S4",cluster:0.5,global:0.2308},{name:"Mediating instead of coupling",code:"S5",cluster:0.3,global:0.376},{name:"Stabilizing around incumbents",code:"S6",cluster:0.8,global:0.2036},{name:"Narrating instead of testing",code:"S7",cluster:0.3,global:0.2837},{name:"Scaling activity instead of throughput",code:"S8",cluster:0.3,global:0.3154},{name:"Waiting for permission",code:"S9",cluster:0.5,global:0.2647}];
   var MAX = 0.7;
   var container = document.getElementById('comparator-rows');
   stalls.forEach(function(s){

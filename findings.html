@@ -83,7 +83,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     --mono:    'Geist Mono', monospace;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth;  overflow-x: hidden;
+    max-width: 100vw; }
   body {
     font-family: var(--font-sans);
     background: var(--page);
@@ -170,7 +171,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   /* ── Page styles ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; background: #f7f4ef; color: #1a1a1a; }
+html { scroll-behavior: smooth; background: #f7f4ef; color: #1a1a1a;  overflow-x: hidden; }
 html, body { overflow-x: hidden; }
 body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
@@ -244,7 +245,7 @@ p + p { margin-top: 16px; }
 .diagram-wrap svg { width: 100%; height: auto; display: block; }
 @media (max-width: 700px) {
   .diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 6px; }
-  .diagram-wrap svg { width: 800px; height: auto; min-width: 800px; }
+  .diagram-wrap svg { width: 100%; height: auto; display: block; }
 }
 
 /* SIGNAL CASCADE TABLE */
@@ -462,7 +463,7 @@ p + p { margin-top: 16px; }
 
 /* Map section */
 .map-section  { position: relative; width: 100%; height: 320px; margin: 0 0 16px;
-  border: 1px solid var(--border); border-radius: 4px; }
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden; touch-action: pan-y; }
 #map          { width: 100%; height: 100%; }
 .map-overlay  { position: absolute; top: 12px; left: 12px; z-index: 800;
   pointer-events: none; }
@@ -665,8 +666,22 @@ p + p { margin-top: 16px; }
   padding: 8px 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); white-space: nowrap; }
 .cluster-tooltip strong { display: block; font-weight: 500; font-size: 13px; margin-bottom: 2px; }
 .cluster-tooltip span { color: var(--ink-muted); font-size: 11px; }
+
+/* ── MOBILE OVERFLOW FIX ─────────────────────────────── */
+img, video, svg, canvas, iframe { max-width: 100%; }
+table { width: 100%; }
+pre, code { white-space: pre-wrap; word-break: break-all; }
+
+/* ── NAV MOBILE FIX ─────────────────────────────────── */
+@media (max-width: 480px) {
+  nav { padding: 0 16px !important; }
+  .nav-logo { font-size: 16px !important; }
+  .nav-cta { display: none !important; }
+  .nav-hamburger { display: flex !important; margin-left: auto; }
+}
 </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script defer src="/_vercel/insights/script.js"></script>
 <meta name="description" content="What 200+ ClusterOS diagnostics found: stall frequency distribution, structural resemblances between ecosystems, and the nine canonical patterns that prevent clusters from compounding.">
 </head>
 <body>
@@ -788,7 +803,7 @@ setTimeout(function() {
 
 <div class="hero">
   <div class="hero-eyebrow">Evidence · 200+ Diagnostics</div>
-  <h1 class="hero-h">The same patterns.<br><em>Everywhere.</em></h1>
+  <h1 class="hero-h">The same patterns.<br><em>Different justifications. Identical structure.</em></h1>
   <p class="hero-p">We have run the ClusterOS diagnostic across 200+ clusters — cyber security ecosystems in Belfast, Tel Aviv, Cheltenham, Singapore, and San Francisco; advanced manufacturing in the Basque Country; the Cambridge tech ecosystem; Orlando's ten innovation clusters; and more. <strong>The finding that surprised us most is not what each ecosystem is doing wrong. It is how consistently they do the same things.</strong></p>
 </div>
 
@@ -835,7 +850,7 @@ setTimeout(function() {
 <div class="f-section">
   <div class="f-num">Finding 1</div>
   <h2 class="f-h">Three stalls appear in<br><em>almost every ecosystem</em></h2>
-  <p class="f-p">Across 200+ diagnostics, we tracked which of the nine canonical stalls appeared in each cluster. The distribution is not even. Three stalls dominate — present across virtually every geography, sector, and maturity level we have encountered.</p>
+  <p class="f-p">Across 200+ diagnostics, we tracked which of the nine canonical stalls appeared in each cluster. The distribution is not even. Three stalls dominate — present across virtually every geography, sector, and maturity level we have encountered. Each is a locally rational response to pressure. Together, they describe how ecosystems learn to stay coherent without having to change.</p>
   <div id="freq-chart" class="freq-chart"></div>
   <p class="freq-note">Frequency reflects appearance across completed diagnostics. Evidence confidence varies — stalls with high X-side observability (S2, S7, S8) show higher confidence than those requiring Y-side verification (S4, S1). Numbers indicate approximate proportion of diagnostics in which each stall was identified.</p>
   <div class="pullquote">

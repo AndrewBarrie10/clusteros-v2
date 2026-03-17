@@ -83,7 +83,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     --mono:    'Geist Mono', monospace;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth;  overflow-x: hidden;
+    max-width: 100vw; }
   body {
     font-family: var(--font-sans);
     background: var(--page);
@@ -170,7 +171,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   /* ── Page styles ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; background: #f7f4ef; color: #1a1a1a; }
+html { scroll-behavior: smooth; background: #f7f4ef; color: #1a1a1a;  overflow-x: hidden; }
 body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
 /* HERO */
@@ -351,6 +352,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 
 </style>
+<script defer src="/_vercel/insights/script.js"></script>
 <meta name="description" content="How ClusterOS identifies leverage hypotheses: the specific structural intervention most likely to shift a stall configuration. Based on 75+ diagnosed clusters.">
 </head>
 <body>
@@ -408,7 +410,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 <div class="hero">
   <div class="hero-tag rev">Stage 5 · Leverage</div>
   <h1 class="hero-h rev d1">The system doesn't need fixing.<br><em>It needs exposure.</em></h1>
-  <p class="hero-p rev d2">Large interventions fail because the stack absorbs them. The coordination body processes the intervention. The narrative explains why it didn't change anything. The activity metrics still look fine. <strong>Leverage is not a bigger push. It is a small withdrawal of protection.</strong></p>
+  <p class="hero-p rev d2">Large interventions fail because the stack absorbs them. The coordination body processes the intervention. The narrative explains why it didn't change anything. The activity metrics still look fine. <strong>Leverage is not a bigger push. It is a small withdrawal of protection.</strong> In many systems, timing pressure produces more learning than strategy ever does.</p>
   <div class="pipeline-strip rev d3">
     <div class="ps done"><div class="ps-num">01</div><div class="ps-label">Evidence</div></div>
     <div class="ps done"><div class="ps-num">02</div><div class="ps-label">Patterns</div></div>
@@ -443,7 +445,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 <div class="moves">
   <div class="moves-heading">
     <h2 class="moves-h">Four repeatable <em>leverage moves</em></h2>
-    <p class="moves-sub">These are not prescriptions. They are patterns that appear across ecosystems where stewards have successfully shifted regimes. Each is a hypothesis for testing in your specific context.</p>
+    <p class="moves-sub">These are not grand interventions. They are small withdrawals of protection — patterns that appear across ecosystems where stewards have shifted regimes. None dictate direction. Each simply makes it harder for the system to absorb pressure without learning.</p>
   </div>
 
   <div id="moves-list"></div>
@@ -501,6 +503,19 @@ hr { border: none; border-top: 1px solid var(--border); }
   .move-main { padding: 14px 10px; }
   .move-num { width: 40px; font-size: 16px; }
   .move-chevron { width: 32px; }
+}
+
+/* ── MOBILE OVERFLOW FIX ─────────────────────────────── */
+img, video, svg, canvas, iframe { max-width: 100%; }
+table { width: 100%; }
+pre, code { white-space: pre-wrap; word-break: break-all; }
+
+/* ── NAV MOBILE FIX ─────────────────────────────────── */
+@media (max-width: 480px) {
+  nav { padding: 0 16px !important; }
+  .nav-logo { font-size: 16px !important; }
+  .nav-cta { display: none !important; }
+  .nav-hamburger { display: flex !important; margin-left: auto; }
 }
 </style>
 

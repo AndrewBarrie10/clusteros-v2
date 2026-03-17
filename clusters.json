@@ -81,11 +81,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -128,7 +123,7 @@
       "target_stack": "STACK_2",
       "timeline": "6-12 months"
     },
-    "summary": "Minneapolis FinTech exhibits 8 observable stalls with Mediating instead of coupling and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Minneapolis FinTech exhibits 7 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17141902",
     "_evidence_count": 59,
     "_lifecycle_stage": "mature",
@@ -162,11 +157,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -211,7 +201,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Calgary CleanTech & Energy Transition exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Calgary CleanTech & Energy Transition exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17140255",
     "_evidence_count": 72,
     "_lifecycle_stage": "transitioning",
@@ -299,11 +289,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -320,7 +305,7 @@
       "target_stack": "STK-02",
       "timeline": "6-12 months"
     },
-    "summary": "Baltimore & Maryland Life Sciences & BioTech exhibits 7 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Baltimore & Maryland Life Sciences & BioTech exhibits 6 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17140247",
     "_evidence_count": 80,
     "_lifecycle_stage": "mature",
@@ -349,11 +334,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -389,7 +369,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Denver & Boulder CleanTech & Energy exhibits 6 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Denver & Boulder CleanTech & Energy exhibits 5 observable stalls with Coordinating instead of deciding and Narrating instead of testing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17140239",
     "_evidence_count": 80,
     "_lifecycle_stage": "growing",
@@ -423,11 +403,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -467,7 +442,7 @@
       "target_stack": "STACK_1",
       "timeline": "6-12 months"
     },
-    "summary": "Boston Robotics & AI exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Boston Robotics & AI exhibits 6 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17140235",
     "_evidence_count": 87,
     "_lifecycle_stage": "mature",
@@ -499,11 +474,6 @@
       },
       {
         "name": "Mediating instead of coupling",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
         "intensity": 0.3,
         "confidence": "low"
       },
@@ -541,7 +511,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Seattle AI & Cloud exhibits 7 observable stalls with Extracting without reinvesting and Narrating instead of testing as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Seattle AI & Cloud exhibits 6 observable stalls with Extracting without reinvesting and Narrating instead of testing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17140231",
     "_evidence_count": 74,
     "_lifecycle_stage": "mature",
@@ -568,11 +538,6 @@
       },
       {
         "name": "Mediating instead of coupling",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
-        "name": "Stabilizing around incumbents",
         "intensity": 0.5,
         "confidence": "medium"
       },
@@ -610,7 +575,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Chicago Advanced Manufacturing exhibits 6 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Chicago Advanced Manufacturing exhibits 5 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17140224",
     "_evidence_count": 61,
     "_lifecycle_stage": "transitioning",
@@ -644,11 +609,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -689,7 +649,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Montreal AI & Deep Tech exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Montreal AI & Deep Tech exhibits 7 observable stalls with Extracting without reinvesting and Scaling activity instead of throughput as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130609",
     "_evidence_count": 82,
     "_lifecycle_stage": "growing",
@@ -725,11 +685,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.5,
         "confidence": "medium"
@@ -751,7 +706,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Vancouver Life Sciences & BioTech exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Vancouver Life Sciences & BioTech exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130519",
     "_evidence_count": 70,
     "_lifecycle_stage": "growing",
@@ -785,11 +740,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -834,7 +784,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Vancouver AI & Deep Tech exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Vancouver AI & Deep Tech exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130515",
     "_evidence_count": 81,
     "_lifecycle_stage": "growing",
@@ -870,11 +820,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -896,7 +841,7 @@
       "target_stack": "ST-03",
       "timeline": "6-12 months"
     },
-    "summary": "Toronto Life Sciences & BioTech exhibits 8 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Toronto Life Sciences & BioTech exhibits 7 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130512",
     "_evidence_count": 79,
     "_lifecycle_stage": "growing",
@@ -932,11 +877,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -958,7 +898,7 @@
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Toronto FinTech exhibits 8 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Toronto FinTech exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130507",
     "_evidence_count": 73,
     "_lifecycle_stage": "mature",
@@ -1121,11 +1061,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -1159,7 +1094,7 @@
       "target_stack": "STACK_2",
       "timeline": "6-12 months"
     },
-    "summary": "Philadelphia Life Sciences & BioTech exhibits 7 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Philadelphia Life Sciences & BioTech exhibits 6 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130455",
     "_evidence_count": 82,
     "_lifecycle_stage": "mature",
@@ -1252,11 +1187,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.5,
         "confidence": "medium"
@@ -1299,7 +1229,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Miami FinTech & Crypto exhibits 8 observable stalls with Coordinating instead of deciding and Narrating instead of testing as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Miami FinTech & Crypto exhibits 7 observable stalls with Coordinating instead of deciding and Narrating instead of testing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130447",
     "_evidence_count": 69,
     "_lifecycle_stage": "growing",
@@ -1328,11 +1258,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.5,
         "confidence": "medium"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
       },
       {
         "name": "Narrating instead of testing",
@@ -1377,7 +1302,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Salt Lake City Life Sciences exhibits 7 observable stalls with Mediating instead of coupling and Waiting for permission as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Salt Lake City Life Sciences exhibits 6 observable stalls with Mediating instead of coupling and Waiting for permission as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130443",
     "_evidence_count": 64,
     "_lifecycle_stage": "growing",
@@ -1584,11 +1509,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.5,
         "confidence": "medium"
@@ -1610,7 +1530,7 @@
       "target_stack": "ST-01",
       "timeline": "6-12 months"
     },
-    "summary": "Detroit & Michigan Advanced Manufacturing exhibits 8 observable stalls with Extracting without reinvesting and Mediating instead of coupling as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Detroit & Michigan Advanced Manufacturing exhibits 7 observable stalls with Extracting without reinvesting and Mediating instead of coupling as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130427",
     "_evidence_count": 72,
     "_lifecycle_stage": "transitioning",
@@ -1637,11 +1557,6 @@
       },
       {
         "name": "Mediating instead of coupling",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
-        "name": "Stabilizing around incumbents",
         "intensity": 0.5,
         "confidence": "medium"
       },
@@ -1688,7 +1603,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Detroit & Michigan Mobility & Auto Tech exhibits 7 observable stalls with Mediating instead of coupling and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Detroit & Michigan Mobility & Auto Tech exhibits 6 observable stalls with Mediating instead of coupling and Waiting for permission as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130424",
     "_evidence_count": 95,
     "_lifecycle_stage": "transitioning",
@@ -1722,11 +1637,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -1766,7 +1676,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Minneapolis MedTech & Life Sciences exhibits 7 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Minneapolis MedTech & Life Sciences exhibits 6 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130418",
     "_evidence_count": 84,
     "_lifecycle_stage": "mature",
@@ -1795,11 +1705,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.5,
         "confidence": "medium"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
       },
       {
         "name": "Narrating instead of testing",
@@ -1835,7 +1740,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Denver & Boulder Life Sciences exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Denver & Boulder Life Sciences exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130414",
     "_evidence_count": 66,
     "_lifecycle_stage": "growing",
@@ -1936,11 +1841,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -1983,7 +1883,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Atlanta Cyber Security exhibits 8 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Atlanta Cyber Security exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130403",
     "_evidence_count": 57,
     "_lifecycle_stage": "growing",
@@ -2019,11 +1919,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -2057,7 +1952,7 @@
       "target_stack": "STACK-02",
       "timeline": "6-12 months"
     },
-    "summary": "Atlanta Life Sciences & MedTech exhibits 7 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Atlanta Life Sciences & MedTech exhibits 6 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130359",
     "_evidence_count": 78,
     "_lifecycle_stage": "growing",
@@ -2091,11 +1986,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -2140,7 +2030,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Atlanta FinTech & Payments exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Atlanta FinTech & Payments exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130355",
     "_evidence_count": 69,
     "_lifecycle_stage": "mature",
@@ -2171,11 +2061,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -2192,7 +2077,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "San Diego Cyber Security exhibits 6 observable stalls with Mediating instead of coupling and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "San Diego Cyber Security exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130351",
     "_evidence_count": 55,
     "_lifecycle_stage": "growing",
@@ -2228,11 +2113,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -2254,7 +2134,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "San Diego Defense Tech exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "San Diego Defense Tech exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130347",
     "_evidence_count": 77,
     "_lifecycle_stage": "mature",
@@ -2290,11 +2170,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -2328,7 +2203,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "San Diego Life Sciences & BioTech exhibits 7 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "San Diego Life Sciences & BioTech exhibits 6 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130343",
     "_evidence_count": 72,
     "_lifecycle_stage": "mature",
@@ -2442,11 +2317,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -2468,7 +2338,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Boston CleanTech exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Boston CleanTech exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130335",
     "_evidence_count": 59,
     "_lifecycle_stage": "growing",
@@ -2500,11 +2370,6 @@
       },
       {
         "name": "Mediating instead of coupling",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
         "intensity": 0.3,
         "confidence": "low"
       },
@@ -2551,7 +2416,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Seattle CleanTech exhibits 8 observable stalls with Waiting for permission and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Seattle CleanTech exhibits 7 observable stalls with Waiting for permission and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130327",
     "_evidence_count": 58,
     "_lifecycle_stage": "growing",
@@ -2665,11 +2530,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -2708,7 +2568,7 @@
       "target_stack": "STACK_02",
       "timeline": "6-12 months"
     },
-    "summary": "Austin CleanTech & Energy exhibits 7 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Austin CleanTech & Energy exhibits 6 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130315",
     "_evidence_count": 66,
     "_lifecycle_stage": "growing",
@@ -2744,11 +2604,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -2770,7 +2625,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Austin FinTech exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Austin FinTech exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130307",
     "_evidence_count": 60,
     "_lifecycle_stage": "growing",
@@ -2806,11 +2661,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Scaling activity instead of throughput",
         "intensity": 0.3,
         "confidence": "low"
@@ -2839,7 +2689,7 @@
       "target_stack": "STACK_1",
       "timeline": "6-12 months"
     },
-    "summary": "Austin AI & Deep Tech exhibits 6 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Austin AI & Deep Tech exhibits 5 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130303",
     "_evidence_count": 73,
     "_lifecycle_stage": "growing",
@@ -2953,11 +2803,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -3000,7 +2845,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Chicago Life Sciences & BioTech exhibits 8 observable stalls with Stabilizing around incumbents and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Chicago Life Sciences & BioTech exhibits 7 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130251",
     "_evidence_count": 73,
     "_lifecycle_stage": "mature",
@@ -3036,11 +2881,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -3062,7 +2902,7 @@
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Chicago FinTech & Payments exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Chicago FinTech & Payments exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130247",
     "_evidence_count": 78,
     "_lifecycle_stage": "mature",
@@ -3149,11 +2989,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -3183,7 +3018,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "New York City AI & Deep Tech exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "summary": "New York City AI & Deep Tech exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130239",
     "_evidence_count": 68,
     "_lifecycle_stage": "growing",
@@ -3214,11 +3049,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Scaling activity instead of throughput",
         "intensity": 0.3,
         "confidence": "low"
@@ -3235,7 +3065,7 @@
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "New York City Life Sciences & BioTech exhibits 6 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "New York City Life Sciences & BioTech exhibits 5 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130236",
     "_evidence_count": 87,
     "_lifecycle_stage": "growing",
@@ -3428,11 +3258,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -3475,7 +3300,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Prague Enterprise Tech & Mobility exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Prague Enterprise Tech & Mobility exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17114749",
     "_evidence_count": 69,
     "_lifecycle_stage": "growing",
@@ -3507,11 +3332,6 @@
       },
       {
         "name": "Mediating instead of coupling",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
-        "name": "Stabilizing around incumbents",
         "intensity": 0.5,
         "confidence": "medium"
       },
@@ -3558,7 +3378,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Warsaw FinTech & Enterprise Software exhibits 8 observable stalls with Extracting without reinvesting and Mediating instead of coupling as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Warsaw FinTech & Enterprise Software exhibits 7 observable stalls with Extracting without reinvesting and Mediating instead of coupling as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17114745",
     "_evidence_count": 77,
     "_lifecycle_stage": "growing",
@@ -3592,11 +3412,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -3641,7 +3456,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Helsinki Gaming Digital & AI exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Helsinki Gaming Digital & AI exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17114741",
     "_evidence_count": 61,
     "_lifecycle_stage": "mature",
@@ -3900,11 +3715,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -3926,7 +3736,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Lisbon Digital & Web3 exhibits 8 observable stalls with Waiting for permission and Coordinating instead of deciding as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Lisbon Digital & Web3 exhibits 7 observable stalls with Waiting for permission and Coordinating instead of deciding as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102438",
     "_evidence_count": 81,
     "_lifecycle_stage": "growing",
@@ -3962,11 +3772,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -3988,7 +3793,7 @@
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Krakow Cyber Security & IT Services exhibits 8 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Krakow Cyber Security & IT Services exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102426",
     "_evidence_count": 57,
     "_lifecycle_stage": "growing",
@@ -4019,11 +3824,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Scaling activity instead of throughput",
         "intensity": 0.3,
         "confidence": "low"
@@ -4040,7 +3840,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Vienna HealthTech & Digital Government exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Vienna HealthTech & Digital Government exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102418",
     "_evidence_count": 62,
     "_lifecycle_stage": "growing",
@@ -4074,11 +3874,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -4123,7 +3918,7 @@
       "target_stack": "STACK_02",
       "timeline": "6-12 months"
     },
-    "summary": "Oslo CleanTech & Maritime Innovation exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Oslo CleanTech & Maritime Innovation exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102414",
     "_evidence_count": 83,
     "_lifecycle_stage": "transitioning",
@@ -4237,11 +4032,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.8,
-        "confidence": "high"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.5,
         "confidence": "medium"
@@ -4284,7 +4074,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Madrid FinTech & Mobility exhibits 8 observable stalls with Stabilizing around incumbents and Coordinating instead of deciding as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Madrid FinTech & Mobility exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102402",
     "_evidence_count": 77,
     "_lifecycle_stage": "growing",
@@ -4385,11 +4175,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -4432,7 +4217,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Grenoble Deep Tech & Semiconductors exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Grenoble Deep Tech & Semiconductors exhibits 7 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102350",
     "_evidence_count": 69,
     "_lifecycle_stage": "mature",
@@ -4468,11 +4253,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Scaling activity instead of throughput",
         "intensity": 0.3,
         "confidence": "low"
@@ -4506,7 +4286,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Stockholm FinTech & Payments exhibits 7 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Stockholm FinTech & Payments exhibits 6 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102340",
     "_evidence_count": 68,
     "_lifecycle_stage": "mature",
@@ -4537,11 +4317,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -4563,7 +4338,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Stuttgart Automotive & Mobility Tech exhibits 7 observable stalls with Stabilizing around incumbents and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Stuttgart Automotive & Mobility Tech exhibits 6 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102336",
     "_evidence_count": 76,
     "_lifecycle_stage": "transitioning",
@@ -4594,11 +4369,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -4620,7 +4390,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Munich Life Sciences & Biotech exhibits 7 observable stalls with Mediating instead of coupling and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Munich Life Sciences & Biotech exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102330",
     "_evidence_count": 78,
     "_lifecycle_stage": "mature",
@@ -4901,11 +4671,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -4939,7 +4704,7 @@
       "target_stack": "STACK_1",
       "timeline": "6-12 months"
     },
-    "summary": "Scotland Quantum and Photonics exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Scotland Quantum and Photonics exhibits 6 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-26132642",
     "_evidence_count": 57,
     "_lifecycle_stage": "emerging",
@@ -5524,11 +5289,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.5,
         "confidence": "medium"
@@ -5550,7 +5310,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Busan Innovation Ecosystem exhibits 8 observable stalls with Extracting without reinvesting and Narrating instead of testing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Busan Innovation Ecosystem exhibits 7 observable stalls with Extracting without reinvesting and Narrating instead of testing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171438",
     "_evidence_count": 54,
     "_lifecycle_stage": "emerging",
@@ -5742,11 +5502,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -5768,7 +5523,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Nashville Regional Innovation Ecosystem exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Nashville Regional Innovation Ecosystem exhibits 7 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171426",
     "_evidence_count": 65,
     "_lifecycle_stage": "growing",
@@ -5802,11 +5557,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -5851,7 +5601,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Wichita Regional Innovation Ecosystem exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Wichita Regional Innovation Ecosystem exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171422",
     "_evidence_count": 59,
     "_lifecycle_stage": "emerging",
@@ -5885,11 +5635,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -5934,7 +5679,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Madison Regional Innovation Ecosystem exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Madison Regional Innovation Ecosystem exhibits 7 observable stalls with Coordinating instead of deciding and Waiting for permission as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171418",
     "_evidence_count": 60,
     "_lifecycle_stage": "growing",
@@ -5970,11 +5715,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -5996,7 +5736,7 @@
       "target_stack": "ST-02",
       "timeline": "6-12 months"
     },
-    "summary": "Buffalo Niagara Innovation Ecosystem exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Buffalo Niagara Innovation Ecosystem exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171414",
     "_evidence_count": 63,
     "_lifecycle_stage": "emerging",
@@ -6110,11 +5850,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -6149,7 +5884,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Eindhoven Brainport Innovation Ecosystem exhibits 7 observable stalls with Mediating instead of coupling and Stabilizing around incumbents as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "summary": "Eindhoven Brainport Innovation Ecosystem exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171402",
     "_evidence_count": 72,
     "_lifecycle_stage": "mature",
@@ -6249,11 +5984,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -6288,7 +6018,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Basque Country Innovation Ecosystem exhibits 7 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "summary": "Basque Country Innovation Ecosystem exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171355",
     "_evidence_count": 68,
     "_lifecycle_stage": "mature",
@@ -6317,11 +6047,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -6361,7 +6086,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Research Triangle Innovation Ecosystem exhibits 6 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Research Triangle Innovation Ecosystem exhibits 5 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171351",
     "_evidence_count": 76,
     "_lifecycle_stage": "mature",
@@ -6390,11 +6115,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -6439,7 +6159,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Chattanooga Regional Innovation Ecosystem exhibits 7 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Chattanooga Regional Innovation Ecosystem exhibits 6 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171348",
     "_evidence_count": 71,
     "_lifecycle_stage": "emerging",
@@ -6470,11 +6190,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Scaling activity instead of throughput",
         "intensity": 0.5,
         "confidence": "medium"
@@ -6491,7 +6206,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Tulsa Regional Innovation Ecosystem exhibits 6 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Tulsa Regional Innovation Ecosystem exhibits 5 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171345",
     "_evidence_count": 56,
     "_lifecycle_stage": "emerging",
@@ -6783,11 +6498,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -6817,7 +6527,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Abu Dhabi HELM Life Sciences exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "summary": "Abu Dhabi HELM Life Sciences exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
     "_run_id": "2026Q1-24083306",
     "_evidence_count": 53,
     "_lifecycle_stage": "emerging",
@@ -6844,11 +6554,6 @@
       },
       {
         "name": "Mediating instead of coupling",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
-        "name": "Stabilizing around incumbents",
         "intensity": 0.5,
         "confidence": "medium"
       },
@@ -6890,7 +6595,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Zurich-Zug MedTech exhibits 6 observable stalls with Mediating instead of coupling and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Zurich-Zug MedTech exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-24083302",
     "_evidence_count": 66,
     "_lifecycle_stage": "",
@@ -6921,11 +6626,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Scaling activity instead of throughput",
         "intensity": 0.3,
         "confidence": "low"
@@ -6937,7 +6637,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Research Triangle Life Sciences exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Research Triangle Life Sciences exhibits 4 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-24083258",
     "_evidence_count": 62,
     "_lifecycle_stage": "",
@@ -7168,11 +6868,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -7210,7 +6905,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Singapore Biopolis Life Sciences exhibits 7 observable stalls with Extracting without reinvesting and Scaling activity instead of throughput as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Singapore Biopolis Life Sciences exhibits 6 observable stalls with Extracting without reinvesting and Scaling activity instead of throughput as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-24083243",
     "_evidence_count": 63,
     "_lifecycle_stage": "",
@@ -7310,11 +7005,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -7344,7 +7034,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Copenhagen-Medicon Valley Life Sciences exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "summary": "Copenhagen-Medicon Valley Life Sciences exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
     "_run_id": "2026Q1-24083236",
     "_evidence_count": 83,
     "_lifecycle_stage": "",
@@ -7375,11 +7065,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -7396,7 +7081,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Basel Life Sciences exhibits 6 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Basel Life Sciences exhibits 5 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-24083233",
     "_evidence_count": 65,
     "_lifecycle_stage": "",
@@ -7427,11 +7112,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Scaling activity instead of throughput",
         "intensity": 0.3,
         "confidence": "low"
@@ -7443,7 +7123,7 @@
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Boston-Cambridge Life Sciences exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Boston-Cambridge Life Sciences exhibits 4 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-24083229",
     "_evidence_count": 82,
     "_lifecycle_stage": "",
@@ -7536,11 +7216,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.5,
         "confidence": "medium"
@@ -7583,7 +7258,7 @@
       "target_stack": "STACK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Tsukuba Space Technology exhibits 8 observable stalls with Extracting without reinvesting and Mediating instead of coupling as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Tsukuba Space Technology exhibits 7 observable stalls with Extracting without reinvesting and Mediating instead of coupling as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-23153856",
     "_evidence_count": 55,
     "_lifecycle_stage": "growing",
@@ -7745,11 +7420,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -7771,7 +7441,7 @@
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Harwell Space Technology exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Harwell Space Technology exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-23153844",
     "_evidence_count": 55,
     "_lifecycle_stage": "growing",
@@ -7807,11 +7477,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.5,
         "confidence": "medium"
@@ -7841,7 +7506,7 @@
       "target_stack": "STACK_1",
       "timeline": "6-12 months"
     },
-    "summary": "Adelaide Space Technology exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "summary": "Adelaide Space Technology exhibits 6 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 3 stabilisation stacks identified.",
     "_run_id": "2026Q1-23153840",
     "_evidence_count": 62,
     "_lifecycle_stage": "emerging",
@@ -7956,11 +7621,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -7982,7 +7642,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Toulouse Space Technology exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Toulouse Space Technology exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-23153833",
     "_evidence_count": 60,
     "_lifecycle_stage": "mature",
@@ -8013,11 +7673,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Scaling activity instead of throughput",
         "intensity": 0.3,
         "confidence": "low"
@@ -8043,7 +7698,7 @@
       "target_stack": "STACK_1",
       "timeline": "6-12 months"
     },
-    "summary": "Los Angeles Space Technology exhibits 6 observable stalls with Stabilizing around incumbents and Re-proving instead of narrowing as primary behavioural patterns. 2 stabilisation stacks identified.",
+    "summary": "Los Angeles Space Technology exhibits 5 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 2 stabilisation stacks identified.",
     "_run_id": "2026Q1-23153829",
     "_evidence_count": 54,
     "_lifecycle_stage": "",
@@ -8925,11 +8580,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -8951,7 +8601,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Tel Aviv Cyber Security exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Tel Aviv Cyber Security exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-23124816",
     "_evidence_count": 70,
     "_lifecycle_stage": "mature",
@@ -9134,11 +8784,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -9172,7 +8817,7 @@
       "target_stack": "STACK_02",
       "timeline": "6-12 months"
     },
-    "summary": "Orlando Photonics & Optics exhibits 7 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Orlando Photonics & Optics exhibits 6 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-20141029",
     "_evidence_count": 58,
     "_lifecycle_stage": "emerging",
@@ -9201,11 +8846,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.5,
         "confidence": "medium"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
       },
       {
         "name": "Narrating instead of testing",
@@ -9246,7 +8886,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Orlando AgTech exhibits 7 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "summary": "Orlando AgTech exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-20141018",
     "_evidence_count": 54,
     "_lifecycle_stage": "emerging",
@@ -9346,11 +8986,6 @@
         "confidence": "low"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -9367,7 +9002,7 @@
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
-    "summary": "Orlando Tourism Technology exhibits 6 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Orlando Tourism Technology exhibits 5 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-20140955",
     "_evidence_count": 68,
     "_lifecycle_stage": "mature",
@@ -9398,11 +9033,6 @@
         "confidence": "medium"
       },
       {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
-      },
-      {
         "name": "Narrating instead of testing",
         "intensity": 0.3,
         "confidence": "low"
@@ -9419,7 +9049,7 @@
       "target_stack": "ST-01",
       "timeline": "6-12 months"
     },
-    "summary": "Orlando MedTech exhibits 6 observable stalls with Mediating instead of coupling and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Orlando MedTech exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
     "_run_id": "2026Q1-20140944",
     "_evidence_count": 57,
     "_lifecycle_stage": "emerging",
@@ -9453,11 +9083,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.5,
         "confidence": "medium"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.3,
-        "confidence": "low"
       },
       {
         "name": "Narrating instead of testing",
@@ -9502,7 +9127,7 @@
       "target_stack": "STACK_02",
       "timeline": "6-12 months"
     },
-    "summary": "Orlando Digital Media exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Orlando Digital Media exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-20140933",
     "_evidence_count": 58,
     "_lifecycle_stage": "mature",
@@ -9536,11 +9161,6 @@
         "name": "Mediating instead of coupling",
         "intensity": 0.3,
         "confidence": "low"
-      },
-      {
-        "name": "Stabilizing around incumbents",
-        "intensity": 0.5,
-        "confidence": "medium"
       },
       {
         "name": "Narrating instead of testing",
@@ -9580,7 +9200,7 @@
       "target_stack": "STACK_01",
       "timeline": "6-12 months"
     },
-    "summary": "Orlando Simulation & Training exhibits 7 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "summary": "Orlando Simulation & Training exhibits 6 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-20140921",
     "_evidence_count": 61,
     "_lifecycle_stage": "mature",
@@ -9654,43 +9274,5 @@
     "_evidence_count": 57,
     "_lifecycle_stage": "mature",
     "_anchor_type": "government"
-  },
-  {
-    "id": "glasgow-health-life-sciences",
-    "name": "Glasgow Health & Life Sciences",
-    "city": "Glasgow",
-    "country": "GB",
-    "lat": 55.8642,
-    "lng": -4.3018,
-    "regime": "mature",
-    "stalls": [],
-    "stacks": [],
-    "leverage": null,
-    "summary": "Glasgow Health & Life Sciences diagnostic complete. Insufficient observable stall data for summary.",
-    "_run_id": "2026Q1-19122947",
-    "_evidence_count": 72,
-    "_lifecycle_stage": "mature",
-    "_anchor_type": "university"
-  },
-  {
-    "id": "glasgow-fintech",
-    "name": "Glasgow FinTech",
-    "city": "Glasgow",
-    "country": "GB",
-    "lat": 55.8642,
-    "lng": -4.1818,
-    "regime": "emerging",
-    "stalls": [],
-    "stacks": [],
-    "leverage": {
-      "hypothesis": "If quarterly roundtable decisions and non-decisions were documented and circulated, it might reduce the system's ability to absorb pressure for exclusionary resource allocation without adaptation, by making decision avoidance observable to stakeholders",
-      "target_stack": "STACK-GF-2026Q1-18235203-01",
-      "timeline": "6-12 months"
-    },
-    "summary": "Glasgow FinTech diagnostic complete. Insufficient observable stall data for summary.",
-    "_run_id": "2026Q1-18235203",
-    "_evidence_count": 62,
-    "_lifecycle_stage": "emerging",
-    "_anchor_type": "university"
   }
-]
+ ]

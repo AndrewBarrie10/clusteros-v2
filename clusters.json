@@ -1,5 +1,144 @@
 [
   {
+    "id": "glasgow-health-life-sciences",
+    "name": "Glasgow Health & Life Sciences",
+    "city": "Glasgow",
+    "country": "GB",
+    "lat": 55.8642,
+    "lng": -4.3018,
+    "regime": "mature",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Incumbent centrality (S6 X-side) co-occurs with formal partnership/coordination structures (S2 X-side). Coordination structures may preferentially connect through established institutions with existing governance capacity; incumbent institutions may host/anchor coordination mechanisms. Both behaviou"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Programme/facility expansion (S8 X-side) co-occurs with partnership formation activity (S1 X-side). New partnerships may enable programme expansion by providing access to resources/networks; programme expansion may motivate partnership formation to access new domains. Both behaviours plausibly susta"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediary/brokerage functions (S5 X-side) co-occur with formal coordination structures (S2 X-side). Coordination structures may create demand for intermediation services; intermediary entities may host or facilitate coordination mechanisms. Both behaviours plausibly sustain one another without re"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If direct relationships between non-incumbent actors (e.g., ventures, smaller institutions, clinical units) were made observable through structured reporting or network mapping, it might reveal whether coordination structures are absorbing complexity that could be managed through peer relationships, potentially reducing reliance on incumbent-hosted coordination.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Glasgow Health & Life Sciences exhibits 5 observable stalls with Stabilizing around incumbents and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
+    "_run_id": "2026Q1-17221847",
+    "_evidence_count": 68,
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "university"
+  },
+  {
+    "id": "glasgow-fintech",
+    "name": "Glasgow FinTech",
+    "city": "Glasgow",
+    "country": "GB",
+    "lat": 55.8642,
+    "lng": -4.1818,
+    "regime": "emerging",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.5,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "X-side of S2 (coordinating through multi-sector partnerships) creates venues where X-side of S8 (scaling activity through programs/events) appears as stakeholder engagement; X-side of S5 (mediating through intermediary structures) provides channels through which S8 activity is distributed; S8 activi"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S1 (re-proving through repeated funding allocations) generates material for X-side of S7 (narrating through events/reporting); X-side of S9 (waiting for formal governance establishment) creates authorization structures that enable S1 funding allocations; S7 narrative activity establishes l"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S6 (stabilising around large established actors with 1,000+ staff) creates employment/infrastructure base that may reduce pressure for X-side of S4 (extracting through ownership transitions) to generate visible disruption; S4 ownership transitions maintain incumbent actor presence that sus"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S2 (coordinating through public-private partnerships with multi-sector boards) creates demand for X-side of S5 (mediating through intermediary structures like FinTech Scotland); S5 mediation structures provide operational platforms that enable S2 coordination to occur without requiring dir"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If activity metrics from programs/events (P005, P015) were made visible in a form that distinguished participation volume from outcome progression, it might reduce the system's ability to absorb pressure through coordination structures (S2) without exposing what S8 activity produces",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Glasgow FinTech exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-17221844",
+    "_evidence_count": 58,
+    "_lifecycle_stage": "emerging",
+    "_anchor_type": "corporate"
+  },
+  {
     "id": "bangalore-quantum-deep-science",
     "name": "Bangalore Quantum & Deep Science",
     "city": "Bangalore",
@@ -559,13 +698,34 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving behavior (S1: training facilities, innovation labs, capacity programs 1958-2024) co-occurs with activity scaling (S8: proliferation of educational institutions, technology parks, startup programs). X-side of S1 (repeated validation cycles) plausibly sustains X-side of S8 (institutional ex"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordinating behavior (S2: industry associations with formal governance 1958-2023, cross-sector representation) co-occurs with incumbent stabilization (S6: long-established associations from 1985, banking institutions from 2001, telecom entities from early 2000s). X-side of S2 (maintaining stakehold"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Mediating behavior (S5: banking institutions as intermediaries, Bangladesh Bank regulation, international partnerships through domestic providers 2001-2024) co-occurs with permission-seeking (S9: government regulatory frameworks 2001-2023, investment promotion agencies 2016-2020). X-side of S5 (inst"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Narrating behavior (S7: international partnerships 2018-2024 with Visa, Mastercard, H&M Foundation, Microsoft, Ant Financial) co-occurs with external capital extraction (S4: international development finance 2018-2021). X-side of S7 (partnership signaling) plausibly sustains X-side of S4 (external c"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Re-proving behavior (S1), incumbent stabilization (S6), and coordination (S2) form triangular reinforcement across 1958-2024. X-side of S1 (validation infrastructure) plausibly sustains X-side of S6 (incumbent integration) as established actors control validation mechanisms. X-side of S6 plausibly s"
+      }
+    ],
     "leverage": {
       "hypothesis": "If validation programs were required to publish time-to-deployment metrics for validated capabilities, it might reduce the system's ability to absorb uncertainty through indefinite re-proving cycles without exposing non-conversion.",
       "target_stack": "ST-01",
       "timeline": "6-12 months"
     },
-    "summary": "Dhaka Garment Tech & FinTech exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Dhaka Garment Tech & FinTech exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17194100",
     "_evidence_count": 80,
     "_lifecycle_stage": "growing",
@@ -616,13 +776,30 @@
         "confidence": "medium"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Partnership formation (S01: P008, P009, P021, P024) operates within coordination structures (S02: P004, P005, P015, P022, P024) that provide legitimacy frameworks for permission-seeking behavior (S09: P008, P009, P021, P022). Coordination bodies create venues for partnership announcement; partnershi"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediation structures (S05: P005, P024, P025) concentrate around incumbent actors (S06: P001, P002, P009), with industry association representing 90% of revenue (P005) and partnerships centered on established multinationals (P009). Incumbent stability makes intermediaries viable; intermediary br"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Strategic framing (S07: P004, P015, P022) accompanies program proliferation (S08: P012, P013, P016, P023) across 2012-2024 period. Narrative provides coordination signal for activity scaling; activity scaling provides material basis for narrative claims. Both absorb performance uncertainty by substi"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Value generation (S04: P018 >$1B revenue, P019 >100K workforce) flows through intermediary structures (S05: P005 industry association 90% revenue coverage, P024, P025). Intermediation provides extraction infrastructure; extraction scale sustains intermediary viability. Temporal window 2022-2023 for "
+      }
+    ],
     "leverage": {
       "hypothesis": "If partnership outcomes (beyond establishment announcements) were made observable through time-bounded reporting requirements, it might reduce the system's ability to absorb partner selection uncertainty through repeated initiation cycles.",
       "target_stack": "ST01",
       "timeline": "6-12 months"
     },
-    "summary": "Colombo IT Services & Digital exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Colombo IT Services & Digital exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17194056",
     "_evidence_count": 59,
     "_lifecycle_stage": "growing",
@@ -751,13 +928,30 @@
         "confidence": "medium"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving sector viability through expansion announcements (S1) plausibly sustains coordination activity (S2) by providing tangible evidence for multi-stakeholder alignment; coordination forums plausibly sustain approval-seeking behavior (S9) by establishing legitimacy pathways; approval processes "
+      },
+      {
+        "stalls_involved": [],
+        "description": "Mediating through intermediaries (S5) plausibly sustains activity expansion (S8) by providing coordination infrastructure for 50+ university partnerships and multiple workforce programs; expanding program activity (S8) plausibly sustains intermediary roles (S5) by generating coordination demand acro"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Stabilization around multinational incumbents (S6) plausibly sustains narrative construction (S7) by providing stable reference points for \"Roadmap 2028\" and priority sector designation; strategic narratives (S7) plausibly sustain incumbent positions (S6) by reinforcing policy frameworks (fiscal inc"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multi-stakeholder coordination activity (S2) plausibly sustains approval-seeking behavior (S9) by establishing formal pathways through BOI/PEZA processes; approval-seeking (S9) plausibly sustains coordination forums (S2) by requiring ongoing government-industry alignment for incentive access. Both o"
+      }
+    ],
     "leverage": {
       "hypothesis": "If expansion announcements were required to include 12-month performance data from prior facilities, it might reduce the system's ability to absorb market uncertainty through repeated validation cycles without exposing performance variance.",
       "target_stack": "ST-01",
       "timeline": "6-12 months"
     },
-    "summary": "Manila BPO & IT Services exhibits 7 observable stalls with Coordinating instead of deciding and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Manila BPO & IT Services exhibits 7 observable stalls with Coordinating instead of deciding and Waiting for permission as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17194048",
     "_evidence_count": 58,
     "_lifecycle_stage": "mature",
@@ -1662,13 +1856,30 @@
         "confidence": "medium"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "X-side of S1 (multiple innovation programs, digital platforms, sandboxes) co-occurs with X-side of S5 (bank innovation programs and accelerators create intermediation layers) and X-side of S8 (proliferation of programs and platforms). Plausible reinforcement: Intermediation structures (S5) enable pa"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S2 (industry associations, international partnerships, SARB engagement mechanisms) co-occurs with X-side of S6 (major banks headquartered in Johannesburg, lead innovation programs, allocate R7.2B+). Plausible reinforcement: Incumbent centrality (S6) creates coordination demand (S2); coordi"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S1 (innovation programs, digital platforms, regulatory sandboxes) co-occurs with X-side of S9 (regulatory frameworks, SARB engagement mechanisms, approval processes). Plausible reinforcement: Permission structures (S9) channel validation activities (S1) into sanctioned spaces; validation a"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S7 (universities established fintech programs, industry associations coordinate) co-occurs with X-side of S8 (proliferation of innovation programs, digital platforms, accelerators). Plausible reinforcement: Narrative production (S7) legitimates activity scaling (S8); activity proliferation"
+      }
+    ],
     "leverage": {
       "hypothesis": "If validation outcomes (success/failure/abandonment) from bank innovation programs (P003) were made observable across institutions, it might reduce the system's ability to absorb uncertainty through parallel re-validation without exposing outcome patterns.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Johannesburg FinTech exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Johannesburg FinTech exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17191943",
     "_evidence_count": 70,
     "_lifecycle_stage": "growing",
@@ -3027,13 +3238,30 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving (S1) generates narrative material for strategy formulation (S7); narrating (S7) creates justification for program expansion (S8); scaling activity (S8) produces new initiatives requiring re-proving (S1). Each stall's X-side plausibly sustains the others without requiring throughput valida"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordinating (S2) creates demand for intermediary infrastructure (S5); mediating (S5) distributes accountability, reducing pressure to decide (S2); waiting for permission (S9) reinforces coordination requirements (S2) and intermediary roles (S5). Multi-stakeholder alignment activity plausibly absorb"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Mediating (S5) channels activity through intermediaries that connect to incumbents; stabilizing around incumbents (S6) creates demand for intermediation infrastructure (S5) to manage multinational relationships and reduce disruption risk. Intermediary roles and incumbent integration plausibly reinfo"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Re-proving (S1) generates new programs requiring coordination (S2); coordinating (S2) produces partnership initiatives that expand activity (S8); scaling activity (S8) creates new coordination requirements (S2) and re-proving opportunities (S1). Program launches, multi-stakeholder partnerships, and "
+      }
+    ],
     "leverage": {
       "hypothesis": "If one intermediary organization (e.g., accelerator, government agency) publicly documented which initiatives were discontinued and why, it might reduce the system's ability to absorb pressure through continuous re-proving without exposing option collapse behavior.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "San José Costa Rica CleanTech & Digital exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "San José Costa Rica CleanTech & Digital exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17185341",
     "_evidence_count": 63,
     "_lifecycle_stage": "growing",
@@ -3295,13 +3523,30 @@
         "confidence": "medium"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Bank-operated platforms (S6 X-side) create demand for intermediation infrastructure (S5 X-side); intermediation preserves incumbent control while enabling coordination (S2 X-side) rather than exclusionary decisions; coordination maintains relationships that sustain incumbent centrality (S6 X-side). "
+      },
+      {
+        "stalls_involved": [],
+        "description": "Regulatory lag (S9 X-side) creates extended validation windows where re-proving (S1 X-side) substitutes for commitment; strategy narration (S7 X-side) fills temporal gaps without behavioral proof; extended validation periods normalize permission-waiting (S9 X-side). Each stall extends time horizons "
+      },
+      {
+        "stalls_involved": [],
+        "description": "User/transaction growth (S8 X-side) validates re-proving across multiple platforms (S1 X-side) without requiring consolidation; growth metrics attract external capital (S4 X-side) that funds continued parallel validation; capital inflows sustain activity expansion (S8 X-side) without throughput conv"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Joint venture coordination (S2 X-side) requires intermediation infrastructure (S5 X-side) to manage multi-party complexity; intermediation layers preserve incumbent positions (S6 X-side) by controlling coupling points; incumbent stability reduces pressure for exclusionary decisions (S2 Y-side). Coor"
+      }
+    ],
     "leverage": {
       "hypothesis": "If a bank were to operate a digital platform under its primary brand rather than as a separate entity, it might reduce the system's ability to absorb fintech emergence without direct competitive response.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Lima FinTech exhibits 7 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Lima FinTech exhibits 7 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17185325",
     "_evidence_count": 51,
     "_lifecycle_stage": "growing",
@@ -5851,13 +6096,26 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Intermediary structures (accelerators, associations, investment entities) may reduce pressure for direct coupling between new ventures and established institutions; established institutional presence across multiple contexts may sustain demand for intermediary services as ventures seek access to inc"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Establishment of multiple accelerator programs over time may provide material basis for sectoral priority narratives; priority designation by economic development entities may justify continued program establishment; expansion of activity (programs, partnerships, facilities) may substitute for demon"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Public-private partnership structures and UT System coordination entities may create governance complexity that sustains demand for intermediary entities to navigate; intermediary structures may reduce pressure for governance simplification by providing workaround mechanisms. Both X-sides observable"
+      }
+    ],
     "leverage": {
       "hypothesis": "If one accelerator program were to restrict eligibility to ventures that demonstrate prior direct engagement with an incumbent institution (P001, P002, P003, P013), it might reduce the system's ability to absorb uncertainty about institutional access through intermediary pathways without testing direct coupling mechanisms.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Austin Life Sciences & MedTech exhibits 6 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Austin Life Sciences & MedTech exhibits 6 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 3 stabilisation stacks identified.",
     "_run_id": "2026Q1-17151949",
     "_evidence_count": 56,
     "_lifecycle_stage": "growing",
@@ -6710,13 +6968,34 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Incumbent concentration (S6: UofT 12 items, UHN 7 items, SickKids 3 items spanning decades) plausibly sustains intermediary presence (S5: MaRS across 10 contexts, 8 accelerator programs) by creating structural positions requiring translation/access services; intermediary operations plausibly sustain"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Repeated proof activities (S1: temporal clusters P006, P007, P014, P018 showing funding/formation events across 2000-2024) plausibly sustain activity scaling (S8: 10 events in 2024, 8 programs, 8 establishments) by generating new validation opportunities; activity scaling plausibly sustains re-provi"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Waiting for external authorization (S9: 6 federal funding events, 5 provincial funding events 2005-2024) plausibly sustains coordination activity (S2: MaRS 10 contexts, 8 partnerships, TAHSN consortium) by creating multi-stakeholder approval requirements; coordination structures plausibly sustain pe"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Cultural characterization (S7: collaboration/networking/diversity metrics P022 2022-2023) plausibly sustains incumbent concentration (S6: UofT/UHN/SickKids multi-decade presence) by providing legitimating frame for centralized structures; incumbent concentration plausibly sustains narrative producti"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Permission-seeking via government funding (S9: 11 distinct funding events 2005-2024) plausibly sustains re-proving activity (S1: temporal clusters of funding/formation events) by requiring repeated demonstration of legitimacy for each allocation; re-proving activity plausibly sustains permission-see"
+      }
+    ],
     "leverage": {
       "hypothesis": "If coordination structures (P020 TAHSN, P005 MaRS contexts) were required to publish decision outcomes and exclusions, it might reduce the system's ability to absorb pressure through coordination without consequence-bearing decisions",
       "target_stack": "ST-03",
       "timeline": "6-12 months"
     },
-    "summary": "Toronto Life Sciences & BioTech exhibits 7 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Toronto Life Sciences & BioTech exhibits 7 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130512",
     "_evidence_count": 79,
     "_lifecycle_stage": "growing",
@@ -6767,13 +7046,34 @@
         "confidence": "medium"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Repeated establishment of validation infrastructure (S1: innovation facilities, research institutes, accelerators 2000-2024) co-occurs with expansion of intermediary networks (S5: VC, angel networks, accelerator programs 2005-2024) and scaling of participation infrastructure (S8: multiple accelerato"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Bank-accelerator partnerships and multi-category institutional presence (S2: 2024 partnerships, 2010-2020 multi-role institutions) co-occurs with incumbent institutional continuity (S6: bank headquarters, innovation facilities, governance infrastructure, payment operators 2001-2024). X-side of S2 (p"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multi-billion dollar bank technology investments and 2024 capital deployment (S4: 2020-2024) co-occurs with governance infrastructure and municipal support (S9: 2001-2023). X-side of S4 (capital deployment) plausibly sustains X-side of S9 (capital flows may require or respond to regulatory structure"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Repeated establishment of validation infrastructure (S1: 2000-2024) and scaling of participation infrastructure (S8: 2000-2020) co-occurs with ecosystem documentation (S7: directories maintained 2023). X-side of S1 (new facilities) and X-side of S8 (program expansion) plausibly sustain X-side of S7 "
+      },
+      {
+        "stalls_involved": [],
+        "description": "Repeated establishment of validation infrastructure (S1), coordination through partnerships (S2), intermediary network expansion (S5), incumbent institutional continuity (S6), and participation infrastructure scaling (S8) form overlapping configuration across 2000-2024. X-side of S1 (facilities) pla"
+      }
+    ],
     "leverage": {
       "hypothesis": "If innovation facilities (P002, P015) were required to publish quarterly utilization data (occupancy rates, project throughput, repeat vs. new users), it might reduce the system's ability to absorb uncertainty about infrastructure productivity without adaptation. Visibility into whether facilities substitute for commitment or enable it could perturb justification for new facility establishment.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Toronto FinTech exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Toronto FinTech exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130507",
     "_evidence_count": 73,
     "_lifecycle_stage": "mature",
@@ -6829,13 +7129,34 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Recognition and scale metrics (S7: X-side) plausibly co-occur with program and institutional expansion (S8: X-side). Reporting achievements may sustain justification for continued activity scaling; activity scaling generates reportable metrics. Both operate in overlapping 2016-2024 window."
+      },
+      {
+        "stalls_involved": [],
+        "description": "Partnership formation and multi-stakeholder alignment (S2: X-side) plausibly co-occurs with accelerator/incubator/VC intermediation (S5: X-side). Maintaining multiple partnerships may sustain demand for intermediary curation; intermediary presence may enable partnership formation without exclusionar"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multiple program establishments and exploratory initiatives (S1: X-side) plausibly co-occur with government and corporate funding dependence (S9: X-side). Repeated validation activity may sustain legitimacy-seeking from funders; external funding authorization may enable continued program proliferati"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Corporate lab establishments and faculty spinouts (S4: X-side) plausibly co-occur with sustained incumbent institutional presence (S6: X-side). Value exit pathways may sustain incumbent centrality by providing career advancement within established network; incumbent stability may enable extraction b"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediary presence (S5: X-side), recognition/scale reporting (S7: X-side), and program/institutional expansion (S8: X-side) plausibly reinforce one another. Intermediaries may generate reportable activity metrics; scale metrics may justify intermediary proliferation; both may sustain activity exp"
+      }
+    ],
     "leverage": {
       "hypothesis": "If recognition metrics were reported with 12-24 month lag from program establishment dates, it might reduce the system's ability to absorb pressure to demonstrate ecosystem vitality without examining whether new programs differ from existing ones.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Toronto AI & Deep Tech exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Toronto AI & Deep Tech exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130504",
     "_evidence_count": 80,
     "_lifecycle_stage": "growing",
@@ -7420,13 +7741,34 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Intermediary structures (S5 X-side: associations, incubators, MMTC) operate within funding-dependent governance frameworks (S9 X-side: grant programs, cooperative agreements). Intermediation activity may become grant-eligible activity; grant structures may favor intermediary models over direct coupl"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination structures (S2 X-side: membership associations, multi-stakeholder initiatives) may provide venues for strategic narrative activity (S7 X-side: mobility/electrification initiatives). Narrative initiatives may justify coordination infrastructure; coordination forums may substitute for com"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediary structures (S5 X-side) may preferentially connect to incumbent networks (S6 X-side: OEM/tier-1 concentration, joint ventures). Incumbent concentration may create demand for intermediation; intermediaries may stabilize incumbent relationships rather than enable new entrants. Both X-sides"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multiple specialized research institutes and training programs (S1 X-side) may generate coordination demand (S2 X-side: associations, multi-stakeholder initiatives coordinate fragmented capabilities). Coordination structures may justify capability proliferation; capability diversity may require coor"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Large-scale facility investments (S4 X-side: OEM/tier-1 multi-billion announcements) concentrate around incumbent actors (S6 X-side: geographic co-location, multiple facilities). Incumbent presence may attract investment; investment scale may reinforce incumbent concentration. Both X-sides co-occur "
+      }
+    ],
     "leverage": {
       "hypothesis": "If grant program eligibility criteria were made explicitly conditional on demonstrated direct coupling outcomes (rather than intermediary activity metrics), it might reduce the system's ability to absorb uncertainty through intermediation without testing whether direct partnerships can form.",
       "target_stack": "ST-01",
       "timeline": "6-12 months"
     },
-    "summary": "Detroit & Michigan Advanced Manufacturing exhibits 7 observable stalls with Extracting without reinvesting and Mediating instead of coupling as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Detroit & Michigan Advanced Manufacturing exhibits 7 observable stalls with Extracting without reinvesting and Mediating instead of coupling as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130427",
     "_evidence_count": 72,
     "_lifecycle_stage": "transitioning",
@@ -8860,13 +9202,30 @@
         "confidence": "medium"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "X-side of S9 (regulatory approval processes, framework development partnerships) plausibly sustains X-side of S2 (partnership formation, task force collaboration): regulatory uncertainty increases value of distributed legitimacy-seeking; coordination structures provide venues for collective permissi"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S6 (incumbent centrality in partnerships, consortia, regulatory frameworks) plausibly sustains X-side of S5 (intermediary structure presence): incumbent participation legitimizes intermediary roles; intermediaries provide neutral venues that preserve incumbent influence. X-side of S5 plaus"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S1 (repeated product launches across cryptocurrency categories 2017-2024) plausibly sustains X-side of S9 (regulatory approval processes): each new product category requires separate regulatory validation; sequential exploration maintains permission-seeking as ongoing activity. X-side of S"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S8 (accelerator/incubator program proliferation 2010-2018, workforce training programs) plausibly sustains X-side of S5 (intermediary structure presence): program establishment creates intermediary organizations; activity generation justifies intermediary roles. X-side of S5 plausibly sust"
+      }
+    ],
     "leverage": {
       "hypothesis": "If regulatory framework development processes were temporally decoupled from partnership formation windows (e.g., framework proposals submitted by single entities before multi-party coordination), it might reduce the system's ability to absorb regulatory uncertainty through distributed legitimacy-seeking without testing whether autonomous regulatory engagement is viable.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Chicago FinTech & Payments exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Chicago FinTech & Payments exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130247",
     "_evidence_count": 78,
     "_lifecycle_stage": "mature",
@@ -9023,13 +9382,30 @@
         "confidence": "medium"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Facility proliferation (S1) creates demand for coordination services; intermediaries (S5) enable facility utilization without direct coupling; activity scaling (S8) justifies additional intermediary programs and facilities. Each facility opening demonstrates viability, attracting intermediaries; int"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multi-institutional coordination structures (S2) distribute risk and defer exclusionary decisions; temporal clustering of government funding (S9) provides legitimacy signals that enable coordination without decision; coordination structures position actors to receive government allocations; governme"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Established academic medical centers (S6) provide stable anchor points for intermediary programs; intermediaries (S5) channel activity through incumbent institutions rather than enabling new institutional forms; incumbent continuity provides credibility for intermediary operations; intermediaries re"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordination structures (S2) enable activity expansion without exclusionary commitment; activity scaling (S8) creates coordination demand and justifies multi-institutional governance; expanded participation infrastructure requires coordination mechanisms; coordination enables activity growth without"
+      }
+    ],
     "leverage": {
       "hypothesis": "If facility utilization rates and tenant retention data were made observable across the 2010-2024 facility cohort, it might reduce the system's ability to absorb market viability uncertainty through repeated facility validation.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "New York City Life Sciences & BioTech exhibits 5 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "New York City Life Sciences & BioTech exhibits 5 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17130236",
     "_evidence_count": 87,
     "_lifecycle_stage": "growing",
@@ -9793,13 +10169,30 @@
         "confidence": "medium"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving activities (S1: accelerators, training programs, research participation) generate coordination requirements across institutional boundaries; coordination activities (S2: partnerships, network memberships) create venues for narrative articulation (S7: policy frameworks, strategic prioritiz"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediary organizations (S5: cluster organizations, accelerators, partnership structures) create venues for activity scaling (S8: program proliferation, event expansion); activity scaling generates demand for intermediation (coordination overhead, transaction costs); both X-sides proceed without "
+      },
+      {
+        "stalls_involved": [],
+        "description": "Established multinational employers (S6: corporations present 1998-2011, employing 1,000+ each) create stable demand for graduate talent (S4: 2,000+ annual graduates flowing to established employers); talent extraction by incumbents reinforces incumbent centrality in ecosystem (anchor status for net"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Strategic narrative articulation (S7: policy frameworks, priority declarations) establishes legitimacy conditions that subsequent actors wait to satisfy (S9: 3-5 year gap between policy adoption and network joining); waiting for legitimacy signals generates demand for continued narrative work (polic"
+      }
+    ],
     "leverage": {
       "hypothesis": "If accelerator/training program outcomes (placement rates, startup survival, skill application) were made observable to coordination venues, it might reduce the system's ability to absorb uncertainty about strategic direction without narrowing activity portfolios.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Krakow Cyber Security & IT Services exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Krakow Cyber Security & IT Services exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-17102426",
     "_evidence_count": 57,
     "_lifecycle_stage": "growing",
@@ -11918,13 +12311,34 @@
         "confidence": "medium"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Multiple specialized facilities (S1) create demand for coordination services (S5); intermediary organizations enable continued facility proliferation by reducing coordination costs; activity scaling (S8) justifies both facility expansion and intermediation functions; each stall's X-side provides leg"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Incumbent institutional infrastructure (S6) provides venues and legitimacy for external funding applications (S9); external funding flows reinforce anchor institution centrality by directing resources through established entities; permission-seeking reduces pressure to build autonomous alternatives "
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordinating structures (S2) facilitate collective external funding applications (S9); external funding success validates coordination mechanisms; permission-seeking behavior reduces pressure for exclusionary decisions within coordination structures"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Partnership announcements (S7) provide narrative content that justifies activity scaling (S8); expanded activity creates opportunities for additional partnership announcements; neither stall requires demonstration of behavioral outcomes or throughput conversion"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Multiple specialized facilities (S1) create fragmentation that increases demand for intermediary coordination (S5); intermediaries reduce pressure to consolidate or choose between facilities by providing navigation and connection services; facility proliferation provides intermediaries with expanded"
+      }
+    ],
     "leverage": {
       "hypothesis": "If resource allocation patterns (what percentage of external funding flows through anchor institutions vs. directly to non-anchor entities) were made observable, it might reduce the system's ability to absorb uncertainty about autonomous viability without testing alternative routing mechanisms",
       "target_stack": "ST-02",
       "timeline": "6-12 months"
     },
-    "summary": "Buffalo Niagara Innovation Ecosystem exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Buffalo Niagara Innovation Ecosystem exhibits 7 observable stalls with Extracting without reinvesting and Waiting for permission as primary behavioural patterns. 5 stabilisation stacks identified.",
     "_run_id": "2026Q1-24171414",
     "_evidence_count": 63,
     "_lifecycle_stage": "emerging",
@@ -13399,13 +13813,26 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "X-side of S1 (repeated accelerator program creation 2002-2017) co-occurs with X-side of S2 (repeated coordination entity creation 1985-2024). Each new program creates coordination demand; each coordination entity legitimates further program creation without requiring consolidation. Both operate acro"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S6 (continuity of Harvard hospitals, major pharma, established partnerships 2003-2024) co-occurs with X-side of S5 (coordination entities, shared facilities, brokered partnerships). Incumbent stability creates demand for intermediation structures that reduce transaction costs; intermediati"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S2 (repeated coordination entity creation 1985-2024) co-occurs with X-side of S8 (accelerator program expansion 2002-2017). Program activity expansion creates coordination demand; coordination entities enable program proliferation without requiring throughput accountability. Both operate a"
+      }
+    ],
     "leverage": {
       "hypothesis": "If outcome data (venture formation, funding secured, survival rates) from university-operated programs were made comparable and visible across institutions, it might reduce the system's ability to absorb uncertainty about optimal venture support models without adaptation.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Boston-Cambridge Life Sciences exhibits 4 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Boston-Cambridge Life Sciences exhibits 4 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
     "_run_id": "2026Q1-24083229",
     "_evidence_count": 82,
     "_lifecycle_stage": "",
@@ -13747,13 +14174,30 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "X-side of S1 (facility expansions, partnership formations, support programs) plausibly increases organizational density and visible activity (S8 X-side). S8 X-side (activity scaling) plausibly creates additional validation opportunities that sustain S1 X-side behaviors. S9 X-side (public funding dep"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S2 (governance structures, network participation, collaboration activities) plausibly creates demand for intermediation services (S5 X-side). S5 X-side (brokerage through support organizations, regional networks) plausibly reduces coordination costs and enables S2 X-side alignment activiti"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S7 (strategic positioning, domain specialization framing) plausibly attracts resources and participants that enable S8 X-side (activity scaling, facility expansion, partnership formation). S8 X-side plausibly provides material evidence that validates and sustains S7 X-side narrative constr"
+      },
+      {
+        "stalls_involved": [],
+        "description": "X-side of S6 (continuity with anchor institutions) plausibly creates structural stability that enables S5 X-side (intermediation through support organizations). S5 X-side plausibly reduces direct coupling pressure on anchor institutions, allowing S6 X-side behaviors to continue. The combination abso"
+      }
+    ],
     "leverage": {
       "hypothesis": "If facility expansions (P007) were accompanied by public disclosure of discontinued activities or consolidated focus areas, it might reduce the system's ability to absorb growth pressure through undifferentiated expansion without strategic narrowing.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Harwell Space Technology exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Harwell Space Technology exhibits 7 observable stalls with Extracting without reinvesting and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-23153844",
     "_evidence_count": 55,
     "_lifecycle_stage": "growing",
@@ -14922,13 +15366,30 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Re-proving through infrastructure establishment (S1: P002, P013 physical facilities; P006, P007, P014, P019 programme structures) co-occurs with strategic designation and knowledge dissemination (S7: P008, P009, P014). Each new infrastructure investment provides material basis for strategic narrativ"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Coordinating through partnership structures (S2: P006, P014, P015) co-occurs with stabilisation around government agencies and established entities (S6: P001, P011, P012, P015, P018). Coordination structures include incumbents as primary nodes; incumbent presence shapes coordination architecture. P0"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Mediating through intermediary structures (S5: P006, P014) co-occurs with scaling of inputs and activities (S8: P002, P004, P007, P019). Intermediation structures channel activity scaling; increased activity volume justifies intermediation infrastructure. P007, P019 (startup/programme support) appea"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Re-proving through infrastructure (S1), coordinating through partnerships (S2), and narrating through strategic designation (S7) form mutually reinforcing configuration. Infrastructure investments require coordination structures (P006 appears in S1, S2); coordination structures require strategic nar"
+      }
+    ],
     "leverage": {
       "hypothesis": "If infrastructure investments (P002, P013) were announced with pre-specified outcome metrics and sunset clauses, it might reduce the system's ability to absorb uncertainty through indefinite re-proving cycles.",
       "target_stack": "ST1",
       "timeline": "6-12 months"
     },
-    "summary": "Cheltenham Cyber Security exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Cheltenham Cyber Security exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
     "_run_id": "2026Q1-23124820",
     "_evidence_count": 54,
     "_lifecycle_stage": "mature",
@@ -15457,13 +15918,26 @@
         "confidence": "low"
       }
     ],
-    "stacks": [],
+    "stacks": [
+      {
+        "stalls_involved": [],
+        "description": "Partnership formation (S1: P003, P013) co-occurs with collaborative platform establishment (S2: P012) and partnership announcements (S7: P013). X-sides plausibly reinforce: partnerships create demand for coordination platforms; platforms enable additional partnership formation; announcements of both"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediated relationships (S5: P003, P012) co-occur with activity/facility expansion (S8: P007, P011, P012). X-sides plausibly reinforce: mediated structures reduce coupling requirements as scale increases; scale expansion increases coordination complexity that makes mediation locally rational; bo"
+      },
+      {
+        "stalls_involved": [],
+        "description": "Intermediated relationships (S5: P003, P012) co-occur with incumbent centrality (S6: P003, P006, P015). X-sides plausibly reinforce: mediation preserves incumbent autonomy while enabling collaboration; incumbent scale and established position make mediation preferable to direct coupling; both absorb"
+      }
+    ],
     "leverage": {
       "hypothesis": "If partnership announcements (P013) were required to specify measurable deliverables and timeline commitments at formation, it might reduce the system's ability to absorb strategic uncertainty through announcement activity without subsequent validation.",
       "target_stack": "ST-01",
       "timeline": "6-12 months"
     },
-    "summary": "Orlando MedTech exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 0 stabilisation stacks identified.",
+    "summary": "Orlando MedTech exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.",
     "_run_id": "2026Q1-20140944",
     "_evidence_count": 57,
     "_lifecycle_stage": "emerging",
@@ -15688,43 +16162,5 @@
     "_evidence_count": 57,
     "_lifecycle_stage": "mature",
     "_anchor_type": "government"
-  },
-  {
-    "id": "glasgow-health-life-sciences",
-    "name": "Glasgow Health & Life Sciences",
-    "city": "Glasgow",
-    "country": "GB",
-    "lat": 55.8642,
-    "lng": -4.3018,
-    "regime": "mature",
-    "stalls": [],
-    "stacks": [],
-    "leverage": null,
-    "summary": "Glasgow Health & Life Sciences diagnostic complete. Insufficient observable stall data for summary.",
-    "_run_id": "2026Q1-19122947",
-    "_evidence_count": 72,
-    "_lifecycle_stage": "mature",
-    "_anchor_type": "university"
-  },
-  {
-    "id": "glasgow-fintech",
-    "name": "Glasgow FinTech",
-    "city": "Glasgow",
-    "country": "GB",
-    "lat": 55.8642,
-    "lng": -4.1818,
-    "regime": "emerging",
-    "stalls": [],
-    "stacks": [],
-    "leverage": {
-      "hypothesis": "If quarterly roundtable decisions and non-decisions were documented and circulated, it might reduce the system's ability to absorb pressure for exclusionary resource allocation without adaptation, by making decision avoidance observable to stakeholders",
-      "target_stack": "STACK-GF-2026Q1-18235203-01",
-      "timeline": "6-12 months"
-    },
-    "summary": "Glasgow FinTech diagnostic complete. Insufficient observable stall data for summary.",
-    "_run_id": "2026Q1-18235203",
-    "_evidence_count": 62,
-    "_lifecycle_stage": "emerging",
-    "_anchor_type": "university"
   }
 ]

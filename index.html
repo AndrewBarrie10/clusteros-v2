@@ -2795,7 +2795,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   /* ══ HERO ══════════════════════════════════════════════ */
   #hero {
     max-width: 860px; margin: 0 auto;
-    padding: 5rem 2rem 3rem;
+    padding: 3rem 2rem 2.5rem;
   }
   .hero-eyebrow {
     font-family: var(--font-mono); font-size: 10px; font-weight: 600;
@@ -3053,6 +3053,195 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
   .nav-cta { display: none !important; }
   .nav-hamburger { display: flex !important; margin-left: auto; }
 }
+
+  .pipeline-note {
+    margin-top: 2px;
+    border: 1px solid var(--border);
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+    background: var(--border);
+  }
+  .pipeline-note-inner {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    background: var(--surface);
+  }
+  .pipeline-note-col {
+    padding: 20px 24px;
+    background: var(--surface);
+  }
+  .pipeline-note-divider {
+    background: var(--border);
+    width: 1px;
+  }
+  .pipeline-note-label {
+    font-family: var(--font-mono);
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 8px;
+  }
+  .pipeline-note-text {
+    font-size: 12px; color: var(--ink-dim);
+    line-height: 1.65; font-weight: 300;
+  }
+  .pipeline-note-text strong { color: var(--ink); font-weight: 500; }
+  @media(max-width:900px) {
+    .pipeline-note-inner { grid-template-columns: 1fr; }
+    .pipeline-note-divider { display: none; }
+  }
+
+  .entry-ctas {
+    padding: 48px 2rem;
+    border-top: 1px solid var(--border);
+    background: var(--page);
+  }
+  .entry-ctas-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  @media(max-width:600px) {
+    .entry-ctas-inner { flex-direction: column; }
+  }
+
+  /* ── PIPELINE SECTION ──────────────────────────────── */
+  #pipeline {
+    padding: 72px 2rem;
+    border-top: 1px solid var(--border);
+    background: var(--page);
+  }
+  .pipeline-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .pipeline-header {
+    max-width: 640px;
+    margin-bottom: 56px;
+  }
+  .pipeline-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .pipeline-eyebrow::before {
+    content: ''; width: 24px; height: 1px; background: var(--green);
+  }
+  .pipeline-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400; line-height: 1.15;
+    color: var(--ink); margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .pipeline-headline em { font-style: italic; color: var(--green); }
+  .pipeline-sub {
+    font-size: 15px; color: var(--ink-dim);
+    line-height: 1.72; font-weight: 300;
+  }
+  .pipeline-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 2px;
+  }
+  .pipeline-step {
+    background: var(--page);
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.15s;
+  }
+  .pipeline-step:hover { background: var(--surface); }
+  .pipeline-step-num {
+    font-family: var(--font-mono);
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green);
+  }
+  .pipeline-step-name {
+    font-family: var(--font-serif);
+    font-size: 18px; font-weight: 400;
+    color: var(--ink); line-height: 1.2;
+    text-decoration: none;
+  }
+  .pipeline-step-name:hover { color: var(--green); }
+  .pipeline-step-desc {
+    font-size: 12px; color: var(--ink-muted);
+    line-height: 1.6; font-weight: 300;
+  }
+  .pipeline-step-tag {
+    font-family: var(--font-mono);
+    font-size: 8px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-muted);
+    border: 1px solid var(--border-2);
+    padding: 2px 7px; border-radius: 2px;
+    display: inline-block; margin-top: auto;
+  }
+  /* Contrast block */
+  .pipeline-contrast {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+  }
+  .contrast-col {
+    padding: 24px 28px;
+    background: var(--surface);
+  }
+  .contrast-col.contrast-col--full {
+    background: var(--green-dim);
+  }
+  .contrast-label {
+    font-family: var(--font-mono);
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 10px;
+  }
+  .contrast-col--full .contrast-label {
+    color: rgba(255,255,255,0.5);
+  }
+  .contrast-title {
+    font-family: var(--font-serif);
+    font-size: 16px; color: var(--ink);
+    margin-bottom: 8px; line-height: 1.25;
+  }
+  .contrast-col--full .contrast-title {
+    color: #fff;
+  }
+  .contrast-body {
+    font-size: 12px; color: var(--ink-dim);
+    line-height: 1.65; font-weight: 300;
+  }
+  .contrast-col--full .contrast-body {
+    color: rgba(255,255,255,0.75);
+  }
+  .contrast-body strong {
+    color: var(--ink); font-weight: 500;
+  }
+  .contrast-col--full .contrast-body strong {
+    color: #fff;
+  }
+  @media (max-width: 900px) {
+    .pipeline-steps { grid-template-columns: 1fr 1fr; }
+    .pipeline-contrast { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .pipeline-steps { grid-template-columns: 1fr; }
+    #pipeline { padding: 60px 1.5rem; }
+  }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -3123,6 +3312,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
   </div>
 </section>
 
+
 <!-- ── OPENING ──────────────────────────────────────────── -->
 <!-- ── HERO ──────────────────────────────────────────────── -->
 <section id="hero">
@@ -3130,18 +3320,97 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
     <p class="hero-eyebrow">200+ clusters diagnosed · 18 countries · 9 structural patterns</p>
     <h1 class="hero-heading">ClusterOS identifies why clusters stall.<br><em>And provides the infrastructure to change it.</em></h1>
     <p class="hero-lede">Diagnostic intelligence and coordination infrastructure for regional innovation ecosystems. We've diagnosed 200+ clusters across 18 countries. The same 9 structural patterns appear everywhere — regardless of sector, geography or funding. ClusterOS names the pattern, finds the leverage, and gives your ecosystem the infrastructure to compound.</p>
-    <div class="hero-choice">
-      <button class="hero-btn-primary" id="hero-pathway-btn">
-        Build your pathway
-        <span>Tell us who you are — we'll build a guided journey specific to your situation</span>
-      </button>
-      <button class="hero-btn-secondary" id="hero-explore-btn">
-        Explore the platform
-        <span>Browse the evidence, architecture and diagnostic framework directly</span>
-      </button>
-    </div>
   </div>
 </section>
+
+
+
+<!-- ── PIPELINE SECTION ─────────────────────────────────── -->
+<section id="pipeline">
+  <div class="pipeline-inner">
+    <div class="pipeline-header">
+      <div class="pipeline-eyebrow">The methodology</div>
+      <h2 class="pipeline-headline">Five stages.<br><em>No interviews. No surveys.</em></h2>
+      <p class="pipeline-sub">ClusterOS runs every ecosystem through a structured diagnostic pipeline — moving from raw external evidence to precise intervention points. The process observes from outside. It doesn't ask what you think is happening. It finds what is.</p>
+    </div>
+
+    <div class="pipeline-steps">
+      <div class="pipeline-step reveal">
+        <div class="pipeline-step-num">01</div>
+        <a href="/diagnostic.html" class="pipeline-step-name">Evidence</a>
+        <div class="pipeline-step-desc">Multi-pass collection across 5 systematic domains. 50–170 structured items per cluster. External evidence is the baseline — neutralised internal evidence and live substrate signals can be layered in for adopters.</div>
+        <span class="pipeline-step-tag">External · Internal · Live</span>
+      </div>
+      <div class="pipeline-step reveal reveal-delay-1">
+        <div class="pipeline-step-num">02</div>
+        <a href="/findings.html" class="pipeline-step-name">Patterns</a>
+        <div class="pipeline-step-desc">Cross-domain pattern extraction bounded strictly by evidence. No inference beyond what the data supports. Audited and confidence-tiered.</div>
+        <span class="pipeline-step-tag">Bounded · Audited</span>
+      </div>
+      <div class="pipeline-step reveal reveal-delay-2">
+        <div class="pipeline-step-num">03</div>
+        <a href="/findings.html" class="pipeline-step-name">Stalls</a>
+        <div class="pipeline-step-desc">Detection against the 9-stall canon. Each stall assessed for observability, substitution plausibility, and Y-side visibility. Confidence tiers assigned.</div>
+        <span class="pipeline-step-tag">9-Stall Canon · Tiered</span>
+      </div>
+      <div class="pipeline-step reveal reveal-delay-3">
+        <div class="pipeline-step-num">04</div>
+        <a href="/diagnostic.html" class="pipeline-step-name">Stacks</a>
+        <div class="pipeline-step-desc">Reinforcing combinations identified — configurations where two or more stalls stabilise each other and absorb multiple signals simultaneously.</div>
+        <span class="pipeline-step-tag">CAS-Consistent</span>
+      </div>
+      <div class="pipeline-step reveal reveal-delay-4">
+        <div class="pipeline-step-num">05</div>
+        <a href="/leverage.html" class="pipeline-step-name">Leverage</a>
+        <div class="pipeline-step-desc">Conditional, testable intervention hypotheses — not recommendations. Each is framed as a probe: small, reversible, targeted at the load-bearing stall.</div>
+        <span class="pipeline-step-tag">Conditional · Testable</span>
+      </div>
+    </div>
+
+    <div class="pipeline-note">
+      <div class="pipeline-note-inner">
+        <div class="pipeline-note-col">
+          <span class="pipeline-note-label">The self-diagnostic</span>
+          <p class="pipeline-note-text">Names the pattern you can see from inside the system. Useful orientation — not a diagnostic. Stewards are inside the system they're trying to diagnose. That's a structural constraint, not a personal one.</p>
+        </div>
+        <div class="pipeline-note-divider"></div>
+        <div class="pipeline-note-col">
+          <span class="pipeline-note-label">The full diagnostic</span>
+          <p class="pipeline-note-text">Observes from outside. Maps stalls the steward may not have named — or named incorrectly. The self-diagnostic and the full diagnostic sometimes agree. <strong>Sometimes they don't. The difference is the point.</strong></p>
+        </div>
+        <div class="pipeline-note-divider"></div>
+        <div class="pipeline-note-col">
+          <span class="pipeline-note-label">Live diagnosis</span>
+          <p class="pipeline-note-text">For ecosystems running the digital substrate, evidence is continuous. Every actor signal updates the diagnostic picture. The stall configuration is no longer a snapshot — it's a live read.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── ENTRY CTAs ─────────────────────────────────────────── -->
+<div class="entry-ctas">
+  <div class="entry-ctas-inner">
+    <button class="hero-btn-primary" id="hero-pathway-btn">
+      Self-assess your cluster
+      <span>Pick the behaviours you're seeing — the system names the stall configuration</span>
+    </button>
+    <button class="hero-btn-secondary" id="hero-explore-btn">
+      Explore the platform
+      <span>Browse the evidence, architecture and diagnostic framework directly</span>
+    </button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 <!-- ── AUDIENCE DIRECTORY (shown in explore mode) ────────── -->
 <section id="audience-directory" class="hidden">

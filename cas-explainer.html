@@ -712,7 +712,6 @@ async function submitReport(){
   const sector=document.getElementById('f-sector').value;
   const region=document.getElementById('f-region').value;
 
-  // Validate
   let valid=true;
   [['f-name',name],['f-email',email],['f-ecosystem',ecosystem]].forEach(([id,val])=>{
     document.getElementById(id).style.borderColor=val?'':'var(--red)';
@@ -729,12 +728,11 @@ async function submitReport(){
   const key=cacheKey(active);
   const commentary=(commentaryCache[key]||[]).join('\n\n');
   const stallIds=active.join(', ');
-  const stallNames=active.map(id=>STALLS.find(s=>s.id===id).short).join(', ');
   const stackName=detected.length?detected.map(s=>s.name).join(', '):'None detected';
   const [firstname,...rest]=name.split(' ');
   const lastname=rest.join(' ')||'';
 
-  // HubSpot Forms API — no auth required for form submissions
+  // 1. HubSpot (EU endpoint)
   const PORTAL_ID='26033843';
   const FORM_ID='85c3303f-8081-430e-91f7-4db16b8ac9d1';
   const HS_URL=`https://api-eu1.hsforms.com/submissions/v3/integration/submit/${PORTAL_ID}/${FORM_ID}`;
@@ -758,20 +756,32 @@ async function submitReport(){
   };
 
   try{
-    const res=await fetch(HS_URL,{
+    await fetch(HS_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(hsPayload)
     });
-    if(!res.ok){
-      const err=await res.text();
-      console.error('HubSpot error:',res.status,err);
-    }
-  }catch(e){
-    console.error('HubSpot submit error:',e);
-  }
+  }catch(e){console.error('HubSpot error:',e);}
 
-  // Show success regardless — don't block the user on API errors
+  // 2. Railway — sends Resend email
+  const railwayPayload={
+    name,email,ecosystem,sector,region,
+    stalls:active.map(id=>({id,short:STALLS.find(s=>s.id===id).short})),
+    health,
+    stacks:detected.map(s=>({name:s.name,sev:s.sev,desc:s.desc})),
+    commentary,
+    submitted_at:new Date().toISOString()
+  };
+
+  try{
+    await fetch('https://clusteros-v3-production.up.railway.app/api/v1/report-request',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(railwayPayload)
+    });
+  }catch(e){console.error('Railway error:',e);}
+
+  // Show success
   document.getElementById('confirm-section').style.display='none';
   document.getElementById('success-section').style.display='block';
   document.getElementById('success-section').scrollIntoView({behavior:'smooth',block:'start'});

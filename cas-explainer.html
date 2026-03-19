@@ -626,13 +626,13 @@ Paragraph 4: Where is the leverage? One specific, small perturbation that could 
 
 Tone: direct, intelligent, non-academic. Plain prose only.`;
 
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
+ try{
+    const res=await fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary',{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:900,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({prompt})
     });
     const data=await res.json();
-    const text=(data.content||[]).map(b=>b.text||'').join('')||'Analysis unavailable.';
+    const text=data.text||'Analysis unavailable.';
     const paras=text.split(/\n\n+/).filter(p=>p.trim());
     setCommentaryReady(paras,detected);
   }catch(e){

@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/orlando-digital-media.html">
 <title>Orlando Digital Media — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Orlando Digital Media exhibits 4 observable stalls. 5 stabilisation stacks identified.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Orlando Digital Media — ClusterOS Diagnostic Profile","description":"Orlando Digital Media exhibits 4 observable stalls. 5 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/orlando-digital-media.html","keywords":["regional innovation cluster","cluster diagnostic","Orlando","United States","emerging","corporate","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Orlando","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.4,"description":"Confidence: medium"}]}</script>
+<meta name="description" content="Orlando Digital Media exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 s">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Orlando Digital Media — ClusterOS Diagnostic Profile","description":"Orlando Digital Media exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.","url":"https://clusteros.io/clusters/orlando-digital-media.html","keywords":["regional innovation cluster","cluster diagnostic","Orlando","United States","mature","corporate","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Orlando","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.3,"description":"Confidence: low"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Orlando Digital Media",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/orlando-digital-media.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Orlando",
-    "addressCountry": "US"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 29.0379, "longitude": -82.0669}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -158,19 +150,20 @@ footer a:hover{color:var(--green);}
     <h1>Orlando Digital Media</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">Orlando, United States</span>
-      <span class="meta-tag meta-emerging">Emerging</span>
+      <span class="meta-tag meta-mature">Mature</span>
       <span class="meta-tag meta-plain">Corporate anchor</span>
       <span class="meta-tag meta-plain">58 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p1">P1</span>
     </div>
-    <p class="cluster-summary">Orlando Digital Media exhibits 4 observable stalls. 5 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Orlando Digital Media exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
-      <div class="stat-num">4</div>
+      <div class="stat-num">8</div>
       <div class="stat-label">Active stalls</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">3</div>
+      <div class="stat-num">5</div>
       <div class="stat-label">Stacks identified</div>
     </div>
     <div class="stat-cell">
@@ -186,12 +179,22 @@ footer a:hover{color:var(--green);}
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
       <div class="stall-row">
+      <span class="stall-id">S1</span>
+      <div class="stall-detail">
+        <span class="stall-name">Re-proving instead of narrowing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
       <span class="stall-id">S2</span>
       <div class="stall-detail">
         <span class="stall-name">Coordinating instead of deciding</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -200,8 +203,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Extracting without reinvesting</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -210,21 +213,51 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Mediating instead of coupling</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S6</span>
+      <div class="stall-detail">
+        <span class="stall-name">Stabilizing around incumbents</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S7</span>
+      <div class="stall-detail">
+        <span class="stall-name">Narrating instead of testing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
     </div><div class="stall-row">
       <span class="stall-id">S8</span>
       <div class="stall-detail">
         <span class="stall-name">Scaling activity instead of throughput</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S9</span>
+      <div class="stall-detail">
+        <span class="stall-name">Waiting for permission</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
     </div>
     </div>
     <div class="section">
@@ -239,32 +272,61 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STK-11</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Re-proving through program expansion provides material content for narrative activities</p>
+      <div class="stack-name">Institutional Breadth–Narrative Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S7</span></div>
+      <p class="stack-desc">Re-proving through program expansion (STALL_01: , ) provides material content for narrative activities (STALL_07: , ). Narrating cluster capabilities through professional networks and economic development coordination creates demand signals that justify continued program diversification. Each stall's X-side activity generates inputs that sustain the other's local rationality.</p>
+      <div class="stack-signals">Uncertainty (about which specializations will remain viable), Complexity (of evolving technology landscape), Opportunity (to demonstrate institutional responsiveness)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STACK-02</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Extracting talent through placement systems is facilitated by institutional mediation infrastructure</p>
+      <div class="stack-name">Mediation–Extraction Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S4</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">Extracting talent through placement systems (STALL_04: , ) is facilitated by institutional mediation infrastructure (STALL_05: , ). Mediating employer-student connections through career services creates structured pathways that channel talent externally. Each stall reduces friction for the other: mediation enables efficient extraction, extraction validates mediation infrastructure.</p>
+      <div class="stack-signals">Pressure (to demonstrate employment outcomes), Uncertainty (about direct hiring mechanisms), Complexity (of multi-stakeholder talent matching)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STK-07</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Coordinating through multi-stakeholder bodies aligns with waiting for policy frameworks</p>
+      <div class="stack-name">Coordination–Permission Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S2</span><span class="stall-tag">S9</span></div>
+      <p class="stack-desc">Coordinating through multi-stakeholder bodies (STALL_02: , ) aligns with waiting for policy frameworks (STALL_09: , ). Coordination activities build consensus that supports policy advocacy, while policy availability provides legitimacy anchors that justify coordination rather than unilateral action. Each stall defers commitment: coordination defers exclusionary decisions, permission-waiting defers</p>
+      <div class="stack-signals">Pressure (to demonstrate cluster development progress), Uncertainty (about strategic direction), Disruption (potential from uncoordinated action)</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STACK-04</span>
+        <span class="conf conf-low">low</span>
+      </div>
+      <div class="stack-name">Incumbent–Activity Scaling Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S6</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">Stabilizing around established institutions (STALL_06: , , ) is reinforced by scaling enrollment and production volume (STALL_08: , ). Large-scale activity through incumbent institutions demonstrates cluster vitality without requiring emergence of new organizational forms. Scaling validates incumbent models, incumbent stability enables continued scaling.</p>
+      <div class="stack-signals">Pressure (to demonstrate cluster growth), Uncertainty (about alternative institutional models), Disruption (risk from organizational experimentation)</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STACK-05</span>
+        <span class="conf conf-low">low</span>
+      </div>
+      <div class="stack-name">Breadth–Mediation–Extraction Configuration</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S4</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">Re-proving through program expansion (STALL_01) generates diverse graduate populations that require mediation infrastructure (STALL_05) to connect with employers, which facilitates extraction (STALL_04). Program breadth creates coordination complexity that justifies institutional intermediation, while mediation infrastructure enables efficient external placement that validates program expansion. T</p>
+      <div class="stack-signals">Uncertainty (about specialization choices), Pressure (to demonstrate employment outcomes), Complexity (of employer-student matching across diverse programs), Opportunity (to serve multiple market segments)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If a subset of employers and students were enabled to form direct hiring relationships without institutional intermediation, it might expose whether mediation currently absorbs uncertainty that could be managed through peer mechanisms."</p>
+    <p class="leverage-hyp">"If a subset of employers and students were enabled to form direct hiring relationships without institutional intermediation, it might expose whether mediation currently absorbs uncertainty that could be managed through peer mechanisms, potentially reducing the system's reliance on extraction-validating placement infrastructure."</p>
     <div class="leverage-meta">
-      <span class="lm-tag">STACK_02</span>
+      <span class="lm-tag">STK-02</span>
       <span class="lm-tag">Timeline: 6-12 months</span>
     </div>
   </div>
@@ -272,20 +334,20 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/harwell-space-technology.html">
-      <div class="sc-name">Harwell Space Technology</div>
-      <div class="sc-meta">Harwell Campus · United Kingdom</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Re-proving instead of narrowing</div>
-    </a><a class="similar-card" href="/clusters/tsukuba-space-technology.html">
-      <div class="sc-name">Tsukuba Space Technology</div>
-      <div class="sc-meta">Tsukuba · Japan</div>
-      <div class="sc-regime">Emerging</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/osaka-life-sciences-robotics.html">
+      <div class="sc-name">Osaka Life Sciences & Robotics</div>
+      <div class="sc-meta">Osaka · Japan</div>
+      <div class="sc-regime">Mature</div>
       <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/orlando-tourism-technology.html">
-      <div class="sc-name">Orlando Tourism Technology</div>
-      <div class="sc-meta">Orlando · United States</div>
-      <div class="sc-regime">Emerging</div>
+    </a><a class="similar-card" href="/clusters/jakarta-digital-e-commerce.html">
+      <div class="sc-name">Jakarta Digital & E-commerce</div>
+      <div class="sc-meta">Jakarta · ID</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a><a class="similar-card" href="/clusters/dubai-logistics-tech.html">
+      <div class="sc-name">Dubai Logistics Tech</div>
+      <div class="sc-meta">Dubai · UAE</div>
+      <div class="sc-regime">Mature</div>
       <div class="sc-stall">Primary: Stabilizing around incumbents</div>
     </a></div>
   </div>
@@ -293,19 +355,19 @@ footer a:hover{color:var(--green);}
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[0,40,0,40,40,0,0,40,0]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,50,50,30,30,50,30]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

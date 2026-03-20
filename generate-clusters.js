@@ -127,18 +127,28 @@ function renderStalls(stalls) {
 
 function renderStacks(stacks) {
   if (!stacks||!stacks.length) return '<p class="empty">No stack analysis available.</p>';
-  return stacks.map((st,i)=>`
+  return stacks.map((st,i)=>{
+    const id = st.canonical_id || `STACK-${String(i+1).padStart(2,'0')}`;
+    const name = st.stack_name || '';
+    const stallTags = (st.stalls_involved||[]).map(s=>`<span class="stall-tag">${s}</span>`).join('');
+    const conf = st.confidence ? `<span class="conf conf-${st.confidence}">${st.confidence}</span>` : '';
+    const signals = st.absorbed_signals ? `<div class="stack-signals">${st.absorbed_signals}</div>` : '';
+    return `
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack ${String(i+1).padStart(2,'0')}</span>
-        <span class="stack-stalls">${(st.stalls_involved||[]).join(' · ')}</span>
+        <span class="stack-num">${id}</span>
+        ${conf}
       </div>
+      ${name ? `<div class="stack-name">${name}</div>` : ''}
+      <div class="stack-stalls-row">${stallTags}</div>
       <p class="stack-desc">${st.description||''}</p>
-    </div>`).join('');
+      ${signals}
+    </div>`;
+  }).join('');
 }
 
 function renderLeverage(leverage) {
-  if (!leverage) return '<p class="empty">Leverage hypothesis available on request.</p>';
+  if (!leverage||!leverage.hypothesis) return '<p class="empty">Leverage hypothesis available on request.</p>';
   return `<div class="leverage-block">
     <p class="leverage-hyp">"${leverage.hypothesis||''}"</p>
     <div class="leverage-meta">
@@ -268,8 +278,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -329,6 +347,7 @@ footer a:hover{color:var(--green);}
       <span class="meta-tag meta-${c.regime||'emerging'}">${regimeLabel(c.regime)}</span>
       ${c._anchor_type?`<span class="meta-tag meta-plain">${anchorLabel(c._anchor_type)}</span>`:''}
       ${c._evidence_count?`<span class="meta-tag meta-plain">${c._evidence_count} evidence items</span>`:''}
+      ${c._evidence_tier?`<span class="meta-tag meta-tier meta-tier-${c._evidence_tier.toLowerCase().replace(' ','-')}">${c._evidence_tier}</span>`:''}
     </div>
     <p class="cluster-summary">${c.summary||''}</p>
   </header>

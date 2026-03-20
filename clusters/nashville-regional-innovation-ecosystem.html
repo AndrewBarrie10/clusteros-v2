@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/nashville-regional-innovation-ecosystem.html">
 <title>Nashville Regional Innovation Ecosystem — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Nashville Regional Innovation Ecosystem exhibits 8 observable stalls. 5 stabilisation stacks identified.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Nashville Regional Innovation Ecosystem — ClusterOS Diagnostic Profile","description":"Nashville Regional Innovation Ecosystem exhibits 8 observable stalls. 5 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/nashville-regional-innovation-ecosystem.html","keywords":["regional innovation cluster","cluster diagnostic","Nashville TN","United States","cycling","corporate","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Nashville TN","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.7,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.7,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.7,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.3,"description":"Confidence: low"}]}</script>
+<meta name="description" content="Nashville Regional Innovation Ecosystem exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behaviou">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Nashville Regional Innovation Ecosystem — ClusterOS Diagnostic Profile","description":"Nashville Regional Innovation Ecosystem exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.","url":"https://clusteros.io/clusters/nashville-regional-innovation-ecosystem.html","keywords":["regional innovation cluster","cluster diagnostic","Nashville TN","United States","growing","corporate","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Nashville TN","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.3,"description":"Confidence: low"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Nashville Regional Innovation Ecosystem",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/nashville-regional-innovation-ecosystem.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Nashville TN",
-    "addressCountry": "US"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 36.1627, "longitude": -86.7816}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -158,11 +150,12 @@ footer a:hover{color:var(--green);}
     <h1>Nashville Regional Innovation Ecosystem</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">Nashville TN, United States</span>
-      <span class="meta-tag meta-cycling">Cycling</span>
+      <span class="meta-tag meta-growing">growing</span>
       <span class="meta-tag meta-plain">Corporate anchor</span>
       <span class="meta-tag meta-plain">65 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p1">P1</span>
     </div>
-    <p class="cluster-summary">Nashville Regional Innovation Ecosystem exhibits 8 observable stalls. 5 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Nashville Regional Innovation Ecosystem exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
@@ -178,7 +171,7 @@ footer a:hover{color:var(--green);}
       <div class="stat-label">Evidence items</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">12</div>
+      <div class="stat-num">6</div>
       <div class="stat-label">Leverage timeline (mo)</div>
     </div>
   </div>
@@ -190,8 +183,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Re-proving instead of narrowing</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:98px;background:#d4695a"></div>
-          <span class="stall-pct">70%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -200,8 +193,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Coordinating instead of deciding</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:98px;background:#d4695a"></div>
-          <span class="stall-pct">70%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -240,8 +233,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Narrating instead of testing</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -250,8 +243,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Scaling activity instead of throughput</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:98px;background:#d4695a"></div>
-          <span class="stall-pct">70%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -279,87 +272,102 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls">Re-proving · Mediating · Scaling activity</span>
+        <span class="stack-num">STACK-01</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Program proliferation creates coordination complexity that intermediaries absorb through brokerage</p>
+      <div class="stack-name">Program-Intermediary Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S5</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">Program proliferation (S1) creates coordination complexity that intermediaries (S5) absorb through brokerage; intermediary presence enables continued program expansion (S8) without requiring direct coupling or consolidation; activity scaling (S8) generates demand for coordination services that sustains intermediary function (S5)</p>
+      <div class="stack-signals">Uncertainty (about which programs work), Complexity (multiple overlapping initiatives), Pressure (to demonstrate responsiveness)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls">Stabilising · Narrating</span>
+        <span class="stack-num">STACK-02</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Incumbent presence provides legitimacy platform for partnership announcements</p>
+      <div class="stack-name">Incumbent-Narrative Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S6</span><span class="stall-tag">S7</span></div>
+      <p class="stack-desc">Incumbent presence (S6) provides legitimacy platform for partnership announcements (S7); narrative declarations (S7) reinforce incumbent centrality without requiring displacement; incumbent stability absorbs uncertainty about new entrant viability while announcements absorb pressure to demonstrate innovation</p>
+      <div class="stack-signals">Uncertainty (about new models), Pressure (to signal innovation), Disruption (potential from new entrants)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls">Coordinating · Mediating</span>
+        <span class="stack-num">STK-02</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Broad stakeholder inclusion generates coordination complexity that intermediaries absorb</p>
+      <div class="stack-name">Coordination-Mediation Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S2</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">Broad stakeholder inclusion (S2) generates coordination complexity that intermediaries (S5) absorb; intermediary presence enables continued inclusive coordination without forcing exclusionary decisions; both absorb pressure to act decisively while maintaining system stability</p>
+      <div class="stack-signals">Pressure (to make commitments), Complexity (multiple stakeholders), Uncertainty (about optimal pathways)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 04</span>
-        <span class="stack-stalls">Narrating · Scaling activity</span>
+        <span class="stack-num">STK-04</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Partnership announcements justify activity expansion as implementation vehicles</p>
+      <div class="stack-name">Activity-Narrative Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S7</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">Partnership announcements (S7) justify activity expansion (S8) as implementation vehicles; activity scaling (S8) generates material for narrative declarations (S7); both absorb pressure to demonstrate progress without requiring throughput validation</p>
+      <div class="stack-signals">Pressure (to show results), Opportunity (to expand), Uncertainty (about effectiveness)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 05</span>
-        <span class="stack-stalls">Re-proving · Coordinating</span>
+        <span class="stack-num">STK-08</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Program proliferation creates stakeholder constituencies that coordination mechanisms must include</p>
+      <div class="stack-name">Program-Coordination Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S2</span></div>
+      <p class="stack-desc">Program proliferation (S1) creates stakeholder constituencies that coordination mechanisms (S2) must include; broad coordination (S2) enables continued program launch without consolidation pressure; both absorb complexity and uncertainty while distributing risk</p>
+      <div class="stack-signals">Complexity (multiple initiatives), Uncertainty (about effectiveness), Pressure (to be inclusive)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If new entities formed direct operational partnerships with incumbents without intermediary brokerage, it might expose whether incumbent centrality depends on mediation or persists through direct coupling."</p>
+    <p class="leverage-hyp">"If accelerator cohort outcomes (company survival, funding raised, employment) were made visible across programs, it might reduce the system's ability to absorb uncertainty about program effectiveness without selection pressure"</p>
     <div class="leverage-meta">
-      <span class="lm-tag">STK-02</span>
-      <span class="lm-tag">Timeline: 12-18 months</span>
+      <span class="lm-tag">STK-01</span>
+      <span class="lm-tag">Timeline: 6-12 months</span>
     </div>
   </div>
     <p class="disclaimer">Leverage hypotheses are testable perturbations, not prescriptions. Where demand-side behaviour is weakly visible, the correct move is observation — improving visibility before attempting change.</p>
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/wichita-regional-innovation-ecosystem.html">
-      <div class="sc-name">Wichita Regional Innovation Ecosystem</div>
-      <div class="sc-meta">Wichita KS · United States</div>
-      <div class="sc-regime">Cycling</div>
-      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/basel-life-sciences.html">
-      <div class="sc-name">Basel Life Sciences</div>
-      <div class="sc-meta">Basel · Switzerland</div>
-      <div class="sc-regime">Cycling</div>
-      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
-    </a><a class="similar-card" href="/clusters/cheltenham-cyber-security.html">
-      <div class="sc-name">Cheltenham Cyber Security</div>
-      <div class="sc-meta">Cheltenham · United Kingdom</div>
-      <div class="sc-regime">Cycling</div>
-      <div class="sc-stall">Primary: Stabilising around incumbents</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/taipei-ai-software.html">
+      <div class="sc-name">Taipei AI & Software</div>
+      <div class="sc-meta">Taipei · Taiwan</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a><a class="similar-card" href="/clusters/karachi-fintech.html">
+      <div class="sc-name">Karachi FinTech</div>
+      <div class="sc-meta">Karachi · PK</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a><a class="similar-card" href="/clusters/hanoi-manufacturing-tech.html">
+      <div class="sc-name">Hanoi Manufacturing Tech</div>
+      <div class="sc-meta">Hanoi · VN</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
     </a></div>
   </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[70,70,0,30,30,50,50,70,30]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,30,30,50,30,30,30]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

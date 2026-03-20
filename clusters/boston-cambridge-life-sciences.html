@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/boston-cambridge-life-sciences.html">
 <title>Boston-Cambridge Life Sciences — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Boston-Cambridge Life Sciences exhibits 5 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural pat">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Boston-Cambridge Life Sciences — ClusterOS Diagnostic Profile","description":"Boston-Cambridge Life Sciences exhibits 5 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 3 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/boston-cambridge-life-sciences.html","keywords":["regional innovation cluster","cluster diagnostic","Cambridge UK","United Kingdom","emerging","university","Re-proving instead of narrowing","Coordinating instead of deciding","Mediating instead of coupling","Stabilizing around incumbents","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Cambridge UK","addressCountry":"GB"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"}]}</script>
+<meta name="description" content="Boston-Cambridge Life Sciences exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patter">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Boston-Cambridge Life Sciences — ClusterOS Diagnostic Profile","description":"Boston-Cambridge Life Sciences exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.","url":"https://clusteros.io/clusters/boston-cambridge-life-sciences.html","keywords":["regional innovation cluster","cluster diagnostic","Boston MA","United States","unknown","university","Re-proving instead of narrowing","Coordinating instead of deciding","Mediating instead of coupling","Stabilizing around incumbents","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Boston MA","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Boston-Cambridge Life Sciences",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/boston-cambridge-life-sciences.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Cambridge UK",
-    "addressCountry": "GB"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 52.2053, "longitude": 0.4718}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -157,12 +149,13 @@ footer a:hover{color:var(--green);}
     <p class="cluster-eyebrow">Diagnostic Profile · 2026Q1-24083229</p>
     <h1>Boston-Cambridge Life Sciences</h1>
     <div class="cluster-meta">
-      <span class="meta-tag meta-plain">Cambridge UK, United Kingdom</span>
-      <span class="meta-tag meta-emerging">Emerging</span>
+      <span class="meta-tag meta-plain">Boston MA, United States</span>
+      <span class="meta-tag meta-unknown">unknown</span>
       <span class="meta-tag meta-plain">University anchor</span>
       <span class="meta-tag meta-plain">82 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p3">P3</span>
     </div>
-    <p class="cluster-summary">Boston-Cambridge Life Sciences exhibits 5 observable stalls with Re-proving instead of narrowing and Coordinating instead of deciding as primary behavioural patterns. 3 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Boston-Cambridge Life Sciences exhibits 5 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
@@ -178,7 +171,7 @@ footer a:hover{color:var(--green);}
       <div class="stat-label">Evidence items</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">12</div>
+      <div class="stat-num">6</div>
       <div class="stat-label">Leverage timeline (mo)</div>
     </div>
   </div>
@@ -220,8 +213,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Stabilizing around incumbents</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -249,73 +242,82 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls">Re-proving · Coordinating</span>
+        <span class="stack-num">STK-08</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">X-side of S1 (repeated accelerator program creation) co-occurs with X-side of S2 (repeated coordination entity creation). Each new program creates coordination demand.</p>
+      <div class="stack-name">Program-Coordination Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S2</span></div>
+      <p class="stack-desc">X-side of S1 (repeated accelerator program creation 2002-2017) co-occurs with X-side of S2 (repeated coordination entity creation 1985-2024). Each new program creates coordination demand; each coordination entity legitimates further program creation without requiring consolidation. Both operate across overlapping 15+ year windows.</p>
+      <div class="stack-signals">Uncertainty (about optimal venture support model), Pressure (to demonstrate institutional capability), Complexity (of multi-institutional coordination)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls">Mediating · Stabilising</span>
+        <span class="stack-num">STK-09</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">X-side of S6 (continuity of Harvard hospitals, major pharma) co-occurs with X-side of S5 (coordination entities, shared facilities). Incumbents create stable demand for intermediation.</p>
+      <div class="stack-name">Incumbent-Mediation Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S5</span><span class="stall-tag">S6</span></div>
+      <p class="stack-desc">X-side of S6 (continuity of Harvard hospitals, major pharma, established partnerships 2003-2024) co-occurs with X-side of S5 (coordination entities, shared facilities, brokered partnerships). Incumbent stability creates demand for intermediation structures that reduce transaction costs; intermediation structures reduce pressure on incumbents to restructure or couple directly. Both operate across 2</p>
+      <div class="stack-signals">Uncertainty (about partnership structures), Pressure (to demonstrate collaboration), Complexity (of multi-institutional integration), Disruption (potential from new entrants)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls">Coordinating · Scaling activity</span>
+        <span class="stack-num">STK-10</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">X-side of S2 (coordination entity creation) co-occurs with X-side of S8 (accelerator program expansion). Program activity expansion creates coordination demand.</p>
+      <div class="stack-name">Activity-Coordination Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S2</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">X-side of S2 (repeated coordination entity creation 1985-2024) co-occurs with X-side of S8 (accelerator program expansion 2002-2017). Program activity expansion creates coordination demand; coordination entities enable program proliferation without requiring throughput accountability. Both operate across overlapping windows (2002-2024 intersection).</p>
+      <div class="stack-signals">Pressure (to demonstrate activity), Complexity (of multi-program landscape), Opportunity (to establish programs without proving conversion)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If a subset of partnerships were structured to require joint governance or shared IP ownership, it might reduce the system's ability to absorb uncertainty about partnership structures through intermediation."</p>
+    <p class="leverage-hyp">"If outcome data (venture formation, funding secured, survival rates) from university-operated programs were made comparable and visible across institutions, it might reduce the system's ability to absorb uncertainty about optimal venture support models without adaptation."</p>
     <div class="leverage-meta">
-      <span class="lm-tag">ST2</span>
-      <span class="lm-tag">Timeline: 12-18 months</span>
+      <span class="lm-tag">STK-01</span>
+      <span class="lm-tag">Timeline: 6-12 months</span>
     </div>
   </div>
     <p class="disclaimer">Leverage hypotheses are testable perturbations, not prescriptions. Where demand-side behaviour is weakly visible, the correct move is observation — improving visibility before attempting change.</p>
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/buffalo-niagara-innovation-ecosystem.html">
-      <div class="sc-name">Buffalo Niagara Innovation Ecosystem</div>
-      <div class="sc-meta">Buffalo NY · United States</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a><a class="similar-card" href="/clusters/copenhagen-medicon-valley-life-sciences.html">
-      <div class="sc-name">Copenhagen-Medicon Valley Life Sciences</div>
-      <div class="sc-meta">Copenhagen · DK</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/harwell-space-technology.html">
-      <div class="sc-name">Harwell Space Technology</div>
-      <div class="sc-meta">Harwell Campus · United Kingdom</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Re-proving instead of narrowing</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/zurich-zug-medtech.html">
+      <div class="sc-name">Zurich-Zug MedTech</div>
+      <div class="sc-meta">Zurich · Switzerland</div>
+      <div class="sc-regime">unknown</div>
+      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
+    </a><a class="similar-card" href="/clusters/research-triangle-life-sciences.html">
+      <div class="sc-name">Research Triangle Life Sciences</div>
+      <div class="sc-meta">Raleigh-Durham NC · United States</div>
+      <div class="sc-regime">unknown</div>
+      <div class="sc-stall">Primary: Mediating instead of coupling</div>
+    </a><a class="similar-card" href="/clusters/cambridge-uk-life-sciences.html">
+      <div class="sc-name">Cambridge UK Life Sciences</div>
+      <div class="sc-meta">Cambridge · United Kingdom</div>
+      <div class="sc-regime">unknown</div>
+      <div class="sc-stall">Primary: Mediating instead of coupling</div>
     </a></div>
   </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,30,0,0,50,50,0,30,0]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,30,0,0,50,30,0,30,0]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

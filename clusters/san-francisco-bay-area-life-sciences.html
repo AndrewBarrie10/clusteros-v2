@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/san-francisco-bay-area-life-sciences.html">
 <title>San Francisco Bay Area Life Sciences — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="San Francisco Bay Area Life Sciences exhibits 6 observable stalls. 8 stabilisation stacks identified.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"San Francisco Bay Area Life Sciences — ClusterOS Diagnostic Profile","description":"San Francisco Bay Area Life Sciences exhibits 6 observable stalls. 8 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/san-francisco-bay-area-life-sciences.html","keywords":["regional innovation cluster","cluster diagnostic","San Francisco Bay Area","United States","cycling","university","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilising around incumbents","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"San Francisco Bay Area","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilising around incumbents","value":0.7,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.7,"description":"Confidence: low"}]}</script>
+<meta name="description" content="San Francisco Bay Area Life Sciences exhibits 6 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioura">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"San Francisco Bay Area Life Sciences — ClusterOS Diagnostic Profile","description":"San Francisco Bay Area Life Sciences exhibits 6 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 4 stabilisation stacks identified.","url":"https://clusteros.io/clusters/san-francisco-bay-area-life-sciences.html","keywords":["regional innovation cluster","cluster diagnostic","San Francisco","United States","unknown","university","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilizing around incumbents","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"San Francisco","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "San Francisco Bay Area Life Sciences",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/san-francisco-bay-area-life-sciences.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "San Francisco Bay Area",
-    "addressCountry": "US"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 37.7749, "longitude": -122.7694}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -157,12 +149,13 @@ footer a:hover{color:var(--green);}
     <p class="cluster-eyebrow">Diagnostic Profile · 2026Q1-24083239</p>
     <h1>San Francisco Bay Area Life Sciences</h1>
     <div class="cluster-meta">
-      <span class="meta-tag meta-plain">San Francisco Bay Area, United States</span>
-      <span class="meta-tag meta-cycling">Cycling</span>
+      <span class="meta-tag meta-plain">San Francisco, United States</span>
+      <span class="meta-tag meta-unknown">unknown</span>
       <span class="meta-tag meta-plain">University anchor</span>
       <span class="meta-tag meta-plain">55 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p1">P1</span>
     </div>
-    <p class="cluster-summary">San Francisco Bay Area Life Sciences exhibits 6 observable stalls. 8 stabilisation stacks identified.</p>
+    <p class="cluster-summary">San Francisco Bay Area Life Sciences exhibits 6 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 4 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
@@ -190,8 +183,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Re-proving instead of narrowing</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -210,8 +203,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Extracting without reinvesting</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -220,18 +213,18 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Mediating instead of coupling</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
     </div><div class="stall-row">
-      <span class="stall-id">—</span>
+      <span class="stall-id">S6</span>
       <div class="stall-detail">
-        <span class="stall-name">Stabilising around incumbents</span>
+        <span class="stall-name">Stabilizing around incumbents</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:98px;background:#d4695a"></div>
-          <span class="stall-pct">70%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -240,8 +233,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Scaling activity instead of throughput</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:98px;background:#d4695a"></div>
-          <span class="stall-pct">70%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -259,39 +252,51 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls">Re-proving · Mediating · Scaling activity</span>
+        <span class="stack-num">STACK-01</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">S1 generates multiple distinct program types requiring specialized support infrastructure</p>
+      <div class="stack-name">Program-Intermediary Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S5</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">S1 (re-proving) generates multiple distinct program types requiring specialized support infrastructure; S5 (mediating) provides that infrastructure through incubators and trade associations; S8 (scaling activity) expands both program count and intermediary touchpoints. Each program type plausibly justifies additional intermediation capacity; each intermediary plausibly enables additional program d</p>
+      <div class="stack-signals">Uncertainty, Complexity, Opportunity</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls">Coordinating · Stabilising</span>
+        <span class="stack-num">STK-20</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">S2 establishes multi-stakeholder alignment mechanisms</p>
+      <div class="stack-name">Coordination-Incumbent Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S2</span><span class="stall-tag">S6</span></div>
+      <p class="stack-desc">S2 (coordinating) establishes multi-stakeholder alignment mechanisms; S6 (stabilising around incumbents) concentrates participation around established universities and pharmaceutical entities. Cross-institutional centers and trade associations plausibly require incumbent participation for legitimacy and resource access; incumbent presence plausibly shapes coordination structures toward consensus-p</p>
+      <div class="stack-signals">Pressure, Complexity, Disruption</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls">Extracting · Mediating</span>
+        <span class="stack-num">STACK-03</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">S4 represents geographic expansion of CZ Biohub to multi-city network</p>
+      <div class="stack-name">Expansion-Intermediary Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S4</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">S4 (extracting without reinvesting) represents geographic expansion of CZ Biohub to multi-city network; S5 (mediating) maintains Bay Area intermediary infrastructure (incubators, trade associations). Geographic distribution plausibly reduces pressure to consolidate or redesign local intermediary structures; continued intermediary presence plausibly provides stable local infrastructure that makes g</p>
+      <div class="stack-signals">Opportunity, Complexity, Pressure</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 04</span>
-        <span class="stack-stalls">Re-proving · Coordinating · Stabilising · Scaling activity</span>
+        <span class="stack-num">STACK-04</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">S1 and S8 generate multiple program types and events</p>
+      <div class="stack-name">Program-Coordination-Incumbent Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S2</span><span class="stall-tag">S6</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">S1 (re-proving) and S8 (scaling activity) generate multiple program types and events; S2 (coordinating) provides alignment mechanisms across programs and institutions; S6 (stabilising around incumbents) concentrates activity around established universities. Program proliferation plausibly requires coordination infrastructure; coordination structures plausibly enable additional program differentiat</p>
+      <div class="stack-signals">Uncertainty, Complexity, Pressure, Opportunity</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If a subset of researchers in established programs were provided direct industry partnership mechanisms bypassing incubator intermediaries, it might reduce the system's ability to absorb complexity through intermediary buffering."</p>
+    <p class="leverage-hyp">"If program-level outcome data (translation rates, time-to-milestone, resource efficiency) were made comparable across the multiple interdisciplinary institutes (P001) and entrepreneurship programs (P006, P019), it might reduce the system's ability to absorb uncertainty through pathway proliferation without exposing performance variance."</p>
     <div class="leverage-meta">
-      <span class="lm-tag">STACK-01</span>
+      <span class="lm-tag">STK-01</span>
       <span class="lm-tag">Timeline: 6-12 months</span>
     </div>
   </div>
@@ -299,40 +304,40 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/wichita-regional-innovation-ecosystem.html">
-      <div class="sc-name">Wichita Regional Innovation Ecosystem</div>
-      <div class="sc-meta">Wichita KS · United States</div>
-      <div class="sc-regime">Cycling</div>
-      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/basel-life-sciences.html">
-      <div class="sc-name">Basel Life Sciences</div>
-      <div class="sc-meta">Basel · Switzerland</div>
-      <div class="sc-regime">Cycling</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/cape-canaveral-space-coast.html">
+      <div class="sc-name">Cape Canaveral Space Coast</div>
+      <div class="sc-meta">Cape Canaveral · United States</div>
+      <div class="sc-regime">unknown</div>
+      <div class="sc-stall">Primary: Extracting without reinvesting</div>
+    </a><a class="similar-card" href="/clusters/boston-robotics-ai.html">
+      <div class="sc-name">Boston Robotics & AI</div>
+      <div class="sc-meta">Boston MA · United States</div>
+      <div class="sc-regime">Mature</div>
       <div class="sc-stall">Primary: Stabilizing around incumbents</div>
-    </a><a class="similar-card" href="/clusters/cheltenham-cyber-security.html">
-      <div class="sc-name">Cheltenham Cyber Security</div>
-      <div class="sc-meta">Cheltenham · United Kingdom</div>
-      <div class="sc-regime">Cycling</div>
-      <div class="sc-stall">Primary: Stabilising around incumbents</div>
+    </a><a class="similar-card" href="/clusters/vancouver-life-sciences-biotech.html">
+      <div class="sc-name">Vancouver Life Sciences & BioTech</div>
+      <div class="sc-meta">Vancouver · Canada</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
     </a></div>
   </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[50,50,0,40,50,0,0,70,0]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,50,30,50,0,30,0]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

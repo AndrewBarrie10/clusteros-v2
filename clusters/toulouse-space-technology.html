@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/toulouse-space-technology.html">
 <title>Toulouse Space Technology — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Toulouse Space Technology exhibits 8 observable stalls. 6 stabilisation stacks identified.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Toulouse Space Technology — ClusterOS Diagnostic Profile","description":"Toulouse Space Technology exhibits 8 observable stalls. 6 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/toulouse-space-technology.html","keywords":["regional innovation cluster","cluster diagnostic","Toulouse","France","emerging","university","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Toulouse","addressCountry":"FR"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.7,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.7,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.4,"description":"Confidence: medium"}]}</script>
+<meta name="description" content="Toulouse Space Technology exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 ">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Toulouse Space Technology — ClusterOS Diagnostic Profile","description":"Toulouse Space Technology exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.","url":"https://clusteros.io/clusters/toulouse-space-technology.html","keywords":["regional innovation cluster","cluster diagnostic","Toulouse","France","mature","university","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Toulouse","addressCountry":"FR"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.5,"description":"Confidence: medium"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Toulouse Space Technology",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/toulouse-space-technology.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Toulouse",
-    "addressCountry": "FR"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 43.6047, "longitude": 1.4442}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -158,11 +150,12 @@ footer a:hover{color:var(--green);}
     <h1>Toulouse Space Technology</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">Toulouse, France</span>
-      <span class="meta-tag meta-emerging">Emerging</span>
+      <span class="meta-tag meta-mature">Mature</span>
       <span class="meta-tag meta-plain">University anchor</span>
       <span class="meta-tag meta-plain">60 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p2">P2</span>
     </div>
-    <p class="cluster-summary">Toulouse Space Technology exhibits 8 observable stalls. 6 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Toulouse Space Technology exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
@@ -170,7 +163,7 @@ footer a:hover{color:var(--green);}
       <div class="stat-label">Active stalls</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">6</div>
+      <div class="stat-num">5</div>
       <div class="stat-label">Stacks identified</div>
     </div>
     <div class="stat-cell">
@@ -190,8 +183,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Re-proving instead of narrowing</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -210,8 +203,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Extracting without reinvesting</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -230,8 +223,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Stabilizing around incumbents</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:98px;background:#d4695a"></div>
-          <span class="stall-pct">70%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -240,8 +233,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Narrating instead of testing</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -250,8 +243,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Scaling activity instead of throughput</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:98px;background:#d4695a"></div>
-          <span class="stall-pct">70%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -260,8 +253,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Waiting for permission</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -279,53 +272,61 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls">Re-proving · Coordinating · Mediating</span>
+        <span class="stack-num">STACK-01</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Re-proving infrastructure creates venues requiring coordination</p>
+      <div class="stack-name">Validation–Coordination Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S2</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">Re-proving infrastructure (S1: support programs, events) creates venues requiring coordination (S2: coordination entities); coordination entities provide legitimacy for continued re-proving activity; mediation infrastructure (S5: intermediaries) enables coordination without forcing exclusionary decisions. Each stall's X-side provides substrate for others.</p>
+      <div class="stack-signals">Uncertainty (about which actors/technologies to select), Pressure (to demonstrate ecosystem activity), Complexity (managing 250+ entities across diverse domains)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls">Narrating · Scaling activity</span>
+        <span class="stack-num">STK-04</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Narrating through designations and multi-domain stories justifies scaling activity</p>
+      <div class="stack-name">Narrative–Activity Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S7</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">Narrating (S7: designations, multi-domain stories) justifies scaling activity (S8: program expansion, entity proliferation); scaling activity provides material for narrative construction (company counts, program diversity); neither requires demonstrating throughput or market validation.</p>
+      <div class="stack-signals">Pressure (to justify institutional funding), Uncertainty (about market viability), Opportunity (policy attention, external investment)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls">Stabilising · Waiting for permission</span>
+        <span class="stack-num">STK-13</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Stabilizing around incumbents aligns with waiting for official designations and institutional partnerships</p>
+      <div class="stack-name">Incumbent–Permission Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S6</span><span class="stall-tag">S9</span></div>
+      <p class="stack-desc">Stabilizing around incumbents (S6: large manufacturers/agencies in network roles) aligns with waiting for permission (S9: seeking official designations, institutional partnerships); incumbents provide legitimacy for permission-granting; permission structures protect incumbent positions by gating access.</p>
+      <div class="stack-signals">Pressure (to maintain ecosystem stability), Uncertainty (regulatory/policy risk), Disruption (potential from unvalidated entrants)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 04</span>
-        <span class="stack-stalls">Re-proving · Narrating</span>
+        <span class="stack-num">STK-11</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Multiple support programs and recurring events generate material for narrating ecosystem vitality</p>
+      <div class="stack-name">Validation–Narrative Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S7</span></div>
+      <p class="stack-desc">Re-proving (S1: multiple support programs, recurring events) generates material for narrating (S7: ecosystem vitality, strategic priority); narrating justifies continued investment in re-proving infrastructure; neither requires demonstrating market conversion or strategic commitment.</p>
+      <div class="stack-signals">Pressure (to attract funding), Uncertainty (about technological/market direction), Opportunity (policy attention)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 05</span>
-        <span class="stack-stalls">Extracting · Stabilising</span>
+        <span class="stack-num">STK-05</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Startup capital exits reduce pressure on incumbents to adapt</p>
-    </div>
-    <div class="stack-item">
-      <div class="stack-header">
-        <span class="stack-num">Stack 06</span>
-        <span class="stack-stalls">Coordinating · Waiting for permission</span>
-      </div>
-      <p class="stack-desc">Coordinating instead of deciding defers exclusionary choices to permission structures</p>
+      <div class="stack-name">Extraction–Incumbent Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S4</span><span class="stall-tag">S6</span></div>
+      <p class="stack-desc">Extracting without reinvesting (S4: startup capital exits) reduces pressure on incumbents to adapt (S6: incumbents maintain specialization boundaries, network positions); incumbent stability enables continued public funding substitution for private reinvestment; neither requires demonstrating startup displacement of incumbents or capital recycling.</p>
+      <div class="stack-signals">Pressure (on founders/investors to optimize returns), Opportunity (exit events), Disruption (potential from startup growth)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If coordination entities published decision rationales for resource allocation or strategic priorities, it might reduce the system's ability to absorb pressure to maintain stability by exposing whether incumbents gate access to opportunities."</p>
+    <p class="leverage-hyp">"If outcomes from support programs (P015: 6 programs) were made comparable through standardized reporting, it might reduce the system's ability to absorb uncertainty about which programs generate strategic narrowing without requiring coordination entities to make exclusionary choices."</p>
     <div class="leverage-meta">
-      <span class="lm-tag">STK-03</span>
+      <span class="lm-tag">STK-01</span>
       <span class="lm-tag">Timeline: 6-12 months</span>
     </div>
   </div>
@@ -333,40 +334,40 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/buffalo-niagara-innovation-ecosystem.html">
-      <div class="sc-name">Buffalo Niagara Innovation Ecosystem</div>
-      <div class="sc-meta">Buffalo NY · United States</div>
-      <div class="sc-regime">Emerging</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/chicago-fintech-payments.html">
+      <div class="sc-name">Chicago FinTech & Payments</div>
+      <div class="sc-meta">Chicago · United States</div>
+      <div class="sc-regime">Mature</div>
       <div class="sc-stall">Primary: Waiting for permission</div>
-    </a><a class="similar-card" href="/clusters/harwell-space-technology.html">
-      <div class="sc-name">Harwell Space Technology</div>
-      <div class="sc-meta">Harwell Campus · United Kingdom</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Re-proving instead of narrowing</div>
-    </a><a class="similar-card" href="/clusters/tsukuba-space-technology.html">
-      <div class="sc-name">Tsukuba Space Technology</div>
-      <div class="sc-meta">Tsukuba · Japan</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
+    </a><a class="similar-card" href="/clusters/boston-robotics-ai.html">
+      <div class="sc-name">Boston Robotics & AI</div>
+      <div class="sc-meta">Boston MA · United States</div>
+      <div class="sc-regime">Mature</div>
+      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
+    </a><a class="similar-card" href="/clusters/san-diego-life-sciences-biotech.html">
+      <div class="sc-name">San Diego Life Sciences & BioTech</div>
+      <div class="sc-meta">San Diego · United States</div>
+      <div class="sc-regime">Mature</div>
+      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
     </a></div>
   </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[50,30,0,40,30,70,50,70,40]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,30,0,50,30,50,30,30,50]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

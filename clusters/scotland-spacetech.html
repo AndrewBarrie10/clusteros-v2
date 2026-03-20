@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/scotland-spacetech.html">
 <title>Scotland SpaceTech — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Scotland SpaceTech exhibits 5 observable stalls. 3 stabilisation stacks identified.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Scotland SpaceTech — ClusterOS Diagnostic Profile","description":"Scotland SpaceTech exhibits 5 observable stalls. 3 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/scotland-spacetech.html","keywords":["regional innovation cluster","cluster diagnostic","Scotland","United Kingdom","emerging","government","Re-proving instead of narrowing","Coordinating instead of deciding","Mediating instead of coupling","Narrating instead of testing","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Scotland","addressCountry":"GB"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"}]}</script>
+<meta name="description" content="Scotland SpaceTech exhibits 5 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 3 sta">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Scotland SpaceTech — ClusterOS Diagnostic Profile","description":"Scotland SpaceTech exhibits 5 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.","url":"https://clusteros.io/clusters/scotland-spacetech.html","keywords":["regional innovation cluster","cluster diagnostic","Scotland","United Kingdom","emerging","government","Re-proving instead of narrowing","Coordinating instead of deciding","Mediating instead of coupling","Narrating instead of testing","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Scotland","addressCountry":"GB"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Scotland SpaceTech",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/scotland-spacetech.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Scotland",
-    "addressCountry": "GB"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 56.7938, "longitude": -4.3776}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -161,8 +153,9 @@ footer a:hover{color:var(--green);}
       <span class="meta-tag meta-emerging">Emerging</span>
       <span class="meta-tag meta-plain">Government anchor</span>
       <span class="meta-tag meta-plain">62 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p3">P3</span>
     </div>
-    <p class="cluster-summary">Scotland SpaceTech exhibits 5 observable stalls. 3 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Scotland SpaceTech exhibits 5 observable stalls with Coordinating instead of deciding and Re-proving instead of narrowing as primary behavioural patterns. 3 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
@@ -190,8 +183,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Re-proving instead of narrowing</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -220,8 +213,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Narrating instead of testing</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -249,30 +242,39 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls">Re-proving · Mediating</span>
+        <span class="stack-num">STACK-01</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Repeated discrete funding allocations may increase perceived need for intermediary support programs</p>
+      <div class="stack-name">Validation–Intermediation Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">Repeated discrete funding allocations (S1 X-side) may increase perceived need for intermediary support programs (S5 X-side) as entities navigate multiple validation processes; intermediary program proliferation may sustain funding fragmentation by creating specialized channels requiring separate validation. Both X-sides observable; neither Y-side observable.</p>
+      <div class="stack-signals">Uncertainty (funding access), Pressure (accountability requirements), Complexity (multi-jurisdictional governance)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls">Coordinating · Narrating</span>
+        <span class="stack-num">STK-01</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Multiple governance entities with defined responsibilities may increase value of sector branding and policy articulation</p>
+      <div class="stack-name">Coordination–Narration Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S2</span><span class="stall-tag">S7</span></div>
+      <p class="stack-desc">Multiple governance entities with defined responsibilities (S2 X-side) may increase value of sector branding and policy articulation (S7 X-side) to maintain coherence across distributed decision-making; narrative activity around values/identity may sustain multi-entity coordination by providing shared reference points without requiring exclusionary decisions. S2 Y-side weakly evidenced; S7 Y-side </p>
+      <div class="stack-signals">Uncertainty (strategic direction), Complexity (multi-stakeholder governance), Opportunity (sector positioning)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls">Re-proving · Scaling activity</span>
+        <span class="stack-num">STACK-03</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Multiple discrete funding allocations may sustain proliferation of support programs</p>
+      <div class="stack-name">Validation–Activity Scaling Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">Multiple discrete funding allocations (S1 X-side) may sustain proliferation of support programs (S8 X-side) as each funding stream generates demand for specialized assistance; program proliferation may sustain funding fragmentation by creating multiple pathways requiring separate validation. Both X-sides observable; neither Y-side observable.</p>
+      <div class="stack-signals">Pressure (accountability), Complexity (diverse entity needs), Opportunity (funding access)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If validation criteria used by UK Space Agency and Highlands and Islands Enterprise were made observable to applicants and intermediaries, it might reduce perceived need for specialized intermediary navigation support."</p>
+    <p class="leverage-hyp">"If validation criteria used by UK Space Agency and Highlands and Islands Enterprise were made observable to applicants and intermediaries, it might reduce perceived need for specialized intermediary navigation support (P007 entities) by decreasing information asymmetry."</p>
     <div class="leverage-meta">
       <span class="lm-tag">STK-01</span>
       <span class="lm-tag">Timeline: 6-12 months</span>
@@ -282,19 +284,19 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/new-zealand-space-technology.html">
-      <div class="sc-name">New Zealand Space Technology</div>
-      <div class="sc-meta">Mahia Peninsula · New Zealand</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/bangalore-quantum-deep-science.html">
+      <div class="sc-name">Bangalore Quantum & Deep Science</div>
+      <div class="sc-meta">Bangalore · India</div>
       <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Narrating instead of testing</div>
-    </a><a class="similar-card" href="/clusters/scotland-health-tech.html">
-      <div class="sc-name">Scotland Health Tech</div>
-      <div class="sc-meta">Edinburgh · United Kingdom</div>
+      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
+    </a><a class="similar-card" href="/clusters/phnom-penh-fintech.html">
+      <div class="sc-name">Phnom Penh FinTech</div>
+      <div class="sc-meta">Phnom Penh · KH</div>
       <div class="sc-regime">Emerging</div>
       <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/tsukuba-space-technology.html">
-      <div class="sc-name">Tsukuba Space Technology</div>
-      <div class="sc-meta">Tsukuba · Japan</div>
+    </a><a class="similar-card" href="/clusters/chattanooga-regional-innovation-ecosystem.html">
+      <div class="sc-name">Chattanooga Regional Innovation Ecosystem</div>
+      <div class="sc-meta">Chattanooga TN · United States</div>
       <div class="sc-regime">Emerging</div>
       <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
     </a></div>
@@ -303,19 +305,19 @@ footer a:hover{color:var(--green);}
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[50,50,0,0,30,0,50,30,0]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,0,30,0,30,30,0]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

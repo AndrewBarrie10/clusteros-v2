@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/houston-space-technology.html">
 <title>Houston Space Technology — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Houston Space Technology exhibits 7 observable stalls. 4 stabilisation stacks identified.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Houston Space Technology — ClusterOS Diagnostic Profile","description":"Houston Space Technology exhibits 7 observable stalls. 4 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/houston-space-technology.html","keywords":["regional innovation cluster","cluster diagnostic","Houston","United States","emerging","university","Re-proving instead of narrowing","Coordinating instead of deciding","Mediating instead of coupling","Stabilising around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Houston","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilising around incumbents","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.3,"description":"Confidence: low"}]}</script>
+<meta name="description" content="Houston Space Technology exhibits 7 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 4">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Houston Space Technology — ClusterOS Diagnostic Profile","description":"Houston Space Technology exhibits 7 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.","url":"https://clusteros.io/clusters/houston-space-technology.html","keywords":["regional innovation cluster","cluster diagnostic","Houston","United States","unknown","university","Re-proving instead of narrowing","Coordinating instead of deciding","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Houston","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.3,"description":"Confidence: low"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Houston Space Technology",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/houston-space-technology.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Houston",
-    "addressCountry": "US"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 29.7604, "longitude": -95.3698}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -158,11 +150,12 @@ footer a:hover{color:var(--green);}
     <h1>Houston Space Technology</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">Houston, United States</span>
-      <span class="meta-tag meta-emerging">Emerging</span>
+      <span class="meta-tag meta-unknown">unknown</span>
       <span class="meta-tag meta-plain">University anchor</span>
       <span class="meta-tag meta-plain">56 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p3">P3</span>
     </div>
-    <p class="cluster-summary">Houston Space Technology exhibits 7 observable stalls. 4 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Houston Space Technology exhibits 7 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
@@ -216,12 +209,12 @@ footer a:hover{color:var(--green);}
       </div>
       <span class="conf conf-low">low</span>
     </div><div class="stall-row">
-      <span class="stall-id">—</span>
+      <span class="stall-id">S6</span>
       <div class="stall-detail">
-        <span class="stall-name">Stabilising around incumbents</span>
+        <span class="stall-name">Stabilizing around incumbents</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -240,8 +233,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Scaling activity instead of throughput</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -269,37 +262,49 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls">Re-proving · Coordinating</span>
+        <span class="stack-num">STK-08</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Repeated initiation activity may sustain formation of collaborative structures across NASA, universities, spaceport</p>
+      <div class="stack-name">Announcement–Coordination Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S2</span></div>
+      <p class="stack-desc">S1 X-side (repeated initiation activity: 13 announcements 2023-2024) may sustain S2 X-side (formation of collaborative structures across NASA, universities, spaceport) by generating continuous demand for alignment mechanisms; S2 X-side may sustain S1 X-side by providing institutional venues for announcement activity without requiring option collapse</p>
+      <div class="stack-signals">Uncertainty (multiple pathways remain open), Pressure (stakeholder expectations for visible progress), Complexity (multi-actor coordination needs)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls">Mediating · Stabilising</span>
+        <span class="stack-num">STK-09</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">NASA JSC as intermediary may sustain sustained incumbent presence and resource flows</p>
+      <div class="stack-name">Intermediation–Incumbent Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S5</span><span class="stall-tag">S6</span></div>
+      <p class="stack-desc">S5 X-side (NASA JSC as intermediary in transactions and programs) may sustain S6 X-side (sustained incumbent presence and resource flows) by channeling contracts through established relationships; S6 X-side may sustain S5 X-side by maintaining demand for intermediary role from entities with existing facility/contract infrastructure</p>
+      <div class="stack-signals">Uncertainty (risk mitigation through proven entities), Pressure (delivery assurance requirements), Complexity (regulatory/technical coordination)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls">Narrating · Scaling activity</span>
+        <span class="stack-num">STK-04</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Creation of governance units and strategy structures may sustain expansion of programs and announcements</p>
+      <div class="stack-name">Activity–Narrative Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S7</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">S7 X-side (creation of governance units and strategy structures) may sustain S8 X-side (expansion of programs, events, announcements) by providing institutional mandate for activity generation; S8 X-side may sustain S7 X-side by supplying content for strategic narrative and justification for governance structures</p>
+      <div class="stack-signals">Pressure (expectations for ecosystem development), Opportunity (program launch possibilities), Uncertainty (ambiguity about what constitutes progress)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 04</span>
-        <span class="stack-stalls">Coordinating · Mediating · Scaling activity</span>
+        <span class="stack-num">STK-30</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Collaborative structure formation may sustain intermediary role by creating partnership arrangements requiring coordination</p>
+      <div class="stack-name">Coordination–Intermediation–Activity Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S2</span><span class="stall-tag">S5</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">S2 X-side (collaborative structure formation) may sustain S5 X-side (intermediary role) by creating partnership arrangements requiring coordination; S5 X-side may sustain S8 X-side (program/event expansion) by providing institutional channel for activity; S8 X-side may sustain S2 X-side by generating demand for additional coordination mechanisms</p>
+      <div class="stack-signals">Complexity (multi-stakeholder ecosystem), Pressure (visible progress expectations), Uncertainty (pathway ambiguity), Opportunity (program/partnership possibilities)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If new collaborative structures were subject to mandatory waiting period after announcement events, it might reduce the system's ability to absorb stakeholder pressure for visible progress."</p>
+    <p class="leverage-hyp">"If announcement events were required to include explicit statements of which prior options are being closed or deprioritized, it might reduce the system's ability to absorb uncertainty without revealing strategic commitment patterns"</p>
     <div class="leverage-meta">
       <span class="lm-tag">STK-01</span>
       <span class="lm-tag">Timeline: 6-12 months</span>
@@ -309,40 +314,40 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/abu-dhabi-helm-life-sciences.html">
-      <div class="sc-name">Abu Dhabi HELM Life Sciences</div>
-      <div class="sc-meta">Abu Dhabi · UAE</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Re-proving instead of narrowing</div>
-    </a><a class="similar-card" href="/clusters/copenhagen-medicon-valley-life-sciences.html">
-      <div class="sc-name">Copenhagen-Medicon Valley Life Sciences</div>
-      <div class="sc-meta">Copenhagen · DK</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/harwell-space-technology.html">
-      <div class="sc-name">Harwell Space Technology</div>
-      <div class="sc-meta">Harwell Campus · United Kingdom</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Re-proving instead of narrowing</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/hyderabad-genome-valley-life-sciences.html">
+      <div class="sc-name">Hyderabad Genome Valley Life Sciences</div>
+      <div class="sc-meta">Hyderabad · India</div>
+      <div class="sc-regime">unknown</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a><a class="similar-card" href="/clusters/san-francisco-bay-area-life-sciences.html">
+      <div class="sc-name">San Francisco Bay Area Life Sciences</div>
+      <div class="sc-meta">San Francisco · United States</div>
+      <div class="sc-regime">unknown</div>
+      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
+    </a><a class="similar-card" href="/clusters/basel-life-sciences.html">
+      <div class="sc-name">Basel Life Sciences</div>
+      <div class="sc-meta">Basel · Switzerland</div>
+      <div class="sc-regime">unknown</div>
+      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
     </a></div>
   </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,0,30,0,30,50,30]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,0,30,50,30,30,30]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

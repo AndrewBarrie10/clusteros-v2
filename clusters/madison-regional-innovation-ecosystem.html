@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/madison-regional-innovation-ecosystem.html">
 <title>Madison Regional Innovation Ecosystem — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Madison Regional Innovation Ecosystem exhibits 3 observable stalls. 5 stabilisation stacks identified.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Madison Regional Innovation Ecosystem — ClusterOS Diagnostic Profile","description":"Madison Regional Innovation Ecosystem exhibits 3 observable stalls. 5 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/madison-regional-innovation-ecosystem.html","keywords":["regional innovation cluster","cluster diagnostic","Madison WI","United States","emerging","university","Coordinating instead of deciding","Stabilizing around incumbents","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Madison WI","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.4,"description":"Confidence: medium"}]}</script>
+<meta name="description" content="Madison Regional Innovation Ecosystem exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioura">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Madison Regional Innovation Ecosystem — ClusterOS Diagnostic Profile","description":"Madison Regional Innovation Ecosystem exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.","url":"https://clusteros.io/clusters/madison-regional-innovation-ecosystem.html","keywords":["regional innovation cluster","cluster diagnostic","Madison WI","United States","growing","university","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Madison WI","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.5,"description":"Confidence: medium"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Madison Regional Innovation Ecosystem",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/madison-regional-innovation-ecosystem.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Madison WI",
-    "addressCountry": "US"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 43.0731, "longitude": -89.4012}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -158,19 +150,20 @@ footer a:hover{color:var(--green);}
     <h1>Madison Regional Innovation Ecosystem</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">Madison WI, United States</span>
-      <span class="meta-tag meta-emerging">Emerging</span>
+      <span class="meta-tag meta-growing">growing</span>
       <span class="meta-tag meta-plain">University anchor</span>
       <span class="meta-tag meta-plain">60 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p3">P3</span>
     </div>
-    <p class="cluster-summary">Madison Regional Innovation Ecosystem exhibits 3 observable stalls. 5 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Madison Regional Innovation Ecosystem exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
-      <div class="stat-num">3</div>
+      <div class="stat-num">8</div>
       <div class="stat-label">Active stalls</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">4</div>
+      <div class="stat-num">5</div>
       <div class="stat-label">Stacks identified</div>
     </div>
     <div class="stat-cell">
@@ -186,32 +179,82 @@ footer a:hover{color:var(--green);}
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
       <div class="stall-row">
+      <span class="stall-id">S1</span>
+      <div class="stall-detail">
+        <span class="stall-name">Re-proving instead of narrowing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
       <span class="stall-id">S2</span>
       <div class="stall-detail">
         <span class="stall-name">Coordinating instead of deciding</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S4</span>
+      <div class="stall-detail">
+        <span class="stall-name">Extracting without reinvesting</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S5</span>
+      <div class="stall-detail">
+        <span class="stall-name">Mediating instead of coupling</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
     </div><div class="stall-row">
       <span class="stall-id">S6</span>
       <div class="stall-detail">
         <span class="stall-name">Stabilizing around incumbents</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S7</span>
+      <div class="stall-detail">
+        <span class="stall-name">Narrating instead of testing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S8</span>
+      <div class="stall-detail">
+        <span class="stall-name">Scaling activity instead of throughput</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
     </div><div class="stall-row">
       <span class="stall-id">S9</span>
       <div class="stall-detail">
         <span class="stall-name">Waiting for permission</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -229,39 +272,61 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STACK-01</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Repeated establishment of entrepreneurship infrastructure creates venues for activity scaling</p>
+      <div class="stack-name">Infrastructure-Activity Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">Repeated establishment of entrepreneurship infrastructure (STALL_01 X-side) creates venues for activity scaling (STALL_08 X-side); activity scaling justifies continued infrastructure investment. Both operate through visible program expansion without requiring throughput measurement or strategic narrowing.</p>
+      <div class="stack-signals">Uncertainty (about what works), Pressure (to demonstrate ecosystem growth), Complexity (of choosing among strategic options)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STK-20</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Long-duration institutional presence creates stable actor set for partnership formation</p>
+      <div class="stack-name">Incumbent-Coordination Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S6</span><span class="stall-tag">S2</span></div>
+      <p class="stack-desc">Long-duration institutional presence and incumbent integration (STALL_06 X-side) creates stable actor set for partnership formation (STALL_02 X-side); partnership coordination reinforces incumbent centrality by channeling collaboration through established entities rather than enabling displacement.</p>
+      <div class="stack-signals">Uncertainty (about new organizational forms), Disruption (potential from new entrants), Pressure (to maintain institutional relationships)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STACK-03</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Aggregate prestige indicators and rankings strengthen case for federal funding receipt</p>
+      <div class="stack-name">Prestige-Permission Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S7</span><span class="stall-tag">S9</span></div>
+      <p class="stack-desc">Aggregate prestige indicators and rankings (STALL_07 X-side) strengthen case for federal funding receipt (STALL_09 X-side); federal awards reinforce prestige narrative by providing external validation. Both substitute external legitimacy for behavioral proof or autonomous action.</p>
+      <div class="stack-signals">Uncertainty (about market validation), Pressure (to secure resources), Opportunity (to pursue autonomous initiatives)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 04</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STACK-04</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">High intermediary density creates organizational demand for entrepreneurship infrastructure</p>
+      <div class="stack-name">Intermediary-Infrastructure Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S5</span><span class="stall-tag">S1</span></div>
+      <p class="stack-desc">High intermediary density (STALL_05 X-side) creates organizational demand for entrepreneurship infrastructure (STALL_01 X-side); infrastructure establishment creates roles and venues for intermediary activity. Both expand organizational presence without requiring direct coupling or strategic commitment.</p>
+      <div class="stack-signals">Complexity (of direct market relationships), Pressure (to demonstrate ecosystem activity), Opportunity (for direct actor coupling)</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STK-05</span>
+        <span class="conf conf-low">low</span>
+      </div>
+      <div class="stack-name">Extraction-Incumbent Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S4</span><span class="stall-tag">S6</span></div>
+      <p class="stack-desc">Large-scale financial extraction from commercialization (STALL_04 X-side) flows to established institutional actors (STALL_06 X-side: WARF since 1925); incumbent stability enables continued extraction without requiring reinvestment discipline or enabling new organizational forms.</p>
+      <div class="stack-signals">Pressure (to redistribute capital), Opportunity (for ecosystem reinvestment), Disruption (from capital-enabled new entrants)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If new entrepreneurship infrastructure establishment were paused for a defined period, it might expose whether absence of new infrastructure increases direct coupling pressure."</p>
+    <p class="leverage-hyp">"If infrastructure funding were conditioned on observable throughput metrics (ventures progressed, capital deployed, exits achieved), it might reduce the system's ability to absorb uncertainty about effectiveness without requiring strategic narrowing."</p>
     <div class="leverage-meta">
-      <span class="lm-tag">STACK_01</span>
+      <span class="lm-tag">STK-01</span>
       <span class="lm-tag">Timeline: 6-12 months</span>
     </div>
   </div>
@@ -269,20 +334,20 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/harwell-space-technology.html">
-      <div class="sc-name">Harwell Space Technology</div>
-      <div class="sc-meta">Harwell Campus · United Kingdom</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Re-proving instead of narrowing</div>
-    </a><a class="similar-card" href="/clusters/adelaide-space-technology.html">
-      <div class="sc-name">Adelaide Space Technology</div>
-      <div class="sc-meta">Adelaide · Australia</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Narrating instead of testing</div>
-    </a><a class="similar-card" href="/clusters/buffalo-niagara-innovation-ecosystem.html">
-      <div class="sc-name">Buffalo Niagara Innovation Ecosystem</div>
-      <div class="sc-meta">Buffalo NY · United States</div>
-      <div class="sc-regime">Emerging</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/taipei-ai-software.html">
+      <div class="sc-name">Taipei AI & Software</div>
+      <div class="sc-meta">Taipei · Taiwan</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a><a class="similar-card" href="/clusters/karachi-fintech.html">
+      <div class="sc-name">Karachi FinTech</div>
+      <div class="sc-meta">Karachi · PK</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a><a class="similar-card" href="/clusters/hanoi-manufacturing-tech.html">
+      <div class="sc-name">Hanoi Manufacturing Tech</div>
+      <div class="sc-meta">Hanoi · VN</div>
+      <div class="sc-regime">growing</div>
       <div class="sc-stall">Primary: Waiting for permission</div>
     </a></div>
   </div>
@@ -290,19 +355,19 @@ footer a:hover{color:var(--green);}
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[0,40,0,0,0,40,0,0,40]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,30,30,50,30,30,50]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

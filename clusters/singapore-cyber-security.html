@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/singapore-cyber-security.html">
 <title>Singapore Cyber Security — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Singapore Cyber Security exhibits 3 observable stalls. 3 stabilisation stacks identified.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Singapore Cyber Security — ClusterOS Diagnostic Profile","description":"Singapore Cyber Security exhibits 3 observable stalls. 3 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/singapore-cyber-security.html","keywords":["regional innovation cluster","cluster diagnostic","Singapore","Singapore","emerging","government","Coordinating instead of deciding","Mediating instead of coupling","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Singapore","addressCountry":"SG"},"variableMeasured":[{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.4,"description":"Confidence: medium"}]}</script>
+<meta name="description" content="Singapore Cyber Security exhibits 6 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 3">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Singapore Cyber Security — ClusterOS Diagnostic Profile","description":"Singapore Cyber Security exhibits 6 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 3 stabilisation stacks identified.","url":"https://clusteros.io/clusters/singapore-cyber-security.html","keywords":["regional innovation cluster","cluster diagnostic","Singapore","Singapore","growing","government","Re-proving instead of narrowing","Coordinating instead of deciding","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Singapore","addressCountry":"SG"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.5,"description":"Confidence: medium"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Singapore Cyber Security",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/singapore-cyber-security.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Singapore",
-    "addressCountry": "SG"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 1.3521, "longitude": 103.4698}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -158,15 +150,16 @@ footer a:hover{color:var(--green);}
     <h1>Singapore Cyber Security</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">Singapore, Singapore</span>
-      <span class="meta-tag meta-emerging">Emerging</span>
+      <span class="meta-tag meta-growing">growing</span>
       <span class="meta-tag meta-plain">Government anchor</span>
       <span class="meta-tag meta-plain">74 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p2">P2</span>
     </div>
-    <p class="cluster-summary">Singapore Cyber Security exhibits 3 observable stalls. 3 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Singapore Cyber Security exhibits 6 observable stalls with Coordinating instead of deciding and Mediating instead of coupling as primary behavioural patterns. 3 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
-      <div class="stat-num">3</div>
+      <div class="stat-num">6</div>
       <div class="stat-label">Active stalls</div>
     </div>
     <div class="stat-cell">
@@ -186,12 +179,22 @@ footer a:hover{color:var(--green);}
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
       <div class="stall-row">
+      <span class="stall-id">S1</span>
+      <div class="stall-detail">
+        <span class="stall-name">Re-proving instead of narrowing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
       <span class="stall-id">S2</span>
       <div class="stall-detail">
         <span class="stall-name">Coordinating instead of deciding</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -200,18 +203,38 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Mediating instead of coupling</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S6</span>
+      <div class="stall-detail">
+        <span class="stall-name">Stabilizing around incumbents</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S7</span>
+      <div class="stall-detail">
+        <span class="stall-name">Narrating instead of testing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
     </div><div class="stall-row">
       <span class="stall-id">S8</span>
       <div class="stall-detail">
         <span class="stall-name">Scaling activity instead of throughput</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -229,32 +252,41 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STK-08</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Repeated resource allocation across multiple programmes sustains coordination activities across stakeholders</p>
+      <div class="stack-name">Resource-Coordination Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S2</span></div>
+      <p class="stack-desc">Repeated resource allocation across multiple programmes (STALL_01 X-side) plausibly sustains coordination activities across stakeholders (STALL_02 X-side): funding multiple initiatives maintains basis for multi-stakeholder engagement. Coordination mechanisms (STALL_02 X-side) plausibly sustain continued resource distribution (STALL_01 X-side): stakeholder inclusion creates expectation of continued</p>
+      <div class="stack-signals">Uncertainty (which pathways will succeed), Pressure (demonstrate government action), Complexity (fragmented institutional landscape)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STK-26</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">CSA intermediation sustains programme proliferation by enabling management of multiple distinct programmes</p>
+      <div class="stack-name">Activity-Intermediation Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S5</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">CSA intermediation across functions (STALL_05 X-side) plausibly sustains programme proliferation (STALL_08 X-side): central coordination enables management of multiple distinct programmes. Programme proliferation (STALL_08 X-side) plausibly sustains intermediation role (STALL_05 X-side): operating 9 distinct programmes creates coordination demand and justifies central coordinating function. Both s</p>
+      <div class="stack-signals">Pressure (demonstrate reach), Complexity (diverse stakeholder needs), Opportunity (expand institutional scope)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STACK-03</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Policy articulation through formal instruments sustains incumbent institutional presence</p>
+      <div class="stack-name">Narrative-Incumbent Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S6</span><span class="stall-tag">S7</span></div>
+      <p class="stack-desc">Policy articulation through formal instruments (STALL_07 X-side) plausibly sustains incumbent institutional presence (STALL_06 X-side): governance frameworks reference and legitimize established universities and agencies. Incumbent institutional presence (STALL_06 X-side) plausibly sustains policy narration (STALL_07 X-side): established institutions provide credible authorship and implementation </p>
+      <div class="stack-signals">Uncertainty (implementation pathways), Pressure (establish legitimacy), Complexity (national security domain)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If CSA-operated programmes implemented shared participant registries visible across programme boundaries, it might reduce the system's ability to absorb pressure to demonstrate reach without programme proliferation adapting toward participant pathway coherence."</p>
+    <p class="leverage-hyp">"If a subset of resource allocation programmes (PAT_006, PAT_024) were time-bounded with explicit sunset provisions, it might reduce the system's ability to absorb uncertainty about pathway viability without stakeholder coordination adapting toward fewer, more committed partnerships."</p>
     <div class="leverage-meta">
-      <span class="lm-tag">STACK_02</span>
+      <span class="lm-tag">STK-01</span>
       <span class="lm-tag">Timeline: 6-12 months</span>
     </div>
   </div>
@@ -262,40 +294,40 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/scotland-tourism-and-hospitality-tech.html">
-      <div class="sc-name">Scotland Tourism and Hospitality Tech</div>
-      <div class="sc-meta">Scotland · United Kingdom</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/abu-dhabi-helm-life-sciences.html">
-      <div class="sc-name">Abu Dhabi HELM Life Sciences</div>
-      <div class="sc-meta">Abu Dhabi · UAE</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Re-proving instead of narrowing</div>
-    </a><a class="similar-card" href="/clusters/copenhagen-medicon-valley-life-sciences.html">
-      <div class="sc-name">Copenhagen-Medicon Valley Life Sciences</div>
-      <div class="sc-meta">Copenhagen · DK</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/cairo-fintech-digital-tech.html">
+      <div class="sc-name">Cairo FinTech & Digital Tech</div>
+      <div class="sc-meta">Cairo · EG</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a><a class="similar-card" href="/clusters/brasilia-govtech-digital-infrastructure.html">
+      <div class="sc-name">Brasilia GovTech & Digital Infrastructure</div>
+      <div class="sc-meta">Brasilia · BR</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Mediating instead of coupling</div>
+    </a><a class="similar-card" href="/clusters/west-midlands-innovation-ecosystem.html">
+      <div class="sc-name">West Midlands Innovation Ecosystem</div>
+      <div class="sc-meta">Birmingham · United Kingdom</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Mediating instead of coupling</div>
     </a></div>
   </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[0,40,0,0,40,0,0,40,0]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,0,50,30,30,50,0]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

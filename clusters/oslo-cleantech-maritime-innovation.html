@@ -3,35 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/oslo-cleantech-maritime-innovation.html">
 <title>Oslo CleanTech & Maritime Innovation — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Oslo CleanTech & Maritime Innovation exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioura">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Oslo CleanTech & Maritime Innovation — ClusterOS Diagnostic Profile","description":"Oslo CleanTech & Maritime Innovation exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks ident","url":"https://www.clusteros.io/clusters/oslo-cleantech-maritime-innovation.html","keywords":["regional innovation cluster", "cluster diagnostic", "Oslo", "Norway", "transitioning", "Coordinating instead of deciding", "Extracting without reinvesting", "Re-proving instead of narrowing"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Oslo","addressCountry":"NO"},"variableMeasured":[{"@type": "PropertyValue", "name": "Coordinating instead of deciding", "value": 0.5, "description": "Confidence: medium"}, {"@type": "PropertyValue", "name": "Extracting without reinvesting", "value": 0.5, "description": "Confidence: medium"}, {"@type": "PropertyValue", "name": "Re-proving instead of narrowing", "value": 0.3, "description": "Confidence: low"}]}</script>
+<meta name="description" content="Oslo CleanTech & Maritime Innovation exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioura">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Oslo CleanTech & Maritime Innovation — ClusterOS Diagnostic Profile","description":"Oslo CleanTech & Maritime Innovation exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.","url":"https://clusteros.io/clusters/oslo-cleantech-maritime-innovation.html","keywords":["regional innovation cluster","cluster diagnostic","Oslo","Norway","transitioning","corporate","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Oslo","addressCountry":"NO"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.3,"description":"Confidence: low"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-:root{--ink:#1a1a1a;--ink-dim:#5a5650;--ink-muted:#8c8780;--page:#f7f4ef;--surface:#f0ece4;--border:#ddd8cf;--border-2:#c8c2b7;--green:#2a7a4f;--green-dim:#1d5c3a;--signal:#c8f0d0;--font-serif:'Instrument Serif',Georgia,serif;--font-sans:'Geist',system-ui,sans-serif;--font-mono:'Geist Mono',monospace;}
+:root{
+  --ink:#1a1a1a;--ink-dim:#5a5650;--ink-muted:#8c8780;
+  --page:#f7f4ef;--surface:#f0ece4;--border:#ddd8cf;--border-2:#c8c2b7;
+  --green:#2a7a4f;--green-dim:#1d5c3a;--signal:#c8f0d0;
+  --font-serif:'Instrument Serif',Georgia,serif;
+  --font-sans:'Geist',system-ui,sans-serif;
+  --font-mono:'Geist Mono',monospace;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--font-sans);background:var(--page);color:var(--ink);font-weight:300;line-height:1.6;}
-nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;background:rgba(247,244,239,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
-.nav-logo{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--green);letter-spacing:0.12em;text-decoration:none;text-transform:uppercase;}
-.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-decoration:none;text-transform:uppercase;letter-spacing:0.1em;transition:color 0.15s;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;
+  background:rgba(247,244,239,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--green);
+  letter-spacing:0.12em;text-decoration:none;text-transform:uppercase;}
+.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-decoration:none;
+  text-transform:uppercase;letter-spacing:0.1em;transition:color 0.15s;}
 .nav-back:hover{color:var(--ink);}
 .nav-back::before{content:'← ';}
-.nav-cta{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;border:1px solid var(--green);padding:5px 14px;border-radius:2px;text-decoration:none;transition:background 0.15s,color 0.15s;}
+.nav-cta{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--green);
+  text-transform:uppercase;letter-spacing:0.08em;border:1px solid var(--green);
+  padding:5px 14px;border-radius:2px;text-decoration:none;transition:background 0.15s,color 0.15s;}
 .nav-cta:hover{background:var(--green);color:#fff;}
 .page-wrap{max-width:860px;margin:0 auto;padding:3.5rem 2rem 6rem;}
-.breadcrumb{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:2rem;}
+.breadcrumb{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);
+  text-transform:uppercase;letter-spacing:0.12em;margin-bottom:2rem;}
 .breadcrumb a{color:var(--ink-muted);text-decoration:none;}
 .breadcrumb a:hover{color:var(--green);}
 .breadcrumb span{margin:0 6px;}
 .cluster-header{margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--border);}
-.cluster-eyebrow{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1rem;}
-.cluster-eyebrow::before{content:'';display:inline-block;width:20px;height:1px;background:var(--border-2);vertical-align:middle;margin-right:8px;}
-h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;line-height:1.15;margin-bottom:1rem;}
+.cluster-eyebrow{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);
+  text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1rem;}
+.cluster-eyebrow::before{content:'';display:inline-block;width:20px;height:1px;
+  background:var(--border-2);vertical-align:middle;margin-right:8px;}
+h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;
+  line-height:1.15;margin-bottom:1rem;}
 .cluster-meta{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:1.2rem;}
-.meta-tag{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:2px;}
+.meta-tag{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;
+  letter-spacing:0.1em;padding:3px 10px;border-radius:2px;}
 .meta-emerging{background:rgba(245,217,122,0.3);color:#7a5500;}
 .meta-cycling{background:rgba(125,211,200,0.3);color:#1a6060;}
 .meta-active,.meta-mature{background:rgba(200,240,208,0.3);color:var(--green);}
@@ -44,7 +62,10 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stat-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem;align-items:start;}
 .section{margin-bottom:2.5rem;}
-.section-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
+.section-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);
+  text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1.2rem;
+  padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
+.radar-wrap{background:var(--surface);border:1px solid var(--border);padding:1.2rem;}
 .stall-row{display:flex;align-items:center;gap:0.8rem;padding:0.75rem 0;border-bottom:1px solid var(--border);}
 .stall-row:last-child{border-bottom:none;}
 .stall-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;width:2rem;flex-shrink:0;}
@@ -53,7 +74,8 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stall-bar-wrap{display:flex;align-items:center;gap:8px;}
 .stall-bar{height:3px;border-radius:2px;flex-shrink:0;}
 .stall-pct{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);}
-.conf{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:2px 6px;border-radius:2px;flex-shrink:0;}
+.conf{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;
+  letter-spacing:0.08em;padding:2px 6px;border-radius:2px;flex-shrink:0;}
 .conf-high{background:rgba(212,105,90,0.15);color:#8a2a1a;}
 .conf-medium{background:rgba(245,217,122,0.25);color:#7a5500;}
 .conf-low{background:var(--surface);color:var(--ink-muted);border:1px solid var(--border);}
@@ -61,232 +83,323 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);}
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
-.stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
+.stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
+.stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
-.lm-tag{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
-.comparator{margin-bottom:2.5rem;}
-.comparator-legend{display:flex;gap:20px;margin-bottom:1.4rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
-.legend-item{display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.08em;}
-.legend-swatch{width:24px;height:4px;border-radius:2px;flex-shrink:0;}
-.comp-row{margin-bottom:16px;}
-.comp-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
-.comp-name{font-size:12px;color:var(--ink-dim);}
-.comp-diff{font-family:var(--font-mono);font-size:10px;font-weight:600;}
-.comp-diff.above{color:#d97706;}
-.comp-diff.below{color:var(--ink-muted);}
-.comp-bars{display:flex;flex-direction:column;gap:4px;}
-.comp-bar-track{position:relative;height:5px;background:var(--surface);border-radius:3px;overflow:hidden;}
-.comp-bar-fill{position:absolute;top:0;left:0;height:100%;border-radius:3px;}
-.comp-sub{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:9px;color:var(--ink-muted);margin-top:3px;}
+.lm-tag{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;
+  letter-spacing:0.1em;background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
+.disclaimer{font-size:12px;color:var(--ink-muted);line-height:1.6;
+  border-top:1px solid var(--border);padding-top:1rem;margin-top:1rem;}
+.similar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.similar-card{background:var(--page);padding:1.2rem;text-decoration:none;display:block;transition:background 0.15s;}
+.similar-card:hover{background:var(--surface);}
+.sc-name{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px;line-height:1.3;}
+.sc-meta{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-bottom:6px;}
+.sc-regime{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);margin-bottom:4px;}
+.sc-stall{font-size:11px;color:var(--ink-muted);line-height:1.4;}
 .cta-block{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-top:3rem;}
 .cta-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.8rem;}
 .cta-h{font-family:var(--font-serif);font-size:1.3rem;margin-bottom:0.6rem;}
 .cta-body{font-size:14px;color:var(--ink-dim);margin-bottom:1.2rem;line-height:1.65;}
-.cta-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#fff;background:var(--green);padding:10px 20px;text-decoration:none;transition:background 0.15s;}
+.cta-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);
+  font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;
+  color:#fff;background:var(--green);padding:10px 20px;text-decoration:none;transition:background 0.15s;}
 .cta-link:hover{background:var(--green-dim);}
-footer{border-top:1px solid var(--border);padding:2rem;max-width:860px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+footer{border-top:1px solid var(--border);padding:2rem;max-width:860px;margin:0 auto;
+  font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 footer a{color:var(--ink-muted);text-decoration:none;}
 footer a:hover{color:var(--green);}
 .empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
-@media(max-width:680px){.two-col{grid-template-columns:1fr;}.stats-row{grid-template-columns:1fr 1fr;}.stat-cell:nth-child(2){border-right:none;}.stat-cell:nth-child(3){border-top:1px solid var(--border);}nav{padding:0 1rem;}.page-wrap{padding:2rem 1.2rem 4rem;}}
+@media(max-width:680px){
+  .two-col{grid-template-columns:1fr;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .stat-cell:nth-child(2){border-right:none;}
+  .stat-cell:nth-child(3){border-top:1px solid var(--border);}
+  .similar-grid{grid-template-columns:1fr;}
+  nav{padding:0 1rem;}
+  .page-wrap{padding:2rem 1.2rem 4rem;}
+}
 </style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Place","name":"Oslo CleanTech & Maritime Innovation","description":"Regional innovation cluster diagnosed by ClusterOS.","url":"https://www.clusteros.io/clusters/oslo-cleantech-maritime-innovation.html","address":{"@type":"PostalAddress","addressLocality":"Oslo","addressCountry":"NO"},"geo":{"@type":"GeoCoordinates","latitude":59.9139,"longitude":10.7522}}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
-  <div class="breadcrumb"><a href="/">ClusterOS</a><span>›</span><a href="/">Clusters</a><span>›</span>Oslo CleanTech & Maritime Innovation</div>
+  <div class="breadcrumb">
+    <a href="/">ClusterOS</a><span>›</span>
+    <a href="/">Clusters</a><span>›</span>
+    Oslo CleanTech & Maritime Innovation
+  </div>
   <header class="cluster-header">
     <p class="cluster-eyebrow">Diagnostic Profile · 2026Q1-17102414</p>
     <h1>Oslo CleanTech & Maritime Innovation</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">Oslo, Norway</span>
-      <span class="meta-tag meta-cycling">Transitioning</span>
+      <span class="meta-tag meta-transitioning">transitioning</span>
       <span class="meta-tag meta-plain">Corporate anchor</span>
       <span class="meta-tag meta-plain">83 evidence items</span>
+      
     </div>
-    <p class="cluster-summary">Oslo CleanTech & Maritime Innovation exhibits 7 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Oslo CleanTech & Maritime Innovation exhibits 8 observable stalls with Coordinating instead of deciding and Extracting without reinvesting as primary behavioural patterns. 5 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
-    <div class="stat-cell"><div class="stat-num">7</div><div class="stat-label">Active stalls</div></div>
-    <div class="stat-cell"><div class="stat-num">5</div><div class="stat-label">Stacks identified</div></div>
-    <div class="stat-cell"><div class="stat-num">83</div><div class="stat-label">Evidence items</div></div>
-    <div class="stat-cell"><div class="stat-num">6-12 months</div><div class="stat-label">Leverage timeline</div></div>
+    <div class="stat-cell">
+      <div class="stat-num">8</div>
+      <div class="stat-label">Active stalls</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Stacks identified</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">83</div>
+      <div class="stat-label">Evidence items</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Leverage timeline (mo)</div>
+    </div>
   </div>
   <div class="two-col">
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
-      
       <div class="stall-row">
-        <span class="stall-id">S1</span>
-        <div class="stall-detail">
-          <span class="stall-name">Re-proving instead of narrowing</span>
-          <div class="stall-bar-wrap">
-            <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
-            <span class="stall-pct">30%</span>
-          </div>
+      <span class="stall-id">S1</span>
+      <div class="stall-detail">
+        <span class="stall-name">Re-proving instead of narrowing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
-        <span class="conf conf-low">low</span>
       </div>
-      <div class="stall-row">
-        <span class="stall-id">S2</span>
-        <div class="stall-detail">
-          <span class="stall-name">Coordinating instead of deciding</span>
-          <div class="stall-bar-wrap">
-            <div class="stall-bar" style="width:70px;background:#d97706"></div>
-            <span class="stall-pct">50%</span>
-          </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S2</span>
+      <div class="stall-detail">
+        <span class="stall-name">Coordinating instead of deciding</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
-        <span class="conf conf-medium">medium</span>
       </div>
-      <div class="stall-row">
-        <span class="stall-id">S4</span>
-        <div class="stall-detail">
-          <span class="stall-name">Extracting without reinvesting</span>
-          <div class="stall-bar-wrap">
-            <div class="stall-bar" style="width:70px;background:#d97706"></div>
-            <span class="stall-pct">50%</span>
-          </div>
+      <span class="conf conf-medium">medium</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S4</span>
+      <div class="stall-detail">
+        <span class="stall-name">Extracting without reinvesting</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
-        <span class="conf conf-medium">medium</span>
       </div>
-      <div class="stall-row">
-        <span class="stall-id">S5</span>
-        <div class="stall-detail">
-          <span class="stall-name">Mediating instead of coupling</span>
-          <div class="stall-bar-wrap">
-            <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
-            <span class="stall-pct">30%</span>
-          </div>
+      <span class="conf conf-medium">medium</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S5</span>
+      <div class="stall-detail">
+        <span class="stall-name">Mediating instead of coupling</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
-        <span class="conf conf-low">low</span>
       </div>
-      <div class="stall-row">
-        <span class="stall-id">S7</span>
-        <div class="stall-detail">
-          <span class="stall-name">Narrating instead of testing</span>
-          <div class="stall-bar-wrap">
-            <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
-            <span class="stall-pct">30%</span>
-          </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S6</span>
+      <div class="stall-detail">
+        <span class="stall-name">Stabilizing around incumbents</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
-        <span class="conf conf-low">low</span>
       </div>
-      <div class="stall-row">
-        <span class="stall-id">S8</span>
-        <div class="stall-detail">
-          <span class="stall-name">Scaling activity instead of throughput</span>
-          <div class="stall-bar-wrap">
-            <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
-            <span class="stall-pct">30%</span>
-          </div>
+      <span class="conf conf-medium">medium</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S7</span>
+      <div class="stall-detail">
+        <span class="stall-name">Narrating instead of testing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
-        <span class="conf conf-low">low</span>
       </div>
-      <div class="stall-row">
-        <span class="stall-id">S9</span>
-        <div class="stall-detail">
-          <span class="stall-name">Waiting for permission</span>
-          <div class="stall-bar-wrap">
-            <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
-            <span class="stall-pct">30%</span>
-          </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S8</span>
+      <div class="stall-detail">
+        <span class="stall-name">Scaling activity instead of throughput</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
-        <span class="conf conf-low">low</span>
       </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S9</span>
+      <div class="stall-detail">
+        <span class="stall-name">Waiting for permission</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div>
     </div>
     <div class="section">
-      <div class="section-label">Stabilisation stacks</div>
-      <div class="stacks-box">
-      <div class="stack-item">
-        <div class="stack-header"><span class="stack-num">Stack 01</span></div>
-        <p class="stack-desc">Re-proving activity co-occurs with coordination mechanisms and intermediation structures. Each new program plausibly requir.</p>
+      <div class="section-label">Stall radar · Intensity across all 9 types</div>
+      <div class="radar-wrap">
+        <canvas id="radarChart"></canvas>
       </div>
-      <div class="stack-item">
-        <div class="stack-header"><span class="stack-num">Stack 02</span></div>
-        <p class="stack-desc">Extraction from incumbent operations co-occurs with stabilisation around incumbent actors. Incumbent positioning plausibly sustains extraction capacity; extraction capacity plausibl.</p>
-      </div>
-      <div class="stack-item">
-        <div class="stack-header"><span class="stack-num">Stack 03</span></div>
-        <p class="stack-desc">Re-proving through program proliferation co-occurs with narrative production and activity scaling. Narrative production plausibly legitimates program expansion; program expansion plausibly g.</p>
-      </div>
-      <div class="stack-item">
-        <div class="stack-header"><span class="stack-num">Stack 04</span></div>
-        <p class="stack-desc">Coordination mechanisms co-occur with governance oversight structures. Coordination processes plausibly align with permission structures by incorporating government entities; permiss.</p>
-      </div>
-      <div class="stack-item">
-        <div class="stack-header"><span class="stack-num">Stack 05</span></div>
-        <p class="stack-desc">Intermediary structures co-occur with incumbent stabilisation. Intermediaries plausibly enable incumbent participation in innovation activities without direct coupling to emergent actors; incumbent centrality p.</p>
-      </div></div>
     </div>
-  </div>
-  <div class="section comparator">
-    <div class="section-label">Stall intensity · vs 221-cluster global average</div>
-    <div class="comparator-legend">
-      <div class="legend-item"><div class="legend-swatch" style="background:#2a7a4f"></div>This cluster</div>
-      <div class="legend-item"><div class="legend-swatch" style="background:#8c8780"></div>Global avg · 221 clusters · zeros included</div>
-    </div>
-    <div id="comparator-rows"></div>
   </div>
   <div class="section">
-    <div class="section-label">Leverage hypothesis</div>
-    
-    <div class="leverage-block">
-      <p class="leverage-hyp">If extraction-to-reinvestment ratios for state-owned enterprises (Equinor, Statkraft) were made observable through standardized reporting, it might reduce the system's ability to absorb pressure for revenue continuity without demonstrating transition commitment proportionality.</p>
-      <div class="leverage-meta">
-        <span class="lm-tag">STACK_02</span>
-        <span class="lm-tag">6-12 months</span>
+    <div class="section-label">Stabilisation stacks · Why single interventions fail</div>
+    <div class="stacks-box">
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STACK-01</span>
+        <span class="conf conf-low">low</span>
       </div>
+      <div class="stack-name">Program-Coordination Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S2</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">Re-proving activity (STALL_01: multiple accelerators, research centers, continuous program launches) co-occurs with coordination mechanisms (STALL_02: industry associations, cluster organizations) and intermediation structures (STALL_05: accelerators, associations). Each new program plausibly requires coordination across existing stakeholders; coordination structures plausibly justify continued pr</p>
+      <div class="stack-signals">Uncertainty (technology transition pathways), Complexity (multi-domain coordination), Pressure (institutional legitimacy requirements)</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STK-05</span>
+        <span class="conf conf-medium">medium</span>
+      </div>
+      <div class="stack-name">Incumbent-Resource Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S4</span><span class="stall-tag">S6</span></div>
+      <p class="stack-desc">Extraction from incumbent operations (STALL_04: state-owned oil/gas enterprises) co-occurs with stabilisation around incumbent actors (STALL_06: Equinor across energy domains, historical continuity from 1972). Incumbent positioning plausibly sustains extraction capacity; extraction capacity plausibly sustains incumbent centrality in transition architecture. Both stalls Medium confidence with weakl</p>
+      <div class="stack-signals">Pressure (revenue continuity, employment), Uncertainty (transition timing), Opportunity (capital deployment)</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STACK-03</span>
+        <span class="conf conf-low">low</span>
+      </div>
+      <div class="stack-name">Narrative-Activity Expansion</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S7</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">Re-proving through program proliferation (STALL_01) co-occurs with narrative production (STALL_07: technical publications, projections 2022-2023) and activity scaling (STALL_08: new facilities/programs 2024). Narrative production plausibly legitimates program expansion; program expansion plausibly generates material for narrative production; activity scaling plausibly substitutes for throughput de</p>
+      <div class="stack-signals">Pressure (institutional legitimacy), Uncertainty (technology viability), Complexity (multi-domain portfolio)</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STK-07</span>
+        <span class="conf conf-low">low</span>
+      </div>
+      <div class="stack-name">Coordination-Permission Alignment</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S2</span><span class="stall-tag">S9</span></div>
+      <p class="stack-desc">Coordination mechanisms (STALL_02: associations, partnerships) co-occur with governance oversight structures (STALL_09: ministry-level entities, continuous government programs since 2009). Coordination processes plausibly align with permission structures by incorporating government entities; permission structures plausibly sustain coordination mechanisms by requiring multi-stakeholder alignment. T</p>
+      <div class="stack-signals">Pressure (regulatory compliance), Complexity (multi-stakeholder alignment), Uncertainty (policy stability)</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STK-09</span>
+        <span class="conf conf-low">low</span>
+      </div>
+      <div class="stack-name">Intermediation-Incumbent Configuration</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S5</span><span class="stall-tag">S6</span></div>
+      <p class="stack-desc">Intermediary structures (STALL_05: accelerators, associations) co-occur with incumbent stabilisation (STALL_06: state-owned enterprises across domains). Intermediaries plausibly enable incumbent participation in innovation activities without direct coupling to emergent actors; incumbent centrality plausibly sustains intermediary organizations through funding and legitimacy. Temporal overlap: 2008-</p>
+      <div class="stack-signals">Complexity (fragmented landscape), Pressure (incumbent legitimacy in transition), Opportunity (portfolio diversification)</div>
+    </div></div>
+  </div>
+  <div class="section">
+    <div class="section-label">Stage 5 · Leverage hypothesis</div>
+    <div class="leverage-block">
+    <p class="leverage-hyp">"If extraction-to-reinvestment ratios for state-owned enterprises (Equinor, Statkraft) were made observable through standardized reporting, it might reduce the system's ability to absorb pressure for revenue continuity without demonstrating transition commitment proportionality."</p>
+    <div class="leverage-meta">
+      <span class="lm-tag">STK-02</span>
+      <span class="lm-tag">Timeline: 6-12 months</span>
     </div>
   </div>
+    <p class="disclaimer">Leverage hypotheses are testable perturbations, not prescriptions. Where demand-side behaviour is weakly visible, the correct move is observation — improving visibility before attempting change.</p>
+  </div>
+  <div class="section">
+    <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/gothenburg-automotive-sustainability-tech.html">
+      <div class="sc-name">Gothenburg Automotive & Sustainability Tech</div>
+      <div class="sc-meta">Gothenburg · Sweden</div>
+      <div class="sc-regime">transitioning</div>
+      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
+    </a><a class="similar-card" href="/clusters/jakarta-digital-e-commerce.html">
+      <div class="sc-name">Jakarta Digital & E-commerce</div>
+      <div class="sc-meta">Jakarta · ID</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a><a class="similar-card" href="/clusters/jakarta-fintech.html">
+      <div class="sc-name">Jakarta FinTech</div>
+      <div class="sc-meta">Jakarta · ID</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a></div>
+  </div>
   <div class="cta-block">
-    <div class="cta-label">Next step</div>
-    <h2 class="cta-h">Request a full diagnostic for Oslo CleanTech & Maritime Innovation</h2>
-    <p class="cta-body">This profile is generated from the ClusterOS diagnostic pipeline. A full engagement includes primary evidence collection, stakeholder interviews, and a live diagnostic session with your leadership team.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <div class="cta-label">What happens next</div>
+    <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
+    <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
-  <span>© 2026 Community Lab · ClusterOS</span>
-  <span><a href="/">clusteros.io</a></span>
+  <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
+  <span>
+    <a href="/">Homepage</a> ·
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
+  </span>
 </footer>
 <script>
-(function(){
-  var stalls = [{name:"Re-proving instead of narrowing",code:"S1",cluster:0.3,global:0.3},{name:"Coordinating instead of deciding",code:"S2",cluster:0.5,global:0.3778},{name:"Extracting without reinvesting",code:"S4",cluster:0.5,global:0.2308},{name:"Mediating instead of coupling",code:"S5",cluster:0.3,global:0.376},{name:"Narrating instead of testing",code:"S7",cluster:0.3,global:0.2837},{name:"Scaling activity instead of throughput",code:"S8",cluster:0.3,global:0.3154},{name:"Waiting for permission",code:"S9",cluster:0.3,global:0.2647}];
-  var MAX = 0.7;
-  var container = document.getElementById('comparator-rows');
-  stalls.forEach(function(s){
-    var above = s.cluster > s.global;
-    var cw = Math.round((s.cluster / MAX) * 100);
-    var gw = Math.round((s.global  / MAX) * 100);
-    var diff = Math.round((s.cluster - s.global) * 100);
-    var diffStr = (diff >= 0 ? '+' : '') + diff + 'pp';
-    var clusterCol = above ? '#d97706' : '#2a7a4f';
-    var diffCls = above ? 'above' : 'below';
-    var row = document.createElement('div');
-    row.className = 'comp-row';
-    row.innerHTML =
-      '<div class="comp-label">' +
-        '<span class="comp-name">' + s.code + ' · ' + s.name + '</span>' +
-        '<span class="comp-diff ' + diffCls + '">' + diffStr + '</span>' +
-      '</div>' +
-      '<div class="comp-bars">' +
-        '<div class="comp-bar-track"><div class="comp-bar-fill" style="width:' + cw + '%;background:' + clusterCol + '"></div></div>' +
-        '<div class="comp-bar-track"><div class="comp-bar-fill" style="width:' + gw + '%;background:#8c8780"></div></div>' +
-      '</div>' +
-      '<div class="comp-sub"><span>' + Math.round(s.cluster*100) + '% this cluster</span><span>' + Math.round(s.global*100) + '% global avg</span></div>';
-    container.appendChild(row);
-  });
-})();
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,50,30,50,30,30,30]};
+new Chart(document.getElementById('radarChart').getContext('2d'),{
+  type:'radar',
+  data:{
+    labels:rd.labels,
+    datasets:[{
+      data:rd.values,
+      backgroundColor:'rgba(42,122,79,0.12)',
+      borderColor:'#2a7a4f',
+      borderWidth:2,
+      pointBackgroundColor:rd.values.map(v=>v>65?'#d4695a':v>40?'#d4a94a':'#2a7a4f'),
+      pointRadius:4,pointHoverRadius:6
+    }]
+  },
+  options:{
+    responsive:true,
+    scales:{r:{
+      min:0,max:100,
+      ticks:{stepSize:25,font:{family:"'Geist Mono',monospace",size:9},color:'#8c8780',backdropColor:'transparent'},
+      pointLabels:{font:{family:"'Geist Mono',monospace",size:10},color:'#5a5650'},
+      grid:{color:'#ddd8cf'},angleLines:{color:'#ddd8cf'}
+    }},
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        callbacks:{label:ctx=>' '+ctx.raw+'% intensity'},
+        bodyFont:{family:"'Geist Mono',monospace"},
+        backgroundColor:'#f7f4ef',borderColor:'#ddd8cf',borderWidth:1,
+        titleColor:'#1a1a1a',bodyColor:'#5a5650'
+      }
+    }
+  }
+});
 </script>
 </body>
 </html>

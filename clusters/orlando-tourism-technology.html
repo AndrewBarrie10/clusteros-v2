@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/orlando-tourism-technology.html">
 <title>Orlando Tourism Technology — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Orlando Tourism Technology exhibits 6 observable stalls. 3 stabilisation stacks identified.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Orlando Tourism Technology — ClusterOS Diagnostic Profile","description":"Orlando Tourism Technology exhibits 6 observable stalls. 3 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/orlando-tourism-technology.html","keywords":["regional innovation cluster","cluster diagnostic","Orlando","United States","emerging","corporate","Re-proving instead of narrowing","Coordinating instead of deciding","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Orlando","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.5,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.7,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.4,"description":"Confidence: medium"}]}</script>
+<meta name="description" content="Orlando Tourism Technology exhibits 6 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural ">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Orlando Tourism Technology — ClusterOS Diagnostic Profile","description":"Orlando Tourism Technology exhibits 6 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural patterns. 3 stabilisation stacks identified.","url":"https://clusteros.io/clusters/orlando-tourism-technology.html","keywords":["regional innovation cluster","cluster diagnostic","Orlando","United States","mature","corporate","Re-proving instead of narrowing","Coordinating instead of deciding","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Orlando","addressCountry":"US"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.5,"description":"Confidence: medium"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Orlando Tourism Technology",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/orlando-tourism-technology.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Orlando",
-    "addressCountry": "US"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 28.0387, "longitude": -80.6915}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -158,11 +150,12 @@ footer a:hover{color:var(--green);}
     <h1>Orlando Tourism Technology</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">Orlando, United States</span>
-      <span class="meta-tag meta-emerging">Emerging</span>
+      <span class="meta-tag meta-mature">Mature</span>
       <span class="meta-tag meta-plain">Corporate anchor</span>
       <span class="meta-tag meta-plain">68 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p3">P3</span>
     </div>
-    <p class="cluster-summary">Orlando Tourism Technology exhibits 6 observable stalls. 3 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Orlando Tourism Technology exhibits 6 observable stalls with Coordinating instead of deciding and Scaling activity instead of throughput as primary behavioural patterns. 3 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
@@ -190,8 +183,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Re-proving instead of narrowing</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -210,8 +203,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Mediating instead of coupling</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
-          <span class="stall-pct">50%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -220,8 +213,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Stabilizing around incumbents</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:98px;background:#d4695a"></div>
-          <span class="stall-pct">70%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
         </div>
       </div>
       <span class="conf conf-low">low</span>
@@ -240,8 +233,8 @@ footer a:hover{color:var(--green);}
       <div class="stall-detail">
         <span class="stall-name">Scaling activity instead of throughput</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -259,30 +252,39 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls">S02 · S08</span>
+        <span class="stack-num">STK-10</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Coordination structures create venues for activity expansion</p>
+      <div class="stack-name">Coordination–Activity Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S2</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">Coordination structures (industry associations, multi-institutional networks, structured programs) create venues for activity expansion (specialized facilities, internship programs). Activity expansion generates demand for additional coordination to manage interfaces between growing programs and multiple institutional participants. Both behaviors respond to workforce development pressure without r</p>
+      <div class="stack-signals">Pressure (workforce development demands), Complexity (multi-actor ecosystem management), Uncertainty (unclear optimal training/partnership models)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls">S05 · S06</span>
+        <span class="stack-num">STK-09</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Intermediary structures reduce transaction costs for incumbent operators</p>
+      <div class="stack-name">Incumbent–Intermediary Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S5</span><span class="stall-tag">S6</span></div>
+      <p class="stack-desc">Intermediary structures (associations, networks, mediated programs) reduce transaction costs for incumbent operators while preserving incumbent autonomy over proprietary technology and capital allocation. Incumbent stability (multi-facility configurations, internal R&D, ongoing investment) sustains demand for intermediation services by maintaining ecosystem complexity and actor diversity. Both beh</p>
+      <div class="stack-signals">Complexity (multi-actor coordination), Pressure (technology development and workforce needs), Uncertainty (collaboration models and competitive boundaries)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls">S01 · S05</span>
+        <span class="stack-num">STACK-03</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Independent technology validation generates complexity that increases value of intermediary coordination</p>
+      <div class="stack-name">Re-proving–Mediation Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">Independent technology validation by multiple operators (proprietary platforms, capital investments, technology partnerships) generates complexity that increases value of intermediary coordination structures. Intermediary structures enable parallel technology development by managing ecosystem interfaces without forcing convergence. Both behaviors absorb competitive pressure and technological uncer</p>
+      <div class="stack-signals">Uncertainty (technology architecture choices), Pressure (competitive differentiation), Complexity (multi-operator ecosystem coordination)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If throughput data were made visible across coordination venues, it might reduce the system's ability to absorb workforce pressure through coordination expansion without exposing performance variances."</p>
+    <p class="leverage-hyp">"If throughput data (program completion rates, time-to-hire, skill certification volumes) were made visible across coordination venues (P006, P007 associations/networks), it might reduce the system's ability to absorb workforce pressure through coordination expansion without exposing performance variance between programs."</p>
     <div class="leverage-meta">
       <span class="lm-tag">STK-01</span>
       <span class="lm-tag">Timeline: 6-12 months</span>
@@ -292,40 +294,40 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/copenhagen-medicon-valley-life-sciences.html">
-      <div class="sc-name">Copenhagen-Medicon Valley Life Sciences</div>
-      <div class="sc-meta">Copenhagen · DK</div>
-      <div class="sc-regime">Emerging</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/osaka-life-sciences-robotics.html">
+      <div class="sc-name">Osaka Life Sciences & Robotics</div>
+      <div class="sc-meta">Osaka · Japan</div>
+      <div class="sc-regime">Mature</div>
       <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/harwell-space-technology.html">
-      <div class="sc-name">Harwell Space Technology</div>
-      <div class="sc-meta">Harwell Campus · United Kingdom</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Re-proving instead of narrowing</div>
-    </a><a class="similar-card" href="/clusters/tsukuba-space-technology.html">
-      <div class="sc-name">Tsukuba Space Technology</div>
-      <div class="sc-meta">Tsukuba · Japan</div>
-      <div class="sc-regime">Emerging</div>
+    </a><a class="similar-card" href="/clusters/orlando-digital-media.html">
+      <div class="sc-name">Orlando Digital Media</div>
+      <div class="sc-meta">Orlando · United States</div>
+      <div class="sc-regime">Mature</div>
       <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
+    </a><a class="similar-card" href="/clusters/manila-bpo-it-services.html">
+      <div class="sc-name">Manila BPO & IT Services</div>
+      <div class="sc-meta">Manila · PH</div>
+      <div class="sc-regime">Mature</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
     </a></div>
   </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[50,50,0,0,50,70,30,40,0]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,50,0,0,30,30,30,50,0]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

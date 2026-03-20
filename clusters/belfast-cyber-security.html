@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/clusters/belfast-cyber-security.html">
 <title>Belfast Cyber Security — ClusterOS Diagnostic Profile</title>
-<meta name="description" content="Belfast Cyber Security exhibits 3 observable stalls with Extracting without reinvesting and Stabilising around incumbents as primary behavioural patterns. 5 sta">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Belfast Cyber Security — ClusterOS Diagnostic Profile","description":"Belfast Cyber Security exhibits 3 observable stalls with Extracting without reinvesting and Stabilising around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.","url":"https://www.clusteros.io/clusters/belfast-cyber-security.html","keywords":["regional innovation cluster","cluster diagnostic","Belfast","United Kingdom","emerging","university","Extracting without reinvesting","Stabilising around incumbents","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Belfast","addressCountry":"GB"},"variableMeasured":[{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Stabilising around incumbents","value":0.4,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.4,"description":"Confidence: medium"}]}</script>
+<meta name="description" content="Belfast Cyber Security exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 sta">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Belfast Cyber Security — ClusterOS Diagnostic Profile","description":"Belfast Cyber Security exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.","url":"https://clusteros.io/clusters/belfast-cyber-security.html","keywords":["regional innovation cluster","cluster diagnostic","Belfast","United Kingdom","unknown","university","Re-proving instead of narrowing","Coordinating instead of deciding","Extracting without reinvesting","Mediating instead of coupling","Stabilizing around incumbents","Narrating instead of testing","Scaling activity instead of throughput","Waiting for permission"],"creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Belfast","addressCountry":"GB"},"variableMeasured":[{"@type":"PropertyValue","name":"Re-proving instead of narrowing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Coordinating instead of deciding","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Extracting without reinvesting","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Mediating instead of coupling","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Stabilizing around incumbents","value":0.5,"description":"Confidence: medium"},{"@type":"PropertyValue","name":"Narrating instead of testing","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Scaling activity instead of throughput","value":0.3,"description":"Confidence: low"},{"@type":"PropertyValue","name":"Waiting for permission","value":0.5,"description":"Confidence: medium"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -85,8 +84,16 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
+.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
+.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
+.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
+.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
+.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
+.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -125,27 +132,12 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Place",
-  "name": "Belfast Cyber Security",
-  "description": "Regional innovation cluster diagnosed by ClusterOS. Full structural stall analysis and leverage hypothesis.",
-  "url": "https://www.clusteros.io/clusters/belfast-cyber-security.html",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Belfast",
-    "addressCountry": "GB"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 54.5973, "longitude": -5.9301}
-}
-</script>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://www.clusteros.io/request.html">Request →</a>
+  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -158,15 +150,16 @@ footer a:hover{color:var(--green);}
     <h1>Belfast Cyber Security</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">Belfast, United Kingdom</span>
-      <span class="meta-tag meta-emerging">Emerging</span>
+      <span class="meta-tag meta-unknown">unknown</span>
       <span class="meta-tag meta-plain">University anchor</span>
       <span class="meta-tag meta-plain">54 evidence items</span>
+      <span class="meta-tag meta-tier meta-tier-p2">P2</span>
     </div>
-    <p class="cluster-summary">Belfast Cyber Security exhibits 3 observable stalls with Extracting without reinvesting and Stabilising around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.</p>
+    <p class="cluster-summary">Belfast Cyber Security exhibits 8 observable stalls with Extracting without reinvesting and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.</p>
   </header>
   <div class="stats-row">
     <div class="stat-cell">
-      <div class="stat-num">3</div>
+      <div class="stat-num">8</div>
       <div class="stat-label">Active stalls</div>
     </div>
     <div class="stat-cell">
@@ -186,32 +179,82 @@ footer a:hover{color:var(--green);}
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
       <div class="stall-row">
+      <span class="stall-id">S1</span>
+      <div class="stall-detail">
+        <span class="stall-name">Re-proving instead of narrowing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S2</span>
+      <div class="stall-detail">
+        <span class="stall-name">Coordinating instead of deciding</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
       <span class="stall-id">S4</span>
       <div class="stall-detail">
         <span class="stall-name">Extracting without reinvesting</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
     </div><div class="stall-row">
-      <span class="stall-id">—</span>
+      <span class="stall-id">S5</span>
       <div class="stall-detail">
-        <span class="stall-name">Stabilising around incumbents</span>
+        <span class="stall-name">Mediating instead of coupling</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S6</span>
+      <div class="stall-detail">
+        <span class="stall-name">Stabilizing around incumbents</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S7</span>
+      <div class="stall-detail">
+        <span class="stall-name">Narrating instead of testing</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
+    </div><div class="stall-row">
+      <span class="stall-id">S8</span>
+      <div class="stall-detail">
+        <span class="stall-name">Scaling activity instead of throughput</span>
+        <div class="stall-bar-wrap">
+          <div class="stall-bar" style="width:42px;background:#2a7a4f"></div>
+          <span class="stall-pct">30%</span>
+        </div>
+      </div>
+      <span class="conf conf-low">low</span>
     </div><div class="stall-row">
       <span class="stall-id">S9</span>
       <div class="stall-detail">
         <span class="stall-name">Waiting for permission</span>
         <div class="stall-bar-wrap">
-          <div class="stall-bar" style="width:56px;background:#2a7a4f"></div>
-          <span class="stall-pct">40%</span>
+          <div class="stall-bar" style="width:70px;background:#d4a94a"></div>
+          <span class="stall-pct">50%</span>
         </div>
       </div>
       <span class="conf conf-medium">medium</span>
@@ -229,46 +272,61 @@ footer a:hover{color:var(--green);}
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 01</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STK-04</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Strategy documents and publication volume provide legitimacy for expanding programme portfolios</p>
+      <div class="stack-name">Narrative–Activity Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S7</span><span class="stall-tag">S8</span></div>
+      <p class="stack-desc">Strategy documents and publication volume (STALL_07 X-side) provide legitimacy for expanding programme portfolios (STALL_08 X-side); programme expansion generates content for narrative production. Both substitute for performance testing and throughput measurement.</p>
+      <div class="stack-signals">Uncertainty (market validation risk), Pressure (performance accountability), Complexity (outcome measurement difficulty)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 02</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STK-02</span>
+        <span class="conf conf-low">low</span>
       </div>
-      <p class="stack-desc">Formal coordinating bodies create demand for intermediation mechanisms</p>
+      <div class="stack-name">Coordination–Mediation Coupling</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S2</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">Formal coordinating bodies (STALL_02 X-side) create demand for intermediation mechanisms (STALL_05 X-side); intermediation structures justify coordination activity. Both substitute for direct decision-making and bilateral coupling.</p>
+      <div class="stack-signals">Pressure (stakeholder conflict avoidance), Complexity (multi-actor alignment), Uncertainty (relationship risk)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 03</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STACK-03</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Repeated accelerator programmes demonstrate activity that justifies continued public funding requests</p>
+      <div class="stack-name">Validation–Dependency Loop</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S1</span><span class="stall-tag">S9</span></div>
+      <p class="stack-desc">Repeated accelerator programmes and validation activities (STALL_01 X-side) demonstrate activity that justifies continued public funding requests (STALL_09 X-side); public funding availability sustains validation programme operation. Both substitute for strategic narrowing and autonomous resource mobilisation.</p>
+      <div class="stack-signals">Uncertainty (pathway selection risk), Pressure (legitimacy maintenance), Opportunity (public capital access)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 04</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STK-09</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Institutional centrality of established actors positions them as natural intermediaries</p>
+      <div class="stack-name">Incumbent–Intermediation Stabilisation</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S6</span><span class="stall-tag">S5</span></div>
+      <p class="stack-desc">Institutional centrality of established actors (STALL_06 X-side) positions them as natural intermediaries, sustaining mediation structures (STALL_05 X-side); intermediation mechanisms channel resources through incumbents, reinforcing centrality. Both substitute for power redistribution and direct peer coupling.</p>
+      <div class="stack-signals">Pressure (institutional disruption risk), Complexity (coordination across fragmented actors), Uncertainty (new actor viability)</div>
     </div>
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">Stack 05</span>
-        <span class="stack-stalls"></span>
+        <span class="stack-num">STK-06</span>
+        <span class="conf conf-medium">medium</span>
       </div>
-      <p class="stack-desc">Multinational operations extracting value through talent access create capability gaps that justify public funding</p>
+      <div class="stack-name">Extraction–Dependency Asymmetry</div>
+      <div class="stack-stalls-row"><span class="stall-tag">S4</span><span class="stall-tag">S9</span></div>
+      <p class="stack-desc">Multinational operations extracting value through talent access (STALL_04 X-side) create capability gaps that justify public funding requests (STALL_09 X-side); public funding sustains talent pipeline that multinationals access. Both substitute for private reinvestment and autonomous capital formation.</p>
+      <div class="stack-signals">Pressure (capital scarcity), Opportunity (talent access for multinationals, public funding for institutions), Complexity (private capital mobilisation difficulty)</div>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If a subset of programmes were required to operate with mutually exclusive eligibility criteria, it might reduce the system's ability to absorb outcome measurement complexity without adapting programme design."</p>
+    <p class="leverage-hyp">"If strategy documents were required to specify falsifiable performance claims with defined measurement windows, it might reduce the system's ability to absorb performance accountability pressure without adapting narrative production or programme design."</p>
     <div class="leverage-meta">
-      <span class="lm-tag">STACK_01</span>
+      <span class="lm-tag">STK-01</span>
       <span class="lm-tag">Timeline: 6-12 months</span>
     </div>
   </div>
@@ -276,20 +334,20 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/buffalo-niagara-innovation-ecosystem.html">
+    <div class="similar-grid"><a class="similar-card" href="/clusters/boston-cleantech.html">
+      <div class="sc-name">Boston CleanTech</div>
+      <div class="sc-meta">Boston MA · United States</div>
+      <div class="sc-regime">growing</div>
+      <div class="sc-stall">Primary: Waiting for permission</div>
+    </a><a class="similar-card" href="/clusters/buffalo-niagara-innovation-ecosystem.html">
       <div class="sc-name">Buffalo Niagara Innovation Ecosystem</div>
       <div class="sc-meta">Buffalo NY · United States</div>
       <div class="sc-regime">Emerging</div>
       <div class="sc-stall">Primary: Waiting for permission</div>
-    </a><a class="similar-card" href="/clusters/harwell-space-technology.html">
-      <div class="sc-name">Harwell Space Technology</div>
-      <div class="sc-meta">Harwell Campus · United Kingdom</div>
-      <div class="sc-regime">Emerging</div>
-      <div class="sc-stall">Primary: Re-proving instead of narrowing</div>
-    </a><a class="similar-card" href="/clusters/tel-aviv-cyber-security.html">
-      <div class="sc-name">Tel Aviv Cyber Security</div>
-      <div class="sc-meta">Tel Aviv · Israel</div>
-      <div class="sc-regime">Emerging</div>
+    </a><a class="similar-card" href="/clusters/hyderabad-genome-valley-life-sciences.html">
+      <div class="sc-name">Hyderabad Genome Valley Life Sciences</div>
+      <div class="sc-meta">Hyderabad · India</div>
+      <div class="sc-regime">unknown</div>
       <div class="sc-stall">Primary: Waiting for permission</div>
     </a></div>
   </div>
@@ -297,19 +355,19 @@ footer a:hover{color:var(--green);}
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
     <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://www.clusteros.io/request.html">Request a diagnostic →</a>
+    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
   </div>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
   <span>
     <a href="/">Homepage</a> ·
-    <a href="https://www.clusteros.io/findings.html">Findings</a> ·
-    <a href="https://www.clusteros.io/about.html">About</a>
+    <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <script>
-const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[0,0,0,40,0,0,0,0,40]};
+const rd = {"labels":["Re-proving","Coordinating","Forgiving","Extracting","Mediating","Stabilising","Narrating","Scaling","Waiting"],"values":[30,30,0,50,30,50,30,30,50]};
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{

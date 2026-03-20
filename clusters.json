@@ -36,7 +36,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -134,7 +134,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-30",
         "stack_name": "Governance–Activity Stabilisation",
         "stalls_involved": [
           "S2",
@@ -146,7 +146,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-29",
         "stack_name": "Narrative–Legitimacy Stabilisation",
         "stalls_involved": [
           "S1",
@@ -251,7 +251,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -830,7 +830,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity Scaling–Mediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -1037,7 +1037,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -1059,7 +1059,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-24",
         "stack_name": "Narrative–Partnership Stabilisation",
         "stalls_involved": [
           "S7",
@@ -1391,7 +1391,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Scaling",
         "stalls_involved": [
           "S5",
@@ -1850,7 +1850,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Scaling Stabilisation",
         "stalls_involved": [
           "S5",
@@ -2159,7 +2159,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-30",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S2",
@@ -2274,7 +2274,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination-Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -2418,7 +2418,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-24",
         "stack_name": "Capital Mobilisation–Narrative Coupling",
         "stalls_involved": [
           "S4",
@@ -2739,7 +2739,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S2",
@@ -3201,7 +3201,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-30",
         "stack_name": "Coordination Infrastructure Stabilisation",
         "stalls_involved": [
           "S2",
@@ -3291,7 +3291,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -3367,7 +3367,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -3620,7 +3620,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-23",
         "stack_name": "Incumbent-Legitimacy Stabilisation",
         "stalls_involved": [
           "S2",
@@ -3764,7 +3764,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination-Incumbent Alignment",
         "stalls_involved": [
           "S2",
@@ -3852,7 +3852,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -3929,7 +3929,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-30",
         "stack_name": "Network-Activity Stabilisation",
         "stalls_involved": [
           "S2",
@@ -4166,7 +4166,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -4255,7 +4255,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-27",
         "stack_name": "Intermediation–Narrative Stabilisation",
         "stalls_involved": [
           "S5",
@@ -4674,7 +4674,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -5001,7 +5001,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordination Stabilisation",
         "stalls_involved": [
           "S2",
@@ -5100,7 +5100,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation-Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -5111,7 +5111,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -5222,7 +5222,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-29",
         "stack_name": "Validation-Deferral Cycle",
         "stalls_involved": [
           "S1",
@@ -5346,7 +5346,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Activity–Permission Stabilisation",
         "stalls_involved": [
           "S8",
@@ -5357,7 +5357,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-21",
         "stack_name": "Coordination–Extraction Stabilisation",
         "stalls_involved": [
           "S2",
@@ -5750,7 +5750,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Activity–Permission Alignment",
         "stalls_involved": [
           "S8",
@@ -6088,7 +6088,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-24",
         "stack_name": "Extraction–Legitimation Cycle",
         "stalls_involved": [
           "S4",
@@ -6253,7 +6253,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Institutional Intermediation–Activity Expansion",
         "stalls_involved": [
           "S5",
@@ -6264,7 +6264,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -6385,7 +6385,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Partnership Stabilisation",
         "stalls_involved": [
           "S6",
@@ -6500,7 +6500,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -6611,7 +6611,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -6698,7 +6698,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-30",
         "stack_name": "Intermediation–Validation Stabilisation",
         "stalls_involved": [
           "S2",
@@ -6710,7 +6710,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Infrastructure Coupling",
         "stalls_involved": [
           "S6",
@@ -6925,7 +6925,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination-Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -7356,7 +7356,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -7818,7 +7818,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Infrastructure Expansion Stabilisation",
         "stalls_involved": [
           "S5",
@@ -8154,7 +8154,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Partnership Formation–Incumbent Integration",
         "stalls_involved": [
           "S2",
@@ -8242,7 +8242,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-27",
         "stack_name": "Intermediation–Narrative Stabilisation",
         "stalls_involved": [
           "S5",
@@ -8609,7 +8609,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity-Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -8697,7 +8697,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Programme-Permission Stabilisation",
         "stalls_involved": [
           "S8",
@@ -8802,7 +8802,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Activity-Permission Stabilisation",
         "stalls_involved": [
           "S8",
@@ -8924,7 +8924,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Activity–Legitimacy Stabilisation",
         "stalls_involved": [
           "S8",
@@ -9244,7 +9244,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Activity–Permission Stabilisation",
         "stalls_involved": [
           "S8",
@@ -9355,7 +9355,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -9366,7 +9366,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity-Intermediation Stabilisation",
         "stalls_involved": [
           "S8",
@@ -9685,7 +9685,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-24",
         "stack_name": "Extraction-Recognition Stabilisation",
         "stalls_involved": [
           "S4",
@@ -9779,7 +9779,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Partnership-Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -10010,7 +10010,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-25",
         "stack_name": "Legitimacy-Dependency Configuration",
         "stalls_involved": [
           "S9",
@@ -10098,7 +10098,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -10460,7 +10460,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordination Stabilisation",
         "stalls_involved": [
           "S2",
@@ -10696,7 +10696,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -10778,7 +10778,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Infrastructure-Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -10789,7 +10789,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Partnership Stabilisation",
         "stalls_involved": [
           "S6",
@@ -10893,7 +10893,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -11140,7 +11140,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -11151,7 +11151,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-27",
         "stack_name": "Narrative–Intermediation Alignment",
         "stalls_involved": [
           "S7",
@@ -11375,7 +11375,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Mediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -11634,7 +11634,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Infrastructure-Activity Expansion",
         "stalls_involved": [
           "S5",
@@ -11762,7 +11762,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordination Stabilisation",
         "stalls_involved": [
           "S2",
@@ -12155,7 +12155,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination-Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -12166,7 +12166,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity-Mediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -12948,7 +12948,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Intermediation Expansion",
         "stalls_involved": [
           "S8",
@@ -13036,7 +13036,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -13141,7 +13141,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediated Expansion",
         "stalls_involved": [
           "S5",
@@ -13362,7 +13362,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -13488,7 +13488,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Program-Permission Stabilisation",
         "stalls_involved": [
           "S8",
@@ -13740,7 +13740,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity-Intermediation Absorption",
         "stalls_involved": [
           "S5",
@@ -13890,7 +13890,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -13901,7 +13901,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Mediation Stabilisation",
         "stalls_involved": [
           "S8",
@@ -14193,7 +14193,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -14215,7 +14215,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -14824,7 +14824,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-29",
         "stack_name": "Infrastructure-Permission-Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14923,7 +14923,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -15055,7 +15055,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-24",
         "stack_name": "Extraction–Narrative Stabilisation",
         "stalls_involved": [
           "S4",
@@ -15154,7 +15154,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -15492,7 +15492,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Intermediation Expansion",
         "stalls_involved": [
           "S5",
@@ -15636,7 +15636,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-27",
         "stack_name": "Narrative-Intermediation Legitimation",
         "stalls_involved": [
           "S7",
@@ -15812,7 +15812,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Activity–Legitimacy Stabilisation",
         "stalls_involved": [
           "S8",
@@ -16136,7 +16136,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-30",
         "stack_name": "Intermediation–Proliferation Stabilisation",
         "stalls_involved": [
           "S2",
@@ -16170,7 +16170,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S2",
@@ -16471,7 +16471,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -16575,7 +16575,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Intermediation Stabilisation",
         "stalls_involved": [
           "S8",
@@ -16785,7 +16785,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -16890,7 +16890,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordinated Stability",
         "stalls_involved": [
           "S2",
@@ -16994,7 +16994,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Scaling",
         "stalls_involved": [
           "S5",
@@ -17105,7 +17105,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Expansion",
         "stalls_involved": [
           "S5",
@@ -17321,7 +17321,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -17526,7 +17526,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Mediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -17773,7 +17773,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Activity-Validation Stabilisation",
         "stalls_involved": [
           "S8",
@@ -18132,7 +18132,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Permission-Activity Stabilisation",
         "stalls_involved": [
           "S8",
@@ -18230,7 +18230,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -18460,7 +18460,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Infrastructure-Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -18471,7 +18471,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Anchor-Governance Stabilisation",
         "stalls_involved": [
           "S6",
@@ -18984,7 +18984,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordinated Continuity",
         "stalls_involved": [
           "S2",
@@ -19194,7 +19194,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -19543,7 +19543,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Legitimacy–Activity Stabilisation",
         "stalls_involved": [
           "S9",
@@ -19644,7 +19644,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Expansion–Intermediation Coupling",
         "stalls_involved": [
           "S5",
@@ -19899,7 +19899,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -19992,7 +19992,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -20107,7 +20107,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbency Stabilisation",
         "stalls_involved": [
           "S2",
@@ -20323,7 +20323,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination-Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -20435,7 +20435,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity-Mediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -20524,7 +20524,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -21003,7 +21003,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -21025,7 +21025,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -21228,7 +21228,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-27",
         "stack_name": "Intermediation–Validation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -21537,7 +21537,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Intermediation Alignment",
         "stalls_involved": [
           "S5",
@@ -21624,7 +21624,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -21750,7 +21750,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-30",
         "stack_name": "Coordination–Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S2",
@@ -22049,7 +22049,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -22164,7 +22164,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Legitimacy–Activity Stabilisation",
         "stalls_involved": [
           "S8",
@@ -22274,7 +22274,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity-Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -22372,7 +22372,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -22825,7 +22825,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Coordination–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -22836,7 +22836,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Mediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -23036,7 +23036,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent-Coordination Stabilisation",
         "stalls_involved": [
           "S2",
@@ -23058,7 +23058,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-27",
         "stack_name": "Narrative-Intermediary Stabilisation",
         "stalls_involved": [
           "S5",
@@ -23361,7 +23361,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity-Mediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -23461,7 +23461,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-28",
         "stack_name": "Activity–Permission Stabilisation",
         "stalls_involved": [
           "S8",
@@ -23472,7 +23472,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-20",
         "stack_name": "Incumbent–Coordination Stabilisation",
         "stalls_involved": [
           "S6",
@@ -23649,7 +23649,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Scale-Mediation Configuration",
         "stalls_involved": [
           "S5",
@@ -23885,7 +23885,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-21",
         "stack_name": "Extraction–Coordination Stabilisation",
         "stalls_involved": [
           "S4",
@@ -23896,7 +23896,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Activity–Intermediation Stabilisation",
         "stalls_involved": [
           "S8",
@@ -23973,7 +23973,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-26",
         "stack_name": "Intermediation–Activity Scaling",
         "stalls_involved": [
           "S5",

@@ -11,17 +11,45 @@ function _track(event, props) {
   } catch(e) {}
 }
 
-window.STALL_SCIENCE_DATA = {
-  Narrating:    { definition:'The ecosystem produces stories about progress instead of evidence of change. Reporting substitutes for impact — the story of activity becomes the activity.', leverage:'Changing what gets reported — not who reports it — breaks this faster than any governance reform. Require evidence of decisions made and options closed, not events held.' },
-  Coordinating: { definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', leverage:'Identify the actor with the most to lose from the current arrangement and change their constraint. The leverage is never more coordination — it is one actor making an exclusionary choice.' },
-  'Re-proving': { definition:'The ecosystem repeats the case for its own existence. Resources flow to justification rather than execution — the case is never quite strong enough to unlock committed action.', leverage:'A single credible external commitment — a named anchor investing, a government fund activated — breaks this faster than any internal advocacy. Find who has the least to lose from going first publicly.' },
-  Scaling:      { definition:'Early-stage activity is celebrated rather than evaluated. The ecosystem optimises for inputs and starts rather than outcomes — motion is mistaken for momentum.', leverage:'Change what counts as success before the next programme begins. Define scaling milestones specifically and publicly. The intervention is at the measurement layer, not the programme layer.' },
-  Mediating:    { definition:'The ecosystem spends its energy managing relationships rather than enabling transactions. Every connection routes through an intermediary — direct actor coupling is structurally unavailable.', leverage:'One direct connection that bypasses the intermediary layer creates a path others can follow. The leverage is not removing the intermediary — it is demonstrating that direct coupling works.' },
-  Extracting:   { definition:'Anchor institutions extract value from the ecosystem rather than circulating it. Talent, IP and capital flow outward — the ecosystem produces but does not retain.', leverage:'Changing anchor procurement or spin-out policy changes the constraint without requiring anchors to behave differently by goodwill. The leverage is structural, not relational.' },
-  Forgiving:    { definition:'Poor performance is tolerated to preserve relationships. Accountability systems are systematically avoided — the relationship is worth more than the outcome it was supposed to produce.', leverage:'A funder or anchor changing the conditions of continued support breaks this faster than any internal review. External conditions change what internal tolerance costs.' },
-  Stabilising:  { definition:'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve the system — change threatens the positions built on the current arrangement.', leverage:'New entry pathways that bypass incumbent gatekeepers are the intervention. The leverage is creating routes that do not require incumbent permission — not changing incumbent behaviour.' },
-  Waiting:      { definition:'Action is deferred pending external conditions — funding decisions, policy clarity, anchor commitment. Waiting becomes structural: the system learns to produce deferral as its primary output.', leverage:'The actor with the least to lose from acting without permission is the entry point. One unilateral move creates a path others can follow. The stack survives collective waiting — not individual defection.' }
-};
+// ── KNOWLEDGE — fetched from /api/v1/knowledge ──────────────────────────────
+// STALL_SCIENCE_DATA and NAMED_STACKS are rebuilt from the canonical API.
+// Fallback to empty objects if API is unavailable.
+window.STALL_SCIENCE_DATA = {};
+window.NAMED_STACKS_CANONICAL = {};
+
+(async function loadKnowledge(){
+  try{
+    const r = await fetch('https://clusteros-v3-production.up.railway.app/api/v1/knowledge');
+    const k = await r.json();
+
+    // Rebuild STALL_SCIENCE_DATA keyed by short name (e.g. "Narrating", "Re-proving")
+    k.stalls.forEach(s=>{
+      window.STALL_SCIENCE_DATA[s.short]={
+        definition: s.definition,
+        leverage:   s.leverage,
+        x:          s.x_behaviour,
+        y:          s.y_substituted,
+        signal:     s.absorbed_signal,
+        cost:       s.accumulated_cost,
+      };
+    });
+
+    // Rebuild canonical stack lookup keyed by sorted stall IDs (e.g. "S1+S2")
+    k.stacks.forEach(s=>{
+      const key = s.stalls.slice().sort().join('+');
+      window.NAMED_STACKS_CANONICAL[key]={
+        id:          s.id,
+        name:        s.name,
+        description: s.reinforcing_logic,
+        leverage:    s.leverage_entry,
+        layer:       s.leverage_layer,
+      };
+    });
+
+  }catch(e){
+    console.warn('Knowledge API unavailable — stall definitions will be empty');
+  }
+})();
 
 const BEHAVIOURS = [
   { key:'commissioning', label:"We keep commissioning strategies, reports and reviews that don't change what anyone actually does", stall:'Narrating' },
@@ -35,17 +63,7 @@ const BEHAVIOURS = [
   { key:'waiting',       label:"We're waiting for a funding decision, a policy signal or an anchor to commit before we can move", stall:'Waiting' }
 ];
 
-const NAMED_STACKS = {
-  'Narrating+Coordinating': { name:'The Activity–Alignment Stack', description:"The ecosystem reports activity to justify continued coordination, and coordinates to generate reportable activity. Each stall provides the other with its raw material. Neither breaks without changing both simultaneously.", leverage:"Change what counts as evidence of progress — require evidence of decisions made and options closed — and the coordination machinery loses its fuel.", tech:"The platform replaces narrative reporting with live signal data. Steward interrogation surfaces actual connection rates and stall indicators automatically." },
-  'Narrating+Re-proving':   { name:'The Justification Stack', description:"Resources flow to making the case rather than executing it. The ecosystem produces increasingly sophisticated evidence of its own potential while deferring the bets that would test it.", leverage:"A single credible external commitment breaks this faster than any internal advocacy. Find who has the least to lose from going first publicly.", tech:"The anchor journey surfaces procurement RFIs and commitment signals automatically. The platform creates conditions for a first visible commitment without requiring anyone to negotiate it." },
-  'Coordinating+Mediating': { name:'The Intermediary Stack', description:"Coordination creates demand for intermediaries. Intermediaries make coordination manageable. The system coheres around process rather than around value exchange.", leverage:"Direct coupling between actors — a founder talking to corporate procurement without a broker — is the intervention. The intermediary layer needs to be bypassed once, publicly.", tech:"The platform enables direct actor-to-actor signal routing. A corporate RFI reaches matched founders without passing through the cluster body." },
-  'Re-proving+Scaling':     { name:'The Evidence–Activity Stack', description:"Early-stage activity is used as proof of concept rather than evaluated against outcomes. The case for scaling is never quite strong enough because the evidence base keeps expanding.", leverage:"Define what scaling means before the next pilot begins — specific, observable, time-bound. The stack breaks when the question shifts from 'does this work?' to 'what would it take to do ten times more?'", tech:"Journey state tracking gives the steward a live view of which founders are progressing versus cycling through early stages." },
-  'Mediating+Extracting':   { name:'The Anchor Dependency Stack', description:"The ecosystem organises itself around managing anchor institutions rather than changing their behaviour. Value flows outward while relationships are maintained.", leverage:"Anchor procurement policy is the leverage point — not anchor engagement. Changing what anchors are required to source locally changes the constraint.", tech:"The anchor journey makes local capability visible to anchor procurement before they look elsewhere. Supply chain intelligence and founder readiness levels are surfaced automatically." },
-  'Forgiving+Scaling':      { name:'The Tolerance Stack', description:"Poor performance at early stages is tolerated to preserve the narrative of progress. The ecosystem scales activity rather than outcomes because acknowledging which bets failed would disrupt momentum.", leverage:"A funder changing the conditions of continued support — not asking for better performance, but changing what they will fund next — breaks this faster than any internal review.", tech:"The steward interrogation layer surfaces programme performance against outcome milestones rather than activity counts." },
-  'Stabilising+Extracting': { name:'The Incumbent Stack', description:"Existing structures are preserved because the actors who benefit from them also control access to the ecosystem's resources. Innovation pathways route through incumbents.", leverage:"New entry pathways that bypass the incumbent orbit are the intervention. The leverage is creating routes that do not require incumbent permission.", tech:"The platform maintains parallel actor journeys that do not route through incumbent gatekeepers." },
-  'Coordinating+Re-proving':{ name:'The Alignment–Justification Stack', description:"The ecosystem coordinates to build the case, and builds the case to justify continued coordination. The system produces visible process while deferring decisions that would make process unnecessary.", leverage:"A decision that closes options — committing to a priority, defunding a programme — breaks the coordination loop by creating something real to report on.", tech:"The steward dashboard shows decision velocity alongside activity counts. The diagnostic flags when coordination events are not producing observable commitments." },
-  'Waiting+Re-proving':     { name:'The Permission Stack', description:"The ecosystem defers action pending external validation, and uses the waiting period to build a stronger case for permission. The case-building extends the waiting.", leverage:"The actor with the least to lose from acting without permission is the leverage point. One unilateral move creates a path others can follow.", tech:"The platform surfaces support programmes and funding eligibility to actors directly — without requiring steward intermediation." }
-};
+// NAMED_STACKS replaced by window.NAMED_STACKS_CANONICAL (loaded from /api/v1/knowledge above)
 
 // ── JOURNEY STATE ─────────────────────────────────────────
 const journey = {
@@ -1336,9 +1354,9 @@ const journey = {
   _findStack(stalls) {
     if(stalls.length<2) return null;
     for(let i=0;i<stalls.length;i++) for(let j=i+1;j<stalls.length;j++){
-      const k1=stalls[i]+'+'+stalls[j], k2=stalls[j]+'+'+stalls[i];
-      if(NAMED_STACKS[k1]) return{named:true,...NAMED_STACKS[k1]};
-      if(NAMED_STACKS[k2]) return{named:true,...NAMED_STACKS[k2]};
+      const key=[stalls[i],stalls[j]].sort().join('+');
+      const ns=window.NAMED_STACKS_CANONICAL||{};
+      if(ns[key]) return{named:true,...ns[key]};
     }
     return{named:false};
   },

@@ -6,156 +6,105 @@
 <title>Behavioural Stalls — ClusterOS</title>
 <style>
 :root{
-  --bg:#09101f;--surface:#111c2e;--border:#1e2f45;--border-mid:#2a3f58;
-  --chalk:#e8edf5;--chalk-dim:#b8c4d4;--dim:#6a7d94;
-  --signal:#c8f0d0;--signal-dim:#4a7a58;
-  --amber:#f5d97a;--amber-dim:#7a6a30;
-  --teal:#7dd3c8;--teal-dim:#2a5a56;
-  --red:#f07070;--red-dim:#6a3030;
-  --mono:'Geist Mono',ui-monospace,'Courier New',monospace;
-  --sans:'Geist',system-ui,sans-serif;
+  --bg:#09101f;--surface:#111c2e;--border:#1e2f45;
+  --chalk:#e8edf5;--dim:#8a9bb0;--signal:#c8f0d0;
+  --amber:#f5d97a;--teal:#7dd3c8;--teal-dim:#2a5a56;
+  --red:#f07070;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-height:100vh;overflow-x:hidden;font-size:14px;line-height:1.6}
+html,body{background:var(--bg);color:var(--chalk);font-family:-apple-system,system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--border)}
 
-/* ── HEADER ── */
-.header{padding:20px 24px 16px;border-bottom:1px solid var(--border)}
-.header-top{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
-.header h1{font-size:22px;font-weight:300;letter-spacing:-.02em;font-family:var(--sans)}
-.header h1 em{font-style:italic;color:var(--signal)}
-.header-eyebrow{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
-.header p{font-size:13px;color:var(--chalk-dim);margin-top:6px;line-height:1.6;max-width:640px}
-.tabs{display:flex;gap:6px;margin-top:14px;align-items:center}
-.tab-btn{background:none;border:none;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;padding:6px 14px;border-radius:4px;cursor:pointer;color:var(--dim);transition:all .2s;-webkit-tap-highlight-color:transparent}
-.tab-btn.active{color:var(--teal);background:rgba(125,211,200,.1);border:1px solid rgba(125,211,200,.2)}
-.tab-btn:not(.active){border:1px solid transparent}
-.reset-btn{background:none;border:1px solid var(--border-mid);color:var(--dim);font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;padding:6px 14px;border-radius:4px;cursor:pointer;display:none;margin-left:auto;transition:all .15s}
-.reset-btn:hover{border-color:var(--chalk-dim);color:var(--chalk)}
+/* HEADER */
+.header{padding:14px 16px 10px;border-bottom:1px solid var(--border)}
+.header h1{font-size:19px;font-weight:300;letter-spacing:-.02em}
+.header h1 em{font-style:italic}
+.header .sub{font-family:monospace;font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+.header p{font-size:11px;color:var(--dim);margin-top:6px;line-height:1.5}
+.tabs{display:flex;gap:6px;margin-top:10px;align-items:center}
+.tab-btn{background:none;border:none;font-family:monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;padding:5px 11px;border-radius:4px;cursor:pointer;color:var(--dim);transition:all .2s;-webkit-tap-highlight-color:transparent}
+.tab-btn.active{color:var(--teal);background:rgba(125,211,200,.1)}
+.reset-btn{background:none;border:1px solid var(--border);color:var(--dim);font-family:monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;padding:5px 11px;border-radius:4px;cursor:pointer;display:none;margin-left:auto;-webkit-tap-highlight-color:transparent}
 
-/* ── METRICS ── */
-.metrics{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
-.metric{padding:16px 20px;border-right:1px solid var(--border);transition:all .6s}
-.metric:last-child{border-right:none}
-.metric.degraded{background:rgba(240,112,112,.04)}
-.metric .mlabel{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
-.metric .mval{font-size:24px;font-weight:300;transition:color .5s;line-height:1}
-.metric .mtrend{font-family:var(--mono);font-size:10px;margin-top:5px;transition:color .5s}
+/* METRICS */
+.metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border)}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 10px;transition:all .6s}
+.metric.degraded{border-color:var(--red);background:rgba(240,112,112,.05)}
+.metric .mlabel{font-family:monospace;font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.metric .mval{font-size:17px;font-weight:300;transition:color .5s}
+.metric .mtrend{font-family:monospace;font-size:9px;margin-top:2px;transition:color .5s}
 
-/* ── HEALTH BAR ── */
-.healthbar-wrap{padding:12px 24px 10px;border-bottom:1px solid var(--border)}
-.hb-top{display:flex;justify-content:space-between;margin-bottom:6px}
-.hb-top span{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
-.hb-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+/* HEALTH */
+.healthbar-wrap{padding:8px 14px 6px;border-bottom:1px solid var(--border)}
+.hb-top{display:flex;justify-content:space-between;margin-bottom:5px}
+.hb-top span{font-family:monospace;font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+.hb-track{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
 .hb-fill{height:100%;border-radius:2px;transition:width .8s ease,background .8s ease}
 
-/* ── MAP ── */
-.map-section{padding:14px 24px 10px;border-bottom:1px solid var(--border)}
-.map-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.section-label{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+/* MAP */
+.map-section{padding:10px 14px 6px;border-bottom:1px solid var(--border)}
+.map-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.section-label{font-family:monospace;font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
 .zoom-btns{display:flex;gap:4px}
-.zoom-btn{background:var(--surface);border:1px solid var(--border-mid);color:var(--dim);font-size:13px;min-width:30px;height:30px;padding:0 8px;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;user-select:none;font-family:var(--mono)}
-.zoom-btn:hover{border-color:var(--chalk-dim);color:var(--chalk)}
-.badges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;min-height:4px}
-.badge{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:3px;border:1px solid}
+.zoom-btn{background:var(--surface);border:1px solid var(--border);color:var(--dim);font-size:14px;min-width:28px;height:28px;padding:0 7px;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;transition:all .15s;user-select:none;font-family:monospace}
+.zoom-btn:active{background:var(--border);color:var(--chalk)}
 .map-outer{width:100%;overflow:hidden;border-radius:6px;border:1px solid var(--border);background:var(--bg);position:relative;touch-action:none}
 .map-outer svg{display:block;transform-origin:0 0;transition:transform .2s ease;cursor:grab}
 .map-outer svg:active{cursor:grabbing}
-.map-hint{font-family:var(--mono);font-size:9px;color:var(--dim);margin-top:6px;text-align:right}
+.badges{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px;min-height:4px}
+.badge{font-family:monospace;font-size:9px;padding:2px 6px;border-radius:3px;border:1px solid}
 
-/* ── STALL GRID ── */
-.stall-section{padding:14px 24px;border-bottom:1px solid var(--border)}
-.stall-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.sc{border-radius:6px;padding:13px 13px 11px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
-.sc:hover{border-color:var(--border-mid)}
-.sc .sc-top{display:flex;align-items:center;gap:6px;margin-bottom:5px}
-.sc .sid{font-family:var(--mono);font-size:10px;font-weight:600}
-.sc .sico{font-size:15px}
-.sc .slabel{font-size:13px;color:var(--chalk-dim);line-height:1.3;font-weight:400}
-.sc.on .slabel{color:var(--chalk);font-weight:500}
-.sc .sdesc{font-size:11px;color:var(--dim);line-height:1.55;margin-top:7px;opacity:0;max-height:0;overflow:hidden;transition:opacity .25s,max-height .3s}
-.sc.on .sdesc{opacity:1;max-height:120px;color:var(--chalk-dim)}
-
-/* ── STACK VIEW ── */
-.stack-section{padding:14px 24px;border-bottom:1px solid var(--border);display:none}
-.stack-card{border-radius:5px;padding:12px 14px;margin-bottom:8px;border:1px solid}
-.stack-pips{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
-.stack-pip{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:3px;border:1px solid}
-
-/* ── COMMENTARY ── */
-.commentary-section{padding:20px 24px;border-bottom:1px solid var(--border)}
-.commentary-inner{background:var(--surface);border:1px solid var(--border-mid);border-radius:8px;padding:20px 24px}
-.commentary-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-.c-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;transition:background .3s,box-shadow .3s}
-.c-label{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
-.c-status{font-family:var(--mono);font-size:10px;margin-left:auto}
-.c-idle{font-size:13px;color:var(--dim);font-style:italic;line-height:1.7}
-.c-loading{font-size:12px;color:var(--dim);font-family:var(--mono)}
-.c-text{font-size:13px;color:var(--chalk-dim);line-height:1.85}
-.c-text p{margin-bottom:14px}
+/* COMMENTARY */
+.commentary-section{padding:12px 14px;border-bottom:1px solid var(--border)}
+.commentary-inner{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:13px}
+.commentary-header{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.c-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:background .3s,box-shadow .3s}
+.c-label{font-family:monospace;font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.c-idle{font-size:11px;color:var(--dim);font-style:italic;line-height:1.7}
+.c-loading{font-size:10px;color:var(--dim);font-family:monospace}
+.c-text{font-size:12px;color:var(--chalk);line-height:1.85}
+.c-text p{margin-bottom:10px}
 .c-text p:last-child{margin-bottom:0}
-.c-health-line{font-family:var(--mono);font-size:11px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
-.stack-alert{border-radius:5px;padding:12px 14px;margin-bottom:8px;border:1px solid}
-.stack-alert:last-child{margin-bottom:0}
-.sa-head{display:flex;align-items:center;gap:10px;margin-bottom:5px}
-.sa-sev{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.sa-name{font-style:italic;font-size:14px;color:var(--chalk)}
-.sa-desc{font-size:12px;color:var(--chalk-dim);line-height:1.6}
 
-/* ── CONFIRM CTA ── */
-.confirm-section{padding:20px 24px;border-bottom:1px solid var(--border);display:none}
-.confirm-inner{border:1px solid var(--signal-dim);border-radius:8px;padding:24px 28px;background:rgba(200,240,208,.04)}
-.confirm-label{font-family:var(--mono);font-size:10px;color:var(--signal-dim);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
-.confirm-stalls{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.confirm-stall-tag{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:3px;border:1px solid;background:rgba(200,240,208,.08);color:var(--signal);border-color:rgba(200,240,208,.25)}
-.confirm-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.confirm-fields input, .confirm-fields select{background:var(--bg);border:1px solid var(--border-mid);color:var(--chalk);font-family:var(--sans);font-size:13px;padding:9px 12px;border-radius:4px;width:100%;outline:none;transition:border-color .15s}
-.confirm-fields input::placeholder{color:var(--dim)}
-.confirm-fields input:focus, .confirm-fields select:focus{border-color:var(--signal-dim)}
-.confirm-fields select option{background:var(--surface);color:var(--chalk)}
-.confirm-fields .full{grid-column:1/-1}
-.confirm-btn{display:flex;align-items:center;justify-content:space-between;width:100%;background:var(--signal-dim);border:none;color:var(--signal);font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;padding:13px 18px;border-radius:4px;cursor:pointer;transition:background .15s}
-.confirm-btn:hover{background:#3a6a48}
-.confirm-btn:disabled{background:var(--border);color:var(--dim);cursor:not-allowed}
-.confirm-btn .arrow{font-size:14px}
-.confirm-note{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:10px;line-height:1.5}
+/* STACK ALERTS inside commentary */
+.stack-alert{border-radius:5px;padding:9px 11px;margin-bottom:6px;border:1px solid}
+.stack-alert .sa-head{display:flex;align-items:center;gap:8px;margin-bottom:3px}
+.stack-alert .sa-sev{font-family:monospace;font-size:9px;text-transform:uppercase}
+.stack-alert .sa-name{font-style:italic;font-size:13px}
+.stack-alert .sa-desc{font-size:10px;color:var(--dim);line-height:1.5}
 
-/* ── SUCCESS ── */
-.success-section{padding:24px;display:none}
-.success-inner{background:var(--surface);border:1px solid var(--signal-dim);border-radius:8px;padding:28px;text-align:center}
-.success-icon{font-size:28px;margin-bottom:12px}
-.success-h{font-size:18px;font-weight:300;margin-bottom:8px;color:var(--chalk)}
-.success-h em{font-style:italic;color:var(--signal)}
-.success-body{font-size:13px;color:var(--chalk-dim);line-height:1.7;max-width:440px;margin:0 auto 20px}
-.success-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.success-link{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-dim);padding-bottom:2px}
+/* STALL GRID */
+.stall-section{padding:12px 14px;border-bottom:1px solid var(--border)}
+.stall-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.sc{border-radius:7px;padding:11px 11px 10px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;min-height:72px}
+.sc .sid{font-family:monospace;font-size:9px}
+.sc .sico{font-size:14px}
+.sc .slabel{font-size:11px;color:var(--dim);line-height:1.35;margin-top:4px}
+.sc.on .slabel{color:var(--chalk);font-weight:500}
+.sc .sdesc{font-size:9.5px;color:var(--dim);line-height:1.5;margin-top:6px;opacity:0;max-height:0;overflow:hidden;transition:opacity .25s,max-height .3s}
+.sc.on .sdesc{opacity:1;max-height:120px}
 
-/* ── STATUS BAR ── */
-.status-bar{padding:8px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;position:sticky;bottom:0;background:var(--bg);z-index:10}
-.status-bar span{font-family:var(--mono);font-size:10px;color:var(--dim)}
+/* STACK VIEW */
+.stack-section{padding:10px 14px;border-bottom:1px solid var(--border);display:none}
+.stack-card{border-radius:5px;padding:9px 10px;margin-bottom:5px;border:1px solid}
+.stack-pips{display:flex;gap:3px;flex-wrap:wrap;margin-top:5px}
+.stack-pip{font-family:monospace;font-size:9px;padding:1px 5px;border-radius:3px;border:1px solid}
+
+.status-bar{padding:7px 14px;border-top:1px solid var(--border);display:flex;justify-content:space-between}
+.status-bar span{font-family:monospace;font-size:9px;color:var(--dim)}
 
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
 @keyframes fadeup{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .pulse-dot{animation:blink .7s infinite}
 .fade-in{animation:fadeup .4s ease}
-
-@media(max-width:600px){
-  .metrics{grid-template-columns:1fr}
-  .metric{border-right:none;border-bottom:1px solid var(--border)}
-  .stall-grid{grid-template-columns:1fr 1fr}
-  .confirm-fields{grid-template-columns:1fr}
-  .confirm-fields .full{grid-column:1}
-}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-top">
-    <h1>Behavioural <em>Stalls</em></h1>
-  </div>
-  <div class="header-eyebrow">Complex Adaptive Systems — Regional Economies</div>
-  <p>Stalls are locally rational behaviours that stabilise a system short-term and displace a capability it might otherwise develop. Activate the stalls you recognise in your ecosystem.</p>
+  <h1>Behavioural <em>Stalls</em></h1>
+  <div class="sub">Complex Adaptive Systems — Regional Economies</div>
+  <p>Stalls are locally rational behaviours that stabilise a system short-term and displace a capability it might otherwise develop.</p>
   <div class="tabs">
     <button class="tab-btn active" onclick="setView('explore')" id="tab-explore">Explorer</button>
     <button class="tab-btn" onclick="setView('stacks')" id="tab-stacks">Stacks</button>
@@ -168,17 +117,17 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
   <div class="metric" id="m-growth">
     <div class="mlabel">Economic Growth</div>
     <div class="mval" id="v-growth" style="color:var(--signal)">+4.2%</div>
-    <div class="mtrend" id="t-growth" style="color:var(--signal-dim)">▲ compounding</div>
+    <div class="mtrend" id="t-growth" style="color:#4a7a58">▲ compounding</div>
   </div>
   <div class="metric" id="m-scale">
-    <div class="mlabel">Scaling Companies</div>
+    <div class="mlabel">Scaling Cos</div>
     <div class="mval" id="v-scale" style="color:var(--teal)">24</div>
-    <div class="mtrend" id="t-scale" style="color:var(--teal-dim)">▲ this year</div>
+    <div class="mtrend" id="t-scale" style="color:#2a5a56">▲ this year</div>
   </div>
   <div class="metric" id="m-jobs">
     <div class="mlabel">Quality Jobs</div>
     <div class="mval" id="v-jobs" style="color:var(--amber)">1,840</div>
-    <div class="mtrend" id="t-jobs" style="color:var(--amber-dim)">▲ created</div>
+    <div class="mtrend" id="t-jobs" style="color:#7a6a30">▲ created</div>
   </div>
 </div>
 
@@ -194,15 +143,17 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
 <!-- MAP -->
 <div class="map-section">
   <div class="map-controls">
-    <div class="section-label">Adaptive System Map</div>
+    <div>
+      <div class="section-label">Adaptive System Map</div>
+    </div>
     <div class="zoom-btns">
       <button class="zoom-btn" onclick="zoomIn()">+</button>
       <button class="zoom-btn" onclick="zoomOut()">−</button>
-      <button class="zoom-btn" onclick="zoomReset()" style="font-size:10px;padding:0 10px">fit</button>
+      <button class="zoom-btn" onclick="zoomReset()" style="font-size:10px">fit</button>
     </div>
   </div>
   <div class="badges" id="active-badges"></div>
-  <div class="map-outer" id="map-outer" style="height:280px">
+  <div class="map-outer" id="map-outer" style="height:260px">
     <svg id="casmap" viewBox="0 0 560 450" width="560" height="450" style="touch-action:none">
       <defs>
         <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -219,7 +170,7 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
         </radialGradient>
       </defs>
       <rect width="560" height="450" fill="url(#mapbg)" rx="6"/>
-      <g opacity="0.15">
+      <g opacity="0.2">
         <line x1="112" y1="0" x2="112" y2="450" stroke="#1e2f45" stroke-width="0.4"/>
         <line x1="224" y1="0" x2="224" y2="450" stroke="#1e2f45" stroke-width="0.4"/>
         <line x1="336" y1="0" x2="336" y2="450" stroke="#1e2f45" stroke-width="0.4"/>
@@ -237,19 +188,13 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
       <g id="stat-layer"></g>
     </svg>
   </div>
-  <div class="map-hint">pinch or use +/− to zoom · drag to pan</div>
+  <div style="font-family:monospace;font-size:8px;color:var(--dim);margin-top:5px;text-align:right">pinch or use +/− to zoom · drag to pan</div>
 </div>
 
 <!-- STALL GRID -->
 <div class="stall-section">
-  <div class="section-label" style="margin-bottom:10px">The nine stalls — tap to activate</div>
+  <div class="section-label" style="margin-bottom:8px">The Nine Stalls — tap to activate</div>
   <div class="stall-grid" id="stall-grid"></div>
-</div>
-
-<!-- STACK VIEW -->
-<div class="stack-section" id="stack-section">
-  <div class="section-label" style="margin-bottom:10px">Stack patterns</div>
-  <div id="stack-list"></div>
 </div>
 
 <!-- COMMENTARY -->
@@ -258,67 +203,17 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
     <div class="commentary-header">
       <div class="c-dot" id="c-dot" style="background:var(--signal);box-shadow:0 0 5px var(--signal)"></div>
       <span class="c-label">System Analysis</span>
-      <span class="c-status" id="c-status" style="color:var(--dim)"></span>
     </div>
     <div id="c-content">
-      <div class="c-idle">Activate any stall to begin. The system will analyse what behaviour it displaces, how the ecosystem adapts, and where the compounding breaks down.</div>
+      <div class="c-idle">Tap any stall to activate it. The system will analyse what behaviour it displaces, how the ecosystem adapts, and where the compounding breaks down.</div>
     </div>
   </div>
 </div>
 
-<!-- CONFIRM CTA -->
-<div class="confirm-section" id="confirm-section">
-  <div class="confirm-inner">
-    <div class="confirm-label">This describes my ecosystem</div>
-    <div class="confirm-stalls" id="confirm-stalls"></div>
-    <div class="confirm-fields">
-      <input type="text" id="f-name" placeholder="Your name" autocomplete="name">
-      <input type="email" id="f-email" placeholder="Your email" autocomplete="email">
-      <input type="text" id="f-ecosystem" placeholder="Ecosystem name (e.g. Scotland FinTech)" class="full">
-      <select id="f-sector">
-        <option value="" disabled selected>Sector</option>
-        <option>FinTech</option>
-        <option>Life Sciences</option>
-        <option>AI & Deep Tech</option>
-        <option>Cyber Security</option>
-        <option>Advanced Manufacturing</option>
-        <option>CleanTech & Energy</option>
-        <option>Space & Defence</option>
-        <option>Digital & Software</option>
-        <option>Other</option>
-      </select>
-      <select id="f-region">
-        <option value="" disabled selected>Region</option>
-        <option>North America</option>
-        <option>Europe</option>
-        <option>South & Southeast Asia</option>
-        <option>East Asia</option>
-        <option>Sub-Saharan Africa</option>
-        <option>North Africa & Middle East</option>
-        <option>Latin America</option>
-        <option>Oceania</option>
-      </select>
-    </div>
-    <button class="confirm-btn" id="confirm-btn" onclick="submitReport()">
-      <span>Send me the diagnostic report</span>
-      <span class="arrow">→</span>
-    </button>
-    <div class="confirm-note">Your report includes stall analysis, system health score, stack identification, and comparator clusters from the 221-cluster dataset. No spam — one email.</div>
-  </div>
-</div>
-
-<!-- SUCCESS -->
-<div class="success-section" id="success-section">
-  <div class="success-inner">
-    <div class="success-icon">✦</div>
-    <h2 class="success-h">Report <em>on its way.</em></h2>
-    <p class="success-body">Your diagnostic report is being prepared and will arrive shortly. It includes your stall profile, system health score, stack analysis, and comparator clusters from the 221-cluster dataset.</p>
-    <div class="success-links">
-      <a href="/findings.html" class="success-link">What 221 diagnostics found</a>
-      <a href="/leverage.html" class="success-link">What leverage looks like</a>
-      <a href="/request.html" class="success-link">Request a full diagnostic</a>
-    </div>
-  </div>
+<!-- STACK VIEW -->
+<div class="stack-section" id="stack-section">
+  <div class="section-label" style="margin-bottom:8px">Stack Patterns</div>
+  <div id="stack-list"></div>
 </div>
 
 <div class="status-bar">
@@ -327,40 +222,38 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
 </div>
 
 <script>
-const P={bg:'#09101f',surface:'#111c2e',border:'#1e2f45',borderMid:'#2a3f58',chalk:'#e8edf5',chalkDim:'#b8c4d4',dim:'#6a7d94',signal:'#c8f0d0',signalDim:'#4a7a58',amber:'#f5d97a',amberDim:'#7a6a30',teal:'#7dd3c8',tealDim:'#2a5a56',red:'#f07070',redDim:'#6a3030',purple:'#a78bfa'};
+const P={bg:'#09101f',surface:'#111c2e',border:'#1e2f45',chalk:'#e8edf5',dim:'#8a9bb0',signal:'#c8f0d0',amber:'#f5d97a',teal:'#7dd3c8',tealDim:'#2a5a56',red:'#f07070',purple:'#a78bfa'};
 
-const STALLS=[
-  {id:'S1',short:'Re-proving',icon:'⟳',color:'#a78bfa',affects:['R-talent','R-capital'],desc:'Validates multiple pathways without letting proof collapse choice. Options multiply. Resources spread thin.'},
-  {id:'S2',short:'Coordinating',icon:'⇄',color:'#60a5fa',affects:['R-anchor','B-policy'],desc:'Partnership frameworks substitute for decisions. Coordination bodies multiply. Responsibility never concentrated.'},
-  {id:'S3',short:'Forgiving',icon:'↺',color:'#34d399',affects:['B-programme'],desc:'Failed programmes continue. Stopping them is more uncomfortable than the cost of continuation.'},
-  {id:'S4',short:'Extracting',icon:'↑',color:'#fb923c',affects:['R-talent','R-capital','OUT'],desc:'Value exits — talent, capital, companies. The ecosystem produces but cannot retain.'},
-  {id:'S5',short:'Mediating',icon:'◈',color:'#e879f9',affects:['R-anchor','R-talent'],desc:'Intermediaries broker all connections. Direct coupling never forms. Friction accumulates.'},
-  {id:'S6',short:'Incumbents',icon:'⬡',color:'#f59e0b',affects:['R-anchor','B-policy'],desc:'Innovation concentrates around large organisations. New entrants adapt to incumbents rather than reshaping them.'},
-  {id:'S7',short:'Narrating',icon:'≣',color:'#38bdf8',affects:['B-policy','B-programme'],desc:'Strategy documents substitute for testable action. Evidence of change is narrative, not behavioural.'},
-  {id:'S8',short:'Scaling activity',icon:'≈',color:'#4ade80',affects:['B-programme','OUT'],desc:'Volume grows. Conversion does not. More events, more cohorts — not more successful companies.'},
-  {id:'S9',short:'Waiting',icon:'⏸',color:'#f472b6',affects:['R-capital','B-policy'],desc:'Actors defer to gatekeepers. Action requires authorisation. Momentum lost to approval cycles.'}
-];
+// ── KNOWLEDGE — fetched from /api/v1/knowledge ──────────────────────────────
+// Stall definitions and stack data come from the canonical knowledge API.
+// Icons, colors and affects are UI-specific and stay local.
+const KNOWLEDGE_URL='https://clusteros-v3-production.up.railway.app/api/v1/knowledge';
 
-const STACKS=[
-  {stalls:['S2','S7'],name:'Strategy Theatre',sev:'critical',desc:'Coordination generates narrative which legitimises more coordination. No decisions are forced. The system produces alignment documents indefinitely.'},
-  {stalls:['S2','S5'],name:'Intermediary Lock-in',sev:'high',desc:'Coordination bodies rely on intermediaries. Intermediaries become essential to coherence. Direct coupling never happens.'},
-  {stalls:['S4','S6'],name:'Extraction Engine',sev:'critical',desc:'Incumbents absorb the value new actors create. It exits via their supply chains rather than recirculating locally.'},
-  {stalls:['S1','S3'],name:'Infinite Pilot',sev:'high',desc:'Programmes validated without commitment. Non-performers continue. The option space never collapses. Resources spread to exhaustion.'},
-  {stalls:['S7','S8'],name:'Visibility Loop',sev:'high',desc:'Activity generates narrative. Narrative legitimises more activity. Conversion is never measured. The system looks healthy from outside.'},
-  {stalls:['S2','S7','S8'],name:'Governance Capture',sev:'critical',desc:'Coordination → reports → programmes → more coordination. The system becomes entirely self-referential. External pressure cannot enter.'},
-  {stalls:['S4','S9'],name:'Dependency Trap',sev:'high',desc:'Actors wait for permission. When it arrives the value has already extracted. Autonomous action is never learned.'}
-];
+const STALL_UI={
+  S1:{icon:'⟳',color:'#a78bfa',affects:['R-talent','R-capital']},
+  S2:{icon:'⇄',color:'#60a5fa',affects:['R-anchor','B-policy']},
+  S3:{icon:'↺',color:'#34d399',affects:['B-programme']},
+  S4:{icon:'↑',color:'#fb923c',affects:['R-talent','R-capital','OUT']},
+  S5:{icon:'◈',color:'#e879f9',affects:['R-anchor','R-talent']},
+  S6:{icon:'⬡',color:'#f59e0b',affects:['R-anchor','B-policy']},
+  S7:{icon:'≣',color:'#38bdf8',affects:['B-policy','B-programme']},
+  S8:{icon:'≈',color:'#4ade80',affects:['B-programme','OUT']},
+  S9:{icon:'⏸',color:'#f472b6',affects:['R-capital','B-policy']},
+};
+
+let STALLS=[];
+let STACKS=[];
 
 const NODES=[
-  {id:'steward',  label:'Steward',  x:270,y:58, r:23,color:P.teal},
-  {id:'anchor',   label:'Anchor',   x:430,y:148,r:21,color:P.amber},
-  {id:'founder',  label:'Founders', x:118,y:192,r:20,color:P.signal},
-  {id:'research', label:'Research', x:370,y:268,r:17,color:P.purple},
-  {id:'broker',   label:'Broker',   x:248,y:210,r:15,color:'#e879f9'},
-  {id:'talent',   label:'Talent',   x:112,y:298,r:15,color:'#60a5fa'},
-  {id:'programme',label:'Programmes',x:375,y:362,r:17,color:'#fb923c'},
-  {id:'capital',  label:'Capital',  x:68, y:95, r:16,color:P.amber},
-  {id:'output',   label:'ECONOMIC\nOUTPUT',x:500,y:390,r:32,color:P.signal,isOutput:true}
+  {id:'steward',     label:'Steward',     x:270,y:58,  r:23,color:P.teal},
+  {id:'anchor',      label:'Anchor',      x:430,y:148, r:21,color:P.amber},
+  {id:'founder',     label:'Founders',    x:118,y:192, r:20,color:P.signal},
+  {id:'research',    label:'Research',    x:370,y:268, r:17,color:P.purple},
+  {id:'broker',      label:'Broker',      x:248,y:210, r:15,color:'#e879f9'},
+  {id:'talent',      label:'Talent',      x:112,y:298, r:15,color:'#60a5fa'},
+  {id:'programme',   label:'Programmes',  x:375,y:362, r:17,color:'#fb923c'},
+  {id:'capital',     label:'Capital',     x:68, y:95,  r:16,color:P.amber},
+  {id:'output',      label:'ECONOMIC\nOUTPUT',x:500,y:390,r:32,color:P.signal,isOutput:true}
 ];
 
 const FLOWS=[
@@ -370,18 +263,18 @@ const FLOWS=[
   {id:'f4',from:'founder', to:'anchor',    color:'#4a7a58'},
   {id:'f5',from:'talent',  to:'founder',   color:'#2a4a7a'},
   {id:'f6',from:'capital', to:'founder',   color:'#6a5a20'},
-  {id:'f7',from:'programme',to:'broker',  color:'#6a3a20'},
+  {id:'f7',from:'programme',to:'broker',   color:'#6a3a20'},
   {id:'f8',from:'broker',  to:'founder',   color:'#5a2a7a'},
   {id:'fo1',from:'anchor', to:'output',    color:'#4a7a58',isOut:true},
   {id:'fo2',from:'founder',to:'output',    color:'#4a7a58',isOut:true},
-  {id:'fo3',from:'research',to:'output',  color:'#3a3a6a',isOut:true},
+  {id:'fo3',from:'research',to:'output',   color:'#3a3a6a',isOut:true},
 ];
 
 const LOOPS=[
-  {id:'R-talent', type:'R',color:'#4ade80',path:'M118,172 C80,120 40,180 68,79 C90,20 160,60 140,172',lx:48,ly:125},
-  {id:'R-anchor', type:'R',color:P.amber,  path:'M430,127 C480,80 510,160 460,200 C430,220 390,180 430,127',lx:492,ly:155},
+  {id:'R-talent',type:'R',color:'#4ade80',path:'M118,172 C80,120 40,180 68,79 C90,20 160,60 140,172',lx:48,ly:125},
+  {id:'R-anchor',type:'R',color:P.amber,  path:'M430,127 C480,80 510,160 460,200 C430,220 390,180 430,127',lx:492,ly:155},
   {id:'R-capital',type:'R',color:'#f59e0b',path:'M68,79 C20,60 10,30 50,25 C90,18 100,55 68,79',lx:28,ly:42},
-  {id:'B-policy', type:'B',color:P.teal,   path:'M270,35 C340,10 420,30 430,127',lx:360,ly:18},
+  {id:'B-policy',type:'B',color:P.teal,   path:'M270,35 C340,10 420,30 430,127',lx:360,ly:18},
   {id:'B-programme',type:'B',color:'#fb923c',path:'M375,345 C420,310 450,330 430,169',lx:450,ly:318},
 ];
 
@@ -390,41 +283,77 @@ function svgEl(tag,a){const e=document.createElementNS('http://www.w3.org/2000/s
 
 let active=[];
 
-// ── ZOOM & PAN ──
-let zoom=1,panX=0,panY=0,isPanning=false,lastPanX=0,lastPanY=0,pinchDist=0;
+// ── ZOOM & PAN ──────────────────────────────────────────────
+let zoom=1, panX=0, panY=0;
+let isPanning=false, lastPanX=0, lastPanY=0;
+let pinchDist=0;
+
 const mapOuter=document.getElementById('map-outer');
 const svg=document.getElementById('casmap');
 
 function applyTransform(){
-  zoom=Math.max(0.4,Math.min(3,zoom));
+  const maxZoom=3, minZoom=0.4;
+  zoom=Math.max(minZoom,Math.min(maxZoom,zoom));
   svg.style.transform=`translate(${panX}px,${panY}px) scale(${zoom})`;
 }
+
 function zoomIn(){zoom=Math.min(3,zoom*1.3);applyTransform()}
 function zoomOut(){zoom=Math.max(0.4,zoom/1.3);applyTransform()}
 function zoomReset(){zoom=1;panX=0;panY=0;applyTransform()}
 
-mapOuter.addEventListener('wheel',e=>{e.preventDefault();zoom*=e.deltaY<0?1.15:0.87;applyTransform()},{passive:false});
+// Mouse wheel zoom
+mapOuter.addEventListener('wheel',e=>{
+  e.preventDefault();
+  zoom*=e.deltaY<0?1.15:0.87;
+  applyTransform();
+},{passive:false});
+
+// Touch pinch-zoom + pan
 mapOuter.addEventListener('touchstart',e=>{
-  if(e.touches.length===2){const dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;pinchDist=Math.sqrt(dx*dx+dy*dy);}
-  else if(e.touches.length===1){isPanning=true;lastPanX=e.touches[0].clientX;lastPanY=e.touches[0].clientY;}
+  if(e.touches.length===2){
+    const dx=e.touches[0].clientX-e.touches[1].clientX;
+    const dy=e.touches[0].clientY-e.touches[1].clientY;
+    pinchDist=Math.sqrt(dx*dx+dy*dy);
+  } else if(e.touches.length===1){
+    isPanning=true;
+    lastPanX=e.touches[0].clientX;
+    lastPanY=e.touches[0].clientY;
+  }
 },{passive:true});
+
 mapOuter.addEventListener('touchmove',e=>{
   e.preventDefault();
-  if(e.touches.length===2){const dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY,dist=Math.sqrt(dx*dx+dy*dy);zoom*=dist/pinchDist;pinchDist=dist;applyTransform();}
-  else if(e.touches.length===1&&isPanning){panX+=e.touches[0].clientX-lastPanX;panY+=e.touches[0].clientY-lastPanY;lastPanX=e.touches[0].clientX;lastPanY=e.touches[0].clientY;applyTransform();}
+  if(e.touches.length===2){
+    const dx=e.touches[0].clientX-e.touches[1].clientX;
+    const dy=e.touches[0].clientY-e.touches[1].clientY;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    zoom*=dist/pinchDist;
+    pinchDist=dist;
+    applyTransform();
+  } else if(e.touches.length===1&&isPanning){
+    panX+=e.touches[0].clientX-lastPanX;
+    panY+=e.touches[0].clientY-lastPanY;
+    lastPanX=e.touches[0].clientX;
+    lastPanY=e.touches[0].clientY;
+    applyTransform();
+  }
 },{passive:false});
+
 mapOuter.addEventListener('touchend',()=>{isPanning=false});
+
+// Mouse drag pan
 mapOuter.addEventListener('mousedown',e=>{isPanning=true;lastPanX=e.clientX;lastPanY=e.clientY});
 window.addEventListener('mousemove',e=>{if(!isPanning)return;panX+=e.clientX-lastPanX;panY+=e.clientY-lastPanY;lastPanX=e.clientX;lastPanY=e.clientY;applyTransform()});
 window.addEventListener('mouseup',()=>{isPanning=false});
 
-// ── MAP RENDER ──
+// ── MAP RENDER ───────────────────────────────────────────────
 function renderMap(){
   const affected=new Set(active.flatMap(id=>STALLS.find(s=>s.id===id)?.affects||[]));
   const hitOut=affected.has('OUT');
   const health=Math.max(0,1-active.length/9);
   const defs=svg.querySelector('defs');
 
+  // LOOPS
   document.getElementById('loop-layer').innerHTML='';
   const ll=document.getElementById('loop-layer');
   LOOPS.forEach(loop=>{
@@ -440,12 +369,15 @@ function renderMap(){
       opacity:hit?'0.3':'0.55','marker-end':`url(#${aId})`,style:'transition:all .6s'}));
     if(!hit){
       const c=svgEl('circle',{cx:loop.lx,cy:loop.ly,r:'7',fill:loop.color,opacity:'0.12'});
-      const t=svgEl('text',{x:loop.lx,y:loop.ly+1,'text-anchor':'middle','dominant-baseline':'middle',fill:loop.color,'font-size':'7','font-family':'monospace','font-weight':'bold',opacity:'0.7'});
-      t.textContent=loop.type;g.appendChild(c);g.appendChild(t);
+      const t=svgEl('text',{x:loop.lx,y:loop.ly+1,'text-anchor':'middle','dominant-baseline':'middle',
+        fill:loop.color,'font-size':'7','font-family':'monospace','font-weight':'bold',opacity:'0.7'});
+      t.textContent=loop.type;
+      g.appendChild(c);g.appendChild(t);
     }
     ll.appendChild(g);
   });
 
+  // FLOWS
   document.getElementById('flow-layer').innerHTML='';
   const fl=document.getElementById('flow-layer');
   FLOWS.forEach((f,i)=>{
@@ -453,8 +385,10 @@ function renderMap(){
     const dx=to.x-fr.x,dy=to.y-fr.y,len=Math.sqrt(dx*dx+dy*dy),nx=dx/len,ny=dy/len;
     const x1=fr.x+nx*(fr.r+1),y1=fr.y+ny*(fr.r+1);
     const x2=to.x-nx*(to.r+6),y2=to.y-ny*(to.r+6);
-    const bad=f.isOut&&hitOut;const col=bad?P.red:f.color;
-    const aId='af_'+f.id;const old=document.getElementById(aId);if(old)old.remove();
+    const bad=f.isOut&&hitOut;
+    const col=bad?P.red:f.color;
+    const aId='af_'+f.id;
+    const old=document.getElementById(aId);if(old)old.remove();
     const mk=svgEl('marker',{id:aId,markerWidth:'5',markerHeight:'5',refX:'4',refY:'2.5',orient:'auto'});
     mk.appendChild(svgEl('path',{d:'M0,0 L0,5 L5,2.5 z',fill:col,opacity:'0.6'}));
     defs.appendChild(mk);
@@ -479,6 +413,7 @@ function renderMap(){
     }
   });
 
+  // OUTPUT NODE
   document.getElementById('out-layer').innerHTML='';
   const ol=document.getElementById('out-layer');
   const on=getNode('output');
@@ -490,15 +425,18 @@ function renderMap(){
     ol.appendChild(ring);
   }
 
+  // NODES
   document.getElementById('node-layer').innerHTML='';
   const nl=document.getElementById('node-layer');
   NODES.forEach(n=>{
     if(n.isOutput){
       const mc=hitOut?P.red:(health>0.6?P.signal:P.amber);
       const g=svgEl('g',{style:'transition:all .6s'});
-      g.appendChild(svgEl('circle',{cx:n.x,cy:n.y,r:n.r,fill:'#0d1828',stroke:mc,'stroke-width':'2',opacity:hitOut?'0.55':'1',filter:hitOut?'url(#rglow)':'url(#sglow)',style:'transition:all .6s'}));
+      g.appendChild(svgEl('circle',{cx:n.x,cy:n.y,r:n.r,fill:'#0d1828',stroke:mc,'stroke-width':'2',
+        opacity:hitOut?'0.55':'1',filter:hitOut?'url(#rglow)':'url(#sglow)',style:'transition:all .6s'}));
       ['ECONOMIC','OUTPUT'].forEach((txt,i)=>{
-        const t=svgEl('text',{x:n.x,y:n.y-5+i*9,'text-anchor':'middle','dominant-baseline':'middle',fill:mc,'font-size':'6','font-family':'monospace','font-weight':'bold',opacity:'0.9',style:'transition:all .6s'});
+        const t=svgEl('text',{x:n.x,y:n.y-5+i*9,'text-anchor':'middle','dominant-baseline':'middle',
+          fill:mc,'font-size':'6','font-family':'monospace','font-weight':'bold',opacity:'0.9',style:'transition:all .6s'});
         t.textContent=txt;g.appendChild(t);
       });
       nl.appendChild(g);return;
@@ -506,25 +444,49 @@ function renderMap(){
     const op=active.length>0?'0.6':'1';
     const g=svgEl('g',{style:'transition:all .5s'});
     g.appendChild(svgEl('circle',{cx:n.x,cy:n.y,r:n.r+7,fill:n.color,opacity:'0.04'}));
-    g.appendChild(svgEl('circle',{cx:n.x,cy:n.y,r:n.r,fill:P.surface,stroke:n.color,'stroke-width':'1.4',opacity:op,filter:'url(#glow)',style:'transition:all .5s'}));
-    const t=svgEl('text',{x:n.x,y:n.y+1,'text-anchor':'middle','dominant-baseline':'middle',fill:n.color,'font-size':'7.5','font-family':'monospace',opacity:op,style:'transition:all .5s'});
-    t.textContent=n.label;g.appendChild(t);nl.appendChild(g);
+    g.appendChild(svgEl('circle',{cx:n.x,cy:n.y,r:n.r,fill:P.surface,stroke:n.color,
+      'stroke-width':'1.4',opacity:op,filter:'url(#glow)',style:'transition:all .5s'}));
+    const t=svgEl('text',{x:n.x,y:n.y+1,'text-anchor':'middle','dominant-baseline':'middle',
+      fill:n.color,'font-size':'7.5','font-family':'monospace',opacity:op,style:'transition:all .5s'});
+    t.textContent=n.label;g.appendChild(t);
+    nl.appendChild(g);
   });
 
+  // ADAPTATION SIGNALS
   document.getElementById('adapt-layer').innerHTML='';
   const al=document.getElementById('adapt-layer');
   if(active.includes('S4')){
     ['talent','capital'].forEach(nid=>{
       const n=getNode(nid);
-      const arr=svgEl('path',{d:`M${n.x},${n.y-n.r-3} L${n.x-5},${n.y-n.r-11} M${n.x},${n.y-n.r-3} L${n.x+5},${n.y-n.r-11} M${n.x},${n.y-n.r-3} L${n.x},${n.y-n.r-15}`,stroke:P.red,'stroke-width':'1.2','stroke-linecap':'round',opacity:'0.7'});
+      const arr=svgEl('path',{d:`M${n.x},${n.y-n.r-3} L${n.x-5},${n.y-n.r-11} M${n.x},${n.y-n.r-3} L${n.x+5},${n.y-n.r-11} M${n.x},${n.y-n.r-3} L${n.x},${n.y-n.r-15}`,
+        stroke:P.red,'stroke-width':'1.2','stroke-linecap':'round',opacity:'0.7'});
       arr.innerHTML=`<animate attributeName="opacity" values="0.2;0.8;0.2" dur="1.4s" repeatCount="indefinite"/>`;
       al.appendChild(arr);
     });
   }
-  if(active.includes('S6')){const an=getNode('anchor');const c=svgEl('circle',{cx:an.x,cy:an.y,r:an.r+14,fill:'none',stroke:P.amber,'stroke-width':'1.5','stroke-dasharray':'3 2',opacity:'0.4'});c.innerHTML=`<animateTransform attributeName="transform" type="rotate" from="0 ${an.x} ${an.y}" to="360 ${an.x} ${an.y}" dur="6s" repeatCount="indefinite"/>`;al.appendChild(c);}
-  if(active.includes('S2')){const st=getNode('steward');const c=svgEl('circle',{cx:st.x,cy:st.y,r:st.r+12,fill:'none',stroke:'#60a5fa','stroke-width':'1.2','stroke-dasharray':'4 3',opacity:'0.4'});c.innerHTML=`<animateTransform attributeName="transform" type="rotate" from="0 ${st.x} ${st.y}" to="-360 ${st.x} ${st.y}" dur="4s" repeatCount="indefinite"/>`;al.appendChild(c);}
-  if(active.includes('S5')){const br=getNode('broker');const c=svgEl('circle',{cx:br.x,cy:br.y,r:br.r+8,fill:'none',stroke:'#e879f9','stroke-width':'1',opacity:'0.5'});c.innerHTML=`<animate attributeName="r" values="${br.r+6};${br.r+16};${br.r+6}" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0.1;0.5" dur="2s" repeatCount="indefinite"/>`;al.appendChild(c);}
+  if(active.includes('S6')){
+    const an=getNode('anchor');
+    const c=svgEl('circle',{cx:an.x,cy:an.y,r:an.r+14,fill:'none',stroke:P.amber,
+      'stroke-width':'1.5','stroke-dasharray':'3 2',opacity:'0.4'});
+    c.innerHTML=`<animateTransform attributeName="transform" type="rotate" from="0 ${an.x} ${an.y}" to="360 ${an.x} ${an.y}" dur="6s" repeatCount="indefinite"/>`;
+    al.appendChild(c);
+  }
+  if(active.includes('S2')){
+    const st=getNode('steward');
+    const c=svgEl('circle',{cx:st.x,cy:st.y,r:st.r+12,fill:'none',stroke:'#60a5fa',
+      'stroke-width':'1.2','stroke-dasharray':'4 3',opacity:'0.4'});
+    c.innerHTML=`<animateTransform attributeName="transform" type="rotate" from="0 ${st.x} ${st.y}" to="-360 ${st.x} ${st.y}" dur="4s" repeatCount="indefinite"/>`;
+    al.appendChild(c);
+  }
+  if(active.includes('S5')){
+    const br=getNode('broker');
+    const c=svgEl('circle',{cx:br.x,cy:br.y,r:br.r+8,fill:'none',stroke:'#e879f9','stroke-width':'1',opacity:'0.5'});
+    c.innerHTML=`<animate attributeName="r" values="${br.r+6};${br.r+16};${br.r+6}" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0.1;0.5" dur="2s" repeatCount="indefinite"/>`;
+    al.appendChild(c);
+  }
 
+  // STATUS
   document.getElementById('stat-layer').innerHTML='';
   if(active.length>0){
     const col=active.length>=4?P.red:P.amber;
@@ -536,10 +498,12 @@ function renderMap(){
   }
 }
 
-// ── METRICS ──
+// ── METRICS ──────────────────────────────────────────────────
 const BASE={growth:4.2,scale:24,jobs:1840};
 function updateMetrics(){
-  const n=active.length,h=Math.max(0,1-n/9),j=()=>(Math.random()-.5)*.04;
+  const n=active.length;
+  const h=Math.max(0,1-n/9);
+  const j=()=>(Math.random()-.5)*.04;
   const growth=+(BASE.growth*(h+j())).toFixed(1);
   const scale=Math.max(0,Math.round(BASE.scale*(h+j())));
   const jobs=Math.max(0,Math.round(BASE.jobs*(h+j())));
@@ -549,19 +513,19 @@ function updateMetrics(){
   document.getElementById('v-jobs').textContent=jobs.toLocaleString();
 
   const vg=document.getElementById('v-growth'),tg=document.getElementById('t-growth');
-  if(growth<1){vg.style.color=P.red;tg.style.color=P.redDim;tg.textContent='▼ contracting';}
-  else if(growth<2.5){vg.style.color=P.amber;tg.style.color=P.amberDim;tg.textContent='→ stagnating';}
-  else{vg.style.color=P.signal;tg.style.color=P.signalDim;tg.textContent='▲ compounding';}
+  if(growth<1){vg.style.color=P.red;tg.style.color='#6a3030';tg.textContent='▼ contracting';}
+  else if(growth<2.5){vg.style.color=P.amber;tg.style.color='#7a6a30';tg.textContent='→ stagnating';}
+  else{vg.style.color=P.signal;tg.style.color='#4a7a58';tg.textContent='▲ compounding';}
 
   const vs=document.getElementById('v-scale'),ts=document.getElementById('t-scale');
-  if(scale<8){vs.style.color=P.red;ts.style.color=P.redDim;ts.textContent='▼ declining';}
-  else if(scale<15){vs.style.color=P.amber;ts.style.color=P.amberDim;ts.textContent='→ flat';}
-  else{vs.style.color=P.teal;ts.style.color=P.tealDim;ts.textContent='▲ this year';}
+  if(scale<8){vs.style.color=P.red;ts.style.color='#6a3030';ts.textContent='▼ declining';}
+  else if(scale<15){vs.style.color=P.amber;ts.style.color='#7a6a30';ts.textContent='→ flat';}
+  else{vs.style.color=P.teal;ts.style.color='#2a5a56';ts.textContent='▲ this year';}
 
   const vj=document.getElementById('v-jobs'),tj=document.getElementById('t-jobs');
-  if(jobs<400){vj.style.color=P.red;tj.style.color=P.redDim;tj.textContent='▼ losses';}
-  else if(jobs<1000){vj.style.color=P.amber;tj.style.color=P.amberDim;tj.textContent='→ stalling';}
-  else{vj.style.color=P.amber;tj.style.color=P.amberDim;tj.textContent='▲ created';}
+  if(jobs<400){vj.style.color=P.red;tj.style.color='#6a3030';tj.textContent='▼ losses';}
+  else if(jobs<1000){vj.style.color=P.amber;tj.style.color='#7a6a30';tj.textContent='→ stalling';}
+  else{vj.style.color=P.amber;tj.style.color='#7a6a30';tj.textContent='▲ created';}
 
   ['m-growth','m-scale','m-jobs'].forEach(id=>{
     const el=document.getElementById(id);
@@ -569,7 +533,8 @@ function updateMetrics(){
   });
 
   const pct=Math.round(h*100);
-  const fill=document.getElementById('hb-fill'),hpct=document.getElementById('health-pct');
+  const fill=document.getElementById('hb-fill');
+  const hpct=document.getElementById('health-pct');
   fill.style.width=pct+'%';
   fill.style.background=pct>65?P.signal:pct>35?P.amber:P.red;
   hpct.textContent=pct+'%';
@@ -582,46 +547,45 @@ function updateMetrics(){
   else{sr.style.color=P.dim;sr.textContent='System nominal';}
 }
 
-// ── COMMENTARY + CACHE ──
-const commentaryCache={};
-
-function cacheKey(stalls){return [...stalls].sort().join(',')}
-
+// ── COMMENTARY ───────────────────────────────────────────────
 function setCommentaryLoading(){
   const dot=document.getElementById('c-dot');
-  dot.style.cssText='background:var(--amber);box-shadow:0 0 5px var(--amber)';
+  dot.style.cssText='background:#f5d97a;box-shadow:0 0 5px #f5d97a';
   dot.classList.add('pulse-dot');
-  document.getElementById('c-status').textContent='';
   document.getElementById('c-content').innerHTML='<div class="c-loading">Analysing system state…</div>';
 }
 
-function setCommentaryReady(paras,detected,fromCache){
+function setCommentaryReady(paras,detected){
   const dot=document.getElementById('c-dot');
   dot.style.cssText='background:var(--signal);box-shadow:0 0 5px var(--signal)';
   dot.classList.remove('pulse-dot');
-  document.getElementById('c-status').style.color=P.dim;
-  document.getElementById('c-status').textContent=fromCache?'cached':'live';
 
   const health=Math.max(0,Math.round((1-active.length/9)*100));
   const healthCol=health>65?P.signal:health>35?P.amber:P.red;
 
   let html=`<div class="c-text fade-in">`;
-  html+=`<div class="c-health-line" style="color:${healthCol}">`;
+  // health summary line
+  html+=`<p style="font-family:monospace;font-size:10px;color:${healthCol};margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)">`;
   html+=`System health ${health}% · ${active.length} stall${active.length>1?'s':''} active`;
   if(detected.length>0) html+=` · <span style="color:${P.red}">${detected.length} stack${detected.length>1?'s':''} formed</span>`;
-  html+=`</div>`;
-  paras.forEach(p=>{if(p.trim())html+=`<p>${p.trim()}</p>`;});
+  html+=`</p>`;
+
+  // paragraphs
+  paras.forEach(p=>{
+    if(p.trim()) html+=`<p>${p.trim()}</p>`;
+  });
   html+=`</div>`;
 
+  // stack alerts
   if(detected.length>0){
-    html+=`<div style="margin-top:16px;border-top:1px solid var(--border);padding-top:14px">`;
-    html+=`<div style="font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Stack${detected.length>1?'s':''} detected</div>`;
+    html+=`<div style="margin-top:14px;border-top:1px solid var(--border);padding-top:12px">`;
+    html+=`<div style="font-family:monospace;font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Stack${detected.length>1?'s':''} Detected</div>`;
     detected.forEach(s=>{
       const c=s.sev==='critical'?P.red:P.amber;
-      html+=`<div class="stack-alert fade-in" style="border-color:${c}30;background:${c}0a">
+      html+=`<div class="stack-alert fade-in" style="border-color:${c}30;background:${c}0e">
         <div class="sa-head">
           <span class="sa-sev" style="color:${c}">${s.sev}</span>
-          <span class="sa-name">${s.name}</span>
+          <span class="sa-name" style="color:var(--chalk)">${s.name}</span>
         </div>
         <div class="sa-desc">${s.desc}</div>
       </div>`;
@@ -630,29 +594,17 @@ function setCommentaryReady(paras,detected,fromCache){
   }
 
   document.getElementById('c-content').innerHTML=html;
-  updateConfirmSection();
 }
 
 function setCommentaryIdle(){
   const dot=document.getElementById('c-dot');
   dot.style.cssText='background:var(--signal);box-shadow:0 0 5px var(--signal)';
   dot.classList.remove('pulse-dot');
-  document.getElementById('c-status').textContent='';
-  document.getElementById('c-content').innerHTML='<div class="c-idle">Activate any stall to begin. The system will analyse what behaviour it displaces, how the ecosystem adapts, and where the compounding breaks down.</div>';
-  document.getElementById('confirm-section').style.display='none';
+  document.getElementById('c-content').innerHTML='<div class="c-idle">Tap any stall to activate it. The system will analyse what behaviour it displaces, how the ecosystem adapts, and where the compounding breaks down.</div>';
 }
 
 async function analyse(stalls){
   if(!stalls.length){setCommentaryIdle();return;}
-
-  const key=cacheKey(stalls);
-  if(commentaryCache[key]){
-    const cached=commentaryCache[key];
-    const detected=STACKS.filter(s=>s.stalls.every(id=>stalls.includes(id)));
-    setCommentaryReady(cached,detected,true);
-    return;
-  }
-
   setCommentaryLoading();
   const aData=stalls.map(id=>STALLS.find(s=>s.id===id));
   const detected=STACKS.filter(s=>s.stalls.every(id=>stalls.includes(id)));
@@ -673,121 +625,20 @@ Paragraph 4: Where is the leverage? One specific, small perturbation that could 
 Tone: direct, intelligent, non-academic. Plain prose only.`;
 
   try{
-    const controller=new AbortController();
-    const timeout=setTimeout(()=>controller.abort(),12000);
     const res=await fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary',{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt}),signal:controller.signal
+      body:JSON.stringify({prompt})
     });
-    clearTimeout(timeout);
     const data=await res.json();
     const text=data.text||'Analysis unavailable.';
     const paras=text.split(/\n\n+/).filter(p=>p.trim());
-    commentaryCache[key]=paras;
-    setCommentaryReady(paras,detected,false);
+    setCommentaryReady(paras,detected);
   }catch(e){
-    if(e.name==='AbortError'){
-      setCommentaryReady(['The analysis is taking longer than expected. Try resetting and reactivating your stalls.'],[],false);
-    } else {
-      setCommentaryReady(['Connection error — check network and try again.'],[],false);
-    }
+    setCommentaryReady(['Connection error — check network.'],[]);
   }
 }
 
-// ── CONFIRM SECTION ──
-function updateConfirmSection(){
-  if(active.length===0){document.getElementById('confirm-section').style.display='none';return;}
-  document.getElementById('confirm-section').style.display='block';
-  const tagsEl=document.getElementById('confirm-stalls');
-  tagsEl.innerHTML=active.map(id=>{
-    const s=STALLS.find(st=>st.id===id);
-    return `<span class="confirm-stall-tag" style="color:${s.color};border-color:${s.color}40;background:${s.color}10">${s.id} · ${s.short}</span>`;
-  }).join('');
-}
-
-async function submitReport(){
-  const name=document.getElementById('f-name').value.trim();
-  const email=document.getElementById('f-email').value.trim();
-  const ecosystem=document.getElementById('f-ecosystem').value.trim();
-  const sector=document.getElementById('f-sector').value;
-  const region=document.getElementById('f-region').value;
-
-  let valid=true;
-  [['f-name',name],['f-email',email],['f-ecosystem',ecosystem]].forEach(([id,val])=>{
-    document.getElementById(id).style.borderColor=val?'':'var(--red)';
-    if(!val)valid=false;
-  });
-  if(!sector||!region)valid=false;
-  if(!valid)return;
-
-  const btn=document.getElementById('confirm-btn');
-  btn.disabled=true;btn.querySelector('span').textContent='Sending…';
-
-  const health=Math.max(0,Math.round((1-active.length/9)*100));
-  const detected=STACKS.filter(s=>s.stalls.every(id=>active.includes(id)));
-  const key=cacheKey(active);
-  const commentary=(commentaryCache[key]||[]).join('\n\n');
-  const stallIds=active.join(', ');
-  const stackName=detected.length?detected.map(s=>s.name).join(', '):'None detected';
-  const [firstname,...rest]=name.split(' ');
-  const lastname=rest.join(' ')||'';
-
-  // 1. HubSpot (EU endpoint)
-  const PORTAL_ID='26033843';
-  const FORM_ID='85c3303f-8081-430e-91f7-4db16b8ac9d1';
-  const HS_URL=`https://api-eu1.hsforms.com/submissions/v3/integration/submit/${PORTAL_ID}/${FORM_ID}`;
-
-  const hsPayload={
-    fields:[
-      {name:'firstname',      value:firstname},
-      {name:'lastname',       value:lastname},
-      {name:'email',          value:email},
-      {name:'ecosystem_name', value:ecosystem},
-      {name:'sector',         value:sector},
-      {name:'region',         value:region},
-      {name:'stall_ids',      value:stallIds},
-      {name:'health_score',   value:String(health)},
-      {name:'stack_name',     value:stackName},
-    ],
-    context:{
-      pageUri:window.location.href,
-      pageName:document.title
-    }
-  };
-
-  try{
-    await fetch(HS_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(hsPayload)
-    });
-  }catch(e){console.error('HubSpot error:',e);}
-
-  // 2. Railway — sends Resend email
-  const railwayPayload={
-    name,email,ecosystem,sector,region,
-    stalls:active.map(id=>({id,short:STALLS.find(s=>s.id===id).short})),
-    health,
-    stacks:detected.map(s=>({name:s.name,sev:s.sev,desc:s.desc})),
-    commentary,
-    submitted_at:new Date().toISOString()
-  };
-
-  try{
-    await fetch('https://clusteros-v3-production.up.railway.app/api/v1/report-request',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(railwayPayload)
-    });
-  }catch(e){console.error('Railway error:',e);}
-
-  // Show success
-  document.getElementById('confirm-section').style.display='none';
-  document.getElementById('success-section').style.display='block';
-  document.getElementById('success-section').scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-// ── STALL GRID ──
+// ── STALL GRID ───────────────────────────────────────────────
 function renderStallGrid(){
   const grid=document.getElementById('stall-grid');
   grid.innerHTML='';
@@ -795,8 +646,8 @@ function renderStallGrid(){
     const on=active.includes(s.id);
     const card=document.createElement('div');
     card.className='sc'+(on?' on':'');
-    card.style.cssText=`border-color:${on?s.color+'55':P.border};background:${on?s.color+'10':P.surface};${on?`box-shadow:0 0 12px ${s.color}14`:''}`;
-    card.innerHTML=`<div class="sc-top">
+    card.style.cssText=`border-color:${on?s.color+'65':P.border};background:${on?s.color+'14':P.surface};${on?`box-shadow:0 0 10px ${s.color}18`:''}`;
+    card.innerHTML=`<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px">
       <span class="sico" style="color:${on?s.color:P.dim}">${s.icon}</span>
       <span class="sid" style="color:${on?s.color:P.dim}">${s.id}</span>
     </div>
@@ -814,8 +665,8 @@ function renderBadges(){
     const s=STALLS.find(st=>st.id===id);
     const el=document.createElement('span');
     el.className='badge';
-    el.style.cssText=`background:${s.color}14;border-color:${s.color}40;color:${s.color}`;
-    el.textContent=s.id+' '+s.short;
+    el.style.cssText=`background:${s.color}18;border-color:${s.color}45;color:${s.color}`;
+    el.textContent=s.id;
     b.appendChild(el);
   });
 }
@@ -832,22 +683,22 @@ function renderStackView(){
     const c=complete?(stack.sev==='critical'?P.red:P.amber):P.dim;
     const pips=stack.stalls.map(id=>{
       const st=STALLS.find(s=>s.id===id);const hit=active.includes(id);
-      return `<span class="stack-pip" style="background:${hit?st.color+'18':'#1e2f4430'};color:${hit?st.color:P.dim};border-color:${hit?st.color+'35':P.border}">${id}</span>`;
+      return `<span class="stack-pip" style="background:${hit?st.color+'22':'#1e2f4440'};color:${hit?st.color:P.dim};border-color:${hit?st.color+'35':P.border}">${id}</span>`;
     }).join('');
     const card=document.createElement('div');
     card.className='stack-card';
     card.style.cssText=`border-color:${c}30;background:${c}08`;
-    card.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-      <span style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:${c};letter-spacing:.06em">${stack.sev}</span>
-      <span style="font-style:italic;font-size:14px;color:${P.chalk}">${stack.name}</span>
-      <span style="font-family:var(--mono);font-size:10px;color:${P.dim}">${matches}/${stack.stalls.length}</span>
-      ${complete?`<span style="font-family:var(--mono);font-size:10px;color:${c};margin-left:auto">formed</span>`:''}
+    card.innerHTML=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:4px">
+      <span style="font-family:monospace;font-size:9px;text-transform:uppercase;color:${c}">${stack.sev}</span>
+      <span style="font-style:italic;font-size:12px;color:${P.chalk}">${stack.name}</span>
+      <span style="font-family:monospace;font-size:9px;color:${P.dim}">${matches}/${stack.stalls.length}</span>
+      ${complete?`<span style="font-family:monospace;font-size:9px;color:${c};margin-left:auto">FORMED</span>`:''}
     </div>
-    <div style="font-size:12px;color:${P.chalkDim};line-height:1.6;margin-bottom:8px">${stack.desc}</div>
+    <div style="font-size:10px;color:${P.dim};line-height:1.5;margin-bottom:5px">${stack.desc}</div>
     <div class="stack-pips">${pips}</div>`;
     list.appendChild(card);
   });
-  if(!any)list.innerHTML=`<div style="font-size:13px;color:${P.dim};font-style:italic">Activate 2 or more stalls to reveal stack patterns.</div>`;
+  if(!any) list.innerHTML=`<div style="font-size:11px;color:${P.dim};font-style:italic">Activate 2+ stalls to reveal stack patterns.</div>`;
 }
 
 function toggle(id){
@@ -861,7 +712,6 @@ function toggle(id){
 function doReset(){
   active=[];
   document.getElementById('reset-btn').style.display='none';
-  document.getElementById('confirm-section').style.display='none';
   renderMap();renderStallGrid();renderBadges();updateMetrics();
   if(currentView==='stacks')renderStackView();
   setCommentaryIdle();
@@ -876,11 +726,35 @@ function setView(v){
   if(v==='stacks')renderStackView();
 }
 
-// init
-renderMap();
-renderStallGrid();
-updateMetrics();
-setInterval(()=>{if(active.length<9)updateMetrics();},3000);
+// init — load knowledge then boot
+async function loadKnowledge(){
+  try{
+    const r=await fetch(KNOWLEDGE_URL);
+    const k=await r.json();
+    STALLS=k.stalls.map(s=>({
+      id:s.id,short:s.short,
+      icon:STALL_UI[s.id].icon,
+      color:STALL_UI[s.id].color,
+      affects:STALL_UI[s.id].affects,
+      desc:s.definition,
+      leverage:s.leverage,
+    }));
+    STACKS=k.stacks.map(s=>({
+      stalls:s.stalls,
+      name:s.name,
+      sev:s.type==='triple'?'critical':'high',
+      desc:s.reinforcing_logic,
+      leverage:s.leverage_entry,
+    }));
+  }catch(e){
+    console.warn('Knowledge API unavailable, using empty definitions');
+  }
+  renderMap();
+  renderStallGrid();
+  updateMetrics();
+  setInterval(()=>{if(active.length<9)updateMetrics();},3000);
+}
+loadKnowledge();
 </script>
 </body>
 </html>

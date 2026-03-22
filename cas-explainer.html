@@ -790,8 +790,7 @@ async function submitReport(){
   const railwayPayload={
     name,email,ecosystem,sector,region,
     stalls:active.map(id=>{const s=STALLS.find(st=>st.id===id);return{id:s.id,short:s.short};}),
-    stack_ids:stackIds,
-    stack_names:stackName,
+    stacks:detected.map(s=>({name:s.name,sev:s.sev||'high',desc:s.desc||''})),
     health,
     commentary,
     submitted_at:new Date().toISOString()

@@ -19,6 +19,14 @@
 html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-height:100vh;overflow-x:hidden;font-size:14px;line-height:1.6}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--border)}
 
+/* ── TOP NAV ── */
+.top-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;border-bottom:1px solid var(--border);background:var(--bg)}
+.top-nav-back{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .15s}
+.top-nav-back:hover{color:var(--chalk)}
+.top-nav-back::before{content:'←';font-size:12px}
+.top-nav-wordmark{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.top-nav-wordmark span{color:var(--signal);font-weight:600}
+
 /* ── HEADER ── */
 .header{padding:20px 24px 16px;border-bottom:1px solid var(--border)}
 .header-top{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
@@ -116,13 +124,18 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
 
 /* ── SUCCESS ── */
 .success-section{padding:24px;display:none}
-.success-inner{background:var(--surface);border:1px solid var(--signal-dim);border-radius:8px;padding:28px;text-align:center}
+.success-inner{background:var(--surface);border:1px solid var(--signal-dim);border-radius:8px;padding:32px 28px;text-align:center}
 .success-icon{font-size:28px;margin-bottom:12px}
-.success-h{font-size:18px;font-weight:300;margin-bottom:8px;color:var(--chalk)}
+.success-h{font-size:20px;font-weight:300;margin-bottom:10px;color:var(--chalk)}
 .success-h em{font-style:italic;color:var(--signal)}
-.success-body{font-size:13px;color:var(--chalk-dim);line-height:1.7;max-width:440px;margin:0 auto 20px}
-.success-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.success-link{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-dim);padding-bottom:2px}
+.success-body{font-size:14px;color:var(--chalk-dim);line-height:1.7;max-width:440px;margin:0 auto 24px}
+.success-home-btn{display:inline-block;background:var(--signal-dim);color:var(--signal);font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;padding:12px 24px;border-radius:4px;text-decoration:none;margin-bottom:24px;transition:background .15s}
+.success-home-btn:hover{background:#3a6a48}
+.success-divider{border:none;border-top:1px solid var(--border);margin:20px 0}
+.success-links-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:12px}
+.success-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.success-link{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-dim);padding-bottom:2px;transition:color .15s}
+.success-link:hover{color:var(--chalk)}
 
 /* ── STATUS BAR ── */
 .status-bar{padding:8px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;position:sticky;bottom:0;background:var(--bg);z-index:10}
@@ -152,6 +165,11 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
 </style>
 </head>
 <body>
+
+<nav class="top-nav">
+  <a href="/" class="top-nav-back">clusteros.io</a>
+  <span class="top-nav-wordmark">Cluster<span>OS</span> · Self-Assessment</span>
+</nav>
 
 <div class="header">
   <div class="header-top">
@@ -316,7 +334,10 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
   <div class="success-inner">
     <div class="success-icon">✦</div>
     <h2 class="success-h">Report <em>on its way.</em></h2>
-    <p class="success-body">Your diagnostic report is being prepared and will arrive shortly. It includes your stall profile, system health score, stack analysis, and comparator clusters from the 221-cluster dataset.</p>
+    <p class="success-body">Your diagnostic report is being prepared and will arrive in your inbox shortly. It includes your stall profile, stabilisation stack analysis, extraction score, and comparator clusters from the 221-cluster dataset.</p>
+    <a href="/" class="success-home-btn">Return to ClusterOS →</a>
+    <hr class="success-divider">
+    <div class="success-links-label">Read more</div>
     <div class="success-links">
       <a href="/findings.html" class="success-link">What 221 diagnostics found</a>
       <a href="/leverage.html" class="success-link">What leverage looks like</a>

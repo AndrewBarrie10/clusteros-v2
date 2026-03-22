@@ -4491,11 +4491,7 @@ document.querySelectorAll('#ripple-chain').forEach(el => rippleObs.observe(el));
 
     if (pathwayBtn) {
       pathwayBtn.addEventListener('click', function() {
-        // Hide directory if shown
-        if (directory) directory.classList.add('hidden');
-        _exploreMode = false;
-        // Open pathway prompt — scroll to it, or start journey directly
-        if (window.journey) window.journey.start();
+        window.location.href = '/cas-explainer.html';
       });
     }
 

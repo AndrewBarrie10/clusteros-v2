@@ -596,7 +596,7 @@ function setCommentaryLoading(){
   dot.style.cssText='background:var(--amber);box-shadow:0 0 5px var(--amber)';
   dot.classList.add('pulse-dot');
   document.getElementById('c-status').textContent='';
-  document.getElementById('c-content').innerHTML='<div class="c-loading">Analysing system state…</div>';
+  document.getElementById('c-content').innerHTML='<div class="c-loading">Analysing system state… <span style="color:var(--dim)">(first analysis may take up to 30 seconds)</span></div>';
 }
 
 function setCommentaryReady(paras,detected,fromCache){
@@ -688,7 +688,7 @@ Tone: direct, intelligent, written for a steward not an analyst. Plain prose onl
 
   try{
     const controller=new AbortController();
-    const timeout=setTimeout(()=>controller.abort(),12000);
+    const timeout=setTimeout(()=>controller.abort(),35000);
     const res=await fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({prompt}),signal:controller.signal

@@ -20,10 +20,10 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--border)}
 
 /* ── TOP NAV ── */
-.top-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;border-bottom:1px solid var(--border);background:var(--bg)}
-.top-nav-back{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .15s}
+.top-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;border-bottom:1px solid var(--border-mid);background:var(--surface)}
+.top-nav-back{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--chalk-dim);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .15s}
 .top-nav-back:hover{color:var(--chalk)}
-.top-nav-back::before{content:'←';font-size:12px}
+.top-nav-back-arrow{font-size:14px;color:var(--chalk-dim)}
 .top-nav-wordmark{font-family:var(--mono);font-size:11px;color:var(--dim)}
 .top-nav-wordmark span{color:var(--signal);font-weight:600}
 
@@ -141,6 +141,18 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
 .status-bar{padding:8px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;position:sticky;bottom:0;background:var(--bg);z-index:10}
 .status-bar span{font-family:var(--mono);font-size:10px;color:var(--dim)}
 
+/* ── INTRO BLOCK ── */
+.intro-block{margin-top:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--border-mid);border-radius:6px}
+.intro-what{font-size:13px;color:var(--chalk-dim);line-height:1.7;margin-bottom:16px}
+.intro-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.intro-step{display:flex;align-items:flex-start;gap:10px}
+.intro-step-num{font-family:var(--mono);font-size:10px;color:var(--signal);font-weight:600;min-width:20px;padding-top:1px}
+.intro-step-text{font-size:12px;color:var(--dim);line-height:1.55}
+.intro-start-btn{background:var(--signal-dim);color:var(--signal);border:none;font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;padding:11px 20px;border-radius:4px;cursor:pointer;transition:background .15s;width:100%;text-align:center;margin-bottom:8px}
+.intro-start-btn:hover{background:#3a6a48}
+.intro-note{font-family:var(--mono);font-size:9px;color:var(--dim);text-align:center}
+.header-top{display:flex;align-items:center}
+
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
 @keyframes fadeup{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .pulse-dot{animation:blink .7s infinite}
@@ -167,19 +179,30 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
 <body>
 
 <nav class="top-nav">
-  <a href="/" class="top-nav-back">clusteros.io</a>
+  <a href="/" class="top-nav-back"><span class="top-nav-back-arrow">←</span> clusteros.io</a>
   <span class="top-nav-wordmark">Cluster<span>OS</span> · Self-Assessment</span>
 </nav>
 
 <div class="header">
   <div class="header-top">
     <h1>Behavioural <em>Stalls</em></h1>
+    <button class="reset-btn" onclick="doReset()" id="reset-btn" style="margin-left:auto">Reset</button>
   </div>
-  <div class="header-eyebrow">ClusterOS · Self-Assessment · Complex Adaptive Systems</div>
-  <p>Regional economies develop structural habits — behaviours that feel rational locally but prevent the system from learning or compounding over time. This tool maps nine of them.</p>
-  <p style="margin-top:8px">Activate the stalls you recognise in your ecosystem. The system will show how they interact, which combinations form self-reinforcing locks, and where the leverage point is. At the end, request your diagnostic report.</p>
-  <div class="tabs">
-    <button class="reset-btn" onclick="doReset()" id="reset-btn">Reset</button>
+  <div class="header-eyebrow" style="margin-top:6px">ClusterOS · Self-Assessment · Complex Adaptive Systems</div>
+
+  <div class="intro-block" id="intro-block">
+    <p class="intro-what">Regional economies develop structural habits — behaviours that feel rational locally but block the system from compounding over time. ClusterOS has identified nine of them across 221 diagnosed clusters. This tool lets you identify which ones you recognise in your ecosystem.</p>
+    <div class="intro-steps">
+      <div class="intro-step"><span class="intro-step-num">01</span><span class="intro-step-text">Tap any stall you recognise — the map shows system-level effects in real time</span></div>
+      <div class="intro-step"><span class="intro-step-num">02</span><span class="intro-step-text">The system detects which combinations are forming self-reinforcing locks</span></div>
+      <div class="intro-step"><span class="intro-step-num">03</span><span class="intro-step-text">Request your diagnostic report — emailed as a PDF with comparators and leverage analysis</span></div>
+    </div>
+    <button class="intro-start-btn" onclick="dismissIntro()">Start the self-assessment →</button>
+    <p class="intro-note">Takes 3–5 minutes · Free · No account required</p>
+  </div>
+
+  <div id="active-header" style="display:none">
+    <p style="font-size:13px;color:var(--chalk-dim);margin-top:8px;line-height:1.6">Each stall describes a substitution — what the system does <em>instead of</em> something more adaptive. Activate the ones you recognise.</p>
   </div>
 </div>
 
@@ -875,6 +898,13 @@ function doReset(){
   document.getElementById('confirm-section').style.display='none';
   renderMap();renderStallGrid();renderBadges();updateMetrics();
   setCommentaryIdle();
+}
+
+// Intro block
+function dismissIntro() {
+  var intro = document.getElementById('intro-block');
+  var activeH = document.getElementById('active-header');
+  if (intro) { intro.style.transition='opacity .3s'; intro.style.opacity='0'; setTimeout(function(){intro.style.display='none'; if(activeH) activeH.style.display='block';}, 300); }
 }
 
 // init

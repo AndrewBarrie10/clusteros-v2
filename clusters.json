@@ -47,7 +47,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Activity-Expansion Stabilisation",
         "stalls_involved": [
           "S8",
@@ -181,7 +181,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If activity metrics from programs/events (P005, P015) were made visible in a form that distinguished participation volume from outcome progression, it might reduce the system's ability to absorb pressure through coordination structures (S2) without exposing what S8 activity produces",
+      "hypothesis": "If activity metrics from programs/events (, ) were made visible in a form that distinguished participation volume from outcome progression, it might reduce the system's ability to absorb pressure through coordination structures (S2) without exposing what S8 activity produces",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -273,7 +273,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Validation–Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -286,7 +286,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If a subset of quantum funding allocations (PAT_009: mission-aligned funding) were temporally sequenced to follow partnership formation (PAT_004) rather than preceding or occurring in parallel, it might reduce the system's ability to absorb mission timeline pressure through distributed validation, potentially exposing whether partnership formation can narrow option space before funding distributio",
+      "hypothesis": "If a subset of quantum funding allocations (: mission-aligned funding) were temporally sequenced to follow partnership formation  rather than preceding or occurring in parallel, it might reduce the system's ability to absorb mission timeline pressure through distributed validation, potentially exposing whether partnership formation can narrow option space before funding distributio",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -350,7 +350,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Initiation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -372,7 +372,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent–Activity Expansion",
         "stalls_involved": [
           "S6",
@@ -406,7 +406,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcomes from 2017-2018 established centers (P001) were made systematically comparable, it might reduce the system's ability to absorb uncertainty about approach viability through continued initiation without reference to prior results.",
+      "hypothesis": "If outcomes from 2017-2018 established centers  were made systematically comparable, it might reduce the system's ability to absorb uncertainty about approach viability through continued initiation without reference to prior results.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -493,7 +493,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -580,7 +580,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-54",
         "stack_name": "Legitimacy–Coordination Stabilisation",
         "stalls_involved": [
           "S2",
@@ -592,7 +592,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Capability–Activity Absorption",
         "stalls_involved": [
           "S1",
@@ -627,7 +627,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination venues (PAT_012: convening platforms) were time-bounded with pre-specified narrative outputs rather than open-ended, it might reduce the system's ability to absorb regulatory uncertainty through extended consultation without exposing decision consequences.",
+      "hypothesis": "If coordination venues (: convening platforms) were time-bounded with pre-specified narrative outputs rather than open-ended, it might reduce the system's ability to absorb regulatory uncertainty through extended consultation without exposing decision consequences.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -686,7 +686,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Infrastructure-Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -796,7 +796,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Institutional Proliferation–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -808,7 +808,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Announcement–Incumbent Stabilisation",
         "stalls_involved": [
           "S6",
@@ -841,7 +841,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Re-proving–Authorization Stabilisation",
         "stalls_involved": [
           "S1",
@@ -917,7 +917,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Regulatory Iteration–Permission Pacing",
         "stalls_involved": [
           "S1",
@@ -1026,7 +1026,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Validation–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -1070,7 +1070,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-45",
         "stack_name": "Validation–Incumbent–Coordination Triad",
         "stalls_involved": [
           "S1",
@@ -1181,7 +1181,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Extraction-Mediation Configuration",
         "stalls_involved": [
           "S4",
@@ -1257,7 +1257,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-44",
         "stack_name": "Program-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -1280,7 +1280,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Activity-Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -1303,7 +1303,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Incumbent-Program Stabilisation",
         "stalls_involved": [
           "S1",
@@ -1402,7 +1402,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -1489,7 +1489,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Validation–Permission Stabilisation",
         "stalls_involved": [
           "S1",
@@ -1511,7 +1511,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent–Activity Stabilisation",
         "stalls_involved": [
           "S6",
@@ -1598,7 +1598,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -1620,7 +1620,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Narrative–Governance Stabilisation",
         "stalls_involved": [
           "S7",
@@ -1642,7 +1642,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Validation–Activity–Intermediation Configuration",
         "stalls_involved": [
           "S1",
@@ -1719,7 +1719,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Validation–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -1752,7 +1752,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Validation–Permission Stabilisation",
         "stalls_involved": [
           "S1",
@@ -1883,7 +1883,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-48",
         "stack_name": "Scaling–Extraction Stabilisation",
         "stalls_involved": [
           "S8",
@@ -1895,7 +1895,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination forums (P004: associations 2018-2020) were established *before* rather than concurrent with validation infrastructure (P003: regulatory instruments 2016-2021), it might reduce the system's ability to absorb regulatory uncertainty through proliferation without requiring earlier strategic commitment.",
+      "hypothesis": "If coordination forums (: associations 2018-2020) were established *before* rather than concurrent with validation infrastructure (: regulatory instruments 2016-2021), it might reduce the system's ability to absorb regulatory uncertainty through proliferation without requiring earlier strategic commitment.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -1959,7 +1959,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Program-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -2005,7 +2005,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcome data from existing programs (P013: 9 programs 2013-2018) were made comparable through standardized reporting, it might reduce the system's ability to absorb uncertainty about program effectiveness without narrowing.",
+      "hypothesis": "If outcome data from existing programs (: 9 programs 2013-2018) were made comparable through standardized reporting, it might reduce the system's ability to absorb uncertainty about program effectiveness without narrowing.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -2059,7 +2059,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Partnership-Proliferation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -2171,7 +2171,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Incumbent–Framework Stabilisation",
         "stalls_involved": [
           "S1",
@@ -2285,7 +2285,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Intermediation-Extraction Stabilisation",
         "stalls_involved": [
           "S4",
@@ -2307,7 +2307,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-46",
         "stack_name": "Response-Incumbent Stabilisation",
         "stalls_involved": [
           "S3",
@@ -2319,7 +2319,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If government programs (PAT_013, PAT_023) were required to publish participant throughput data (entry counts, completion rates, time-to-next-activity) without outcome attribution, it might reduce the system's ability to absorb Uncertainty about intervention effectiveness through narrative alone.",
+      "hypothesis": "If government programs (, ) were required to publish participant throughput data (entry counts, completion rates, time-to-next-activity) without outcome attribution, it might reduce the system's ability to absorb Uncertainty about intervention effectiveness through narrative alone.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -2383,7 +2383,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-49",
         "stack_name": "Legitimacy–Scale Stabilisation",
         "stalls_involved": [
           "S7",
@@ -2429,7 +2429,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Regulatory Support–Activity Expansion",
         "stalls_involved": [
           "S1",
@@ -2500,7 +2500,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Activity–Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -2524,7 +2524,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Expansion–Incumbency Loop",
         "stalls_involved": [
           "S6",
@@ -2535,7 +2535,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Re-proving–Permission Synchronisation",
         "stalls_involved": [
           "S1",
@@ -2606,7 +2606,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediated Proliferation",
         "stalls_involved": [
           "S1",
@@ -2663,7 +2663,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator programs (PAT_008: 8 programs 2009-2019) were required to publish standardized outcome metrics (startup survival, funding progression, market entry), it might reduce the system's ability to absorb uncertainty through program proliferation without performance differentiation.",
+      "hypothesis": "If accelerator programs (: 8 programs 2009-2019) were required to publish standardized outcome metrics (startup survival, funding progression, market entry), it might reduce the system's ability to absorb uncertainty through program proliferation without performance differentiation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -2727,7 +2727,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -2750,7 +2750,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Permission–Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -2773,7 +2773,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If validation outcomes (success/failure/abandonment) from bank innovation programs (P003) were made observable across institutions, it might reduce the system's ability to absorb uncertainty through parallel re-validation without exposing outcome patterns.",
+      "hypothesis": "If validation outcomes (success/failure/abandonment) from bank innovation programs  were made observable across institutions, it might reduce the system's ability to absorb uncertainty through parallel re-validation without exposing outcome patterns.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -2837,7 +2837,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Program-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -2860,7 +2860,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Narrative-Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -2959,7 +2959,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Infrastructure Proliferation–Legitimacy Stabilisation",
         "stalls_involved": [
           "S1",
@@ -3003,7 +3003,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Re-proving–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -3074,7 +3074,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediation–Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -3190,7 +3190,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Infrastructure Expansion–Capital Validation",
         "stalls_involved": [
           "S8",
@@ -3214,7 +3214,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If a subset of ventures established publicly observable direct partnerships with end-users or distribution channels (similar to P010, P011 patterns but extended beyond 2024 sample), it might reduce the system's reliance on intermediation layers to absorb complexity without requiring ventures to demonstrate independent market access.",
+      "hypothesis": "If a subset of ventures established publicly observable direct partnerships with end-users or distribution channels (similar to , patterns but extended beyond 2024 sample), it might reduce the system's reliance on intermediation layers to absorb complexity without requiring ventures to demonstrate independent market access.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -3268,7 +3268,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediation–Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -3487,7 +3487,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Proliferation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -3532,7 +3532,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Narration–Affiliation Stabilisation",
         "stalls_involved": [
           "S7",
@@ -3544,7 +3544,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If formation-to-failure timelines for entities in PAT_003, PAT_005, PAT_009 cohorts were made observable to new entity founders, it might reduce the system's ability to absorb uncertainty through proliferation without exposing actual risk concentration.",
+      "hypothesis": "If formation-to-failure timelines for entities in , cohorts were made observable to new entity founders, it might reduce the system's ability to absorb uncertainty through proliferation without exposing actual risk concentration.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -3608,7 +3608,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -3731,7 +3731,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Infrastructure-Activity Expansion",
         "stalls_involved": [
           "S1",
@@ -3753,7 +3753,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Regulatory-Narrative Sequencing",
         "stalls_involved": [
           "S7",
@@ -3840,7 +3840,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -3863,7 +3863,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Governance–Narrative Stabilisation",
         "stalls_involved": [
           "S7",
@@ -3952,7 +3952,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Narrative-Incumbent Stabilisation",
         "stalls_involved": [
           "S6",
@@ -3975,7 +3975,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcomes from direct university-corporate partnerships (P012) were made observable to intermediary organizations (P008, P009, P010), it might reduce the system's ability to absorb complexity through intermediation without exposing comparative performance.",
+      "hypothesis": "If outcomes from direct university-corporate partnerships  were made observable to intermediary organizations (, ), it might reduce the system's ability to absorb complexity through intermediation without exposing comparative performance.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -4045,7 +4045,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent Integration–Activity Expansion Stabilisation",
         "stalls_involved": [
           "S6",
@@ -4056,7 +4056,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Knowledge Production–Incumbent Integration Stabilisation",
         "stalls_involved": [
           "S7",
@@ -4078,7 +4078,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Institutional Proliferation–Activity Expansion Stabilisation",
         "stalls_involved": [
           "S1",
@@ -4090,7 +4090,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If utilization data for existing facilities (P001, P002) were made observable across the institutional network, it might reduce the system's ability to absorb technology pathway uncertainty through new facility establishment without exposing capacity redundancy.",
+      "hypothesis": "If utilization data for existing facilities (, ) were made observable across the institutional network, it might reduce the system's ability to absorb technology pathway uncertainty through new facility establishment without exposing capacity redundancy.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -4144,7 +4144,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -4177,7 +4177,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Validation–Narrative–Activity Configuration",
         "stalls_involved": [
           "S1",
@@ -4299,7 +4299,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Regulatory–Incumbent Co-Stabilisation",
         "stalls_involved": [
           "S1",
@@ -4311,7 +4311,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If sandbox licensing outcomes (P017: 29 licenses by 2023, 12 Q4 2024) were published with performance metrics or exit reasons, it might reduce the system's ability to absorb regulatory uncertainty through iterative re-proving (S1) without requiring coordination structures (S2) to validate each instrument.",
+      "hypothesis": "If sandbox licensing outcomes (: 29 licenses by 2023, 12 Q4 2024) were published with performance metrics or exit reasons, it might reduce the system's ability to absorb regulatory uncertainty through iterative re-proving (S1) without requiring coordination structures (S2) to validate each instrument.",
       "target_stack": "STK-02",
       "timeline": "6-12 months"
     },
@@ -4376,7 +4376,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Innovation–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -4453,7 +4453,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Narrative–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -4488,7 +4488,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If establishment activities (P001-P003, P005, P009) were accompanied by time-bounded visibility markers (e.g., explicit sunset provisions, milestone publication requirements), it might reduce the system's ability to absorb uncertainty through continuous re-proving without exposing whether initiatives reach completion or consolidation.",
+      "hypothesis": "If establishment activities (-, ) were accompanied by time-bounded visibility markers (e.g., explicit sunset provisions, milestone publication requirements), it might reduce the system's ability to absorb uncertainty through continuous re-proving without exposing whether initiatives reach completion or consolidation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -4574,7 +4574,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-46",
         "stack_name": "Incumbent–Structure Stabilisation",
         "stalls_involved": [
           "S3",
@@ -4585,7 +4585,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Permission–Initiation Synchronisation",
         "stalls_involved": [
           "S9",
@@ -4608,7 +4608,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If narrative infrastructure (PAT_019: large convening events, PAT_020: multi-function platform communications) were to surface cohort-to-deployment ratios or venture survival rates alongside intake metrics (PAT_021: 600+ companies, 3,000+ participants), it might reduce the system's ability to absorb uncertainty about market viability without testing actual throughput.",
+      "hypothesis": "If narrative infrastructure (: large convening events, : multi-function platform communications) were to surface cohort-to-deployment ratios or venture survival rates alongside intake metrics (: 600+ companies, 3,000+ participants), it might reduce the system's ability to absorb uncertainty about market viability without testing actual throughput.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -4662,7 +4662,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-44",
         "stack_name": "Infrastructure–Partnership Stabilisation",
         "stalls_involved": [
           "S1",
@@ -4685,7 +4685,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -4696,7 +4696,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Multi-Domain Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -4709,7 +4709,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership structures (PAT_013, PAT_014) were required to publish time-bound deliverable commitments at formation, it might reduce the system's ability to absorb pressure through partnership announcements without subsequent evidence of conversion.",
+      "hypothesis": "If partnership structures (, ) were required to publish time-bound deliverable commitments at formation, it might reduce the system's ability to absorb pressure through partnership announcements without subsequent evidence of conversion.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -4773,7 +4773,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Activity–Legitimacy Stabilisation",
         "stalls_involved": [
           "S1",
@@ -4808,7 +4808,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Program–Partnership Proliferation",
         "stalls_involved": [
           "S1",
@@ -4875,7 +4875,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Intermediated Proliferation",
         "stalls_involved": [
           "S5",
@@ -4920,7 +4920,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If a shared registry of technology capabilities developed through intermediated partnerships (P003, P009, P011) were made observable to entities establishing new specialized centers (P002), it might reduce the system's ability to absorb uncertainty about legitimate technology authority without consolidation.",
+      "hypothesis": "If a shared registry of technology capabilities developed through intermediated partnerships (, ) were made observable to entities establishing new specialized centers , it might reduce the system's ability to absorb uncertainty about legitimate technology authority without consolidation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -4990,7 +4990,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Proliferation-Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -5012,7 +5012,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Intermediary-Extraction Stabilisation",
         "stalls_involved": [
           "S4",
@@ -5024,7 +5024,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination mechanisms (PAT_002, PAT_019, PAT_020) were required to publish decision timelines and participant counts for specific initiatives, it might reduce the system's ability to absorb uncertainty through indefinite coordination by making deferral patterns observable to external actors.",
+      "hypothesis": "If coordination mechanisms (, ) were required to publish decision timelines and participant counts for specific initiatives, it might reduce the system's ability to absorb uncertainty through indefinite coordination by making deferral patterns observable to external actors.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -5088,7 +5088,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-44",
         "stack_name": "Infrastructure-Partnership Stabilisation",
         "stalls_involved": [
           "S1",
@@ -5133,7 +5133,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Narrative-Activity Stabilisation",
         "stalls_involved": [
           "S7",
@@ -5210,7 +5210,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Incumbent-Mediated Expansion",
         "stalls_involved": [
           "S6",
@@ -5234,7 +5234,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-55",
         "stack_name": "Activity-Volume Stabilization",
         "stalls_involved": [
           "S8",
@@ -5246,7 +5246,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Coordination-Intermediation Lock",
         "stalls_involved": [
           "S2",
@@ -5323,7 +5323,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Intermediation–Initiation Stabilisation",
         "stalls_involved": [
           "S2",
@@ -5335,7 +5335,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -5368,7 +5368,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Initiation–Mediation–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -5381,7 +5381,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination structures (PAT_006, PAT_015) introduced mandatory waiting periods between proposal alignment and program launch authorization, it might reduce the system's ability to absorb opportunity signals through immediate program proliferation without testing whether coordination forums can sustain legitimacy under delayed initiation",
+      "hypothesis": "If coordination structures (, ) introduced mandatory waiting periods between proposal alignment and program launch authorization, it might reduce the system's ability to absorb opportunity signals through immediate program proliferation without testing whether coordination forums can sustain legitimacy under delayed initiation",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -5435,7 +5435,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Program-Announcement Stabilisation",
         "stalls_involved": [
           "S1",
@@ -5529,7 +5529,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -5551,7 +5551,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Activity–Incumbent Integration",
         "stalls_involved": [
           "S6",
@@ -5633,7 +5633,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Intermediation–Exploration Stabilisation",
         "stalls_involved": [
           "S1",
@@ -5645,7 +5645,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent–Activity Stabilisation",
         "stalls_involved": [
           "S6",
@@ -5727,7 +5727,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Validation–Intermediation Configuration",
         "stalls_involved": [
           "S1",
@@ -5739,7 +5739,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -5821,7 +5821,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-56",
         "stack_name": "Legitimacy–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -5856,7 +5856,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Program–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -5932,7 +5932,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-57",
         "stack_name": "Legitimacy–Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -5944,7 +5944,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-44",
         "stack_name": "Validation–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -6043,7 +6043,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-58",
         "stack_name": "Legitimation–Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -6066,7 +6066,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Activity–Validation Expansion",
         "stalls_involved": [
           "S1",
@@ -6154,7 +6154,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -6297,7 +6297,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-46",
         "stack_name": "Crisis Absorption–Incumbent Continuity",
         "stalls_involved": [
           "S3",
@@ -6309,7 +6309,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator program outcomes (PAT_008) were made systematically observable across programs, it might reduce the system's ability to absorb uncertainty about technology pathway viability without adapting validation structure proliferation.",
+      "hypothesis": "If accelerator program outcomes  were made systematically observable across programs, it might reduce the system's ability to absorb uncertainty about technology pathway viability without adapting validation structure proliferation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -6373,7 +6373,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediary–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -6396,7 +6396,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Extraction–Mediation Stabilisation",
         "stalls_involved": [
           "S4",
@@ -6545,7 +6545,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership announcements (PAT_005) were required to specify excluded alternatives or resource trade-offs, it might reduce the system's ability to absorb uncertainty about pathway viability without narrowing strategic options.",
+      "hypothesis": "If partnership announcements  were required to specify excluded alternatives or resource trade-offs, it might reduce the system's ability to absorb uncertainty about pathway viability without narrowing strategic options.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -6599,7 +6599,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -6732,7 +6732,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-48",
         "stack_name": "Capital–Scaling Decoupling",
         "stalls_involved": [
           "S4",
@@ -6755,7 +6755,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediation infrastructure (PAT_006, PAT_009) were required to publish comparative throughput metrics (startups reaching market without mediation vs. through programs), it might reduce the system's ability to absorb complexity signals through coordination justification cycles.",
+      "hypothesis": "If intermediation infrastructure (, ) were required to publish comparative throughput metrics (startups reaching market without mediation vs. through programs), it might reduce the system's ability to absorb complexity signals through coordination justification cycles.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -6826,7 +6826,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent–Activity Stabilisation",
         "stalls_involved": [
           "S6",
@@ -6913,7 +6913,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Activity-Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -6936,7 +6936,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Resource-Mediation Stabilisation",
         "stalls_involved": [
           "S4",
@@ -6958,7 +6958,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-59",
         "stack_name": "Comprehensive Stabilisation",
         "stalls_involved": [
           "S1",
@@ -7034,7 +7034,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-50",
         "stack_name": "Platform-Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -7057,7 +7057,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Announcement-Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -7080,7 +7080,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-51",
         "stack_name": "Multi-Domain Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -7158,7 +7158,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Incumbent-Mediated Expansion",
         "stalls_involved": [
           "S6",
@@ -7181,7 +7181,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-47",
         "stack_name": "Exploration-Accumulation Coupling",
         "stalls_involved": [
           "S1",
@@ -7280,7 +7280,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Program-Incumbent Stabilisation",
         "stalls_involved": [
           "S6",
@@ -7400,7 +7400,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Program–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -7575,7 +7575,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediation–Proliferation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -7696,7 +7696,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Program-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -7708,7 +7708,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent-Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -7719,7 +7719,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Extraction-Mediation Stabilisation",
         "stalls_involved": [
           "S4",
@@ -7795,7 +7795,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-44",
         "stack_name": "Announcement–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -7807,7 +7807,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-46",
         "stack_name": "Incumbent Integration Stabilisation",
         "stalls_involved": [
           "S3",
@@ -7840,7 +7840,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-52",
         "stack_name": "Announcement–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -7853,7 +7853,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If investment announcements (PAT_003, PAT_004, PAT_017) were required to include time-bound, observable deployment milestones at announcement time, it might reduce the system's ability to absorb stakeholder pressure through announcement activity alone, potentially exposing whether coordination structures (STALL_02) serve commitment or substitution functions",
+      "hypothesis": "If investment announcements (, ) were required to include time-bound, observable deployment milestones at announcement time, it might reduce the system's ability to absorb stakeholder pressure through announcement activity alone, potentially exposing whether coordination structures (STALL_02) serve commitment or substitution functions",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -7917,7 +7917,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Institutional Proliferation–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -7961,7 +7961,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Value Extraction–Intermediation Dependence",
         "stalls_involved": [
           "S4",
@@ -8032,7 +8032,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Infrastructure-Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -8142,7 +8142,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Institutional Expansion–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -8253,7 +8253,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent–Activity Stabilisation",
         "stalls_involved": [
           "S6",
@@ -8329,7 +8329,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Infrastructure Multiplication–Mediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -8373,7 +8373,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Multi-Layer Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -8386,7 +8386,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcome data from existing support programs (P010, P013) were made observable to entities considering new program creation, it might reduce the system's ability to absorb uncertainty about pathway effectiveness without consolidation.",
+      "hypothesis": "If outcome data from existing support programs (, ) were made observable to entities considering new program creation, it might reduce the system's ability to absorb uncertainty about pathway effectiveness without consolidation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -8494,7 +8494,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-47",
         "stack_name": "Revenue–Program Stabilisation",
         "stalls_involved": [
           "S1",
@@ -8506,7 +8506,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator/incubation programs (PAT_006) were required to publish cohort outcome data (e.g., survival rates, follow-on funding, commercialization events) at 12-month intervals, it might reduce the system's ability to absorb uncertainty about strategic direction without narrowing program diversity.",
+      "hypothesis": "If accelerator/incubation programs  were required to publish cohort outcome data (e.g., survival rates, follow-on funding, commercialization events) at 12-month intervals, it might reduce the system's ability to absorb uncertainty about strategic direction without narrowing program diversity.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -8565,7 +8565,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Capital-Permission Stabilisation",
         "stalls_involved": [
           "S1",
@@ -8587,7 +8587,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Incumbent-Capital Stabilisation",
         "stalls_involved": [
           "S1",
@@ -8621,7 +8621,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If government support (P012) were made conditional on documented discontinuation of one existing product line or facility, it might reduce the system's ability to absorb strategic focus pressure through simultaneous capital deployment across multiple technology domains.",
+      "hypothesis": "If government support  were made conditional on documented discontinuation of one existing product line or facility, it might reduce the system's ability to absorb strategic focus pressure through simultaneous capital deployment across multiple technology domains.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -8708,7 +8708,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-45",
         "stack_name": "Resource-Incumbent-Coordination Triad",
         "stalls_involved": [
           "S1",
@@ -8721,7 +8721,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If government funding allocations (PAT_007, PAT_013) were released contingent on prior-period coordination outcome disclosure (via PAT_004, PAT_018 entities), it might reduce the system's ability to absorb uncertainty through simultaneous resource commitment and coordination expansion without demonstrating trajectory convergence",
+      "hypothesis": "If government funding allocations (, ) were released contingent on prior-period coordination outcome disclosure (via , entities), it might reduce the system's ability to absorb uncertainty through simultaneous resource commitment and coordination expansion without demonstrating trajectory convergence",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -8824,7 +8824,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Entity-Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -8890,7 +8890,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediation–Proliferation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -9001,7 +9001,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Program Expansion–Narrative Prioritisation",
         "stalls_involved": [
           "S1",
@@ -9025,7 +9025,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If one accelerator program were to restrict eligibility to ventures that demonstrate prior direct engagement with an incumbent institution (P001, P002, P003, P013), it might reduce the system's ability to absorb uncertainty about institutional access through intermediary pathways without testing direct coupling mechanisms.",
+      "hypothesis": "If one accelerator program were to restrict eligibility to ventures that demonstrate prior direct engagement with an incumbent institution (, , ), it might reduce the system's ability to absorb uncertainty about institutional access through intermediary pathways without testing direct coupling mechanisms.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -9122,7 +9122,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Permission–Resource Entanglement",
         "stalls_involved": [
           "S9",
@@ -9133,7 +9133,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-60",
         "stack_name": "Validation–Intermediation–Narrative Triad",
         "stalls_involved": [
           "S1",
@@ -9146,7 +9146,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator programs (PAT_007) published structured outcome data (e.g., cohort survival rates, follow-on funding, partnership conversion), it might reduce the system's ability to absorb uncertainty through repeated validation cycles without exposing performance patterns.",
+      "hypothesis": "If accelerator programs  published structured outcome data (e.g., cohort survival rates, follow-on funding, partnership conversion), it might reduce the system's ability to absorb uncertainty through repeated validation cycles without exposing performance patterns.",
       "target_stack": "STK-02",
       "timeline": "6-12 months"
     },
@@ -9210,7 +9210,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -9222,7 +9222,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -9255,7 +9255,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Validation–Coordination–Intermediation Configuration",
         "stalls_involved": [
           "S1",
@@ -9437,7 +9437,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Intermediation–Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -9470,7 +9470,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Validation–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -9547,7 +9547,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure-Intermediary Stabilisation",
         "stalls_involved": [
           "S1",
@@ -9593,7 +9593,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If research centers (PAT_005, PAT_013) were required to publish annual statements documenting which research pathways were discontinued or deprioritized, it might reduce the system's ability to absorb uncertainty about pathway viability without making exclusionary choices visible.",
+      "hypothesis": "If research centers (, ) were required to publish annual statements documenting which research pathways were discontinued or deprioritized, it might reduce the system's ability to absorb uncertainty about pathway viability without making exclusionary choices visible.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -9652,7 +9652,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Incumbent-Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -9767,7 +9767,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Program-Intermediary Stabilisation",
         "stalls_involved": [
           "S1",
@@ -9813,7 +9813,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediary organizations (PAT_010, PAT_020, PAT_021) were required to publish conversion metrics (program participants → sustained outcomes) rather than activity metrics (participant counts, event volumes), it might reduce the system's ability to absorb uncertainty about strategic commitment without exposing program efficacy gaps.",
+      "hypothesis": "If intermediary organizations (, ) were required to publish conversion metrics (program participants → sustained outcomes) rather than activity metrics (participant counts, event volumes), it might reduce the system's ability to absorb uncertainty about strategic commitment without exposing program efficacy gaps.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -9912,7 +9912,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination venues (PAT_005, PAT_006) were required to publish decision records distinguishing between \"alignment achieved\" and \"decision deferred,\" it might reduce the system's ability to absorb pressure for binding commitments without exposing the coordination/decision boundary.",
+      "hypothesis": "If coordination venues (, ) were required to publish decision records distinguishing between \"alignment achieved\" and \"decision deferred,\" it might reduce the system's ability to absorb pressure for binding commitments without exposing the coordination/decision boundary.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -9976,7 +9976,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Programmatic Continuity Configuration",
         "stalls_involved": [
           "S1",
@@ -9988,7 +9988,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent-Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -10087,7 +10087,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Intermediation–Optionality Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10120,7 +10120,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Capital–Intermediation Stabilisation",
         "stalls_involved": [
           "S4",
@@ -10143,7 +10143,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediary organizations (P010) were required to publish which strategic pathways were explicitly not pursued or discontinued, it might reduce the system's ability to absorb uncertainty through optionality maintenance without exposing the cost of maintaining multiple alternatives.",
+      "hypothesis": "If intermediary organizations  were required to publish which strategic pathways were explicitly not pursued or discontinued, it might reduce the system's ability to absorb uncertainty through optionality maintenance without exposing the cost of maintaining multiple alternatives.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -10207,7 +10207,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Program-Network Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10241,7 +10241,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Extraction-Intermediation Stabilisation",
         "stalls_involved": [
           "S4",
@@ -10252,7 +10252,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Program-Permission Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10264,7 +10264,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcome data (employment, funding, survival rates) from multiple programs (PAT_006: 5 programs 2012-2018) were made comparable through standardized reporting, it might reduce the system's ability to absorb uncertainty through program proliferation without exposing performance variance.",
+      "hypothesis": "If outcome data (employment, funding, survival rates) from multiple programs (: 5 programs 2012-2018) were made comparable through standardized reporting, it might reduce the system's ability to absorb uncertainty through program proliferation without exposing performance variance.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -10339,7 +10339,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Validation-Activity Cycling",
         "stalls_involved": [
           "S1",
@@ -10361,7 +10361,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Narrative-Incumbent Coherence",
         "stalls_involved": [
           "S7",
@@ -10372,7 +10372,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Funding-Validation Recursion",
         "stalls_involved": [
           "S9",
@@ -10384,7 +10384,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination structures (P020 TAHSN, P005 MaRS contexts) were required to publish decision outcomes and exclusions, it might reduce the system's ability to absorb pressure through coordination without consequence-bearing decisions",
+      "hypothesis": "If coordination structures ( TAHSN, MaRS contexts) were required to publish decision outcomes and exclusions, it might reduce the system's ability to absorb pressure through coordination without consequence-bearing decisions",
       "target_stack": "STK-03",
       "timeline": "6-12 months"
     },
@@ -10448,7 +10448,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10482,7 +10482,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Narrative-Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10494,7 +10494,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-61",
         "stack_name": "Infrastructure-Incumbent-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10509,7 +10509,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If innovation facilities (P002, P015) were required to publish quarterly utilization data (occupancy rates, project throughput, repeat vs. new users), it might reduce the system's ability to absorb uncertainty about infrastructure productivity without adaptation. Visibility into whether facilities substitute for commitment or enable it could perturb justification for new facility establishment.",
+      "hypothesis": "If innovation facilities (, ) were required to publish quarterly utilization data (occupancy rates, project throughput, repeat vs. new users), it might reduce the system's ability to absorb uncertainty about infrastructure productivity without adaptation. Visibility into whether facilities substitute for commitment or enable it could perturb justification for new facility establishment.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -10595,7 +10595,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Validation–Permission Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10617,7 +10617,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-62",
         "stack_name": "Activity–Intermediation–Narrative Stabilisation",
         "stalls_involved": [
           "S5",
@@ -10684,7 +10684,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Proliferation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10719,7 +10719,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediary organizations (PAT_004, PAT_008) were required to publish service utilization rates (which programs/facilities are used, by whom, at what frequency), it might expose whether proliferation (STALL_01) reflects genuine demand diversity or redundant capacity absorption.",
+      "hypothesis": "If intermediary organizations (, ) were required to publish service utilization rates (which programs/facilities are used, by whom, at what frequency), it might expose whether proliferation (STALL_01) reflects genuine demand diversity or redundant capacity absorption.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -10882,7 +10882,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10915,7 +10915,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Validation–Permission Stabilisation",
         "stalls_involved": [
           "S1",
@@ -10926,7 +10926,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Coordination–Intermediation–Incumbent Configuration",
         "stalls_involved": [
           "S2",
@@ -11025,7 +11025,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Institutional Proliferation",
         "stalls_involved": [
           "S1",
@@ -11036,7 +11036,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Relocation–Intermediation Alignment",
         "stalls_involved": [
           "S4",
@@ -11047,7 +11047,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -11129,7 +11129,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Establishment–Activity Expansion",
         "stalls_involved": [
           "S1",
@@ -11174,7 +11174,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership formations (P011) were tracked for operational coupling indicators (shared infrastructure, joint decision authority, resource co-deployment) vs. coordination indicators (meetings, MOUs, information exchange), it might expose whether intermediation structures (S5) are absorbing coupling pressure or enabling it.",
+      "hypothesis": "If partnership formations  were tracked for operational coupling indicators (shared infrastructure, joint decision authority, resource co-deployment) vs. coordination indicators (meetings, MOUs, information exchange), it might expose whether intermediation structures (S5) are absorbing coupling pressure or enabling it.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -11243,7 +11243,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediation–Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -11277,7 +11277,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-46",
         "stack_name": "Adjustment–Incumbent Stabilisation",
         "stalls_involved": [
           "S3",
@@ -11300,7 +11300,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator programs (PAT_008) were required to publish time-series data on participant company survival, funding progression, and employment outcomes, it might reduce the system's ability to absorb uncertainty about program effectiveness without adaptation. Intermediaries might face pressure to demonstrate conversion rather than participation volume.",
+      "hypothesis": "If accelerator programs  were required to publish time-series data on participant company survival, funding progression, and employment outcomes, it might reduce the system's ability to absorb uncertainty about program effectiveness without adaptation. Intermediaries might face pressure to demonstrate conversion rather than participation volume.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -11397,7 +11397,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Incumbent–Partnership Stabilisation",
         "stalls_involved": [
           "S1",
@@ -11420,7 +11420,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership programs (PAT_006, PAT_016, PAT_018) introduced time-limited exclusivity requirements (e.g., \"no concurrent partnerships with overlapping scope for 24 months\"), it might reduce the system's ability to absorb uncertainty through continuous re-proving without requiring strategic commitment",
+      "hypothesis": "If partnership programs (, ) introduced time-limited exclusivity requirements (e.g., \"no concurrent partnerships with overlapping scope for 24 months\"), it might reduce the system's ability to absorb uncertainty through continuous re-proving without requiring strategic commitment",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -11599,7 +11599,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Capital-Intermediary Stabilisation",
         "stalls_involved": [
           "S1",
@@ -11622,7 +11622,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-44",
         "stack_name": "Announcement-Coordination Coupling",
         "stalls_involved": [
           "S1",
@@ -11716,7 +11716,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure-Intermediary Stabilisation",
         "stalls_involved": [
           "S1",
@@ -11750,7 +11750,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Multi-Layer Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -11774,7 +11774,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator/incubator programs (PAT_005) were required to publish standardized throughput data (companies graduated, funding secured, products commercialized) in comparable format, it might reduce the system's ability to absorb uncertainty through pathway proliferation without requiring evidence of differential outcomes.",
+      "hypothesis": "If accelerator/incubator programs  were required to publish standardized throughput data (companies graduated, funding secured, products commercialized) in comparable format, it might reduce the system's ability to absorb uncertainty through pathway proliferation without requiring evidence of differential outcomes.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -11861,7 +11861,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Incumbent-Coordination-Intermediation Stabilisation",
         "stalls_involved": [
           "S2",
@@ -11928,7 +11928,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Infrastructure-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -11940,7 +11940,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Activity-Narration Amplification",
         "stalls_involved": [
           "S1",
@@ -11952,7 +11952,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Incumbent-Intermediation Configuration",
         "stalls_involved": [
           "S2",
@@ -12051,7 +12051,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Validation–Permission Stabilisation",
         "stalls_involved": [
           "S1",
@@ -12177,7 +12177,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-47",
         "stack_name": "Validation-Extraction Stabilisation",
         "stalls_involved": [
           "S1",
@@ -12189,7 +12189,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination entities (P006, P007, P013) were required to publish comparative resource flow data across member institutions, it might reduce the system's ability to absorb pressure for collective action without revealing allocation asymmetries that currently remain implicit.",
+      "hypothesis": "If coordination entities (, ) were required to publish comparative resource flow data across member institutions, it might reduce the system's ability to absorb pressure for collective action without revealing allocation asymmetries that currently remain implicit.",
       "target_stack": "STK-02",
       "timeline": "6-12 months"
     },
@@ -12253,7 +12253,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Validation–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -12363,7 +12363,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Network-Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -12398,7 +12398,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership announcements (P012, P018) were accompanied by time-bounded outcome disclosure requirements (e.g., 18-month progress markers), it might reduce the system's ability to absorb uncertainty through indefinite validation cycles without exposing whether pathways narrow or persist.",
+      "hypothesis": "If partnership announcements (, ) were accompanied by time-bounded outcome disclosure requirements (e.g., 18-month progress markers), it might reduce the system's ability to absorb uncertainty through indefinite validation cycles without exposing whether pathways narrow or persist.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -12462,7 +12462,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediation–Proliferation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -12496,7 +12496,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Activity–Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -12580,7 +12580,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -12685,7 +12685,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Incumbent-Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -12805,7 +12805,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Intermediation–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -12817,7 +12817,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Proliferation–Permission Cycle",
         "stalls_involved": [
           "S1",
@@ -12828,7 +12828,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Extraction–Intermediation Loop",
         "stalls_involved": [
           "S4",
@@ -12915,7 +12915,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Validation–Intermediation Cycle",
         "stalls_involved": [
           "S1",
@@ -12960,7 +12960,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If narrative commitments (PAT_001, PAT_002) were required to specify measurable activity milestones within 12-month windows, it might reduce the system's ability to absorb uncertainty through narrative alone without requiring observable activity changes",
+      "hypothesis": "If narrative commitments (, ) were required to specify measurable activity milestones within 12-month windows, it might reduce the system's ability to absorb uncertainty through narrative alone without requiring observable activity changes",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -13024,7 +13024,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Infrastructure–Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -13047,7 +13047,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Legitimacy–Permission Stabilisation",
         "stalls_involved": [
           "S9",
@@ -13058,7 +13058,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Extraction–Mediation Stabilisation",
         "stalls_involved": [
           "S4",
@@ -13152,7 +13152,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Incumbent-Mediated Coordination",
         "stalls_involved": [
           "S6",
@@ -13251,7 +13251,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Partnership-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -13296,7 +13296,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Re-proving-Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -13407,7 +13407,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator/incubator programs (PAT_005, PAT_016) were required to publish standardized throughput metrics (e.g., companies formed, capital raised by cohort, employment outcomes), it might reduce the system's ability to absorb complexity through intermediation without exposing whether mediation produces coupling.",
+      "hypothesis": "If accelerator/incubator programs (, ) were required to publish standardized throughput metrics (e.g., companies formed, capital raised by cohort, employment outcomes), it might reduce the system's ability to absorb complexity through intermediation without exposing whether mediation produces coupling.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -13510,7 +13510,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent-Announcement Stabilisation",
         "stalls_involved": [
           "S6",
@@ -13522,7 +13522,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediary organizations (PAT_004, PAT_015) were required to publish transaction-level data on technology adoption pathways (which farmers, which technologies, which outcomes), it might expose whether intermediation currently absorbs adoption uncertainty or whether direct coupling is already occurring but unobserved.",
+      "hypothesis": "If intermediary organizations (, ) were required to publish transaction-level data on technology adoption pathways (which farmers, which technologies, which outcomes), it might expose whether intermediation currently absorbs adoption uncertainty or whether direct coupling is already occurring but unobserved.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -13619,7 +13619,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-53",
         "stack_name": "Validation–Intermediation–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -13729,7 +13729,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Exploration-Validation Cycling",
         "stalls_involved": [
           "S1",
@@ -13801,7 +13801,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Network–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -13879,7 +13879,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Expansion–Mediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -13913,7 +13913,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If a subset of actors formed direct bilateral partnerships without using established intermediary platforms (P018, P023), it might reduce the system's ability to absorb coordination complexity through mediation, potentially exposing whether direct coupling can occur without intermediation infrastructure.",
+      "hypothesis": "If a subset of actors formed direct bilateral partnerships without using established intermediary platforms (, ), it might reduce the system's ability to absorb coordination complexity through mediation, potentially exposing whether direct coupling can occur without intermediation infrastructure.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -13967,7 +13967,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14072,7 +14072,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14084,7 +14084,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent–Activity Stabilisation",
         "stalls_involved": [
           "S6",
@@ -14095,7 +14095,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Validation–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14106,7 +14106,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Extraction–Intermediation Stabilisation",
         "stalls_involved": [
           "S4",
@@ -14204,7 +14204,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Validation–Proliferation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14226,7 +14226,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Narrative–Incumbent Stabilisation",
         "stalls_involved": [
           "S6",
@@ -14302,7 +14302,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure Proliferation–Mediation",
         "stalls_involved": [
           "S1",
@@ -14336,7 +14336,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Extraction–Mediation Decoupling",
         "stalls_involved": [
           "S4",
@@ -14423,7 +14423,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Institutional Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14445,7 +14445,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent-Centered Activity Stabilisation",
         "stalls_involved": [
           "S6",
@@ -14479,7 +14479,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If institutional financing (PAT_006, PAT_007: 2021-2024) were made contingent on consolidation of existing innovation entities rather than establishment of new ones, it might reduce the system's ability to absorb innovation pathway uncertainty through sequential entity creation.",
+      "hypothesis": "If institutional financing (, : 2021-2024) were made contingent on consolidation of existing innovation entities rather than establishment of new ones, it might reduce the system's ability to absorb innovation pathway uncertainty through sequential entity creation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -14543,7 +14543,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediation–Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14555,7 +14555,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -14588,7 +14588,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Validation–Activity Expansion",
         "stalls_involved": [
           "S1",
@@ -14664,7 +14664,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Infrastructure–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14720,7 +14720,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If utilization data for existing innovation spaces (P006: 5 facilities) were made observable across time periods, it might reduce the system's ability to absorb Complexity (fragmented evaluation) without exposing infrastructure redundancy or underutilization.",
+      "hypothesis": "If utilization data for existing innovation spaces (: 5 facilities) were made observable across time periods, it might reduce the system's ability to absorb Complexity (fragmented evaluation) without exposing infrastructure redundancy or underutilization.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -14779,7 +14779,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14901,7 +14901,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Platform–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -14934,7 +14934,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Activity–Platform Stabilisation",
         "stalls_involved": [
           "S8",
@@ -15021,7 +15021,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Infrastructure Multiplication–Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -15078,7 +15078,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator/incubator programs (P007) were required to publish cohort-level outcome data (e.g., survival rates, follow-on funding, revenue thresholds) in standardized format, it might reduce the system's ability to absorb uncertainty about intervention effectiveness without strategic narrowing.",
+      "hypothesis": "If accelerator/incubator programs  were required to publish cohort-level outcome data (e.g., survival rates, follow-on funding, revenue thresholds) in standardized format, it might reduce the system's ability to absorb uncertainty about intervention effectiveness without strategic narrowing.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -15142,7 +15142,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-44",
         "stack_name": "Demonstration–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -15176,7 +15176,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Legitimacy–Timing Stabilisation",
         "stalls_involved": [
           "S7",
@@ -15242,7 +15242,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-45",
         "stack_name": "Distributed Establishment Stabilisation",
         "stalls_involved": [
           "S1",
@@ -15254,7 +15254,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Activity Expansion Without Consolidation",
         "stalls_involved": [
           "S1",
@@ -15352,7 +15352,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Program-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -15375,7 +15375,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Narrative-Activity Expansion",
         "stalls_involved": [
           "S1",
@@ -15469,7 +15469,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Breadth–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -15481,7 +15481,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Alignment",
         "stalls_involved": [
           "S6",
@@ -15514,7 +15514,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Breadth–Activity Proliferation",
         "stalls_involved": [
           "S1",
@@ -15590,7 +15590,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Incumbent-Intermediation Stabilisation",
         "stalls_involved": [
           "S6",
@@ -15602,7 +15602,7 @@
         "confidence": "high"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Validation-Activity Expansion",
         "stalls_involved": [
           "S1",
@@ -15702,7 +15702,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Infrastructure Proliferation–Coordination Expansion",
         "stalls_involved": [
           "S1",
@@ -15737,7 +15737,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If program scope boundaries and target cohort distinctions were made observable across the 10 accelerator/incubator entities (P010), it might reduce the system's ability to absorb uncertainty about which programs to prioritize without making exclusionary choices.",
+      "hypothesis": "If program scope boundaries and target cohort distinctions were made observable across the 10 accelerator/incubator entities , it might reduce the system's ability to absorb uncertainty about which programs to prioritize without making exclusionary choices.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -15845,7 +15845,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-47",
         "stack_name": "Validation–Extraction Stabilisation",
         "stalls_involved": [
           "S1",
@@ -15916,7 +15916,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Infrastructure Multiplication–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -15950,7 +15950,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Infrastructure Multiplication–Permission Seeking Stabilisation",
         "stalls_involved": [
           "S1",
@@ -15962,7 +15962,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator programs (PAT_005: 11 programs 1998-2020) were required to publish standardized throughput metrics (companies graduated, funding secured post-program, survival rates at 2/5 years), it might reduce the system's ability to absorb uncertainty through program proliferation without demonstrating comparative effectiveness.",
+      "hypothesis": "If accelerator programs (: 11 programs 1998-2020) were required to publish standardized throughput metrics (companies graduated, funding secured post-program, survival rates at 2/5 years), it might reduce the system's ability to absorb uncertainty through program proliferation without demonstrating comparative effectiveness.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -16065,7 +16065,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Validation–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -16148,7 +16148,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Legitimacy–Narrative Stabilisation",
         "stalls_involved": [
           "S7",
@@ -16159,7 +16159,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Support–Optionality Stabilisation",
         "stalls_involved": [
           "S1",
@@ -16274,7 +16274,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Proliferation–Permission Alignment",
         "stalls_involved": [
           "S1",
@@ -16286,7 +16286,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcome data from existing accelerator/incubator programs (P011, P012) were made comparable across programs, it might reduce the system's ability to absorb uncertainty about institutional form through proliferation without requiring performance comparison.",
+      "hypothesis": "If outcome data from existing accelerator/incubator programs (, ) were made comparable across programs, it might reduce the system's ability to absorb uncertainty about institutional form through proliferation without requiring performance comparison.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -16390,7 +16390,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediary organizations (P005, P027) were required to report both successful and unsuccessful direct coupling attempts between universities and NHS units, it might reduce the system's ability to absorb partnership risk through intermediation without revealing coupling failure rates.",
+      "hypothesis": "If intermediary organizations (, ) were required to report both successful and unsuccessful direct coupling attempts between universities and NHS units, it might reduce the system's ability to absorb partnership risk through intermediation without revealing coupling failure rates.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -16460,7 +16460,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Resource Distribution–Activity Proliferation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -16586,7 +16586,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Narrative–Incumbent Stabilisation",
         "stalls_involved": [
           "S7",
@@ -16608,7 +16608,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Validation–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -16773,7 +16773,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Activity–Mediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -16796,7 +16796,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Portfolio Expansion Stabilisation",
         "stalls_involved": [
           "S1",
@@ -16879,7 +16879,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Activity Expansion Without Closure",
         "stalls_involved": [
           "S1",
@@ -17005,7 +17005,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Narrative–Legitimacy Stabilisation",
         "stalls_involved": [
           "S7",
@@ -17093,7 +17093,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-45",
         "stack_name": "Infrastructure–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17116,7 +17116,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Narrative–Incumbent Alignment",
         "stalls_involved": [
           "S6",
@@ -17127,7 +17127,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Re-proving–Intermediation Cycle",
         "stalls_involved": [
           "S1",
@@ -17232,7 +17232,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Programme–Activity–Partnership Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17245,7 +17245,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If programme establishment timing and overlap were made visible across the 2020-2021 and 2024 concentrations (PAT_013, PAT_014), it might reduce the system's ability to absorb uncertainty about which approaches will succeed without requiring explicit comparison or selection",
+      "hypothesis": "If programme establishment timing and overlap were made visible across the 2020-2021 and 2024 concentrations (, ), it might reduce the system's ability to absorb uncertainty about which approaches will succeed without requiring explicit comparison or selection",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -17332,7 +17332,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Launch–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17344,7 +17344,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Activity–Incumbent Stabilisation",
         "stalls_involved": [
           "S8",
@@ -17405,7 +17405,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17427,7 +17427,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Validation–Activity Scaling Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17439,7 +17439,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If validation criteria used by UK Space Agency and Highlands and Islands Enterprise were made observable to applicants and intermediaries, it might reduce perceived need for specialized intermediary navigation support (P007 entities) by decreasing information asymmetry.",
+      "hypothesis": "If validation criteria used by UK Space Agency and Highlands and Islands Enterprise were made observable to applicants and intermediaries, it might reduce perceived need for specialized intermediary navigation support ( entities) by decreasing information asymmetry.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -17503,7 +17503,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Infrastructure–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17515,7 +17515,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -17537,7 +17537,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Permission–Infrastructure Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17560,7 +17560,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If utilization data for specialized facilities (PAT_001: INO, COPL, Cégep Limoilou) were made observable to peer institutions and funders, it might reduce the system's ability to absorb uncertainty about capability prioritization without triggering consolidation discussions.",
+      "hypothesis": "If utilization data for specialized facilities (: INO, COPL, Cégep Limoilou) were made observable to peer institutions and funders, it might reduce the system's ability to absorb uncertainty about capability prioritization without triggering consolidation discussions.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -17624,7 +17624,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Proliferation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17669,7 +17669,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Authorization–Proliferation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17784,7 +17784,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Program-Coordination-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17856,7 +17856,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Validation-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17878,7 +17878,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent-Activity Stabilisation",
         "stalls_involved": [
           "S6",
@@ -17900,7 +17900,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Validation-Coordination-Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17977,7 +17977,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Program-Intermediary Stabilisation",
         "stalls_involved": [
           "S1",
@@ -17989,7 +17989,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent-Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -18098,7 +18098,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Infrastructure-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -18219,7 +18219,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Infrastructure-Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -18241,7 +18241,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Prestige-Permission Stabilisation",
         "stalls_involved": [
           "S7",
@@ -18252,7 +18252,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Intermediary-Infrastructure Stabilisation",
         "stalls_involved": [
           "S5",
@@ -18339,7 +18339,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Infrastructure-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -18384,7 +18384,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Optionality-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -18575,7 +18575,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Infrastructure-Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -18610,7 +18610,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If program-level outcome data (participant trajectories, capital deployed, technology transitions) were made observable across the 10+ venture/accelerator programs (PAT_007), it might reduce the system's ability to absorb uncertainty about domain prioritization without comparison.",
+      "hypothesis": "If program-level outcome data (participant trajectories, capital deployed, technology transitions) were made observable across the 10+ venture/accelerator programs , it might reduce the system's ability to absorb uncertainty about domain prioritization without comparison.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -18686,7 +18686,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Incumbent–Program Proliferation Stabilisation",
         "stalls_involved": [
           "S6",
@@ -18780,7 +18780,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Program Proliferation–Activity Scaling",
         "stalls_involved": [
           "S1",
@@ -18791,7 +18791,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Narrative–Incumbent Stabilisation",
         "stalls_involved": [
           "S6",
@@ -18803,7 +18803,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If participation in coordination forums (PAT_001, PAT_015) were bounded by explicit exclusion criteria (e.g., sectoral scope, organizational scale thresholds), it might reduce the system's ability to absorb stakeholder inclusion pressure through indefinite coordination expansion.",
+      "hypothesis": "If participation in coordination forums (, ) were bounded by explicit exclusion criteria (e.g., sectoral scope, organizational scale thresholds), it might reduce the system's ability to absorb stakeholder inclusion pressure through indefinite coordination expansion.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -18868,7 +18868,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Exploration–Activity Expansion",
         "stalls_involved": [
           "S1",
@@ -18901,7 +18901,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Exploration–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -18972,7 +18972,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediated Validation Structure",
         "stalls_involved": [
           "S1",
@@ -19029,7 +19029,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator/training programs (PAT_004, PAT_017) were required to publish participant outcome data (employment, venture formation, revenue) in standardized format accessible to other programs, it might reduce the system's ability to absorb uncertainty about program effectiveness without adaptation. Programs might face pressure to differentiate or consolidate if comparative performance became ob",
+      "hypothesis": "If accelerator/training programs (, ) were required to publish participant outcome data (employment, venture formation, revenue) in standardized format accessible to other programs, it might reduce the system's ability to absorb uncertainty about program effectiveness without adaptation. Programs might face pressure to differentiate or consolidate if comparative performance became ob",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -19105,7 +19105,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Exploration–Legitimacy Stabilisation",
         "stalls_involved": [
           "S1",
@@ -19182,7 +19182,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Intermediation–Proliferation Stabilisation",
         "stalls_involved": [
           "S2",
@@ -19205,7 +19205,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Activity–Narrative Stabilisation",
         "stalls_involved": [
           "S8",
@@ -19217,7 +19217,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Intermediation–Activity Stabilisation",
         "stalls_involved": [
           "S5",
@@ -19230,7 +19230,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination entities (PAT_006, PAT_016) made decision records and non-decision records equally visible, it might reduce the system's ability to absorb uncertainty through coordination without exposing what coordination does not produce.",
+      "hypothesis": "If coordination entities (, ) made decision records and non-decision records equally visible, it might reduce the system's ability to absorb uncertainty through coordination without exposing what coordination does not produce.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -19305,7 +19305,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Announcement-Permission Alignment",
         "stalls_involved": [
           "S7",
@@ -19327,7 +19327,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Activity-Throughput Absorption",
         "stalls_involved": [
           "S1",
@@ -19404,7 +19404,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-63",
         "stack_name": "Infrastructure-Intermediation Stabilisation",
         "stalls_involved": [
           "S5",
@@ -19438,7 +19438,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-53",
         "stack_name": "Multi-Layer Infrastructure Stabilisation",
         "stalls_involved": [
           "S1",
@@ -19451,7 +19451,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If the ratio of direct partnerships (P005: WMG 500+ industry partners) to intermediated connections were made observable across all institutions, it might reduce the system's ability to absorb uncertainty through intermediary buffering without revealing coupling capacity variance.",
+      "hypothesis": "If the ratio of direct partnerships (: WMG 500+ industry partners) to intermediated connections were made observable across all institutions, it might reduce the system's ability to absorb uncertainty through intermediary buffering without revealing coupling capacity variance.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -19620,7 +19620,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Announcement–Partnership Stabilisation",
         "stalls_involved": [
           "S1",
@@ -19632,7 +19632,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Intermediation–Incumbent Stabilisation",
         "stalls_involved": [
           "S2",
@@ -19656,7 +19656,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership announcements (P002, P005, P006) were required to include pre-specified outcome reporting timelines at announcement, it might reduce the system's ability to absorb pressure through announcement activity without subsequent validation.",
+      "hypothesis": "If partnership announcements (, ) were required to include pre-specified outcome reporting timelines at announcement, it might reduce the system's ability to absorb pressure through announcement activity without subsequent validation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -19710,7 +19710,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Announcement–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -19732,7 +19732,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Activity–Incumbent Stabilisation",
         "stalls_involved": [
           "S6",
@@ -19743,7 +19743,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Announcement–Activity Amplification",
         "stalls_involved": [
           "S1",
@@ -19766,7 +19766,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership announcements (PAT_019, PAT_020) were required to include 12-month outcome reporting, it might reduce the system's ability to absorb pressure for visible activity without committing to integration depth.",
+      "hypothesis": "If partnership announcements (, ) were required to include 12-month outcome reporting, it might reduce the system's ability to absorb pressure for visible activity without committing to integration depth.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -19815,7 +19815,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Intermediated Exploration",
         "stalls_involved": [
           "S2",
@@ -19838,7 +19838,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Activity Expansion Without Throughput Discipline",
         "stalls_involved": [
           "S8",
@@ -19850,7 +19850,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If collaborative programs (PAT_006, PAT_007, PAT_010, PAT_014) were required to publish outcome metrics (participant trajectories, technology transfer events, partnership dissolution rates) in standardized format accessible to intermediaries and funders, it might reduce the system's ability to absorb uncertainty about pathway viability without strategic narrowing.",
+      "hypothesis": "If collaborative programs (, , ) were required to publish outcome metrics (participant trajectories, technology transfer events, partnership dissolution rates) in standardized format accessible to intermediaries and funders, it might reduce the system's ability to absorb uncertainty about pathway viability without strategic narrowing.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -19921,7 +19921,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Programme–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -20048,7 +20048,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediary entities (P009, P010, P012) were required to report throughput metrics (startup exits, employment placement rates, direct manufacturer-research linkages) rather than activity counts, it might reduce the system's ability to absorb complexity through activity multiplication without exposing coupling gaps.",
+      "hypothesis": "If intermediary entities (, ) were required to report throughput metrics (startup exits, employment placement rates, direct manufacturer-research linkages) rather than activity counts, it might reduce the system's ability to absorb complexity through activity multiplication without exposing coupling gaps.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -20118,7 +20118,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Activity Expansion–Coordination Absorption",
         "stalls_involved": [
           "S1",
@@ -20201,7 +20201,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Validation–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -20223,7 +20223,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -20234,7 +20234,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Extraction–Mediation Stabilisation",
         "stalls_involved": [
           "S4",
@@ -20311,7 +20311,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Program-Intermediary Stabilisation",
         "stalls_involved": [
           "S1",
@@ -20334,7 +20334,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Expansion-Intermediary Stabilisation",
         "stalls_involved": [
           "S4",
@@ -20345,7 +20345,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-51",
         "stack_name": "Program-Coordination-Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -20359,7 +20359,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If program-level outcome data (translation rates, time-to-milestone, resource efficiency) were made comparable across the multiple interdisciplinary institutes (P001) and entrepreneurship programs (P006, P019), it might reduce the system's ability to absorb uncertainty through pathway proliferation without exposing performance variance.",
+      "hypothesis": "If program-level outcome data (translation rates, time-to-milestone, resource efficiency) were made comparable across the multiple interdisciplinary institutes  and entrepreneurship programs (, ), it might reduce the system's ability to absorb uncertainty through pathway proliferation without exposing performance variance.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -20424,7 +20424,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent-Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -20447,7 +20447,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If validation outcomes (pass/fail rates, time-to-decision, exit criteria) from multiple incubator/accelerator entities (P005: 7 entities) were made mutually observable across facilities, it might reduce the system's ability to absorb uncertainty about validation effectiveness without requiring comparative performance assessment.",
+      "hypothesis": "If validation outcomes (pass/fail rates, time-to-decision, exit criteria) from multiple incubator/accelerator entities (: 7 entities) were made mutually observable across facilities, it might reduce the system's ability to absorb uncertainty about validation effectiveness without requiring comparative performance assessment.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -20501,7 +20501,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-41",
         "stack_name": "Activity–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -20513,7 +20513,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Incumbent–Narrative Stabilisation",
         "stalls_involved": [
           "S6",
@@ -20678,7 +20678,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-31",
         "stack_name": "Programme-Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -20810,7 +20810,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Validation–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -20833,7 +20833,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If operational demonstration outcomes (P014: ELSA-d, QPS-SAR, TSUBAME 2014-2024) were made observable to coordination forums (P011: SJAC, Tsukuba Innovation Arena) with explicit success/failure criteria, it might reduce the system's ability to absorb technical uncertainty through repeated validation without strategic commitment.",
+      "hypothesis": "If operational demonstration outcomes (: ELSA-d, QPS-SAR, TSUBAME 2014-2024) were made observable to coordination forums (: SJAC, Tsukuba Innovation Arena) with explicit success/failure criteria, it might reduce the system's ability to absorb technical uncertainty through repeated validation without strategic commitment.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -20909,7 +20909,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Activity–Incumbency Stabilisation",
         "stalls_involved": [
           "S6",
@@ -20920,7 +20920,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Coordination–Demonstration–Intermediation Configuration",
         "stalls_involved": [
           "S2",
@@ -20992,7 +20992,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Incumbent–Validation Stabilisation",
         "stalls_involved": [
           "S6",
@@ -21101,7 +21101,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-64",
         "stack_name": "Activity–Legitimacy Stabilisation",
         "stalls_involved": [
           "S1",
@@ -21147,7 +21147,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If facility expansions (P007) were accompanied by public disclosure of discontinued activities or consolidated focus areas, it might reduce the system's ability to absorb growth pressure through undifferentiated expansion without strategic narrowing.",
+      "hypothesis": "If facility expansions  were accompanied by public disclosure of discontinued activities or consolidated focus areas, it might reduce the system's ability to absorb growth pressure through undifferentiated expansion without strategic narrowing.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -21316,7 +21316,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Demonstration-Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -21350,7 +21350,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If instances where direct ISRO-private coupling occurred (PAT_013: Skyroot-ISRO MoU, Bellatrix-Ananth partnership) were systematically documented and made visible alongside mediated pathways, it might reduce the system's ability to absorb uncertainty about regulatory boundaries without testing direct coupling more frequently.",
+      "hypothesis": "If instances where direct ISRO-private coupling occurred (: Skyroot-ISRO MoU, Bellatrix-Ananth partnership) were systematically documented and made visible alongside mediated pathways, it might reduce the system's ability to absorb uncertainty about regulatory boundaries without testing direct coupling more frequently.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -21414,7 +21414,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Validation–Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -21471,7 +21471,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcomes from support programs (P015: 6 programs) were made comparable through standardized reporting, it might reduce the system's ability to absorb uncertainty about which programs generate strategic narrowing without requiring coordination entities to make exclusionary choices.",
+      "hypothesis": "If outcomes from support programs (: 6 programs) were made comparable through standardized reporting, it might reduce the system's ability to absorb uncertainty about which programs generate strategic narrowing without requiring coordination entities to make exclusionary choices.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -21525,7 +21525,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Intermediation–Continuity Stabilisation",
         "stalls_involved": [
           "S2",
@@ -21549,7 +21549,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If a subset of partnership arrangements (PAT_010) were structured to require direct bilateral resource commitment without intermediary coordination platforms, it might reduce the system's ability to absorb uncertainty through distributed coordination and expose whether direct coupling is viable under current conditions.",
+      "hypothesis": "If a subset of partnership arrangements  were structured to require direct bilateral resource commitment without intermediary coordination platforms, it might reduce the system's ability to absorb uncertainty through distributed coordination and expose whether direct coupling is viable under current conditions.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -21827,7 +21827,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Capability-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -21850,7 +21850,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-42",
         "stack_name": "Incumbent-Intermediary Stabilisation",
         "stalls_involved": [
           "S6",
@@ -21873,7 +21873,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Capability-Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -21984,7 +21984,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If new institutional establishment were temporally decoupled from funding allocation cycles (P005 multi-year packages), it might reduce the system's ability to absorb uncertainty about threat landscape without demonstrating strategic commitment.",
+      "hypothesis": "If new institutional establishment were temporally decoupled from funding allocation cycles ( multi-year packages), it might reduce the system's ability to absorb uncertainty about threat landscape without demonstrating strategic commitment.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -22071,7 +22071,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Demonstration–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -22209,7 +22209,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If new infrastructure facilities (PAT_005, PAT_011, PAT_013) were required to operate under time-bound exclusivity agreements (e.g., 24-month prohibition on functionally overlapping facilities), it might reduce the system's ability to absorb infrastructure demand uncertainty through proliferation without testing substitution.",
+      "hypothesis": "If new infrastructure facilities (, ) were required to operate under time-bound exclusivity agreements (e.g., 24-month prohibition on functionally overlapping facilities), it might reduce the system's ability to absorb infrastructure demand uncertainty through proliferation without testing substitution.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -22285,7 +22285,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Narrative-Incumbent Stabilisation",
         "stalls_involved": [
           "S6",
@@ -22297,7 +22297,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If a subset of resource allocation programmes (PAT_006, PAT_024) were time-bounded with explicit sunset provisions, it might reduce the system's ability to absorb uncertainty about pathway viability without stakeholder coordination adapting toward fewer, more committed partnerships.",
+      "hypothesis": "If a subset of resource allocation programmes (, ) were time-bounded with explicit sunset provisions, it might reduce the system's ability to absorb uncertainty about pathway viability without stakeholder coordination adapting toward fewer, more committed partnerships.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -22361,7 +22361,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Validation–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -22405,7 +22405,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Validation–Coordination–Intermediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -22418,7 +22418,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator programs (PAT_010) introduced fixed intervals between validation cycles (e.g., 18-month cohort gaps instead of continuous intake), it might reduce the system's ability to absorb technology trajectory uncertainty through repeated re-proving without requiring commitment to specific domains.",
+      "hypothesis": "If accelerator programs  introduced fixed intervals between validation cycles (e.g., 18-month cohort gaps instead of continuous intake), it might reduce the system's ability to absorb technology trajectory uncertainty through repeated re-proving without requiring commitment to specific domains.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -22477,7 +22477,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Network–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -22593,7 +22593,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-52",
         "stack_name": "Institutional Validation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -22616,7 +22616,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Activity-Narrative Stabilisation",
         "stalls_involved": [
           "S1",
@@ -22726,7 +22726,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Validation–Dependency Loop",
         "stalls_involved": [
           "S1",
@@ -22847,7 +22847,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-44",
         "stack_name": "Infrastructure–Coordination–Narrative Triad",
         "stalls_involved": [
           "S1",
@@ -22860,7 +22860,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If infrastructure investments (P002, P013) were announced with pre-specified outcome metrics and sunset clauses, it might reduce the system's ability to absorb uncertainty through indefinite re-proving cycles.",
+      "hypothesis": "If infrastructure investments (, ) were announced with pre-specified outcome metrics and sunset clauses, it might reduce the system's ability to absorb uncertainty through indefinite re-proving cycles.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -22924,7 +22924,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-33",
         "stack_name": "Infrastructure-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -22936,7 +22936,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-49",
         "stack_name": "Legitimacy-Activity Stabilisation",
         "stalls_involved": [
           "S7",
@@ -22971,7 +22971,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If performance data across research centers and accelerators (PAT_002, PAT_007) were made comparable through standardized metrics, it might reduce the system's ability to absorb uncertainty about which institutional approaches are effective without requiring strategic selection among them.",
+      "hypothesis": "If performance data across research centers and accelerators (, ) were made comparable through standardized metrics, it might reduce the system's ability to absorb uncertainty about which institutional approaches are effective without requiring strategic selection among them.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -23047,7 +23047,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Expansion-Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -23070,7 +23070,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcome differences between direct collaborative relationships (PAT_003) and intermediated coordination (PAT_007, PAT_022) were made observable through structured comparison, it might reduce the system's ability to absorb uncertainty about direct relationship risks without testing direct coupling modes.",
+      "hypothesis": "If outcome differences between direct collaborative relationships  and intermediated coordination (, ) were made observable through structured comparison, it might reduce the system's ability to absorb uncertainty about direct relationship risks without testing direct coupling modes.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -23162,7 +23162,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-36",
         "stack_name": "Validation–Credentialing Stabilisation",
         "stalls_involved": [
           "S1",
@@ -23255,7 +23255,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Narrative–Activity Expansion",
         "stalls_involved": [
           "S1",
@@ -23290,7 +23290,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If Florida Photonics Summit (PAT_013) or quarterly networking events were to publish post-event outcome reports documenting specific commitments made or options foreclosed by participants, it might reduce the system's ability to absorb uncertainty about cluster value proposition without narrowing.",
+      "hypothesis": "If Florida Photonics Summit  or quarterly networking events were to publish post-event outcome reports documenting specific commitments made or options foreclosed by participants, it might reduce the system's ability to absorb uncertainty about cluster value proposition without narrowing.",
       "target_stack": "STK-02",
       "timeline": "6-12 months"
     },
@@ -23349,7 +23349,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-45",
         "stack_name": "Research-Coordination Stabilisation",
         "stalls_involved": [
           "S1",
@@ -23372,7 +23372,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-43",
         "stack_name": "Narrative-Permission Stabilisation",
         "stalls_involved": [
           "S7",
@@ -23383,7 +23383,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-50",
         "stack_name": "Institutional Continuity Configuration",
         "stalls_involved": [
           "S1",
@@ -23483,7 +23483,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-32",
         "stack_name": "Partnership–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -23571,7 +23571,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-38",
         "stack_name": "Re-proving–Mediation Stabilisation",
         "stalls_involved": [
           "S1",
@@ -23583,7 +23583,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If throughput data (program completion rates, time-to-hire, skill certification volumes) were made visible across coordination venues (P006, P007 associations/networks), it might reduce the system's ability to absorb workforce pressure through coordination expansion without exposing performance variance between programs.",
+      "hypothesis": "If throughput data (program completion rates, time-to-hire, skill certification volumes) were made visible across coordination venues (, associations/networks), it might reduce the system's ability to absorb workforce pressure through coordination expansion without exposing performance variance between programs.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -23637,7 +23637,7 @@
     ],
     "stacks": [
       {
-        "canonical_id": null,
+        "canonical_id": "STK-44",
         "stack_name": "Partnership-Platform Stabilisation",
         "stalls_involved": [
           "S1",
@@ -23672,7 +23672,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership announcements (P013) were required to specify measurable deliverables and timeline commitments at formation, it might reduce the system's ability to absorb strategic uncertainty through announcement activity without subsequent validation.",
+      "hypothesis": "If partnership announcements  were required to specify measurable deliverables and timeline commitments at formation, it might reduce the system's ability to absorb strategic uncertainty through announcement activity without subsequent validation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -23747,7 +23747,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-39",
         "stack_name": "Mediation–Extraction Stabilisation",
         "stalls_involved": [
           "S4",
@@ -23769,7 +23769,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-40",
         "stack_name": "Incumbent–Activity Scaling Stabilisation",
         "stalls_involved": [
           "S6",
@@ -23780,7 +23780,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-65",
         "stack_name": "Breadth–Mediation–Extraction Configuration",
         "stalls_involved": [
           "S1",
@@ -23874,7 +23874,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-37",
         "stack_name": "Partnership–Incumbent Stabilisation",
         "stalls_involved": [
           "S1",
@@ -23908,7 +23908,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordinating structures (PAT_004, PAT_005, PAT_020) were required to publish records of options considered-but-not-pursued, it might reduce the system's ability to absorb complexity without exposing trade-offs.",
+      "hypothesis": "If coordinating structures (, ) were required to publish records of options considered-but-not-pursued, it might reduce the system's ability to absorb complexity without exposing trade-offs.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -23984,7 +23984,7 @@
         "confidence": "medium"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-34",
         "stack_name": "Narrative–Incumbent Stabilisation",
         "stalls_involved": [
           "S6",
@@ -23995,7 +23995,7 @@
         "confidence": "low"
       },
       {
-        "canonical_id": null,
+        "canonical_id": "STK-35",
         "stack_name": "Validation–Narrative–Activity Stabilisation",
         "stalls_involved": [
           "S1",
@@ -24008,7 +24008,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership formations (PAT_007) were required to specify exclusionary commitments or resource allocation decisions at formation, it might reduce the system's ability to absorb uncertainty about strategic direction without adaptation.",
+      "hypothesis": "If partnership formations  were required to specify exclusionary commitments or resource allocation decisions at formation, it might reduce the system's ability to absorb uncertainty about strategic direction without adaptation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },

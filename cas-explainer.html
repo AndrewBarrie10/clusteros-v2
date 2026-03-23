@@ -199,6 +199,7 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
     </div>
     <button class="intro-start-btn" onclick="dismissIntro()">Start the self-assessment →</button>
     <p class="intro-note">Takes 3–5 minutes · Free · No account required</p>
+    <p class="intro-note" style="margin-top:4px;color:var(--dim);">Your submission is private. It does not contribute to the 221-cluster dataset or appear on the map.</p>
   </div>
 
   <div id="active-header" style="display:none">
@@ -344,6 +345,11 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
         <option>Oceania</option>
       </select>
     </div>
+    <div style="padding:10px 12px;background:rgba(200,240,208,0.06);border:1px solid rgba(200,240,208,0.15);border-radius:4px;margin-bottom:8px;">
+      <p style="font-family:var(--mono);font-size:9px;color:var(--dim);line-height:1.6;margin:0;">
+        <span style="color:var(--signal);font-weight:600;">PRIVATE</span>&nbsp; Your report is sent only to you. This submission does not contribute to the 221-cluster dataset, does not appear on the map, and is not shared with any third party.
+      </p>
+    </div>
     <button class="confirm-btn" id="confirm-btn" onclick="submitReport()">
       <span>Send me the diagnostic report</span>
       <span class="arrow">→</span>
@@ -358,6 +364,7 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
     <div class="success-icon">✦</div>
     <h2 class="success-h">Report <em>on its way.</em></h2>
     <p class="success-body">Your diagnostic report is being prepared and will arrive in your inbox shortly. It includes your stall profile, stabilisation stack analysis, extraction score, and comparator clusters from the 221-cluster dataset.</p>
+    <p class="success-body" style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-bottom:16px;">Your report is private to you — it has not been added to the dataset or the map.</p>
     <a href="/" class="success-home-btn">Return to ClusterOS →</a>
     <hr class="success-divider">
     <div class="success-links-label">Read more</div>

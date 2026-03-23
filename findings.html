@@ -685,6 +685,28 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
   .nav-cta { display: none !important; }
   .nav-hamburger { display: flex !important; margin-left: auto; }
 }
+
+/* ── STICKY BAR ─────────────────────────────────── */
+#intel-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+  height: 48px; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; gap: 16px;
+}
+#bar-default-state { display: flex; align-items: center; gap: 20px; flex: 1; min-width: 0; }
+.bar-icon { font-family: var(--font-serif); font-size: 14px; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.bar-default-links { display: flex; gap: 16px; }
+.bar-default-links a { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
+.bar-default-links a:hover { color: rgba(255,255,255,0.9); }
+.bar-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.bar-action { font-family: var(--font-mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; padding: 8px 16px; border-radius: 3px; white-space: nowrap; }
+.bar-action-secondary { color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.15); }
+.bar-action-secondary:hover { color: rgba(255,255,255,0.9); }
+.bar-action-primary { background: var(--green); color: #fff; }
+.bar-action-primary:hover { opacity: 0.85; }
+@media (max-width: 640px) { .bar-default-links { display: none; } #intel-bar { padding: 0 16px; } }
+body { padding-bottom: 48px; }
+
 </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -950,6 +972,57 @@ setTimeout(function() {
     <p class="cta-p">The diagnostic identifies your stalls, names your stack, and generates leverage hypotheses calibrated to your specific configuration — informed by every ecosystem we have diagnosed before it.</p>
     <a href="/request.html" class="cta-btn">Request a Diagnostic</a>
     <div class="cta-note">Testable leverage hypotheses · Informed by 200+ comparable ecosystems</div>
+  </div>
+</div>
+
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="footer-logo">Cluster<span>OS</span></a>
+      <p class="footer-tagline">Diagnostic intelligence for regional economies.<br>Why clusters stall — and what to do about it.</p>
+      <p class="footer-copy">© 2026 Community Lab · Built in Edinburgh</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Product</div>
+      <a href="/digital-infrastructure.html">Digital Infrastructure</a>
+      <a href="/signals-systems.html">Signals &amp; Systems</a>
+      <a href="/diagnostic.html">The Diagnostic</a>
+      <a href="/leverage.html">Leverage</a>
+      <a href="/findings.html">Findings</a>
+      <a href="/pricing.html">Pricing</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Lab Notes</div>
+      <a href="/notes.html">All Notes</a>
+      <a href="/ln-01-coordinating.html">S2 · Coordinating</a>
+      <a href="/ln-02-narrating.html">S7 · Narrating</a>
+      <a href="/ln-12-leverage.html">What Leverage Looks Like</a>
+      <a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Company</div>
+      <a href="/about.html">About</a>
+      <a href="/request.html">Request a Diagnostic</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<div id="intel-bar">
+  <div id="bar-default-state">
+    <span class="bar-icon">ClusterOS</span>
+    <span class="bar-default-links">
+      <a href="/diagnostic.html">The Diagnostic</a>
+      <a href="/findings.html">Findings</a>
+      <a href="/notes.html">Lab Notes</a>
+      <a href="/pricing.html">Pricing</a>
+    </span>
+  </div>
+  <div class="bar-actions">
+    <a class="bar-action bar-action-secondary" href="mailto:andrew@communitylab.app?subject=ClusterOS conversation">Speak to Andrew →</a>
+    <a class="bar-action bar-action-primary" href="/request.html">Snapshot diagnostic →</a>
   </div>
 </div>
 

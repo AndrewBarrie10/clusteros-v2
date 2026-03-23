@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.clusteros.io/pricing.html">
-<title>Pricing — ClusterOS</title>
+<link rel="canonical" href="https://www.clusteros.io/get-started.html">
+<title>Get Started — ClusterOS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -329,6 +329,41 @@ body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; 
 .cta-note { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--ink-dim); margin-top: 16px; letter-spacing: 0.06em; }
 
 .footer-pad { padding-bottom: 80px; }
+
+/* SELF-ASSESSMENT BLOCK */
+.sa-wrap { max-width: 960px; margin: 0 auto; padding: 56px 24px 0; }
+.sa-block {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.sa-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+@media (max-width: 640px) {
+  .sa-inner { grid-template-columns: 1fr; }
+  .sa-right { border-left: none !important; border-top: 1px solid var(--border); }
+}
+.sa-left { padding: 32px 32px; }
+.sa-right { padding: 32px 32px; border-left: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 16px; }
+.sa-tier { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+.sa-title { font-family: var(--font-serif); font-size: 22px; color: var(--ink); line-height: 1.15; margin-bottom: 10px; }
+.sa-title em { font-style: italic; color: var(--green); }
+.sa-body { font-size: 13px; color: var(--ink-dim); line-height: 1.7; margin-bottom: 16px; }
+.sa-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.sa-badge { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; background: rgba(42,122,79,0.06); border: 1px solid rgba(42,122,79,0.15); color: var(--green); }
+.sa-btn { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 22px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.15s; }
+.sa-btn:hover { opacity: 0.85; }
+.sa-what-label { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px; }
+.sa-items { display: flex; flex-direction: column; gap: 8px; }
+.sa-item { display: flex; gap: 10px; }
+.sa-item-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(42,122,79,0.35); flex-shrink: 0; margin-top: 7px; }
+.sa-item-text { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+.sa-item-text strong { color: var(--ink); font-weight: 400; }
+.sa-note { font-family: var(--font-mono); font-size: 9px; color: var(--ink-muted); letter-spacing: 0.06em; }
 hr { border: none; border-top: 1px solid var(--border); }
 
 /* Reveal */
@@ -378,7 +413,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 
 </style>
-<meta name="description" content="ClusterOS engagement tiers: self-diagnostic (free), snapshot diagnostic, full diagnostic, and platform deployment. Pricing for regional innovation ecosystem analysis.">
+<meta name="description" content="ClusterOS engagement structure: Cluster Snapshot, Collaborative Diagnostic, and Platform Deployment. Fixed-scope engagements for regional innovation ecosystem analysis. Fees quoted on request.">
 </head>
 <body>
 <nav>
@@ -392,7 +427,7 @@ hr { border: none; border-top: 1px solid var(--border); }
         <li><a href="/diagnostic.html">The Diagnostic</a></li>
         <li><a href="/leverage.html">Leverage</a></li>
         <li><a href="/findings.html">Findings</a></li>
-        <li><a href="/pricing.html">Pricing</a></li>
+        <li><a href="/get-started.html">Get Started</a></li>
       </ul>
     </li>
     <li class="nav-dropdown">
@@ -420,7 +455,7 @@ hr { border: none; border-top: 1px solid var(--border); }
   <a href="/diagnostic.html">The Diagnostic</a>
   <a href="/leverage.html">Leverage</a>
   <a href="/findings.html">Findings</a>
-  <a href="/pricing.html">Pricing</a>
+  <a href="/get-started.html">Get Started</a>
   <div class="nav-mobile-divider"></div>
   <a href="/notes.html">Lab Notes</a>
   <a href="/about.html">About</a>
@@ -433,39 +468,76 @@ hr { border: none; border-top: 1px solid var(--border); }
 </div>
 
 <div class="hero">
-  <div class="hero-tag rev">Pricing</div>
-  <h1 class="hero-h rev d1">Three ways in.<br><em>One direction.</em></h1>
-  <p class="hero-p rev d2">Every engagement starts with a diagnostic. The question is how much of your own data goes in. <strong>The Cluster Snapshot — public data pipeline plus a structured actor questionnaire — is the entry point. Each tier above it adds depth, not a different product.</strong></p>
+  <div class="hero-tag rev">Get Started</div>
+  <h1 class="hero-h rev d1">Every engagement<br><em>starts with a diagnostic.</em></h1>
+  <p class="hero-p rev d2">The diagnostic is not a precursor to the real work — it is the real work. It identifies exactly what your ecosystem is doing, why it is doing it, and where the specific leverage points are. What follows depends on what it finds. <strong>Fees are discussed directly after an initial scoping conversation.</strong></p>
 </div>
 
 <!-- PHILOSOPHY STRIP -->
 <div class="phil">
   <div class="phil-inner">
     <div class="phil-icon">◎</div>
-    <div class="phil-text">Pricing is discussed directly after an initial scoping conversation. What we can tell you here is the structure: two phases, each with a defined scope and deliverable, sequenced so that the diagnostic informs the platform. The diagnostic is the right starting point for every engagement, regardless of where it leads.</div>
+    <div class="phil-text">We don't publish fees. Engagements are scoped individually — the same diagnostic framework applied to a single emerging cluster and to a national innovation programme are different conversations. What we can tell you is the structure: fixed scope, defined deliverables, and a clear sequence where the diagnostic always comes first because it tells you what the platform needs to address.</div>
+  </div>
+</div>
+
+<!-- SELF-ASSESSMENT -->
+<div class="sa-wrap">
+  <div class="sa-block">
+    <div class="sa-inner">
+      <div class="sa-left">
+        <div class="sa-tier">Before you commission anything</div>
+        <h2 class="sa-title">Start with the<br><em>self-assessment.</em></h2>
+        <p class="sa-body">The self-assessment is free. It takes five minutes. You select the behavioural stalls you recognise in your ecosystem — the system identifies which combinations are reinforcing each other, generates a structural analysis, and emails you a PDF report with comparators from the 221-cluster dataset and a primary leverage hypothesis.</p>
+        <div class="sa-meta">
+          <span class="sa-badge">Free</span>
+          <span class="sa-badge">5 minutes</span>
+          <span class="sa-badge">PDF report by email</span>
+          <span class="sa-badge">No account required</span>
+        </div>
+        <p class="sa-body" style="margin-bottom:0">It is not a substitute for a full diagnostic — it is self-reported and not independently evidenced. But it gives you a structural read on your ecosystem right now, and tells you whether the Snapshot is worth commissioning.</p>
+      </div>
+      <div class="sa-right">
+        <div class="sa-what-label">What the report includes</div>
+        <div class="sa-items">
+          <div class="sa-item"><div class="sa-item-dot"></div><div class="sa-item-text"><strong>Stall profile</strong> — the substitutions your ecosystem is performing and what capabilities they are displacing</div></div>
+          <div class="sa-item"><div class="sa-item-dot"></div><div class="sa-item-text"><strong>Stack detection</strong> — which combinations of stalls are reinforcing each other and why single interventions fail</div></div>
+          <div class="sa-item"><div class="sa-item-dot"></div><div class="sa-item-text"><strong>Extraction score</strong> — an estimate of the proportion of value your ecosystem produces that stays local, benchmarked against 221 comparable cases</div></div>
+          <div class="sa-item"><div class="sa-item-dot"></div><div class="sa-item-text"><strong>Blind spot analysis</strong> — stalls that frequently appear in ecosystems with your configuration but that you did not identify</div></div>
+          <div class="sa-item"><div class="sa-item-dot"></div><div class="sa-item-text"><strong>Primary leverage hypothesis</strong> — one testable perturbation calibrated to your specific stack</div></div>
+          <div class="sa-item"><div class="sa-item-dot"></div><div class="sa-item-text"><strong>Structural comparators</strong> — clusters from the dataset sharing your configuration</div></div>
+        </div>
+        <a href="/cas-explainer.html" class="sa-btn">Start the self-assessment →</a>
+        <p class="sa-note">Self-reported · Not independently evidenced · Free</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:960px;margin:32px auto 0;padding:0 24px;">
+  <div style="border-top:1px solid var(--border);padding-top:32px;display:flex;align-items:center;gap:16px;">
+    <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;">Ready to go further?</div>
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+    <div style="font-size:13px;color:var(--ink-dim);">The Snapshot and Collaborative Diagnostic are below.</div>
   </div>
 </div>
 
 <!-- SNAPSHOT -->
 <div class="snapshot">
-  <div class="sec-tag" style="max-width:640px;margin:0 auto 20px;">The three tiers</div>
+  <div class="sec-tag" style="max-width:640px;margin:0 auto 20px;">The entry point</div>
 
   <div class="snap-card rev">
     <div class="snap-head">
       <div class="snap-head-left">
-        <div class="snap-tier">SNAPSHOT</div>
+        <div class="snap-tier">ENTRY POINT</div>
         <div>
           <div class="snap-title">Cluster Snapshot</div>
           <div class="snap-meta">
             <span class="snap-badge">4–5 weeks</span>
             <span class="snap-badge">Public data + actor questionnaire</span>
-            <span class="snap-badge">Single cluster</span>
+            <span class="snap-badge">Fixed fee · Scoped on request</span>
           </div>
         </div>
-      </div>
-      <div class="snap-price">
-        <div class="snap-price-val">£5k</div>
-        <div class="snap-price-note">fixed fee</div>
       </div>
     </div>
     <div class="snap-body">
@@ -500,10 +572,11 @@ hr { border: none; border-top: 1px solid var(--border); }
 
     <div class="snap-caveat">
       <div class="snap-caveat-icon">◎</div>
-      <div class="snap-caveat-text">The questionnaire is what takes the Snapshot beyond what public data alone can produce. <strong>Reported actor behaviour — processed against the stall framework — is the closest proxy to Y-side observability without a full collaborative engagement.</strong> Confidence levels are still stated explicitly. The Snapshot is a starting structure, not a final diagnosis. It is designed to stand alone and to make the path to Phase 1 obvious if the findings warrant it.</div>
+      <div class="snap-caveat-text">The questionnaire is what takes the Snapshot beyond what public data alone can produce. <strong>Reported actor behaviour — processed against the stall framework — is the closest proxy to Y-side observability without a full collaborative engagement.</strong> Confidence levels are stated explicitly throughout. The Snapshot is designed to stand alone — and to make the case for deeper engagement when the findings warrant it.</div>
     </div>
     <div class="snap-cta">
-      <div class="snap-cta-text">Delivered as a structured report. <strong>No working sessions. Fixed fee. Natural path to Phase 1 if the findings warrant it.</strong></div>
+      <div class="snap-cta-text">Delivered as a structured report. <strong>No working sessions. Fixed scope. Natural path to Phase 1 if the findings warrant it.</strong></div>
+      <a href="/request.html" class="snap-btn">Request a Snapshot →</a>
     </div>
   </div>
 </div>
@@ -511,6 +584,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 <!-- PHASES HEADER -->
 <div style="max-width:640px;margin:48px auto 0;padding:0 24px;">
   <div class="sec-tag">Deeper engagements</div>
+  <p style="font-size:15px;color:var(--ink-dim);line-height:1.72;font-weight:300;margin-top:12px;">For organisations ready to move beyond the Snapshot — a full collaborative diagnostic and, where appropriate, platform deployment. Both are fixed-scope engagements, quoted after an initial conversation.</p>
 </div>
 
 <!-- PHASES -->
@@ -525,6 +599,7 @@ hr { border: none; border-top: 1px solid var(--border); }
         <div class="phase-meta">
           <span class="phase-badge time">4–6 weeks</span>
           <span class="phase-badge scope">Your evidence + our technology</span>
+          <span class="phase-badge scope">Fixed fee · Quoted on request</span>
         </div>
       </div>
     </div>
@@ -674,12 +749,13 @@ hr { border: none; border-top: 1px solid var(--border); }
 <!-- CTA -->
 <div class="cta-section" id="cta">
   <div class="cta-box rev">
-    <h2 class="cta-h">Not sure where<br>to <em>start</em>?</h2>
-    <p class="cta-p">The Cluster Snapshot is the lowest-friction entry point — fixed fee, no working sessions, 3–4 weeks. Or get in touch directly and we'll work out which tier fits where you are.</p>
+    <h2 class="cta-h">The right starting point<br>is <em>a conversation.</em></h2>
+    <p class="cta-p">Tell us about your ecosystem — sector, geography, what the board is asking for. We'll scope the right engagement, explain what it produces, and agree a fixed fee before anything starts.</p>
     <div class="cta-btns">
-      <a href="/cdn-cgi/l/email-protection#1879767c6a7d6f587b7775756d76716c6174797a36796868" class="btn-secondary">Talk to Andrew</a>
+      <a href="/request.html" class="btn-primary">Request a Diagnostic</a>
+      <a href="mailto:andrew@communitylab.app?subject=ClusterOS conversation" class="btn-secondary">Talk to Andrew directly</a>
     </div>
-    <div class="cta-note"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aecfc0cadccbd9eecdc1c3c3dbc0c7dad7c2cfcc80cfdede">[email&#160;protected]</a> · Community Lab · Edinburgh</div>
+    <div class="cta-note">andrew@communitylab.app · Community Lab · Edinburgh</div>
   </div>
 </div>
 
@@ -730,7 +806,7 @@ hr { border: none; border-top: 1px solid var(--border); }
       <a href="/diagnostic.html">The Diagnostic</a>
       <a href="/leverage.html">Leverage</a>
       <a href="/findings.html">Findings</a>
-      <a href="/pricing.html">Pricing</a>
+      <a href="/get-started.html">Get Started</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-label">Lab Notes</div>
@@ -744,7 +820,7 @@ hr { border: none; border-top: 1px solid var(--border); }
       <div class="footer-col-label">Company</div>
       <a href="/about.html">About</a>
       <a href="/request.html">Request a Diagnostic</a>
-      <a href="/pricing.html">Pricing</a>
+      <a href="/get-started.html">Get Started</a>
       <a href="/contact.html">Contact</a>
     </div>
   </div>

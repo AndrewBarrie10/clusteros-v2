@@ -2888,6 +2888,9 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     background: var(--page); padding: 36px 40px;
     transition: background 0.15s;
   }
+  @media (max-width: 640px) {
+    .dir-card { padding: 28px 24px; }
+  }
   .dir-card:hover { background: var(--surface); }
   .dir-card-eyebrow {
     font-family: var(--font-mono); font-size: 9px; font-weight: 700;
@@ -3265,6 +3268,77 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
     .pipeline-steps { grid-template-columns: 1fr; }
     #pipeline { padding: 60px 1.5rem; }
   }
+
+/* ── MOBILE CAROUSEL SYSTEM ─────────────────────────────────────────────── */
+@media (max-width: 640px) {
+
+  /* Wrapper that enables carousel mode */
+  .carousel-mobile {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding-bottom: 4px !important;
+    margin: 0 -1.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  .carousel-mobile::-webkit-scrollbar { display: none !important; }
+
+  /* Each card inside a carousel */
+  .carousel-mobile > * {
+    flex: 0 0 85vw !important;
+    max-width: 85vw !important;
+    scroll-snap-align: start !important;
+    border-radius: 4px !important;
+    margin-right: 12px !important;
+    border: 1px solid var(--border) !important;
+  }
+
+  /* Dot indicator track */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .carousel-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border-2);
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .carousel-dot.active {
+    background: var(--green);
+    transform: scale(1.3);
+  }
+
+  /* Swipe hint label */
+  .carousel-hint {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+    padding-left: 0;
+  }
+}
+
+/* Hide carousel hints on desktop */
+@media (min-width: 641px) {
+  .carousel-dots { display: none; }
+  .carousel-hint { display: none; }
+}
+
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -3357,7 +3431,8 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <p class="pipeline-sub">ClusterOS runs every ecosystem through a structured diagnostic pipeline — moving from raw external evidence to precise intervention points. The process observes from outside. It doesn't ask what you think is happening. It finds what is.</p>
     </div>
 
-    <div class="pipeline-steps">
+    <span class="carousel-hint">Swipe to explore →</span>
+    <div class="pipeline-steps carousel-mobile">
       <div class="pipeline-step reveal">
         <div class="pipeline-step-num">01</div>
         <a href="/diagnostic.html" class="pipeline-step-name">Evidence</a>
@@ -3437,7 +3512,8 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 
 <!-- ── AUDIENCE DIRECTORY (shown in explore mode) ────────── -->
 <section id="audience-directory" class="hidden">
-  <div class="dir-inner">
+  <span class="carousel-hint">Swipe to explore →</span>
+  <div class="dir-inner carousel-mobile">
 
     <div class="dir-card" id="dir-steward">
       <div class="dir-card-eyebrow">Steward · EDA Lead · Cluster Manager</div>
@@ -4586,6 +4662,55 @@ document.querySelectorAll('#ripple-chain').forEach(el => rippleObs.observe(el));
   if(h&&mob){
     h.addEventListener('click',function(e){e.stopPropagation();var o=mob.classList.contains('open');mob.classList.toggle('open',!o);h.classList.toggle('open',!o);});
     document.addEventListener('click',function(){mob.classList.remove('open');h.classList.remove('open');});
+  }
+})();
+</script>
+<script>
+// ── MOBILE CAROUSEL DOT INDICATORS ──────────────────────────────────────
+(function() {
+  function initCarousels() {
+    document.querySelectorAll('.carousel-mobile').forEach(function(carousel) {
+      var children = Array.from(carousel.children).filter(function(el) {
+        return !el.classList.contains('carousel-dots') && !el.classList.contains('carousel-hint');
+      });
+      if (children.length < 2) return;
+
+      // Find or create dots container after the carousel
+      var dotsId = 'dots-' + Math.random().toString(36).substr(2,6);
+      var dotsEl = carousel.nextElementSibling;
+      if (!dotsEl || !dotsEl.classList.contains('carousel-dots')) {
+        dotsEl = document.createElement('div');
+        dotsEl.className = 'carousel-dots';
+        carousel.parentNode.insertBefore(dotsEl, carousel.nextSibling);
+      }
+      dotsEl.innerHTML = '';
+
+      children.forEach(function(_, i) {
+        var dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', function() {
+          children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        });
+        dotsEl.appendChild(dot);
+      });
+
+      var dots = dotsEl.querySelectorAll('.carousel-dot');
+
+      carousel.addEventListener('scroll', function() {
+        var scrollLeft = carousel.scrollLeft;
+        var cardWidth = children[0] ? children[0].offsetWidth + 12 : 1;
+        var active = Math.round(scrollLeft / cardWidth);
+        dots.forEach(function(d, i) {
+          d.classList.toggle('active', i === active);
+        });
+      }, { passive: true });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousels);
+  } else {
+    initCarousels();
   }
 })();
 </script>

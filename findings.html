@@ -443,6 +443,11 @@ p + p { margin-top: 16px; }
 .num-item     { padding: 0 24px; border-right: 1px solid var(--border); }
 .num-item:first-child { padding-left: 0; }
 .num-item:last-child  { border-right: none; }
+@media (max-width: 640px) {
+  .num-grid { grid-template-columns: 1fr 1fr !important; gap: 24px; }
+  .num-item { padding: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  .num-item:nth-child(3), .num-item:last-child { border-bottom: none; }
+}
 .num-val      { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px);
   color: var(--ink); line-height: 1; margin-bottom: 6px; }
 .num-val span { color: var(--green); }

@@ -683,25 +683,12 @@ async function submitForm() {
   const engagement   = window._selectedOption || 'not specified';
 
   // Build email body
-  const emailBody = [
-    'NEW DIAGNOSTIC REQUEST',
-    '======================',
-    '',
-    'Cluster: ' + clusterName,
-    'Organisation: ' + (orgName || '-'),
-    'Engagement type: ' + engagement,
-    '',
-    'Name: ' + firstName + ' ' + lastName,
-    'Email: ' + email,
-    '',
-    'Message:',
-    message || '(none)',
-    '',
-    '---',
-    'Submitted: ' + new Date().toISOString(),
-    'Source: clusteros.io/request.html',
-  ].join('
-');
+  var emailBody = 'NEW DIAGNOSTIC REQUEST\n' +
+    'Cluster: ' + clusterName + '\n' +
+    'Engagement: ' + engagement + '\n' +
+    'Name: ' + firstName + ' ' + lastName + '\n' +
+    'Email: ' + email + '\n' +
+    'Message: ' + (message || '(none)');
 
   try {
     const res = await fetch('https://clusteros-v3-production.up.railway.app/api/v1/contact-request', {

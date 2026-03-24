@@ -635,6 +635,39 @@ body { overflow-x: hidden; }
 
 
 <script>
+
+// STEP NAVIGATION
+function goToStep(n) {
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  var el = document.getElementById('step-' + n);
+  if (el) el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Enable step 1 continue when cluster name is filled
+document.addEventListener('DOMContentLoaded', function() {
+  var clusterInput = document.getElementById('cluster-name');
+  var step1btn = document.getElementById('step1-next');
+  if (clusterInput && step1btn) {
+    clusterInput.addEventListener('input', function() {
+      step1btn.disabled = this.value.trim().length < 2;
+    });
+  }
+
+  // Enable step 3 submit when name + email filled
+  var firstInput = document.getElementById('first-name');
+  var emailInput = document.getElementById('email');
+  var step3btn  = document.getElementById('step3-submit');
+  function checkStep3() {
+    if (!step3btn) return;
+    var name = firstInput ? firstInput.value.trim() : '';
+    var email = emailInput ? emailInput.value.trim() : '';
+    step3btn.disabled = name.length < 1 || email.indexOf('@') < 1;
+  }
+  if (firstInput) firstInput.addEventListener('input', checkStep3);
+  if (emailInput) emailInput.addEventListener('input', checkStep3);
+});
+
 // FORM SUBMISSION
 async function submitForm() {
   const btn = document.getElementById('step3-submit');
@@ -708,6 +741,15 @@ async function submitForm() {
 window._selectedOption = null;
 function selectOption(val) {
   window._selectedOption = val;
+  // Enable step 2 continue button
+  var btn = document.getElementById('step2-next');
+  if (btn) btn.disabled = false;
+  // Highlight selected option
+  document.querySelectorAll('.option').forEach(function(o) {
+    o.classList.remove('selected');
+  });
+  var optEl = document.getElementById('opt-' + val);
+  if (optEl) optEl.classList.add('selected');
 }
 
 (function(){

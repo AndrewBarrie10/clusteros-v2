@@ -11,7 +11,7 @@
 
 <style>
 /* ── NAV ─────────────────────────────────────────────────── */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
 .nav-logo { font-family: 'Instrument Serif', serif; font-size: 18px; text-decoration: none; color: var(--ink); letter-spacing: -0.01em; flex-shrink: 0; }
 .nav-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; font-size: 14px; color: var(--green) !important; }
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
@@ -32,7 +32,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; 
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
 @media (max-width: 480px) { nav { padding: 0 16px; } .nav-logo { font-size: 15px; } }
-.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
+.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 9999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
 .nav-mobile-menu.open { display: flex; }
 .nav-mobile-menu a { font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: var(--ink-dim); padding: 10px 0; border-bottom: 1px solid var(--border); transition: color 0.15s; }
 .nav-mobile-menu a:hover { color: var(--ink); }
@@ -389,11 +389,6 @@ body { overflow-x: hidden; }
   <a href="/request.html">Request a Diagnostic</a>
 </div>
 
-
-</div>
-</div>
-</div>
-
 <div class="page">
 
   <!-- HERO -->
@@ -633,6 +628,112 @@ body { overflow-x: hidden; }
 
 
 
+
+<script>
+/* ── Request form logic ── */
+var currentStep = 1;
+var selectedEngagement = null;
+
+function goToStep(n) {
+  document.querySelectorAll('.form-step').forEach(function(s) { s.classList.remove('active'); });
+  var target = document.getElementById('step-' + n);
+  if (target) target.classList.add('active');
+  currentStep = n;
+
+  // Update step dots
+  for (var i = 0; i < 3; i++) {
+    var dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active', 'done');
+    if (i < n - 1) dot.classList.add('done');
+    if (i === n - 1) dot.classList.add('active');
+  }
+  var label = document.getElementById('step-label');
+  if (label) label.textContent = 'Step ' + n + ' of 3';
+
+  // Update step 3 context strip based on engagement choice
+  if (n === 3 && selectedEngagement) {
+    var strip = document.getElementById('context-strip');
+    var ctxt = document.getElementById('context-text');
+    if (strip && ctxt) {
+      strip.style.display = 'flex';
+      if (selectedEngagement === 'snapshot') {
+        ctxt.innerHTML = 'You selected <strong>Cluster Snapshot</strong> — fixed-fee, £5k. Andrew will confirm scope and send the diagnostic instrument.';
+      } else if (selectedEngagement === 'full') {
+        ctxt.innerHTML = 'You selected <strong>Collaborative Diagnostic</strong>. Andrew will arrange a scoping conversation to calibrate the engagement.';
+      } else {
+        ctxt.innerHTML = 'No problem — Andrew will suggest the right starting point based on where you are.';
+      }
+    }
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectOption(type) {
+  selectedEngagement = type;
+  document.querySelectorAll('#engagement-options .option').forEach(function(o) {
+    o.classList.remove('selected', 'selected-amber');
+  });
+  var el = document.getElementById('opt-' + type);
+  if (el) el.classList.add(type === 'snapshot' ? 'selected-amber' : 'selected');
+  var btn = document.getElementById('step2-next');
+  if (btn) btn.disabled = false;
+}
+
+function validateStep3() {
+  var first = document.getElementById('first-name').value.trim();
+  var last = document.getElementById('last-name').value.trim();
+  var email = document.getElementById('email').value.trim();
+  var btn = document.getElementById('step3-submit');
+  if (btn) btn.disabled = !(first && last && email);
+}
+
+function submitForm() {
+  var data = {
+    cluster: document.getElementById('cluster-name').value.trim(),
+    organisation: document.getElementById('org-name').value.trim(),
+    engagement: selectedEngagement,
+    firstName: document.getElementById('first-name').value.trim(),
+    lastName: document.getElementById('last-name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    message: document.getElementById('message').value.trim()
+  };
+
+  // Show confirmation
+  document.querySelectorAll('.form-step').forEach(function(s) { s.classList.remove('active'); });
+  var confirm = selectedEngagement === 'snapshot'
+    ? document.getElementById('confirm-snapshot')
+    : document.getElementById('confirm-full');
+  if (confirm) confirm.classList.add('active');
+
+  // Hide step indicator
+  var indicator = document.getElementById('step-indicator');
+  if (indicator) indicator.style.display = 'none';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Send to backend
+  try {
+    fetch('https://clusteros-v3-production.up.railway.app/api/v1/request', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch(e) { /* silent — confirmation already shown */ }
+}
+
+// Enable step 1 next button when cluster name filled
+document.getElementById('cluster-name').addEventListener('input', function() {
+  var btn = document.getElementById('step1-next');
+  if (btn) btn.disabled = !this.value.trim();
+});
+
+// Enable step 3 submit when required fields filled
+['first-name', 'last-name', 'email'].forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('input', validateStep3);
+});
+</script>
 
 <script>
 (function(){

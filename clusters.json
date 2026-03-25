@@ -286,7 +286,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If a subset of quantum funding allocations (: mission-aligned funding) were temporally sequenced to follow partnership formation  rather than preceding or occurring in parallel, it might reduce the system's ability to absorb mission timeline pressure through distributed validation, potentially exposing whether partnership formation can narrow option space before funding distributio",
+      "hypothesis": "If a subset of quantum funding allocations (: mission-aligned funding) were temporally sequenced to follow partnership formation () rather than preceding or occurring in parallel, it might reduce the system's ability to absorb mission timeline pressure through distributed validation, potentially exposing whether partnership formation can narrow option space before funding distributio",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -406,7 +406,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcomes from 2017-2018 established centers  were made systematically comparable, it might reduce the system's ability to absorb uncertainty about approach viability through continued initiation without reference to prior results.",
+      "hypothesis": "If outcomes from 2017-2018 established centers () were made systematically comparable, it might reduce the system's ability to absorb uncertainty about approach viability through continued initiation without reference to prior results.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -2773,7 +2773,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If validation outcomes (success/failure/abandonment) from bank innovation programs  were made observable across institutions, it might reduce the system's ability to absorb uncertainty through parallel re-validation without exposing outcome patterns.",
+      "hypothesis": "If validation outcomes (success/failure/abandonment) from bank innovation programs () were made observable across institutions, it might reduce the system's ability to absorb uncertainty through parallel re-validation without exposing outcome patterns.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -3544,7 +3544,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If formation-to-failure timelines for entities in , cohorts were made observable to new entity founders, it might reduce the system's ability to absorb uncertainty through proliferation without exposing actual risk concentration.",
+      "hypothesis": "If formation-to-failure timelines for entities in , , cohorts were made observable to new entity founders, it might reduce the system's ability to absorb uncertainty through proliferation without exposing actual risk concentration.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -3975,7 +3975,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcomes from direct university-corporate partnerships  were made observable to intermediary organizations (, ), it might reduce the system's ability to absorb complexity through intermediation without exposing comparative performance.",
+      "hypothesis": "If outcomes from direct university-corporate partnerships () were made observable to intermediary organizations (, , ), it might reduce the system's ability to absorb complexity through intermediation without exposing comparative performance.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -4488,7 +4488,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If establishment activities (-, ) were accompanied by time-bounded visibility markers (e.g., explicit sunset provisions, milestone publication requirements), it might reduce the system's ability to absorb uncertainty through continuous re-proving without exposing whether initiatives reach completion or consolidation.",
+      "hypothesis": "If establishment activities (-, , ) were accompanied by time-bounded visibility markers (e.g., explicit sunset provisions, milestone publication requirements), it might reduce the system's ability to absorb uncertainty through continuous re-proving without exposing whether initiatives reach completion or consolidation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -4920,7 +4920,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If a shared registry of technology capabilities developed through intermediated partnerships (, ) were made observable to entities establishing new specialized centers , it might reduce the system's ability to absorb uncertainty about legitimate technology authority without consolidation.",
+      "hypothesis": "If a shared registry of technology capabilities developed through intermediated partnerships (, , ) were made observable to entities establishing new specialized centers (), it might reduce the system's ability to absorb uncertainty about legitimate technology authority without consolidation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -5024,7 +5024,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination mechanisms (, ) were required to publish decision timelines and participant counts for specific initiatives, it might reduce the system's ability to absorb uncertainty through indefinite coordination by making deferral patterns observable to external actors.",
+      "hypothesis": "If coordination mechanisms (, , ) were required to publish decision timelines and participant counts for specific initiatives, it might reduce the system's ability to absorb uncertainty through indefinite coordination by making deferral patterns observable to external actors.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -6309,7 +6309,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator program outcomes  were made systematically observable across programs, it might reduce the system's ability to absorb uncertainty about technology pathway viability without adapting validation structure proliferation.",
+      "hypothesis": "If accelerator program outcomes () were made systematically observable across programs, it might reduce the system's ability to absorb uncertainty about technology pathway viability without adapting validation structure proliferation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -6545,7 +6545,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership announcements  were required to specify excluded alternatives or resource trade-offs, it might reduce the system's ability to absorb uncertainty about pathway viability without narrowing strategic options.",
+      "hypothesis": "If partnership announcements () were required to specify excluded alternatives or resource trade-offs, it might reduce the system's ability to absorb uncertainty about pathway viability without narrowing strategic options.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -7309,8 +7309,8 @@
     "name": "Taipei Semiconductor & Hardware",
     "city": "Taipei",
     "country": "TW",
-    "lat": 25.0375,
-    "lng": 121.5637,
+    "lat": 24.7136,
+    "lng": 121.005,
     "regime": "mature",
     "stalls": [
       {
@@ -7853,7 +7853,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If investment announcements (, ) were required to include time-bound, observable deployment milestones at announcement time, it might reduce the system's ability to absorb stakeholder pressure through announcement activity alone, potentially exposing whether coordination structures (STALL_02) serve commitment or substitution functions",
+      "hypothesis": "If investment announcements (, , ) were required to include time-bound, observable deployment milestones at announcement time, it might reduce the system's ability to absorb stakeholder pressure through announcement activity alone, potentially exposing whether coordination structures (STALL_02) serve commitment or substitution functions",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -8506,7 +8506,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator/incubation programs  were required to publish cohort outcome data (e.g., survival rates, follow-on funding, commercialization events) at 12-month intervals, it might reduce the system's ability to absorb uncertainty about strategic direction without narrowing program diversity.",
+      "hypothesis": "If accelerator/incubation programs () were required to publish cohort outcome data (e.g., survival rates, follow-on funding, commercialization events) at 12-month intervals, it might reduce the system's ability to absorb uncertainty about strategic direction without narrowing program diversity.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -8621,7 +8621,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If government support  were made conditional on documented discontinuation of one existing product line or facility, it might reduce the system's ability to absorb strategic focus pressure through simultaneous capital deployment across multiple technology domains.",
+      "hypothesis": "If government support () were made conditional on documented discontinuation of one existing product line or facility, it might reduce the system's ability to absorb strategic focus pressure through simultaneous capital deployment across multiple technology domains.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -9025,7 +9025,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If one accelerator program were to restrict eligibility to ventures that demonstrate prior direct engagement with an incumbent institution (, , ), it might reduce the system's ability to absorb uncertainty about institutional access through intermediary pathways without testing direct coupling mechanisms.",
+      "hypothesis": "If one accelerator program were to restrict eligibility to ventures that demonstrate prior direct engagement with an incumbent institution (, , , ), it might reduce the system's ability to absorb uncertainty about institutional access through intermediary pathways without testing direct coupling mechanisms.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -9146,7 +9146,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator programs  published structured outcome data (e.g., cohort survival rates, follow-on funding, partnership conversion), it might reduce the system's ability to absorb uncertainty through repeated validation cycles without exposing performance patterns.",
+      "hypothesis": "If accelerator programs () published structured outcome data (e.g., cohort survival rates, follow-on funding, partnership conversion), it might reduce the system's ability to absorb uncertainty through repeated validation cycles without exposing performance patterns.",
       "target_stack": "STK-02",
       "timeline": "6-12 months"
     },
@@ -9813,7 +9813,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediary organizations (, ) were required to publish conversion metrics (program participants → sustained outcomes) rather than activity metrics (participant counts, event volumes), it might reduce the system's ability to absorb uncertainty about strategic commitment without exposing program efficacy gaps.",
+      "hypothesis": "If intermediary organizations (, , ) were required to publish conversion metrics (program participants → sustained outcomes) rather than activity metrics (participant counts, event volumes), it might reduce the system's ability to absorb uncertainty about strategic commitment without exposing program efficacy gaps.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -10143,7 +10143,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediary organizations  were required to publish which strategic pathways were explicitly not pursued or discontinued, it might reduce the system's ability to absorb uncertainty through optionality maintenance without exposing the cost of maintaining multiple alternatives.",
+      "hypothesis": "If intermediary organizations () were required to publish which strategic pathways were explicitly not pursued or discontinued, it might reduce the system's ability to absorb uncertainty through optionality maintenance without exposing the cost of maintaining multiple alternatives.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -11174,7 +11174,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership formations  were tracked for operational coupling indicators (shared infrastructure, joint decision authority, resource co-deployment) vs. coordination indicators (meetings, MOUs, information exchange), it might expose whether intermediation structures (S5) are absorbing coupling pressure or enabling it.",
+      "hypothesis": "If partnership formations () were tracked for operational coupling indicators (shared infrastructure, joint decision authority, resource co-deployment) vs. coordination indicators (meetings, MOUs, information exchange), it might expose whether intermediation structures (S5) are absorbing coupling pressure or enabling it.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -11300,7 +11300,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator programs  were required to publish time-series data on participant company survival, funding progression, and employment outcomes, it might reduce the system's ability to absorb uncertainty about program effectiveness without adaptation. Intermediaries might face pressure to demonstrate conversion rather than participation volume.",
+      "hypothesis": "If accelerator programs () were required to publish time-series data on participant company survival, funding progression, and employment outcomes, it might reduce the system's ability to absorb uncertainty about program effectiveness without adaptation. Intermediaries might face pressure to demonstrate conversion rather than participation volume.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -11420,7 +11420,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership programs (, ) introduced time-limited exclusivity requirements (e.g., \"no concurrent partnerships with overlapping scope for 24 months\"), it might reduce the system's ability to absorb uncertainty through continuous re-proving without requiring strategic commitment",
+      "hypothesis": "If partnership programs (, , ) introduced time-limited exclusivity requirements (e.g., \"no concurrent partnerships with overlapping scope for 24 months\"), it might reduce the system's ability to absorb uncertainty through continuous re-proving without requiring strategic commitment",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -11774,7 +11774,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator/incubator programs  were required to publish standardized throughput data (companies graduated, funding secured, products commercialized) in comparable format, it might reduce the system's ability to absorb uncertainty through pathway proliferation without requiring evidence of differential outcomes.",
+      "hypothesis": "If accelerator/incubator programs () were required to publish standardized throughput data (companies graduated, funding secured, products commercialized) in comparable format, it might reduce the system's ability to absorb uncertainty through pathway proliferation without requiring evidence of differential outcomes.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -12189,7 +12189,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordination entities (, ) were required to publish comparative resource flow data across member institutions, it might reduce the system's ability to absorb pressure for collective action without revealing allocation asymmetries that currently remain implicit.",
+      "hypothesis": "If coordination entities (, , ) were required to publish comparative resource flow data across member institutions, it might reduce the system's ability to absorb pressure for collective action without revealing allocation asymmetries that currently remain implicit.",
       "target_stack": "STK-02",
       "timeline": "6-12 months"
     },
@@ -15078,7 +15078,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator/incubator programs  were required to publish cohort-level outcome data (e.g., survival rates, follow-on funding, revenue thresholds) in standardized format, it might reduce the system's ability to absorb uncertainty about intervention effectiveness without strategic narrowing.",
+      "hypothesis": "If accelerator/incubator programs () were required to publish cohort-level outcome data (e.g., survival rates, follow-on funding, revenue thresholds) in standardized format, it might reduce the system's ability to absorb uncertainty about intervention effectiveness without strategic narrowing.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -15737,7 +15737,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If program scope boundaries and target cohort distinctions were made observable across the 10 accelerator/incubator entities , it might reduce the system's ability to absorb uncertainty about which programs to prioritize without making exclusionary choices.",
+      "hypothesis": "If program scope boundaries and target cohort distinctions were made observable across the 10 accelerator/incubator entities (), it might reduce the system's ability to absorb uncertainty about which programs to prioritize without making exclusionary choices.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -16637,8 +16637,8 @@
     "name": "Scotland Quantum and Photonics",
     "city": "Glasgow",
     "country": "GB",
-    "lat": 55.8612,
-    "lng": -4.2502,
+    "lat": 55.3411,
+    "lng": -4.0818,
     "regime": "emerging",
     "stalls": [
       {
@@ -16741,8 +16741,8 @@
     "name": "Scotland Creative Industries",
     "city": "Glasgow",
     "country": "GB",
-    "lat": 55.8612,
-    "lng": -4.2502,
+    "lat": 55.9533,
+    "lng": -2.6383,
     "regime": "growing",
     "stalls": [
       {
@@ -17263,7 +17263,7 @@
     "city": "Edinburgh",
     "country": "GB",
     "lat": 55.9533,
-    "lng": -3.1884,
+    "lng": -3.7383,
     "regime": "mature",
     "stalls": [
       {
@@ -18610,7 +18610,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If program-level outcome data (participant trajectories, capital deployed, technology transitions) were made observable across the 10+ venture/accelerator programs , it might reduce the system's ability to absorb uncertainty about domain prioritization without comparison.",
+      "hypothesis": "If program-level outcome data (participant trajectories, capital deployed, technology transitions) were made observable across the 10+ venture/accelerator programs (), it might reduce the system's ability to absorb uncertainty about domain prioritization without comparison.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -19656,7 +19656,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership announcements (, ) were required to include pre-specified outcome reporting timelines at announcement, it might reduce the system's ability to absorb pressure through announcement activity without subsequent validation.",
+      "hypothesis": "If partnership announcements (, , ) were required to include pre-specified outcome reporting timelines at announcement, it might reduce the system's ability to absorb pressure through announcement activity without subsequent validation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -19850,7 +19850,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If collaborative programs (, , ) were required to publish outcome metrics (participant trajectories, technology transfer events, partnership dissolution rates) in standardized format accessible to intermediaries and funders, it might reduce the system's ability to absorb uncertainty about pathway viability without strategic narrowing.",
+      "hypothesis": "If collaborative programs (, , , ) were required to publish outcome metrics (participant trajectories, technology transfer events, partnership dissolution rates) in standardized format accessible to intermediaries and funders, it might reduce the system's ability to absorb uncertainty about pathway viability without strategic narrowing.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -20048,7 +20048,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If intermediary entities (, ) were required to report throughput metrics (startup exits, employment placement rates, direct manufacturer-research linkages) rather than activity counts, it might reduce the system's ability to absorb complexity through activity multiplication without exposing coupling gaps.",
+      "hypothesis": "If intermediary entities (, , ) were required to report throughput metrics (startup exits, employment placement rates, direct manufacturer-research linkages) rather than activity counts, it might reduce the system's ability to absorb complexity through activity multiplication without exposing coupling gaps.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -20359,7 +20359,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If program-level outcome data (translation rates, time-to-milestone, resource efficiency) were made comparable across the multiple interdisciplinary institutes  and entrepreneurship programs (, ), it might reduce the system's ability to absorb uncertainty through pathway proliferation without exposing performance variance.",
+      "hypothesis": "If program-level outcome data (translation rates, time-to-milestone, resource efficiency) were made comparable across the multiple interdisciplinary institutes () and entrepreneurship programs (, ), it might reduce the system's ability to absorb uncertainty through pathway proliferation without exposing performance variance.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -21147,7 +21147,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If facility expansions  were accompanied by public disclosure of discontinued activities or consolidated focus areas, it might reduce the system's ability to absorb growth pressure through undifferentiated expansion without strategic narrowing.",
+      "hypothesis": "If facility expansions () were accompanied by public disclosure of discontinued activities or consolidated focus areas, it might reduce the system's ability to absorb growth pressure through undifferentiated expansion without strategic narrowing.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -21549,7 +21549,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If a subset of partnership arrangements  were structured to require direct bilateral resource commitment without intermediary coordination platforms, it might reduce the system's ability to absorb uncertainty through distributed coordination and expose whether direct coupling is viable under current conditions.",
+      "hypothesis": "If a subset of partnership arrangements () were structured to require direct bilateral resource commitment without intermediary coordination platforms, it might reduce the system's ability to absorb uncertainty through distributed coordination and expose whether direct coupling is viable under current conditions.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -22209,7 +22209,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If new infrastructure facilities (, ) were required to operate under time-bound exclusivity agreements (e.g., 24-month prohibition on functionally overlapping facilities), it might reduce the system's ability to absorb infrastructure demand uncertainty through proliferation without testing substitution.",
+      "hypothesis": "If new infrastructure facilities (, , ) were required to operate under time-bound exclusivity agreements (e.g., 24-month prohibition on functionally overlapping facilities), it might reduce the system's ability to absorb infrastructure demand uncertainty through proliferation without testing substitution.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -22418,7 +22418,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If accelerator programs  introduced fixed intervals between validation cycles (e.g., 18-month cohort gaps instead of continuous intake), it might reduce the system's ability to absorb technology trajectory uncertainty through repeated re-proving without requiring commitment to specific domains.",
+      "hypothesis": "If accelerator programs () introduced fixed intervals between validation cycles (e.g., 18-month cohort gaps instead of continuous intake), it might reduce the system's ability to absorb technology trajectory uncertainty through repeated re-proving without requiring commitment to specific domains.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -22988,8 +22988,8 @@
     "name": "Orlando Advanced Manufacturing",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 28.5383,
+    "lng": -80.5292,
     "regime": "mature",
     "stalls": [
       {
@@ -23070,7 +23070,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If outcome differences between direct collaborative relationships  and intermediated coordination (, ) were made observable through structured comparison, it might reduce the system's ability to absorb uncertainty about direct relationship risks without testing direct coupling modes.",
+      "hypothesis": "If outcome differences between direct collaborative relationships () and intermediated coordination (, ) were made observable through structured comparison, it might reduce the system's ability to absorb uncertainty about direct relationship risks without testing direct coupling modes.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -23087,8 +23087,8 @@
     "name": "Orlando Cybersecurity",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 29.3467,
+    "lng": -81.6419,
     "regime": "emerging",
     "stalls": [
       {
@@ -23202,8 +23202,8 @@
     "name": "Orlando Photonics & Optics",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 28.0387,
+    "lng": -82.0669,
     "regime": "emerging",
     "stalls": [
       {
@@ -23290,7 +23290,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If Florida Photonics Summit  or quarterly networking events were to publish post-event outcome reports documenting specific commitments made or options foreclosed by participants, it might reduce the system's ability to absorb uncertainty about cluster value proposition without narrowing.",
+      "hypothesis": "If Florida Photonics Summit () or quarterly networking events were to publish post-event outcome reports documenting specific commitments made or options foreclosed by participants, it might reduce the system's ability to absorb uncertainty about cluster value proposition without narrowing.",
       "target_stack": "STK-02",
       "timeline": "6-12 months"
     },
@@ -23307,8 +23307,8 @@
     "name": "Orlando AgTech",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 29.0379,
+    "lng": -80.6915,
     "regime": "emerging",
     "stalls": [
       {
@@ -23413,8 +23413,8 @@
     "name": "Orlando Aviation & Aerospace",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 29.3467,
+    "lng": -81.1165,
     "regime": "mature",
     "stalls": [
       {
@@ -23512,8 +23512,8 @@
     "name": "Orlando Tourism Technology",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 28.0387,
+    "lng": -80.6915,
     "regime": "mature",
     "stalls": [
       {
@@ -23600,8 +23600,8 @@
     "name": "Orlando MedTech",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 28.5383,
+    "lng": -82.2292,
     "regime": "emerging",
     "stalls": [
       {
@@ -23672,7 +23672,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership announcements  were required to specify measurable deliverables and timeline commitments at formation, it might reduce the system's ability to absorb strategic uncertainty through announcement activity without subsequent validation.",
+      "hypothesis": "If partnership announcements () were required to specify measurable deliverables and timeline commitments at formation, it might reduce the system's ability to absorb strategic uncertainty through announcement activity without subsequent validation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -23689,8 +23689,8 @@
     "name": "Orlando Digital Media",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 29.0379,
+    "lng": -82.0669,
     "regime": "mature",
     "stalls": [
       {
@@ -23810,8 +23810,8 @@
     "name": "Orlando Simulation & Training",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 27.7299,
+    "lng": -81.6419,
     "regime": "mature",
     "stalls": [
       {
@@ -23908,7 +23908,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If coordinating structures (, ) were required to publish records of options considered-but-not-pursued, it might reduce the system's ability to absorb complexity without exposing trade-offs.",
+      "hypothesis": "If coordinating structures (, , ) were required to publish records of options considered-but-not-pursued, it might reduce the system's ability to absorb complexity without exposing trade-offs.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },
@@ -23925,8 +23925,8 @@
     "name": "Orlando SpaceTech",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5421,
-    "lng": -81.379,
+    "lat": 27.7299,
+    "lng": -81.1165,
     "regime": "mature",
     "stalls": [
       {
@@ -24008,7 +24008,7 @@
       }
     ],
     "leverage": {
-      "hypothesis": "If partnership formations  were required to specify exclusionary commitments or resource allocation decisions at formation, it might reduce the system's ability to absorb uncertainty about strategic direction without adaptation.",
+      "hypothesis": "If partnership formations () were required to specify exclusionary commitments or resource allocation decisions at formation, it might reduce the system's ability to absorb uncertainty about strategic direction without adaptation.",
       "target_stack": "STK-01",
       "timeline": "6-12 months"
     },

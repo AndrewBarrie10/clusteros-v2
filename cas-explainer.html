@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Behavioural Stalls — ClusterOS</title>
+<title>Free Pulse Check — ClusterOS</title>
 <style>
 :root{
   --bg:#09101f;--surface:#111c2e;--border:#1e2f45;--border-mid:#2a3f58;
@@ -150,7 +150,7 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
 .intro-step-text{font-size:12px;color:var(--dim);line-height:1.55}
 .intro-start-btn{background:var(--signal-dim);color:var(--signal);border:none;font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;padding:11px 20px;border-radius:4px;cursor:pointer;transition:background .15s;width:100%;text-align:center;margin-bottom:8px}
 .intro-start-btn:hover{background:#3a6a48}
-.intro-note{font-family:var(--mono);font-size:9px;color:var(--dim);text-align:center}
+.intro-note{font-family:var(--mono);font-size:9px;color:var(--chalk-dim);text-align:center}
 .header-top{display:flex;align-items:center}
 
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
@@ -180,7 +180,7 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
 
 <nav class="top-nav">
   <a href="/" class="top-nav-back"><span class="top-nav-back-arrow">←</span> clusteros.io</a>
-  <span class="top-nav-wordmark">Cluster<span>OS</span> · Self-Assessment</span>
+  <span class="top-nav-wordmark">Cluster<span>OS</span> · Free Pulse Check</span>
 </nav>
 
 <div class="header">
@@ -188,18 +188,18 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
     <h1>Behavioural <em>Stalls</em></h1>
     <button class="reset-btn" onclick="doReset()" id="reset-btn" style="margin-left:auto">Reset</button>
   </div>
-  <div class="header-eyebrow" style="margin-top:6px">ClusterOS · Self-Assessment · Complex Adaptive Systems</div>
+  <div class="header-eyebrow" style="margin-top:6px">ClusterOS · Free Pulse Check</div>
 
   <div class="intro-block" id="intro-block">
     <p class="intro-what">Regional economies develop structural habits — behaviours that feel rational locally but block the system from compounding over time. ClusterOS has identified nine of them across 221 diagnosed clusters. This tool lets you identify which ones you recognise in your ecosystem.</p>
     <div class="intro-steps">
       <div class="intro-step"><span class="intro-step-num">01</span><span class="intro-step-text">Tap any stall you recognise — the map shows system-level effects in real time</span></div>
       <div class="intro-step"><span class="intro-step-num">02</span><span class="intro-step-text">The system detects which combinations are forming self-reinforcing locks</span></div>
-      <div class="intro-step"><span class="intro-step-num">03</span><span class="intro-step-text">Request your diagnostic report — emailed as a PDF with comparators and leverage analysis</span></div>
+      <div class="intro-step"><span class="intro-step-num">03</span><span class="intro-step-text">Request your report — free, emailed as a PDF with comparators and a primary leverage hypothesis</span></div>
     </div>
-    <button class="intro-start-btn" onclick="dismissIntro()">Start the self-assessment →</button>
+    <button class="intro-start-btn" onclick="dismissIntro()">Start the Free Pulse Check →</button>
     <p class="intro-note">Takes 3–5 minutes · Free · No account required</p>
-    <p class="intro-note" style="margin-top:4px;color:var(--dim);">Your submission is private. It does not contribute to the 221-cluster dataset or appear on the map.</p>
+    <p class="intro-note" style="margin-top:4px;color:var(--chalk-dim);">Your submission is private. It does not contribute to the 221-cluster dataset or appear on the map.</p>
   </div>
 
   <div id="active-header" style="display:none">
@@ -240,7 +240,7 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
   <div class="map-controls">
     <div>
       <div class="section-label">Adaptive System Map</div>
-      <div style="font-size:11px;color:var(--dim);margin-top:3px">The map shows how your ecosystem's actors and value flows are affected as stalls activate. Watch the system degrade.</div>
+      <div style="font-size:11px;color:var(--chalk-dim);margin-top:3px">The map shows how your ecosystem's actors and value flows are affected as stalls activate. Watch the system degrade.</div>
     </div>
     <div class="zoom-btns">
       <button class="zoom-btn" onclick="zoomIn()">+</button>
@@ -346,7 +346,7 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
       </select>
     </div>
     <div style="padding:10px 12px;background:rgba(200,240,208,0.06);border:1px solid rgba(200,240,208,0.15);border-radius:4px;margin-bottom:8px;">
-      <p style="font-family:var(--mono);font-size:9px;color:var(--dim);line-height:1.6;margin:0;">
+      <p style="font-family:var(--mono);font-size:9px;color:var(--chalk-dim);line-height:1.6;margin:0;">
         <span style="color:var(--signal);font-weight:600;">PRIVATE</span>&nbsp; Your report is sent only to you. This submission does not contribute to the 221-cluster dataset, does not appear on the map, and is not shared with any third party.
       </p>
     </div>
@@ -364,20 +364,20 @@ html,body{background:var(--bg);color:var(--chalk);font-family:var(--sans);min-he
     <div class="success-icon">✦</div>
     <h2 class="success-h">Report <em>on its way.</em></h2>
     <p class="success-body">Your diagnostic report is being prepared and will arrive in your inbox shortly. It includes your stall profile, stabilisation stack analysis, extraction score, and comparator clusters from the 221-cluster dataset.</p>
-    <p class="success-body" style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-bottom:16px;">Your report is private to you — it has not been added to the dataset or the map.</p>
+    <p class="success-body" style="font-family:var(--mono);font-size:10px;color:var(--chalk-dim);margin-bottom:16px;">Your report is private to you — it has not been added to the dataset or the map.</p>
     <a href="/" class="success-home-btn">Return to ClusterOS →</a>
     <hr class="success-divider">
     <div class="success-links-label">Read more</div>
     <div class="success-links">
       <a href="/findings.html" class="success-link">What 221 diagnostics found</a>
       <a href="/leverage.html" class="success-link">What leverage looks like</a>
-      <a href="/request.html" class="success-link">Request a full diagnostic</a>
+      <a href="/request.html" class="success-link">Request a commissioned diagnostic →</a>
     </div>
   </div>
 </div>
 
 <div class="status-bar">
-  <span>ClusterOS — CAS Diagnostic</span>
+  <span>ClusterOS — Free Pulse Check</span>
   <span id="status-r">System nominal</span>
 </div>
 
@@ -397,13 +397,70 @@ const STALLS=[
 ];
 
 const STACKS=[
-  {stalls:['S2','S7'],name:'Strategy Theatre',sev:'critical',desc:'Coordination generates narrative which legitimises more coordination. No decisions are forced. The system produces alignment documents indefinitely.'},
-  {stalls:['S2','S5'],name:'Intermediary Lock-in',sev:'high',desc:'Coordination bodies rely on intermediaries. Intermediaries become essential to coherence. Direct coupling never happens.'},
-  {stalls:['S4','S6'],name:'Extraction Engine',sev:'critical',desc:'Incumbents absorb the value new actors create. It exits via their supply chains rather than recirculating locally.'},
-  {stalls:['S1','S3'],name:'Infinite Pilot',sev:'high',desc:'Programmes validated without commitment. Non-performers continue. The option space never collapses. Resources spread to exhaustion.'},
-  {stalls:['S7','S8'],name:'Visibility Loop',sev:'high',desc:'Activity generates narrative. Narrative legitimises more activity. Conversion is never measured. The system looks healthy from outside.'},
-  {stalls:['S2','S7','S8'],name:'Governance Capture',sev:'critical',desc:'Coordination → reports → programmes → more coordination. The system becomes entirely self-referential. External pressure cannot enter.'},
-  {stalls:['S4','S9'],name:'Dependency Trap',sev:'high',desc:'Actors wait for permission. When it arrives the value has already extracted. Autonomous action is never learned.'}
+  {stalls:['S2', 'S5'],name:'Intermediary Lock-in',sev:'high',desc:'Coordination bodies rely on intermediaries. Direct coupling never forms.',leverage:'One direct deal between two actors without routing through the intermediary.'},
+  {stalls:['S1', 'S3'],name:'Infinite Pilot',sev:'high',desc:'Programmes validated without commitment. Non-performers continue. Resources spread to exhaustion.',leverage:'One programme publicly stopped.'},
+  {stalls:['S7', 'S8'],name:'Visibility Loop',sev:'high',desc:'Activity generates narrative. Narrative legitimises more activity. Conversion never measured.',leverage:'One public conversion metric.'},
+  {stalls:['S4', 'S6'],name:'Extraction Engine',sev:'critical',desc:'Incumbents absorb the value new actors create. It exits via their supply chains.',leverage:'One anchor institution commits a defined percentage of output to local reinvestment.'},
+  {stalls:['S4', 'S9'],name:'Dependency Trap',sev:'high',desc:'Actors wait for permission. When it arrives the value has already extracted.',leverage:'One actor responds to extraction autonomously.'},
+  {stalls:['S2', 'S9'],name:'Coordination-Permission Configuration',sev:'high',desc:'Coordination infrastructure becomes the permission-seeking mechanism.',leverage:'One exclusionary choice made without full alignment.'},
+  {stalls:['S1', 'S2'],name:'Validation-Coordination Configuration',sev:'high',desc:'Re-proving requires broad consensus; coordination produces buy-in that justifies continued re-proving.',leverage:'One actor makes a decision that closes options.'},
+  {stalls:['S5', 'S6'],name:'Intermediation-Incumbent Configuration',sev:'high',desc:'Intermediaries route all relationships through incumbents. New entrants never access direct pathways.',leverage:'One new entrant relationship formed without intermediary routing.'},
+  {stalls:['S2', 'S8'],name:'Coordination-Activity Configuration',sev:'high',desc:'Coordination produces more programmes. Activity volume grows. Conversion is never the measure.',leverage:'One throughput measure replacing an activity count.'},
+  {stalls:['S1', 'S7'],name:'Validation-Narration Configuration',sev:'high',desc:'Validation produces narratives that justify more validation. The system documents itself into paralysis.',leverage:'One decision that closes options and commits to a single path.'},
+  {stalls:['S3', 'S8'],name:'Forgiveness-Activity Configuration',sev:'high',desc:'Failed programmes continue generating activity. Activity counts mask the absence of learning.',leverage:'One programme publicly stopped with published reasons.'},
+  {stalls:['S6', 'S9'],name:'Incumbent-Permission Configuration',sev:'high',desc:'Incumbents hold the permission. Actors wait. Incumbents absorb the waiting as market protection.',leverage:'One autonomous actor decision made without seeking incumbent permission.'},
+  {stalls:['S5', 'S9'],name:'Intermediation-Permission Configuration',sev:'high',desc:'Intermediaries become the permission layer. All action routes through them. Direct action atrophies.',leverage:'One direct relationship formed bypassing the intermediary.'},
+  {stalls:['S2', 'S7', 'S8'],name:'Governance Capture',sev:'critical',desc:'Coordination → reports → programmes → more coordination. The system becomes entirely self-referential.',leverage:'One decision made publicly without prior alignment.'},
+  {stalls:['S1', 'S2', 'S9'],name:'Validation-Coordination-Permission Configuration',sev:'critical',desc:'Validation requires alignment; alignment requires permission; permission loops back to validation.',leverage:'One actor makes a decision that closes options without seeking alignment.'},
+  {stalls:['S4', 'S5', 'S6'],name:'Extraction-Intermediation-Incumbent Configuration',sev:'critical',desc:'Incumbents extract via supply chains; intermediaries broker all relationships; extraction is never visible.',leverage:'One named commitment to local reinvestment from a value-capturing actor.'},
+  {stalls:['S2', 'S5', 'S9'],name:'Coordination-Intermediation-Permission Configuration',sev:'critical',desc:'Coordination requires intermediaries; intermediaries require permission; permission requires coordination.',leverage:'One direct relationship formed without routing through the coordination-intermediary layer.'},
+  {stalls:['S1', 'S3', 'S8'],name:'Validation-Forgiveness-Activity Configuration',sev:'high',desc:'Pilots continue because validation never concludes; activity grows to justify continued validation.',leverage:'One programme publicly stopped.'},
+  {stalls:['S2', 'S6'],name:'Coordination-Incumbent Configuration',sev:'high',desc:'Coordination bodies concentrate around incumbents. Innovation routes through rather than around large actors.',leverage:'One coordination body explicitly excludes incumbents from a decision-making round.'},
+  {stalls:['S2', 'S4'],name:'Coordination-Extraction Configuration',sev:'high',desc:'Value exit managed through more coordination rather than triggering structural response.',leverage:'One visible public commitment to local reinvestment that bypasses the coordination layer.'},
+  {stalls:['S4', 'S6', 'S9'],name:'Extraction-Incumbent-Permission Configuration',sev:'critical',desc:'Incumbents extract value while actors wait for permission to respond.',leverage:'A named measurement of incumbent extraction made public.'},
+  {stalls:['S2', 'S6', 'S9'],name:'Coordination-Incumbent-Permission Configuration',sev:'critical',desc:'Coordination bodies legitimise incumbents; waiting preserves their position.',leverage:'One new entrant that explicitly refuses to route through the incumbent layer.'},
+  {stalls:['S4', 'S7'],name:'Extraction-Narration Configuration',sev:'high',desc:'Value exit is narrated as success. Strategy documents celebrate extraction as ecosystem maturity.',leverage:'One public measurement that separates extraction from reinvestment.'},
+  {stalls:['S2', 'S4', 'S9'],name:'Coordination-Extraction-Permission Configuration',sev:'critical',desc:'Coordination delays structural response to extraction; waiting absorbs autonomous response capacity.',leverage:'One actor responds to extraction autonomously and publicly.'},
+  {stalls:['S5', 'S8'],name:'Intermediation-Activity Configuration',sev:'high',desc:'Intermediaries generate activity. Activity volumes grow. The absence of direct coupling is never named.',leverage:'One direct relationship formed between two actors without intermediary routing.'},
+  {stalls:['S5', 'S7'],name:'Intermediation-Narration Configuration',sev:'high',desc:'Intermediaries produce reports. Reports justify continued intermediation. Direct relationships are never formed.',leverage:'One direct relationship formed that makes intermediary narration redundant.'},
+  {stalls:['S8', 'S9'],name:'Activity-Permission Configuration',sev:'high',desc:'Activity grows while waiting for permission to act on what it produces. Volume substitutes for autonomy.',leverage:'One autonomous actor decision made without seeking permission from the coordination layer.'},
+  {stalls:['S1', 'S7', 'S9'],name:'Validation-Narration-Permission Configuration',sev:'critical',desc:'Validation produces narratives that require permission to act on. Permission defers to more validation.',leverage:'One decision that closes options without requiring narrative justification or permission.'},
+  {stalls:['S2', 'S5', 'S8'],name:'Coordination-Intermediation-Activity Configuration',sev:'high',desc:'Coordination generates activity via intermediaries. Activity legitimises more coordination.',leverage:'One throughput measure that makes activity-without-conversion visible.'},
+  {stalls:['S1', 'S5', 'S8'],name:'Validation-Intermediation-Activity Configuration',sev:'critical',desc:'Re-proving instead of narrowing and mediating instead of coupling create the conditions for scaling activity instead of throughput to persist. The configuration absorbs evidence, complexity and demand signals, systematically displacing commitment, trust and throughput.',leverage:'One decision that closes options and commits to a single path — proof of commitment over validation.'},
+  {stalls:['S1', 'S8'],name:'Validation-Activity Configuration',sev:'high',desc:'Re-proving instead of narrowing lowers the cost of scaling activity instead of throughput. Together they absorb evidence and demand signals, displacing commitment and throughput.',leverage:'One decision that closes options and commits to a single path — proof of commitment over validation.'},
+  {stalls:['S1', 'S2', 'S5'],name:'Validation-Coordination-Intermediation Configuration',sev:'high',desc:'Re-proving instead of narrowing and coordinating instead of deciding create the conditions for mediating instead of coupling to persist. The configuration absorbs evidence, friction and complexity, systematically displacing commitment, consequence and trust.',leverage:'One decision made without full alignment — demonstrates that consequence is survivable.'},
+  {stalls:['S6', 'S7'],name:'Incumbent-Narration Configuration',sev:'high',desc:'Stabilising around incumbents lowers the cost of narrating instead of testing. Together they absorb disruption signals and ambiguity, displacing renewal and evidence.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S1', 'S7', 'S8'],name:'Validation-Narration-Activity Configuration',sev:'high',desc:'Re-proving instead of narrowing and narrating instead of testing create the conditions for scaling activity instead of throughput to persist. The configuration absorbs evidence, ambiguity and demand signals, systematically displacing commitment, evidence and throughput.',leverage:'One decision that closes options and commits to a single path — proof of commitment over validation.'},
+  {stalls:['S1', 'S9'],name:'Validation-Permission Configuration',sev:'high',desc:'Re-proving instead of narrowing lowers the cost of waiting for permission. Together they absorb evidence and opportunity signals, displacing commitment and timing.',leverage:'One autonomous actor decision made without seeking permission from the coordination layer.'},
+  {stalls:['S1', 'S6'],name:'Validation-Incumbent Configuration',sev:'high',desc:'Re-proving instead of narrowing lowers the cost of stabilising around incumbents. Together they absorb evidence and disruption signals, displacing commitment and renewal.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S1', 'S5'],name:'Validation-Intermediation Configuration',sev:'high',desc:'Re-proving instead of narrowing lowers the cost of mediating instead of coupling. Together they absorb evidence and complexity, displacing commitment and trust.',leverage:'One decision that closes options and commits to a single path — proof of commitment over validation.'},
+  {stalls:['S4', 'S5'],name:'Extraction-Intermediation Configuration',sev:'high',desc:'Extracting without reinvesting lowers the cost of mediating instead of coupling. Together they absorb success signals and complexity, displacing resilience and trust.',leverage:'One named commitment to local reinvestment from a value-capturing actor.'},
+  {stalls:['S6', 'S8'],name:'Incumbent-Activity Configuration',sev:'high',desc:'Stabilising around incumbents lowers the cost of scaling activity instead of throughput. Together they absorb disruption signals and demand signals, displacing renewal and throughput.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S1', 'S2', 'S8'],name:'Validation-Coordination-Activity Configuration',sev:'high',desc:'Re-proving instead of narrowing and coordinating instead of deciding create the conditions for scaling activity instead of throughput to persist. The configuration absorbs evidence, friction and demand signals, systematically displacing commitment, consequence and throughput.',leverage:'One decision made without full alignment — demonstrates that consequence is survivable.'},
+  {stalls:['S2', 'S5', 'S6'],name:'Coordination-Intermediation-Incumbent Configuration',sev:'critical',desc:'Coordinating instead of deciding and mediating instead of coupling create the conditions for stabilising around incumbents to persist. The configuration absorbs friction, complexity and disruption signals, systematically displacing consequence, trust and renewal.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S7', 'S9'],name:'Narration-Permission Configuration',sev:'high',desc:'Narrating instead of testing lowers the cost of waiting for permission. Together they absorb ambiguity and opportunity signals, displacing evidence and timing.',leverage:'One autonomous actor decision made without seeking permission from the coordination layer.'},
+  {stalls:['S1', 'S2', 'S7'],name:'Validation-Coordination-Narration Configuration',sev:'high',desc:'Re-proving instead of narrowing and coordinating instead of deciding create the conditions for narrating instead of testing to persist. The configuration absorbs evidence, friction and ambiguity, systematically displacing commitment, consequence and evidence.',leverage:'One decision made without full alignment — demonstrates that consequence is survivable.'},
+  {stalls:['S1', 'S2', 'S6'],name:'Validation-Coordination-Incumbent Configuration',sev:'high',desc:'Re-proving instead of narrowing and coordinating instead of deciding create the conditions for stabilising around incumbents to persist. The configuration absorbs evidence, friction and disruption signals, systematically displacing commitment, consequence and renewal.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S3', 'S6'],name:'Forgiveness-Incumbent Configuration',sev:'high',desc:'Forgiving instead of redesigning lowers the cost of stabilising around incumbents. Together they absorb failure signals and disruption signals, displacing learning and renewal.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S1', 'S4'],name:'Validation-Extraction Configuration',sev:'high',desc:'Re-proving instead of narrowing lowers the cost of extracting without reinvesting. Together they absorb evidence and success signals, displacing commitment and resilience.',leverage:'One named commitment to local reinvestment from a value-capturing actor.'},
+  {stalls:['S4', 'S8'],name:'Extraction-Activity Configuration',sev:'high',desc:'Extracting without reinvesting lowers the cost of scaling activity instead of throughput. Together they absorb success signals and demand signals, displacing resilience and throughput.',leverage:'One named commitment to local reinvestment from a value-capturing actor.'},
+  {stalls:['S7', 'S8', 'S9'],name:'Narration-Activity-Permission Configuration',sev:'critical',desc:'Narrating instead of testing and scaling activity instead of throughput create the conditions for waiting for permission to persist. The configuration absorbs ambiguity, demand signals and opportunity signals, systematically displacing evidence, throughput and timing.',leverage:'One autonomous actor decision made without seeking permission from the coordination layer.'},
+  {stalls:['S1', 'S6', 'S8'],name:'Validation-Incumbent-Activity Configuration',sev:'high',desc:'Re-proving instead of narrowing and stabilising around incumbents create the conditions for scaling activity instead of throughput to persist. The configuration absorbs evidence, disruption signals and demand signals, systematically displacing commitment, renewal and throughput.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S1', 'S2', 'S6', 'S8'],name:'Validation-Coordination-Incumbent-Activity Configuration',sev:'critical',desc:'A compound configuration in which re-proving instead of narrowing and coordinating instead of deciding anchor a reinforcing system that draws in stabilising around incumbents, scaling activity instead of throughput. Each stall provides the others with conditions for continued local rationality. Absorbed signals: evidence, friction, disruption signals, demand signals. Displaced capabilities: commitment, consequence, renewal, throughput.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S1', 'S6', 'S7'],name:'Validation-Incumbent-Narration Configuration',sev:'high',desc:'Re-proving instead of narrowing and stabilising around incumbents create the conditions for narrating instead of testing to persist. The configuration absorbs evidence, disruption signals and ambiguity, systematically displacing commitment, renewal and evidence.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S1', 'S5', 'S6'],name:'Validation-Intermediation-Incumbent Configuration',sev:'high',desc:'Re-proving instead of narrowing and mediating instead of coupling create the conditions for stabilising around incumbents to persist. The configuration absorbs evidence, complexity and disruption signals, systematically displacing commitment, trust and renewal.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S2', 'S7', 'S9'],name:'Coordination-Narration-Permission Configuration',sev:'critical',desc:'Coordinating instead of deciding and narrating instead of testing create the conditions for waiting for permission to persist. The configuration absorbs friction, ambiguity and opportunity signals, systematically displacing consequence, evidence and timing.',leverage:'One decision made without full alignment — demonstrates that consequence is survivable.'},
+  {stalls:['S1', 'S4', 'S8'],name:'Validation-Extraction-Activity Configuration',sev:'high',desc:'Re-proving instead of narrowing and extracting without reinvesting create the conditions for scaling activity instead of throughput to persist. The configuration absorbs evidence, success signals and demand signals, systematically displacing commitment, resilience and throughput.',leverage:'One named commitment to local reinvestment from a value-capturing actor.'},
+  {stalls:['S1', 'S7', 'S8', 'S9'],name:'Validation-Narration-Activity-Permission Configuration',sev:'critical',desc:'A compound configuration in which re-proving instead of narrowing and narrating instead of testing anchor a reinforcing system that draws in scaling activity instead of throughput, waiting for permission. Each stall provides the others with conditions for continued local rationality. Absorbed signals: evidence, ambiguity, demand signals, opportunity signals. Displaced capabilities: commitment, evidence, throughput, timing.',leverage:'One autonomous actor decision made without seeking permission from the coordination layer.'},
+  {stalls:['S5', 'S6', 'S9'],name:'Intermediation-Incumbent-Permission Configuration',sev:'high',desc:'Mediating instead of coupling and stabilising around incumbents create the conditions for waiting for permission to persist. The configuration absorbs complexity, disruption signals and opportunity signals, systematically displacing trust, renewal and timing.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S5', 'S7', 'S9'],name:'Intermediation-Narration-Permission Configuration',sev:'high',desc:'Mediating instead of coupling and narrating instead of testing create the conditions for waiting for permission to persist. The configuration absorbs complexity, ambiguity and opportunity signals, systematically displacing trust, evidence and timing.',leverage:'One autonomous actor decision made without seeking permission from the coordination layer.'},
+  {stalls:['S1', 'S2', 'S4', 'S5', 'S6', 'S7', 'S8'],name:'Validation-Coordination-Extraction-Intermediation-Incumbent-Narration-Activity Configuration',sev:'critical',desc:'A compound configuration in which re-proving instead of narrowing and coordinating instead of deciding anchor a reinforcing system that draws in extracting without reinvesting, mediating instead of coupling, stabilising around incumbents, narrating instead of testing, scaling activity instead of throughput. Each stall provides the others with conditions for continued local rationality. Absorbed signals: evidence, friction, success signals, complexity, disruption signals, ambiguity, demand signals. Displaced capabilities: commitment, consequence, resilience, trust, renewal, evidence, throughput.',leverage:'One named commitment to local reinvestment from a value-capturing actor.'},
+  {stalls:['S1', 'S5', 'S7'],name:'Validation-Intermediation-Narration Configuration',sev:'high',desc:'Re-proving instead of narrowing and mediating instead of coupling create the conditions for narrating instead of testing to persist. The configuration absorbs evidence, complexity and ambiguity, systematically displacing commitment, trust and evidence.',leverage:'One decision that closes options and commits to a single path — proof of commitment over validation.'},
+  {stalls:['S1', 'S2', 'S5', 'S6', 'S8'],name:'Validation-Coordination-Intermediation-Incumbent-Activity Configuration',sev:'critical',desc:'A compound configuration in which re-proving instead of narrowing and coordinating instead of deciding anchor a reinforcing system that draws in mediating instead of coupling, stabilising around incumbents, scaling activity instead of throughput. Each stall provides the others with conditions for continued local rationality. Absorbed signals: evidence, friction, complexity, disruption signals, demand signals. Displaced capabilities: commitment, consequence, trust, renewal, throughput.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S5', 'S7', 'S8'],name:'Intermediation-Narration-Activity Configuration',sev:'high',desc:'Mediating instead of coupling and narrating instead of testing create the conditions for scaling activity instead of throughput to persist. The configuration absorbs complexity, ambiguity and demand signals, systematically displacing trust, evidence and throughput.',leverage:'One public conversion metric — makes the gap between narrative and outcome visible.'},
+  {stalls:['S5', 'S6', 'S8'],name:'Intermediation-Incumbent-Activity Configuration',sev:'high',desc:'Mediating instead of coupling and stabilising around incumbents create the conditions for scaling activity instead of throughput to persist. The configuration absorbs complexity, disruption signals and demand signals, systematically displacing trust, renewal and throughput.',leverage:'One route to market that explicitly bypasses the incumbent layer.'},
+  {stalls:['S1', 'S8', 'S9'],name:'Validation-Activity-Permission Configuration',sev:'high',desc:'Re-proving instead of narrowing and scaling activity instead of throughput create the conditions for waiting for permission to persist. The configuration absorbs evidence, demand signals and opportunity signals, systematically displacing commitment, throughput and timing.',leverage:'One autonomous actor decision made without seeking permission from the coordination layer.'},
+  {stalls:['S1', 'S4', 'S5'],name:'Validation-Extraction-Intermediation Configuration',sev:'high',desc:'Re-proving instead of narrowing and extracting without reinvesting create the conditions for mediating instead of coupling to persist. The configuration absorbs evidence, success signals and complexity, systematically displacing commitment, resilience and trust.',leverage:'One named commitment to local reinvestment from a value-capturing actor.'},
 ];
 
 const NODES=[

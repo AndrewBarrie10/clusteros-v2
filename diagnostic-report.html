@@ -330,7 +330,7 @@ const STACK_CONTENT = {
   'Narrating+Scaling': {
     cas: "Narrative × Activity persists because in an unconnected system, describing what you're doing and scaling the activity that generates those descriptions are both rational responses to the incentive structure. Funders reward evidence of activity. Boards reward evidence of momentum. The system produces exactly what the incentive structure demands — and that demand has never required throughput. The loop is not a failure of leadership. It is what a complex adaptive system produces when the feedback signal is activity rather than value.",
     infra: ["The substrate introduces throughput signals that activity cannot substitute for. When a founder's RFI response converts to procurement, that signal propagates. When it doesn't, that signal propagates too. The system starts distinguishing between activity that compounds and activity that doesn't.", "Stewards currently report on what happened. The substrate interrogation layer lets stewards ask what is happening — which connections are forming, which are stalling, which interventions are producing pipeline movement. Reporting changes from description to diagnosis.", "Every actor in the substrate generates signals by pursuing their own interests. The accumulation of those signals produces a live read of ecosystem health that no programme of coordinated reporting could replicate."],
-    infraNote: "Narrative × Activity is the most frequently identified stack across all 200+ diagnostics. It appears in mature and emerging ecosystems alike. Geography, sector, and maturity do not predict its presence. The absence of a substrate does."
+    infraNote: "Narrative × Activity is the most frequently identified stack across all 221 diagnostics. It appears in mature and emerging ecosystems alike. Geography, sector, and maturity do not predict its presence. The absence of a substrate does."
   },
   'Coordinating+Stabilising': {
     cas: "Incumbent Anchor Lock-In persists because incumbents are rational actors optimising for their own interests, and in an unconnected ecosystem their interests define what coordination is for. New entrants rationally orient toward incumbent partnership because that's where the visible signal is. The structure isn't maintained by anyone defending it — it's maintained by every actor making the individually rational choice. A substrate doesn't change the actors. It changes what the rational choice is.",
@@ -576,7 +576,7 @@ function init() {
   // 6. Leverage
   document.getElementById('leverage-block').innerHTML = `
     <div class="leverage-hypothesis">"${stack.leverage || 'A leverage hypothesis will be generated in your full diagnostic.'}"</div>
-    <div class="leverage-note">This is an orientation hypothesis based on pattern matching against 200+ diagnostics. A full diagnostic tests this against evidence specific to your ecosystem and assigns a confidence tier.</div>`;
+    <div class="leverage-note">This is an orientation hypothesis based on pattern matching against 221 diagnostics. A full diagnostic tests this against evidence specific to your ecosystem and assigns a confidence tier.</div>`;
 
   // 7. Full diagnostic
   const diagContent = FULL_DIAG[stackKey] || FULL_DIAG.default;

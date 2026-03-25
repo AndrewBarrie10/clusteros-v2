@@ -4,7 +4,7 @@
 const RAILWAY = 'https://clusteros-v3-production.up.railway.app';
 
 const FORK_LABELS = {
-  evidence:   'Show me the evidence — what 75 diagnostics found',
+  evidence:   'Show me the evidence — what 221 diagnostics found',
   diagnostic: 'How does the diagnostic work?',
   digital:    "I'm Head of Digital — show me the architecture",
   founders:   'Who built this and why does it exist?'

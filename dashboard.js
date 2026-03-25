@@ -195,7 +195,7 @@ const PATHWAY_SCRIPTS = {
         title: 'The signal gap',
         observation: null,
         invitations: [
-          { label: "What 75 diagnostics actually found →", action: "page:findings.html" },
+          { label: "What 221 diagnostics actually found →", action: "page:findings.html" },
           { label: "The structured dataset →",             action: "page:data.html" },
           { label: "What regime type predicts →",          action: "page:ln-05-incumbents.html" }
         ]
@@ -391,7 +391,7 @@ const PATHWAY_SCRIPTS = {
 
   unknown: {
         title: 'Next step',
-    opening: "75 clusters diagnosed. 18 countries. The same 9 behavioural patterns appear everywhere — regardless of sector, geography, or funding.",
+    opening: "221 clusters diagnosed. 57 countries. The same 9 behavioural patterns appear everywhere — regardless of sector, geography, or funding.",
     beats: [
       {
         title: 'The finding',
@@ -740,7 +740,7 @@ STRICT RULES:
 - No hedging. No "suggests", "may", "often". State facts.
 - No em-dashes. No semicolons. Short, direct, specific.
 
-Step 1 (complete): Name the stall. State how many of the 75 clusters show it. One sentence.
+Step 1 (complete): Name the stall. State how many of the 221 clusters show it. One sentence.
 Step 2: Name one matched cluster + one specific data point (stall intensity % or regime). One sentence.
 Step 3: Name the stack + which clusters share this combination. One sentence.
 Step 4: State the leverage entry point from the best matched cluster's leverage hypothesis. Name the cluster. One sentence.
@@ -897,7 +897,7 @@ Rewrite steps ${this.currentStep + 2} through 4 only. Keep step 5 unchanged. STR
 
     const step2desc = top
       ? `${top.name} (${top.city}, ${top.country}) shows the ${this.stallName} stall at ${Math.round(((top.stalls||[])[0]?.intensity||0.5)*100)}% intensity — same configuration, already diagnosed.`
-      : `Three of the 75 clusters share your configuration. Their stall profiles are already mapped.`;
+      : `Three of the 221 clusters share your configuration. Their stall profiles are already mapped.`;
 
     const stackDesc = this.stack
       ? `${this.stallName} stacks with ${this.stack.name} — ${second ? second.name + ' shows both active.' : 'single interventions will not break it.'}`
@@ -1188,8 +1188,8 @@ const briefing = {
       sections: [
         { heading: "Why strategy isn't working",
           content: "Development agencies commission strategies. They produce roadmaps, priority sectors, and action plans. Then the cluster keeps doing what it was doing — because the structural blocker was never named. The blocker is not a gap in the strategy. It is a behavioural substitution: the ecosystem doing something observable instead of something harder. ClusterOS calls these stalls." },
-        { heading: "What the diagnostic found across 75 clusters",
-          content: "75 clusters diagnosed across 18 countries. 9 canonical stall types appear repeatedly — regardless of sector, geography, or funding level. The most common: Coordinating Instead of Deciding (97% frequency), Narrating Instead of Testing (89%), and Re-proving Instead of Narrowing (81%). Stalls rarely travel alone. They form stabilisation stacks that resist single interventions." },
+        { heading: "What the diagnostic found across 221 clusters",
+          content: "221 clusters diagnosed across 57 countries. 9 canonical stall types appear repeatedly — regardless of sector, geography, or funding level. The most common: Coordinating Instead of Deciding (97% frequency), Narrating Instead of Testing (89%), and Re-proving Instead of Narrowing (81%). Stalls rarely travel alone. They form stabilisation stacks that resist single interventions." },
         { heading: "Where leverage sits",
           content: "The leverage point is almost never where the stall is most visible. A coordination stall is rarely fixed by more coordination — it breaks when one actor's constraint changes. A narrating stall breaks when what gets reported changes, not who reports it. A snapshot diagnostic identifies the structural configuration, names the stack, and surfaces a specific leverage hypothesis in 4–5 weeks." },
         { heading: "What a diagnostic produces",
@@ -1221,7 +1221,7 @@ const briefing = {
         { heading: "The problem with ecosystem-blind investing",
           content: "The ecosystem a company operates in predicts its trajectory more than most investors account for. An anchor-dominated ecosystem extracts talent, IP, and capital rather than circulating it. A cycling ecosystem compounds — early-stage activity converts to scale, relationships convert to transactions, knowledge stays local. Most investors have no instrument for reading this." },
         { heading: "What the data shows",
-          content: "75 clusters diagnosed across 18 countries. Regime type — the structural configuration of power and incentive — is the strongest predictor of ecosystem behaviour. Anchored ecosystems show Extracting Without Reinvesting at 73% frequency. Cycling ecosystems show higher founder survival rates and faster time-to-scale. The difference is not sector or geography — it is structural." },
+          content: "221 clusters diagnosed across 57 countries. Regime type — the structural configuration of power and incentive — is the strongest predictor of ecosystem behaviour. Anchored ecosystems show Extracting Without Reinvesting at 73% frequency. Cycling ecosystems show higher founder survival rates and faster time-to-scale. The difference is not sector or geography — it is structural." },
         { heading: "The 9 stall types as investment signals",
           content: "Coordinating Instead of Deciding means no actor will commit to anything — deals stall, partnerships dissolve, nothing closes. Re-proving Instead of Narrowing means the investment case will be remade repeatedly without execution. Scaling Activity Instead of Throughput means the headline numbers are inputs, not outcomes. Each stall type has a predictable effect on portfolio company trajectory." },
         { heading: "What a diagnostic tells you",
@@ -1237,7 +1237,7 @@ const briefing = {
         { heading: "Why strategy engagements don't produce change",
           content: "The strategy is rarely the problem. The structural blocker that makes strategies irrelevant is the problem — and it operates at a layer most strategy engagements don't reach. A Narrating stall means the ecosystem produces reports about progress instead of evidence of change. The strategy becomes another report. Commissioning a better strategy without diagnosing the stall produces a better report that also won't be implemented." },
         { heading: "What a stall is",
-          content: "A stall is a behavioural substitution: the system doing something observable instead of something harder. 9 canonical stall types appear across 75 clusters worldwide. They form stabilisation stacks — combinations of two or more stalls that reinforce each other and resist single interventions. The stack is what makes ecosystems feel intractable. A single-stall ecosystem is fixable. A stacked ecosystem needs two levers applied in sequence." },
+          content: "A stall is a behavioural substitution: the system doing something observable instead of something harder. 9 canonical stall types appear across 221 clusters worldwide. They form stabilisation stacks — combinations of two or more stalls that reinforce each other and resist single interventions. The stack is what makes ecosystems feel intractable. A single-stall ecosystem is fixable. A stacked ecosystem needs two levers applied in sequence." },
         { heading: "What the diagnostic produces",
           content: "A structured evidence review across five stages: Evidence → Patterns → Stalls → Stacks → Leverage. Output is a named intervention point — specific, evidenced, and actionable. Delivered in 4–5 weeks at a fixed price. The diagnostic doesn't tell the client what to do. It tells them what is structurally blocking everything they're already trying to do." },
         { heading: "Using ClusterOS in an engagement",
@@ -1269,7 +1269,7 @@ const briefing = {
         { heading: "The structural answer to a political question",
           content: "Economic transformation stalls for structural reasons, not political ones. The blockers are nameable — behavioural substitutions that operate below the level of strategy. Ecosystems coordinate instead of committing. They narrate progress instead of generating it. They wait for permission instead of moving. These are not culture problems. They are structural configurations that respond to specific interventions." },
         { heading: "What the evidence shows",
-          content: "75 clusters diagnosed across 18 countries. The clusters that transformed fastest were not the best resourced — they had the clearest diagnosis of what was holding them back. Removing the right structural blocker produces compounding change. Adding more resource to a stalled system produces more activity, not more outcomes." },
+          content: "221 clusters diagnosed across 57 countries. The clusters that transformed fastest were not the best resourced — they had the clearest diagnosis of what was holding them back. Removing the right structural blocker produces compounding change. Adding more resource to a stalled system produces more activity, not more outcomes." },
         { heading: "What a diagnostic tells you publicly",
           content: "A diagnostic names the blocker in a way a strategy cannot. It produces a specific, evidenced intervention point — something that can be explained to a board, a minister, or a public audience. Not 'we are investing in the ecosystem.' But 'we identified the specific configuration holding this cluster back, and here is the intervention that addresses it.'" },
         { heading: "The policy lever",
@@ -1287,7 +1287,7 @@ const briefing = {
         { heading: "What ClusterOS measures",
           content: "Four health signals per cluster, updated continuously: bridging score (are anchors and founders transacting?), signal velocity (is new information entering the system?), stall intensity (which behavioural substitutions are active?), and leverage position (where would a specific intervention have compounding effect?). These are systems-level measurements — not activity counts." },
         { heading: "How clusters are compared",
-          content: "75 clusters diagnosed across 18 countries provide the comparative baseline. Your EDAs' clusters can be positioned against analogous configurations worldwide — same sector, similar regime, comparable maturity. The diagnostic identifies whether a cluster is ahead of, behind, or structurally different from its comparators — and why." },
+          content: "221 clusters diagnosed across 57 countries provide the comparative baseline. Your EDAs' clusters can be positioned against analogous configurations worldwide — same sector, similar regime, comparable maturity. The diagnostic identifies whether a cluster is ahead of, behind, or structurally different from its comparators — and why." },
         { heading: "The procurement model",
           content: "ClusterOS operates as sovereign infrastructure — one dedicated instance per regional EDA. Data residency is jurisdictional; it does not leave the region. The intelligence layer improves centrally via model updates. Platform procurement includes the diagnostic capability, the coordination infrastructure, and the bot network for continuous signal ingestion. Diagnostic runs are available separately as a scoping instrument before platform procurement." }
       ],
@@ -1301,7 +1301,7 @@ const briefing = {
         { heading: "What ClusterOS is",
           content: "Coordination infrastructure for regional innovation ecosystems. Not a community platform. Not a dashboard system. ClusterOS gives Economic Development Agencies the diagnostic capability to identify why their clusters stall — and the platform infrastructure to coordinate actors around the intervention." },
         { heading: "What the diagnostic found",
-          content: "75 clusters diagnosed across 18 countries. 9 canonical stall types appear regardless of sector, geography, or funding level. Stalls are behavioural substitutions — the ecosystem doing something observable instead of something harder. They form stabilisation stacks that resist single interventions. The diagnosis names the stack and surfaces a specific leverage hypothesis." },
+          content: "221 clusters diagnosed across 57 countries. 9 canonical stall types appear regardless of sector, geography, or funding level. Stalls are behavioural substitutions — the ecosystem doing something observable instead of something harder. They form stabilisation stacks that resist single interventions. The diagnosis names the stack and surfaces a specific leverage hypothesis." },
         { heading: "The intelligence layer",
           content: "Model Context Protocol is the infrastructure. Actor experiences are generated at runtime from live data — not hardcoded into an interface. Founders get personalised pathways. Anchors get capability matching. Researchers get demand signal translation. Stewards get structural interrogation. Every selfish action by every actor generates typed signals that make the system more intelligent for everyone else." },
         { heading: "Get started",

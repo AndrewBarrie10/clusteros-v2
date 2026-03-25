@@ -11,7 +11,7 @@
 
 <style>
 /* ── NAV ─────────────────────────────────────────────────── */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
 .nav-logo { font-family: 'Instrument Serif', serif; font-size: 18px; text-decoration: none; color: var(--ink); letter-spacing: -0.01em; flex-shrink: 0; }
 .nav-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; font-size: 14px; color: var(--green) !important; }
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
@@ -32,7 +32,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; display: flex;
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
 @media (max-width: 480px) { nav { padding: 0 16px; } .nav-logo { font-size: 15px; } }
-.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 9999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
+.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
 .nav-mobile-menu.open { display: flex; }
 .nav-mobile-menu a { font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: var(--ink-dim); padding: 10px 0; border-bottom: 1px solid var(--border); transition: color 0.15s; }
 .nav-mobile-menu a:hover { color: var(--ink); }
@@ -222,7 +222,7 @@ body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; 
 .snap-cta { padding: 16px 24px; border-top: 1px solid rgba(245,217,122,0.15); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .snap-cta-text { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
 .snap-cta-text strong { color: var(--dim); font-weight: 400; }
-.snap-btn { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; border-radius: 3px; background: var(--amber); color: var(--bg); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+.snap-btn { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
 
 /* PHASES */
 .phases { max-width: 960px; margin: 0 auto; padding: 16px 24px 0; display: flex; flex-direction: column; gap: 16px; }
@@ -324,8 +324,8 @@ body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; 
 .cta-p { font-size: 14px; color: var(--ink-dim); line-height: 1.7; margin-bottom: 28px; max-width: 440px; margin-left: auto; margin-right: auto; }
 .cta-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 .btn-primary { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px 24px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; }
-.btn-secondary { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px 24px; border-radius: 3px; border: 1px solid var(--border2); color: var(--ink-dim); text-decoration: none; }
-.btn-secondary:hover { border-color: #1a1a1a; color: #1a1a1a; }
+.btn-secondary { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px 24px; border-radius: 3px; border: 1px solid var(--green); color: var(--green); text-decoration: none; }
+.btn-secondary:hover { background: var(--green); color: #fff; }
 .cta-note { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--ink-dim); margin-top: 16px; letter-spacing: 0.06em; }
 
 .footer-pad { padding-bottom: 80px; }
@@ -412,8 +412,66 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 
 
+
+/* ── TERM TOOLTIPS ──────────────────────────────────────── */
+.term {
+  border-bottom: 1px dashed var(--green);
+  cursor: help;
+  position: relative;
+  white-space: nowrap;
+}
+.term-tip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: rgba(255,255,255,0.9);
+  font-family: var(--font-sans, 'Geist', sans-serif);
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 1.55;
+  padding: 10px 14px;
+  border-radius: 4px;
+  width: 280px;
+  z-index: 1000;
+  pointer-events: none;
+  white-space: normal;
+}
+.term-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--ink);
+}
+.term:hover .term-tip,
+.term:focus .term-tip {
+  display: block;
+}
+@media (max-width: 640px) {
+  .term-tip {
+    left: 0;
+    transform: none;
+    width: 240px;
+  }
+  .term-tip::after { left: 20px; }
+}
+
+
+/* Free Pulse Check — amber CTA */
+.btn-amber { font-family: var(--font-mono, 'Geist Mono', monospace); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px 24px; border-radius: 3px; background: var(--amber); color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.15s; }
+.btn-amber:hover { opacity: 0.85; }
+.sa-btn-amber { font-family: var(--font-mono, 'Geist Mono', monospace); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 22px; border-radius: 3px; background: var(--amber); color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.15s; }
+.sa-btn-amber:hover { opacity: 0.85; }
+.tier-tag-free { font-family: var(--font-mono, 'Geist Mono', monospace); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); }
+
 </style>
-<meta name="description" content="ClusterOS engagement structure: Cluster Snapshot, Collaborative Diagnostic, and Platform Deployment. Fixed-scope engagements for regional innovation ecosystem analysis. Fees quoted on request.">
+<meta name="description" content="Get started with ClusterOS: Free Pulse Check, Commissioned Diagnostic, and Platform deployment. Fixed-scope engagements for regional innovation ecosystem analysis. Fees quoted on request.">
 </head>
 <body>
 <nav>
@@ -471,7 +529,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 <div class="hero">
   <div class="hero-tag rev">Get Started</div>
   <h1 class="hero-h rev d1">Every engagement<br><em>starts with a diagnostic.</em></h1>
-  <p class="hero-p rev d2">The diagnostic is not a precursor to the real work — it is the real work. It identifies exactly what your ecosystem is doing, why it is doing it, and where the specific leverage points are. What follows depends on what it finds. <strong>Fees are discussed directly after an initial scoping conversation.</strong></p>
+  <p class="hero-p rev d2">The diagnostic identifies exactly what your ecosystem is doing, why it is doing it, and where the leverage points are. Not sure if you're ready? Run the free pulse check first — five minutes, no commitment. <strong>Fees are discussed directly after an initial scoping conversation.</strong></p>
 </div>
 
 <div style="max-width:960px;margin:0 auto;padding:0 32px 8px;">
@@ -481,29 +539,28 @@ hr { border: none; border-top: 1px solid var(--border); }
 <!-- PHILOSOPHY STRIP -->
 <div class="phil">
   <div class="phil-inner">
-    <div class="phil-icon"></div>
-    <div class="phil-text">We don't publish fees. Engagements are scoped individually — the same diagnostic framework applied to a single emerging cluster and to a national innovation programme are different conversations. What we can tell you is the structure: fixed scope, defined deliverables, and a clear sequence where the diagnostic always comes first because it tells you what the platform needs to address.</div>
-      <div class="phil-text" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
-        <strong style="color:var(--ink);font-weight:400;">On data governance.</strong> The 221-cluster dataset was built from publicly available evidence — it does not contain steward-submitted data or self-assessments. Commissioned diagnostics are private to the commissioning organisation. No findings, data, or cluster profile from a commissioned engagement appear in the public dataset or on the map without explicit written consent.
-      </div>
+    <div class="phil-text">The Free Pulse Check is instant and costs nothing. The Diagnostic and Platform are commissioned engagements — scoped individually and priced after an initial conversation. What we can tell you is the structure: fixed scope, defined deliverables, and fees agreed before anything starts.</div>
+    <div class="phil-text" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+      <strong style="color:var(--ink);font-weight:400;">On data governance.</strong> The 221-cluster dataset was built from publicly available evidence — it does not contain steward-submitted data or self-assessments. Commissioned diagnostics are private to the commissioning organisation. No findings, data, or cluster profile from a commissioned engagement appear in the public dataset or on the map without explicit written consent.
+    </div>
   </div>
 </div>
 
-<!-- FREE PULSE CHECK -->
+<!-- SELF-ASSESSMENT -->
 <div class="sa-wrap">
   <div class="sa-block">
     <div class="sa-inner">
       <div class="sa-left">
-        <div class="sa-tier">Before you commission anything</div>
-        <h2 class="sa-title">Start with the<br><em>free pulse check.</em></h2>
-        <p class="sa-body">The free pulse check takes five minutes. You select the behavioural stalls you recognise in your ecosystem — the system identifies which combinations are reinforcing each other, generates a structural analysis, and emails you a PDF report with comparators from the 221-cluster dataset and a primary leverage hypothesis.</p>
+        <div class="tier-tag-free">Tier 1 · Free</div>
+        <h2 class="sa-title">Free<br><em>Pulse Check.</em></h2>
+        <p class="sa-body">The Free Pulse Check takes five minutes. You select the behavioural patterns you recognise in your ecosystem — the system identifies which combinations are reinforcing each other and emails you a PDF report with a structural analysis, comparators from the 221-cluster dataset, and a primary leverage hypothesis. No account. No commitment. No fee.</p>
         <div class="sa-meta">
           <span class="sa-badge">Free</span>
           <span class="sa-badge">5 minutes</span>
           <span class="sa-badge">PDF report by email</span>
           <span class="sa-badge">No account required</span>
         </div>
-        <p class="sa-body" style="margin-bottom:0">The pulse check is not a substitute for a full diagnostic — it is self-reported and not independently evidenced. But it gives you a structural read on your ecosystem right now, and tells you whether the Snapshot is worth commissioning.</p>
+        <p class="sa-body" style="margin-bottom:0">It is self-reported and not independently evidenced — the system works from what you tell it, not from external research. But it gives you a structural read right now, and tells you whether a commissioned diagnostic is worth pursuing.</p>
       </div>
       <div class="sa-right">
         <div class="sa-what-label">What the report includes</div>
@@ -515,8 +572,8 @@ hr { border: none; border-top: 1px solid var(--border); }
           <div class="sa-item"><div class="sa-item-dot"></div><div class="sa-item-text"><strong>Primary leverage hypothesis</strong> — one testable perturbation calibrated to your specific stack</div></div>
           <div class="sa-item"><div class="sa-item-dot"></div><div class="sa-item-text"><strong>Structural comparators</strong> — clusters from the dataset sharing your configuration</div></div>
         </div>
-        <a href="/cas-explainer.html" class="sa-btn">Start the free pulse check →</a>
-        <p class="sa-note">Self-reported · Not independently evidenced · Free</p>
+        <a href="/cas-explainer.html" class="sa-btn-amber">Free Pulse Check →</a>
+        <p class="sa-note">Self-reported · Not independently evidenced · Always free</p>
         <p class="sa-note" style="margin-top:6px;color:var(--ink-muted);">Your submission is private. It does not contribute to the dataset or appear on the map.</p>
       </div>
     </div>
@@ -525,25 +582,25 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 <div style="max-width:960px;margin:32px auto 0;padding:0 24px;">
   <div style="border-top:1px solid var(--border);padding-top:32px;display:flex;align-items:center;gap:16px;">
-    <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;">Ready to go further?</div>
+    <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;">Commission a diagnostic</div>
     <div style="flex:1;height:1px;background:var(--border);"></div>
-    <div style="font-size:13px;color:var(--ink-dim);">The Snapshot and Collaborative Diagnostic are below.</div>
+    <div style="font-size:13px;color:var(--ink-dim);">Tier 2 and Tier 3 are below.</div>
   </div>
 </div>
 
 <!-- SNAPSHOT -->
 <div class="snapshot">
-  <div class="sec-tag" style="max-width:640px;margin:0 auto 20px;">The entry point</div>
+  <div class="sec-tag" style="max-width:640px;margin:0 auto 20px;">Tier 2 · Commissioned</div>
 
   <div class="snap-card rev">
     <div class="snap-head">
       <div class="snap-head-left">
-        <div class="snap-tier">ENTRY POINT</div>
+        <div class="snap-tier" style="color:var(--green);background:rgba(42,122,79,0.08);border-color:rgba(42,122,79,0.2);">COMMISSIONED</div>
         <div>
-          <div class="snap-title">Cluster Snapshot</div>
+          <div class="snap-title">The Diagnostic</div>
           <div class="snap-meta">
-            <span class="snap-badge">4–5 weeks</span>
-            <span class="snap-badge">Public data + actor questionnaire</span>
+            <span class="snap-badge">4–6 weeks</span>
+            <span class="snap-badge">Public data + actor questionnaire + working sessions</span>
             <span class="snap-badge">Fixed fee · Scoped on request</span>
           </div>
         </div>
@@ -551,18 +608,19 @@ hr { border: none; border-top: 1px solid var(--border); }
     </div>
     <div class="snap-body">
       <div class="snap-col">
-        <div class="col-label yours" style="color:#f5d97a">What you provide</div>
+        <div class="col-label yours" style="color:var(--amber)">What you provide</div>
         <div class="item-list">
           <div class="item"><div class="item-dot" style="background:rgba(245,217,122,0.4)"></div><div class="item-text"><strong>Cluster name, geography, sector</strong> — boundary definition and a short description to calibrate the pipeline</div></div>
-          <div class="item"><div class="item-dot" style="background:rgba(245,217,122,0.4)"></div><div class="item-text"><strong>Questionnaire distribution</strong> — you send the ClusterOS Diagnostic Instrument to actors across your cluster. Founders, anchors, researchers, and stewards each receive a role-specific version. We handle the rest</div></div>
+          <div class="item"><div class="item-dot" style="background:rgba(245,217,122,0.4)"></div><div class="item-text"><strong>Questionnaire distribution</strong> — role-specific questions to founders, <span class="term">anchor organisations<span class="term-tip">Large established actors — corporates, universities, hospitals, or public bodies — whose scale shapes the conditions other actors navigate. Some anchors also carry stewardship responsibility for the cluster.</span></span>, researchers, and stewards. We handle the instrument design, analysis, and aggregation</div></div>
+          <div class="item"><div class="item-dot" style="background:rgba(245,217,122,0.4)"></div><div class="item-text"><strong>A working session</strong> (optional, recommended) — your team's institutional knowledge calibrates the diagnostic and prevents it surfacing findings you already have in a drawer</div></div>
         </div>
       </div>
       <div class="snap-col">
-        <div class="col-label ours" style="color:#c8f0d0">What you receive</div>
+        <div class="col-label ours" style="color:var(--green)">What you receive</div>
         <div class="item-list">
           <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>50–70 verified evidence items</strong> from public records, sourced and confidence-tiered</div></div>
           <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Actor signal data</strong> — questionnaire responses processed against the stall framework, surfacing buy-side demand, sell-side capability, and cross-actor bridging signals invisible to public data</div></div>
-          <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Stall identification</strong> — X-side and Y-side evidence combined, with meaningfully higher confidence than public data alone</div></div>
+          <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Stall identification</strong> — evidence of the behaviour itself (what actors are doing) combined with evidence of what is being displaced (what they are not doing), producing meaningfully higher confidence than public data alone</div></div>
           <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Stack analysis</strong> — the mutually reinforcing configuration your cluster has stabilised around, and why single interventions have been failing</div></div>
           <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Structural resemblances</strong> — 2–3 comparable ecosystems from the database with similar configurations, and what shifted them</div></div>
           <div class="item"><div class="item-dot" style="background:rgba(200,240,208,0.4)"></div><div class="item-text"><strong>Leverage hypotheses</strong> — testable perturbations calibrated to your stack and informed by comparable ecosystems</div></div>
@@ -580,78 +638,35 @@ hr { border: none; border-top: 1px solid var(--border); }
     </div>
 
     <div class="snap-caveat">
-      <div class="snap-caveat-icon"></div>
-      <div class="snap-caveat-text">The questionnaire is what takes the Snapshot beyond what public data alone can produce. <strong>Reported actor behaviour — processed against the stall framework — is the closest proxy to Y-side observability without a full collaborative engagement.</strong> Confidence levels are stated explicitly throughout. The Snapshot is designed to stand alone — and to make the case for deeper engagement when the findings warrant it.</div>
+      
+      <div class="snap-caveat-text">The actor questionnaire is what takes the diagnostic beyond what public data alone can produce. <strong>Reported actor behaviour — processed against the stall framework — surfaces the demand signals, capability gaps, and bridging opportunities that public evidence cannot see.</strong> Confidence levels are stated explicitly throughout. The diagnostic is designed to stand alone — and to make the case for platform deployment when the findings warrant it.</div>
     </div>
     <div class="snap-cta">
-      <div class="snap-cta-text">Delivered as a structured report. <strong>No working sessions. Fixed scope. Natural path to Phase 1 if the findings warrant it.</strong></div>
-      <a href="/request.html" class="snap-btn">Request a Snapshot →</a>
+      <div class="snap-cta-text">Delivered as a structured report. <strong>Fixed scope. Standalone value. Natural path to the Platform if the findings warrant it.</strong></div>
+      <a href="/request.html" class="snap-btn">Request a Diagnostic →</a>
     </div>
   </div>
 </div>
 
-<!-- PHASES HEADER -->
+<!-- PLATFORM SECTION HEADER -->
 <div style="max-width:640px;margin:48px auto 0;padding:0 24px;">
-  <div class="sec-tag">Deeper engagements</div>
-  <p style="font-size:15px;color:var(--ink-dim);line-height:1.72;font-weight:300;margin-top:12px;">For organisations ready to move beyond the Snapshot — a full collaborative diagnostic and, where appropriate, platform deployment. Both are fixed-scope engagements, quoted after an initial conversation.</p>
+  <div class="sec-tag">Tier 3 · Platform</div>
+  <p style="font-size:15px;color:var(--ink-dim);line-height:1.72;font-weight:300;margin-top:12px;">For organisations ready to make the diagnostic findings continuously actionable. The platform is the coordination infrastructure that runs on top of the diagnostic — a sovereign deployment of ClusterOS in your region.</p>
 </div>
 
 <!-- PHASES -->
 <div class="phases">
 
-  <!-- PHASE 1 -->
-  <div class="phase-card p1 rev">
-    <div class="phase-head">
-      <div class="phase-num">PHASE 01</div>
-      <div class="phase-title-wrap">
-        <div class="phase-title">Collaborative Diagnostic</div>
-        <div class="phase-meta">
-          <span class="phase-badge time">4–6 weeks</span>
-          <span class="phase-badge scope">Your evidence + our technology</span>
-          <span class="phase-badge scope">Fixed fee · Quoted on request</span>
-        </div>
-      </div>
-    </div>
-    <div class="phase-body">
-      <div class="phase-col">
-        <div class="col-label yours">What you bring</div>
-        <div class="item-list">
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>A working session</strong> with your steward team — what you see, what you don't, where the gaps are</div></div>
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Programme documentation</strong> — existing reports, strategy documents, membership data, event records</div></div>
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>One or two anchor contacts</strong> willing to share their perspective on ecosystem engagement</div></div>
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Your cluster map</strong> — how you segment the ecosystem, who is in each cluster, where the boundaries are</div></div>
-        </div>
-      </div>
-      <div class="phase-col">
-        <div class="col-label ours">What you get back</div>
-        <div class="item-list">
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Full evidence base</strong> — 50–170 verified items per cluster, tiered by confidence, sourced and classified</div></div>
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Pattern map</strong> — systems map of reinforcing and balancing feedback loops across your ecosystem</div></div>
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Stall identification</strong> — which of the 9 canonical stalls are operating, with X-side and Y-side evidence and confidence levels</div></div>
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Stack analysis</strong> — which stalls are reinforcing each other, why single interventions have been failing</div></div>
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Leverage hypotheses</strong> — testable perturbations targeting your specific stack, with cascade predictions and success metrics</div></div>
-          <div class="item"><div class="item-dot"></div><div class="item-text"><strong>Board-ready output</strong> — the first report your board has seen built on diagnostic intelligence rather than activity metrics</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="deliverable rev">
-    <div class="del-label">Deliverable</div>
-    <div class="del-text">A complete canonical diagnostic of your ecosystem — <strong>the clearest picture of what your ecosystem is actually doing, why it is doing it, and where the specific leverage points are</strong>. Standalone value regardless of what follows.</div>
-  </div>
-
-  <div class="phase-arrow rev">↓</div>
-
-  <!-- PHASE 2 -->
+  <!-- PHASE 2 (now Tier 3) -->
   <div class="phase-card p2 rev">
     <div class="phase-head">
-      <div class="phase-num">PHASE 02</div>
+      <div class="phase-num">TIER 03</div>
       <div class="phase-title-wrap">
-        <div class="phase-title">Platform Deployment</div>
+        <div class="phase-title">ClusterOS Platform</div>
         <div class="phase-meta">
-          <span class="phase-badge time">Alongside or following Phase 1</span>
+          <span class="phase-badge time">Following or alongside the Diagnostic</span>
           <span class="phase-badge scope">Continuous ecosystem intelligence</span>
+          <span class="phase-badge scope">Partnership · Quoted on request</span>
         </div>
       </div>
     </div>
@@ -678,18 +693,16 @@ hr { border: none; border-top: 1px solid var(--border); }
     </div>
   </div>
 
-  <div class="deliverable rev" style="border-color:rgba(200,240,208,0.1);background:rgba(200,240,208,0.02);">
-    <div class="del-label">What this becomes</div>
-    <div class="del-text">The cognitive infrastructure layer for your region — <strong>a system that gets smarter as actors use it, surfaces what the board needs before they ask, and makes complexity manageable rather than fragile</strong>. Not a report. Not a tool. Infrastructure.</div>
+  
   </div>
 
 </div>
 
 <!-- WHAT'S REQUIRED -->
 <div class="required">
-  <div class="sec-tag">Starting point</div>
+  <div class="sec-tag">What the Diagnostic needs from <em>you</em></div>
   <h2 class="sec-h">What we need from <em>you</em></h2>
-  <p class="sec-p">The diagnostic is more powerful when it combines our AI pipeline with your institutional knowledge. We can run a preliminary diagnostic on public evidence alone — we did exactly this for Orlando across 582 evidence items. <strong>But steward-held data is what moves stall confidence from LOW to MEDIUM or HIGH, and what reveals dynamics that public evidence cannot see.</strong></p>
+  <p class="sec-p">The diagnostic combines a public data pipeline with your institutional knowledge. The pipeline runs on public evidence alone if needed — producing 400–600 verified evidence items per cluster. <strong>But steward-held data is what moves stall confidence from LOW to MEDIUM or HIGH, and reveals the dynamics that public evidence cannot see.</strong> Haven't mapped your cluster yet? That's part of what the working session produces.</p>
 
   <div class="req-list">
     <div class="req rev">
@@ -710,7 +723,7 @@ hr { border: none; border-top: 1px solid var(--border); }
       <div class="req-num">03</div>
       <div class="req-body">
         <div class="req-h">One or two anchor contacts</div>
-        <div class="req-p">An introduction to one or two anchor organisations willing to share their perspective on ecosystem engagement. This is the hardest data to get from public sources, and the most valuable for Y-side observability.</div>
+        <div class="req-p">An introduction to one or two <span class="term">anchor organisations<span class="term-tip">Large established actors — corporates, universities, hospitals, or public bodies — whose scale means their procurement, employment, and investment decisions set the conditions other actors navigate. In some ecosystems, the anchor also carries stewardship responsibility for the cluster.</span></span> willing to share their perspective on ecosystem engagement. This is the hardest data to get from public sources, and the most valuable for Y-side observability.</div>
       </div>
     </div>
     <div class="req rev">
@@ -723,82 +736,23 @@ hr { border: none; border-top: 1px solid var(--border); }
   </div>
 </div>
 
-<!-- WHY DIAGNOSTIC FIRST -->
-<div class="why">
-  <div class="why-box">
-    <div class="why-head">Why start with the diagnostic</div>
-    <div class="why-list">
-      <div class="why-item">
-        <div class="why-item-mark">→</div>
-        <div class="why-item-text"><strong>It de-risks the platform commitment.</strong> The diagnostic tells you exactly what your platform needs to address. You don't configure ClusterOS for a generic ecosystem — you configure it for yours, based on what the diagnostic found.</div>
-      </div>
-      <div class="why-item">
-        <div class="why-item-mark">→</div>
-        <div class="why-item-text"><strong>It is standalone valuable.</strong> The full canonical diagnostic — evidence base, pattern map, stall identification, stack analysis, leverage hypotheses — is a deliverable your board will not have seen before. It has value regardless of whether Phase 1 follows.</div>
-      </div>
-      <div class="why-item">
-        <div class="why-item-mark">→</div>
-        <div class="why-item-text"><strong>It builds the evidence base Phase 1 runs on.</strong> The platform is only as good as the diagnostic intelligence underneath it. Starting with a rigorous diagnostic means Phase 1 begins with high-confidence data, not assumptions.</div>
-      </div>
-      <div class="why-item">
-        <div class="why-item-mark">→</div>
-        <div class="why-item-text"><strong>It gives you something to take to your board immediately.</strong> Most stewards need to build the case for infrastructure investment. A board-ready diagnostic report — built on evidence, not activity metrics — is that case.</div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <!-- FAQ -->
 <div class="faq">
   <div class="sec-tag">Common questions</div>
   <h2 class="sec-h">Before you <em>get in touch</em></h2>
-  <div class="faq-list" id="faq-list">
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span class="faq-q-text">How long does a diagnostic take?</span>
-        <span class="faq-chevron">▼</span>
-      </div>
-      <div class="faq-a">A Cluster Snapshot takes 4–5 weeks. A full Collaborative Diagnostic takes 4–6 weeks. Timelines depend on questionnaire distribution and the complexity of the ecosystem being diagnosed. Both are fixed-scope engagements with a defined delivery date agreed at the start.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span class="faq-q-text">Is our data kept confidential?</span>
-        <span class="faq-chevron">▼</span>
-      </div>
-      <div class="faq-a">Yes. Commissioned diagnostics are private to the commissioning organisation. No findings, data, or cluster profile from a commissioned engagement appear in the public dataset or on the map without explicit written consent. Each regional deployment is a sovereign instance — data does not leave the regional tenant.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span class="faq-q-text">Do we need to have done the free pulse check first?</span>
-        <span class="faq-chevron">▼</span>
-      </div>
-      <div class="faq-a">No. The free pulse check is an optional starting point — it gives you a structural read based on self-reported stalls. You can commission a Snapshot or Collaborative Diagnostic directly. That said, the pulse check takes five minutes and can help frame the initial scoping conversation.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span class="faq-q-text">What happens after the diagnostic?</span>
-        <span class="faq-chevron">▼</span>
-      </div>
-      <div class="faq-a">The diagnostic produces a stall profile, stack analysis, structural resemblances, and testable leverage hypotheses. What happens next depends on the findings. Some organisations act on the leverage hypotheses independently. Others move to Phase 2 — platform deployment — where ClusterOS provides the coordination infrastructure to execute the interventions the diagnostic identified.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span class="faq-q-text">Can you work with clusters outside Europe?</span>
-        <span class="faq-chevron">▼</span>
-      </div>
-      <div class="faq-a">Yes. The 221-cluster dataset spans 57 countries across six continents. The diagnostic framework and platform are not region-specific — the same structural patterns appear regardless of geography, sector, or maturity level. We have worked with ecosystems in North America, Asia-Pacific, the Middle East, and Africa.</div>
-    </div>
-  </div>
+  <div class="faq-list" id="faq-list"></div>
 </div>
 
 <!-- CTA -->
 <div class="cta-section" id="cta">
   <div class="cta-box rev">
-    <h2 class="cta-h">The right starting point<br>is <em>a conversation.</em></h2>
-    <p class="cta-p">Tell us about your ecosystem — sector, geography, what the board is asking for. We'll scope the right engagement, explain what it produces, and agree a fixed fee before anything starts.</p>
+    <h2 class="cta-h">Ready to<br><em>get started?</em></h2>
+    <p class="cta-p">Run the free pulse check now — five minutes, no commitment. Or get in touch to commission a Diagnostic.</p>
     <div class="cta-btns">
+      <a href="/cas-explainer.html" class="btn-amber">Free Pulse Check →</a>
       <a href="/request.html" class="btn-primary">Request a Diagnostic</a>
-      <a href="mailto:andrew@communitylab.app?subject=ClusterOS conversation" class="btn-secondary">Talk to Andrew directly</a>
     </div>
     <div class="cta-note">andrew@communitylab.app · Community Lab · Edinburgh</div>
   </div>

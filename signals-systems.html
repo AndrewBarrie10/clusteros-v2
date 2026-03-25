@@ -181,6 +181,7 @@ body {
   background: #f7f4ef; color: #1a1a1a;
   font-family: 'Geist', sans-serif; font-weight: 300;
   line-height: 1.6; overflow-x: hidden;
+  padding-bottom: 56px;
 }
 
 
@@ -719,9 +720,14 @@ body {
 .nav-links a { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: #8c8780; transition: color 0.2s; }
 .nav-links a:hover { color: #1a1a1a; }
 
-
-
-
+.sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 950; background: rgba(247,244,239,0.97); backdrop-filter: blur(16px); border-top: 1px solid var(--border); height: 56px; display: flex; align-items: center; justify-content: flex-end; }
+.sticky-bar-inner { display: flex; align-items: center; height: 100%; }
+.sticky-btn { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0 1.4rem; height: 100%; display: flex; align-items: center; white-space: nowrap; transition: opacity 0.15s; }
+.sticky-amber { background: var(--amber, #d97706); color: #fff; }
+.sticky-amber:hover { opacity: 0.85; }
+.sticky-green { background: var(--green); color: #fff; }
+.sticky-green:hover { opacity: 0.85; }
+@media (max-width: 640px) { .sticky-btn { font-size: 10px; padding: 0 1rem; } }
 </style>
 <meta name="description" content="How ClusterOS works: four actors, one substrate. Every selfish action by founders, corporates, researchers and stewards generates intelligence that makes the whole cluster more effective.">
 </head>
@@ -1072,24 +1078,6 @@ body {
     </div>
   </div>
 </section>
-
-<!-- CTA -->
-<section id="cta">
-  <div class="cta-inner">
-    <div class="section-label reveal" style="justify-content:center;">Build your infrastructure</div>
-    <h2 class="cta-headline reveal reveal-delay-1">
-      Your cluster has actors.<br>
-      <em>Does it have an infrastructure layer?</em>
-    </h2>
-    <p class="cta-sub reveal reveal-delay-2">
-      A ClusterOS diagnostic identifies which actors are present, what signal they're generating, and what coordination layer is missing. Then we build it.
-    </p>
-    <a href="/request.html" class="btn-primary reveal reveal-delay-3">Request a diagnostic →</a>
-    <p class="cta-note reveal reveal-delay-3">Stall analysis · Actor mapping · Substrate design</p>
-  </div>
-</section>
-
-
 
 
 
@@ -1756,5 +1744,11 @@ document.querySelectorAll('#ripple-chain').forEach(el => rippleObs.observe(el));
   }
 })();
 </script>
+<div class="sticky-bar">
+  <div class="sticky-bar-inner">
+    <a class="sticky-btn sticky-amber" href="/cas-explainer.html">Free Pulse Check →</a>
+    <a class="sticky-btn sticky-green" href="/request.html">Request a Diagnostic →</a>
+  </div>
+</div>
 </body>
 </html>

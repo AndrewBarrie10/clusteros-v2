@@ -94,6 +94,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     padding-top: 56px;
+    padding-bottom: 56px;
   }
   a { color: inherit; text-decoration: none; }
   /* Typography overrides — match index scale & ink colours */
@@ -459,10 +460,6 @@ html{scroll-behavior:smooth}
       <a href="/ln-12-leverage.html" class="rel-card"><div class="rel-tag">Leverage</div><div class="rel-title">What Leverage Actually Looks Like</div></a>
     </div>
   </div>
-
-  <div class="cta">
-    <p>S8 is present in 88% of diagnostics — usually alongside S7. Find out whether your cluster's activity is converting, or cycling.</p>
-  </div>
 </div>
 
 
@@ -489,6 +486,14 @@ html{scroll-behavior:smooth}
   .section-h, h2 { font-size: clamp(18px, 5vw, 24px) !important; }
   p { font-size: 15px; line-height: 1.65; }
 }
+.sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 950; background: rgba(247,244,239,0.97); backdrop-filter: blur(16px); border-top: 1px solid var(--border); height: 56px; display: flex; align-items: center; justify-content: flex-end; }
+.sticky-bar-inner { display: flex; align-items: center; height: 100%; }
+.sticky-btn { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0 1.4rem; height: 100%; display: flex; align-items: center; white-space: nowrap; transition: opacity 0.15s; }
+.sticky-amber { background: var(--amber, #d97706); color: #fff; }
+.sticky-amber:hover { opacity: 0.85; }
+.sticky-green { background: var(--green); color: #fff; }
+.sticky-green:hover { opacity: 0.85; }
+@media (max-width: 640px) { .sticky-btn { font-size: 10px; padding: 0 1rem; } }
 </style>
 
 
@@ -565,5 +570,11 @@ html{scroll-behavior:smooth}
   }
 })();
 </script>
+<div class="sticky-bar">
+  <div class="sticky-bar-inner">
+    <a class="sticky-btn sticky-amber" href="/cas-explainer.html">Free Pulse Check →</a>
+    <a class="sticky-btn sticky-green" href="/request.html">Request a Diagnostic →</a>
+  </div>
+</div>
 </body>
 </html>

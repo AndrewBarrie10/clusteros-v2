@@ -173,7 +173,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; background: #f7f4ef; color: #1a1a1a;  overflow-x: hidden; }
-body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; padding-bottom: 56px; }
 
 /* HERO */
 .hero { padding: 96px 24px 64px; max-width: 960px; margin: 0 auto; text-align: left; }
@@ -349,9 +349,14 @@ hr { border: none; border-top: 1px solid var(--border); }
 .nav-links a { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: #8c8780; transition: color 0.2s; }
 .nav-links a:hover { color: #1a1a1a; }
 
-
-
-
+.sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 950; background: rgba(247,244,239,0.97); backdrop-filter: blur(16px); border-top: 1px solid var(--border); height: 56px; display: flex; align-items: center; justify-content: flex-end; }
+.sticky-bar-inner { display: flex; align-items: center; height: 100%; }
+.sticky-btn { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0 1.4rem; height: 100%; display: flex; align-items: center; white-space: nowrap; transition: opacity 0.15s; }
+.sticky-amber { background: var(--amber, #d97706); color: #fff; }
+.sticky-amber:hover { opacity: 0.85; }
+.sticky-green { background: var(--green); color: #fff; }
+.sticky-green:hover { opacity: 0.85; }
+@media (max-width: 640px) { .sticky-btn { font-size: 10px; padding: 0 1rem; } }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 <meta name="description" content="How ClusterOS identifies leverage hypotheses: the specific structural intervention most likely to shift a stall configuration. Based on 75+ diagnosed clusters.">
@@ -477,13 +482,6 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 <hr>
 
-<!-- CTA -->
-<div class="cta" id="cta">
-  <h2 class="cta-h rev">Your stack has a <em>leverage point</em>.</h2>
-  <p class="cta-p rev d1">The diagnostic identifies which stalls are operating in your ecosystem, names the stack they form, and generates testable leverage hypotheses specific to that configuration — with confidence levels, cascade predictions, and observable success metrics. Not a strategy. A starting point.</p>
-  <div class="cta-note rev d3">Testable leverage hypotheses · Calibrated to your specific stack</div>
-</div>
-
 
 
 
@@ -588,5 +586,11 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
   }
 })();
 </script>
+<div class="sticky-bar">
+  <div class="sticky-bar-inner">
+    <a class="sticky-btn sticky-amber" href="/cas-explainer.html">Free Pulse Check →</a>
+    <a class="sticky-btn sticky-green" href="/request.html">Request a Diagnostic →</a>
+  </div>
+</div>
 </body>
 </html>

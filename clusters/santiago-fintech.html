@@ -26,10 +26,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem
   position:sticky;top:0;z-index:100;}
 .nav-logo{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--green);
   letter-spacing:0.12em;text-decoration:none;text-transform:uppercase;}
-.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-decoration:none;
+.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-decoration:none;
   text-transform:uppercase;letter-spacing:0.1em;transition:color 0.15s;}
 .nav-back:hover{color:var(--ink);}
-.nav-back::before{content:'← ';}
+.nav-back::before{content:'← ';color:var(--ink-muted);}
 .nav-cta{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--green);
   text-transform:uppercase;letter-spacing:0.08em;border:1px solid var(--green);
   padding:5px 14px;border-radius:2px;text-decoration:none;transition:background 0.15s,color 0.15s;}
@@ -136,8 +136,11 @@ footer a:hover{color:var(--green);}
 </head>
 <body>
 <nav>
-  <a class="nav-logo" href="/">ClusterOS</a>
-  <a class="nav-back" href="/">All clusters</a>
+  <div class="nav-left">
+    <a class="nav-logo" href="/">ClusterOS</a>
+    <span class="nav-sep">/</span>
+    <a class="nav-back" href="/">All clusters</a>
+  </div>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">

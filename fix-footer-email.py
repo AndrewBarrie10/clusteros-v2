@@ -6,13 +6,13 @@ root = Path('.')
 OLD_FOOTER = '''      <div class="footer-col-label">Company</div>
       <a href="/about.html">About</a>
       <a href="/request.html">Request a Diagnostic</a>
-      <a href="/pricing.html">Pricing</a>
+      <a href="/get-started.html">Pricing</a>
     </div>'''
 
 NEW_FOOTER = '''      <div class="footer-col-label">Company</div>
       <a href="/about.html">About</a>
       <a href="/request.html">Request a Diagnostic</a>
-      <a href="/pricing.html">Pricing</a>
+      <a href="/get-started.html">Pricing</a>
       <a href="mailto:andrew@communitylab.app">Contact</a>
     </div>'''
 

@@ -133,7 +133,7 @@ const PATHWAY_SCRIPTS = {
         observation: "A single intervention rarely breaks a stack. Two levers, applied in sequence, usually do.",
         invitations: [
           { label: "See the stall science →",   action: "page:notes.html" },
-          { label: "What does it cost? →",      action: "page:pricing.html" }
+          { label: "Get started →",      action: "page:get-started.html" }
         ]
       },
       {
@@ -174,7 +174,7 @@ const PATHWAY_SCRIPTS = {
         observation: "Every actor experience is generated at runtime from live data. Nothing is hardcoded into the interface.",
         invitations: [
           { label: "How we've built this before →", action: "page:about.html" },
-          { label: "Platform pricing →",            action: "page:pricing.html" }
+          { label: "Get started →",            action: "page:get-started.html" }
         ]
       },
       {
@@ -214,7 +214,7 @@ const PATHWAY_SCRIPTS = {
         observation: "The question isn't whether an ecosystem is active. It's whether activity is converting to structural change.",
         invitations: [
           { label: "How a diagnostic works →",  action: "page:diagnostic.html" },
-          { label: "Pricing and access →",      action: "page:pricing.html" }
+          { label: "Get started →",      action: "page:get-started.html" }
         ]
       },
       {
@@ -254,7 +254,7 @@ const PATHWAY_SCRIPTS = {
         title: 'What a diagnostic is',
         observation: "A diagnostic names the blocker in a way a strategy can't. That's a different kind of deliverable.",
         invitations: [
-          { label: "Three ways in →",         action: "page:pricing.html" }
+          { label: "Get started →",         action: "page:get-started.html" }
         ]
       },
       {
@@ -293,7 +293,7 @@ const PATHWAY_SCRIPTS = {
         title: 'What you get back',
         observation: "The platform doesn't ask anchors to behave differently. It changes what their existing behaviour produces.",
         invitations: [
-          { label: "How it's priced →",           action: "page:pricing.html" }
+          { label: "Get started →",           action: "page:get-started.html" }
         ]
       },
       {
@@ -334,7 +334,7 @@ const PATHWAY_SCRIPTS = {
         observation: "A diagnostic doesn't produce a report. It produces a named, evidenced intervention point — something you can act on and explain publicly.",
         invitations: [
           { label: "How it works →",    action: "page:diagnostic.html" },
-          { label: "What it costs →",   action: "page:pricing.html" }
+          { label: "Get started →",   action: "page:get-started.html" }
         ]
       },
       {
@@ -375,7 +375,7 @@ const PATHWAY_SCRIPTS = {
         observation: "A sovereign database means your EDA's data stays jurisdictional. The intelligence layer improves centrally. The data never leaves the region.",
         invitations: [
           { label: "The infrastructure model →",  action: "page:digital-infrastructure.html" },
-          { label: "Procurement and pricing →",   action: "page:pricing.html" }
+          { label: "Get started →",   action: "page:get-started.html" }
         ]
       },
       {
@@ -414,7 +414,7 @@ const PATHWAY_SCRIPTS = {
       {
         observation: null,
         invitations: [
-          { label: "See how it's priced →",          action: "page:pricing.html" },
+          { label: "Get started →",          action: "page:get-started.html" },
           { label: "Request a diagnostic →",          action: "page:request.html" },
           { label: "Speak to Andrew →",               action: "action:email:ClusterOS conversation" }
         ]
@@ -1304,10 +1304,10 @@ const briefing = {
           content: "75 clusters diagnosed across 18 countries. 9 canonical stall types appear regardless of sector, geography, or funding level. Stalls are behavioural substitutions — the ecosystem doing something observable instead of something harder. They form stabilisation stacks that resist single interventions. The diagnosis names the stack and surfaces a specific leverage hypothesis." },
         { heading: "The intelligence layer",
           content: "Model Context Protocol is the infrastructure. Actor experiences are generated at runtime from live data — not hardcoded into an interface. Founders get personalised pathways. Anchors get capability matching. Researchers get demand signal translation. Stewards get structural interrogation. Every selfish action by every actor generates typed signals that make the system more intelligent for everyone else." },
-        { heading: "Three ways in",
+        { heading: "Get started",
           content: "A snapshot diagnostic (4–5 weeks, fixed price) identifies the structural configuration of your cluster and surfaces a leverage hypothesis. A full diagnostic run produces the complete five-stage analysis. Platform procurement gives your EDA the full coordination infrastructure — diagnostic capability, actor journeys, signal ingestion, and the sovereign database." }
       ],
-      cta: { text: "See how it's priced", url: "/pricing.html" }
+      cta: { text: "Get started", url: "/get-started.html" }
     }
   },
 

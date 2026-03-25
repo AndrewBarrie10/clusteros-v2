@@ -58,7 +58,7 @@ Key findings from the database:
 - /digital-infrastructure.html — Technical architecture
 - /findings.html — What 200+ diagnostics found
 - /leverage.html — How leverage hypotheses are constructed
-- /pricing.html — Engagement tiers
+- /get-started.html — Get Started
 - /about.html — About Community Lab and ClusterOS
 - /notes.html — Lab Notes: detailed analysis of individual stalls and stacks
 - /clusters/ — Full diagnostic profiles for 75+ clusters worldwide

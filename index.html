@@ -3109,6 +3109,11 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
   .nav-hamburger { display: flex !important; margin-left: auto; }
 }
 
+  .pipeline-cta { display: flex; gap: 12px; justify-content: center; padding: 28px 0 8px; flex-wrap: wrap; }
+  .pipeline-cta-amber { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 24px; border-radius: 3px; background: var(--amber); color: #fff; text-decoration: none; transition: opacity 0.15s; }
+  .pipeline-cta-amber:hover { opacity: 0.85; }
+  .pipeline-cta-green { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 24px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; transition: opacity 0.15s; }
+  .pipeline-cta-green:hover { opacity: 0.85; }
   .pipeline-note {
     margin-top: 2px;
     border: 1px solid var(--border);
@@ -3214,8 +3219,12 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
     flex-direction: column;
     gap: 10px;
     transition: background 0.15s;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
   .pipeline-step:hover { background: var(--surface); }
+  .pipeline-step:hover .pipeline-step-name { color: var(--green); }
   .pipeline-step-num {
     font-family: var(--font-mono);
     font-size: 9px; font-weight: 700;
@@ -3462,36 +3471,36 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 
     <span class="carousel-hint">Swipe to explore →</span>
     <div class="pipeline-steps carousel-mobile">
-      <div class="pipeline-step reveal">
+      <a href="/diagnostic.html" class="pipeline-step reveal">
         <div class="pipeline-step-num">01</div>
-        <a href="/diagnostic.html" class="pipeline-step-name">Evidence</a>
+        <div class="pipeline-step-name">Evidence</div>
         <div class="pipeline-step-desc">Multi-pass collection across 5 systematic domains. 50–170 structured items per cluster. External evidence is the baseline — neutralised internal evidence and live substrate signals can be layered in for adopters.</div>
         <span class="pipeline-step-tag">External · Internal · Live</span>
-      </div>
-      <div class="pipeline-step reveal reveal-delay-1">
+      </a>
+      <a href="/diagnostic.html" class="pipeline-step reveal reveal-delay-1">
         <div class="pipeline-step-num">02</div>
-        <a href="/findings.html" class="pipeline-step-name">Patterns</a>
+        <div class="pipeline-step-name">Patterns</div>
         <div class="pipeline-step-desc">Cross-domain pattern extraction bounded strictly by evidence. No inference beyond what the data supports. Audited and confidence-tiered.</div>
         <span class="pipeline-step-tag">Bounded · Audited</span>
-      </div>
-      <div class="pipeline-step reveal reveal-delay-2">
+      </a>
+      <a href="/diagnostic.html#stalls" class="pipeline-step reveal reveal-delay-2">
         <div class="pipeline-step-num">03</div>
-        <a href="/findings.html" class="pipeline-step-name">Stalls</a>
+        <div class="pipeline-step-name">Stalls</div>
         <div class="pipeline-step-desc">Detection against the 9-stall canon. Each stall assessed for observability, substitution plausibility, and Y-side visibility. Confidence tiers assigned.</div>
         <span class="pipeline-step-tag">9-Stall Canon · Tiered</span>
-      </div>
-      <div class="pipeline-step reveal reveal-delay-3">
+      </a>
+      <a href="/diagnostic.html#stacks" class="pipeline-step reveal reveal-delay-3">
         <div class="pipeline-step-num">04</div>
-        <a href="/diagnostic.html" class="pipeline-step-name">Stacks</a>
+        <div class="pipeline-step-name">Stacks</div>
         <div class="pipeline-step-desc">Reinforcing combinations identified — configurations where two or more stalls stabilise each other and absorb multiple signals simultaneously.</div>
         <span class="pipeline-step-tag">CAS-Consistent</span>
-      </div>
-      <div class="pipeline-step reveal reveal-delay-4">
+      </a>
+      <a href="/leverage.html" class="pipeline-step reveal reveal-delay-4">
         <div class="pipeline-step-num">05</div>
-        <a href="/leverage.html" class="pipeline-step-name">Leverage</a>
+        <div class="pipeline-step-name">Leverage</div>
         <div class="pipeline-step-desc">Conditional, testable intervention hypotheses — not recommendations. Each is framed as a probe: small, reversible, targeted at the load-bearing stall.</div>
         <span class="pipeline-step-tag">Conditional · Testable</span>
-      </div>
+      </a>
     </div>
 
     <div class="pipeline-note">
@@ -3511,6 +3520,11 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
           <p class="pipeline-note-text">For ecosystems running the digital substrate, evidence is continuous. Every actor signal updates the diagnostic picture. The stall configuration is no longer a snapshot — it's a live read.</p>
         </div>
       </div>
+    </div>
+
+    <div class="pipeline-cta">
+      <a href="/cas-explainer.html" class="pipeline-cta-amber">Free Pulse Check →</a>
+      <a href="/request.html" class="pipeline-cta-green">Request a Diagnostic →</a>
     </div>
 
   </div>

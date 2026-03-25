@@ -11,7 +11,7 @@
 
 <style>
 /* ── NAV ─────────────────────────────────────────────────── */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
 .nav-logo { font-family: 'Instrument Serif', serif; font-size: 18px; text-decoration: none; color: var(--ink); letter-spacing: -0.01em; flex-shrink: 0; }
 .nav-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; font-size: 14px; color: var(--green) !important; }
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
@@ -32,7 +32,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; display: flex;
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
 @media (max-width: 480px) { nav { padding: 0 16px; } .nav-logo { font-size: 15px; } }
-.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 9999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
+.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
 .nav-mobile-menu.open { display: flex; }
 .nav-mobile-menu a { font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: var(--ink-dim); padding: 10px 0; border-bottom: 1px solid var(--border); transition: color 0.15s; }
 .nav-mobile-menu a:hover { color: var(--ink); }
@@ -881,6 +881,56 @@ p + p { margin-top: 16px; }
 /* ── STALL OVERRIDE: remove old conflicting rules ──────── */
 .stall-name, .stall-num { display: none; } /* Old class names — JS doesn't generate these */
 /* ── END STALL CARD CSS ─────────────────────────────────── */
+
+/* ── TERM TOOLTIPS ──────────────────────────────────────── */
+.term {
+  border-bottom: 1px dashed var(--green);
+  cursor: help;
+  position: relative;
+  white-space: nowrap;
+}
+.term-tip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: rgba(255,255,255,0.9);
+  font-family: var(--font-sans, 'Geist', sans-serif);
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 1.55;
+  padding: 10px 14px;
+  border-radius: 4px;
+  width: 280px;
+  z-index: 1000;
+  pointer-events: none;
+  white-space: normal;
+}
+.term-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--ink);
+}
+.term:hover .term-tip,
+.term:focus .term-tip {
+  display: block;
+}
+@media (max-width: 640px) {
+  .term-tip {
+    left: 0;
+    transform: none;
+    width: 240px;
+  }
+  .term-tip::after { left: 20px; }
+}
+
 </style>
 <meta name="description" content="The ClusterOS diagnostic identifies structural stalls in regional innovation ecosystems using a 5-stage evidence pipeline. 75+ clusters diagnosed across 20+ countries.">
 </head>
@@ -929,7 +979,7 @@ p + p { margin-top: 16px; }
   <a href="diagnostic.html">The Diagnostic</a>
   <a href="leverage.html">Leverage</a>
   <a href="findings.html">Findings</a>
-  <a href="/get-started.html">Get Started</a>
+  <a href="pricing.html">Pricing</a>
   <div class="nav-mobile-divider"></div>
   <a href="notes.html">Lab Notes</a>
   <a href="ln-01-coordinating.html">S2 · Coordinating</a>
@@ -977,7 +1027,7 @@ p + p { margin-top: 16px; }
     <div class="cas-pillars reveal reveal-d1">
       <div class="cas-pillar">
         <div class="cas-pillar-num">01</div>
-        <div class="cas-pillar-text"><strong>Actors are locally rational.</strong> Every behaviour that looks like dysfunction makes perfect sense from inside the actor's constraints. Stalls are sensible responses, not mistakes.</div>
+        <div class="cas-pillar-text"><strong>Actors are locally rational</strong>Every behaviour that looks like dysfunction makes perfect sense from inside the actor's constraints. Stalls are sensible responses, not mistakes.</div>
       </div>
       <div class="cas-pillar">
         <div class="cas-pillar-num">02</div>
@@ -1076,7 +1126,7 @@ p + p { margin-top: 16px; }
   <div class="known-stacks-inner">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:56px">
       <div>
-        <div class="section-eyebrow reveal">From 221 diagnostics</div>
+        <div class="section-eyebrow reveal">From 75 diagnostics</div>
         <h2 class="section-headline reveal reveal-d1">Stacks we've seen<br><em>in the field</em></h2>
       </div>
       <p class="section-body reveal reveal-d1" style="margin-bottom:0">These three configurations appear repeatedly across geographies and sectors. They have different names in different ecosystems — but the reinforcement logic is the same. Recognising your stack is the first step to targeting it.</p>
@@ -1137,7 +1187,7 @@ p + p { margin-top: 16px; }
     <p class="cta-body reveal reveal-d2">The ClusterOS diagnostic runs evidence through all five stages. It doesn't score your cluster or rank it. It identifies the specific behavioural substitutions operating in your ecosystem — and the stack they form. That's the starting point for interventions that actually shift regimes.</p>
     <div class="cta-actions reveal reveal-d2">
       <a href="request.html" class="btn-primary">Request a diagnostic</a>
-      <a href="/leverage.html" class="btn-ghost">Explore leverage →</a>
+      <a href="signals-systems.html" class="btn-ghost">← Back to Signals &amp; Systems</a>
     </div>
     <div class="cta-note reveal reveal-d3">Testable leverage hypotheses · Calibrated to your specific configuration</div>
   </div>
@@ -1238,7 +1288,7 @@ const STALLS = [
     id: 'S6', code: 's6',
     name: 'Stabilising around incumbents',
     sub: '<em>Innovation pathways</em> concentrate around large organisations',
-    xSide: 'All significant innovation activity — funding, talent, partnerships, procurement — routes through or depends on a small number of anchor organisations.',
+    xSide: 'All significant innovation activity — funding, talent, partnerships, procurement — routes through or depends on a small number of <span class="term">anchor organisations<span class="term-tip">Large established actors — corporates, universities, hospitals, or public bodies — whose scale means their procurement, employment, and investment decisions set the conditions other actors navigate. Some anchors also carry stewardship responsibility for the cluster.</span></span>.',
     ySide: 'Emergence paths independent of incumbent strategies — new companies forming, growing, and reaching market on their own trajectory.',
     example: 'Three large defence primes control access to every significant programme in the cluster. Startups are told to "get into the supply chain." The primes decide what gets built. New entrants adapt to them.',
     color: '#ffb482',

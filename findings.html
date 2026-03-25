@@ -763,7 +763,15 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 .bar-action-amber { background: var(--amber); color: #fff; }
 .bar-action-amber:hover { opacity: 0.85; }
 @media (max-width: 640px) { .bar-default-links { display: none; } #intel-bar { padding: 0 16px; } }
-body { padding-bottom: 48px; }
+body { padding-bottom: 56px; }
+.sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 950; background: #f7f4ef; border-top: 1px solid #ddd8cf; height: 56px; display: flex; align-items: center; justify-content: flex-end; }
+.sticky-bar-inner { display: flex; align-items: center; height: 100%; }
+.sticky-btn { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0 1.4rem; height: 100%; display: flex; align-items: center; white-space: nowrap; transition: opacity 0.15s; }
+.sticky-amber { background: var(--amber, #d97706); color: #fff; }
+.sticky-amber:hover { opacity: 0.85; }
+.sticky-green { background: var(--green); color: #fff; }
+.sticky-green:hover { opacity: 0.85; }
+@media (max-width: 640px) { .sticky-btn { font-size: 10px; padding: 0 0.8rem; } }
 
 
 /* ── TERM TOOLTIPS ──────────────────────────────────────── */
@@ -917,7 +925,7 @@ setTimeout(function() {
     </li>
     <li><a href="/about.html">About</a></li>
   </ul>
-  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
+
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
@@ -1129,19 +1137,10 @@ setTimeout(function() {
   </div>
 </footer>
 
-<div id="intel-bar">
-  <div id="bar-default-state">
-    <span class="bar-icon">ClusterOS</span>
-    <span class="bar-default-links">
-      <a href="/diagnostic.html">The Diagnostic</a>
-      <a href="/findings.html">Findings</a>
-      <a href="/notes.html">Lab Notes</a>
-      <a href="/get-started.html">Get Started</a>
-    </span>
-  </div>
-  <div class="bar-actions">
-    <a class="bar-action bar-action-amber" href="/cas-explainer.html">Free Pulse Check →</a>
-    <a class="bar-action bar-action-primary" href="/request.html">Request a Diagnostic →</a>
+<div class="sticky-bar">
+  <div class="sticky-bar-inner">
+    <a class="sticky-btn sticky-amber" href="/cas-explainer.html">Free Pulse Check →</a>
+    <a class="sticky-btn sticky-green" href="/request.html">Request a Diagnostic →</a>
   </div>
 </div>
 

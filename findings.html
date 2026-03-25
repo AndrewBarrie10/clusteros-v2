@@ -565,6 +565,62 @@ p + p { margin-top: 16px; }
   .finding       { flex-direction: column; gap: 6px; }
   .finding-num   { font-size: 24px; width: auto; }
   .freq-name     { width: 130px; }
+  .carousel-mobile {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding-bottom: 4px !important;
+    margin: 0 -24px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .carousel-mobile::-webkit-scrollbar { display: none !important; }
+  .carousel-mobile > * {
+    flex: 0 0 80vw !important;
+    max-width: 80vw !important;
+    scroll-snap-align: start !important;
+    border-radius: 4px !important;
+    margin-right: 12px !important;
+    border: 1px solid var(--border) !important;
+  }
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .carousel-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border-2);
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .carousel-dot.active {
+    background: var(--green);
+    transform: scale(1.3);
+  }
+  .carousel-hint {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+}
+
+@media (min-width: 761px) {
+  .carousel-dots { display: none; }
+  .carousel-hint { display: none; }
 }
 
 /* Leaflet */
@@ -998,7 +1054,8 @@ setTimeout(function() {
   <div class="f-num">Implication</div>
   <h2 class="f-h">What the data<br><em>means for your ecosystem</em></h2>
   <p class="f-p">Pattern consistency across 200+ diagnostics has a practical implication: your ecosystem is more predictable than it looks. The diagnostic does not need to start from scratch. It applies a framework refined across dozens of ecosystems to identify which patterns are operating in yours — and where the specific leverage points are.</p>
-  <div class="means-grid">
+  <span class="carousel-hint">Swipe to explore →</span>
+  <div class="means-grid carousel-mobile">
     <div class="means-card">
       <div class="means-icon">◎</div>
       <div class="means-h">Your stack is probably already named</div>
@@ -1296,6 +1353,45 @@ if(window.initMap) window.initMap();
   if(h&&mob){
     h.addEventListener('click',function(e){e.stopPropagation();var o=mob.classList.contains('open');mob.classList.toggle('open',!o);h.classList.toggle('open',!o);});
     document.addEventListener('click',function(){mob.classList.remove('open');h.classList.remove('open');});
+  }
+})();
+</script>
+<script>
+(function() {
+  function initCarousels() {
+    document.querySelectorAll('.carousel-mobile').forEach(function(carousel) {
+      var children = Array.from(carousel.children).filter(function(el) {
+        return !el.classList.contains('carousel-dots') && !el.classList.contains('carousel-hint');
+      });
+      if (children.length < 2) return;
+      var dotsEl = carousel.nextElementSibling;
+      if (!dotsEl || !dotsEl.classList.contains('carousel-dots')) {
+        dotsEl = document.createElement('div');
+        dotsEl.className = 'carousel-dots';
+        carousel.parentNode.insertBefore(dotsEl, carousel.nextSibling);
+      }
+      dotsEl.innerHTML = '';
+      children.forEach(function(_, i) {
+        var dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', function() {
+          children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        });
+        dotsEl.appendChild(dot);
+      });
+      var dots = dotsEl.querySelectorAll('.carousel-dot');
+      carousel.addEventListener('scroll', function() {
+        var scrollLeft = carousel.scrollLeft;
+        var cardWidth = children[0] ? children[0].offsetWidth + 12 : 1;
+        var active = Math.round(scrollLeft / cardWidth);
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === active); });
+      }, { passive: true });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousels);
+  } else {
+    initCarousels();
   }
 })();
 </script>

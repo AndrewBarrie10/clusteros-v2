@@ -201,7 +201,42 @@ body { background: var(--bg); color: #1a1a1a; font-family: 'Geist', sans-serif; 
 .frame-rule { width: 100%; height: 1px; background: var(--border); margin-bottom: 40px; }
 
 .frame-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
-@media (max-width: 500px) { .frame-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .frame-grid { grid-template-columns: 1fr; }
+  .carousel-mobile {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding-bottom: 4px !important;
+    margin: 0 -24px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .carousel-mobile::-webkit-scrollbar { display: none !important; }
+  .carousel-mobile > * {
+    flex: 0 0 80vw !important;
+    max-width: 80vw !important;
+    scroll-snap-align: start !important;
+    border-radius: 6px !important;
+    margin-right: 12px !important;
+    border: 1px solid var(--border) !important;
+  }
+  .carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+  .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: #ddd8cf; transition: background 0.2s, transform 0.2s; cursor: pointer; }
+  .carousel-dot.active { background: var(--green); transform: scale(1.3); }
+  .carousel-hint { display: block; font-family: 'Geist Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 8px; }
+}
+@media (min-width: 641px) {
+  .carousel-dots { display: none; }
+  .carousel-hint { display: none; }
+}
 .frame-card { padding: 16px 18px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
 .frame-card-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
 .frame-card.bad .frame-card-label { color: #f08080; }
@@ -434,7 +469,8 @@ hr { border: none; border-top: 1px solid var(--border); }
   <p style="font-size:15px;color:var(--dim);line-height:1.75;margin-bottom:16px">Leverage means changing the <strong style="color:#1a1a1a;font-weight:400">operating conditions</strong> of the system — not the actors' values, not the institutional structure, not the strategy. Small moves that make it slightly harder for the system to continue stabilising around the same equilibrium.</p>
   <p style="font-size:15px;color:var(--dim);line-height:1.75;margin-bottom:28px">The move itself is only half the work. Without monitoring whether the system is absorbing or adapting to the intervention, any change — large or small — will be absorbed back into the existing configuration. ClusterOS tracks the signals that show whether a leverage hypothesis is working: whether behaviour is shifting, whether the stall is losing its structural support, whether the stack is beginning to decouple.</p>
 
-  <div class="frame-grid">
+  <span class="carousel-hint">Swipe to explore →</span>
+  <div class="frame-grid carousel-mobile">
     <div class="frame-card bad">
       <div class="frame-card-label">What doesn't work</div>
       <div class="frame-card-text">Large reform programmes. Structural reorganisations. New strategies. Mandating behaviour change. Targeting a single stall without addressing the stack. More activity in response to low throughput.</div>
@@ -593,5 +629,44 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
     <a class="sticky-btn sticky-green" href="/request.html">Request a Diagnostic →</a>
   </div>
 </div>
+<script>
+(function() {
+  function initCarousels() {
+    document.querySelectorAll('.carousel-mobile').forEach(function(carousel) {
+      var children = Array.from(carousel.children).filter(function(el) {
+        return !el.classList.contains('carousel-dots') && !el.classList.contains('carousel-hint');
+      });
+      if (children.length < 2) return;
+      var dotsEl = carousel.nextElementSibling;
+      if (!dotsEl || !dotsEl.classList.contains('carousel-dots')) {
+        dotsEl = document.createElement('div');
+        dotsEl.className = 'carousel-dots';
+        carousel.parentNode.insertBefore(dotsEl, carousel.nextSibling);
+      }
+      dotsEl.innerHTML = '';
+      children.forEach(function(_, i) {
+        var dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', function() {
+          children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        });
+        dotsEl.appendChild(dot);
+      });
+      var dots = dotsEl.querySelectorAll('.carousel-dot');
+      carousel.addEventListener('scroll', function() {
+        var scrollLeft = carousel.scrollLeft;
+        var cardWidth = children[0] ? children[0].offsetWidth + 12 : 1;
+        var active = Math.round(scrollLeft / cardWidth);
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === active); });
+      }, { passive: true });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousels);
+  } else {
+    initCarousels();
+  }
+})();
+</script>
 </body>
 </html>

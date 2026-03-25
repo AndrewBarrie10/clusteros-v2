@@ -117,7 +117,6 @@ function renderStalls(stalls) {
         <span class="stall-name">${s.name}</span>
         <div class="stall-bar-wrap">
           <div class="stall-bar" style="width:${w}px;background:${col}"></div>
-          <span class="stall-pct">${pct}%</span>
         </div>
       </div>
       ${confidenceBadge(s.confidence)}
@@ -128,32 +127,26 @@ function renderStalls(stalls) {
 function renderStacks(stacks) {
   if (!stacks||!stacks.length) return '<p class="empty">No stack analysis available.</p>';
   return stacks.map((st,i)=>{
-    const id = st.canonical_id || `STACK-${String(i+1).padStart(2,'0')}`;
-    const name = st.stack_name || '';
-    const stallTags = (st.stalls_involved||[]).map(s=>`<span class="stall-tag">${s}</span>`).join('');
-    const conf = st.confidence ? `<span class="conf conf-${st.confidence}">${st.confidence}</span>` : '';
-    const signals = st.absorbed_signals ? `<div class="stack-signals">${st.absorbed_signals}</div>` : '';
+    const stackId = st.id && st.id.match(/STK-\d+/) ? st.id : null;
+    const stackLabel = stackId || `Stack ${String(i+1).padStart(2,'0')}`;
+    const stackName = st.name && st.name !== stackId ? ` · ${st.name}` : '';
     return `
     <div class="stack-item">
       <div class="stack-header">
-        <span class="stack-num">${id}</span>
-        ${conf}
+        <span class="stack-num">${stackLabel}${stackName}</span>
+        <span class="stack-stalls">${(st.stalls_involved||[]).join(' · ')}</span>
       </div>
-      ${name ? `<div class="stack-name">${name}</div>` : ''}
-      <div class="stack-stalls-row">${stallTags}</div>
       <p class="stack-desc">${st.description||''}</p>
-      ${signals}
     </div>`;
   }).join('');
 }
 
 function renderLeverage(leverage) {
-  if (!leverage||!leverage.hypothesis) return '<p class="empty">Leverage hypothesis available on request.</p>';
+  if (!leverage) return '<p class="empty">Leverage hypothesis available on request.</p>';
   return `<div class="leverage-block">
     <p class="leverage-hyp">"${leverage.hypothesis||''}"</p>
     <div class="leverage-meta">
-      ${leverage.target_stack?`<span class="lm-tag">${leverage.target_stack}</span>`:''}
-      ${leverage.timeline?`<span class="lm-tag">Timeline: ${leverage.timeline}</span>`:''}
+      ${leverage.timeline?`<span class="lm-tag">${leverage.timeline}</span>`:''}
     </div>
   </div>`;
 }
@@ -214,10 +207,10 @@ function template(c, similar) {
   --font-mono:'Geist Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:var(--font-sans);background:var(--page);color:var(--ink);font-weight:300;line-height:1.6;}
+body{font-family:var(--font-sans);padding-bottom:56px;background:var(--page);color:var(--ink);font-weight:300;line-height:1.6;}
 nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;
   background:rgba(247,244,239,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
-  position:sticky;top:0;z-index:10000;}
+  position:sticky;top:0;z-index:100;}
 .nav-logo{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--green);
   letter-spacing:0.12em;text-decoration:none;text-transform:uppercase;}
 .nav-back{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-decoration:none;
@@ -278,16 +271,8 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .stack-item:last-child{border-bottom:none;}
 .stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;}
 .stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;}
-.stack-name{font-size:14px;font-style:italic;color:var(--ink);margin-bottom:0.5rem;font-family:var(--font-serif);}
-.stack-stalls-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
-.stall-tag{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border:1px solid var(--border);background:var(--surface);color:var(--green);}
 .stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
 .stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
-.stack-signals{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:0.4rem;line-height:1.5;}
-.meta-tier{font-family:var(--font-mono);font-size:10px;padding:2px 8px;}
-.meta-tier-p1{background:rgba(200,240,208,0.3);color:var(--green);border:1px solid rgba(42,122,79,0.3);}
-.meta-tier-p2{background:rgba(245,217,122,0.2);color:#7a5500;border:1px solid rgba(217,119,6,0.3);}
-.meta-tier-p3{background:rgba(212,105,90,0.1);color:#8a2a1a;border:1px solid rgba(212,105,90,0.3);}
 .leverage-block{border-left:3px solid var(--signal);padding:1.2rem 1.4rem;background:rgba(200,240,208,0.12);}
 .leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:0.8rem;}
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
@@ -314,6 +299,15 @@ footer{border-top:1px solid var(--border);padding:2rem;max-width:860px;margin:0 
   font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 footer a{color:var(--ink-muted);text-decoration:none;}
+.cluster-sticky-bar{position:fixed;bottom:0;left:0;right:0;z-index:950;background:rgba(247,244,239,0.97);backdrop-filter:blur(16px);border-top:1px solid var(--border);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 0 0 1.4rem;gap:1rem;}
+.csb-name{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1;}
+.csb-actions{display:flex;align-items:center;flex-shrink:0;height:100%;}
+.csb-btn{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:0 1.2rem;height:100%;display:flex;align-items:center;white-space:nowrap;transition:opacity 0.15s;}
+.csb-amber{background:var(--amber,#d97706);color:#fff;}
+.csb-amber:hover{opacity:0.85;}
+.csb-green{background:var(--green);color:#fff;}
+.csb-green:hover{opacity:0.85;}
+@media(max-width:640px){.csb-name{display:none;}.csb-btn{font-size:10px;padding:0 1rem;}}
 footer a:hover{color:var(--green);}
 .empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
 @media(max-width:680px){
@@ -331,7 +325,6 @@ footer a:hover{color:var(--green);}
 <nav>
   <a class="nav-logo" href="/">ClusterOS</a>
   <a class="nav-back" href="/">All clusters</a>
-  <a class="nav-cta" href="https://clusteros.io/request.html">Request →</a>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
@@ -340,14 +333,13 @@ footer a:hover{color:var(--green);}
     ${c.name}
   </div>
   <header class="cluster-header">
-    <p class="cluster-eyebrow">Diagnostic Profile · ${c._run_id||'ClusterOS 2026'}</p>
+    <p class="cluster-eyebrow">ClusterOS Diagnostic Profile</p>
     <h1>${c.name}</h1>
     <div class="cluster-meta">
       <span class="meta-tag meta-plain">${c.city}, ${countryName(c.country)}</span>
       <span class="meta-tag meta-${c.regime||'emerging'}">${regimeLabel(c.regime)}</span>
       ${c._anchor_type?`<span class="meta-tag meta-plain">${anchorLabel(c._anchor_type)}</span>`:''}
       ${c._evidence_count?`<span class="meta-tag meta-plain">${c._evidence_count} evidence items</span>`:''}
-      ${c._evidence_tier?`<span class="meta-tag meta-tier meta-tier-${c._evidence_tier.toLowerCase().replace(' ','-')}">${c._evidence_tier}</span>`:''}
     </div>
     <p class="cluster-summary">${c.summary||''}</p>
   </header>
@@ -397,8 +389,7 @@ footer a:hover{color:var(--green);}
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
-    <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context. Fixed price. 4–5 weeks.</p>
-    <a class="cta-link" href="https://clusteros.io/request.html">Request a diagnostic →</a>
+    <p class="cta-body">A full ClusterOS diagnostic adds actor questionnaire data, working sessions, and anchor interviews — producing higher-confidence stall identification, board-ready stack analysis, and leverage hypotheses calibrated to your specific context.</p>
   </div>
 </main>
 <footer>
@@ -409,6 +400,13 @@ footer a:hover{color:var(--green);}
     <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
+<div class="cluster-sticky-bar">
+  <span class="csb-name">${c.name}</span>
+  <div class="csb-actions">
+    <a class="csb-btn csb-amber" href="/cas-explainer.html">Free Pulse Check →</a>
+    <a class="csb-btn csb-green" href="/request.html">Request a Diagnostic →</a>
+  </div>
+</div>
 <script>
 const rd = ${rd};
 new Chart(document.getElementById('radarChart').getContext('2d'),{

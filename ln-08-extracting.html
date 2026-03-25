@@ -369,13 +369,11 @@ html{scroll-behavior:smooth}body{background:#f7f4ef;color:#1a1a1a;font-family:va
 }
 .sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 950; background: #f7f4ef; border-top: 1px solid #ddd8cf; height: 56px; display: flex; align-items: center; justify-content: flex-end; }
 .sticky-bar-inner { display: flex; align-items: center; height: 100%; }
-.sticky-page-id { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-left: 1.4rem; margin-right: auto; }
 .sticky-btn { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0 1.4rem; height: 100%; display: flex; align-items: center; white-space: nowrap; transition: opacity 0.15s; }
 .sticky-amber { background: var(--amber, #d97706); color: #fff; }
 .sticky-amber:hover { opacity: 0.85; }
 .sticky-green { background: var(--green); color: #fff; }
 .sticky-green:hover { opacity: 0.85; }
-@media (max-width: 640px) { .sticky-btn { font-size: 10px; padding: 0 0.8rem; } .sticky-page-id { display: none; } }
 </style>
 
 
@@ -453,7 +451,6 @@ html{scroll-behavior:smooth}body{background:#f7f4ef;color:#1a1a1a;font-family:va
 })();
 </script>
 <div class="sticky-bar">
-  <span class="sticky-page-id">S4 · Extracting</span>
   <div class="sticky-bar-inner">
     <a class="sticky-btn sticky-amber" href="/cas-explainer.html">Free Pulse Check →</a>
     <a class="sticky-btn sticky-green" href="/request.html">Request a Diagnostic →</a>

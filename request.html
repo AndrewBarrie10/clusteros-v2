@@ -641,6 +641,8 @@ function goToStep(n) {
   document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
   var el = document.getElementById('step-' + n);
   if (el) el.classList.add('active');
+  var label = document.getElementById('step-label');
+  if (label) label.textContent = 'Step ' + n + ' of 3';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 

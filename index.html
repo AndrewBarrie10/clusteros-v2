@@ -220,9 +220,16 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     transition: transform 0.15s;
   }
   .cluster-pin:hover { transform: scale(1.6); }
-  .cluster-pin.stall-high { background: #c0392b; box-shadow: 0 1px 5px rgba(192,57,43,0.5); }
-  .cluster-pin.stall-med  { background: #d97706; box-shadow: 0 1px 5px rgba(217,119,6,0.4); }
-  .cluster-pin.stall-low  { background: var(--green); box-shadow: 0 1px 5px rgba(42,122,79,0.4); }
+  .cluster-pin.regime-growing      { background: #2a7a4f; }
+  .cluster-pin.regime-mature       { background: #0c9488; }
+  .cluster-pin.regime-transitioning { background: #d97706; }
+  .cluster-pin.regime-emerging     { background: #3b82f6; }
+  .cluster-pin.regime-stalling     { background: #c0392b; }
+  .cluster-pin.regime-unknown      { background: #8c8780; }
+
+  .map-legend { display: flex; gap: 12px; flex-wrap: wrap; padding: 6px 12px; font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); align-items: center; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
   /* ── OPENING STATEMENT ───────────────────────────────── */
   #opening {
@@ -3445,6 +3452,13 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <button class="map-filter" data-filter="life">Life Sciences</button>
       <button class="map-filter" data-filter="manufacturing">Manufacturing</button>
       <button class="map-filter" data-filter="space">Space & Deep Tech</button>
+    </div>
+    <div class="map-legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#2a7a4f"></span>Growing</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#0c9488"></span>Mature</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span>Emerging</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Transitioning</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#8c8780"></span>Unknown</div>
     </div>
   </div>
 </section>

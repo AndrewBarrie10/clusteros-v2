@@ -2901,7 +2901,10 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   }
 
   /* ══ AUDIENCE DIRECTORY ════════════════════════════════ */
-  #audience-directory {
+  .dir-intro { max-width: 640px; margin: 0 auto 32px; padding: 0 24px; text-align: center; }
+.dir-intro-eyebrow { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+.dir-intro-text { font-size: 15px; color: var(--ink-dim); font-weight: 300; line-height: 1.6; }
+#audience-directory {
     padding: 4rem 2rem 6rem;
     border-top: 1px solid var(--border);
   }
@@ -3409,7 +3412,6 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
     </li>
     <li><a href="/about.html">About</a></li>
   </ul>
-  <a href="/request.html" class="nav-cta">Request a Diagnostic</a>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
@@ -3452,9 +3454,9 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 <!-- ── HERO ──────────────────────────────────────────────── -->
 <section id="hero">
   <div class="hero-inner">
-    <p class="hero-eyebrow">200+ clusters diagnosed · 18 countries · 9 structural patterns</p>
+    <p class="hero-eyebrow">221 clusters diagnosed · 18 countries · 9 structural patterns</p>
     <h1 class="hero-heading">ClusterOS identifies why clusters stall.<br><em>And provides the infrastructure to change it.</em></h1>
-    <p class="hero-lede">Diagnostic intelligence and coordination infrastructure for regional innovation ecosystems. We've diagnosed 200+ clusters across 18 countries. The same 9 structural patterns appear everywhere — regardless of sector, geography or funding. ClusterOS names the pattern, finds the leverage, and gives your ecosystem the infrastructure to compound.</p>
+    <p class="hero-lede">Diagnostic intelligence and coordination infrastructure for regional innovation ecosystems. We've diagnosed 221 clusters across 18 countries. The same 9 structural patterns appear everywhere — regardless of sector, geography or funding. ClusterOS names the pattern, finds the leverage, and gives your ecosystem the infrastructure to compound.</p>
   </div>
 </section>
 
@@ -3531,18 +3533,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 </section>
 
 <!-- ── ENTRY CTAs ─────────────────────────────────────────── -->
-<div class="entry-ctas">
-  <div class="entry-ctas-inner">
-    <button class="hero-btn-primary" id="hero-pathway-btn">
-      Free Pulse Check
-      <span>Pick the behaviours you're seeing — the system names the stall configuration. Free, instant, no account needed.</span>
-    </button>
-    <button class="hero-btn-secondary" id="hero-explore-btn">
-      Explore the platform
-      <span>Browse the evidence, architecture and diagnostic framework directly</span>
-    </button>
-  </div>
-</div>
+
 
 
 
@@ -3554,7 +3545,11 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 
 
 <!-- ── AUDIENCE DIRECTORY (shown in explore mode) ────────── -->
-<section id="audience-directory" class="hidden">
+<section id="audience-directory">
+  <div class="dir-intro">
+    <div class="dir-intro-eyebrow">Who uses ClusterOS</div>
+    <p class="dir-intro-text">The platform serves different actors differently. Find your entry point.</p>
+  </div>
   <span class="carousel-hint">Swipe to explore →</span>
   <div class="dir-inner carousel-mobile">
 
@@ -3564,7 +3559,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <p class="dir-card-body">Development agencies commission strategies. They produce roadmaps, priority sectors, and action plans. Then the cluster keeps doing what it was doing — because the structural blocker was never named. ClusterOS names it.</p>
       <div class="dir-card-links">
         <a href="/diagnostic.html">The Diagnostic →</a>
-        <a href="/findings.html">What 200+ diagnostics found →</a>
+        <a href="/findings.html">What 221 diagnostics found →</a>
         <a href="/leverage.html">Where leverage sits →</a>
         <a href="/request.html" class="dir-cta">Request a snapshot diagnostic →</a>
       </div>
@@ -4624,32 +4619,14 @@ document.querySelectorAll('#ripple-chain').forEach(el => rippleObs.observe(el));
 <script>
 // ── INDEX PAGE NAVIGATION ─────────────────────────────────
 (function() {
-  var _exploreMode = false;
-
+  
   function initIndex() {
-    var pathwayBtn = document.getElementById('hero-pathway-btn');
-    var exploreBtn = document.getElementById('hero-explore-btn');
     var directory  = document.getElementById('audience-directory');
 
-    if (pathwayBtn) {
-      pathwayBtn.addEventListener('click', function() {
-        window.location.href = '/cas-explainer.html';
-      });
-    }
-
-    if (exploreBtn) {
-      exploreBtn.addEventListener('click', function() {
-        _exploreMode = true;
-        if (directory) {
-          directory.classList.remove('hidden');
-          directory.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    }
 
     // Update map count
     var countEl = document.getElementById('map-count');
-    if (countEl) countEl.textContent = '200+';
+    if (countEl) countEl.textContent = '221';
   }
 
   // Bar mode switching

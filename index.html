@@ -758,6 +758,12 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     border-right: none;
   }
   .bar-action-primary:hover { background: var(--green-dim); }
+  .bar-action-amber {
+    color: #fff;
+    background: var(--amber);
+    border-right: none;
+  }
+  .bar-action-amber:hover { opacity: 0.85; }
 
   /* push page content above the bar */
   body { padding-bottom: 56px; }
@@ -2841,7 +2847,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     display: flex; gap: 12px; flex-wrap: wrap;
   }
   .hero-btn-primary {
-    background: var(--green); color: #fff; border: none;
+    background: var(--amber); color: #fff; border: none;
     font-family: var(--font-mono); font-size: 12px; font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
     padding: 16px 24px; border-radius: 3px; cursor: pointer;
@@ -2853,7 +2859,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     font-weight: 300; text-transform: none; letter-spacing: 0;
     color: rgba(255,255,255,0.7); margin-top: 4px; line-height: 1.4;
   }
-  .hero-btn-primary:hover { background: var(--green-dim); }
+  .hero-btn-primary:hover { opacity: 0.85; }
   .hero-btn-secondary {
     background: transparent; color: var(--ink-dim);
     border: 1px solid var(--border-2);
@@ -3492,7 +3498,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 <div class="entry-ctas">
   <div class="entry-ctas-inner">
     <button class="hero-btn-primary" id="hero-pathway-btn">
-      Self-assess your cluster
+      Free Pulse Check
       <span>Pick the behaviours you're seeing — the system names the stall configuration</span>
     </button>
     <button class="hero-btn-secondary" id="hero-explore-btn">
@@ -3535,7 +3541,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <div class="dir-card-links">
         <a href="/digital-infrastructure.html">Architecture overview →</a>
         <a href="/signals-systems.html">Four actors, one system →</a>
-        <a href="mailto:andrew@communitylab.app?subject=Architecture conversation" class="dir-cta">Talk to Andrew →</a>
+        <a href="/request.html" class="dir-cta">Request a diagnostic →</a>
       </div>
     </div>
 
@@ -3559,7 +3565,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
         <a href="/diagnostic.html">What the diagnostic produces →</a>
         <a href="/notes.html">The stall science →</a>
         <a href="/get-started.html">Three ways in →</a>
-        <a href="mailto:andrew@communitylab.app?subject=Consultant conversation" class="dir-cta">Talk about using this in an engagement →</a>
+        <a href="/request.html" class="dir-cta">Request a diagnostic →</a>
       </div>
     </div>
 
@@ -3582,7 +3588,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
         <a href="/findings.html">What the evidence shows →</a>
         <a href="/digital-infrastructure.html">The infrastructure model →</a>
         <a href="/get-started.html">Procurement and pricing →</a>
-        <a href="mailto:andrew@communitylab.app?subject=Government briefing" class="dir-cta">Request a policy briefing →</a>
+        <a href="/request.html" class="dir-cta">Request a diagnostic →</a>
       </div>
     </div>
 
@@ -3952,8 +3958,8 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
     <button id="briefing-btn" onclick="window.briefing && window.briefing.generate()">↓ Briefing</button>
   </div>
   <div class="bar-actions">
-    <a class="bar-action bar-action-secondary" href="mailto:andrew@communitylab.app?subject=ClusterOS conversation">Speak to Andrew →</a>
-    <a class="bar-action bar-action-primary" href="/request.html">Snapshot diagnostic →</a>
+    <a class="bar-action bar-action-amber" href="/cas-explainer.html">Free Pulse Check →</a>
+    <a class="bar-action bar-action-primary" href="/request.html">Request a Diagnostic →</a>
   </div>
 </div>
 

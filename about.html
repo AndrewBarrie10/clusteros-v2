@@ -11,7 +11,7 @@
 
 <style>
 /* ── NAV ─────────────────────────────────────────────────── */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
 .nav-logo { font-family: 'Instrument Serif', serif; font-size: 18px; text-decoration: none; color: var(--ink); letter-spacing: -0.01em; flex-shrink: 0; }
 .nav-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; font-size: 14px; color: var(--green) !important; }
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
@@ -32,7 +32,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; display: flex;
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
 @media (max-width: 480px) { nav { padding: 0 16px; } .nav-logo { font-size: 15px; } }
-.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 9999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
+.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
 .nav-mobile-menu.open { display: flex; }
 .nav-mobile-menu a { font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: var(--ink-dim); padding: 10px 0; border-bottom: 1px solid var(--border); transition: color 0.15s; }
 .nav-mobile-menu a:hover { color: var(--ink); }
@@ -325,6 +325,14 @@ p + p { margin-top: 16px; }
 
 
 
+
+.cl-cases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin: 24px 0 0; }
+.cl-case { background: var(--page); padding: 22px 24px; }
+.cl-case-tag { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+.cl-case-h { font-family: 'Instrument Serif', serif; font-size: 16px; color: var(--ink); line-height: 1.3; margin-bottom: 8px; }
+.cl-case-p { font-size: 12px; color: var(--ink-dim); line-height: 1.65; font-weight: 300; }
+@media (max-width: 640px) { .cl-cases { grid-template-columns: 1fr; } }
+
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 <meta name="description" content="ClusterOS is built by Community Lab Ltd, Edinburgh. Founded by Andrew Barrie, co-founder of Barrie & Hibbert (acquired by Moody's Analytics). Coordination infrastructure for regional economies.">
@@ -417,7 +425,8 @@ p + p { margin-top: 16px; }
   <p>The parallel is not superficial. Barrie & Hibbert's core insight was that financial institutions were making consequential decisions about systems they did not understand well enough — because the models they were using were inadequate for the complexity they faced. The same is true of regional economies. <strong>The stewards of innovation ecosystems are making consequential decisions — about programmes, funding, strategy — based on activity metrics that do not capture what the system is actually doing.</strong></p>
 
   <div class="pullquote">
-    <p>"Coordination should be carried by infrastructure, not by people. When coordination is infrastructural, collaboration becomes repeatable, pathways become routable, and complexity becomes manageable rather than fragile."</p>
+    <p>"The systems that endure are not those with the most control but those with the most capacity to learn."</p>
+    <p style="font-family:'Geist Mono',monospace;font-size:11px;font-style:normal;color:var(--ink-muted);margin-top:10px;">— Donella H. Meadows, <em>Thinking in Systems</em>, 2008</p>
   </div>
 </div>
 
@@ -461,14 +470,14 @@ p + p { margin-top: 16px; }
       <div class="tl-year">2024</div>
       <div class="tl-body">
         <div class="tl-h">ClusterOS diagnostic pipeline goes live</div>
-        <div class="tl-p">The AI-powered 5-stage diagnostic pipeline is deployed. Full canonical diagnostics completed across cyber security clusters in Belfast, Tel Aviv, Cheltenham, Singapore, and San Francisco; advanced manufacturing in the Basque Country; the Cambridge tech ecosystem; and ten Orlando innovation clusters.</div>
+        <div class="tl-p">The AI-powered 5-stage diagnostic pipeline is deployed. Full canonical diagnostics completed across cyber security clusters in Belfast, Cheltenham, Singapore, and San Francisco; advanced manufacturing in the Basque Country; the Cambridge tech ecosystem; and ten Orlando innovation clusters.</div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-year">2025</div>
       <div class="tl-body">
-        <div class="tl-h">221 diagnostics completed across 8+ countries</div>
-        <div class="tl-p">The pattern database reaches 200+ completed diagnostics. The actor journeys, steward dashboard, and evidence ingestor are all live. Structural resemblances identified across ecosystems in Europe, the Middle East, Southeast Asia, Australasia, and North America.</div>
+        <div class="tl-h">221 diagnostics completed across 18 countries</div>
+        <div class="tl-p">The pattern database reaches 221 completed diagnostics across 18 countries. The actor journeys, steward dashboard, and evidence ingestor are all live. Structural resemblances identified across ecosystems in Europe, the Middle East, Southeast Asia, Australasia, and North America.</div>
       </div>
     </div>
   </div>
@@ -495,7 +504,7 @@ p + p { margin-top: 16px; }
       </div>
       <div class="profile-links">
         <a href="https://www.communitylab.app" class="profile-link" target="_blank">Community Lab ↗</a>
-        <a href="mailto:andrew@communitylab.app" style="color:#c8f0d0;text-decoration:none">andrew@communitylab.app</a>
+        <a href="mailto:andrew@communitylab.app" style="color:var(--green);text-decoration:none">andrew@communitylab.app</a>
       </div>
     </div>
   </div>
@@ -520,63 +529,39 @@ p + p { margin-top: 16px; }
       </div>
     </div>
     <div class="cl-body">
-      Community Lab provides sovereign infrastructure for networks to anchor. Governed environments to start initiatives, scale connectivity, build momentum, and drive growth. Trusted by organisations including the <strong>Scottish Government</strong>, PwC, and innovation networks across the UK. Based in Edinburgh.
+      Community Lab provides sovereign infrastructure for networks to anchor — governed digital environments where organisations start initiatives, scale connectivity, build momentum, and drive measurable growth. Since 2020, Community Lab has delivered digital infrastructure for some of the UK's most complex ecosystem challenges.
     </div>
     <a href="https://www.communitylab.app" class="cl-link" target="_blank">communitylab.app</a>
   </div>
-</div>
 
-<hr>
-
-<!-- WHAT WE BELIEVE -->
-<div class="section">
-  <div class="sec-tag">What we believe</div>
-  <h2 class="sec-h">The principles behind<br><em>the framework</em></h2>
-
-  <div class="values">
-    <div class="value">
-      <div class="value-num">01</div>
-      <div class="value-body">
-        <div class="value-h">Stalls are not failures</div>
-        <div class="value-p">Every behaviour we diagnose is locally rational. Actors are not making mistakes. They are responding sensibly to the incentives and information they face. The question is never "why aren't they trying harder?" It is "what has the system structured them to do?"</div>
-      </div>
+  <div class="cl-cases">
+    <div class="cl-case">
+      <div class="cl-case-tag">Digital Infrastructure</div>
+      <div class="cl-case-h">#OpenScotland: Supercharging a Nation</div>
+      <div class="cl-case-p">Community Lab provides the coordination infrastructure for #OpenScotland — uniting partners across regions, streamlining programme delivery, and enabling the kind of cross-sector collaboration that previously required dedicated relationship managers to sustain.</div>
     </div>
-    <div class="value">
-      <div class="value-num">02</div>
-      <div class="value-body">
-        <div class="value-h">Epistemic honesty is not optional</div>
-        <div class="value-p">Every diagnostic output carries a confidence level. Where the X-side is observable but the Y-side is not, we say so. Where public evidence is insufficient, we say so. Institutions that govern at scale need to know what we know, what we infer, and what we cannot yet see. Flattening that uncertainty is not helpful. It is dangerous.</div>
-      </div>
+    <div class="cl-case">
+      <div class="cl-case-tag">Entrepreneurship</div>
+      <div class="cl-case-h">Elevator: Scotland's Largest Business Support Network</div>
+      <div class="cl-case-p">Community Lab digitised one of Scotland's largest business support providers — extending Elevator's reach to satellite communities across the country and replacing fragmented tooling with a single coordinated infrastructure layer.</div>
     </div>
-    <div class="value">
-      <div class="value-num">03</div>
-      <div class="value-body">
-        <div class="value-h">Leverage is small, not large</div>
-        <div class="value-p">Complex adaptive systems do not respond to large interventions the way linear systems do. The stack absorbs them. Leverage means small perturbations that shift the operating conditions — withdrawals of protection, not new programmes. We design for this from the start.</div>
-      </div>
-    </div>
-    <div class="value">
-      <div class="value-num">04</div>
-      <div class="value-body">
-        <div class="value-h">Infrastructure over strategy</div>
-        <div class="value-p">Strategies are documents. Infrastructure is what the system runs on. ClusterOS does not produce strategies. It produces the diagnostic intelligence that makes better decisions possible — continuously, not once every three years.</div>
-      </div>
-    </div>
-    <div class="value">
-      <div class="value-num">05</div>
-      <div class="value-body">
-        <div class="value-h">Continuation is itself a choice</div>
-        <div class="value-p">Every time a programme renews without scrutiny, the system learns that renewal requires no evidence. Every time coordination persists without consequence, the system learns that coordination is its own justification. Stewardship is not passive. Silence is consent. We build for the stewards who understand this.</div>
-      </div>
+    <div class="cl-case">
+      <div class="cl-case-tag">Social Innovation</div>
+      <div class="cl-case-h">20,000+ Frontline Carers Reached</div>
+      <div class="cl-case-p">In partnership with a Scottish Health & Social Care Partnership, Community Lab enabled the delivery of a pioneering intrapreneurship programme to thousands of frontline carers — infrastructure that made a national programme personally navigable.</div>
     </div>
   </div>
+
+  <p style="font-size:13px;color:var(--ink-dim);margin-top:24px;">Trusted by the <strong style="color:var(--ink);font-weight:400;">Scottish Government</strong>, PwC, The Lens, The Melting Pot, Elevator, and innovation networks across the UK.</p>
 </div>
+
+
 
 <!-- CTA -->
 <div class="cta" id="cta">
   <h2 class="cta-h">Built in Edinburgh.<br><em>Running everywhere.</em></h2>
-  <p class="cta-p">The diagnostic pipeline is live. 221 completed runs across 57 countries. If you steward a regional economy and have been told — by a strategy, a report, or a gap analysis — that you understand what it is doing, we think there is a more useful question. Get in touch.</p>
-  <div class="cta-or">or email <span id="cta-email" style="color:#c8f0d0"></span><script>document.getElementById('cta-email').textContent='andrew'+('@')+'communitylab.app';</script></div>
+  <p class="cta-p">The diagnostic pipeline is live. 221 completed runs across 18 countries. If you steward a regional economy and have been told — by a strategy, a report, or a gap analysis — that you understand what it is doing, we think there is a more useful question. Get in touch.</p>
+  <div class="cta-or">or email <span id="cta-email" style="color:var(--green)"></span><script>document.getElementById('cta-email').textContent='andrew'+('@')+'communitylab.app';</script></div>
 </div>
 
 

@@ -699,7 +699,7 @@ const journey = {
 
   _renderInfra1() {
     this._setPanelHeader('02 · The Infrastructure');
-    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','What it costs'];
+    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','Get started'];
     this._setPanel(`
       <span class="jnav-stage">Stage 1 · Not a platform</span>
       <p class="jnav-context">The fundamental distinction — why ClusterOS is infrastructure, not a community platform with AI features added.</p>
@@ -727,7 +727,7 @@ const journey = {
 
   _renderInfra2() {
     this._setPanelHeader('02 · The Infrastructure');
-    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','What it costs'];
+    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','Get started'];
     this._setPanel(`
       <span class="jnav-stage">Stage 2 · Signal cascade</span>
       <p class="jnav-context">The same event reaches every actor differently. This is what coordination infrastructure actually does.</p>
@@ -760,7 +760,7 @@ const journey = {
 
   _renderInfra3() {
     this._setPanelHeader('02 · The Infrastructure');
-    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','What it costs'];
+    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','Get started'];
     this._setPanel(`
       <span class="jnav-stage">Stage 3 · Actor journeys</span>
       <p class="jnav-context">Each actor type sees a different surface. Select one to see what their experience looks like.</p>
@@ -916,13 +916,13 @@ const journey = {
 
   _renderInfra4() {
     this._setPanelHeader('02 · The Infrastructure');
-    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','What it costs'];
+    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','Get started'];
     this._setPanel(`
       <span class="jnav-stage">Stage 4 · Intelligence layer</span>
       <p class="jnav-context">MCP substrate, sovereign database, autonomous bot network.</p>
       ${this._infraNav(steps,3)}
       <div class="jnav-actions">
-        <button class="jnav-btn-primary" onclick="journey._renderInfra5()">What it costs →</button>
+        <button class="jnav-btn-primary" onclick="journey._renderInfra5()">Get started →</button>
         <button class="jnav-btn-secondary" onclick="journey._renderInfra3()">← Back</button>
       </div>
       ${this._escape()}`);
@@ -1146,26 +1146,26 @@ const journey = {
       </div>
       <div class="jf-sovereign"><span class="jf-sovereign-label">Sovereign by design</span>One dedicated database per regional EDA. Data residency is jurisdictional. The intelligence layer improves centrally via model updates. Full role-based access control.</div>
       <div class="jf-sticky-bottom">
-        <button class="jnav-btn-primary" onclick="journey._renderInfra5()" style="padding:12px 28px;font-size:12px">What it costs →</button>
+        <button class="jnav-btn-primary" onclick="journey._renderInfra5()" style="padding:12px 28px;font-size:12px">Get started →</button>
         <button class="jnav-btn-secondary" onclick="journey._renderInfra3()">← Back</button>
       </div>`);
   },
 
   _renderInfra5() {
     this._setPanelHeader('02 · The Infrastructure');
-    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','What it costs'];
+    const steps=['Not a platform','Signal cascade','Actor journeys','Intelligence layer','Get started'];
     this._setPanel(`
-      <span class="jnav-stage">Stage 5 · What it costs</span>
-      <p class="jnav-context">Three ways into the platform. One direction.</p>
+      <span class="jnav-stage">Stage 5 · Get started</span>
+      <p class="jnav-context">Get startedto the platform. One direction.</p>
       ${this._infraNav(steps,4)}
       <div class="jnav-actions">
-        <a class="jnav-btn-primary" href="/pricing.html" target="_blank" style="display:block;text-align:center;text-decoration:none">See full pricing →</a>
+        <a class="jnav-btn-primary" href="/get-started.html" target="_blank" style="display:block;text-align:center;text-decoration:none">Get started →</a>
         <button class="jnav-btn-secondary" onclick="journey._startDiag()">01 · The Diagnostic</button>
         <button class="jnav-btn-secondary" onclick="journey._startCAS()">03 · Complex Adaptive Systems</button>
       </div>
       ${this._escape()}`);
     this._setFrame(`
-      <h2 class="jf-stage-heading">Three ways in.<br><em>One direction.</em></h2>
+      <h2 class="jf-stage-heading">Get started.<br><em>One direction.</em></h2>
       <p class="jf-stage-sub">ClusterOS is designed to be entered at the right level for where you are. The diagnostic confirms whether the structural conditions exist for platform investment.</p>
       <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
         ${[
@@ -1175,7 +1175,7 @@ const journey = {
         ].map(s=>`<div style="display:flex;gap:16px;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:4px"><div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--green);flex-shrink:0;padding-top:2px">${s.n}</div><div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><div style="font-size:15px;font-weight:500;color:var(--ink)">${s.name}</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-muted)">${s.price} · ${s.time}</div></div><p style="font-size:13px;color:var(--ink-dim);line-height:1.65;margin:0;font-weight:300">${s.body}</p></div></div>`).join('')}
       </div>
       <div>
-        <a class="jf-cta-btn" href="/pricing.html" target="_blank">See full pricing →</a>
+        <a class="jf-cta-btn" href="/get-started.html" target="_blank">Get started →</a>
         <a class="jf-cta-btn" href="mailto:andrew@communitylab.app?subject=ClusterOS%20infrastructure%20conversation" style="background:transparent;color:var(--green);border:2px solid var(--green);display:inline-block;margin-left:10px">Talk to Andrew →</a>
       </div>`);
   },

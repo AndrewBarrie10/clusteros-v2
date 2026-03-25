@@ -205,7 +205,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
     /* NOTE GRID */
     .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: #f0ece4; border: 1px solid #f0ece4; border-radius: 8px; overflow: hidden; }
     .note-card { background: #f7f4ef; padding: 28px; text-decoration: none; transition: background 0.2s; display: block; }
-    .note-card:hover { background: var(--green-dim); }
+    .note-card:hover { background: var(--surface); }
     .note-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
     .note-tag { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 8px; border-radius: 3px; flex-shrink: 0; }
     .note-tag.stall { background: rgba(200,240,208,0.1); color: var(--green); border: 1px solid rgba(200,240,208,0.2); }
@@ -353,7 +353,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
         <li><a href="/diagnostic.html">The Diagnostic</a></li>
         <li><a href="/leverage.html">Leverage</a></li>
         <li><a href="/findings.html">Findings</a></li>
-        <li><a href="/pricing.html">Pricing</a></li>
+        <li><a href="/get-started.html">Get Started</a></li>
       </ul>
     </li>
     <li class="nav-dropdown">
@@ -381,7 +381,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
   <a href="/diagnostic.html">The Diagnostic</a>
   <a href="/leverage.html">Leverage</a>
   <a href="/findings.html">Findings</a>
-  <a href="/pricing.html">Pricing</a>
+  <a href="/get-started.html">Get Started</a>
   <div class="nav-mobile-divider"></div>
   <a href="/notes.html">Lab Notes</a>
   <a href="/about.html">About</a>
@@ -396,7 +396,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
 <div class="hero">
   <div class="hero-tag">Lab Notes · Andrew Barrie</div>
   <h1>Why effort fails to<br><em>compound</em></h1>
-  <p class="hero-sub">Short pieces on how regional innovation clusters stall, what stabilisation stacks look like, and where leverage actually exists. Written from 200+ diagnostic runs across 8 countries.</p>
+  <p class="hero-sub">Short pieces on how regional innovation clusters stall, what stabilisation stacks look like, and where leverage actually exists. Written from 221 diagnostic runs across 57 countries.</p>
   <div class="hero-meta">
     <span>13 notes</span>
     <span>All published</span>
@@ -539,7 +539,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
   </div>
 
   <div class="about-strip">
-    <p>These notes are written from 200+ diagnostic runs across cyber security, advanced manufacturing, space technology, life sciences, and regional innovation ecosystems. <strong>Andrew Barrie</strong> is co-founder of Barrie & Hibbert (acquired by Moody's Analytics, 2011) and founder of ClusterOS.</p>
+    <p>These notes are written from 221 diagnostic runs across cyber security, advanced manufacturing, space technology, life sciences, and regional innovation ecosystems. <strong>Andrew Barrie</strong> is co-founder of Barrie & Hibbert (acquired by Moody's Analytics, 2011) and founder of ClusterOS.</p>
   </div>
 
 </div>
@@ -588,7 +588,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
       <a href="/diagnostic.html">The Diagnostic</a>
       <a href="/leverage.html">Leverage</a>
       <a href="/findings.html">Findings</a>
-      <a href="/pricing.html">Pricing</a>
+      <a href="/get-started.html">Get Started</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-label">Lab Notes</div>
@@ -602,7 +602,7 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
       <div class="footer-col-label">Company</div>
       <a href="/about.html">About</a>
       <a href="/request.html">Request a Diagnostic</a>
-      <a href="/pricing.html">Pricing</a>
+      <a href="/get-started.html">Get Started</a>
       <a href="/contact.html">Contact</a>
     </div>
   </div>
@@ -635,6 +635,37 @@ body { background: #f7f4ef; color: #1a1a1a; font-family: var(--sans); font-weigh
     h.addEventListener('click',function(e){e.stopPropagation();var o=mob.classList.contains('open');mob.classList.toggle('open',!o);h.classList.toggle('open',!o);});
     document.addEventListener('click',function(){mob.classList.remove('open');h.classList.remove('open');});
   }
+})();
+</script>
+<script>
+(function(){
+  var pills = document.querySelectorAll('.filter-pill');
+  var cards = document.querySelectorAll('.note-card');
+  var sectionBlocks = document.querySelectorAll('.notes-grid');
+  var sectionLabels = [];
+  sectionBlocks.forEach(function(grid){
+    var prev = grid.previousElementSibling;
+    if(prev && prev.classList.contains('section-label')) sectionLabels.push({label:prev, grid:grid});
+  });
+  pills.forEach(function(pill){
+    pill.addEventListener('click', function(){
+      pills.forEach(function(p){ p.classList.remove('active'); });
+      pill.classList.add('active');
+      var filter = pill.getAttribute('data-filter');
+      cards.forEach(function(card){
+        if(filter === 'all' || card.getAttribute('data-type') === filter){
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      sectionLabels.forEach(function(pair){
+        var visibleCards = pair.grid.querySelectorAll('.note-card:not(.hidden)');
+        pair.label.style.display = visibleCards.length === 0 ? 'none' : '';
+        pair.grid.style.display = visibleCards.length === 0 ? 'none' : '';
+      });
+    });
+  });
 })();
 </script>
 </body>

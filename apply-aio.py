@@ -11,7 +11,7 @@ META_DESCS = {
     'digital-infrastructure.html': 'ClusterOS is coordination infrastructure, not a platform. The architecture: MCP intelligence substrate, sovereign database, actor journey generation, and steward interrogation layer.',
     'findings.html': 'What 200+ ClusterOS diagnostics found: stall frequency distribution, structural resemblances between ecosystems, and the nine canonical patterns that prevent clusters from compounding.',
     'leverage.html': 'How ClusterOS identifies leverage hypotheses: the specific structural intervention most likely to shift a stall configuration. Based on 75+ diagnosed clusters.',
-    'pricing.html': 'ClusterOS engagement tiers: self-diagnostic (free), snapshot diagnostic, full diagnostic, and platform deployment. Pricing for regional innovation ecosystem analysis.',
+    'get-started.html': 'ClusterOS get started page',
     'about.html': "ClusterOS is built by Community Lab Ltd, Edinburgh. Founded by Andrew Barrie, co-founder of Barrie & Hibbert (acquired by Moody's Analytics). Coordination infrastructure for regional economies.",
     'request.html': 'Request a ClusterOS diagnostic for your innovation cluster. Stall analysis, actor mapping, leverage hypothesis, and substrate design for regional ecosystems.',
     'notes.html': 'ClusterOS Lab Notes: detailed analysis of structural stalls, stacks, and leverage hypotheses from 75+ ecosystem diagnostics.',

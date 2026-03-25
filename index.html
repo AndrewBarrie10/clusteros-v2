@@ -33,7 +33,7 @@
 
 <style>
 /* ── NAV ─────────────────────────────────────────────────── */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; background: rgba(247,244,239,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
 .nav-logo { font-family: 'Instrument Serif', serif; font-size: 18px; text-decoration: none; color: var(--ink); letter-spacing: -0.01em; flex-shrink: 0; }
 .nav-logo span { font-family: 'Geist Mono', monospace; font-weight: 600; font-size: 14px; color: var(--green) !important; }
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
@@ -54,7 +54,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; display: flex;
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 1024px) { .nav-hamburger { display: flex; } .nav-links { display: none; } .nav-cta { display: none; } }
 @media (max-width: 480px) { nav { padding: 0 16px; } .nav-logo { font-size: 15px; } }
-.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 9999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
+.nav-mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 999; background: rgba(247,244,239,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 24px; flex-direction: column; gap: 2px; }
 .nav-mobile-menu.open { display: flex; }
 .nav-mobile-menu a { font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: var(--ink-dim); padding: 10px 0; border-bottom: 1px solid var(--border); transition: color 0.15s; }
 .nav-mobile-menu a:hover { color: var(--ink); }
@@ -758,12 +758,6 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     border-right: none;
   }
   .bar-action-primary:hover { background: var(--green-dim); }
-  .bar-action-amber {
-    color: #fff;
-    background: var(--amber);
-    border-right: none;
-  }
-  .bar-action-amber:hover { opacity: 0.85; }
 
   /* push page content above the bar */
   body { padding-bottom: 56px; }
@@ -852,7 +846,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   .cp-stall:last-of-type { border-bottom: none; }
   .cp-stall-bar {
     height: 3px;
-    background: var(--green);
+    background: var(--amber);
     border-radius: 2px;
     flex-shrink: 0;
   }
@@ -876,9 +870,14 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   .cp-regime.emerging { background: rgba(245,217,122,0.3); color: #7a5500; }
   .cp-regime.developing { background: rgba(125,211,200,0.3); color: #1a6060; }
   .cp-regime.mature { background: rgba(200,240,208,0.3); color: var(--green-dim); }
+  .cp-regime.unknown { background: rgba(0,0,0,0.04); color: var(--ink-muted); }
+  .cp-regime.growing { background: rgba(200,240,208,0.3); color: var(--green-dim); }
+  .cp-regime.transitioning { background: rgba(125,211,200,0.2); color: #1a6060; }
+  .cp-regime.stalling { background: rgba(240,112,112,0.15); color: #7a2020; }
 
   #cp-radar { padding: 4px 0 8px; }
-  #cp-radar svg text { font-size: 6.5px; }
+  #cp-radar svg { width: 100% !important; height: auto !important; min-height: 180px; }
+  #cp-radar svg text { font-size: 7.5px; }
   .cp-link {
     display: block;
     margin-top: 1.4rem;
@@ -912,6 +911,28 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   }
   .cp-full-btn:hover { opacity: 0.85; }
   .cp-link:hover { background: var(--green); color: #fff; }
+  .cp-section-note {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--ink-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  .cp-stall-note {
+    font-size: 11px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .cp-stall-link {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .cp-stall-link:hover { text-decoration: underline; }
 
   /* ── FOOTER ──────────────────────────────────────────── */
   
@@ -2847,7 +2868,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     display: flex; gap: 12px; flex-wrap: wrap;
   }
   .hero-btn-primary {
-    background: var(--amber); color: #fff; border: none;
+    background: var(--green); color: #fff; border: none;
     font-family: var(--font-mono); font-size: 12px; font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
     padding: 16px 24px; border-radius: 3px; cursor: pointer;
@@ -2859,7 +2880,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     font-weight: 300; text-transform: none; letter-spacing: 0;
     color: rgba(255,255,255,0.7); margin-top: 4px; line-height: 1.4;
   }
-  .hero-btn-primary:hover { opacity: 0.85; }
+  .hero-btn-primary:hover { background: var(--green-dim); }
   .hero-btn-secondary {
     background: transparent; color: var(--ink-dim);
     border: 1px solid var(--border-2);
@@ -3360,7 +3381,6 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
         <li><a href="/diagnostic.html">The Diagnostic</a></li>
         <li><a href="/leverage.html">Leverage</a></li>
         <li><a href="/findings.html">Findings</a></li>
-        <li><a href="/data.html">Cluster Data</a></li>
         <li><a href="/get-started.html">Get Started</a></li>
       </ul>
     </li>
@@ -3405,7 +3425,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 <section id="map-section" aria-label="Global cluster map">
   <div id="map"></div>
   <div class="map-overlay">
-    <div class="map-count"><span id="map-count">221</span> clusters diagnosed</div>
+    <div class="map-count"><span id="map-count">200+</span> clusters diagnosed</div>
     <div class="map-filters">
       <button class="map-filter active" data-filter="all">All</button>
       <button class="map-filter" data-filter="cyber">Cyber Security</button>
@@ -3421,9 +3441,9 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 <!-- ── HERO ──────────────────────────────────────────────── -->
 <section id="hero">
   <div class="hero-inner">
-    <p class="hero-eyebrow">221 clusters diagnosed · 57 countries · 9 structural patterns</p>
+    <p class="hero-eyebrow">200+ clusters diagnosed · 18 countries · 9 structural patterns</p>
     <h1 class="hero-heading">ClusterOS identifies why clusters stall.<br><em>And provides the infrastructure to change it.</em></h1>
-    <p class="hero-lede">Diagnostic intelligence and coordination infrastructure for regional innovation ecosystems. We've diagnosed 221 clusters across 57 countries. The same 9 structural patterns appear everywhere — regardless of sector, geography or funding. ClusterOS names the pattern, finds the leverage, and gives your ecosystem the infrastructure to compound.</p>
+    <p class="hero-lede">Diagnostic intelligence and coordination infrastructure for regional innovation ecosystems. We've diagnosed 200+ clusters across 18 countries. The same 9 structural patterns appear everywhere — regardless of sector, geography or funding. ClusterOS names the pattern, finds the leverage, and gives your ecosystem the infrastructure to compound.</p>
   </div>
 </section>
 
@@ -3499,7 +3519,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
   <div class="entry-ctas-inner">
     <button class="hero-btn-primary" id="hero-pathway-btn">
       Free Pulse Check
-      <span>Pick the behaviours you're seeing — the system names the stall configuration</span>
+      <span>Pick the behaviours you're seeing — the system names the stall configuration. Free, instant, no account needed.</span>
     </button>
     <button class="hero-btn-secondary" id="hero-explore-btn">
       Explore the platform
@@ -3528,7 +3548,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <p class="dir-card-body">Development agencies commission strategies. They produce roadmaps, priority sectors, and action plans. Then the cluster keeps doing what it was doing — because the structural blocker was never named. ClusterOS names it.</p>
       <div class="dir-card-links">
         <a href="/diagnostic.html">The Diagnostic →</a>
-        <a href="/findings.html">What 221 diagnostics found →</a>
+        <a href="/findings.html">What 200+ diagnostics found →</a>
         <a href="/leverage.html">Where leverage sits →</a>
         <a href="/request.html" class="dir-cta">Request a snapshot diagnostic →</a>
       </div>
@@ -3541,7 +3561,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <div class="dir-card-links">
         <a href="/digital-infrastructure.html">Architecture overview →</a>
         <a href="/signals-systems.html">Four actors, one system →</a>
-        <a href="/request.html" class="dir-cta">Request a diagnostic →</a>
+        <a href="/request.html" class="dir-cta">Request a Diagnostic →</a>
       </div>
     </div>
 
@@ -3564,8 +3584,8 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <div class="dir-card-links">
         <a href="/diagnostic.html">What the diagnostic produces →</a>
         <a href="/notes.html">The stall science →</a>
-        <a href="/get-started.html">Three ways in →</a>
-        <a href="/request.html" class="dir-cta">Request a diagnostic →</a>
+        <a href="/pricing.html">Three ways in →</a>
+        <a href="/request.html" class="dir-cta">Talk about using this in an engagement →</a>
       </div>
     </div>
 
@@ -3587,8 +3607,8 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <div class="dir-card-links">
         <a href="/findings.html">What the evidence shows →</a>
         <a href="/digital-infrastructure.html">The infrastructure model →</a>
-        <a href="/get-started.html">Procurement and pricing →</a>
-        <a href="/request.html" class="dir-cta">Request a diagnostic →</a>
+        <a href="/pricing.html">Procurement and pricing →</a>
+        <a href="/request.html" class="dir-cta">Request a policy briefing →</a>
       </div>
     </div>
 
@@ -3603,11 +3623,11 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 <div class="journey-panel" id="panel-evidence">
   <div class="panel-inner">
     <button class="panel-close" onclick="closePanel('evidence')">Back</button>
-    <p class="panel-tag">Findings · 221 diagnostics · 57 countries</p>
+    <p class="panel-tag">Findings · 75 diagnostics · 18 countries</p>
     <h2 class="panel-h">The same patterns.<br><em>Everywhere.</em></h2>
     <p class="panel-body">We have run the ClusterOS diagnostic across 75 clusters — cyber security in Belfast, Tel Aviv, Cheltenham, Singapore; advanced manufacturing in the Basque Country; the Cambridge tech ecosystem; Orlando's ten innovation clusters and more. The finding that surprised us most is not what each ecosystem is doing wrong. It is <strong>how consistently they do the same things.</strong></p>
 
-    <div class="panel-pull">"Narrative × Activity is the most frequently identified stack across all 221 diagnostics. It appears in mature ecosystems and emerging ones. Geography, sector, and maturity level do not predict its presence. Something else does."</div>
+    <div class="panel-pull">"Narrative × Activity is the most frequently identified stack across all 75 diagnostics. It appears in mature ecosystems and emerging ones. Geography, sector, and maturity level do not predict its presence. Something else does."</div>
 
     <p class="panel-body">Three stalls appear in almost every ecosystem we have diagnosed, regardless of country, sector, or maturity stage:</p>
 
@@ -3709,7 +3729,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 
     <div class="sub-forks">
       <p class="sub-fork-label">Continue reading</p>
-      <span class="sub-fork-link" onclick="switchPanel('diagnostic','evidence')">What did 221 diagnostics find?</span>
+      <span class="sub-fork-link" onclick="switchPanel('diagnostic','evidence')">What did 75 diagnostics find?</span>
       <span class="sub-fork-link" onclick="switchPanel('diagnostic','digital')">How is it built? Show me the architecture</span>
     </div>
   </div>
@@ -3845,7 +3865,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 
     <div class="sub-forks">
       <p class="sub-fork-label">Continue reading</p>
-      <span class="sub-fork-link" onclick="switchPanel('founders','evidence')">Show me what 221 diagnostics found</span>
+      <span class="sub-fork-link" onclick="switchPanel('founders','evidence')">Show me what 75 diagnostics found</span>
       <span class="sub-fork-link" href="/request.html">Request a diagnostic →</span>
     </div>
   </div>
@@ -3862,7 +3882,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
     <div class="sub-forks">
       <p class="sub-fork-label">Continue</p>
       <span class="sub-fork-link" onclick="switchPanel('clusters','diagnostic')">How does the diagnostic identify these patterns?</span>
-      <span class="sub-fork-link" onclick="switchPanel('clusters','evidence')">What did all 221 diagnostics find?</span>
+      <span class="sub-fork-link" onclick="switchPanel('clusters','evidence')">What did all 75 diagnostics find?</span>
     </div>
   </div>
 </div>
@@ -3879,8 +3899,9 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
     <p class="cp-section-label">Summary</p>
     <p class="cp-summary" id="cp-summary">—</p>
     <div id="cp-radar" style="margin:16px 0 4px;"></div>
-    <p class="cp-section-label">Active stalls</p>
+    <p class="cp-section-label">Active stalls <span class="cp-section-note">— bar shows intensity</span></p>
     <div id="cp-stalls"></div>
+    <p class="cp-stall-note">A stall is a behavioural substitution — what the ecosystem does instead of something more adaptive. <a href="/diagnostic.html" class="cp-stall-link">Learn about stalls →</a></p>
     <a class="cp-full-btn" id="cp-full-link" href="#">View full cluster profile →</a>
   </div>
 </aside>
@@ -4612,7 +4633,7 @@ document.querySelectorAll('#ripple-chain').forEach(el => rippleObs.observe(el));
 
     // Update map count
     var countEl = document.getElementById('map-count');
-    if (countEl) countEl.textContent = '221';
+    if (countEl) countEl.textContent = '200+';
   }
 
   // Bar mode switching

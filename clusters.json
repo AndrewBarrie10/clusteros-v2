@@ -7309,8 +7309,8 @@
     "name": "Taipei Semiconductor & Hardware",
     "city": "Taipei",
     "country": "TW",
-    "lat": 24.7136,
-    "lng": 121.005,
+    "lat": 25.0375,
+    "lng": 121.5637,
     "regime": "mature",
     "stalls": [
       {
@@ -16637,8 +16637,8 @@
     "name": "Scotland Quantum and Photonics",
     "city": "Glasgow",
     "country": "GB",
-    "lat": 55.3411,
-    "lng": -4.0818,
+    "lat": 55.8612,
+    "lng": -4.2502,
     "regime": "emerging",
     "stalls": [
       {
@@ -16741,8 +16741,8 @@
     "name": "Scotland Creative Industries",
     "city": "Glasgow",
     "country": "GB",
-    "lat": 55.9533,
-    "lng": -2.6383,
+    "lat": 55.8612,
+    "lng": -4.2502,
     "regime": "growing",
     "stalls": [
       {
@@ -17263,7 +17263,7 @@
     "city": "Edinburgh",
     "country": "GB",
     "lat": 55.9533,
-    "lng": -3.7383,
+    "lng": -3.1884,
     "regime": "mature",
     "stalls": [
       {
@@ -22988,8 +22988,8 @@
     "name": "Orlando Advanced Manufacturing",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5383,
-    "lng": -80.5292,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "mature",
     "stalls": [
       {
@@ -23087,8 +23087,8 @@
     "name": "Orlando Cybersecurity",
     "city": "Orlando",
     "country": "US",
-    "lat": 29.3467,
-    "lng": -81.6419,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "emerging",
     "stalls": [
       {
@@ -23202,8 +23202,8 @@
     "name": "Orlando Photonics & Optics",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.0387,
-    "lng": -82.0669,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "emerging",
     "stalls": [
       {
@@ -23307,8 +23307,8 @@
     "name": "Orlando AgTech",
     "city": "Orlando",
     "country": "US",
-    "lat": 29.0379,
-    "lng": -80.6915,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "emerging",
     "stalls": [
       {
@@ -23413,8 +23413,8 @@
     "name": "Orlando Aviation & Aerospace",
     "city": "Orlando",
     "country": "US",
-    "lat": 29.3467,
-    "lng": -81.1165,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "mature",
     "stalls": [
       {
@@ -23512,8 +23512,8 @@
     "name": "Orlando Tourism Technology",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.0387,
-    "lng": -80.6915,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "mature",
     "stalls": [
       {
@@ -23600,8 +23600,8 @@
     "name": "Orlando MedTech",
     "city": "Orlando",
     "country": "US",
-    "lat": 28.5383,
-    "lng": -82.2292,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "emerging",
     "stalls": [
       {
@@ -23689,8 +23689,8 @@
     "name": "Orlando Digital Media",
     "city": "Orlando",
     "country": "US",
-    "lat": 29.0379,
-    "lng": -82.0669,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "mature",
     "stalls": [
       {
@@ -23810,8 +23810,8 @@
     "name": "Orlando Simulation & Training",
     "city": "Orlando",
     "country": "US",
-    "lat": 27.7299,
-    "lng": -81.6419,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "mature",
     "stalls": [
       {
@@ -23925,8 +23925,8 @@
     "name": "Orlando SpaceTech",
     "city": "Orlando",
     "country": "US",
-    "lat": 27.7299,
-    "lng": -81.1165,
+    "lat": 28.5421,
+    "lng": -81.379,
     "regime": "mature",
     "stalls": [
       {

@@ -201,6 +201,12 @@ function deriveOSConfig(qualifiers, stalls, detectedStacks) {
   const lookupKey = `${clusterType || 'regional'}|${priority || 'growth'}`;
   const configName = CONFIG_NAMES[lookupKey] || 'Regional Operating System';
 
+  // Derived flags for infrastructure priority selection
+  const researchFocus = priority === 'research' || protectSet.has('ip');
+  const talentFocus = priority === 'talent' || protectSet.has('talent');
+  const anchorLed = clusterType === 'corporate' || priority === 'supply';
+  const sovereignty = protectSet.has('sovereignty') || protectSet.has('knowledge');
+
   // Derive infrastructure priorities
   const priorities = [];
 

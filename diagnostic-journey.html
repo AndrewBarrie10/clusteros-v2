@@ -1060,90 +1060,123 @@ function buildProvocation(stepIndex, journeyState, config) {
       return { diagnosis, consequence, mechanism };
     }
 
-    /* Steps 5-6: fallback to single string (will be replaced in next session) */
-    default: return null;
-  }
-}
-
-/* ─── Legacy single-string annotation for steps 4-5 (to be replaced) */
-function buildAnnotation(stepIndex, journeyState, config) {
-  const stacks = journeyState.detectedStacks || [];
-  const stalls = journeyState.stalls || [];
-  const qa = journeyState.qualifierAnswers || {};
-  const clusterDesc = CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem';
-  const anchorLabel = config.anchorLabel || 'Anchors';
-
-  const PRIORITY_AI = {
-    research: 'Journey Construction and Role-Aware Reframing are foregrounded — translating research into demand signals without breaching IP boundaries.',
-    capital: 'Signal Propagation and Actor Matching are foregrounded — making investment opportunities visible to the right actors at the right time.',
-    talent: 'Journey Construction and Actor Matching are foregrounded — connecting founders to opportunities before they leave the ecosystem.',
-    supply: 'Actor Matching and Steward Interrogation are foregrounded — mapping supply chain capability and surfacing structural gaps.',
-    growth: 'All capabilities are active — growth requires the full intelligence surface operating across every actor type.',
-  };
-
-  const PRIORITY_JOURNEY = {
-    research: 'Researcher Journey is highlighted — every research output becomes a demand signal for matched founders and anchors.',
-    capital: 'All journeys are highlighted — investment readiness is cross-cutting, every actor type must be visible.',
-    talent: 'Founder Journey is highlighted — every founder action feeds the talent pipeline and makes the ecosystem discoverable.',
-    supply: 'Anchor Journey is highlighted — every RFI signal from your anchor creates supply chain visibility for the wider ecosystem.',
-    growth: 'All journeys are highlighted — growth requires every actor type generating signals simultaneously.',
-  };
-
-  switch (stepIndex) {
+    /* ── STEP 5: AI Reasoning Engine ── */
     case 4: {
-      let txt = 'The AI is the runtime, not a feature.';
-      const aiTxt = PRIORITY_AI[qa.priority];
-      if (aiTxt) txt += ` ${aiTxt}`;
-      txt += ' Every actor experience is constructed here, from live data, on demand.';
-      return txt;
+      let diagnosis = '';
+      const stkEvidence = stackContains(stacks, 'S1', 'S7');
+      const stkIncumbent = stackContains(stacks, 'S4', 'S6');
+      const stkMediated = stackContains(stacks, 'S5', 'S9');
+      if (stkEvidence) diagnosis = `${stkEvidence.name} is partly a narrative failure. Your ecosystem produces reports because that is what the system rewards. The AI reasoning engine changes what gets rewarded — it constructs journeys toward progress, not toward justification.`;
+      else if (stkIncumbent) diagnosis = `${stkIncumbent.name} means innovation routes through established actors. The AI reasoning engine makes alternative pathways visible and credible — not by removing incumbents but by routing around dependency on them.`;
+      else if (stkMediated) diagnosis = `${stkMediated.name} means actor journeys run through human brokers. The AI reasoning engine replaces the broker function with infrastructure — every actor gets a personalised pathway without requiring mediation.`;
+      else if (stacks.length > 0) diagnosis = `Your ecosystem is running ${stacks[0].name} — ${stacks[0].logic} The AI reasoning engine is what makes the pattern breakable by constructing alternative pathways from live data.`;
+      else diagnosis = 'Your ecosystem constructs actor experiences manually — through brokers, events, and personal introductions. The AI reasoning engine makes this infrastructure rather than a service.';
+
+      let consequence = '';
+      if (anchorLabel === 'University') consequence = 'A university anchor generates demand signals that are never translated into commercial language. Without role-aware reframing, researcher needs stay inside institutional language and never reach the founders who could address them.';
+      else if (anchorLabel === 'Large corporate') consequence = 'A corporate anchor generates procurement signals that are never structured into accessible RFIs. Without signal propagation, supply chain opportunities stay invisible to the SMEs best placed to respond.';
+      else if (anchorLabel === 'Public agency') consequence = 'A public agency anchor generates policy signals that are never personalised to individual actors. Without journey construction, programme support reaches actors who can navigate bureaucracy — not actors who need it most.';
+      else if (anchorLabel === 'Hospital') consequence = 'A hospital anchor generates clinical need signals that never reach the innovators who could address them. Without role-aware reframing, health innovation stays inside procurement language that SMEs cannot decode.';
+      else if (anchorLabel === 'Research institute') consequence = 'A research institute anchor generates capability signals that never translate into commercial demand. Without actor matching, research capacity waits to be discovered rather than being actively routed to relevant opportunity.';
+      else consequence = 'Without an AI reasoning engine, actor experiences depend on who happens to know whom. The same quality of pathway is not available to every actor — only to those with the right connections.';
+
+      let mechanism = '';
+      if (qa.priority === 'talent') mechanism = 'Journey Construction is your primary engine — personalised pathways for every actor, adapted to their stage, technology, and motivations. No actor falls through the gaps because no actor relies on a human broker to find their next step.';
+      else if (qa.priority === 'capital') mechanism = 'Signal Propagation is your primary engine — surfacing pipeline formation to external capital before it appears in public records. Investors see momentum, not just transactions.';
+      else if (qa.priority === 'research') mechanism = 'Role-Aware Reframing is your primary engine — translating research outputs into commercial language and commercial needs into research questions. The translation layer that makes university-industry coupling possible at scale.';
+      else if (qa.priority === 'supply') mechanism = 'Actor Matching is your primary engine — identifying supply chain capability across your ecosystem and matching it to anchor procurement signals. No premature disclosure. No cold outreach.';
+      else if (qa.priority === 'growth') mechanism = 'Steward Interrogation is your primary engine — live insight into system health, coordination load, and emerging risk. Not retrospective reporting. Adaptive governance.';
+      else mechanism = 'All reasoning capabilities active — Journey Construction, Signal Propagation, Role-Aware Reframing, Actor Matching, Stall Detection, Steward Interrogation.';
+      mechanism += ' Every actor experience is constructed here, from live data, on demand.';
+
+      return { diagnosis, consequence, mechanism };
     }
+
+    /* ── STEP 6: Actor Journeys ── */
     case 5: {
-      const fg = getForegroundedActor(config);
-      const cascade = ACTOR_CASCADES[fg];
-      let txt = cascade ? `${fg} experience: ${cascade.action}. Every selfish action feeds the whole.` : 'Every actor journey is generated at runtime from live ecosystem data.';
-      const jTxt = PRIORITY_JOURNEY[qa.priority];
-      if (jTxt) txt += ` ${jTxt}`;
-      return txt;
+      let diagnosis = '';
+      const stkEvidence = stackContains(stacks, 'S1', 'S7');
+      const stkMediated = stackContains(stacks, 'S5', 'S9');
+      if (stkEvidence) diagnosis = `${stkEvidence.name} is partly a journey failure. Actors produce evidence because that is what the system rewards. Journey infrastructure changes what the system rewards — progress, connection, conversion.`;
+      else if (stkMediated) diagnosis = `${stkMediated.name} means actor journeys run through human brokers. Infrastructure replaces the broker with a pathway — the actor pursues their own interest and the system routes them without mediation.`;
+      else if (stalls.includes('S9')) diagnosis = 'Waiting stall means actors defer to gatekeepers. Journey infrastructure removes the gatekeeper from the critical path — actors see their next step without waiting for permission.';
+      else diagnosis = 'Your actors currently navigate your ecosystem through personal networks and chance encounters. Journey infrastructure makes navigation repeatable — the same quality of pathway for every actor, regardless of who they know.';
+
+      let consequence = '';
+      if (qa.priority === 'talent') consequence = 'Without journey infrastructure, talent leaves not because there are no opportunities but because opportunities are invisible. A graduating engineer cannot see a pathway into your ecosystem so they take the visible pathway out of it.';
+      else if (qa.priority === 'capital') consequence = 'Without journey infrastructure, investors cannot find credible entry points. They see activity but not momentum. They back ecosystems where the pipeline is legible.';
+      else if (qa.priority === 'research') consequence = 'Without journey infrastructure, researchers cannot translate their work into commercial opportunity. They publish, present, and wait. The demand is there — the routing infrastructure is not.';
+      else if (qa.priority === 'supply') consequence = 'Without journey infrastructure, supply chain actors cannot find anchor procurement signals. The anchor knows what it needs. The supplier knows what it offers. The matching never happens.';
+      else if (qa.priority === 'growth') consequence = 'Without journey infrastructure, economic growth is personality-dependent — it compounds when brokers are active and stalls when they are not. Infrastructure makes growth repeatable.';
+      else consequence = 'Without journey infrastructure, participation is unequal. Actors with strong networks navigate well. Actors without them do not. The ecosystem compounds inequality rather than capability.';
+
+      // Mechanism includes cascade cards — return actor list for rendering
+      let goalPhrase = 'pursuing their own goals';
+      if (qa.priority === 'talent') goalPhrase = 'finding and developing their career';
+      else if (qa.priority === 'capital') goalPhrase = 'finding the right investment opportunity';
+      else if (qa.priority === 'research') goalPhrase = 'finding commercial applications for their work';
+      else if (qa.priority === 'supply') goalPhrase = 'finding anchor procurement opportunities';
+      else if (qa.priority === 'growth') goalPhrase = 'finding the conditions for their organisation to grow';
+
+      const mechanism = `Every selfish action feeds the whole. No actor needs to care about the ecosystem. They only need to care about ${goalPhrase}. The platform makes their self-interest productive for the whole.`;
+
+      // Get foregrounded actors for cascade cards
+      const fgActors = [];
+      const seen = new Set();
+      (config.protections || []).forEach(p => {
+        const actor = PROTECT_ACTOR_MAP[p];
+        if (actor && ACTOR_CASCADES[actor] && !seen.has(actor)) { fgActors.push(actor); seen.add(actor); }
+      });
+      if (config.anchorLabel && ACTOR_CASCADES[config.anchorLabel] && !seen.has(config.anchorLabel)) { fgActors.push(config.anchorLabel); seen.add(config.anchorLabel); }
+      if (!seen.has('Stewards')) fgActors.push('Stewards');
+      const cascadeActors = fgActors.slice(0, 3);
+
+      return { diagnosis, consequence, mechanism, cascadeActors };
     }
-    default: return '';
+
+    /* ── STEP 7: Full Reveal ── */
+    case 6: {
+      const stallNames = stalls.map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; });
+      let diagnosis = `You identified ${stalls.length} stall${stalls.length !== 1 ? 's' : ''} — ${stallNames.join(', ')}. `;
+      if (stacks.length > 0) {
+        const stackNames = stacks.map(s => s.name);
+        diagnosis += `Your ecosystem is running ${stackNames.join(', ')}. `;
+      } else {
+        diagnosis += 'No reinforcing stacks detected — your stalls appear independent. ';
+      }
+      const stkEvidence = stackContains(stacks, 'S1', 'S7');
+      const stkIncumbent = stackContains(stacks, 'S4', 'S6');
+      const stkMediated = stackContains(stacks, 'S5', 'S9');
+      if (stkEvidence) diagnosis += 'Evidence accumulates but never converts — the ecosystem justifies rather than executes.';
+      else if (stkIncumbent) diagnosis += 'Value flows through incumbents rather than circulating locally — the ecosystem stabilises rather than compounds.';
+      else if (stkMediated) diagnosis += 'Connections depend on brokers rather than forming directly — the ecosystem mediates rather than couples.';
+      else if (stacks.length > 0) diagnosis += stacks[0].entry || '';
+      else diagnosis += 'Each stall can be addressed independently — no reinforcing combination is locking the system into a single regime.';
+      diagnosis += ` ${articleFor(config.configName)} ${config.configName} needs infrastructure that addresses this directly.`;
+
+      let priorityLabel = 'economic growth';
+      if (qa.priority === 'talent') priorityLabel = 'talent retention';
+      else if (qa.priority === 'capital') priorityLabel = 'investment attraction';
+      else if (qa.priority === 'research') priorityLabel = 'research commercialisation';
+      else if (qa.priority === 'supply') priorityLabel = 'supply chain development';
+
+      let consequence = `Without this infrastructure, ${priorityLabel} depends on the behaviours your stalls describe — brokerage, narrative, deference, tolerance of failure. `;
+      if (protections.includes('knowledge')) consequence += 'The knowledge your ecosystem generates leaves with the people who hold it. ';
+      if (protections.includes('ip')) consequence += 'The IP your anchor produces circulates beyond your boundary before it creates local value. ';
+      if (protections.includes('trust')) consequence += 'The relationships your ecosystem depends on are invisible to any new actor who joins. ';
+      if (protections.includes('talent')) consequence += 'The pipeline you build empties faster than you fill it. ';
+      if (protections.includes('sovereignty')) consequence += 'The value your ecosystem creates is captured elsewhere. ';
+      consequence += 'Coordination stays a social task rather than an infrastructural one.';
+
+      let mechanism = `Every layer above exists in service of your sovereign ecosystem database — the one regional asset that compounds rather than depletes. ${config.configName} is not a platform you adopt. It is infrastructure you own.`;
+      if (protectStr) mechanism += ` ${protectStr} — protected by architecture, not by policy.`;
+      mechanism += ' The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem\'s actors and configures the platform for your specific context.';
+
+      return { diagnosis, consequence, mechanism, showCTA: true };
+    }
+
+    default: return { diagnosis: '', consequence: '', mechanism: '' };
   }
-}
-
-function getForegroundedActor(config) {
-  const protections = config.protections || [];
-  for (const p of protections) {
-    const actor = PROTECT_ACTOR_MAP[p];
-    if (actor && ACTOR_CASCADES[actor]) return actor;
-  }
-  if (config.anchorLabel && ACTOR_CASCADES[config.anchorLabel]) return config.anchorLabel;
-  return 'Stewards';
-}
-
-/* ─── Final annotation builder ─────────────────────────────────────── */
-function buildFinalAnnotation(journeyState, config) {
-  const qa = journeyState.qualifierAnswers || {};
-  const stacks = journeyState.detectedStacks || [];
-  const clusterDesc = CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem';
-  const anchorLabel = config.anchorLabel || 'Anchors';
-  const protections = (qa.protect || []).map(p => PROTECT_LABELS[p]).filter(Boolean);
-  const protectStr = protections.length > 0
-    ? (protections.length === 1 ? protections[0] : protections.slice(0, -1).join(', ') + ' and ' + protections[protections.length - 1])
-    : 'its regional assets';
-
-  let stackStr = '';
-  if (stacks.length === 1) stackStr = stacks[0].name;
-  else if (stacks.length > 1) stackStr = stacks.map(s => s.name).slice(0, -1).join(', ') + ' and ' + stacks[stacks.length - 1].name;
-
-  let entryStr = '';
-  if (stacks.length > 0 && stacks[0].entry) {
-    entryStr = ` The infrastructure above addresses this directly — ${stacks[0].entry.charAt(0).toLowerCase()}${stacks[0].entry.slice(1)}`;
-  }
-
-  let txt = `Your ${config.configName} — ${clusterDesc} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor, protecting ${protectStr}.`;
-  if (stackStr) txt += ` Your ecosystem shows ${stackStr}.`;
-  if (entryStr) txt += entryStr;
-  txt += ' Every layer exists in service of your sovereign ecosystem.';
-  return txt;
 }
 
 /* ─── Architecture walkthrough overlay ─────────────────────────────── */
@@ -1164,9 +1197,7 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
   }, [onClose]);
 
   const isFinal = step === 6;
-  const provocation = (!isFinal && step <= 3) ? buildProvocation(step, journeyState, config) : null;
-  const legacyAnnotation = (!isFinal && step > 3) ? buildAnnotation(step, journeyState, config) : null;
-  const finalAnnotation = isFinal ? buildFinalAnnotation(journeyState, config) : null;
+  const provocation = buildProvocation(step, journeyState, config);
 
   return (
     <div style={arch.overlay}>
@@ -1219,7 +1250,6 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
             {isFinal ? config.configName : ARCH_LAYERS[step].label}
           </div>
 
-          {/* 3-part provocation format (steps 0-3) */}
           {provocation && (
             <div style={arch.provocationWrap}>
               <div style={arch.provSection}>
@@ -1232,25 +1262,35 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
               </div>
               <div style={arch.provSection}>
                 <div style={arch.provLabel}>Mechanism</div>
+                {/* Step 6: cascade cards before mechanism text */}
+                {provocation.cascadeActors && provocation.cascadeActors.map(name => {
+                  const c = ACTOR_CASCADES[name];
+                  if (!c) return null;
+                  return (
+                    <div key={name} style={arch.cascadeCard}>
+                      <div style={arch.cascadeActor}>{name}</div>
+                      <div style={arch.cascadeRow}>
+                        <span style={arch.cascadeStepText}>{c.action}</span>
+                        <span style={arch.cascadeArrowInline}>&darr;</span>
+                        <span style={arch.cascadeStepText}>{c.signal}</span>
+                        <span style={arch.cascadeArrowInline}>&darr;</span>
+                        <span style={arch.cascadeStepText}>{c.effect}</span>
+                      </div>
+                    </div>
+                  );
+                })}
                 <p style={arch.provText}>{provocation.mechanism}</p>
               </div>
+              {/* Step 7: CTA */}
+              {provocation.showCTA && (
+                <a href="/get-started.html" style={arch.ctaLink}>
+                  Talk to us about your configuration
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+                    <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+              )}
             </div>
-          )}
-
-          {/* Legacy single-string (steps 4-5, to be replaced) */}
-          {legacyAnnotation && <p style={arch.annotText}>{legacyAnnotation}</p>}
-
-          {/* Final step */}
-          {isFinal && (
-            <React.Fragment>
-              <p style={arch.annotText}>{finalAnnotation}</p>
-              <a href="/get-started.html" style={arch.ctaLink}>
-                Talk to us about your configuration
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-                  <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
-            </React.Fragment>
           )}
         </div>
       </div>
@@ -2784,13 +2824,6 @@ const arch = {
     marginBottom: '16px',
     letterSpacing: '-0.01em',
   },
-  annotText: {
-    fontFamily: 'var(--font-sans)',
-    fontSize: '14px',
-    lineHeight: 1.7,
-    color: 'var(--dj-chalk-dim)',
-  },
-
   /* Provocation 3-part format */
   provocationWrap: {
     display: 'flex',
@@ -2824,6 +2857,38 @@ const arch = {
     fontWeight: 400,
     lineHeight: 1.65,
     color: 'var(--dj-chalk-dim)',
+  },
+
+  /* Cascade cards for Step 6 */
+  cascadeCard: {
+    border: '1px solid var(--dj-border)',
+    borderRadius: '6px',
+    padding: '10px 12px',
+    marginBottom: '8px',
+    background: 'rgba(0,0,0,0.02)',
+  },
+  cascadeActor: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '14px',
+    color: 'var(--dj-chalk)',
+    marginBottom: '6px',
+  },
+  cascadeRow: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '2px',
+  },
+  cascadeStepText: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '11px',
+    color: 'var(--dj-chalk-dim)',
+    lineHeight: 1.4,
+  },
+  cascadeArrowInline: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '10px',
+    color: 'var(--steward)',
+    padding: '0 0 0 2px',
   },
 
   ctaLink: {

@@ -148,12 +148,43 @@ function StepIndicator({ current, completedUpTo }) {
 
 /* ─── Stage placeholder (for stages 2 & 3) ────────────────────────── */
 function StagePlaceholder({ stage }) {
+  const { journeyState } = useJourney();
+  const stageIndex = STAGES.findIndex(s => s.id === stage.id);
+  const showDebug = stage.id === 'leverage';
+  const detectedStacks = journeyState.detectedStacks || [];
+
   return (
     <div style={styles.stageContainer}>
       <h2 style={styles.stageHeading}>
-        Stage {STAGES.findIndex(s => s.id === stage.id) + 1}: {stage.label}
+        Stage {stageIndex + 1}: {stage.label}
       </h2>
       <p style={styles.stageSubtitle}>{stage.subtitle}</p>
+
+      {showDebug && (
+        <div style={styles.debugBox}>
+          <div style={styles.debugHeader}>State carried forward from Stage 1</div>
+          <div style={styles.debugRow}>
+            <span style={styles.debugKey}>selectedStalls</span>
+            <span style={styles.debugVal}>
+              {journeyState.stalls.length > 0
+                ? journeyState.stalls.map(id => {
+                    const s = STALLS.find(x => x.id === id);
+                    return s ? `${id} ${s.name}` : id;
+                  }).join(', ')
+                : '(none)'}
+            </span>
+          </div>
+          <div style={styles.debugRow}>
+            <span style={styles.debugKey}>detectedStacks</span>
+            <span style={styles.debugVal}>
+              {detectedStacks.length > 0
+                ? detectedStacks.map(s => `${s.id} ${s.name} [${s.triggers.join('+')}]`).join(', ')
+                : '(none)'}
+            </span>
+          </div>
+        </div>
+      )}
+
       <div style={styles.placeholderBox}>
         <span style={styles.placeholderLabel}>Stage content</span>
         <span style={styles.placeholderHint}>Not yet implemented</span>
@@ -584,6 +615,38 @@ const styles = {
     fontSize: '14px',
     color: 'var(--dj-chalk-dim)',
     marginBottom: '32px',
+  },
+  debugBox: {
+    background: 'rgba(125,211,200,0.06)',
+    border: '1px solid rgba(125,211,200,0.2)',
+    borderRadius: '8px',
+    padding: '16px 20px',
+    marginBottom: '20px',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '12px',
+  },
+  debugHeader: {
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    color: 'var(--steward)',
+    marginBottom: '12px',
+  },
+  debugRow: {
+    display: 'flex',
+    gap: '12px',
+    marginBottom: '6px',
+    lineHeight: 1.5,
+  },
+  debugKey: {
+    color: 'var(--dj-chalk-muted)',
+    flexShrink: 0,
+    minWidth: '120px',
+  },
+  debugVal: {
+    color: 'var(--dj-chalk-dim)',
+    wordBreak: 'break-word',
   },
   placeholderBox: {
     border: '1px dashed var(--dj-border)',

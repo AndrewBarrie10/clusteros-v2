@@ -65,17 +65,70 @@ const STALLS = [
   { id: 'S9', name: 'Waiting',          sub: 'Action is deferred pending external conditions — funding, policy clarity, anchor commitment. Waiting becomes structural.' },
 ];
 
-/* ─── Stack detection rules ────────────────────────────────────────── */
+/* ─── Stack detection rules + leverage hypotheses ──────────────────── */
 const STACK_RULES = [
-  { id: 'STK-05', name: 'Mediated Dependency Loop',    triggers: ['S5', 'S9'], logic: 'Mediation defers action to external actors, who are themselves waiting — creating a self-reinforcing dependency cycle where no party moves first.' },
-  { id: 'STK-12', name: 'Evidence Without Commitment',  triggers: ['S1', 'S7'], logic: 'Re-proving generates narrative to justify existence, while narrating substitutes reporting for impact — evidence accumulates but never converts to committed action.' },
-  { id: 'STK-03', name: 'Incumbent Lock',               triggers: ['S6', 'S4'], logic: 'Stabilising preserves structures that enable extraction — anchors maintain their position while the ecosystem optimises around them rather than adapting.' },
-  { id: 'STK-01', name: 'Activity-Alignment Stack',     triggers: ['S7', 'S2'], logic: 'The ecosystem reports activity to justify coordination, and coordinates to generate reportable activity. Neither breaks without changing both.' },
-  { id: 'STK-02', name: 'Justification Stack',          triggers: ['S1', 'S8'], logic: 'Early-stage activity is used as proof of concept rather than evaluated against outcomes. The case for scaling is never quite strong enough.' },
-  { id: 'STK-04', name: 'Relationship Stack',           triggers: ['S2', 'S5'], logic: 'The ecosystem manages relationships as the primary output. Transactions are replaced by partnerships, and partnerships by further coordination.' },
-  { id: 'STK-06', name: 'Anchor Dependency Stack',      triggers: ['S5', 'S4'], logic: 'The ecosystem organises itself around managing anchor institutions rather than changing their behaviour. Value flows out while relationships are maintained.' },
-  { id: 'STK-07', name: 'Tolerance Stack',              triggers: ['S8', 'S3'], logic: 'Poor performance at scale is tolerated to avoid disrupting the narrative of progress. Accountability is systematically deferred.' },
+  { id: 'STK-05', name: 'Mediated Dependency Loop',    triggers: ['S5', 'S9'],
+    logic: 'Mediation defers action to external actors, who are themselves waiting — creating a self-reinforcing dependency cycle where no party moves first.',
+    regime: 'The ecosystem is locked into perpetual standby — every actor waits for another to move, and mediation sustains the waiting as productive activity.',
+    entry: 'Identify the actor with the least to lose from unilateral action and change their constraint — not their willingness.',
+    effect: 'One committed move breaks the symmetry of waiting; other actors follow once the cost of inaction exceeds the cost of going second.',
+    confidence: 'High' },
+  { id: 'STK-12', name: 'Evidence Without Commitment',  triggers: ['S1', 'S7'],
+    logic: 'Re-proving generates narrative to justify existence, while narrating substitutes reporting for impact — evidence accumulates but never converts to committed action.',
+    regime: 'The ecosystem is locked into a justification cycle — evidence is produced to sustain funding, not to inform decisions or trigger execution.',
+    entry: 'Secure a single credible external validator who makes the case once and commits publicly, removing the need for continuous internal re-proving.',
+    effect: 'Resources shift from justification to execution; narrative production drops as the case becomes settled rather than perpetually contested.',
+    confidence: 'High' },
+  { id: 'STK-03', name: 'Incumbent Lock',               triggers: ['S6', 'S4'],
+    logic: 'Stabilising preserves structures that enable extraction — anchors maintain their position while the ecosystem optimises around them rather than adapting.',
+    regime: 'The ecosystem is locked into serving incumbent anchors — stability protects extraction channels, and extraction funds the stability apparatus.',
+    entry: 'Change anchor procurement or spin-out policy to redirect value circulation, rather than asking anchors to voluntarily change behaviour.',
+    effect: 'Value begins circulating within the ecosystem; new entrants gain access to resources previously captured by incumbents.',
+    confidence: 'Medium' },
+  { id: 'STK-01', name: 'Activity-Alignment Stack',     triggers: ['S7', 'S2'],
+    logic: 'The ecosystem reports activity to justify coordination, and coordinates to generate reportable activity. Neither breaks without changing both.',
+    regime: 'The ecosystem is locked into performative coordination — meetings and reports are the primary output, and both exist to justify the other.',
+    entry: 'Change what gets reported — shift metrics from activity and alignment to outcomes and commitments — before changing governance.',
+    effect: 'Coordination without reportable outcomes loses justification; actors redirect effort toward measurable change.',
+    confidence: 'High' },
+  { id: 'STK-02', name: 'Justification Stack',          triggers: ['S1', 'S8'],
+    logic: 'Early-stage activity is used as proof of concept rather than evaluated against outcomes. The case for scaling is never quite strong enough.',
+    regime: 'The ecosystem is locked into pilot mode — starts accumulate but never graduate, because each is used as evidence rather than evaluated as progress.',
+    entry: 'Change the measurement layer — redefine success from number of starts to rate of graduation — before changing programme design.',
+    effect: 'Activity that does not convert to outcomes loses funding priority; resources concentrate on fewer, higher-conviction bets.',
+    confidence: 'Medium' },
+  { id: 'STK-04', name: 'Relationship Stack',           triggers: ['S2', 'S5'],
+    logic: 'The ecosystem manages relationships as the primary output. Transactions are replaced by partnerships, and partnerships by further coordination.',
+    regime: 'The ecosystem is locked into relationship maintenance — partnerships are preserved as ends in themselves, substituting for the transactions they were meant to enable.',
+    entry: 'Restructure incentives so that actors benefit from completed transactions, not from maintaining partnership status.',
+    effect: 'Partnerships that do not produce transactions dissolve naturally; remaining relationships become functional rather than ceremonial.',
+    confidence: 'Medium' },
+  { id: 'STK-06', name: 'Anchor Dependency Stack',      triggers: ['S5', 'S4'],
+    logic: 'The ecosystem organises itself around managing anchor institutions rather than changing their behaviour. Value flows out while relationships are maintained.',
+    regime: 'The ecosystem is locked into anchor servicing — mediation effort flows toward keeping anchors comfortable rather than changing their extraction behaviour.',
+    entry: 'Change anchor procurement or IP policy at the institutional level, creating structural incentives for value to circulate rather than extract.',
+    effect: 'Mediation effort redirects from relationship management to transaction facilitation; anchor behaviour shifts through changed constraints.',
+    confidence: 'Low' },
+  { id: 'STK-07', name: 'Tolerance Stack',              triggers: ['S8', 'S3'],
+    logic: 'Poor performance at scale is tolerated to avoid disrupting the narrative of progress. Accountability is systematically deferred.',
+    regime: 'The ecosystem is locked into tolerance of underperformance — scaling activity provides cover, and forgiving prevents the accountability that would expose it.',
+    entry: 'Introduce conditional continuation — a funder or anchor changes the terms under which they will continue to support, creating accountability without confrontation.',
+    effect: 'Underperforming programmes lose automatic renewal; resources shift toward programmes that demonstrate measurable progress.',
+    confidence: 'Medium' },
 ];
+
+/* ─── Individual stall leverage (for stalls not in any stack) ──────── */
+const STALL_LEVERAGE = {
+  S1: 'Secure one credible external validator to make the case definitively — internal re-proving almost never resolves this.',
+  S2: 'Identify the actor with the most to lose from the current arrangement and change their constraint, not their willingness to coordinate.',
+  S3: 'Introduce conditional continuation from a funder or anchor — accountability breaks through changed conditions, not culture.',
+  S4: 'Change anchor procurement or spin-out policy to redirect value circulation within the ecosystem.',
+  S5: 'Restructure incentives so actors benefit from completed transactions rather than maintained relationships.',
+  S6: 'The leverage is almost always external — a new entrant, a policy shift, or a funding regime change that disrupts incumbent comfort.',
+  S7: 'Change what gets reported — shift from activity narratives to outcome evidence — before changing who reports.',
+  S8: 'Redefine success from number of starts to rate of graduation — change the measurement layer before changing programmes.',
+  S9: 'Find the actor with the least to lose from going first and remove their remaining constraint. Others follow.',
+};
 
 /* ─── Journey context (state carried forward across stages) ────────── */
 const JourneyContext = createContext(null);
@@ -146,49 +199,165 @@ function StepIndicator({ current, completedUpTo }) {
   );
 }
 
-/* ─── Stage placeholder (for stages 2 & 3) ────────────────────────── */
+/* ─── Stage placeholder (for Stage 3) ──────────────────────────────── */
 function StagePlaceholder({ stage }) {
-  const { journeyState } = useJourney();
   const stageIndex = STAGES.findIndex(s => s.id === stage.id);
-  const showDebug = stage.id === 'leverage';
-  const detectedStacks = journeyState.detectedStacks || [];
-
   return (
     <div style={styles.stageContainer}>
       <h2 style={styles.stageHeading}>
         Stage {stageIndex + 1}: {stage.label}
       </h2>
       <p style={styles.stageSubtitle}>{stage.subtitle}</p>
-
-      {showDebug && (
-        <div style={styles.debugBox}>
-          <div style={styles.debugHeader}>State carried forward from Stage 1</div>
-          <div style={styles.debugRow}>
-            <span style={styles.debugKey}>selectedStalls</span>
-            <span style={styles.debugVal}>
-              {journeyState.stalls.length > 0
-                ? journeyState.stalls.map(id => {
-                    const s = STALLS.find(x => x.id === id);
-                    return s ? `${id} ${s.name}` : id;
-                  }).join(', ')
-                : '(none)'}
-            </span>
-          </div>
-          <div style={styles.debugRow}>
-            <span style={styles.debugKey}>detectedStacks</span>
-            <span style={styles.debugVal}>
-              {detectedStacks.length > 0
-                ? detectedStacks.map(s => `${s.id} ${s.name} [${s.triggers.join('+')}]`).join(', ')
-                : '(none)'}
-            </span>
-          </div>
-        </div>
-      )}
-
       <div style={styles.placeholderBox}>
         <span style={styles.placeholderLabel}>Stage content</span>
         <span style={styles.placeholderHint}>Not yet implemented</span>
       </div>
+    </div>
+  );
+}
+
+/* ─── Confidence badge ─────────────────────────────────────────────── */
+function ConfidenceBadge({ level }) {
+  const color = level === 'High' ? 'var(--signal)'
+    : level === 'Medium' ? 'var(--founder)'
+    : 'var(--researcher)';
+  const bg = level === 'High' ? 'rgba(200,240,208,0.1)'
+    : level === 'Medium' ? 'rgba(245,217,122,0.1)'
+    : 'rgba(240,128,128,0.1)';
+  const border = level === 'High' ? 'rgba(200,240,208,0.25)'
+    : level === 'Medium' ? 'rgba(245,217,122,0.25)'
+    : 'rgba(240,128,128,0.25)';
+  return (
+    <span style={{
+      fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 600,
+      letterSpacing: '0.1em', textTransform: 'uppercase',
+      color, background: bg, border: `1px solid ${border}`,
+      borderRadius: '3px', padding: '3px 8px',
+    }}>{level} confidence</span>
+  );
+}
+
+/* ─── Leverage hypothesis card ─────────────────────────────────────── */
+function LeverageCard({ stack }) {
+  const triggerNames = stack.triggers
+    .map(id => STALLS.find(s => s.id === id))
+    .filter(Boolean);
+  return (
+    <div style={s2.card}>
+      <div style={s2.cardTop}>
+        <div style={s2.cardMeta}>
+          <span style={s2.cardId}>{stack.id}</span>
+          <ConfidenceBadge level={stack.confidence} />
+        </div>
+        <h3 style={s2.cardName}>{stack.name}</h3>
+        <div style={s2.cardTriggers}>
+          {triggerNames.map(s => (
+            <span key={s.id} style={s2.triggerPill}>{s.id} {s.name}</span>
+          ))}
+        </div>
+      </div>
+
+      <div style={s2.fieldGroup}>
+        <div style={s2.field}>
+          <span style={s2.fieldLabel}>Regime</span>
+          <span style={s2.fieldValue}>{stack.regime}</span>
+        </div>
+        <div style={s2.field}>
+          <span style={{ ...s2.fieldLabel, color: 'var(--steward)' }}>Entry point</span>
+          <span style={s2.fieldValue}>{stack.entry}</span>
+        </div>
+        <div style={s2.field}>
+          <span style={s2.fieldLabel}>Expected effect</span>
+          <span style={s2.fieldValue}>{stack.effect}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Stage 2: Leverage ────────────────────────────────────────────── */
+function LeverageStage() {
+  const { journeyState, updateJourneyState } = useJourney();
+  const detectedStacks = journeyState.detectedStacks || [];
+  const selectedStalls = journeyState.stalls || [];
+
+  const stallsInStacks = useMemo(() => {
+    const set = new Set();
+    detectedStacks.forEach(s => s.triggers.forEach(t => set.add(t)));
+    return set;
+  }, [detectedStacks]);
+
+  const unstackedStalls = useMemo(() =>
+    selectedStalls.filter(id => !stallsInStacks.has(id)),
+    [selectedStalls, stallsInStacks]
+  );
+
+  const stackNames = detectedStacks.map(s => s.name);
+  const framingLine = detectedStacks.length > 0
+    ? `${stackNames.length === 1 ? stackNames[0] : stackNames.slice(0, -1).join(', ') + ' and ' + stackNames[stackNames.length - 1]} — leverage targets the reinforcing logic between stalls, not individual stalls in isolation.`
+    : null;
+
+  // Store leverage hypotheses in journey state for Stage 3
+  useEffect(() => {
+    updateJourneyState({
+      leverageHypotheses: detectedStacks.map(s => ({
+        stackId: s.id, name: s.name, entry: s.entry,
+        effect: s.effect, confidence: s.confidence,
+      })),
+    });
+  }, [detectedStacks]);
+
+  return (
+    <div style={s2.container}>
+      {/* Framing */}
+      {framingLine && <p style={s2.framing}>{framingLine}</p>}
+
+      {/* Stack hypotheses */}
+      {detectedStacks.length > 0 ? (
+        <div style={s2.section}>
+          {detectedStacks.map(stack => (
+            <LeverageCard key={stack.id} stack={stack} />
+          ))}
+        </div>
+      ) : (
+        <div style={s2.emptyBox}>
+          <p style={s2.emptyText}>
+            No reinforcing stacks detected. Your stalls appear independent — each can be addressed directly.
+          </p>
+        </div>
+      )}
+
+      {/* Structural priorities — unstacked stalls */}
+      {unstackedStalls.length > 0 && (
+        <div style={s2.priorities}>
+          <div style={s2.prioritiesHeader}>Structural priorities</div>
+          <p style={s2.prioritiesSub}>
+            Stalls not part of a detected stack — addressable independently.
+          </p>
+          {unstackedStalls.map(id => {
+            const stall = STALLS.find(s => s.id === id);
+            if (!stall) return null;
+            return (
+              <div key={id} style={s2.priorityRow}>
+                <div style={s2.priorityLeft}>
+                  <span style={s2.priorityId}>{id}</span>
+                  <span style={s2.priorityName}>{stall.name}</span>
+                </div>
+                <div style={s2.priorityNote}>{STALL_LEVERAGE[id]}</div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Empty state — no stalls at all */}
+      {selectedStalls.length === 0 && (
+        <div style={s2.emptyBox}>
+          <p style={s2.emptyText}>
+            No stalls were selected in Stage 1. Go back to identify behavioural stalls before generating leverage hypotheses.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
@@ -497,8 +666,8 @@ function DiagnosticJourney() {
 
         {/* ── Stage content area ── */}
         <main style={styles.main}>
-          {currentStage === 0
-            ? <BehavioursStage />
+          {currentStage === 0 ? <BehavioursStage />
+            : currentStage === 1 ? <LeverageStage />
             : <StagePlaceholder stage={stage} />
           }
         </main>
@@ -615,38 +784,6 @@ const styles = {
     fontSize: '14px',
     color: 'var(--dj-chalk-dim)',
     marginBottom: '32px',
-  },
-  debugBox: {
-    background: 'rgba(125,211,200,0.06)',
-    border: '1px solid rgba(125,211,200,0.2)',
-    borderRadius: '8px',
-    padding: '16px 20px',
-    marginBottom: '20px',
-    fontFamily: 'var(--font-mono)',
-    fontSize: '12px',
-  },
-  debugHeader: {
-    fontSize: '10px',
-    fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
-    color: 'var(--steward)',
-    marginBottom: '12px',
-  },
-  debugRow: {
-    display: 'flex',
-    gap: '12px',
-    marginBottom: '6px',
-    lineHeight: 1.5,
-  },
-  debugKey: {
-    color: 'var(--dj-chalk-muted)',
-    flexShrink: 0,
-    minWidth: '120px',
-  },
-  debugVal: {
-    color: 'var(--dj-chalk-dim)',
-    wordBreak: 'break-word',
   },
   placeholderBox: {
     border: '1px dashed var(--dj-border)',
@@ -1033,6 +1170,173 @@ const s1 = {
     fontFamily: 'var(--font-sans)',
     fontSize: '13px',
     lineHeight: 1.55,
+    color: 'var(--dj-chalk-dim)',
+  },
+};
+
+/* ─── Stage 2 styles ───────────────────────────────────────────────── */
+const s2 = {
+  container: {
+    width: '100%',
+    maxWidth: '720px',
+  },
+
+  /* Framing line */
+  framing: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '15px',
+    lineHeight: 1.6,
+    color: 'var(--dj-chalk-dim)',
+    marginBottom: '32px',
+    fontStyle: 'italic',
+  },
+
+  section: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    marginBottom: '36px',
+  },
+
+  /* Leverage card */
+  card: {
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '10px',
+    borderLeft: '3px solid var(--founder)',
+    overflow: 'hidden',
+  },
+  cardTop: {
+    padding: '20px 24px 16px',
+  },
+  cardMeta: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: '8px',
+  },
+  cardId: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.1em',
+    color: 'var(--dj-chalk-muted)',
+  },
+  cardName: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '22px',
+    fontWeight: 400,
+    color: 'var(--dj-chalk)',
+    marginBottom: '10px',
+    letterSpacing: '-0.01em',
+  },
+  cardTriggers: {
+    display: 'flex',
+    gap: '6px',
+    flexWrap: 'wrap',
+  },
+  triggerPill: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 500,
+    letterSpacing: '0.04em',
+    color: 'var(--dj-chalk-dim)',
+    background: 'rgba(232,237,245,0.06)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '3px',
+    padding: '3px 8px',
+  },
+
+  /* Fields */
+  fieldGroup: {
+    borderTop: '1px solid var(--dj-border)',
+    padding: '0 24px 20px',
+  },
+  field: {
+    paddingTop: '14px',
+  },
+  fieldLabel: {
+    display: 'block',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '9px',
+    fontWeight: 600,
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '4px',
+  },
+  fieldValue: {
+    display: 'block',
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13.5px',
+    lineHeight: 1.55,
+    color: 'var(--dj-chalk)',
+  },
+
+  /* Empty state */
+  emptyBox: {
+    border: '1px dashed var(--dj-border)',
+    borderRadius: '8px',
+    padding: '48px 32px',
+    textAlign: 'center',
+    marginBottom: '32px',
+  },
+  emptyText: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '14px',
+    color: 'var(--dj-chalk-muted)',
+    lineHeight: 1.6,
+  },
+
+  /* Structural priorities */
+  priorities: {
+    borderTop: '1px solid var(--dj-border)',
+    paddingTop: '28px',
+  },
+  prioritiesHeader: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    fontWeight: 600,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase',
+    color: 'var(--dj-chalk)',
+    marginBottom: '4px',
+  },
+  prioritiesSub: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '16px',
+  },
+  priorityRow: {
+    padding: '14px 16px',
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '6px',
+    marginBottom: '8px',
+  },
+  priorityLeft: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    marginBottom: '6px',
+  },
+  priorityId: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.08em',
+    color: 'var(--steward)',
+  },
+  priorityName: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '16px',
+    color: 'var(--dj-chalk)',
+  },
+  priorityNote: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    lineHeight: 1.5,
     color: 'var(--dj-chalk-dim)',
   },
 };

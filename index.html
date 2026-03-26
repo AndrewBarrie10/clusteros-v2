@@ -220,16 +220,9 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
     transition: transform 0.15s;
   }
   .cluster-pin:hover { transform: scale(1.6); }
-  .cluster-pin.regime-growing      { background: #2a7a4f; }
-  .cluster-pin.regime-mature       { background: #0c9488; }
-  .cluster-pin.regime-transitioning { background: #d97706; }
-  .cluster-pin.regime-emerging     { background: #3b82f6; }
-  .cluster-pin.regime-stalling     { background: #c0392b; }
-  .cluster-pin.regime-unknown      { background: #8c8780; }
-
-  .map-legend { display: flex; gap: 12px; flex-wrap: wrap; padding: 6px 12px; font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); align-items: center; }
-  .legend-item { display: flex; align-items: center; gap: 5px; }
-  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .cluster-pin.stall-high { background: #c0392b; box-shadow: 0 1px 5px rgba(192,57,43,0.5); }
+  .cluster-pin.stall-med  { background: #d97706; box-shadow: 0 1px 5px rgba(217,119,6,0.4); }
+  .cluster-pin.stall-low  { background: var(--green); box-shadow: 0 1px 5px rgba(42,122,79,0.4); }
 
   /* ── OPENING STATEMENT ───────────────────────────────── */
   #opening {
@@ -767,6 +760,11 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   .bar-action-primary:hover { background: var(--green-dim); }
   .bar-action-amber { background: var(--amber, #d97706); color: #fff; }
   .bar-action-amber:hover { opacity: 0.85; }
+  .bar-action-case { color: var(--ink-dim); border-left: 1px solid var(--border); }
+  .bar-action-case:hover { background: var(--surface); color: var(--ink); }
+  .bar-action-platform { background: var(--green); color: #fff; border-right: none; }
+  .bar-action-platform:hover { opacity: 0.85; }
+  @media (max-width: 480px) { .bar-case-hide { display: none; } }
 
   /* push page content above the bar */
   body { padding-bottom: 56px; }
@@ -2908,7 +2906,14 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   }
 
   /* ══ AUDIENCE DIRECTORY ════════════════════════════════ */
-  .dir-intro { max-width: 640px; margin: 0 auto 32px; padding: 0 24px; text-align: center; }
+  #platform-bridge { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 24px; }
+.bridge-inner { max-width: 640px; margin: 0 auto; }
+.bridge-eyebrow { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+.bridge-h { font-family: var(--font-serif); font-size: clamp(24px, 4vw, 36px); line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 20px; }
+.bridge-p { font-size: 16px; color: var(--ink-dim); line-height: 1.75; font-weight: 300; margin-bottom: 28px; }
+.bridge-link { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); text-decoration: none; border-bottom: 1px solid var(--green); padding-bottom: 2px; transition: opacity 0.15s; }
+.bridge-link:hover { opacity: 0.7; }
+.dir-intro { max-width: 640px; margin: 0 auto 32px; padding: 0 24px; text-align: center; }
 .dir-intro-eyebrow { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
 .dir-intro-text { font-size: 15px; color: var(--ink-dim); font-weight: 300; line-height: 1.6; }
 #audience-directory {
@@ -3453,13 +3458,6 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <button class="map-filter" data-filter="manufacturing">Manufacturing</button>
       <button class="map-filter" data-filter="space">Space & Deep Tech</button>
     </div>
-    <div class="map-legend">
-      <div class="legend-item"><span class="legend-dot" style="background:#2a7a4f"></span>Growing</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#0c9488"></span>Mature</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span>Emerging</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Transitioning</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#8c8780"></span>Unknown</div>
-    </div>
   </div>
 </section>
 
@@ -3554,11 +3552,17 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 
 
 
+<!-- ── BRIDGE SECTION ───────────────────────────────────── -->
+<section id="platform-bridge">
+  <div class="bridge-inner">
+    <div class="bridge-eyebrow">The platform</div>
+    <h2 class="bridge-h">The diagnostic is the entry point.</h2>
+    <p class="bridge-p">ClusterOS is what comes after it — the coordination infrastructure that makes the findings actionable, keeps the ecosystem legible in real time, and turns complexity from something you periodically summarise into something you continuously govern. The diagnostic tells you what your ecosystem is doing. The platform changes it.</p>
+    <a href="/digital-infrastructure.html" class="bridge-link">See how the platform works →</a>
+  </div>
+</section>
 
-
-
-
-<!-- ── AUDIENCE DIRECTORY (shown in explore mode) ────────── -->
+<!-- ── AUDIENCE DIRECTORY ───────────────────────────────── -->
 <section id="audience-directory">
   <div class="dir-intro">
     <div class="dir-intro-eyebrow">Who uses ClusterOS</div>
@@ -4003,9 +4007,15 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
     <div class="bar-journey-steps" id="bar-journey-steps"></div>
     <button id="briefing-btn" onclick="window.briefing && window.briefing.generate()">↓ Briefing</button>
   </div>
-  <div class="bar-actions">
+  <div class="bar-actions" id="bar-actions-diagnostic">
     <a class="bar-action bar-action-amber" href="/cas-explainer.html">Free Pulse Check →</a>
+    <a class="bar-action bar-action-case bar-case-hide" href="/clusters/glasgow-fintech.html">See a diagnostic →</a>
     <a class="bar-action bar-action-primary" href="/request.html">Request a Diagnostic →</a>
+  </div>
+  <div class="bar-actions" id="bar-actions-platform" style="display:none">
+    <a class="bar-action bar-action-amber" href="/cas-explainer.html">Free Pulse Check →</a>
+    <a class="bar-action bar-action-case bar-case-hide" href="/signals-systems.html">See how it works →</a>
+    <a class="bar-action bar-action-primary bar-action-platform" href="/request.html?subject=Platform+conversation">Map your OS →</a>
   </div>
 </div>
 
@@ -4644,6 +4654,26 @@ document.querySelectorAll('#ripple-chain').forEach(el => rippleObs.observe(el));
   }
 
   // Bar mode switching
+  // ── Sticky bar zone switching on scroll ──────────────────
+  (function() {
+    var bridge = document.getElementById('platform-bridge');
+    var diagBar = document.getElementById('bar-actions-diagnostic');
+    var platBar = document.getElementById('bar-actions-platform');
+    if (!bridge || !diagBar || !platBar) return;
+    var inPlatformZone = false;
+    function checkZone() {
+      var rect = bridge.getBoundingClientRect();
+      var nowPlatform = rect.top <= window.innerHeight * 0.6;
+      if (nowPlatform !== inPlatformZone) {
+        inPlatformZone = nowPlatform;
+        diagBar.style.display = nowPlatform ? 'none' : 'flex';
+        platBar.style.display = nowPlatform ? 'flex' : 'none';
+      }
+    }
+    window.addEventListener('scroll', checkZone, { passive: true });
+    checkZone();
+  })();
+
   window._setBarMode = function(mode) {
     var def = document.getElementById('bar-default-state');
     var jny = document.getElementById('bar-journey-state');

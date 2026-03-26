@@ -1011,6 +1011,72 @@ function stackContains(stacks, s1, s2) {
   return stacks.find(st => st.triggers.includes(s1) && st.triggers.includes(s2));
 }
 
+/* ─── Stage labels for scenario templates ──────────────────────────── */
+const STAGE_LABELS = { early: 'early-stage', established: 'established', mature: 'mature' };
+
+/* ─── Scenario template builder for Step 2 ─────────────────────────── */
+function buildStep2Scenario(journeyState, config) {
+  const stacks = journeyState.detectedStacks || [];
+  const stalls = journeyState.stalls || [];
+  const qa = journeyState.qualifierAnswers || {};
+  // TODO: populate from Railway API — field: qualifierAnswers.stage
+  const stageLabel = STAGE_LABELS[qa.stage] || 'established';
+  // TODO: populate from Railway API — field: qualifierAnswers.anchorType
+  const anchorLabel = config.anchorLabel || 'Anchors';
+  // TODO: populate from Railway API — field: qualifierAnswers.clusterType
+  const clusterType = (CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem').replace(/^a /, '').replace(/^an /, '');
+
+  // Determine foregrounded actor for the scenario
+  const protections = qa.protect || [];
+  let fgActor = anchorLabel;
+  for (const p of protections) {
+    const actor = PROTECT_ACTOR_MAP[p];
+    if (actor && ACTOR_CASCADES[actor]) { fgActor = actor; break; }
+  }
+  if (!ACTOR_CASCADES[fgActor]) fgActor = 'Researchers';
+
+  const stkEvidence = stackContains(stacks, 'S1', 'S7');
+  const stkIncumbent = stackContains(stacks, 'S4', 'S6');
+  const stkMediated = stackContains(stacks, 'S5', 'S9');
+
+  // TEMPLATE A — Evidence Without Commitment pattern
+  if (stkEvidence || (stalls.includes('S1') && stalls.includes('S7'))) {
+    // TODO: populate from Railway API — field: anchorType, clusterType, stage
+    return `A ${stageLabel} ${anchorLabel}-anchored ${clusterType} has a knowledge problem that looks like a capability problem. Evidence accumulates — research outputs, programme reports, diagnostic findings — but decisions keep getting made without reference to it. The evidence exists. The mechanism that forces it to inform action doesn't.\n\n` +
+    // TODO: populate from Railway API — field: foregrounded actor type
+    `A ${fgActor} in your ${clusterType} declares a research output and tags it to the knowledge taxonomy. The system structures that declaration — not as a document in a repository, but as a structured signal with identified commercial relevance and matched actor types. Within the same session, the AI reasoning engine reads the live demand signals in the sovereign database and identifies actors whose current journey state indicates they need exactly the capability this research represents. A matched connection is surfaced — a structured pathway step for both actors, generated from their respective journey states.\n\n` +
+    `The ${fgActor} pursued their own interest — getting credit for their output. The matched actor pursued their own interest — finding a relevant partner. Neither needed to know about the other. The sovereign database held the signal that made the connection possible.\n\n` +
+    `Six months later your sovereign database holds the record of that connection — whether it converted, what it produced, what the next step was. Not in a report. In the live intelligence picture that makes the next connection faster and more accurate than the last.`;
+  }
+
+  // TEMPLATE B — Incumbent Lock pattern
+  if (stkIncumbent || (stalls.includes('S4') && stalls.includes('S6'))) {
+    // TODO: populate from Railway API — field: anchorType, clusterType, stage
+    return `A ${stageLabel} ${anchorLabel}-anchored ${clusterType} has a value problem that looks like a capability problem. The anchor is present, active, and well-intentioned. But value flows outward — procurement goes to established relationships, talent gets developed and then recruited away, innovation gets piloted locally and scaled elsewhere.\n\n` +
+    // TODO: populate from Railway API — field: clusterType, stage
+    `Your anchor posts a procurement requirement to a supply chain group in your sovereign ecosystem. Not a public tender — a structured signal, role-gated, visible only to actors whose declared capability matches the requirement. The actor matching engine identifies ${stageLabel}-stage suppliers in your ${clusterType} whose journey state indicates readiness for this procurement tier. A structured introduction is made — both parties see only what they need to see to decide whether to proceed.\n\n` +
+    `The anchor pursued its own interest — finding the best supplier. The supplier pursued its own interest — finding a procurement opportunity. Neither needed a broker. The sovereign database held the capability signals that made the match possible. The procurement decision stayed local.\n\n` +
+    `Your sovereign database now holds the record of that transaction. Over time it builds a picture of where local procurement is converting and where it is not. The steward sees value circulation as a measurable signal derived from real transactions — not as an aspiration in a strategy document.`;
+  }
+
+  // TEMPLATE C — Mediated Dependency Loop pattern
+  if (stkMediated || (stalls.includes('S5') && stalls.includes('S9'))) {
+    // TODO: populate from Railway API — field: anchorType, clusterType, stage
+    return `A ${stageLabel} ${anchorLabel}-anchored ${clusterType} has a pathway problem that looks like a talent problem. The talent exists. The opportunities exist. But the connection depends on knowing the right person, being in the right room, arriving at the right moment. Most actors never find the pathway. They leave not because there is nothing for them — but because nothing visible tells them where to go.\n\n` +
+    // TODO: populate from Railway API — field: stage, clusterType
+    `A ${stageLabel}-stage actor in your ${clusterType} registers their profile and declares their skills and goals. The journey construction engine reads that declaration against the live state of your sovereign database — the open opportunities, the active groups, the demand signals, the actors who need exactly what this person offers. It generates a pathway: not a list of programmes, but a sequence of specific next steps, each one generated from the intersection of this actor's profile and the current state of your ecosystem.\n\n` +
+    `The actor pursued their own interest — finding their next opportunity. The system captured that as a signal that the talent pipeline is or is not converting. Your sovereign database now holds the record of that progression — where the actor was, where they went, what converted and what did not.\n\n` +
+    `The steward sees the pipeline moving. Not in a report. In the live intelligence picture that makes the next pathway more accurate than the last.`;
+  }
+
+  // TEMPLATE D — Fallback
+  // TODO: populate from Railway API — field: anchorType, clusterType, stage
+  return `A ${stageLabel} ${anchorLabel}-anchored ${clusterType} has a visibility problem that looks like a pipeline problem. The pipeline exists — ${stageLabel}-stage actors building on ${anchorLabel} capability, progressing through your ecosystem, approaching readiness for external engagement. But the people who could accelerate that progression cannot see it. They see activity. They cannot see momentum.\n\n` +
+  `As actors in your ${clusterType} progress through their journey states — from formation through to scale — the system reads those progression signals and writes them back to the sovereign database as pipeline formation indicators. Not self-reported. Not compiled by an analyst. Derived from actual behaviour in the system.\n\n` +
+  `The AI reasoning engine reads those pipeline formation signals and constructs a curated signal feed for matched external actors — not a pitch, not a cold introduction, but a structured signal that indicates readiness without forcing premature engagement.\n\n` +
+  `Your ${clusterType} is no longer opaque from the outside. The pipeline is legible. The right actors can find it at the right moment.`;
+}
+
 /* ─── Provocation builder (3-part: diagnosis, consequence, mechanism) */
 function buildProvocation(stepIndex, journeyState, config) {
   const stacks = journeyState.detectedStacks || [];
@@ -1071,7 +1137,8 @@ function buildProvocation(stepIndex, journeyState, config) {
       mechanism += 'Health Monitoring Bot — tracks system health across all clusters continuously.';
       if (protectStr) mechanism += ` The sovereign membrane protects ${protectStr} at the boundary — by architecture, not by policy.`;
 
-      return { diagnosis, consequence, mechanism };
+      const scenario = buildStep2Scenario(journeyState, config);
+      return { scenario, diagnosis, consequence, mechanism };
     }
 
     /* ── STEP 3: External Data Sources ── */
@@ -1320,6 +1387,14 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
 
           {provocation && (
             <div style={arch.provocationWrap}>
+              {/* Scenario (Step 2 only) */}
+              {provocation.scenario && (
+                <div style={arch.scenarioSection}>
+                  {provocation.scenario.split('\n\n').map((para, i) => (
+                    <p key={i} style={arch.scenarioText}>{para}</p>
+                  ))}
+                </div>
+              )}
               <div style={arch.provSection}>
                 <div style={arch.provLabel}>Diagnosis</div>
                 <p style={arch.provDiagnosis}>{provocation.diagnosis}</p>
@@ -2927,6 +3002,20 @@ const arch = {
     overflowY: 'auto',
     maxHeight: 'calc(100vh - 240px)',
     paddingRight: '4px',
+  },
+  scenarioSection: {
+    marginBottom: '20px',
+    paddingBottom: '16px',
+    borderBottom: '1px solid var(--dj-border)',
+  },
+  scenarioText: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '15px',
+    fontWeight: 400,
+    lineHeight: 1.7,
+    color: 'var(--dj-chalk)',
+    letterSpacing: '-0.01em',
+    marginBottom: '12px',
   },
   provSection: {},
   provLabel: {

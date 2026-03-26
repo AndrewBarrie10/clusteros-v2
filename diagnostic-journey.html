@@ -130,6 +130,112 @@ const STALL_LEVERAGE = {
   S9: 'Find the actor with the least to lose from going first and remove their remaining constraint. Others follow.',
 };
 
+/* ─── Stage 3: Qualifier questions ─────────────────────────────────── */
+const QUALIFIER_QUESTIONS = [
+  { id: 'clusterType', question: 'What best describes your cluster?', multi: false,
+    options: [
+      { value: 'regional',    label: 'Regional Speciality',  desc: 'Place-based cluster with sector focus and local identity' },
+      { value: 'national',    label: 'National Supercluster', desc: 'Cross-regional network with national strategic significance' },
+      { value: 'corporate',   label: 'Corporate',             desc: 'Anchor-led ecosystem organised around corporate R&D or supply chain' },
+    ]},
+  { id: 'stage', question: "What is your ecosystem's current stage?", multi: false,
+    options: [
+      { value: 'early',       label: 'Early-stage (forming)',    desc: 'Building initial connections and proving the cluster thesis' },
+      { value: 'established', label: 'Established (operating)',  desc: 'Operating programmes and structures, seeking to deepen impact' },
+      { value: 'mature',      label: 'Mature (optimising)',      desc: 'Optimising existing infrastructure and addressing structural stalls' },
+    ]},
+  { id: 'priority', question: 'What is your primary strategic priority?', multi: false,
+    options: [
+      { value: 'talent',      label: 'Retain & grow local talent' },
+      { value: 'capital',     label: 'Attract external capital' },
+      { value: 'research',    label: 'Convert research to commercial activity' },
+      { value: 'supply',      label: 'Build anchor supply chains' },
+      { value: 'growth',      label: 'Drive economic growth' },
+    ]},
+  { id: 'gap', question: 'Where is your biggest coordination gap?', multi: false,
+    options: [
+      { value: 'discovery',   label: "Actors can't find each other" },
+      { value: 'flow',        label: "Knowledge doesn't flow between groups" },
+      { value: 'access',      label: "Outside actors can't engage" },
+      { value: 'conversion',  label: "Activity isn't converting to outcomes" },
+    ]},
+  { id: 'protect', question: 'What does your ecosystem need to protect?', multi: true,
+    options: [
+      { value: 'knowledge',   label: 'Local knowledge staying local' },
+      { value: 'ip',          label: 'Institutional IP and research' },
+      { value: 'trust',       label: 'Community relationships and trust' },
+      { value: 'talent',      label: 'Founder and talent pipeline' },
+      { value: 'sovereignty', label: 'Economic sovereignty' },
+    ]},
+];
+
+/* ─── OS configuration derivation ──────────────────────────────────── */
+function deriveOSConfig(qualifiers, stalls, detectedStacks) {
+  const { clusterType, stage, priority, gap, protect } = qualifiers;
+  const protectSet = new Set(protect || []);
+  const stallSet = new Set(stalls || []);
+
+  // Derive configuration name
+  let configName = '';
+  const sovereignty = protectSet.has('sovereignty') || protectSet.has('knowledge');
+  const researchFocus = priority === 'research' || protectSet.has('ip');
+  const talentFocus = priority === 'talent' || protectSet.has('talent');
+  const anchorLed = clusterType === 'corporate' || priority === 'supply';
+
+  if (sovereignty && researchFocus) configName = 'Sovereign Knowledge Cluster';
+  else if (anchorLed && stage === 'mature') configName = 'Anchor-Led Growth Network';
+  else if (anchorLed) configName = 'Anchor-Integrated Ecosystem';
+  else if (clusterType === 'national') configName = 'Federated Supercluster';
+  else if (sovereignty && talentFocus) configName = 'Talent Sovereignty Network';
+  else if (researchFocus) configName = 'Research Translation Engine';
+  else if (priority === 'capital') configName = 'Investment-Ready Ecosystem';
+  else if (talentFocus && stage === 'early') configName = 'Founder Pipeline Cluster';
+  else if (gap === 'discovery') configName = 'Discovery-First Network';
+  else if (gap === 'conversion') configName = 'Outcome Conversion Architecture';
+  else configName = 'Regional Operating System';
+
+  // Derive infrastructure priorities
+  const priorities = [];
+
+  if (gap === 'discovery' || gap === 'access')
+    priorities.push({ name: 'Actor Registry & Discovery Layer', desc: 'Structured directory enabling actors to find each other by capability, not just sector or geography.' });
+  if (gap === 'flow' || researchFocus)
+    priorities.push({ name: 'Knowledge Flow Infrastructure', desc: 'Controlled channels for research, data, and insight to move between groups without leaking sovereignty.' });
+  if (gap === 'conversion' || stallSet.has('S7') || stallSet.has('S8'))
+    priorities.push({ name: 'Outcome Measurement Layer', desc: 'Shared metrics that track conversion from activity to impact, replacing narrative reporting with evidence.' });
+  if (sovereignty || protectSet.has('trust'))
+    priorities.push({ name: 'Sovereign Data Membrane', desc: 'Permissioned boundary controlling what knowledge crosses the cluster edge and under what terms.' });
+  if (anchorLed || stallSet.has('S4'))
+    priorities.push({ name: 'Anchor Accountability Protocol', desc: 'Structural mechanism ensuring anchor institutions circulate value rather than extract it.' });
+  if (talentFocus)
+    priorities.push({ name: 'Talent Pipeline Tracker', desc: 'Visibility layer connecting education, founders, and employers within the ecosystem boundary.' });
+  if (priority === 'capital')
+    priorities.push({ name: 'Investment Signalling Layer', desc: 'Curated surface enabling external capital to engage with ecosystem opportunities without requiring mediation.' });
+  if (detectedStacks.length > 0)
+    priorities.push({ name: 'Stack Intervention Monitor', desc: 'Diagnostic layer tracking whether leverage interventions are shifting the reinforcing dynamics between stalls.' });
+
+  // Take top 4
+  const topPriorities = priorities.slice(0, 4);
+  if (topPriorities.length < 3) {
+    topPriorities.push({ name: 'Coordination Infrastructure', desc: 'Lightweight protocol layer replacing ad-hoc meetings with structured, accountable commitments.' });
+  }
+
+  // Derive membrane actors
+  const outsideActors = [];
+  if (priority === 'capital' || clusterType === 'national') outsideActors.push('Investors');
+  if (researchFocus) outsideActors.push('Research partners');
+  if (priority === 'talent' || protectSet.has('talent')) outsideActors.push('Talent networks');
+  if (anchorLed) outsideActors.push('Supply chain partners');
+  if (priority === 'growth') outsideActors.push('Trade bodies');
+  if (clusterType === 'national') outsideActors.push('Regional EDAs');
+  if (outsideActors.length === 0) outsideActors.push('External partners');
+  if (outsideActors.length < 2) outsideActors.push('Policy actors');
+
+  const insideActors = ['Founders', 'Anchors', 'Researchers', 'Stewards'];
+
+  return { configName, priorities: topPriorities, outsideActors: outsideActors.slice(0, 4), insideActors, clusterType: clusterType || 'regional' };
+}
+
 /* ─── Journey context (state carried forward across stages) ────────── */
 const JourneyContext = createContext(null);
 
@@ -531,6 +637,252 @@ function BehavioursStage() {
   );
 }
 
+/* ─── Membrane diagram (SVG) ───────────────────────────────────────── */
+function MembraneDiagram({ config }) {
+  const { outsideActors, insideActors, clusterType } = config;
+  const w = 520, h = 340;
+  const cx = w / 2, cy = h / 2;
+  const outerR = 140, innerR = 38;
+
+  // Position inside actors as small circles
+  const insidePositions = insideActors.map((name, i) => {
+    const angle = (i / insideActors.length) * Math.PI * 2 - Math.PI / 2;
+    const r = 70;
+    return { name, x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r };
+  });
+
+  // Position outside actors beyond the membrane
+  const outsidePositions = outsideActors.map((name, i) => {
+    const angle = (i / outsideActors.length) * Math.PI * 2 - Math.PI / 4;
+    const r = outerR + 50;
+    return { name, x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r };
+  });
+
+  const label = clusterType === 'national' ? 'Supercluster boundary' : 'Cluster membrane';
+
+  return (
+    <div style={s3.diagramWrap}>
+      <svg viewBox={`0 0 ${w} ${h}`} style={{ width: '100%', maxWidth: '520px', height: 'auto' }}>
+        {/* Membrane boundary */}
+        <circle cx={cx} cy={cy} r={outerR} fill="none" stroke="#1e2f45" strokeWidth="2" strokeDasharray="8 4" />
+        <text x={cx} y={cy - outerR - 12} textAnchor="middle"
+          fill="#576275" fontFamily="'Geist Mono', monospace" fontSize="9" letterSpacing="0.1em">{label.toUpperCase()}</text>
+
+        {/* Inside actors */}
+        {insidePositions.map((actor, i) => (
+          <g key={i}>
+            <circle cx={actor.x} cy={actor.y} r={innerR} fill="rgba(17,28,46,0.8)" stroke="#1e2f45" strokeWidth="1.2" />
+            <text x={actor.x} y={actor.y + 1} textAnchor="middle" dominantBaseline="middle"
+              fill="#8a95a8" fontFamily="'Geist', system-ui" fontSize="10.5">{actor.name}</text>
+          </g>
+        ))}
+
+        {/* Connection lines between inside actors */}
+        {insidePositions.map((a, i) =>
+          insidePositions.slice(i + 1).map((b, j) => (
+            <line key={`${i}-${j}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y}
+              stroke="#1e2f45" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.5" />
+          ))
+        )}
+
+        {/* Outside actors */}
+        {outsidePositions.map((actor, i) => {
+          const angle = Math.atan2(actor.y - cy, actor.x - cx);
+          const edgeX = cx + Math.cos(angle) * outerR;
+          const edgeY = cy + Math.sin(angle) * outerR;
+          return (
+            <g key={i}>
+              <line x1={edgeX} y1={edgeY} x2={actor.x} y2={actor.y}
+                stroke="var(--steward)" strokeWidth="1" strokeDasharray="4 3" opacity="0.5" />
+              <circle cx={actor.x} cy={actor.y} r="4" fill="var(--steward)" opacity="0.6" />
+              <text x={actor.x + (actor.x > cx ? 10 : -10)} y={actor.y + 1}
+                textAnchor={actor.x > cx ? 'start' : 'end'} dominantBaseline="middle"
+                fill="var(--steward)" fontFamily="'Geist', system-ui" fontSize="10.5">{actor.name}</text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
+/* ─── Stage 3: Digital OS ──────────────────────────────────────────── */
+function DigitalOSStage() {
+  const { journeyState, updateJourneyState } = useJourney();
+  const [currentQ, setCurrentQ] = useState(0);
+  const [answers, setAnswers] = useState(journeyState.qualifierAnswers || {});
+  const [multiSelect, setMultiSelect] = useState(answers.protect || []);
+  const [showRecommendation, setShowRecommendation] = useState(
+    journeyState.osConfig !== null
+  );
+
+  const q = QUALIFIER_QUESTIONS[currentQ];
+  const totalQ = QUALIFIER_QUESTIONS.length;
+
+  const selectSingle = useCallback((qId, value) => {
+    const next = { ...answers, [qId]: value };
+    setAnswers(next);
+    updateJourneyState({ qualifierAnswers: next });
+    if (currentQ < totalQ - 1) {
+      setTimeout(() => setCurrentQ(currentQ + 1), 300);
+    }
+  }, [answers, currentQ, totalQ, updateJourneyState]);
+
+  const toggleMulti = useCallback((value) => {
+    setMultiSelect(prev =>
+      prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]
+    );
+  }, []);
+
+  const submitMulti = useCallback(() => {
+    const next = { ...answers, [q.id]: multiSelect };
+    setAnswers(next);
+    const config = deriveOSConfig(next, journeyState.stalls, journeyState.detectedStacks || []);
+    updateJourneyState({ qualifierAnswers: next, osConfig: config });
+    setShowRecommendation(true);
+  }, [answers, multiSelect, q, journeyState, updateJourneyState]);
+
+  const goBackQ = useCallback(() => {
+    if (showRecommendation) {
+      setShowRecommendation(false);
+    } else if (currentQ > 0) {
+      setCurrentQ(currentQ - 1);
+    }
+  }, [currentQ, showRecommendation]);
+
+  // Show recommendation
+  if (showRecommendation && journeyState.osConfig) {
+    const config = journeyState.osConfig;
+    return (
+      <div style={s3.container}>
+        <div style={s3.configBadge}>Your configuration</div>
+        <h2 style={s3.configName}>{config.configName}</h2>
+        <p style={s3.configSummary}>
+          Based on {journeyState.stalls.length} behavioural stall{journeyState.stalls.length !== 1 ? 's' : ''},{' '}
+          {(journeyState.detectedStacks || []).length} reinforcing stack{(journeyState.detectedStacks || []).length !== 1 ? 's' : ''},{' '}
+          and your qualifier responses.
+        </p>
+
+        {/* Infrastructure priorities */}
+        <div style={s3.section}>
+          <div style={s3.sectionLabel}>Infrastructure priorities</div>
+          {config.priorities.map((p, i) => (
+            <div key={i} style={s3.priorityCard}>
+              <div style={s3.priorityNum}>{String(i + 1).padStart(2, '0')}</div>
+              <div>
+                <div style={s3.priorityName}>{p.name}</div>
+                <div style={s3.priorityDesc}>{p.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Membrane diagram */}
+        <div style={s3.section}>
+          <div style={s3.sectionLabel}>Ecosystem membrane</div>
+          <MembraneDiagram config={config} />
+        </div>
+
+        {/* CTA */}
+        <div style={s3.ctaBox}>
+          <h3 style={s3.ctaHeading}>Talk to us about your configuration</h3>
+          <p style={s3.ctaBody}>
+            This diagnostic has identified your stalls, mapped your stacks, and derived an architecture recommendation.
+            The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem's actors.
+          </p>
+          <a href="/get-started.html" style={s3.ctaButton}>
+            Get started
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // Show qualifier question
+  return (
+    <div style={s3.container}>
+      <div style={s3.qProgress}>
+        <span style={s3.qProgressLabel}>Question {currentQ + 1} of {totalQ}</span>
+        <div style={s3.qProgressTrack}>
+          <div style={{ ...s3.qProgressFill, width: `${((currentQ + 1) / totalQ) * 100}%` }} />
+        </div>
+      </div>
+
+      <h3 style={s3.qText}>{q.question}</h3>
+      {q.multi && <p style={s3.qHint}>Select all that apply</p>}
+
+      <div style={s3.optionGrid}>
+        {q.options.map(opt => {
+          const isSelected = q.multi
+            ? multiSelect.includes(opt.value)
+            : answers[q.id] === opt.value;
+          return (
+            <button
+              key={opt.value}
+              onClick={() => q.multi ? toggleMulti(opt.value) : selectSingle(q.id, opt.value)}
+              style={{
+                ...s3.optionCard,
+                borderColor: isSelected ? 'var(--steward)' : 'var(--dj-border)',
+                background: isSelected ? 'rgba(125,211,200,0.06)' : 'var(--dj-surface)',
+              }}
+            >
+              <div style={s3.optionHeader}>
+                <span style={{
+                  ...s3.optionLabel,
+                  color: isSelected ? 'var(--dj-chalk)' : 'var(--dj-chalk-dim)',
+                }}>{opt.label}</span>
+                <div style={{
+                  ...s3.optionCheck,
+                  borderColor: isSelected ? 'var(--steward)' : 'var(--dj-border)',
+                  background: isSelected ? 'var(--steward)' : 'transparent',
+                  borderRadius: q.multi ? '4px' : '50%',
+                }}>
+                  {isSelected && (
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M2 5L4.2 7.2L8 3" stroke="var(--dj-bg)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </div>
+              </div>
+              {opt.desc && <div style={s3.optionDesc}>{opt.desc}</div>}
+            </button>
+          );
+        })}
+      </div>
+
+      {q.multi && (
+        <div style={s3.multiActions}>
+          <button
+            style={{
+              ...styles.btnSignal,
+              opacity: multiSelect.length > 0 ? 1 : 0.4,
+              pointerEvents: multiSelect.length > 0 ? 'auto' : 'none',
+            }}
+            onClick={submitMulti}
+          >
+            Continue
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {currentQ > 0 && (
+        <button style={{ ...styles.btnGhost, marginTop: '16px' }} onClick={goBackQ}>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginRight: '6px' }}>
+            <path d="M8.5 3L4.5 7L8.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Previous question
+        </button>
+      )}
+    </div>
+  );
+}
+
 /* ─── Exit confirmation modal ──────────────────────────────────────── */
 function ExitModal({ stage, onConfirm, onCancel }) {
   return (
@@ -574,6 +926,14 @@ function ExitSummary({ exitedAt, journeyState }) {
             {stacks.length > 0 ? stacks.join(', ') : 'None yet'}
           </div>
         </div>
+        {journeyState.osConfig && (
+          <div style={styles.summarySection}>
+            <div style={styles.summaryLabel}>Configuration</div>
+            <div style={styles.summaryValue}>
+              {journeyState.osConfig.configName}
+            </div>
+          </div>
+        )}
         {exitedAt < STAGES.length - 1 && (
           <div style={styles.summarySection}>
             <div style={styles.summaryLabel}>Stages remaining</div>
@@ -606,6 +966,7 @@ function DiagnosticJourney() {
     stalls: [],           // selected stall IDs from Stage 1
     stacks: [],           // detected stack names from Stage 1
     leverageHypotheses: [],  // generated in Stage 2
+    qualifierAnswers: {},    // qualifier responses from Stage 3
     osConfig: null,          // generated in Stage 3
   });
 
@@ -668,6 +1029,7 @@ function DiagnosticJourney() {
         <main style={styles.main}>
           {currentStage === 0 ? <BehavioursStage />
             : currentStage === 1 ? <LeverageStage />
+            : currentStage === 2 ? <DigitalOSStage />
             : <StagePlaceholder stage={stage} />
           }
         </main>
@@ -1338,6 +1700,238 @@ const s2 = {
     fontSize: '13px',
     lineHeight: 1.5,
     color: 'var(--dj-chalk-dim)',
+  },
+};
+
+/* ─── Stage 3 styles ───────────────────────────────────────────────── */
+const s3 = {
+  container: {
+    width: '100%',
+    maxWidth: '640px',
+  },
+
+  /* Question progress */
+  qProgress: {
+    marginBottom: '28px',
+  },
+  qProgressLabel: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '8px',
+    display: 'block',
+  },
+  qProgressTrack: {
+    height: '3px',
+    background: 'var(--dj-border)',
+    borderRadius: '2px',
+    overflow: 'hidden',
+  },
+  qProgressFill: {
+    height: '100%',
+    background: 'var(--steward)',
+    borderRadius: '2px',
+    transition: 'width 0.4s ease',
+  },
+
+  /* Question text */
+  qText: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '26px',
+    fontWeight: 400,
+    color: 'var(--dj-chalk)',
+    marginBottom: '8px',
+    letterSpacing: '-0.01em',
+    lineHeight: 1.3,
+  },
+  qHint: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '8px',
+  },
+
+  /* Option grid */
+  optionGrid: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+    marginTop: '20px',
+  },
+  optionCard: {
+    textAlign: 'left',
+    padding: '16px 20px',
+    borderRadius: '8px',
+    border: '1px solid var(--dj-border)',
+    cursor: 'pointer',
+    transition: 'border-color 0.2s, background 0.2s',
+    fontFamily: 'var(--font-sans)',
+    width: '100%',
+  },
+  optionHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  optionLabel: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '15px',
+    fontWeight: 400,
+    transition: 'color 0.2s',
+  },
+  optionCheck: {
+    width: '18px',
+    height: '18px',
+    border: '1.5px solid var(--dj-border)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.2s',
+    flexShrink: 0,
+  },
+  optionDesc: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '12px',
+    color: 'var(--dj-chalk-muted)',
+    marginTop: '4px',
+    lineHeight: 1.4,
+  },
+
+  /* Multi-select actions */
+  multiActions: {
+    marginTop: '20px',
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+
+  /* Config recommendation */
+  configBadge: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
+    color: 'var(--steward)',
+    background: 'rgba(125,211,200,0.1)',
+    border: '1px solid rgba(125,211,200,0.2)',
+    borderRadius: '3px',
+    padding: '4px 10px',
+    display: 'inline-block',
+    marginBottom: '12px',
+  },
+  configName: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '34px',
+    fontWeight: 400,
+    color: 'var(--dj-chalk)',
+    letterSpacing: '-0.02em',
+    lineHeight: 1.2,
+    marginBottom: '12px',
+  },
+  configSummary: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '14px',
+    color: 'var(--dj-chalk-dim)',
+    lineHeight: 1.6,
+    marginBottom: '36px',
+  },
+
+  /* Sections */
+  section: {
+    marginBottom: '36px',
+  },
+  sectionLabel: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '16px',
+  },
+
+  /* Priority cards */
+  priorityCard: {
+    display: 'flex',
+    gap: '16px',
+    padding: '16px 20px',
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '8px',
+    marginBottom: '10px',
+    alignItems: 'flex-start',
+  },
+  priorityNum: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '12px',
+    fontWeight: 600,
+    color: 'var(--steward)',
+    marginTop: '2px',
+    flexShrink: 0,
+  },
+  priorityName: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '17px',
+    color: 'var(--dj-chalk)',
+    marginBottom: '4px',
+  },
+  priorityDesc: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    color: 'var(--dj-chalk-dim)',
+    lineHeight: 1.5,
+  },
+
+  /* Membrane diagram */
+  diagramWrap: {
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '10px',
+    padding: '24px',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+
+  /* CTA */
+  ctaBox: {
+    borderTop: '1px solid var(--dj-border)',
+    paddingTop: '32px',
+    textAlign: 'center',
+  },
+  ctaHeading: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '24px',
+    fontWeight: 400,
+    color: 'var(--dj-chalk)',
+    marginBottom: '12px',
+  },
+  ctaBody: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '14px',
+    color: 'var(--dj-chalk-dim)',
+    lineHeight: 1.6,
+    marginBottom: '24px',
+    maxWidth: '480px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  ctaButton: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '12px',
+    fontWeight: 600,
+    letterSpacing: '0.04em',
+    color: 'var(--dj-bg)',
+    background: 'var(--signal)',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '12px 28px',
+    textDecoration: 'none',
+    transition: 'opacity 0.2s',
   },
 };
 

@@ -35,19 +35,46 @@
 html { background: var(--dj-bg); color: var(--dj-chalk); font-family: var(--font-sans); }
 body { min-height: 100vh; }
 #root { min-height: 100vh; display: flex; flex-direction: column; }
+@media (max-width: 680px) { .stall-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 420px) { .stall-grid { grid-template-columns: 1fr !important; } }
 </style>
 </head>
 <body>
 <div id="root"></div>
 
 <script type="text/babel" data-type="module">
-const { useState, useCallback, useMemo, createContext, useContext } = React;
+const { useState, useCallback, useMemo, useEffect, createContext, useContext } = React;
 
 /* ─── Stage definitions ────────────────────────────────────────────── */
 const STAGES = [
   { id: 'behaviours', label: 'Behaviours',  subtitle: 'Stall identification & stack detection' },
   { id: 'leverage',   label: 'Leverage',     subtitle: 'Intervention hypotheses' },
   { id: 'digital-os', label: 'Digital OS',   subtitle: 'Architecture recommendation' },
+];
+
+/* ─── Stall data ───────────────────────────────────────────────────── */
+const STALLS = [
+  { id: 'S1', name: 'Re-proving',       sub: 'Resources flow to justification rather than execution. The ecosystem repeats the case for its own existence.' },
+  { id: 'S2', name: 'Coordinating',     sub: 'Coordination becomes the output rather than the mechanism. Meetings and alignment substitute for committed action.' },
+  { id: 'S3', name: 'Forgiving',        sub: 'Poor performance is tolerated to preserve relationships. Accountability systems are systematically avoided.' },
+  { id: 'S4', name: 'Extracting',       sub: 'Anchor institutions extract value rather than circulating it. Talent, IP, and capital flow outward.' },
+  { id: 'S5', name: 'Mediating',        sub: 'The ecosystem manages relationships between actors rather than enabling transactions between them.' },
+  { id: 'S6', name: 'Stabilising',      sub: 'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve.' },
+  { id: 'S7', name: 'Narrating',        sub: 'Stories about progress substitute for evidence of change. Reporting substitutes for impact.' },
+  { id: 'S8', name: 'Scaling Activity', sub: 'Early-stage activity is celebrated rather than evaluated. The ecosystem optimises for inputs and starts rather than outcomes.' },
+  { id: 'S9', name: 'Waiting',          sub: 'Action is deferred pending external conditions — funding, policy clarity, anchor commitment. Waiting becomes structural.' },
+];
+
+/* ─── Stack detection rules ────────────────────────────────────────── */
+const STACK_RULES = [
+  { id: 'STK-05', name: 'Mediated Dependency Loop',    triggers: ['S5', 'S9'], logic: 'Mediation defers action to external actors, who are themselves waiting — creating a self-reinforcing dependency cycle where no party moves first.' },
+  { id: 'STK-12', name: 'Evidence Without Commitment',  triggers: ['S1', 'S7'], logic: 'Re-proving generates narrative to justify existence, while narrating substitutes reporting for impact — evidence accumulates but never converts to committed action.' },
+  { id: 'STK-03', name: 'Incumbent Lock',               triggers: ['S6', 'S4'], logic: 'Stabilising preserves structures that enable extraction — anchors maintain their position while the ecosystem optimises around them rather than adapting.' },
+  { id: 'STK-01', name: 'Activity-Alignment Stack',     triggers: ['S7', 'S2'], logic: 'The ecosystem reports activity to justify coordination, and coordinates to generate reportable activity. Neither breaks without changing both.' },
+  { id: 'STK-02', name: 'Justification Stack',          triggers: ['S1', 'S8'], logic: 'Early-stage activity is used as proof of concept rather than evaluated against outcomes. The case for scaling is never quite strong enough.' },
+  { id: 'STK-04', name: 'Relationship Stack',           triggers: ['S2', 'S5'], logic: 'The ecosystem manages relationships as the primary output. Transactions are replaced by partnerships, and partnerships by further coordination.' },
+  { id: 'STK-06', name: 'Anchor Dependency Stack',      triggers: ['S5', 'S4'], logic: 'The ecosystem organises itself around managing anchor institutions rather than changing their behaviour. Value flows out while relationships are maintained.' },
+  { id: 'STK-07', name: 'Tolerance Stack',              triggers: ['S8', 'S3'], logic: 'Poor performance at scale is tolerated to avoid disrupting the narrative of progress. Accountability is systematically deferred.' },
 ];
 
 /* ─── Journey context (state carried forward across stages) ────────── */
@@ -119,7 +146,7 @@ function StepIndicator({ current, completedUpTo }) {
   );
 }
 
-/* ─── Stage placeholder ────────────────────────────────────────────── */
+/* ─── Stage placeholder (for stages 2 & 3) ────────────────────────── */
 function StagePlaceholder({ stage }) {
   return (
     <div style={styles.stageContainer}>
@@ -131,6 +158,164 @@ function StagePlaceholder({ stage }) {
         <span style={styles.placeholderLabel}>Stage content</span>
         <span style={styles.placeholderHint}>Not yet implemented</span>
       </div>
+    </div>
+  );
+}
+
+/* ─── Health indicator ─────────────────────────────────────────────── */
+function HealthIndicator({ count }) {
+  const max = 9;
+  const ratio = count / max;
+  const color = count === 0 ? 'var(--dj-chalk-muted)'
+    : ratio <= 0.22 ? 'var(--signal)'
+    : ratio <= 0.44 ? 'var(--steward)'
+    : ratio <= 0.66 ? 'var(--founder)'
+    : 'var(--researcher)';
+  const label = count === 0 ? 'No stalls selected'
+    : ratio <= 0.22 ? 'Low severity'
+    : ratio <= 0.44 ? 'Moderate'
+    : ratio <= 0.66 ? 'Elevated'
+    : 'Critical';
+
+  return (
+    <div style={s1.healthBar}>
+      <div style={s1.healthHeader}>
+        <span style={s1.healthLabel}>Ecosystem health</span>
+        <span style={{ ...s1.healthStatus, color }}>{label}</span>
+      </div>
+      <div style={s1.healthTrack}>
+        <div style={{
+          height: '100%',
+          width: `${Math.max(ratio * 100, count > 0 ? 8 : 0)}%`,
+          background: color,
+          borderRadius: '3px',
+          transition: 'width 0.4s ease, background 0.4s ease',
+        }} />
+      </div>
+      <div style={s1.healthCount}>{count} of {max} stalls active</div>
+    </div>
+  );
+}
+
+/* ─── Stall card ───────────────────────────────────────────────────── */
+function StallCard({ stall, selected, onToggle }) {
+  return (
+    <button
+      onClick={() => onToggle(stall.id)}
+      style={{
+        ...s1.card,
+        borderColor: selected ? 'var(--signal)' : 'var(--dj-border)',
+        background: selected ? 'rgba(200,240,208,0.06)' : 'var(--dj-surface)',
+      }}
+    >
+      <div style={s1.cardHeader}>
+        <span style={{
+          ...s1.cardId,
+          color: selected ? 'var(--signal)' : 'var(--dj-chalk-muted)',
+        }}>{stall.id}</span>
+        <div style={{
+          ...s1.cardCheck,
+          borderColor: selected ? 'var(--signal)' : 'var(--dj-border)',
+          background: selected ? 'var(--signal)' : 'transparent',
+        }}>
+          {selected && (
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M2 5L4.2 7.2L8 3" stroke="var(--dj-bg)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          )}
+        </div>
+      </div>
+      <div style={{
+        ...s1.cardName,
+        color: selected ? 'var(--dj-chalk)' : 'var(--dj-chalk-dim)',
+      }}>{stall.name}</div>
+      <div style={s1.cardSub}>{stall.sub}</div>
+    </button>
+  );
+}
+
+/* ─── Detected stack card ──────────────────────────────────────────── */
+function StackCard({ stack }) {
+  const triggerNames = stack.triggers
+    .map(id => STALLS.find(s => s.id === id)?.name)
+    .filter(Boolean);
+  return (
+    <div style={s1.stackCard}>
+      <div style={s1.stackHeader}>
+        <span style={s1.stackId}>{stack.id}</span>
+        <span style={s1.stackName}>{stack.name}</span>
+      </div>
+      <div style={s1.stackTriggers}>
+        {triggerNames.map(name => (
+          <span key={name} style={s1.stackPill}>{name}</span>
+        ))}
+      </div>
+      <div style={s1.stackLogic}>{stack.logic}</div>
+    </div>
+  );
+}
+
+/* ─── Stage 1: Behaviours ──────────────────────────────────────────── */
+function BehavioursStage() {
+  const { journeyState, updateJourneyState } = useJourney();
+  const selected = journeyState.stalls;
+
+  const toggleStall = useCallback((id) => {
+    const next = selected.includes(id)
+      ? selected.filter(s => s !== id)
+      : [...selected, id];
+    const detected = STACK_RULES.filter(
+      rule => rule.triggers.every(t => next.includes(t))
+    );
+    updateJourneyState({
+      stalls: next,
+      stacks: detected.map(s => s.name),
+      detectedStacks: detected,
+    });
+  }, [selected, updateJourneyState]);
+
+  const detectedStacks = useMemo(() =>
+    STACK_RULES.filter(rule => rule.triggers.every(t => selected.includes(t))),
+    [selected]
+  );
+
+  return (
+    <div style={s1.container}>
+      <h2 style={styles.stageHeading}>Behaviours</h2>
+      <p style={styles.stageSubtitle}>
+        Select the behavioural stalls you observe in this ecosystem. Stacks — reinforcing combinations — are detected automatically.
+      </p>
+
+      <HealthIndicator count={selected.length} />
+
+      <div className="stall-grid" style={s1.grid}>
+        {STALLS.map(stall => (
+          <StallCard
+            key={stall.id}
+            stall={stall}
+            selected={selected.includes(stall.id)}
+            onToggle={toggleStall}
+          />
+        ))}
+      </div>
+
+      {detectedStacks.length > 0 && (
+        <div style={s1.stackSection}>
+          <div style={s1.stackSectionHeader}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
+              <circle cx="8" cy="8" r="6.5" stroke="var(--founder)" strokeWidth="1.2"/>
+              <path d="M8 5V8.5" stroke="var(--founder)" strokeWidth="1.3" strokeLinecap="round"/>
+              <circle cx="8" cy="11" r="0.8" fill="var(--founder)"/>
+            </svg>
+            <span style={s1.stackSectionLabel}>
+              {detectedStacks.length} stack{detectedStacks.length > 1 ? 's' : ''} detected
+            </span>
+          </div>
+          {detectedStacks.map(stack => (
+            <StackCard key={stack.id} stack={stack} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -167,7 +352,9 @@ function ExitSummary({ exitedAt, journeyState }) {
         <div style={styles.summarySection}>
           <div style={styles.summaryLabel}>Stalls identified</div>
           <div style={styles.summaryValue}>
-            {stalls.length > 0 ? stalls.join(', ') : 'None yet'}
+            {stalls.length > 0
+              ? stalls.map(id => { const s = STALLS.find(x => x.id === id); return s ? `${s.id} ${s.name}` : id; }).join(', ')
+              : 'None yet'}
           </div>
         </div>
         <div style={styles.summarySection}>
@@ -268,7 +455,10 @@ function DiagnosticJourney() {
 
         {/* ── Stage content area ── */}
         <main style={styles.main}>
-          <StagePlaceholder stage={stage} />
+          {currentStage === 0
+            ? <BehavioursStage />
+            : <StagePlaceholder stage={stage} />
+          }
         </main>
 
         {/* ── Navigation bar ── */}
@@ -359,8 +549,8 @@ const styles = {
   /* Main content area */
   main: {
     flex: 1,
+    overflowY: 'auto',
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
     padding: '24px 32px 32px',
   },
@@ -576,6 +766,179 @@ const styles = {
   summaryValue: {
     fontFamily: 'var(--font-sans)',
     fontSize: '14px',
+    color: 'var(--dj-chalk-dim)',
+  },
+};
+
+/* ─── Stage 1 styles ───────────────────────────────────────────────── */
+const s1 = {
+  container: {
+    width: '100%',
+    maxWidth: '780px',
+  },
+
+  /* Health indicator */
+  healthBar: {
+    marginBottom: '28px',
+    padding: '16px 20px',
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '8px',
+  },
+  healthHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '8px',
+  },
+  healthLabel: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    color: 'var(--dj-chalk-muted)',
+  },
+  healthStatus: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    fontWeight: 600,
+    letterSpacing: '0.04em',
+  },
+  healthTrack: {
+    height: '6px',
+    background: 'rgba(30,47,69,0.6)',
+    borderRadius: '3px',
+    overflow: 'hidden',
+  },
+  healthCount: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '11px',
+    color: 'var(--dj-chalk-muted)',
+    marginTop: '6px',
+  },
+
+  /* Card grid */
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '12px',
+    marginBottom: '32px',
+  },
+
+  /* Stall card */
+  card: {
+    textAlign: 'left',
+    padding: '16px',
+    borderRadius: '8px',
+    border: '1px solid var(--dj-border)',
+    cursor: 'pointer',
+    transition: 'border-color 0.2s, background 0.2s',
+    fontFamily: 'var(--font-sans)',
+  },
+  cardHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '8px',
+  },
+  cardId: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.1em',
+  },
+  cardCheck: {
+    width: '18px',
+    height: '18px',
+    borderRadius: '4px',
+    border: '1.5px solid var(--dj-border)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.2s',
+    flexShrink: 0,
+  },
+  cardName: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '17px',
+    lineHeight: 1.2,
+    marginBottom: '6px',
+    transition: 'color 0.2s',
+  },
+  cardSub: {
+    fontSize: '12px',
+    lineHeight: 1.5,
+    color: 'var(--dj-chalk-muted)',
+  },
+
+  /* Stack section */
+  stackSection: {
+    borderTop: '1px solid var(--dj-border)',
+    paddingTop: '24px',
+  },
+  stackSectionHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    marginBottom: '16px',
+  },
+  stackSectionLabel: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    fontWeight: 600,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase',
+    color: 'var(--founder)',
+  },
+
+  /* Stack card */
+  stackCard: {
+    background: 'var(--dj-surface)',
+    border: '1px solid rgba(245,217,122,0.2)',
+    borderRadius: '8px',
+    padding: '16px 20px',
+    marginBottom: '12px',
+  },
+  stackHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    marginBottom: '10px',
+  },
+  stackId: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.08em',
+    color: 'var(--dj-chalk-muted)',
+  },
+  stackName: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '17px',
+    color: 'var(--dj-chalk)',
+  },
+  stackTriggers: {
+    display: 'flex',
+    gap: '6px',
+    marginBottom: '10px',
+    flexWrap: 'wrap',
+  },
+  stackPill: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 500,
+    letterSpacing: '0.04em',
+    color: 'var(--signal)',
+    background: 'rgba(200,240,208,0.08)',
+    border: '1px solid rgba(200,240,208,0.2)',
+    borderRadius: '3px',
+    padding: '3px 8px',
+  },
+  stackLogic: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    lineHeight: 1.55,
     color: 'var(--dj-chalk-dim)',
   },
 };

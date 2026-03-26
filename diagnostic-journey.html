@@ -1451,6 +1451,70 @@ function ExitSummary({ exitedAt, journeyState }) {
   );
 }
 
+/* ─── Transition card between stages ───────────────────────────────── */
+function TransitionCard({ fromStage, journeyState, onContinue, onStop }) {
+  const stalls = journeyState.stalls || [];
+  const stacks = journeyState.detectedStacks || [];
+  const stallNames = stalls.map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; });
+
+  if (fromStage === 0) {
+    const stackNames = stacks.map(s => s.name);
+    const stallStr = stallNames.join(', ');
+    let body = `You've identified ${stalls.length} stall${stalls.length !== 1 ? 's' : ''} — ${stallStr}. `;
+    if (stacks.length > 0) {
+      body += `Your ecosystem is running ${stackNames.join(', ')}. Stacks are harder to break than individual stalls because removing one stall does not remove the conditions that sustain it. `;
+    } else {
+      body += 'No reinforcing stacks detected — your stalls appear independent. ';
+    }
+    body += 'The next stage shows you where to intervene first — and what changes if you do.';
+
+    return (
+      <div style={trans.card}>
+        <p style={trans.text}>{body}</p>
+        <div style={trans.actions}>
+          <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
+          <button style={styles.btnSignal} onClick={onContinue}>
+            Continue to Leverage
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (fromStage === 1) {
+    let target = '';
+    let entryText = '';
+    if (stacks.length > 0) {
+      target = stacks[0].name;
+      entryText = stacks[0].entry ? ` — ${stacks[0].entry.charAt(0).toLowerCase()}${stacks[0].entry.slice(1)}` : '';
+    } else if (stalls.length > 0) {
+      target = stallNames[0];
+      entryText = ' — addressing the stall patterns independently';
+    }
+    const body = `Your leverage hypothesis targets ${target}${entryText}. The next stage translates this into infrastructure — what your ecosystem needs to be built on, configured for your specific context.`;
+
+    return (
+      <div style={trans.card}>
+        <p style={trans.text}>{body}</p>
+        <div style={trans.actions}>
+          <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
+          <button style={styles.btnSignal} onClick={onContinue}>
+            Continue to Digital OS
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 /* ─── Main app ─────────────────────────────────────────────────────── */
 function DiagnosticJourney() {
   const [currentStage, setCurrentStage]   = useState(0);
@@ -1458,6 +1522,7 @@ function DiagnosticJourney() {
   const [showExitModal, setShowExitModal] = useState(false);
   const [exited, setExited]               = useState(false);
   const [exitedAt, setExitedAt]           = useState(null);
+  const [showTransition, setShowTransition] = useState(false);
 
   /* ── Carried-forward state ── */
   const [journeyState, setJourneyState] = useState({
@@ -1474,16 +1539,23 @@ function DiagnosticJourney() {
 
   /* ── Navigation ── */
   const goNext = useCallback(() => {
+    // Intercept stages 0 and 1 to show transition card first
+    if ((currentStage === 0 || currentStage === 1) && !showTransition) {
+      setShowTransition(true);
+      return;
+    }
+    setShowTransition(false);
     const next = currentStage + 1;
     if (next < STAGES.length) {
       setCompletedUpTo(prev => Math.max(prev, next));
       setCurrentStage(next);
     }
-  }, [currentStage]);
+  }, [currentStage, showTransition]);
 
   const goBack = useCallback(() => {
+    if (showTransition) { setShowTransition(false); return; }
     if (currentStage > 0) setCurrentStage(currentStage - 1);
-  }, [currentStage]);
+  }, [currentStage, showTransition]);
 
   const requestExit = useCallback(() => {
     setShowExitModal(true);
@@ -1525,7 +1597,19 @@ function DiagnosticJourney() {
 
         {/* ── Stage content area ── */}
         <main style={styles.main}>
-          {currentStage === 0 ? <BehavioursStage />
+          {showTransition ? (
+            <TransitionCard
+              fromStage={currentStage}
+              journeyState={journeyState}
+              onContinue={goNext}
+              onStop={() => {
+                console.log(currentStage === 0 ? 'stop-behaviours' : 'stop-leverage');
+                // TODO: wire to email capture / report generation
+                setExitedAt(currentStage);
+                setExited(true);
+              }}
+            />
+          ) : currentStage === 0 ? <BehavioursStage />
             : currentStage === 1 ? <LeverageStage />
             : currentStage === 2 ? <DigitalOSStage />
             : <StagePlaceholder stage={stage} />
@@ -2629,6 +2713,34 @@ const arch = {
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'opacity 0.2s',
+  },
+};
+
+/* ─── Transition card styles ───────────────────────────────────────── */
+const trans = {
+  card: {
+    width: '100%',
+    maxWidth: '640px',
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderLeft: '3px solid var(--steward)',
+    borderRadius: '8px',
+    padding: '32px',
+  },
+  text: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '18px',
+    fontWeight: 400,
+    lineHeight: 1.6,
+    color: 'var(--dj-chalk)',
+    marginBottom: '28px',
+    letterSpacing: '-0.01em',
+  },
+  actions: {
+    display: 'flex',
+    gap: '12px',
+    justifyContent: 'flex-end',
+    flexWrap: 'wrap',
   },
 };
 

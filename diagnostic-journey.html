@@ -53,8 +53,8 @@ const STAGES = [
   { id: 'digital-os', label: 'Digital OS',   subtitle: 'Architecture recommendation' },
 ];
 
-/* ─── Stall data ───────────────────────────────────────────────────── */
-const STALLS = [
+/* ─── Stall data (fallback + API-loaded) ────────────────────────────── */
+const FALLBACK_STALLS = [
   { id: 'S1', name: 'Re-proving',       sub: 'Resources flow to justification rather than execution. The ecosystem repeats the case for its own existence.' },
   { id: 'S2', name: 'Coordinating',     sub: 'Coordination becomes the output rather than the mechanism. Meetings and alignment substitute for committed action.' },
   { id: 'S3', name: 'Forgiving',        sub: 'Poor performance is tolerated to preserve relationships. Accountability systems are systematically avoided.' },
@@ -65,9 +65,10 @@ const STALLS = [
   { id: 'S8', name: 'Scaling Activity', sub: 'Early-stage activity is celebrated rather than evaluated. The ecosystem optimises for inputs and starts rather than outcomes.' },
   { id: 'S9', name: 'Waiting',          sub: 'Action is deferred pending external conditions — funding, policy clarity, anchor commitment. Waiting becomes structural.' },
 ];
+let STALLS = FALLBACK_STALLS;
 
-/* ─── Stack detection rules + leverage hypotheses ──────────────────── */
-const STACK_RULES = [
+/* ─── Stack detection rules + leverage hypotheses (fallback + API) ── */
+const FALLBACK_STACK_RULES = [
   { id: 'STK-05', name: 'Mediated Dependency Loop',    triggers: ['S5', 'S9'],
     logic: 'Mediation defers action to external actors, who are themselves waiting — creating a self-reinforcing dependency cycle where no party moves first.',
     regime: 'The ecosystem is locked into perpetual standby — every actor waits for another to move, and mediation sustains the waiting as productive activity.',
@@ -117,9 +118,10 @@ const STACK_RULES = [
     effect: 'Underperforming programmes lose automatic renewal; resources shift toward programmes that demonstrate measurable progress.',
     confidence: 'Medium' },
 ];
+let STACK_RULES = FALLBACK_STACK_RULES;
 
-/* ─── Individual stall leverage (for stalls not in any stack) ──────── */
-const STALL_LEVERAGE = {
+/* ─── Individual stall leverage (fallback + API-loaded) ────────────── */
+const FALLBACK_STALL_LEVERAGE = {
   S1: 'Secure one credible external validator to make the case definitively — internal re-proving almost never resolves this.',
   S2: 'Identify the actor with the most to lose from the current arrangement and change their constraint, not their willingness to coordinate.',
   S3: 'Introduce conditional continuation from a funder or anchor — accountability breaks through changed conditions, not culture.',
@@ -130,6 +132,55 @@ const STALL_LEVERAGE = {
   S8: 'Redefine success from number of starts to rate of graduation — change the measurement layer before changing programmes.',
   S9: 'Find the actor with the least to lose from going first and remove their remaining constraint. Others follow.',
 };
+let STALL_LEVERAGE = FALLBACK_STALL_LEVERAGE;
+
+/* ─── API loader ───────────────────────────────────────────────────── */
+const KNOWLEDGE_API = 'https://clusteros-v3-production.up.railway.app/api/v1/knowledge';
+let knowledgeLoaded = false;
+let knowledgePromise = null;
+
+function loadKnowledge() {
+  if (knowledgePromise) return knowledgePromise;
+  knowledgePromise = fetch(KNOWLEDGE_API)
+    .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+    .then(k => {
+      // Map stalls
+      if (k.stalls && k.stalls.length > 0) {
+        STALLS = k.stalls.map(s => ({
+          id:   s.id || s.stall_id,
+          name: s.short || s.name,
+          sub:  s.definition || s.y_substituted || '',
+        }));
+        // Rebuild STALL_LEVERAGE from API
+        const leverageMap = {};
+        k.stalls.forEach(s => {
+          const id = s.id || s.stall_id;
+          if (s.leverage) leverageMap[id] = s.leverage;
+        });
+        if (Object.keys(leverageMap).length > 0) STALL_LEVERAGE = { ...FALLBACK_STALL_LEVERAGE, ...leverageMap };
+      }
+      // Map stacks
+      if (k.stacks && k.stacks.length > 0) {
+        STACK_RULES = k.stacks.map(s => ({
+          id:         s.id || s.canonical_id || '',
+          name:       s.name || '',
+          triggers:   s.stalls || s.component_stalls || [],
+          logic:      s.reinforcing_logic || s.description || '',
+          regime:     s.regime || '',
+          entry:      s.leverage_entry || s.entry || '',
+          effect:     s.expected_effect || s.effect || '',
+          confidence: s.confidence || 'Medium',
+        }));
+      }
+      knowledgeLoaded = true;
+      console.log(`Knowledge API loaded: ${STALLS.length} stalls, ${STACK_RULES.length} stacks`);
+    })
+    .catch(err => {
+      console.warn('Knowledge API unavailable — using fallback definitions:', err.message);
+      knowledgeLoaded = true; // proceed with fallbacks
+    });
+  return knowledgePromise;
+}
 
 /* ─── Stage 3: Qualifier questions ─────────────────────────────────── */
 const QUALIFIER_QUESTIONS = [
@@ -2957,9 +3008,23 @@ const trans = {
   },
 };
 
+/* ─── App wrapper with loading gate ────────────────────────────────── */
+function App() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => { loadKnowledge().then(() => setReady(true)); }, []);
+  if (!ready) return (
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--dj-bg)' }}>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--dj-chalk-muted)', letterSpacing: '0.06em' }}>
+        Loading ecosystem definitions...
+      </span>
+    </div>
+  );
+  return <DiagnosticJourney />;
+}
+
 /* ─── Mount ────────────────────────────────────────────────────────── */
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<DiagnosticJourney />);
+root.render(<App />);
 </script>
 </body>
 </html>

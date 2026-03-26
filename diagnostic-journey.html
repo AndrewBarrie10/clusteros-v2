@@ -551,18 +551,14 @@ function HealthIndicator({ count }) {
   const ratio = count / max;
   // Health DEGRADES as stalls increase: 0 = full health, 9 = critical
   const color = count === 0 ? 'var(--signal)'
-    : ratio <= 0.33 ? 'var(--founder)'
-    : ratio <= 0.66 ? 'var(--researcher)'
-    : 'var(--researcher)';
+    : ratio <= 0.33 ? 'var(--founder)'   // amber
+    : ratio <= 0.66 ? '#e06b2c'           // orange
+    : 'var(--researcher)';                 // red
   const label = count === 0 ? 'Healthy'
     : ratio <= 0.33 ? 'Moderate'
     : ratio <= 0.66 ? 'Concerning'
     : 'Critical';
-  // Health bar shows remaining health (inverted)
   const healthPct = Math.max(100 - (ratio * 100), count > 0 ? 8 : 0);
-  const healthColor = count === 0 ? 'var(--signal)'
-    : ratio <= 0.33 ? 'var(--founder)'
-    : 'var(--researcher)';
 
   return (
     <div style={s1.healthBar}>
@@ -574,7 +570,7 @@ function HealthIndicator({ count }) {
         <div style={{
           height: '100%',
           width: `${count === 0 ? 100 : healthPct}%`,
-          background: healthColor,
+          background: color,
           borderRadius: '3px',
           transition: 'width 0.4s ease, background 0.4s ease',
         }} />
@@ -910,15 +906,15 @@ function getActiveToolNames(js) { return MCP_TOOLS.filter(t => t.cond(js)).map(t
 
 /* ─── Actor cascade data ──────────────────────────────────────────── */
 const ACTOR_CASCADES = {
-  Founders: { action: 'Register capability profile and declare sector intent' },
-  University: { action: 'Publish research demand signal from active grant portfolio' },
-  'Research institute': { action: 'Declare research output with controlled access terms' },
-  'Large corporate': { action: 'Post RFI signal to scouted capability matches' },
-  'Public agency': { action: 'Publish programme eligibility criteria and open funding windows' },
-  Hospital: { action: 'Register clinical need signal from active research programme' },
-  Researchers: { action: 'Declare research output and tag to cluster knowledge taxonomy' },
-  Stewards: { action: 'Run diagnostic interrogation against live ecosystem signals' },
-  Anchors: { action: 'Declare strategic intent and resource availability' },
+  Founders: { action: 'Register capability profile and declare sector intent', signal: 'New founder signal propagates to matched anchor and researcher nodes', effect: 'Ecosystem discovers talent it didn\'t know existed — connection density increases' },
+  University: { action: 'Publish research demand signal from active grant portfolio', signal: 'Demand signal translates to commercial opportunity for matched founders', effect: 'Research-to-market conversion accelerates without IP boundary violation' },
+  'Research institute': { action: 'Declare research output with controlled access terms', signal: 'Evidence base updates; matched actors receive filtered insight notification', effect: 'Knowledge flows between groups without leaking sovereign data' },
+  'Large corporate': { action: 'Post RFI signal to scouted capability matches', signal: 'Supply chain visibility increases; founder pipeline receives opportunity alert', effect: 'Anchor procurement begins to circulate value within ecosystem boundary' },
+  'Public agency': { action: 'Publish programme eligibility criteria and open funding windows', signal: 'Support programme alerts reach eligible founders and researchers', effect: 'Coordination gap closes — actors discover routes they couldn\'t find before' },
+  Hospital: { action: 'Register clinical need signal from active research programme', signal: 'Demand signal reaches matched researchers and health-tech founders', effect: 'Clinical translation pipeline gains visibility and founder engagement' },
+  Researchers: { action: 'Declare research output and tag to cluster knowledge taxonomy', signal: 'Evidence base enriches; IP-protected insight flows to matched actors', effect: 'Knowledge layer deepens — ecosystem builds cumulative intelligence' },
+  Stewards: { action: 'Run diagnostic interrogation against live ecosystem signals', signal: 'Stall detection updates; stack analysis surfaces new leverage hypotheses', effect: 'Structural position becomes visible — intervention can be targeted precisely' },
+  Anchors: { action: 'Declare strategic intent and resource availability', signal: 'Ecosystem actors see anchor commitment; waiting stall pressure reduces', effect: 'Coordination unlocks as anchor position becomes transparent' },
 };
 
 /* ─── Walkthrough layer definitions ────────────────────────────────── */

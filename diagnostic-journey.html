@@ -989,6 +989,9 @@ const ACTOR_CASCADES = {
 const CLUSTER_TYPE_SENTENCES = {
   regional: 'a place-based cluster', national: 'a nationally significant supercluster', corporate: 'an anchor-led enterprise ecosystem',
 };
+const CLUSTER_TYPE_LABELS = {
+  regional: 'Regional Speciality', national: 'National Supercluster', corporate: 'Corporate',
+};
 
 const ARCH_LAYERS = [
   { id: 'governance',  label: 'Federated Governance Layer',
@@ -1085,6 +1088,7 @@ function buildProvocation(stepIndex, journeyState, config) {
   const protections = qa.protect || [];
   const clusterDesc = CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem';
   const clusterType = clusterDesc.replace(/^a /, '').replace(/^an /, '');
+  const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'Regional Speciality';
   const anchorLabel = config.anchorLabel || 'Anchors';
   const protectLabels = protections.map(p => PROTECT_LABELS[p]).filter(Boolean);
   const protectStr = protectLabels.length > 0
@@ -1095,7 +1099,7 @@ function buildProvocation(stepIndex, journeyState, config) {
 
     /* ── STEP 1: Federated Governance Layer ── */
     case 0: {
-      const diagnosis = `Your ${clusterType} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor operates across multiple institutions with competing accountability structures. Without identity-first governance, coordination defaults to whoever has the most political capital — not whoever has the most relevant capability.`;
+      const diagnosis = `Your ${clusterLabel} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor operates across multiple institutions with competing accountability structures. Without identity-first governance, coordination defaults to whoever has the most political capital — not whoever has the most relevant capability.`;
 
       let consequence = '';
       if (stalls.includes('S2')) consequence = 'Coordinating stall means your ecosystem is already producing alignment without accountability — more committees, more MoUs, more consultation with no audit trail.';
@@ -1346,7 +1350,10 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
       {/* Step counter */}
       <div style={arch.stepCounter}>{step + 1} of {totalSteps}</div>
 
-      <div style={arch.walkthroughLayout}>
+      <div style={{
+        ...arch.walkthroughLayout,
+        gridTemplateColumns: (provocation && provocation.scenario) ? '1fr 600px' : '1fr 340px',
+      }}>
         {/* Diagram column */}
         <div style={arch.diagramCol}>
           {ARCH_LAYERS.map((layer, i) => {
@@ -1379,63 +1386,86 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
           }).reverse()}
         </div>
 
-        {/* Annotation column */}
-        <div style={arch.annotCol}>
-          <div style={arch.annotLabel}>
-            {isFinal ? config.configName : ARCH_LAYERS[step].label}
-          </div>
-
-          {provocation && (
-            <div style={arch.provocationWrap}>
-              {/* Scenario (Step 2 only) */}
-              {provocation.scenario && (
-                <div style={arch.scenarioSection}>
-                  {provocation.scenario.split('\n\n').map((para, i) => (
-                    <p key={i} style={arch.scenarioText}>{para}</p>
-                  ))}
-                </div>
-              )}
-              <div style={arch.provSection}>
-                <div style={arch.provLabel}>Diagnosis</div>
-                <p style={arch.provDiagnosis}>{provocation.diagnosis}</p>
-              </div>
-              <div style={arch.provSection}>
-                <div style={arch.provLabel}>Consequence</div>
-                <p style={arch.provText}>{provocation.consequence}</p>
-              </div>
-              <div style={arch.provSection}>
-                <div style={arch.provLabel}>Mechanism</div>
-                {/* Step 6: cascade cards before mechanism text */}
-                {provocation.cascadeActors && provocation.cascadeActors.map(name => {
-                  const c = ACTOR_CASCADES[name];
-                  if (!c) return null;
-                  return (
-                    <div key={name} style={arch.cascadeCard}>
-                      <div style={arch.cascadeActor}>{name}</div>
-                      <div style={arch.cascadeRow}>
-                        <span style={arch.cascadeStepText}>{c.action}</span>
-                        <span style={arch.cascadeArrowInline}>&darr;</span>
-                        <span style={arch.cascadeStepText}>{c.signal}</span>
-                        <span style={arch.cascadeArrowInline}>&darr;</span>
-                        <span style={arch.cascadeStepText}>{c.effect}</span>
-                      </div>
-                    </div>
-                  );
-                })}
-                <p style={arch.provText}>{provocation.mechanism}</p>
-              </div>
-              {/* Step 7: CTA */}
-              {provocation.showCTA && (
-                <a href="/get-started.html" style={arch.ctaLink}>
-                  Talk to us about your configuration
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-                    <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </a>
-              )}
+        {/* Annotation column — split layout for Step 2, single panel for others */}
+        {provocation && provocation.scenario ? (
+          <div style={arch.annotColSplit}>
+            <div style={arch.annotLabel}>
+              {ARCH_LAYERS[step].label}
             </div>
-          )}
-        </div>
+            <div style={arch.splitAnnot}>
+              {/* Left: scenario story */}
+              <div style={arch.splitLeft}>
+                {provocation.scenario.split('\n\n').map((para, i) => (
+                  <p key={i} style={arch.scenarioText}>{para}</p>
+                ))}
+              </div>
+              {/* Divider */}
+              <div style={arch.splitDivider} />
+              {/* Right: provocation */}
+              <div style={arch.splitRight}>
+                <div style={arch.provSection}>
+                  <div style={arch.provLabel}>Diagnosis</div>
+                  <p style={arch.provDiagnosis}>{provocation.diagnosis}</p>
+                </div>
+                <div style={arch.provSection}>
+                  <div style={arch.provLabel}>Consequence</div>
+                  <p style={arch.provText}>{provocation.consequence}</p>
+                </div>
+                <div style={arch.provSection}>
+                  <div style={arch.provLabel}>Mechanism</div>
+                  <p style={arch.provText}>{provocation.mechanism}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div style={arch.annotCol}>
+            <div style={arch.annotLabel}>
+              {isFinal ? config.configName : ARCH_LAYERS[step].label}
+            </div>
+
+            {provocation && (
+              <div style={arch.provocationWrap}>
+                <div style={arch.provSection}>
+                  <div style={arch.provLabel}>Diagnosis</div>
+                  <p style={arch.provDiagnosis}>{provocation.diagnosis}</p>
+                </div>
+                <div style={arch.provSection}>
+                  <div style={arch.provLabel}>Consequence</div>
+                  <p style={arch.provText}>{provocation.consequence}</p>
+                </div>
+                <div style={arch.provSection}>
+                  <div style={arch.provLabel}>Mechanism</div>
+                  {provocation.cascadeActors && provocation.cascadeActors.map(name => {
+                    const c = ACTOR_CASCADES[name];
+                    if (!c) return null;
+                    return (
+                      <div key={name} style={arch.cascadeCard}>
+                        <div style={arch.cascadeActor}>{name}</div>
+                        <div style={arch.cascadeRow}>
+                          <span style={arch.cascadeStepText}>{c.action}</span>
+                          <span style={arch.cascadeArrowInline}>&darr;</span>
+                          <span style={arch.cascadeStepText}>{c.signal}</span>
+                          <span style={arch.cascadeArrowInline}>&darr;</span>
+                          <span style={arch.cascadeStepText}>{c.effect}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <p style={arch.provText}>{provocation.mechanism}</p>
+                </div>
+                {provocation.showCTA && (
+                  <a href="/get-started.html" style={arch.ctaLink}>
+                    Talk to us about your configuration
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+                      <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Navigation */}
@@ -2952,6 +2982,39 @@ const arch = {
     padding: '0 8px',
   },
 
+  /* Step 2 split annotation */
+  annotColSplit: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: '0 8px',
+  },
+  splitAnnot: {
+    display: 'grid',
+    gridTemplateColumns: '55% 1px 1fr',
+    gap: '0',
+    flex: 1,
+    overflow: 'hidden',
+  },
+  splitLeft: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingRight: '20px',
+    overflowY: 'auto',
+  },
+  splitDivider: {
+    background: 'var(--dj-border)',
+    width: '1px',
+  },
+  splitRight: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '14px',
+    paddingLeft: '20px',
+    overflowY: 'auto',
+  },
+
   /* Layer box */
   layerBox: {
     border: '1px solid var(--dj-border)',
@@ -3003,19 +3066,14 @@ const arch = {
     maxHeight: 'calc(100vh - 240px)',
     paddingRight: '4px',
   },
-  scenarioSection: {
-    marginBottom: '20px',
-    paddingBottom: '16px',
-    borderBottom: '1px solid var(--dj-border)',
-  },
   scenarioText: {
     fontFamily: 'var(--font-serif)',
-    fontSize: '15px',
+    fontSize: '16px',
     fontWeight: 400,
-    lineHeight: 1.7,
+    lineHeight: 1.75,
     color: 'var(--dj-chalk)',
     letterSpacing: '-0.01em',
-    marginBottom: '12px',
+    marginBottom: '14px',
   },
   provSection: {},
   provLabel: {

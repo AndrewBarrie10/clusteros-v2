@@ -938,26 +938,140 @@ const ARCH_LAYERS = [
 ];
 
 /* ─── Walkthrough annotation builders ──────────────────────────────── */
-function buildAnnotation(stepIndex, journeyState, config) {
+/* ─── Stack pattern helpers ────────────────────────────────────────── */
+function stackContains(stacks, s1, s2) {
+  return stacks.find(st => st.triggers.includes(s1) && st.triggers.includes(s2));
+}
+
+/* ─── Provocation builder (3-part: diagnosis, consequence, mechanism) */
+function buildProvocation(stepIndex, journeyState, config) {
   const stacks = journeyState.detectedStacks || [];
   const stalls = journeyState.stalls || [];
   const qa = journeyState.qualifierAnswers || {};
   const protections = qa.protect || [];
   const clusterDesc = CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem';
+  const clusterType = clusterDesc.replace(/^a /, '').replace(/^an /, '');
   const anchorLabel = config.anchorLabel || 'Anchors';
-  const protectList = protections.map(p => PROTECT_LABELS[p]).filter(Boolean);
-  const protectStr = protectList.length > 0
-    ? (protectList.length === 1 ? protectList[0] : protectList.slice(0, -1).join(', ') + ' and ' + protectList[protectList.length - 1])
+  const protectLabels = protections.map(p => PROTECT_LABELS[p]).filter(Boolean);
+  const protectStr = protectLabels.length > 0
+    ? (protectLabels.length === 1 ? protectLabels[0] : protectLabels.slice(0, -1).join(', ') + ' and ' + protectLabels[protectLabels.length - 1])
     : '';
-  const stackName = stacks.length > 0 ? stacks[0].name : '';
-  const stackEntry = stacks.length > 0 ? stacks[0].entry : '';
 
-  const GAP_SOURCE = {
-    discovery: 'Govt Support Directory surfaces programme listings actors couldn\'t find before.',
-    flow: 'Community Services API enables knowledge to flow between groups at the supercluster level.',
-    access: 'Publication Databases make research outputs visible to external actors seeking engagement.',
-    conversion: 'Professional Identity feeds behavioural enrichment that converts activity into measurable outcomes.',
-  };
+  switch (stepIndex) {
+
+    /* ── STEP 1: Federated Governance Layer ── */
+    case 0: {
+      const diagnosis = `Your ${clusterType} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor operates across multiple institutions with competing accountability structures. Without identity-first governance, coordination defaults to whoever has the most political capital — not whoever has the most relevant capability.`;
+
+      let consequence = '';
+      if (stalls.includes('S2')) consequence = 'Coordinating stall means your ecosystem is already producing alignment without accountability — more committees, more MoUs, more consultation with no audit trail.';
+      else if (stalls.includes('S9')) consequence = 'Waiting stall means actors are deferring to gatekeepers. Without role-based access that makes pathways visible, deference becomes structural.';
+      else consequence = 'Without governance infrastructure, trust cannot scale. Every new actor requires a personal introduction rather than a verified identity.';
+
+      let mechanism = 'Identity-first governance at every level — Supercluster \u2192 Cluster \u2192 Group \u2192 Actor. Every actor holds one system identity. Permissions are explicit, inherited, and auditable.';
+      if (protections.includes('sovereignty')) mechanism += ' No data crosses the regional boundary without consent recorded at the governance layer.';
+      if (protections.includes('trust')) mechanism += ' Trust structures are preserved through role-based access — openness and confidentiality coexist without leakage.';
+
+      return { diagnosis, consequence, mechanism };
+    }
+
+    /* ── STEP 2: Sovereign Ecosystem Database + Bot Network ── */
+    case 1: {
+      let diagnosis = '';
+      const stkEvidence = stackContains(stacks, 'S1', 'S7');
+      const stkIncumbent = stackContains(stacks, 'S4', 'S6');
+      const stkMediated = stackContains(stacks, 'S5', 'S9');
+      if (stkEvidence) diagnosis = `Your ecosystem is running ${stkEvidence.name} — evidence accumulates to justify existence rather than inform decisions. Your database currently holds reports, not outcomes.`;
+      else if (stkIncumbent) diagnosis = `Your ecosystem is running ${stkIncumbent.name} — value flows through established structures rather than circulating locally. Your database needs to track where value goes, not just where activity happens.`;
+      else if (stkMediated) diagnosis = `Your ecosystem is running ${stkMediated.name} — connections are brokered rather than formed. Your database holds relationship records that belong to intermediaries, not to the ecosystem.`;
+      else if (stacks.length > 0) diagnosis = `Your ecosystem is running ${stacks[0].name} — ${stacks[0].logic} The database is where this pattern becomes visible and addressable.`;
+      else if (stalls.includes('S1')) diagnosis = 'Re-proving means your ecosystem validates multiple pathways without letting proof collapse choice — no mechanism forces selection.';
+      else if (stalls.includes('S4')) diagnosis = 'Extracting means value leaves faster than it circulates. Your database needs to track retention, not just activity.';
+      else diagnosis = 'Without a sovereign database, your ecosystem has no memory. Every new programme starts from zero.';
+
+      let consequence = `A ${clusterType} without a sovereign database has no memory. Every new programme starts from zero. Every new steward inherits anecdote rather than evidence. `;
+      if (anchorLabel === 'Large corporate') consequence += 'A corporate anchor without sovereign data infrastructure owns the ecosystem intelligence. When they leave, the intelligence leaves with them.';
+      else if (anchorLabel === 'University') consequence += 'A university anchor generates research that leaves through publication. Without sovereign infrastructure, the ecosystem funds research it never benefits from.';
+      else if (anchorLabel === 'Hospital') consequence += 'A hospital anchor generates clinical intelligence that stays inside institutional boundaries. Without sovereign infrastructure, health innovation stays disconnected from the surrounding ecosystem.';
+      else if (anchorLabel === 'Public agency') consequence += 'A public agency anchor generates policy intelligence that dissipates between electoral cycles. Without sovereign infrastructure, institutional memory resets with every administration.';
+      else if (anchorLabel === 'Research institute') consequence += 'A research institute anchor generates capability signals that stay inside academic boundaries. Without sovereign infrastructure, research capacity is invisible to the actors who need it.';
+
+      let mechanism = `One dedicated instance per ${clusterType}. Actor profiles \u00b7 Signal history \u00b7 Journey state \u00b7 Evidence base \u00b7 Diagnostic outputs \u00b7 Stall records \u00b7 Leverage hypotheses. All within your sovereign boundary. `;
+      if (stalls.includes('S1') || stalls.includes('S7')) mechanism += 'Evidence Ingestion Bot — continuously structures incoming evidence so it informs rather than accumulates. ';
+      if (stalls.includes('S8') || stalls.includes('S9')) mechanism += 'Signal Monitoring Bot — detects when activity grows without conversion. ';
+      if (stalls.includes('S2') || stalls.includes('S5')) mechanism += 'Actor Enrichment Bot — enriches actor profiles from system behaviour rather than self-report. ';
+      mechanism += 'Health Monitoring Bot — tracks system health across all clusters continuously.';
+      if (protectStr) mechanism += ` The sovereign membrane protects ${protectStr} at the boundary — by architecture, not by policy.`;
+
+      return { diagnosis, consequence, mechanism };
+    }
+
+    /* ── STEP 3: External Data Sources ── */
+    case 2: {
+      let diagnosis = '';
+      if (qa.gap === 'discovery') diagnosis = 'Your coordination gap is discovery. Actors exist in your ecosystem but cannot find each other by capability — only by sector or geography. A new actor joins and sees an empty ecosystem.';
+      else if (qa.gap === 'flow') diagnosis = 'Your coordination gap is knowledge flow. Groups produce intelligence that never reaches the actors who need it. Institutional boundaries trap rather than protect.';
+      else if (qa.gap === 'access') diagnosis = 'Your coordination gap is membrane permeability. Investors, diaspora, global partners cannot find a credible entry point. The ecosystem is opaque from the outside.';
+      else if (qa.gap === 'conversion') diagnosis = 'Your coordination gap is conversion. Activity is visible but outcomes are not. The ecosystem cannot distinguish programmes that work from programmes that do not.';
+      else diagnosis = 'Without external data at the supercluster level, every new ecosystem starts empty. Actors arrive and see nothing.';
+
+      let consequence = `Without external data at the supercluster level, every new ${clusterType} starts empty. `;
+      if (stalls.includes('S3')) consequence += 'Forgiving stall means failed programmes continue. Without external data showing what comparable ecosystems have tried and stopped, stewards have no reference point for termination decisions.';
+      else if (stalls.includes('S7')) consequence += 'Narrating stall means strategy substitutes for evidence. External data breaks this — it introduces evidence the ecosystem did not generate and cannot rewrite.';
+      else consequence += 'Actors arrive and see nothing. The cold-start problem kills momentum before the platform generates its own signal.';
+
+      let mechanism = '';
+      if (qa.gap === 'discovery') mechanism = 'Govt Support Directory — live programme listings, funding routes by stage, advisor networks. Ingested weekly. Actors find support before any human broker is involved.';
+      else if (qa.gap === 'flow') mechanism = 'Community Services API — wellbeing services, peer networks, community assets. CC BY 4.0. Knowledge outside institutional boundaries becomes visible inside them.';
+      else if (qa.gap === 'access') mechanism = 'Publication Databases — research outputs, grant announcements, patent filings. Outside actors find credible entry points through research rather than cold outreach.';
+      else if (qa.gap === 'conversion') mechanism = 'Professional Identity — profile import, Research Identity (ORCID), behavioural enrichment. Progressive, never compulsory. Conversion becomes visible when identity is persistent.';
+      else mechanism = 'All four external data sources active — Govt Support Directory, Community Services API, Publication Databases, Professional Identity. Cold-start solved before any actor joins.';
+      mechanism += ' All external data lives at the supercluster level — available to every cluster, never duplicated.';
+
+      return { diagnosis, consequence, mechanism };
+    }
+
+    /* ── STEP 4: MCP Intelligence Substrate ── */
+    case 3: {
+      let diagnosis = '';
+      const stkEvidence = stackContains(stacks, 'S1', 'S7');
+      const stkIncumbent = stackContains(stacks, 'S4', 'S6');
+      const stkMediated = stackContains(stacks, 'S5', 'S9');
+      if (stkEvidence) diagnosis = `${stkEvidence.name} is a reasoning failure — the ecosystem has evidence but no mechanism that forces it to inform decisions. The intelligence substrate converts evidence into structured findings and findings into routable interventions.`;
+      else if (stkIncumbent) diagnosis = `${stkIncumbent.name} is a signal failure — the ecosystem cannot see value leaving because no infrastructure reads the signals that would show it.`;
+      else if (stkMediated) diagnosis = `${stkMediated.name} is a matching failure — connections are possible but require a human broker. The intelligence substrate makes matching infrastructure, not a service.`;
+      else if (stacks.length > 0) diagnosis = `${stacks[0].name} — ${stacks[0].logic} The intelligence substrate is what makes this pattern visible and addressable in real time.`;
+      else diagnosis = 'Your stalls are independent but share a common cause — the ecosystem cannot observe itself. Without structured intelligence tools, stall patterns are invisible until they become crises.';
+
+      let consequence = 'Without an intelligence substrate, AI in your ecosystem is decorative. It answers questions but cannot observe the system, detect patterns, or surface interventions. ';
+      if (qa.priority === 'research') consequence += 'Research commercialisation requires the system to read demand signals and match them to capability — without structured tools this matching is manual, slow, and broker-dependent.';
+      else if (qa.priority === 'capital') consequence += 'Investment attraction requires surfacing pipeline formation to external actors — without signal propagation, investors see activity not momentum.';
+      else if (qa.priority === 'talent') consequence += 'Talent retention requires tracking where talent goes and why — without journey state tools this is invisible until the talent has already left.';
+      else if (qa.priority === 'supply') consequence += 'Supply chain development requires matching capability to procurement signals — without actor matching tools, suppliers wait to be discovered.';
+      else if (qa.priority === 'growth') consequence += 'Economic growth requires observing what is working and what is not — without steward diagnostic tools, intervention is always retrospective.';
+
+      let mechanism = 'Each tool is a structured call from the AI to the live sovereign database. Intelligence assembled at runtime — not pre-baked, not static. detect_stalls() — reads behavioural patterns against the 9 canonical stalls continuously. get_leverage_hypotheses() — surfaces interventions ranked by confidence for your stack configuration. ';
+      if (stalls.includes('S2') || stalls.includes('S5')) mechanism += 'get_matched_connections() — identifies actor pairs with complementary capability and intent. ';
+      if (stalls.includes('S1') || stalls.includes('S7')) mechanism += 'ingest_evidence() — structures incoming evidence so it informs rather than accumulates. ';
+      if (qa.priority === 'capital') mechanism += 'get_open_funding() — surfaces relevant funding to matched actors. ';
+      if (qa.gap === 'access') mechanism += 'get_steward_diagnostic() — live system health reading rather than retrospective reporting. ';
+      mechanism += 'get_actor_profile() \u00b7 get_cluster_signals() \u00b7 get_journey_state() — always active: the substrate that makes every other tool possible.';
+
+      return { diagnosis, consequence, mechanism };
+    }
+
+    /* Steps 5-6: fallback to single string (will be replaced in next session) */
+    default: return null;
+  }
+}
+
+/* ─── Legacy single-string annotation for steps 4-5 (to be replaced) */
+function buildAnnotation(stepIndex, journeyState, config) {
+  const stacks = journeyState.detectedStacks || [];
+  const stalls = journeyState.stalls || [];
+  const qa = journeyState.qualifierAnswers || {};
+  const clusterDesc = CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem';
+  const anchorLabel = config.anchorLabel || 'Anchors';
 
   const PRIORITY_AI = {
     research: 'Journey Construction and Role-Aware Reframing are foregrounded — translating research into demand signals without breaching IP boundaries.',
@@ -976,33 +1090,6 @@ function buildAnnotation(stepIndex, journeyState, config) {
   };
 
   switch (stepIndex) {
-    case 0: {
-      let txt = `Your ${clusterDesc.replace(/^a /, '')} operates under identity-first governance. Every actor, every action, fully auditable.`;
-      if (protections.includes('sovereignty')) txt += ' Economic sovereignty is enforced at the governance layer — no data leaves the regional boundary without explicit consent.';
-      if (protections.includes('trust')) txt += ' Community trust structures are preserved through role-based access at every level.';
-      return txt;
-    }
-    case 1: {
-      let txt = `Your regional asset. Holds actor profiles, signal history, stall records, and leverage hypotheses for your ${clusterDesc.replace(/^a /, '')} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor.`;
-      if (stackName && (stalls.includes('S1') || stalls.includes('S7')))
-        txt += ` ${stackName} means your database currently holds evidence that justifies rather than informs — the leverage entry point is recording outcomes alongside evidence.`;
-      if (protectStr) txt += ` The sovereign membrane protects ${protectStr} at the boundary.`;
-      return txt;
-    }
-    case 2: {
-      let txt = 'What feeds your ecosystem before any actor joins.';
-      const gapTxt = GAP_SOURCE[qa.gap];
-      if (gapTxt) txt += ` ${gapTxt}`;
-      else txt += ' External data sources surface signals at the supercluster level.';
-      return txt;
-    }
-    case 3: {
-      const tools = getActiveToolNames(journeyState);
-      let txt = `How your ecosystem thinks. ${tools.slice(0, 6).join(', ')}.`;
-      if (stackName) txt += ` These tools detect ${stackName} and surface the leverage entry point — ${stackEntry ? stackEntry.charAt(0).toLowerCase() + stackEntry.slice(1) : 'intelligence assembled at runtime, not pre-baked.'}`;
-      else txt += ' Intelligence assembled at runtime, not pre-baked.';
-      return txt;
-    }
     case 4: {
       let txt = 'The AI is the runtime, not a feature.';
       const aiTxt = PRIORITY_AI[qa.priority];
@@ -1077,9 +1164,9 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
   }, [onClose]);
 
   const isFinal = step === 6;
-  const annotation = isFinal
-    ? buildFinalAnnotation(journeyState, config)
-    : buildAnnotation(step, journeyState, config);
+  const provocation = (!isFinal && step <= 3) ? buildProvocation(step, journeyState, config) : null;
+  const legacyAnnotation = (!isFinal && step > 3) ? buildAnnotation(step, journeyState, config) : null;
+  const finalAnnotation = isFinal ? buildFinalAnnotation(journeyState, config) : null;
 
   return (
     <div style={arch.overlay}>
@@ -1131,14 +1218,39 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
           <div style={arch.annotLabel}>
             {isFinal ? config.configName : ARCH_LAYERS[step].label}
           </div>
-          <p style={arch.annotText}>{annotation}</p>
+
+          {/* 3-part provocation format (steps 0-3) */}
+          {provocation && (
+            <div style={arch.provocationWrap}>
+              <div style={arch.provSection}>
+                <div style={arch.provLabel}>Diagnosis</div>
+                <p style={arch.provDiagnosis}>{provocation.diagnosis}</p>
+              </div>
+              <div style={arch.provSection}>
+                <div style={arch.provLabel}>Consequence</div>
+                <p style={arch.provText}>{provocation.consequence}</p>
+              </div>
+              <div style={arch.provSection}>
+                <div style={arch.provLabel}>Mechanism</div>
+                <p style={arch.provText}>{provocation.mechanism}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Legacy single-string (steps 4-5, to be replaced) */}
+          {legacyAnnotation && <p style={arch.annotText}>{legacyAnnotation}</p>}
+
+          {/* Final step */}
           {isFinal && (
-            <a href="/get-started.html" style={arch.ctaLink}>
-              Talk to us about your configuration
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
+            <React.Fragment>
+              <p style={arch.annotText}>{finalAnnotation}</p>
+              <a href="/get-started.html" style={arch.ctaLink}>
+                Talk to us about your configuration
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+                  <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+            </React.Fragment>
           )}
         </div>
       </div>
@@ -2678,6 +2790,42 @@ const arch = {
     lineHeight: 1.7,
     color: 'var(--dj-chalk-dim)',
   },
+
+  /* Provocation 3-part format */
+  provocationWrap: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    overflowY: 'auto',
+    maxHeight: 'calc(100vh - 240px)',
+    paddingRight: '4px',
+  },
+  provSection: {},
+  provLabel: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '9px',
+    fontWeight: 600,
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
+    color: 'var(--steward)',
+    marginBottom: '6px',
+  },
+  provDiagnosis: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '15px',
+    fontWeight: 400,
+    lineHeight: 1.6,
+    color: 'var(--dj-chalk)',
+    letterSpacing: '-0.01em',
+  },
+  provText: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    fontWeight: 400,
+    lineHeight: 1.65,
+    color: 'var(--dj-chalk-dim)',
+  },
+
   ctaLink: {
     display: 'inline-flex',
     alignItems: 'center',

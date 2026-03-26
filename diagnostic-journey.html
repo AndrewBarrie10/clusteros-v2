@@ -2963,7 +2963,7 @@ const arch = {
     flex: 1,
     display: 'grid',
     gridTemplateColumns: '1fr 340px',
-    alignItems: 'center',
+    alignItems: 'stretch',
     gap: '32px',
     padding: '56px 40px 80px',
     overflowY: 'auto',
@@ -2975,8 +2975,7 @@ const arch = {
     justifyContent: 'center',
     overflowY: 'auto',
     minWidth: 0,
-    width: '100%',
-    height: '100%',
+    minHeight: 0,
   },
   annotCol: {
     display: 'flex',
@@ -3026,7 +3025,7 @@ const arch = {
     background: 'var(--dj-surface)',
     transition: 'all 0.4s ease',
     flex: 1,
-    width: '100%',
+    minHeight: 0,
   },
   layerTitle: {
     fontFamily: 'var(--font-mono)',

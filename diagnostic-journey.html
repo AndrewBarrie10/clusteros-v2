@@ -299,6 +299,17 @@ function BehavioursStage() {
         ))}
       </div>
 
+      {/* ── Summary line ── */}
+      {selected.length > 0 && (
+        <div style={s1.summaryLine}>
+          <span>{selected.length} stall{selected.length !== 1 ? 's' : ''} active</span>
+          <span style={s1.summaryDot} />
+          <span style={{ color: detectedStacks.length > 0 ? 'var(--founder)' : 'var(--dj-chalk-muted)' }}>
+            {detectedStacks.length} stack{detectedStacks.length !== 1 ? 's' : ''} detected
+          </span>
+        </div>
+      )}
+
       {detectedStacks.length > 0 && (
         <div style={s1.stackSection}>
           <div style={s1.stackSectionHeader}>
@@ -870,6 +881,26 @@ const s1 = {
     fontSize: '12px',
     lineHeight: 1.5,
     color: 'var(--dj-chalk-muted)',
+  },
+
+  /* Summary line */
+  summaryLine: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    fontWeight: 500,
+    letterSpacing: '0.04em',
+    color: 'var(--dj-chalk-dim)',
+    marginBottom: '24px',
+  },
+  summaryDot: {
+    width: '3px',
+    height: '3px',
+    borderRadius: '50%',
+    background: 'var(--dj-chalk-muted)',
+    flexShrink: 0,
   },
 
   /* Stack section */

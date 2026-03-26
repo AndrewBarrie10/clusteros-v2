@@ -138,6 +138,15 @@ const QUALIFIER_QUESTIONS = [
       { value: 'national',    label: 'National Supercluster', desc: 'Cross-regional network with national strategic significance' },
       { value: 'corporate',   label: 'Corporate',             desc: 'Anchor-led ecosystem organised around corporate R&D or supply chain' },
     ]},
+  { id: 'anchorType', question: 'Who is the primary anchor in your ecosystem?', multi: false,
+    options: [
+      { value: 'university',  label: 'University',          desc: 'Higher education institution driving research and talent' },
+      { value: 'research',    label: 'Research institute',  desc: 'Dedicated research organisation or national lab' },
+      { value: 'corporate',   label: 'Large corporate',     desc: 'Major employer or R&D centre anchoring the ecosystem' },
+      { value: 'public',      label: 'Public agency',       desc: 'Government body, EDA, or public development agency' },
+      { value: 'hospital',    label: 'Hospital',             desc: 'NHS trust, health system, or clinical research centre' },
+      { value: 'none',        label: 'None yet',             desc: 'No established anchor — ecosystem is pre-anchor stage' },
+    ]},
   { id: 'stage', question: "What is your ecosystem's current stage?", multi: false,
     options: [
       { value: 'early',       label: 'Early-stage (forming)',    desc: 'Building initial connections and proving the cluster thesis' },
@@ -170,36 +179,63 @@ const QUALIFIER_QUESTIONS = [
 ];
 
 /* ─── Configuration name taxonomy (fixed lookup) ──────────────────── */
+/* Keys: clusterType|anchorType|priority — 15 canonical entries + fallback */
 const CONFIG_NAMES = {
-  // regional × priority
-  'regional|talent':   'Regional Talent Ecosystem',
-  'regional|capital':  'Investment-Ready Cluster',
-  'regional|research': 'Research Translation Cluster',
-  'regional|supply':   'Anchor Supply Network',
-  'regional|growth':   'Regional Growth Engine',
-  // national × priority
-  'national|talent':   'Federated Talent Supercluster',
-  'national|capital':  'National Investment Corridor',
-  'national|research': 'Sovereign Research Network',
-  'national|supply':   'National Supply Chain Architecture',
-  'national|growth':   'Federated Growth Supercluster',
-  // corporate × priority
-  'corporate|talent':  'Corporate Talent Pipeline',
-  'corporate|capital': 'Anchor-Led Investment Ecosystem',
-  'corporate|research':'Corporate R&D Translation Engine',
-  'corporate|supply':  'Anchor-Integrated Supply Network',
-  'corporate|growth':  'Anchor-Led Growth Network',
+  // Regional
+  'regional|university|research':  'Knowledge Commercialisation Cluster',
+  'regional|university|talent':    'Knowledge Retention Cluster',
+  'regional|corporate|supply':     'Anchor Supply Network',
+  'regional|corporate|growth':     'Industrial Growth Cluster',
+  'regional|public|capital':       'Investment-Ready Region',
+  'regional|public|growth':        'Regional Development Cluster',
+  // National
+  'national|university|research':  'National Innovation Corridor',
+  'national|corporate|supply':     'Strategic Supply Chain Network',
+  'national|public|growth':        'National Growth Programme',
+  'national|*|capital':            'Capital Mobilisation Network',
+  // Enterprise (corporate cluster type)
+  'corporate|corporate|supply':    'Supplier Ecosystem Network',
+  'corporate|corporate|research':  'Corporate Innovation Cluster',
+  'corporate|university|research': 'Corporate-Academic Alliance',
+  'corporate|public|growth':       'Corporate Regional Partnership',
+  'corporate|*|talent':            'Internal Talent Ecosystem',
 };
 
+function lookupConfigName(clusterType, anchorType, priority) {
+  const ct = clusterType || 'regional';
+  const at = anchorType || 'none';
+  const pr = priority || 'growth';
+  // Try exact match first
+  const exact = CONFIG_NAMES[`${ct}|${at}|${pr}`];
+  if (exact) return exact;
+  // Try wildcard anchor match
+  const wildAnchor = CONFIG_NAMES[`${ct}|*|${pr}`];
+  if (wildAnchor) return wildAnchor;
+  // Try wildcard priority match
+  const wildPriority = CONFIG_NAMES[`${ct}|${at}|*`];
+  if (wildPriority) return wildPriority;
+  return 'Regional Operating System';
+}
+
 /* ─── OS configuration derivation ──────────────────────────────────── */
+/* ─── Anchor type display labels ───────────────────────────────────── */
+const ANCHOR_LABELS = {
+  university: 'University',
+  research:   'Research institute',
+  corporate:  'Large corporate',
+  public:     'Public agency',
+  hospital:   'Hospital',
+  none:       'Anchors',
+};
+
 function deriveOSConfig(qualifiers, stalls, detectedStacks) {
-  const { clusterType, stage, priority, gap, protect } = qualifiers;
+  const { clusterType, anchorType, stage, priority, gap, protect } = qualifiers;
   const protectSet = new Set(protect || []);
   const stallSet = new Set(stalls || []);
 
-  // Configuration name — fixed taxonomy lookup
-  const lookupKey = `${clusterType || 'regional'}|${priority || 'growth'}`;
-  const configName = CONFIG_NAMES[lookupKey] || 'Regional Operating System';
+  // Configuration name — fixed taxonomy lookup (3-key)
+  const configName = lookupConfigName(clusterType, anchorType, priority);
+  const anchorLabel = ANCHOR_LABELS[anchorType] || 'Anchors';
 
   // Derived flags for infrastructure priority selection
   const researchFocus = priority === 'research' || protectSet.has('ip');
@@ -247,12 +283,12 @@ function deriveOSConfig(qualifiers, stalls, detectedStacks) {
   if (outsideActors.length === 0) outsideActors.push('External partners');
   if (outsideActors.length < 2) outsideActors.push('Policy actors');
 
-  const insideActors = ['Founders', 'Anchors', 'Researchers', 'Stewards'];
+  const insideActors = ['Founders', anchorLabel, 'Researchers', 'Stewards'];
 
   // Q5 protection selections — passed through for description and membrane rendering
   const protections = protect || [];
 
-  return { configName, priorities: topPriorities, outsideActors: outsideActors.slice(0, 5), insideActors, clusterType: clusterType || 'regional', protections };
+  return { configName, priorities: topPriorities, outsideActors: outsideActors.slice(0, 5), insideActors, clusterType: clusterType || 'regional', protections, anchorLabel };
 }
 
 /* ─── Journey context (state carried forward across stages) ────────── */
@@ -673,12 +709,17 @@ const PROTECT_INFRA = {
   sovereignty: 'the sovereign data membrane and permissioned access layer protect economic self-determination',
 };
 
+function articleFor(name) {
+  return /^[AEIOU]/i.test(name) ? 'An' : 'A';
+}
+
 function buildConfigDescription(config) {
   const { configName, protections, priorities } = config;
+  const article = articleFor(configName);
   const protectNames = (protections || []).map(p => PROTECT_LABELS[p]).filter(Boolean);
 
   if (protectNames.length === 0) {
-    return `A ${configName} configuration organises the ecosystem's digital infrastructure around its strategic priority. The architecture prioritises ${priorities.slice(0, 2).map(p => p.name.toLowerCase()).join(' and ')}.`;
+    return `${article} ${configName} configuration organises the ecosystem's digital infrastructure around its strategic priority. The architecture prioritises ${priorities.slice(0, 2).map(p => p.name.toLowerCase()).join(' and ')}.`;
   }
 
   const protectList = protectNames.length === 1
@@ -693,25 +734,29 @@ function buildConfigDescription(config) {
     ? ` Specifically, ${infraLinks.join(', and ')}.`
     : '';
 
-  return `A ${configName} configuration prioritises protecting ${protectList}. The infrastructure recommendations are shaped by these protection priorities — every layer serves the boundary conditions your ecosystem has identified.${infraSentence}`;
+  return `${article} ${configName} configuration prioritises protecting ${protectList}. The infrastructure recommendations are shaped by these protection priorities — every layer serves the boundary conditions your ecosystem has identified.${infraSentence}`;
 }
 
 /* ─── Protection-to-actor mapping for membrane foregrounding ───────── */
+/* sovereignty maps to the anchor label dynamically — resolved in MembraneDiagram */
 const PROTECT_ACTOR_MAP = {
   knowledge:   'Researchers',
   ip:          'Researchers',
   trust:       'Stewards',
   talent:      'Founders',
-  sovereignty: 'Anchors',
 };
 
 /* ─── Membrane diagram (SVG) ───────────────────────────────────────── */
 function MembraneDiagram({ config }) {
-  const { outsideActors, insideActors, clusterType, protections } = config;
+  const { outsideActors, insideActors, clusterType, protections, anchorLabel } = config;
   const protectSet = new Set(protections || []);
-  const w = 520, h = 340;
+
+  // Dynamic SVG dimensions based on outside actor count
+  const outsideCount = outsideActors.length;
+  const insideCount = insideActors.length;
+  const w = 560, h = 400;
   const cx = w / 2, cy = h / 2;
-  const outerR = 140;
+  const outerR = Math.min(140, (Math.min(w, h) / 2) - 60);
 
   // Determine which inside actors are foregrounded by Q5
   const foregroundedActors = new Set();
@@ -719,23 +764,32 @@ function MembraneDiagram({ config }) {
     const actor = PROTECT_ACTOR_MAP[p];
     if (actor) foregroundedActors.add(actor);
   });
+  // Sovereignty foregrounds the anchor node (dynamic label)
+  if (protectSet.has('sovereignty') && anchorLabel) foregroundedActors.add(anchorLabel);
 
   // Membrane permeability: tight if 3+ protections, dashed if 1-2
   const tightMembrane = protectSet.size >= 3;
 
-  // Position inside actors
+  // Dynamic inside actor positioning — distribute evenly on a radius that fits
+  const maxNodeR = 44;
+  const insideOrbitR = Math.max(50, outerR - maxNodeR - 14);
   const insidePositions = insideActors.map((name, i) => {
-    const angle = (i / insideActors.length) * Math.PI * 2 - Math.PI / 2;
-    const r = 70;
+    const angle = (i / insideCount) * Math.PI * 2 - Math.PI / 2;
     const fg = foregroundedActors.has(name);
-    return { name, x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r, fg };
+    return { name, x: cx + Math.cos(angle) * insideOrbitR, y: cy + Math.sin(angle) * insideOrbitR, fg };
   });
 
-  // Position outside actors beyond the membrane
+  // Dynamic outside actor positioning — consistent distance, evenly spaced
+  const outsideOrbitR = outerR + 60;
+  const outsideStartAngle = -Math.PI / 4;
   const outsidePositions = outsideActors.map((name, i) => {
-    const angle = (i / outsideActors.length) * Math.PI * 2 - Math.PI / 4;
-    const r = outerR + 50;
-    return { name, x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r };
+    const angle = outsideStartAngle + (i / outsideCount) * Math.PI * 2;
+    const x = cx + Math.cos(angle) * outsideOrbitR;
+    const y = cy + Math.sin(angle) * outsideOrbitR;
+    // Clamp to SVG bounds with label padding
+    const clampX = Math.max(75, Math.min(w - 75, x));
+    const clampY = Math.max(20, Math.min(h - 16, y));
+    return { name, x: clampX, y: clampY };
   });
 
   const label = clusterType === 'national' ? 'Supercluster boundary' : 'Cluster membrane';

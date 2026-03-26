@@ -1017,7 +1017,7 @@ function buildAnnotation(stepIndex, journeyState, config) {
     case 5: {
       const fg = getForegroundedActor(config);
       const cascade = ACTOR_CASCADES[fg];
-      let txt = cascade ? `${fg} sees: ${cascade.action}. Every selfish action feeds the whole.` : 'Every actor journey is generated at runtime from live ecosystem data.';
+      let txt = cascade ? `${fg} experience: ${cascade.action}. Every selfish action feeds the whole.` : 'Every actor journey is generated at runtime from live ecosystem data.';
       const jTxt = PRIORITY_JOURNEY[qa.priority];
       if (jTxt) txt += ` ${jTxt}`;
       return txt;
@@ -1034,6 +1034,33 @@ function getForegroundedActor(config) {
   }
   if (config.anchorLabel && ACTOR_CASCADES[config.anchorLabel]) return config.anchorLabel;
   return 'Stewards';
+}
+
+/* ─── Final annotation builder ─────────────────────────────────────── */
+function buildFinalAnnotation(journeyState, config) {
+  const qa = journeyState.qualifierAnswers || {};
+  const stacks = journeyState.detectedStacks || [];
+  const clusterDesc = CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem';
+  const anchorLabel = config.anchorLabel || 'Anchors';
+  const protections = (qa.protect || []).map(p => PROTECT_LABELS[p]).filter(Boolean);
+  const protectStr = protections.length > 0
+    ? (protections.length === 1 ? protections[0] : protections.slice(0, -1).join(', ') + ' and ' + protections[protections.length - 1])
+    : 'its regional assets';
+
+  let stackStr = '';
+  if (stacks.length === 1) stackStr = stacks[0].name;
+  else if (stacks.length > 1) stackStr = stacks.map(s => s.name).slice(0, -1).join(', ') + ' and ' + stacks[stacks.length - 1].name;
+
+  let entryStr = '';
+  if (stacks.length > 0 && stacks[0].entry) {
+    entryStr = ` The infrastructure above addresses this directly — ${stacks[0].entry.charAt(0).toLowerCase()}${stacks[0].entry.slice(1)}`;
+  }
+
+  let txt = `Your ${config.configName} — ${clusterDesc} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor, protecting ${protectStr}.`;
+  if (stackStr) txt += ` Your ecosystem shows ${stackStr}.`;
+  if (entryStr) txt += entryStr;
+  txt += ' Every layer exists in service of your sovereign ecosystem.';
+  return txt;
 }
 
 /* ─── Architecture walkthrough overlay ─────────────────────────────── */
@@ -1055,7 +1082,7 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
 
   const isFinal = step === 6;
   const annotation = isFinal
-    ? `Your ${config.configName}. Every layer in service of your sovereign ecosystem.`
+    ? buildFinalAnnotation(journeyState, config)
     : buildAnnotation(step, journeyState, config);
 
   return (
@@ -2504,9 +2531,10 @@ const arch = {
     flex: 1,
     display: 'grid',
     gridTemplateColumns: '1fr 340px',
+    alignItems: 'center',
     gap: '32px',
     padding: '56px 40px 80px',
-    overflow: 'hidden',
+    overflowY: 'auto',
   },
   diagramCol: {
     display: 'flex',

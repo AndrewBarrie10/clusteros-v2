@@ -549,16 +549,20 @@ function LeverageStage() {
 function HealthIndicator({ count }) {
   const max = 9;
   const ratio = count / max;
-  const color = count === 0 ? 'var(--dj-chalk-muted)'
-    : ratio <= 0.22 ? 'var(--signal)'
-    : ratio <= 0.44 ? 'var(--steward)'
-    : ratio <= 0.66 ? 'var(--founder)'
+  // Health DEGRADES as stalls increase: 0 = full health, 9 = critical
+  const color = count === 0 ? 'var(--signal)'
+    : ratio <= 0.33 ? 'var(--founder)'
+    : ratio <= 0.66 ? 'var(--researcher)'
     : 'var(--researcher)';
-  const label = count === 0 ? 'No stalls selected'
-    : ratio <= 0.22 ? 'Low severity'
-    : ratio <= 0.44 ? 'Moderate'
-    : ratio <= 0.66 ? 'Elevated'
+  const label = count === 0 ? 'Healthy'
+    : ratio <= 0.33 ? 'Moderate'
+    : ratio <= 0.66 ? 'Concerning'
     : 'Critical';
+  // Health bar shows remaining health (inverted)
+  const healthPct = Math.max(100 - (ratio * 100), count > 0 ? 8 : 0);
+  const healthColor = count === 0 ? 'var(--signal)'
+    : ratio <= 0.33 ? 'var(--founder)'
+    : 'var(--researcher)';
 
   return (
     <div style={s1.healthBar}>
@@ -569,13 +573,15 @@ function HealthIndicator({ count }) {
       <div style={s1.healthTrack}>
         <div style={{
           height: '100%',
-          width: `${Math.max(ratio * 100, count > 0 ? 8 : 0)}%`,
-          background: color,
+          width: `${count === 0 ? 100 : healthPct}%`,
+          background: healthColor,
           borderRadius: '3px',
           transition: 'width 0.4s ease, background 0.4s ease',
         }} />
       </div>
-      <div style={s1.healthCount}>{count} of {max} stalls active</div>
+      <div style={s1.healthCount}>
+        {count === 0 ? 'No stalls detected — ecosystem operating normally' : `${count} of ${max} stalls active — health degraded`}
+      </div>
     </div>
   );
 }
@@ -884,7 +890,7 @@ function MembraneDiagram({ config }) {
   );
 }
 
-/* ─── MCP tool activation rules (for Card 2) ──────────────────────── */
+/* ─── MCP tool activation rules ────────────────────────────────────── */
 const MCP_TOOLS = [
   { name: 'detect_stalls()',           cond: s => s.stalls.length > 0 },
   { name: 'get_leverage_hypotheses()', cond: s => s.stalls.length > 0 },
@@ -900,237 +906,253 @@ const MCP_TOOLS = [
   { name: 'enrich_actor_profile()',    cond: s => (new Set((s.qualifierAnswers||{}).protect||[])).has('talent') },
 ];
 
-function getActiveToolNames(journeyState) {
-  return MCP_TOOLS.filter(t => t.cond(journeyState)).map(t => t.name);
-}
+function getActiveToolNames(js) { return MCP_TOOLS.filter(t => t.cond(js)).map(t => t.name); }
 
 /* ─── Actor cascade data ──────────────────────────────────────────── */
 const ACTOR_CASCADES = {
-  Founders: {
-    action: 'Register capability profile and declare sector intent',
-    signal: 'New founder signal propagates to matched anchor and researcher nodes',
-    effect: 'Ecosystem discovers talent it didn\'t know existed — connection density increases',
-  },
-  University: {
-    action: 'Publish research demand signal from active grant portfolio',
-    signal: 'Demand signal translates to commercial opportunity for matched founders',
-    effect: 'Research-to-market conversion accelerates without IP boundary violation',
-  },
-  'Research institute': {
-    action: 'Declare research output with controlled access terms',
-    signal: 'Evidence base updates; matched actors receive filtered insight notification',
-    effect: 'Knowledge flows between groups without leaking sovereign data',
-  },
-  'Large corporate': {
-    action: 'Post RFI signal to scouted capability matches',
-    signal: 'Supply chain visibility increases; founder pipeline receives opportunity alert',
-    effect: 'Anchor procurement begins to circulate value within ecosystem boundary',
-  },
-  'Public agency': {
-    action: 'Publish programme eligibility criteria and open funding windows',
-    signal: 'Support programme alerts reach eligible founders and researchers',
-    effect: 'Coordination gap closes — actors discover routes they couldn\'t find before',
-  },
-  Hospital: {
-    action: 'Register clinical need signal from active research programme',
-    signal: 'Demand signal reaches matched researchers and health-tech founders',
-    effect: 'Clinical translation pipeline gains visibility and founder engagement',
-  },
-  Researchers: {
-    action: 'Declare research output and tag to cluster knowledge taxonomy',
-    signal: 'Evidence base enriches; IP-protected insight flows to matched actors',
-    effect: 'Knowledge layer deepens — ecosystem builds cumulative intelligence',
-  },
-  Stewards: {
-    action: 'Run diagnostic interrogation against live ecosystem signals',
-    signal: 'Stall detection updates; stack analysis surfaces new leverage hypotheses',
-    effect: 'Structural position becomes visible — intervention can be targeted precisely',
-  },
-  Anchors: {
-    action: 'Declare strategic intent and resource availability',
-    signal: 'Ecosystem actors see anchor commitment; waiting stall pressure reduces',
-    effect: 'Coordination unlocks as anchor position becomes transparent',
-  },
+  Founders: { action: 'Register capability profile and declare sector intent' },
+  University: { action: 'Publish research demand signal from active grant portfolio' },
+  'Research institute': { action: 'Declare research output with controlled access terms' },
+  'Large corporate': { action: 'Post RFI signal to scouted capability matches' },
+  'Public agency': { action: 'Publish programme eligibility criteria and open funding windows' },
+  Hospital: { action: 'Register clinical need signal from active research programme' },
+  Researchers: { action: 'Declare research output and tag to cluster knowledge taxonomy' },
+  Stewards: { action: 'Run diagnostic interrogation against live ecosystem signals' },
+  Anchors: { action: 'Declare strategic intent and resource availability' },
 };
 
-/* ─── Narrative bridge builder ─────────────────────────────────────── */
+/* ─── Walkthrough layer definitions ────────────────────────────────── */
 const CLUSTER_TYPE_SENTENCES = {
-  regional:  'a place-based cluster',
-  national:  'a nationally significant supercluster',
-  corporate: 'an anchor-led enterprise ecosystem',
+  regional: 'a place-based cluster', national: 'a nationally significant supercluster', corporate: 'an anchor-led enterprise ecosystem',
 };
 
-function buildNarrativeBridge(journeyState, config) {
+const ARCH_LAYERS = [
+  { id: 'governance',  label: 'Federated Governance Layer',
+    components: ['Supercluster', 'Cluster', 'Group', 'Actor'] },
+  { id: 'data',        label: 'Sovereign Ecosystem Database + Bot Network',
+    components: ['Actor profiles', 'Signal history', 'Stall records', 'Leverage hypotheses', 'Evidence Ingestion Bot', 'Signal Monitoring Bot', 'Actor Enrichment Bot', 'Health Monitoring Bot'] },
+  { id: 'external',    label: 'External Data Sources',
+    components: ['Govt Support Directory', 'Community Services API', 'Publication Databases', 'Professional Identity'] },
+  { id: 'mcp',         label: 'MCP Intelligence Substrate',
+    components: [] }, // filled dynamically
+  { id: 'ai',          label: 'AI Reasoning Engine',
+    components: ['Journey Construction', 'Signal Propagation', 'Role-Aware Reframing', 'Actor Matching', 'Stall Detection', 'Steward Interrogation'] },
+  { id: 'journeys',    label: 'Actor Journeys',
+    components: ['Founder Journey', 'Anchor Journey', 'Researcher Journey', 'Steward Interrogation'] },
+];
+
+/* ─── Walkthrough annotation builders ──────────────────────────────── */
+function buildAnnotation(stepIndex, journeyState, config) {
   const stacks = journeyState.detectedStacks || [];
   const stalls = journeyState.stalls || [];
   const qa = journeyState.qualifierAnswers || {};
-
+  const protections = qa.protect || [];
   const clusterDesc = CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem';
-  const anchorDesc = (config.anchorLabel && config.anchorLabel !== 'Anchors')
-    ? ` with ${articleFor(config.anchorLabel).toLowerCase()} ${config.anchorLabel} anchor`
+  const anchorLabel = config.anchorLabel || 'Anchors';
+  const protectList = protections.map(p => PROTECT_LABELS[p]).filter(Boolean);
+  const protectStr = protectList.length > 0
+    ? (protectList.length === 1 ? protectList[0] : protectList.slice(0, -1).join(', ') + ' and ' + protectList[protectList.length - 1])
     : '';
+  const stackName = stacks.length > 0 ? stacks[0].name : '';
+  const stackEntry = stacks.length > 0 ? stacks[0].entry : '';
 
-  let stackSentence = '';
-  if (stacks.length === 1) {
-    stackSentence = `Your ecosystem shows ${stacks[0].name} — ${stacks[0].logic.charAt(0).toLowerCase()}${stacks[0].logic.slice(1)}`;
-  } else if (stacks.length > 1) {
-    const names = stacks.map(s => s.name);
-    stackSentence = `Your ecosystem shows ${names.slice(0, -1).join(', ')} and ${names[names.length - 1]} — ${stacks.length} reinforcing loops that lock the system into its current state.`;
-  } else if (stalls.length > 0) {
-    const stallNames = stalls.map(id => STALLS.find(s => s.id === id)?.name).filter(Boolean);
-    stackSentence = `Your ecosystem shows ${stallNames.length} independent stall${stallNames.length > 1 ? 's' : ''} — ${stallNames.join(', ')}.`;
-  }
+  const GAP_SOURCE = {
+    discovery: 'Govt Support Directory surfaces programme listings actors couldn\'t find before.',
+    flow: 'Community Services API enables knowledge to flow between groups at the supercluster level.',
+    access: 'Publication Databases make research outputs visible to external actors seeking engagement.',
+    conversion: 'Professional Identity feeds behavioural enrichment that converts activity into measurable outcomes.',
+  };
 
-  const configSentence = `${articleFor(config.configName)} ${config.configName} configured as ${clusterDesc}${anchorDesc} needs infrastructure that makes outcomes measurable and knowledge visible.`;
+  const PRIORITY_AI = {
+    research: 'Journey Construction and Role-Aware Reframing are foregrounded — translating research into demand signals without breaching IP boundaries.',
+    capital: 'Signal Propagation and Actor Matching are foregrounded — making investment opportunities visible to the right actors at the right time.',
+    talent: 'Journey Construction and Actor Matching are foregrounded — connecting founders to opportunities before they leave the ecosystem.',
+    supply: 'Actor Matching and Steward Interrogation are foregrounded — mapping supply chain capability and surfacing structural gaps.',
+    growth: 'All capabilities are active — growth requires the full intelligence surface operating across every actor type.',
+  };
 
-  return `${stackSentence} ${configSentence} Here is your recommended architecture.`;
-}
+  const PRIORITY_JOURNEY = {
+    research: 'Researcher Journey is highlighted — every research output becomes a demand signal for matched founders and anchors.',
+    capital: 'All journeys are highlighted — investment readiness is cross-cutting, every actor type must be visible.',
+    talent: 'Founder Journey is highlighted — every founder action feeds the talent pipeline and makes the ecosystem discoverable.',
+    supply: 'Anchor Journey is highlighted — every RFI signal from your anchor creates supply chain visibility for the wider ecosystem.',
+    growth: 'All journeys are highlighted — growth requires every actor type generating signals simultaneously.',
+  };
 
-/* ─── Card 1 description builder ───────────────────────────────────── */
-const DB_DESC_BY_TYPE = {
-  regional:  'Your sovereign database holds actor profiles, signal history, and diagnostic records for this regional cluster.',
-  national:  'Your federated database holds cross-regional actor profiles, signal history, and diagnostic records across the supercluster.',
-  corporate: 'Your enterprise database holds supply chain actors, capability profiles, and diagnostic records across the anchor ecosystem.',
-};
-
-function buildDbDescription(qa, protections) {
-  const base = DB_DESC_BY_TYPE[qa.clusterType] || DB_DESC_BY_TYPE.regional;
-  const protectNames = (protections || []).map(p => PROTECT_LABELS[p]).filter(Boolean);
-  if (protectNames.length > 0) {
-    const list = protectNames.length === 1 ? protectNames[0] : protectNames.slice(0, -1).join(', ') + ' and ' + protectNames[protectNames.length - 1];
-    return `${base} The sovereign data membrane ensures ${list} ${protectNames.length === 1 ? 'is' : 'are'} protected at the boundary.`;
-  }
-  return base;
-}
-
-/* ─── Card 2 description builder ───────────────────────────────────── */
-function buildIntelDescription(journeyState) {
-  const stalls = journeyState.stalls || [];
-  const stacks = journeyState.detectedStacks || [];
-  if (stacks.length > 0) {
-    return `These tools detect the ${stacks.length} reinforcing stack${stacks.length > 1 ? 's' : ''} in your ecosystem and surface leverage hypotheses — the intelligence layer that turns diagnostic findings into actionable interventions.`;
-  }
-  if (stalls.length > 0) {
-    return `These tools monitor the ${stalls.length} behavioural stall${stalls.length > 1 ? 's' : ''} in your ecosystem and propagate signals between actors — the intelligence layer that makes stall patterns visible before they compound.`;
-  }
-  return 'These tools provide the intelligence substrate for your ecosystem — stall detection, signal propagation, and actor matching.';
-}
-
-/* ─── Reveal card component ────────────────────────────────────────── */
-function RevealCard({ visible, delay, label, screenshotLabel, children, description }) {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    if (visible) {
-      const timer = setTimeout(() => setShow(true), delay);
-      return () => clearTimeout(timer);
+  switch (stepIndex) {
+    case 0: {
+      let txt = `Your ${clusterDesc.replace(/^a /, '')} operates under identity-first governance. Every actor, every action, fully auditable.`;
+      if (protections.includes('sovereignty')) txt += ' Economic sovereignty is enforced at the governance layer — no data leaves the regional boundary without explicit consent.';
+      if (protections.includes('trust')) txt += ' Community trust structures are preserved through role-based access at every level.';
+      return txt;
     }
-    setShow(false);
-  }, [visible, delay]);
+    case 1: {
+      let txt = `Your regional asset. Holds actor profiles, signal history, stall records, and leverage hypotheses for your ${clusterDesc.replace(/^a /, '')} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor.`;
+      if (stackName && (stalls.includes('S1') || stalls.includes('S7')))
+        txt += ` ${stackName} means your database currently holds evidence that justifies rather than informs — the leverage entry point is recording outcomes alongside evidence.`;
+      if (protectStr) txt += ` The sovereign membrane protects ${protectStr} at the boundary.`;
+      return txt;
+    }
+    case 2: {
+      let txt = 'What feeds your ecosystem before any actor joins.';
+      const gapTxt = GAP_SOURCE[qa.gap];
+      if (gapTxt) txt += ` ${gapTxt}`;
+      else txt += ' External data sources surface signals at the supercluster level.';
+      return txt;
+    }
+    case 3: {
+      const tools = getActiveToolNames(journeyState);
+      let txt = `How your ecosystem thinks. ${tools.slice(0, 6).join(', ')}.`;
+      if (stackName) txt += ` These tools detect ${stackName} and surface the leverage entry point — ${stackEntry ? stackEntry.charAt(0).toLowerCase() + stackEntry.slice(1) : 'intelligence assembled at runtime, not pre-baked.'}`;
+      else txt += ' Intelligence assembled at runtime, not pre-baked.';
+      return txt;
+    }
+    case 4: {
+      let txt = 'The AI is the runtime, not a feature.';
+      const aiTxt = PRIORITY_AI[qa.priority];
+      if (aiTxt) txt += ` ${aiTxt}`;
+      txt += ' Every actor experience is constructed here, from live data, on demand.';
+      return txt;
+    }
+    case 5: {
+      const fg = getForegroundedActor(config);
+      const cascade = ACTOR_CASCADES[fg];
+      let txt = cascade ? `${fg} sees: ${cascade.action}. Every selfish action feeds the whole.` : 'Every actor journey is generated at runtime from live ecosystem data.';
+      const jTxt = PRIORITY_JOURNEY[qa.priority];
+      if (jTxt) txt += ` ${jTxt}`;
+      return txt;
+    }
+    default: return '';
+  }
+}
+
+function getForegroundedActor(config) {
+  const protections = config.protections || [];
+  for (const p of protections) {
+    const actor = PROTECT_ACTOR_MAP[p];
+    if (actor && ACTOR_CASCADES[actor]) return actor;
+  }
+  if (config.anchorLabel && ACTOR_CASCADES[config.anchorLabel]) return config.anchorLabel;
+  return 'Stewards';
+}
+
+/* ─── Architecture walkthrough overlay ─────────────────────────────── */
+function ArchWalkthrough({ journeyState, config, onClose }) {
+  const [step, setStep] = useState(0);
+  const totalSteps = 7; // 6 layers + final reveal
+
+  const activeTools = useMemo(() => getActiveToolNames(journeyState), [journeyState]);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); setStep(s => Math.min(s + 1, totalSteps - 1)); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); setStep(s => Math.max(s - 1, 0)); }
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [onClose]);
+
+  const isFinal = step === 6;
+  const annotation = isFinal
+    ? `Your ${config.configName}. Every layer in service of your sovereign ecosystem.`
+    : buildAnnotation(step, journeyState, config);
 
   return (
-    <div style={{
-      ...arch.revealCard,
-      opacity: show ? 1 : 0,
-      transform: show ? 'translateY(0)' : 'translateY(16px)',
-    }}>
-      <div style={arch.revealLabel}>{label}</div>
-      <div style={arch.revealPlaceholder}>
-        <div style={arch.revealScreenshotLabel}>UI screenshot — {screenshotLabel}</div>
-        {children}
+    <div style={arch.overlay}>
+      {/* Close */}
+      <button style={arch.closeBtn} onClick={onClose}>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M5 5L15 15M15 5L5 15" stroke="#f7f4ef" strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+      </button>
+
+      {/* Step counter */}
+      <div style={arch.stepCounter}>{step + 1} of {totalSteps}</div>
+
+      <div style={arch.walkthroughLayout}>
+        {/* Diagram column */}
+        <div style={arch.diagramCol}>
+          {ARCH_LAYERS.map((layer, i) => {
+            const layerIndex = i;
+            const isActive = isFinal || layerIndex === step;
+            const comps = layer.id === 'mcp' ? activeTools.slice(0, 12) : layer.components;
+            return (
+              <div key={layer.id} style={{
+                ...arch.layerBox,
+                opacity: isActive ? 1 : 0.15,
+                borderColor: isActive ? 'var(--steward)' : 'var(--dj-border)',
+                filter: isActive ? 'none' : 'blur(0.5px)',
+                transition: 'opacity 0.4s, border-color 0.4s, filter 0.4s',
+              }}>
+                <div style={{
+                  ...arch.layerTitle,
+                  color: isActive ? 'var(--steward)' : 'var(--dj-chalk-muted)',
+                }}>{layer.label}</div>
+                <div style={arch.layerChips}>
+                  {comps.map(c => (
+                    <span key={c} style={{
+                      ...arch.chip,
+                      color: isActive ? 'var(--dj-chalk)' : 'var(--dj-chalk-muted)',
+                      borderColor: isActive ? 'var(--dj-border)' : 'transparent',
+                    }}>{c}</span>
+                  ))}
+                </div>
+              </div>
+            );
+          }).reverse()}
+        </div>
+
+        {/* Annotation column */}
+        <div style={arch.annotCol}>
+          <div style={arch.annotLabel}>
+            {isFinal ? config.configName : ARCH_LAYERS[step].label}
+          </div>
+          <p style={arch.annotText}>{annotation}</p>
+          {isFinal && (
+            <a href="/get-started.html" style={arch.ctaLink}>
+              Talk to us about your configuration
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          )}
+        </div>
       </div>
-      <div style={arch.revealDesc}>{description}</div>
+
+      {/* Navigation */}
+      <div style={arch.navRow}>
+        <button style={{ ...arch.navBtn, opacity: step > 0 ? 1 : 0.3 }} onClick={() => setStep(s => Math.max(s - 1, 0))} disabled={step === 0}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8L10 12" stroke="#f7f4ef" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </button>
+        <button style={{ ...arch.navBtn, opacity: step < totalSteps - 1 ? 1 : 0.3 }} onClick={() => setStep(s => Math.min(s + 1, totalSteps - 1))} disabled={step >= totalSteps - 1}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4L10 8L6 12" stroke="#f7f4ef" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </button>
+      </div>
     </div>
   );
 }
 
-/* ─── Infrastructure section — reveal mechanic ────────────────────── */
+/* ─── Infrastructure section — walkthrough trigger ─────────────────── */
 function InfrastructureSection({ journeyState, config }) {
-  const [revealed, setRevealed] = useState(false);
-
-  const narrative = useMemo(() => buildNarrativeBridge(journeyState, config), [journeyState, config]);
-
-  const activeTools = useMemo(() => getActiveToolNames(journeyState), [journeyState]);
-
-  // Foregrounded actors for Card 3
-  const actorList = useMemo(() => {
-    const protections = config.protections || [];
-    const fg = new Set();
-    protections.forEach(p => {
-      const actor = PROTECT_ACTOR_MAP[p];
-      if (actor) fg.add(actor);
-    });
-    if (protections.includes('sovereignty') && config.anchorLabel) fg.add(config.anchorLabel);
-    fg.add('Stewards');
-    return Array.from(fg).slice(0, 3).filter(n => ACTOR_CASCADES[n]);
-  }, [config]);
-
-  const qa = journeyState.qualifierAnswers || {};
-  const dbDesc = useMemo(() => buildDbDescription(qa, config.protections), [qa, config.protections]);
-  const intelDesc = useMemo(() => buildIntelDescription(journeyState), [journeyState]);
+  const [showWalkthrough, setShowWalkthrough] = useState(false);
 
   return (
     <div style={s3.section}>
-      {/* Narrative bridge */}
-      <p style={arch.narrative}>{narrative}</p>
+      {/* Trigger button */}
+      <button style={arch.triggerBtn} onClick={() => setShowWalkthrough(true)}>
+        <span style={arch.triggerLabel}>Generate your architecture</span>
+        <span style={arch.triggerArrow}>&rarr;</span>
+        <span style={arch.triggerSub}>Derived from your stalls, stacks, and configuration</span>
+      </button>
 
-      {/* Reveal button */}
-      {!revealed && (
-        <button style={arch.revealBtn} onClick={() => setRevealed(true)}>
-          <span style={arch.revealBtnLabel}>Generate your architecture</span>
-          <span style={arch.revealBtnArrow}>&rarr;</span>
-          <span style={arch.revealBtnSub}>Derived from your stalls, stacks, and configuration</span>
-        </button>
-      )}
-
-      {/* Revealed cards */}
-      {revealed && (
-        <div style={arch.revealGrid}>
-          {/* Card 1 — Sovereign Ecosystem Database */}
-          <RevealCard
-            visible={revealed} delay={0}
-            label="Your regional asset"
-            screenshotLabel="Sovereign Database"
-            description={dbDesc}
-          >
-            <div style={arch.placeholderMono}>
-              Supercluster · Clusters · Groups · Actors
-            </div>
-          </RevealCard>
-
-          {/* Card 2 — Intelligence Substrate */}
-          <RevealCard
-            visible={revealed} delay={400}
-            label="How your ecosystem thinks"
-            screenshotLabel="Intelligence Substrate"
-            description={intelDesc}
-          >
-            <div style={arch.placeholderToolList}>
-              {activeTools.map(name => (
-                <span key={name} style={arch.placeholderTool}>{name}</span>
-              ))}
-            </div>
-          </RevealCard>
-
-          {/* Card 3 — Actor Experience */}
-          <RevealCard
-            visible={revealed} delay={800}
-            label="What your actors see"
-            screenshotLabel="Actor Experience"
-            description="Each actor pursues their own interest — the system captures the intelligence their actions generate, turning selfish behaviour into shared structural visibility."
-          >
-            <div style={arch.placeholderActorList}>
-              {actorList.map(name => {
-                const c = ACTOR_CASCADES[name];
-                return (
-                  <div key={name} style={arch.placeholderActorRow}>
-                    <span style={arch.placeholderActorName}>{name}</span>
-                    <span style={arch.placeholderActorAction}>{c.action}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </RevealCard>
-        </div>
+      {/* Full-screen walkthrough overlay */}
+      {showWalkthrough && (
+        <ArchWalkthrough
+          journeyState={journeyState}
+          config={config}
+          onClose={() => setShowWalkthrough(false)}
+        />
       )}
     </div>
   );
@@ -2405,24 +2427,10 @@ const s3 = {
   },
 };
 
-/* ─── Reveal section styles ────────────────────────────────────────── */
+/* ─── Architecture walkthrough styles ──────────────────────────────── */
 const arch = {
-  /* Narrative bridge */
-  narrative: {
-    fontFamily: 'var(--font-sans)',
-    fontSize: '15px',
-    lineHeight: 1.7,
-    color: 'var(--dj-chalk-dim)',
-    marginBottom: '28px',
-    padding: '20px 24px',
-    background: 'var(--dj-surface)',
-    border: '1px solid var(--dj-border)',
-    borderRadius: '8px',
-    borderLeft: '3px solid var(--steward)',
-  },
-
-  /* Reveal button */
-  revealBtn: {
+  /* Trigger button */
+  triggerBtn: {
     width: '100%',
     padding: '24px 28px',
     background: 'var(--dj-surface)',
@@ -2436,18 +2444,18 @@ const arch = {
     alignItems: 'center',
     gap: '12px',
   },
-  revealBtnLabel: {
+  triggerLabel: {
     fontFamily: 'var(--font-serif)',
     fontSize: '22px',
     color: 'var(--dj-chalk)',
     letterSpacing: '-0.01em',
   },
-  revealBtnArrow: {
+  triggerArrow: {
     fontFamily: 'var(--font-serif)',
     fontSize: '22px',
     color: 'var(--signal)',
   },
-  revealBtnSub: {
+  triggerSub: {
     width: '100%',
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
@@ -2457,104 +2465,146 @@ const arch = {
     marginTop: '-4px',
   },
 
-  /* Reveal grid */
-  revealGrid: {
+  /* Full-screen overlay */
+  overlay: {
+    position: 'fixed',
+    inset: 0,
+    zIndex: 2000,
+    background: '#0a0f1a',
+    color: '#e8edf5',
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px',
+    overflow: 'hidden',
+  },
+  closeBtn: {
+    position: 'absolute',
+    top: '16px',
+    right: '20px',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    zIndex: 10,
+    padding: '4px',
+  },
+  stepCounter: {
+    position: 'absolute',
+    top: '20px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    fontWeight: 500,
+    letterSpacing: '0.08em',
+    color: '#576275',
+    zIndex: 10,
   },
 
-  /* Reveal card */
-  revealCard: {
-    background: 'var(--dj-surface)',
-    border: '1px solid var(--dj-border)',
-    borderRadius: '10px',
-    padding: '24px',
-    transition: 'opacity 0.5s ease, transform 0.5s ease',
+  /* Walkthrough layout */
+  walkthroughLayout: {
+    flex: 1,
+    display: 'grid',
+    gridTemplateColumns: '1fr 340px',
+    gap: '32px',
+    padding: '56px 40px 80px',
+    overflow: 'hidden',
   },
-  revealLabel: {
-    fontFamily: 'var(--font-serif)',
-    fontSize: '20px',
-    fontWeight: 400,
-    color: 'var(--dj-chalk)',
-    marginBottom: '16px',
-    letterSpacing: '-0.01em',
+  diagramCol: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '6px',
+    justifyContent: 'center',
+    overflowY: 'auto',
   },
-  revealPlaceholder: {
-    background: 'var(--dj-bg)',
-    border: '1px solid var(--dj-border)',
-    borderRadius: '6px',
-    padding: '24px 20px',
-    marginBottom: '14px',
-    minHeight: '120px',
+  annotCol: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-  },
-  revealScreenshotLabel: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '9px',
-    fontWeight: 500,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
-    color: 'var(--dj-chalk-muted)',
-    opacity: 0.4,
-    marginBottom: '12px',
-  },
-  revealDesc: {
-    fontFamily: 'var(--font-sans)',
-    fontSize: '13.5px',
-    lineHeight: 1.6,
-    color: 'var(--dj-chalk-dim)',
+    padding: '0 8px',
   },
 
-  /* Placeholder content styles */
-  placeholderMono: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '13px',
-    fontWeight: 500,
-    color: 'var(--signal)',
-    letterSpacing: '0.04em',
-    textAlign: 'center',
+  /* Layer box */
+  layerBox: {
+    border: '1px solid #1e2f45',
+    borderRadius: '6px',
+    padding: '12px 16px',
+    background: 'rgba(17,28,46,0.5)',
+    transition: 'all 0.4s ease',
   },
-  placeholderToolList: {
+  layerTitle: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '9px',
+    fontWeight: 600,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    marginBottom: '6px',
+    transition: 'color 0.4s',
+  },
+  layerChips: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '6px',
+    gap: '4px',
   },
-  placeholderTool: {
+  chip: {
     fontFamily: 'var(--font-mono)',
-    fontSize: '10px',
+    fontSize: '9px',
     fontWeight: 400,
-    color: 'var(--signal)',
-    background: 'rgba(42,122,79,0.06)',
-    border: '1px solid rgba(42,122,79,0.12)',
+    padding: '3px 7px',
     borderRadius: '3px',
-    padding: '4px 8px',
+    border: '1px solid transparent',
+    background: 'rgba(255,255,255,0.03)',
+    transition: 'all 0.4s',
   },
-  placeholderActorList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '8px',
+
+  /* Annotation */
+  annotLabel: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '24px',
+    fontWeight: 400,
+    color: '#e8edf5',
+    marginBottom: '16px',
+    letterSpacing: '-0.01em',
   },
-  placeholderActorRow: {
-    display: 'flex',
-    gap: '12px',
-    alignItems: 'baseline',
-  },
-  placeholderActorName: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '11px',
-    fontWeight: 600,
-    color: 'var(--steward)',
-    flexShrink: 0,
-    minWidth: '100px',
-  },
-  placeholderActorAction: {
+  annotText: {
     fontFamily: 'var(--font-sans)',
+    fontSize: '14px',
+    lineHeight: 1.7,
+    color: '#8a95a8',
+  },
+  ctaLink: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    fontFamily: 'var(--font-mono)',
     fontSize: '12px',
-    color: 'var(--dj-chalk-dim)',
-    lineHeight: 1.4,
+    fontWeight: 600,
+    letterSpacing: '0.04em',
+    color: '#0a0f1a',
+    background: '#c8f0d0',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '12px 24px',
+    textDecoration: 'none',
+    marginTop: '24px',
+  },
+
+  /* Navigation row */
+  navRow: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '16px',
+    padding: '0 0 24px',
+    flexShrink: 0,
+  },
+  navBtn: {
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    border: '1px solid #1e2f45',
+    background: 'rgba(17,28,46,0.6)',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'opacity 0.2s',
   },
 };
 

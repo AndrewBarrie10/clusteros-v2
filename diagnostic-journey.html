@@ -883,27 +883,25 @@ function MembraneDiagram({ config }) {
   );
 }
 
-/* ─── Infrastructure layer data ────────────────────────────────────── */
-const KNOWLEDGE_LAYER = [
-  { id: 'evidence',    label: 'Evidence base',        stalls: ['S1', 'S7'], protect: 'ip' },
-  { id: 'signals',     label: 'Signal history',       stalls: ['S8', 'S9'], protect: 'knowledge' },
-  { id: 'stall-rec',   label: 'Stall records',        stalls: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'], protect: 'ip' },
-  { id: 'hypotheses',  label: 'Leverage hypotheses',  stalls: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'], protect: 'sovereignty' },
+/* ─── MCP tool activation rules (for Card 2) ──────────────────────── */
+const MCP_TOOLS = [
+  { name: 'detect_stalls()',           cond: s => s.stalls.length > 0 },
+  { name: 'get_leverage_hypotheses()', cond: s => s.stalls.length > 0 },
+  { name: 'get_steward_diagnostic()',  cond: s => (s.detectedStacks || []).length > 0 },
+  { name: 'get_matched_connections()', cond: s => s.stalls.includes('S2') || s.stalls.includes('S5') },
+  { name: 'get_cluster_signals()',     cond: s => s.stalls.includes('S7') || s.stalls.includes('S1') },
+  { name: 'propagate_signal()',        cond: s => s.stalls.includes('S9') || s.stalls.includes('S8') },
+  { name: 'get_actor_profile()',       cond: () => true },
+  { name: 'get_journey_state()',       cond: () => true },
+  { name: 'search_support_programmes()', cond: s => { const g = (s.qualifierAnswers||{}).gap; return g === 'discovery' || g === 'access'; } },
+  { name: 'get_open_funding()',        cond: s => (s.qualifierAnswers||{}).priority === 'capital' },
+  { name: 'ingest_evidence()',         cond: s => { const p = new Set((s.qualifierAnswers||{}).protect||[]); return p.has('ip') || p.has('knowledge'); } },
+  { name: 'enrich_actor_profile()',    cond: s => (new Set((s.qualifierAnswers||{}).protect||[])).has('talent') },
 ];
 
-const INTERACTION_LAYER = [
-  { id: 'registry',    label: 'Actor registry',          gap: 'discovery', priority: 'talent' },
-  { id: 'journey',     label: 'Journey construction',    gap: 'conversion', priority: 'growth' },
-  { id: 'connections', label: 'Matched connections',      gap: 'discovery', priority: 'supply' },
-  { id: 'propagation', label: 'Signal propagation',      gap: 'flow',      priority: 'research' },
-];
-
-const STRUCTURAL_LAYER = [
-  { id: 'stall-detect', label: 'Stall detection',       stalls: true },
-  { id: 'stack-analysis', label: 'Stack analysis',      stacks: true },
-  { id: 'gov-membrane', label: 'Governance membrane',   protect: ['sovereignty', 'knowledge', 'trust'] },
-  { id: 'bot-network',  label: 'Bot network',           stalls: true },
-];
+function getActiveToolNames(journeyState) {
+  return MCP_TOOLS.filter(t => t.cond(journeyState)).map(t => t.name);
+}
 
 /* ─── Actor cascade data ──────────────────────────────────────────── */
 const ACTOR_CASCADES = {
@@ -954,165 +952,186 @@ const ACTOR_CASCADES = {
   },
 };
 
-/* ─── Derive active infrastructure components ──────────────────────── */
-function deriveInfraActive(journeyState) {
-  const stalls = new Set(journeyState.stalls || []);
+/* ─── Narrative bridge builder ─────────────────────────────────────── */
+const CLUSTER_TYPE_SENTENCES = {
+  regional:  'a place-based cluster',
+  national:  'a nationally significant supercluster',
+  corporate: 'an anchor-led enterprise ecosystem',
+};
+
+function buildNarrativeBridge(journeyState, config) {
   const stacks = journeyState.detectedStacks || [];
+  const stalls = journeyState.stalls || [];
   const qa = journeyState.qualifierAnswers || {};
-  const priority = qa.priority || '';
-  const gap = qa.gap || '';
-  const protections = new Set(qa.protect || []);
 
-  const activeKnowledge = new Set();
-  KNOWLEDGE_LAYER.forEach(c => {
-    if (c.stalls && c.stalls.some(s => stalls.has(s))) activeKnowledge.add(c.id);
-    if (c.protect && protections.has(c.protect)) activeKnowledge.add(c.id);
-  });
-  // Stall records and leverage hypotheses active if any stalls selected
-  if (stalls.size > 0) { activeKnowledge.add('stall-rec'); activeKnowledge.add('hypotheses'); }
+  const clusterDesc = CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem';
+  const anchorDesc = (config.anchorLabel && config.anchorLabel !== 'Anchors')
+    ? ` with ${articleFor(config.anchorLabel).toLowerCase()} ${config.anchorLabel} anchor`
+    : '';
 
-  const activeInteraction = new Set();
-  INTERACTION_LAYER.forEach(c => {
-    if (c.gap === gap) activeInteraction.add(c.id);
-    if (c.priority === priority) activeInteraction.add(c.id);
-  });
-  if (priority === 'capital') INTERACTION_LAYER.forEach(c => activeInteraction.add(c.id));
-  if (activeInteraction.size === 0) activeInteraction.add('journey');
+  let stackSentence = '';
+  if (stacks.length === 1) {
+    stackSentence = `Your ecosystem shows ${stacks[0].name} — ${stacks[0].logic.charAt(0).toLowerCase()}${stacks[0].logic.slice(1)}`;
+  } else if (stacks.length > 1) {
+    const names = stacks.map(s => s.name);
+    stackSentence = `Your ecosystem shows ${names.slice(0, -1).join(', ')} and ${names[names.length - 1]} — ${stacks.length} reinforcing loops that lock the system into its current state.`;
+  } else if (stalls.length > 0) {
+    const stallNames = stalls.map(id => STALLS.find(s => s.id === id)?.name).filter(Boolean);
+    stackSentence = `Your ecosystem shows ${stallNames.length} independent stall${stallNames.length > 1 ? 's' : ''} — ${stallNames.join(', ')}.`;
+  }
 
-  const activeStructural = new Set();
-  STRUCTURAL_LAYER.forEach(c => {
-    if (c.stalls && stalls.size > 0) activeStructural.add(c.id);
-    if (c.stacks && stacks.length > 0) activeStructural.add(c.id);
-    if (c.protect && c.protect.some(p => protections.has(p))) activeStructural.add(c.id);
-  });
+  const configSentence = `${articleFor(config.configName)} ${config.configName} configured as ${clusterDesc}${anchorDesc} needs infrastructure that makes outcomes measurable and knowledge visible.`;
 
-  return { activeKnowledge, activeInteraction, activeStructural };
+  return `${stackSentence} ${configSentence} Here is your recommended architecture.`;
 }
 
-/* ─── Infrastructure cell ──────────────────────────────────────────── */
-function InfraCell({ label, active, starred }) {
+/* ─── Card 1 description builder ───────────────────────────────────── */
+const DB_DESC_BY_TYPE = {
+  regional:  'Your sovereign database holds actor profiles, signal history, and diagnostic records for this regional cluster.',
+  national:  'Your federated database holds cross-regional actor profiles, signal history, and diagnostic records across the supercluster.',
+  corporate: 'Your enterprise database holds supply chain actors, capability profiles, and diagnostic records across the anchor ecosystem.',
+};
+
+function buildDbDescription(qa, protections) {
+  const base = DB_DESC_BY_TYPE[qa.clusterType] || DB_DESC_BY_TYPE.regional;
+  const protectNames = (protections || []).map(p => PROTECT_LABELS[p]).filter(Boolean);
+  if (protectNames.length > 0) {
+    const list = protectNames.length === 1 ? protectNames[0] : protectNames.slice(0, -1).join(', ') + ' and ' + protectNames[protectNames.length - 1];
+    return `${base} The sovereign data membrane ensures ${list} ${protectNames.length === 1 ? 'is' : 'are'} protected at the boundary.`;
+  }
+  return base;
+}
+
+/* ─── Card 2 description builder ───────────────────────────────────── */
+function buildIntelDescription(journeyState) {
+  const stalls = journeyState.stalls || [];
+  const stacks = journeyState.detectedStacks || [];
+  if (stacks.length > 0) {
+    return `These tools detect the ${stacks.length} reinforcing stack${stacks.length > 1 ? 's' : ''} in your ecosystem and surface leverage hypotheses — the intelligence layer that turns diagnostic findings into actionable interventions.`;
+  }
+  if (stalls.length > 0) {
+    return `These tools monitor the ${stalls.length} behavioural stall${stalls.length > 1 ? 's' : ''} in your ecosystem and propagate signals between actors — the intelligence layer that makes stall patterns visible before they compound.`;
+  }
+  return 'These tools provide the intelligence substrate for your ecosystem — stall detection, signal propagation, and actor matching.';
+}
+
+/* ─── Reveal card component ────────────────────────────────────────── */
+function RevealCard({ visible, delay, label, screenshotLabel, children, description }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    if (visible) {
+      const timer = setTimeout(() => setShow(true), delay);
+      return () => clearTimeout(timer);
+    }
+    setShow(false);
+  }, [visible, delay]);
+
   return (
     <div style={{
-      ...arch.cell,
-      opacity: active ? 1 : 0.2,
-      borderColor: active ? (starred ? 'rgba(200,240,208,0.4)' : 'rgba(200,240,208,0.25)') : 'var(--dj-border)',
-      background: active ? (starred ? 'rgba(200,240,208,0.08)' : 'rgba(200,240,208,0.04)') : 'var(--dj-surface)',
+      ...arch.revealCard,
+      opacity: show ? 1 : 0,
+      transform: show ? 'translateY(0)' : 'translateY(16px)',
     }}>
-      <span style={{
-        ...arch.cellMono,
-        fontSize: '10px',
-        color: active ? 'var(--signal)' : 'var(--dj-chalk-muted)',
-        fontWeight: starred ? 600 : 400,
-      }}>{label}</span>
+      <div style={arch.revealLabel}>{label}</div>
+      <div style={arch.revealPlaceholder}>
+        <div style={arch.revealScreenshotLabel}>UI screenshot — {screenshotLabel}</div>
+        {children}
+      </div>
+      <div style={arch.revealDesc}>{description}</div>
     </div>
   );
 }
 
-/* ─── Actor cascade card ───────────────────────────────────────────── */
-function ActorCascadeCard({ actorName, cascade }) {
-  return (
-    <div style={arch.cascadeCard}>
-      <div style={arch.cascadeActor}>{actorName}</div>
-      <div style={arch.cascadeStep}>
-        <div style={arch.cascadeLabel}>First action</div>
-        <div style={arch.cascadeValue}>{cascade.action}</div>
-      </div>
-      <div style={arch.cascadeArrow}>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M7 3L7 11M4 8L7 11L10 8" stroke="var(--steward)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </div>
-      <div style={arch.cascadeStep}>
-        <div style={arch.cascadeLabel}>Signal generated</div>
-        <div style={arch.cascadeValue}>{cascade.signal}</div>
-      </div>
-      <div style={arch.cascadeArrow}>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M7 3L7 11M4 8L7 11L10 8" stroke="var(--steward)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </div>
-      <div style={arch.cascadeStep}>
-        <div style={arch.cascadeLabel}>System effect</div>
-        <div style={arch.cascadeValue}>{cascade.effect}</div>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Infrastructure section (replaces old ArchitectureDiagram) ───── */
+/* ─── Infrastructure section — reveal mechanic ────────────────────── */
 function InfrastructureSection({ journeyState, config }) {
-  const active = deriveInfraActive(journeyState);
+  const [revealed, setRevealed] = useState(false);
 
-  // Determine foregrounded actors from membrane config
-  const protections = config.protections || [];
-  const foregroundedActors = new Set();
-  protections.forEach(p => {
-    const actor = PROTECT_ACTOR_MAP[p];
-    if (actor) foregroundedActors.add(actor);
-  });
-  if (protections.includes('sovereignty') && config.anchorLabel) {
-    foregroundedActors.add(config.anchorLabel);
-  }
-  // Always include Stewards
-  foregroundedActors.add('Stewards');
-  // Cap at 3
-  const actorList = Array.from(foregroundedActors).slice(0, 3);
+  const narrative = useMemo(() => buildNarrativeBridge(journeyState, config), [journeyState, config]);
+
+  const activeTools = useMemo(() => getActiveToolNames(journeyState), [journeyState]);
+
+  // Foregrounded actors for Card 3
+  const actorList = useMemo(() => {
+    const protections = config.protections || [];
+    const fg = new Set();
+    protections.forEach(p => {
+      const actor = PROTECT_ACTOR_MAP[p];
+      if (actor) fg.add(actor);
+    });
+    if (protections.includes('sovereignty') && config.anchorLabel) fg.add(config.anchorLabel);
+    fg.add('Stewards');
+    return Array.from(fg).slice(0, 3).filter(n => ACTOR_CASCADES[n]);
+  }, [config]);
+
+  const qa = journeyState.qualifierAnswers || {};
+  const dbDesc = useMemo(() => buildDbDescription(qa, config.protections), [qa, config.protections]);
+  const intelDesc = useMemo(() => buildIntelDescription(journeyState), [journeyState]);
 
   return (
-    <React.Fragment>
-      {/* Subsection 1 — What your infrastructure does */}
-      <div style={s3.section}>
-        <h3 style={arch.sectionHeading}>What your infrastructure does</h3>
-        <div style={arch.threeCol}>
-          {/* Knowledge Layer */}
-          <div style={arch.column}>
-            <div style={arch.colHeader}>
-              <div style={arch.colHeaderStarred}>Sovereign Ecosystem Database</div>
-              <div style={arch.colSub}>What the ecosystem knows</div>
-            </div>
-            {KNOWLEDGE_LAYER.map(c => (
-              <InfraCell key={c.id} label={c.label} active={active.activeKnowledge.has(c.id)} starred={c.id === 'stall-rec' || c.id === 'hypotheses'} />
-            ))}
-          </div>
-          {/* Interaction Layer */}
-          <div style={arch.column}>
-            <div style={arch.colHeader}>
-              <div style={arch.colHeaderLabel}>Interaction Layer</div>
-              <div style={arch.colSub}>Who connects to whom and why</div>
-            </div>
-            {INTERACTION_LAYER.map(c => (
-              <InfraCell key={c.id} label={c.label} active={active.activeInteraction.has(c.id)} />
-            ))}
-          </div>
-          {/* Structural Layer */}
-          <div style={arch.column}>
-            <div style={arch.colHeader}>
-              <div style={arch.colHeaderLabel}>Structural Layer</div>
-              <div style={arch.colSub}>The cluster's structural position</div>
-            </div>
-            {STRUCTURAL_LAYER.map(c => (
-              <InfraCell key={c.id} label={c.label} active={active.activeStructural.has(c.id)} />
-            ))}
-          </div>
-        </div>
-        <div style={arch.legend}>
-          <div style={arch.legendDot} />
-          <span style={arch.legendText}>Highlighted components are recommended for your configuration.</span>
-        </div>
-      </div>
+    <div style={s3.section}>
+      {/* Narrative bridge */}
+      <p style={arch.narrative}>{narrative}</p>
 
-      {/* Subsection 2 — What your actors experience */}
-      <div style={s3.section}>
-        <h3 style={arch.sectionHeading}>What your actors experience</h3>
-        <div style={arch.cascadeGrid}>
-          {actorList.map(name => {
-            const cascade = ACTOR_CASCADES[name];
-            if (!cascade) return null;
-            return <ActorCascadeCard key={name} actorName={name} cascade={cascade} />;
-          })}
+      {/* Reveal button */}
+      {!revealed && (
+        <button style={arch.revealBtn} onClick={() => setRevealed(true)}>
+          <span style={arch.revealBtnLabel}>Generate your architecture</span>
+          <span style={arch.revealBtnArrow}>&rarr;</span>
+          <span style={arch.revealBtnSub}>Derived from your stalls, stacks, and configuration</span>
+        </button>
+      )}
+
+      {/* Revealed cards */}
+      {revealed && (
+        <div style={arch.revealGrid}>
+          {/* Card 1 — Sovereign Ecosystem Database */}
+          <RevealCard
+            visible={revealed} delay={0}
+            label="Your regional asset"
+            screenshotLabel="Sovereign Database"
+            description={dbDesc}
+          >
+            <div style={arch.placeholderMono}>
+              Supercluster · Clusters · Groups · Actors
+            </div>
+          </RevealCard>
+
+          {/* Card 2 — Intelligence Substrate */}
+          <RevealCard
+            visible={revealed} delay={400}
+            label="How your ecosystem thinks"
+            screenshotLabel="Intelligence Substrate"
+            description={intelDesc}
+          >
+            <div style={arch.placeholderToolList}>
+              {activeTools.map(name => (
+                <span key={name} style={arch.placeholderTool}>{name}</span>
+              ))}
+            </div>
+          </RevealCard>
+
+          {/* Card 3 — Actor Experience */}
+          <RevealCard
+            visible={revealed} delay={800}
+            label="What your actors see"
+            screenshotLabel="Actor Experience"
+            description="Each actor pursues their own interest — the system captures the intelligence their actions generate, turning selfish behaviour into shared structural visibility."
+          >
+            <div style={arch.placeholderActorList}>
+              {actorList.map(name => {
+                const c = ACTOR_CASCADES[name];
+                return (
+                  <div key={name} style={arch.placeholderActorRow}>
+                    <span style={arch.placeholderActorName}>{name}</span>
+                    <span style={arch.placeholderActorAction}>{c.action}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </RevealCard>
         </div>
-      </div>
-    </React.Fragment>
+      )}
+    </div>
   );
 }
 
@@ -2385,144 +2404,156 @@ const s3 = {
   },
 };
 
-/* ─── Infrastructure section styles ────────────────────────────────── */
+/* ─── Reveal section styles ────────────────────────────────────────── */
 const arch = {
-  /* Section heading */
-  sectionHeading: {
-    fontFamily: 'var(--font-serif)',
-    fontSize: '22px',
-    fontWeight: 400,
-    color: 'var(--dj-chalk)',
-    letterSpacing: '-0.01em',
-    marginBottom: '20px',
-  },
-
-  /* Three-column layout */
-  threeCol: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '12px',
-  },
-  column: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '6px',
-  },
-  colHeader: {
-    marginBottom: '8px',
-  },
-  colHeaderStarred: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '10px',
-    fontWeight: 600,
-    letterSpacing: '0.06em',
-    textTransform: 'uppercase',
-    color: 'var(--signal)',
-    marginBottom: '2px',
-  },
-  colHeaderLabel: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '10px',
-    fontWeight: 600,
-    letterSpacing: '0.08em',
-    textTransform: 'uppercase',
+  /* Narrative bridge */
+  narrative: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '15px',
+    lineHeight: 1.7,
     color: 'var(--dj-chalk-dim)',
-    marginBottom: '2px',
-  },
-  colSub: {
-    fontFamily: 'var(--font-sans)',
-    fontSize: '11px',
-    color: 'var(--dj-chalk-muted)',
-    lineHeight: 1.4,
-  },
-
-  /* Cell */
-  cell: {
-    padding: '10px 12px',
-    borderRadius: '5px',
-    border: '1px solid var(--dj-border)',
-    background: 'var(--dj-surface)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    transition: 'opacity 0.3s, border-color 0.3s, background 0.3s',
-    minHeight: '40px',
-  },
-  cellMono: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '10px',
-    fontWeight: 400,
-    lineHeight: 1.3,
-  },
-
-  /* Legend */
-  legend: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    marginTop: '16px',
-    paddingTop: '12px',
-    borderTop: '1px solid var(--dj-border)',
-  },
-  legendDot: {
-    width: '8px',
-    height: '8px',
-    borderRadius: '2px',
-    background: 'var(--signal)',
-    flexShrink: 0,
-  },
-  legendText: {
-    fontFamily: 'var(--font-sans)',
-    fontSize: '11px',
-    color: 'var(--dj-chalk-muted)',
-  },
-
-  /* Actor cascade cards */
-  cascadeGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    gap: '12px',
-  },
-  cascadeCard: {
+    marginBottom: '28px',
+    padding: '20px 24px',
     background: 'var(--dj-surface)',
     border: '1px solid var(--dj-border)',
     borderRadius: '8px',
-    padding: '16px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0',
+    borderLeft: '3px solid var(--steward)',
   },
-  cascadeActor: {
+
+  /* Reveal button */
+  revealBtn: {
+    width: '100%',
+    padding: '24px 28px',
+    background: 'var(--dj-surface)',
+    border: '1px solid rgba(200,240,208,0.25)',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    textAlign: 'left',
+    transition: 'border-color 0.2s, background 0.2s',
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    gap: '12px',
+  },
+  revealBtnLabel: {
     fontFamily: 'var(--font-serif)',
-    fontSize: '18px',
-    fontWeight: 400,
+    fontSize: '22px',
     color: 'var(--dj-chalk)',
-    marginBottom: '14px',
     letterSpacing: '-0.01em',
   },
-  cascadeStep: {
-    padding: '0',
+  revealBtnArrow: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '22px',
+    color: 'var(--signal)',
   },
-  cascadeLabel: {
+  revealBtnSub: {
+    width: '100%',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 500,
+    letterSpacing: '0.06em',
+    color: 'var(--dj-chalk-muted)',
+    marginTop: '-4px',
+  },
+
+  /* Reveal grid */
+  revealGrid: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  },
+
+  /* Reveal card */
+  revealCard: {
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '10px',
+    padding: '24px',
+    transition: 'opacity 0.5s ease, transform 0.5s ease',
+  },
+  revealLabel: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '20px',
+    fontWeight: 400,
+    color: 'var(--dj-chalk)',
+    marginBottom: '16px',
+    letterSpacing: '-0.01em',
+  },
+  revealPlaceholder: {
+    background: 'var(--dj-bg)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '6px',
+    padding: '24px 20px',
+    marginBottom: '14px',
+    minHeight: '120px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  revealScreenshotLabel: {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
-    fontWeight: 600,
+    fontWeight: 500,
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
     color: 'var(--dj-chalk-muted)',
-    marginBottom: '3px',
+    opacity: 0.4,
+    marginBottom: '12px',
   },
-  cascadeValue: {
+  revealDesc: {
     fontFamily: 'var(--font-sans)',
-    fontSize: '12px',
-    lineHeight: 1.5,
+    fontSize: '13.5px',
+    lineHeight: 1.6,
     color: 'var(--dj-chalk-dim)',
   },
-  cascadeArrow: {
+
+  /* Placeholder content styles */
+  placeholderMono: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '13px',
+    fontWeight: 500,
+    color: 'var(--signal)',
+    letterSpacing: '0.04em',
+    textAlign: 'center',
+  },
+  placeholderToolList: {
     display: 'flex',
-    justifyContent: 'center',
-    padding: '6px 0',
+    flexWrap: 'wrap',
+    gap: '6px',
+  },
+  placeholderTool: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    fontWeight: 400,
+    color: 'var(--signal)',
+    background: 'rgba(200,240,208,0.06)',
+    border: '1px solid rgba(200,240,208,0.15)',
+    borderRadius: '3px',
+    padding: '4px 8px',
+  },
+  placeholderActorList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+  },
+  placeholderActorRow: {
+    display: 'flex',
+    gap: '12px',
+    alignItems: 'baseline',
+  },
+  placeholderActorName: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    fontWeight: 600,
+    color: 'var(--steward)',
+    flexShrink: 0,
+    minWidth: '100px',
+  },
+  placeholderActorAction: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '12px',
+    color: 'var(--dj-chalk-dim)',
+    lineHeight: 1.4,
   },
 };
 

@@ -883,6 +883,251 @@ function MembraneDiagram({ config }) {
   );
 }
 
+/* ─── Architecture diagram data ────────────────────────────────────── */
+const ARCH_ACTOR_JOURNEYS = [
+  { id: 'founder',    label: 'Founder Journey',        priority: 'talent' },
+  { id: 'anchor',     label: 'Anchor Journey',         priority: 'supply' },
+  { id: 'researcher', label: 'Researcher Journey',     priority: 'research' },
+  { id: 'steward',    label: 'Steward Interrogation',  priority: 'growth' },
+];
+
+const ARCH_AI_ENGINE = [
+  'Journey Construction', 'Signal Propagation', 'Role-Aware Reframing',
+  'Actor Matching', 'Stall Detection', 'Steward Interrogation',
+];
+
+const ARCH_MCP_TOOLS_ROW1 = [
+  'get_actor_profile()', 'get_cluster_signals()', 'detect_stalls()',
+  'get_matched_connections()', 'propagate_signal()', 'get_steward_diagnostic()',
+];
+const ARCH_MCP_TOOLS_ROW2 = [
+  'get_journey_state()', 'search_support_programmes()', 'get_open_funding()',
+  'ingest_evidence()', 'enrich_actor_profile()', 'get_leverage_hypotheses()',
+];
+
+const ARCH_BOTS = [
+  { id: 'evidence',  label: 'Evidence Ingestion',  stalls: ['S1', 'S7'] },
+  { id: 'signal',    label: 'Signal Monitoring',   stalls: ['S8', 'S9'] },
+  { id: 'enrich',    label: 'Actor Enrichment',    stalls: ['S2', 'S5'] },
+  { id: 'health',    label: 'Health Monitoring',    stalls: ['S3', 'S4', 'S6'] },
+];
+
+const ARCH_EXTERNAL = [
+  { id: 'govt',    label: 'Govt Support Directory',  gap: 'discovery' },
+  { id: 'community', label: 'Community Services API', gap: 'flow' },
+  { id: 'pubs',    label: 'Publication Databases',   gap: 'access' },
+  { id: 'identity', label: 'Professional Identity',  gap: 'conversion' },
+];
+
+const ARCH_GOV_FEATURES = [
+  { id: 'identity-first', label: 'Identity-first access', protect: 'sovereignty' },
+  { id: 'role-based',     label: 'Role-based access',     protect: 'trust' },
+  { id: 'audit',          label: 'Full audit trail',       protect: 'ip' },
+  { id: 'autonomy',       label: 'Institutional autonomy', protect: 'knowledge' },
+];
+
+const ARCH_DB_FEATURES = [
+  { id: 'profiles',    label: 'Actor profiles',       protect: 'talent' },
+  { id: 'signals',     label: 'Signal history',        protect: 'knowledge' },
+  { id: 'stalls',      label: 'Stall records',         protect: 'ip' },
+  { id: 'hypotheses',  label: 'Leverage hypotheses',   protect: 'sovereignty' },
+];
+
+/* ─── Derive active components from journey state ──────────────────── */
+function deriveActiveComponents(journeyState) {
+  const stalls = new Set(journeyState.stalls || []);
+  const stacks = journeyState.detectedStacks || [];
+  const qa = journeyState.qualifierAnswers || {};
+  const priority = qa.priority || '';
+  const gap = qa.gap || '';
+  const protections = new Set(qa.protect || []);
+
+  // Actor journeys — foreground the one matching strategic priority
+  const activeJourneys = new Set();
+  ARCH_ACTOR_JOURNEYS.forEach(j => {
+    if (j.priority === priority) activeJourneys.add(j.id);
+  });
+  // Capital priority activates all journeys (investment readiness is cross-cutting)
+  if (priority === 'capital') ARCH_ACTOR_JOURNEYS.forEach(j => activeJourneys.add(j.id));
+  if (activeJourneys.size === 0) activeJourneys.add('steward');
+
+  // AI engine — activate based on stalls and stacks
+  const activeAI = new Set();
+  if (stalls.size > 0) { activeAI.add('Stall Detection'); activeAI.add('Signal Propagation'); }
+  if (stacks.length > 0) activeAI.add('Steward Interrogation');
+  if (stalls.has('S2') || stalls.has('S5')) activeAI.add('Actor Matching');
+  if (stalls.has('S7') || stalls.has('S1')) activeAI.add('Role-Aware Reframing');
+  activeAI.add('Journey Construction');
+
+  // MCP tools — activate those relevant to detected stalls
+  const activeMCP = new Set();
+  if (stalls.size > 0) { activeMCP.add('detect_stalls()'); activeMCP.add('get_leverage_hypotheses()'); }
+  if (stalls.has('S2') || stalls.has('S5')) activeMCP.add('get_matched_connections()');
+  if (stalls.has('S7') || stalls.has('S1')) activeMCP.add('get_cluster_signals()');
+  if (stalls.has('S9') || stalls.has('S8')) activeMCP.add('propagate_signal()');
+  if (stacks.length > 0) activeMCP.add('get_steward_diagnostic()');
+  activeMCP.add('get_actor_profile()');
+  activeMCP.add('get_journey_state()');
+  if (gap === 'discovery' || gap === 'access') activeMCP.add('search_support_programmes()');
+  if (priority === 'capital') activeMCP.add('get_open_funding()');
+  if (protections.has('ip') || protections.has('knowledge')) activeMCP.add('ingest_evidence()');
+  if (protections.has('talent')) activeMCP.add('enrich_actor_profile()');
+
+  // Bots — activate if any of their associated stalls are selected
+  const activeBots = new Set();
+  ARCH_BOTS.forEach(b => {
+    if (b.stalls.some(s => stalls.has(s))) activeBots.add(b.id);
+  });
+
+  // External sources — activate based on coordination gap
+  const activeExternal = new Set();
+  ARCH_EXTERNAL.forEach(e => {
+    if (e.gap === gap) activeExternal.add(e.id);
+  });
+  // Also activate based on priority
+  if (priority === 'research') activeExternal.add('pubs');
+  if (priority === 'talent') activeExternal.add('identity');
+  if (priority === 'capital') activeExternal.add('govt');
+
+  // Governance features — activate based on Q5 protections
+  const activeGov = new Set();
+  ARCH_GOV_FEATURES.forEach(f => {
+    if (protections.has(f.protect)) activeGov.add(f.id);
+  });
+
+  // DB features — activate based on Q5 protections
+  const activeDB = new Set();
+  ARCH_DB_FEATURES.forEach(f => {
+    if (protections.has(f.protect)) activeDB.add(f.id);
+  });
+
+  return { activeJourneys, activeAI, activeMCP, activeBots, activeExternal, activeGov, activeDB };
+}
+
+/* ─── Architecture layer component ─────────────────────────────────── */
+function ArchLayer({ label, children }) {
+  return (
+    <div style={arch.layer}>
+      <div style={arch.layerLabel}>{label}</div>
+      <div style={arch.layerContent}>{children}</div>
+    </div>
+  );
+}
+
+function ArchCell({ label, active, mono, small }) {
+  return (
+    <div style={{
+      ...arch.cell,
+      opacity: active ? 1 : 0.25,
+      borderColor: active ? 'rgba(200,240,208,0.3)' : 'var(--dj-border)',
+      background: active ? 'rgba(200,240,208,0.05)' : 'var(--dj-surface)',
+    }}>
+      <span style={{
+        ...(mono ? arch.cellMono : arch.cellText),
+        ...(small ? { fontSize: '9px' } : {}),
+        color: active ? 'var(--signal)' : 'var(--dj-chalk-muted)',
+      }}>{label}</span>
+    </div>
+  );
+}
+
+/* ─── Architecture diagram ─────────────────────────────────────────── */
+function ArchitectureDiagram({ journeyState }) {
+  const active = deriveActiveComponents(journeyState);
+
+  return (
+    <div style={arch.container}>
+      {/* Layer 1 — Actor Journeys */}
+      <ArchLayer label="Actor Journeys">
+        <div style={arch.row4}>
+          {ARCH_ACTOR_JOURNEYS.map(j => (
+            <ArchCell key={j.id} label={j.label} active={active.activeJourneys.has(j.id)} />
+          ))}
+        </div>
+      </ArchLayer>
+
+      <div style={arch.connector} />
+
+      {/* Layer 2 — AI Reasoning Engine */}
+      <ArchLayer label="AI Reasoning Engine">
+        <div style={arch.row6}>
+          {ARCH_AI_ENGINE.map(name => (
+            <ArchCell key={name} label={name} active={active.activeAI.has(name)} small />
+          ))}
+        </div>
+      </ArchLayer>
+
+      <div style={arch.connector} />
+
+      {/* Layer 3 — MCP Intelligence Substrate */}
+      <ArchLayer label="MCP Intelligence Substrate">
+        <div style={arch.row6}>
+          {ARCH_MCP_TOOLS_ROW1.map(name => (
+            <ArchCell key={name} label={name} active={active.activeMCP.has(name)} mono small />
+          ))}
+        </div>
+        <div style={{ ...arch.row6, marginTop: '6px' }}>
+          {ARCH_MCP_TOOLS_ROW2.map(name => (
+            <ArchCell key={name} label={name} active={active.activeMCP.has(name)} mono small />
+          ))}
+        </div>
+      </ArchLayer>
+
+      <div style={arch.connector} />
+
+      {/* Layer 4 — Database + Bot Network */}
+      <ArchLayer label="Data & Automation">
+        <div style={arch.splitRow}>
+          <div style={arch.splitLeft}>
+            <div style={arch.splitHeader}>Sovereign Ecosystem Database</div>
+            <div style={arch.chipRow}>
+              {ARCH_DB_FEATURES.map(f => (
+                <ArchCell key={f.id} label={f.label} active={active.activeDB.has(f.id)} small />
+              ))}
+            </div>
+          </div>
+          <div style={arch.splitRight}>
+            <div style={arch.splitHeader}>Autonomous Bot Network</div>
+            <div style={arch.chipRow}>
+              {ARCH_BOTS.map(b => (
+                <ArchCell key={b.id} label={b.label} active={active.activeBots.has(b.id)} small />
+              ))}
+            </div>
+          </div>
+        </div>
+      </ArchLayer>
+
+      <div style={arch.connector} />
+
+      {/* Layer 5 — External Data Sources */}
+      <ArchLayer label="External Data Sources">
+        <div style={arch.row4}>
+          {ARCH_EXTERNAL.map(e => (
+            <ArchCell key={e.id} label={e.label} active={active.activeExternal.has(e.id)} small />
+          ))}
+        </div>
+      </ArchLayer>
+
+      <div style={arch.connector} />
+
+      {/* Layer 6 — Federated Governance */}
+      <ArchLayer label="Federated Governance Layer">
+        <div style={arch.row4}>
+          {ARCH_GOV_FEATURES.map(f => (
+            <ArchCell key={f.id} label={f.label} active={active.activeGov.has(f.id)} small />
+          ))}
+        </div>
+      </ArchLayer>
+
+      {/* Legend */}
+      <div style={arch.legend}>
+        <div style={arch.legendDot} />
+        <span style={arch.legendText}>Highlighted components are recommended for your configuration.</span>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Stage 3: Digital OS ──────────────────────────────────────────── */
 function DigitalOSStage() {
   const { journeyState, updateJourneyState } = useJourney();
@@ -978,6 +1223,12 @@ function DigitalOSStage() {
         <div style={s3.section}>
           <div style={s3.sectionLabel}>Ecosystem membrane</div>
           <MembraneDiagram config={config} />
+        </div>
+
+        {/* Tech configuration */}
+        <div style={s3.section}>
+          <div style={s3.sectionLabel}>Technical architecture</div>
+          <ArchitectureDiagram journeyState={journeyState} />
         </div>
 
         {/* CTA */}
@@ -2146,6 +2397,133 @@ const s3 = {
     padding: '12px 28px',
     textDecoration: 'none',
     transition: 'opacity 0.2s',
+  },
+};
+
+/* ─── Architecture diagram styles ──────────────────────────────────── */
+const arch = {
+  container: {
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '10px',
+    padding: '24px 20px',
+    overflowX: 'auto',
+  },
+
+  /* Layer */
+  layer: {
+    marginBottom: '0',
+  },
+  layerLabel: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '9px',
+    fontWeight: 600,
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '8px',
+  },
+  layerContent: {
+    minWidth: '680px',
+  },
+
+  /* Rows */
+  row4: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gap: '6px',
+  },
+  row6: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(6, 1fr)',
+    gap: '6px',
+  },
+  splitRow: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '10px',
+  },
+  splitLeft: {
+    background: 'rgba(9,16,31,0.5)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '6px',
+    padding: '10px',
+  },
+  splitRight: {
+    background: 'rgba(9,16,31,0.5)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '6px',
+    padding: '10px',
+  },
+  splitHeader: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '9px',
+    fontWeight: 600,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase',
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '8px',
+  },
+  chipRow: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: '5px',
+  },
+
+  /* Cell */
+  cell: {
+    padding: '8px 10px',
+    borderRadius: '4px',
+    border: '1px solid var(--dj-border)',
+    background: 'var(--dj-surface)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    transition: 'opacity 0.3s, border-color 0.3s, background 0.3s',
+    minHeight: '36px',
+  },
+  cellText: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '11px',
+    fontWeight: 400,
+    lineHeight: 1.3,
+  },
+  cellMono: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '9.5px',
+    fontWeight: 400,
+    lineHeight: 1.3,
+  },
+
+  /* Connector between layers */
+  connector: {
+    width: '1px',
+    height: '12px',
+    background: 'var(--dj-border)',
+    margin: '0 auto',
+  },
+
+  /* Legend */
+  legend: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    marginTop: '16px',
+    paddingTop: '12px',
+    borderTop: '1px solid var(--dj-border)',
+  },
+  legendDot: {
+    width: '8px',
+    height: '8px',
+    borderRadius: '2px',
+    background: 'var(--signal)',
+    flexShrink: 0,
+  },
+  legendText: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '11px',
+    color: 'var(--dj-chalk-muted)',
   },
 };
 

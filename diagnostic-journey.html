@@ -742,12 +742,12 @@ function DigitalOSStage() {
   }, []);
 
   const submitMulti = useCallback(() => {
-    const next = { ...answers, [q.id]: multiSelect };
-    setAnswers(next);
-    const config = deriveOSConfig(next, journeyState.stalls, journeyState.detectedStacks || []);
-    updateJourneyState({ qualifierAnswers: next, osConfig: config });
+    const finalAnswers = { ...answers, protect: multiSelect };
+    setAnswers(finalAnswers);
+    const config = deriveOSConfig(finalAnswers, journeyState.stalls, journeyState.detectedStacks || []);
+    updateJourneyState({ qualifierAnswers: finalAnswers, osConfig: config });
     setShowRecommendation(true);
-  }, [answers, multiSelect, q, journeyState, updateJourneyState]);
+  }, [answers, multiSelect, journeyState.stalls, journeyState.detectedStacks, updateJourneyState]);
 
   const goBackQ = useCallback(() => {
     if (showRecommendation) {

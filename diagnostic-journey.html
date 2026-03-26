@@ -1088,8 +1088,6 @@ function buildProvocation(stepIndex, journeyState, config) {
   const stalls = journeyState.stalls || [];
   const qa = journeyState.qualifierAnswers || {};
   const protections = qa.protect || [];
-  const clusterDesc = CLUSTER_TYPE_SENTENCES[qa.clusterType] || 'a regional ecosystem';
-  const clusterType = clusterDesc.replace(/^a /, '').replace(/^an /, '');
   const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'Regional Speciality';
   const anchorLabel = config.anchorLabel || 'Anchors';
   const protectLabels = protections.map(p => PROTECT_LABELS[p]).filter(Boolean);
@@ -1129,14 +1127,14 @@ function buildProvocation(stepIndex, journeyState, config) {
       else if (stalls.includes('S4')) diagnosis = 'Extracting means value leaves faster than it circulates. Your database needs to track retention, not just activity.';
       else diagnosis = 'Without a sovereign database, your ecosystem has no memory. Every new programme starts from zero.';
 
-      let consequence = `A ${clusterType} without a sovereign database has no memory. Every new programme starts from zero. Every new steward inherits anecdote rather than evidence. `;
+      let consequence = `${articleFor(clusterLabel)} ${clusterLabel} without a sovereign database has no memory. Every new programme starts from zero. Every new steward inherits anecdote rather than evidence. `;
       if (anchorLabel === 'Large corporate') consequence += 'A corporate anchor without sovereign data infrastructure owns the ecosystem intelligence. When they leave, the intelligence leaves with them.';
       else if (anchorLabel === 'University') consequence += 'A university anchor generates research that leaves through publication. Without sovereign infrastructure, the ecosystem funds research it never benefits from.';
       else if (anchorLabel === 'Hospital') consequence += 'A hospital anchor generates clinical intelligence that stays inside institutional boundaries. Without sovereign infrastructure, health innovation stays disconnected from the surrounding ecosystem.';
       else if (anchorLabel === 'Public agency') consequence += 'A public agency anchor generates policy intelligence that dissipates between electoral cycles. Without sovereign infrastructure, institutional memory resets with every administration.';
       else if (anchorLabel === 'Research institute') consequence += 'A research institute anchor generates capability signals that stay inside academic boundaries. Without sovereign infrastructure, research capacity is invisible to the actors who need it.';
 
-      let mechanism = `One dedicated instance per ${clusterType}. Actor profiles \u00b7 Signal history \u00b7 Journey state \u00b7 Evidence base \u00b7 Diagnostic outputs \u00b7 Stall records \u00b7 Leverage hypotheses. All within your sovereign boundary. `;
+      let mechanism = `One dedicated instance per ${clusterLabel}. Actor profiles \u00b7 Signal history \u00b7 Journey state \u00b7 Evidence base \u00b7 Diagnostic outputs \u00b7 Stall records \u00b7 Leverage hypotheses. All within your sovereign boundary. `;
       if (stalls.includes('S1') || stalls.includes('S7')) mechanism += 'Evidence Ingestion Bot — continuously structures incoming evidence so it informs rather than accumulates. ';
       if (stalls.includes('S8') || stalls.includes('S9')) mechanism += 'Signal Monitoring Bot — detects when activity grows without conversion. ';
       if (stalls.includes('S2') || stalls.includes('S5')) mechanism += 'Actor Enrichment Bot — enriches actor profiles from system behaviour rather than self-report. ';
@@ -1156,7 +1154,7 @@ function buildProvocation(stepIndex, journeyState, config) {
       else if (qa.gap === 'conversion') diagnosis = 'Your coordination gap is conversion. Activity is visible but outcomes are not. The ecosystem cannot distinguish programmes that work from programmes that do not.';
       else diagnosis = 'Without external data at the supercluster level, every new ecosystem starts empty. Actors arrive and see nothing.';
 
-      let consequence = `Without external data at the supercluster level, every new ${clusterType} starts empty. `;
+      let consequence = `Without external data at the supercluster level, every new ${clusterLabel} starts empty. `;
       if (stalls.includes('S3')) consequence += 'Forgiving stall means failed programmes continue. Without external data showing what comparable ecosystems have tried and stopped, stewards have no reference point for termination decisions.';
       else if (stalls.includes('S7')) consequence += 'Narrating stall means strategy substitutes for evidence. External data breaks this — it introduces evidence the ecosystem did not generate and cannot rewrite.';
       else consequence += 'Actors arrive and see nothing. The cold-start problem kills momentum before the platform generates its own signal.';
@@ -2977,6 +2975,8 @@ const arch = {
     justifyContent: 'center',
     overflowY: 'auto',
     minWidth: 0,
+    width: '100%',
+    height: '100%',
   },
   annotCol: {
     display: 'flex',
@@ -3025,6 +3025,8 @@ const arch = {
     padding: '12px 16px',
     background: 'var(--dj-surface)',
     transition: 'all 0.4s ease',
+    flex: 1,
+    width: '100%',
   },
   layerTitle: {
     fontFamily: 'var(--font-mono)',

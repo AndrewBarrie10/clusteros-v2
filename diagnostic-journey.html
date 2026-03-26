@@ -1319,6 +1319,117 @@ function buildProvocation(stepIndex, journeyState, config) {
 }
 
 /* ─── Architecture walkthrough overlay ─────────────────────────────── */
+/* ─── Circulation diagram SVG ──────────────────────────────────────── */
+function CirculationDiagram({ journeyState, allActive }) {
+  const stalls = journeyState.stalls || [];
+  const stacks = journeyState.detectedStacks || [];
+  const stkEvidence = stackContains(stacks, 'S1', 'S7') || (stalls.includes('S1') && stalls.includes('S7'));
+  const stkIncumbent = stackContains(stacks, 'S4', 'S6') || (stalls.includes('S4') && stalls.includes('S6'));
+  const stkMediated = stackContains(stacks, 'S5', 'S9') || (stalls.includes('S5') && stalls.includes('S9'));
+
+  // Determine active flows by template
+  let activeFlows;
+  if (allActive) activeFlows = new Set([1,2,3,4,5,6,7,8,9,10]);
+  else if (stkEvidence) activeFlows = new Set([1,3,4,5,6,7,8]);
+  else if (stkIncumbent) activeFlows = new Set([1,3,4,5,6,7,8,9]);
+  else if (stkMediated) activeFlows = new Set([1,3,4,5,6,7]);
+  else activeFlows = new Set([1,2,3,4,5,6,7]); // Template D fallback
+
+  const cx = 250, cy = 300, cr = 70;
+  const nodes = [
+    { id: 'journeys',  label: 'Actor Journeys',         x: 250, y: 68 },
+    { id: 'ai',        label: 'AI Reasoning',           x: 410, y: 130 },
+    { id: 'mcp',       label: 'MCP Substrate',          x: 445, y: 300 },
+    { id: 'external',  label: 'External Data',          x: 400, y: 460 },
+    { id: 'bots',      label: 'Bots',                   x: 250, y: 530 },
+    { id: 'gov',       label: 'Governance',              x: 100, y: 460 },
+    { id: 'actors',    label: 'Actors',                  x: 55,  y: 300 },
+    { id: 'stewards',  label: 'Stewards',                x: 90,  y: 130 },
+  ];
+
+  const flows = [
+    { id: 1,  from: 'actors',   to: 'db',       label: 'Selfish actions generate signal',         path: `M 80 300 Q 130 280 ${cx-cr} 300` },
+    { id: 2,  from: 'external', to: 'db',       label: 'Cold-start feed',                         path: `M 380 450 Q 330 400 ${cx+20} ${cy+cr-10}` },
+    { id: 3,  from: 'bots',     to: 'db',       label: 'Continuous enrichment',                   path: `M 250 510 L 250 ${cy+cr}` },
+    { id: 4,  from: 'db',       to: 'mcp',      label: 'Live queries at runtime',                 path: `M ${cx+cr} 300 Q 370 300 420 300` },
+    { id: 5,  from: 'mcp',      to: 'ai',       label: 'Structured findings',                     path: `M 435 275 Q 430 220 410 155` },
+    { id: 6,  from: 'ai',       to: 'journeys', label: 'Personalised at runtime',                 path: `M 390 115 Q 340 80 275 68` },
+    { id: 7,  from: 'journeys', to: 'actors',   label: 'Next step, always relevant',              path: `M 225 68 Q 130 80 70 275` },
+    { id: 8,  from: 'ai',       to: 'db',       label: 'Diagnostic intelligence written back',    path: `M 385 150 Q 330 220 ${cx+30} ${cy-cr+10}` },
+    { id: 9,  from: 'gov',      to: 'db',       label: 'Sovereign boundary enforced',             path: `M 125 445 Q 170 400 ${cx-20} ${cy+cr-10}` },
+    { id: 10, from: 'stewards', to: 'ai',       label: 'Interrogation triggers',                  path: `M 115 130 Q 200 110 385 130` },
+  ];
+
+  const nr = 30; // satellite node radius
+
+  return (
+    <svg viewBox="0 0 500 600" style={{ width: '100%', height: '100%', display: 'block' }}>
+      <defs>
+        <marker id="arrowActive" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0L10 4L0 8Z" fill="#0c9488" />
+        </marker>
+        <marker id="arrowDim" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0L10 4L0 8Z" fill="#ddd8cf" />
+        </marker>
+      </defs>
+
+      {/* Governance boundary ellipse */}
+      <ellipse cx={cx} cy={cy} rx="230" ry="270" fill="none"
+        stroke="var(--dj-border)" strokeWidth="1.2" strokeDasharray="6 4" />
+      <text x={cx} y="18" textAnchor="middle"
+        fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace"
+        fontSize="8" letterSpacing="0.12em">SOVEREIGN BOUNDARY</text>
+
+      {/* Flows */}
+      {flows.map(f => {
+        const active = activeFlows.has(f.id);
+        return (
+          <g key={f.id} style={{ opacity: active ? 1 : 0.2, transition: 'opacity 0.4s' }}>
+            <path d={f.path} fill="none"
+              stroke={active ? '#0c9488' : 'var(--dj-border)'}
+              strokeWidth={active ? 1.5 : 1}
+              markerEnd={active ? 'url(#arrowActive)' : 'url(#arrowDim)'} />
+            {active && (
+              <text dy="-6" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="7.5">
+                <textPath href={`#flow-path-${f.id}`} startOffset="50%" textAnchor="middle">{f.label}</textPath>
+              </text>
+            )}
+            <path id={`flow-path-${f.id}`} d={f.path} fill="none" stroke="none" />
+          </g>
+        );
+      })}
+
+      {/* Central node — Sovereign Ecosystem Database */}
+      <circle cx={cx} cy={cy} r={cr+8} fill="none" stroke="rgba(42,122,79,0.15)" strokeWidth="6" />
+      <circle cx={cx} cy={cy} r={cr} fill="#c8f0d0" stroke="rgba(42,122,79,0.3)" strokeWidth="1.5" />
+      <text x={cx} y={cy-12} textAnchor="middle" fill="#1a1a1a"
+        fontFamily="'Geist Mono', monospace" fontSize="7" fontWeight="600" letterSpacing="0.04em">
+        ★ SOVEREIGN ECOSYSTEM
+      </text>
+      <text x={cx} y={cy+2} textAnchor="middle" fill="#1a1a1a"
+        fontFamily="'Geist Mono', monospace" fontSize="7" fontWeight="600" letterSpacing="0.04em">
+        DATABASE
+      </text>
+      <text x={cx} y={cy+18} textAnchor="middle" fill="#5a5650"
+        fontFamily="'Geist', system-ui" fontSize="8" fontStyle="italic">
+        The regional asset
+      </text>
+
+      {/* Satellite nodes */}
+      {nodes.map(n => (
+        <g key={n.id}>
+          <circle cx={n.x} cy={n.y} r={nr} fill="var(--dj-surface)"
+            stroke="var(--steward)" strokeWidth="1.2" />
+          <text x={n.x} y={n.y+1} textAnchor="middle" dominantBaseline="middle"
+            fill="var(--dj-chalk-dim)" fontFamily="'Geist', system-ui" fontSize="8.5">
+            {n.label}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 function ArchWalkthrough({ journeyState, config, onClose }) {
   const [step, setStep] = useState(0);
   const totalSteps = 7; // 6 layers + final reveal
@@ -1354,36 +1465,40 @@ function ArchWalkthrough({ journeyState, config, onClose }) {
         ...arch.walkthroughLayout,
         gridTemplateColumns: (provocation && provocation.scenario) ? '1fr 600px' : '1fr 340px',
       }}>
-        {/* Diagram column */}
+        {/* Diagram column — circulation diagram for Step 2 + final, flat layers for others */}
         <div style={arch.diagramCol}>
-          {ARCH_LAYERS.map((layer, i) => {
-            const layerIndex = i;
-            const isActive = isFinal || layerIndex === step;
-            const comps = layer.id === 'mcp' ? activeTools.slice(0, 12) : layer.components;
-            return (
-              <div key={layer.id} style={{
-                ...arch.layerBox,
-                opacity: isActive ? 1 : 0.15,
-                borderColor: isActive ? 'var(--steward)' : 'var(--dj-border)',
-                filter: isActive ? 'none' : 'blur(0.5px)',
-                transition: 'opacity 0.4s, border-color 0.4s, filter 0.4s',
-              }}>
-                <div style={{
-                  ...arch.layerTitle,
-                  color: isActive ? 'var(--steward)' : 'var(--dj-chalk-muted)',
-                }}>{layer.label}</div>
-                <div style={arch.layerChips}>
-                  {comps.map(c => (
-                    <span key={c} style={{
-                      ...arch.chip,
-                      color: isActive ? 'var(--dj-chalk)' : 'var(--dj-chalk-muted)',
-                      borderColor: isActive ? 'var(--dj-border)' : 'transparent',
-                    }}>{c}</span>
-                  ))}
+          {(step === 1 || isFinal) ? (
+            <CirculationDiagram journeyState={journeyState} allActive={isFinal} />
+          ) : (
+            ARCH_LAYERS.map((layer, i) => {
+              const layerIndex = i;
+              const isActive = layerIndex === step;
+              const comps = layer.id === 'mcp' ? activeTools.slice(0, 12) : layer.components;
+              return (
+                <div key={layer.id} style={{
+                  ...arch.layerBox,
+                  opacity: isActive ? 1 : 0.15,
+                  borderColor: isActive ? 'var(--steward)' : 'var(--dj-border)',
+                  filter: isActive ? 'none' : 'blur(0.5px)',
+                  transition: 'opacity 0.4s, border-color 0.4s, filter 0.4s',
+                }}>
+                  <div style={{
+                    ...arch.layerTitle,
+                    color: isActive ? 'var(--steward)' : 'var(--dj-chalk-muted)',
+                  }}>{layer.label}</div>
+                  <div style={arch.layerChips}>
+                    {comps.map(c => (
+                      <span key={c} style={{
+                        ...arch.chip,
+                        color: isActive ? 'var(--dj-chalk)' : 'var(--dj-chalk-muted)',
+                        borderColor: isActive ? 'var(--dj-border)' : 'transparent',
+                      }}>{c}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            );
-          }).reverse()}
+              );
+            }).reverse()
+          )}
         </div>
 
         {/* Annotation column — split layout for Step 2, single panel for others */}

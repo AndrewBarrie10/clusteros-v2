@@ -169,30 +169,37 @@ const QUALIFIER_QUESTIONS = [
     ]},
 ];
 
+/* ─── Configuration name taxonomy (fixed lookup) ──────────────────── */
+const CONFIG_NAMES = {
+  // regional × priority
+  'regional|talent':   'Regional Talent Ecosystem',
+  'regional|capital':  'Investment-Ready Cluster',
+  'regional|research': 'Research Translation Cluster',
+  'regional|supply':   'Anchor Supply Network',
+  'regional|growth':   'Regional Growth Engine',
+  // national × priority
+  'national|talent':   'Federated Talent Supercluster',
+  'national|capital':  'National Investment Corridor',
+  'national|research': 'Sovereign Research Network',
+  'national|supply':   'National Supply Chain Architecture',
+  'national|growth':   'Federated Growth Supercluster',
+  // corporate × priority
+  'corporate|talent':  'Corporate Talent Pipeline',
+  'corporate|capital': 'Anchor-Led Investment Ecosystem',
+  'corporate|research':'Corporate R&D Translation Engine',
+  'corporate|supply':  'Anchor-Integrated Supply Network',
+  'corporate|growth':  'Anchor-Led Growth Network',
+};
+
 /* ─── OS configuration derivation ──────────────────────────────────── */
 function deriveOSConfig(qualifiers, stalls, detectedStacks) {
   const { clusterType, stage, priority, gap, protect } = qualifiers;
   const protectSet = new Set(protect || []);
   const stallSet = new Set(stalls || []);
 
-  // Derive configuration name
-  let configName = '';
-  const sovereignty = protectSet.has('sovereignty') || protectSet.has('knowledge');
-  const researchFocus = priority === 'research' || protectSet.has('ip');
-  const talentFocus = priority === 'talent' || protectSet.has('talent');
-  const anchorLed = clusterType === 'corporate' || priority === 'supply';
-
-  if (sovereignty && researchFocus) configName = 'Sovereign Knowledge Cluster';
-  else if (anchorLed && stage === 'mature') configName = 'Anchor-Led Growth Network';
-  else if (anchorLed) configName = 'Anchor-Integrated Ecosystem';
-  else if (clusterType === 'national') configName = 'Federated Supercluster';
-  else if (sovereignty && talentFocus) configName = 'Talent Sovereignty Network';
-  else if (researchFocus) configName = 'Research Translation Engine';
-  else if (priority === 'capital') configName = 'Investment-Ready Ecosystem';
-  else if (talentFocus && stage === 'early') configName = 'Founder Pipeline Cluster';
-  else if (gap === 'discovery') configName = 'Discovery-First Network';
-  else if (gap === 'conversion') configName = 'Outcome Conversion Architecture';
-  else configName = 'Regional Operating System';
+  // Configuration name — fixed taxonomy lookup
+  const lookupKey = `${clusterType || 'regional'}|${priority || 'growth'}`;
+  const configName = CONFIG_NAMES[lookupKey] || 'Regional Operating System';
 
   // Derive infrastructure priorities
   const priorities = [];
@@ -722,7 +729,7 @@ function DigitalOSStage() {
   const selectSingle = useCallback((qId, value) => {
     const next = { ...answers, [qId]: value };
     setAnswers(next);
-    updateJourneyState({ qualifierAnswers: next });
+    updateJourneyState({ qualifierAnswers: next, osConfig: null });
     if (currentQ < totalQ - 1) {
       setTimeout(() => setCurrentQ(currentQ + 1), 300);
     }
@@ -745,17 +752,35 @@ function DigitalOSStage() {
   const goBackQ = useCallback(() => {
     if (showRecommendation) {
       setShowRecommendation(false);
+      setCurrentQ(totalQ - 1);
+      setMultiSelect(answers.protect || []);
+      updateJourneyState({ osConfig: null });
     } else if (currentQ > 0) {
-      setCurrentQ(currentQ - 1);
+      const prevQ = currentQ - 1;
+      setCurrentQ(prevQ);
+      if (QUALIFIER_QUESTIONS[prevQ].multi) {
+        setMultiSelect(answers[QUALIFIER_QUESTIONS[prevQ].id] || []);
+      }
     }
-  }, [currentQ, showRecommendation]);
+  }, [currentQ, showRecommendation, totalQ, answers, updateJourneyState]);
+
+  const reviseFromStart = useCallback(() => {
+    setShowRecommendation(false);
+    setCurrentQ(0);
+    updateJourneyState({ osConfig: null });
+  }, [updateJourneyState]);
 
   // Show recommendation
   if (showRecommendation && journeyState.osConfig) {
     const config = journeyState.osConfig;
     return (
       <div style={s3.container}>
-        <div style={s3.configBadge}>Your configuration</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+          <div style={s3.configBadge}>Your configuration</div>
+          <button style={styles.btnGhost} onClick={reviseFromStart}>
+            Revise answers
+          </button>
+        </div>
         <h2 style={s3.configName}>{config.configName}</h2>
         <p style={s3.configSummary}>
           Based on {journeyState.stalls.length} behavioural stall{journeyState.stalls.length !== 1 ? 's' : ''},{' '}

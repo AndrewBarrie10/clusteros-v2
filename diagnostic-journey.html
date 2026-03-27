@@ -56,6 +56,8 @@ body { min-height: 100vh; }
   .stepper-config-badge { display: none !important; }
   .stepper-back-overview { display: none !important; }
   .stepper-counter { display: none !important; }
+  /* Hide annotation panel title on mobile — MobileSchemaStep already shows layer heading */
+  .annot-title-desktop { display: none !important; }
   /* Cap commentary length on mobile */
   .digital-body {
     display: -webkit-box !important;
@@ -2625,7 +2627,7 @@ function DigitalOSStage() {
         }
         return (
         <div style={schema.annotPanel}>
-          <h3 style={schema.annotTitle}>{annotation.title}</h3>
+          <h3 className="annot-title-desktop" style={schema.annotTitle}>{annotation.title}</h3>
           {/* Digital commentary inside/outside — replaces body text when available (steps 1-7 only) */}
           {schemaStep >= 1 && schemaStep <= 7 && (dc && dc.inside ? (
             <div>

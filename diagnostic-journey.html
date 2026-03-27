@@ -802,6 +802,8 @@ const PROTECT_INFRA = {
 };
 
 function articleFor(name) {
+  // Words starting with U that sound like "yoo" take "A" not "An"
+  if (/^Uni|^Use|^Util|^Usu/i.test(name)) return 'A';
   return /^[AEIOU]/i.test(name) ? 'An' : 'A';
 }
 

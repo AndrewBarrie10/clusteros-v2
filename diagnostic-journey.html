@@ -2551,19 +2551,19 @@ function DigitalOSStage() {
         return (
         <div style={schema.annotPanel}>
           <h3 style={schema.annotTitle}>{annotation.title}</h3>
-          {/* Digital commentary inside/outside — replaces body text when available */}
-          {dc && dc.inside ? (
+          {/* Digital commentary inside/outside — replaces body text when available (steps 1-7 only) */}
+          {schemaStep >= 1 && schemaStep <= 7 && (dc && dc.inside ? (
             <div>
-              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', color: '#f5d97a', marginBottom: '6px' }}>FROM THE INSIDE</div>
-              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)', marginBottom: '16px' }}>{dc.inside}</p>
-              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', color: '#7dd3c8', marginBottom: '6px' }}>FROM THE OUTSIDE</div>
+              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', color: '#f5d97a', marginBottom: '6px' }}>FROM THE INSIDE</div>
+              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.inside}</p>
+              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', color: '#2a6b5e', marginTop: '16px', marginBottom: '6px' }}>FROM THE OUTSIDE</div>
               <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.outside}</p>
             </div>
           ) : (
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', fontStyle: 'italic' }}>
               Commentary is being prepared for your configuration.
             </p>
-          )}
+          ))}
           {annotation.cascadeActors && annotation.cascadeActors.map(name => {
             const c = ACTOR_CASCADES[name];
             if (!c) return null;

@@ -2869,7 +2869,7 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop }) {
      6: digital os (Stage 3)
    ── */
 function DiagnosticJourney() {
-  const [phase, setPhase] = useState(0);
+  const [phase, setPhase] = useState(-1); // -1 = intro, 0 = behaviours, 1-5 = transitions/qualifiers, 6 = digital os
   const [exited, setExited] = useState(false);
   const [exitedAt, setExitedAt] = useState(null);
   const [showExitModal, setShowExitModal] = useState(false);
@@ -2947,8 +2947,47 @@ function DiagnosticJourney() {
   }
 
   const stage = STAGES[currentStage];
-  const isFirst = phase === 0;
+  const isFirst = phase <= 0;
   const isLast = phase === 6;
+
+  // Stage 0 — intro screen (no step indicator, no nav, no sticky bar)
+  if (phase === -1) {
+    return (
+      <div style={styles.shell}>
+        <main style={{ ...styles.main, alignItems: 'center' }}>
+          <div style={s0.container}>
+            <h1 style={s0.heading}>A behavioural diagnostic for your innovation ecosystem</h1>
+            <p style={s0.body}>
+              This diagnostic identifies the behavioural patterns preventing your ecosystem from compounding value. It works by asking you to recognise stalls — substitution behaviours your ecosystem has adopted instead of the outcomes you're trying to produce.
+            </p>
+            <p style={s0.body}>
+              You will identify stalls, detect reinforcing combinations, and receive a configuration recommendation for your digital infrastructure. Each stage produces a standalone report. The whole journey takes 10–15 minutes.
+            </p>
+            <div style={s0.outputRow}>
+              <div style={s0.outputCard}>
+                <div style={s0.outputLabel}>Behaviours</div>
+                <div style={s0.outputText}>Stall identification and stack detection</div>
+              </div>
+              <div style={s0.outputCard}>
+                <div style={s0.outputLabel}>Leverage</div>
+                <div style={s0.outputText}>Intervention hypotheses targeted at your specific configuration</div>
+              </div>
+              <div style={s0.outputCard}>
+                <div style={s0.outputLabel}>Digital OS</div>
+                <div style={s0.outputText}>A personalised infrastructure recommendation</div>
+              </div>
+            </div>
+            <button style={s0.cta} onClick={() => setPhase(0)}>
+              Begin diagnostic
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '8px' }}>
+                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   // Determine what to show in main content area
   let mainContent;
@@ -4371,6 +4410,72 @@ const schema = {
     justifyContent: 'space-between',
     marginTop: '16px',
     gap: '12px',
+  },
+};
+
+/* ─── Stage 0 intro styles ─────────────────────────────────────────── */
+const s0 = {
+  container: {
+    width: '100%',
+    maxWidth: '640px',
+  },
+  heading: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '34px',
+    fontWeight: 400,
+    color: 'var(--dj-chalk)',
+    lineHeight: 1.25,
+    letterSpacing: '-0.02em',
+    marginBottom: '24px',
+  },
+  body: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '15px',
+    lineHeight: 1.7,
+    color: 'var(--dj-chalk-dim)',
+    marginBottom: '16px',
+  },
+  outputRow: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '12px',
+    margin: '28px 0',
+  },
+  outputCard: {
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '6px',
+    padding: '14px 16px',
+  },
+  outputLabel: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '9px',
+    fontWeight: 600,
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
+    color: 'var(--steward)',
+    marginBottom: '6px',
+  },
+  outputText: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    lineHeight: 1.5,
+    color: 'var(--dj-chalk-dim)',
+  },
+  cta: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '12px',
+    fontWeight: 600,
+    letterSpacing: '0.04em',
+    color: '#fff',
+    background: 'var(--steward)',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '12px 28px',
+    cursor: 'pointer',
+    transition: 'opacity 0.2s',
   },
 };
 

@@ -1962,8 +1962,10 @@ const SCHEMA_LAYERS = [
     ]},
 ];
 
-function ArchitectureSchemaSVG({ activeLayer, secondaryLayers }) {
+function ArchitectureSchemaSVG({ activeLayer, secondaryLayers, selectedStalls, currentStep }) {
   const pad = 20, w = 900;
+  const stallsArr = selectedStalls || [];
+  const step = currentStep || 0;
   const active = activeLayer ? new Set(Array.isArray(activeLayer) ? activeLayer : [activeLayer]) : null;
   const secondary = secondaryLayers ? new Set(Array.isArray(secondaryLayers) ? secondaryLayers : [secondaryLayers]) : new Set();
 
@@ -2102,15 +2104,143 @@ function ArchitectureSchemaSVG({ activeLayer, secondaryLayers }) {
           </g>
         );
       })}
+
+      {/* Flow arrows */}
+      <defs>
+        <marker id="arrow-teal" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0L10 4L0 8Z" fill="#7dd3c8" />
+        </marker>
+        <marker id="arrow-green" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0L10 4L0 8Z" fill="#c8f0d0" />
+        </marker>
+        <style>{`
+          @keyframes dash-flow { to { stroke-dashoffset: -28; } }
+          .flow-arrow { stroke-dasharray: 8 6; animation: dash-flow 1.5s linear infinite; }
+        `}</style>
+      </defs>
+      {(() => {
+        const arrows = [];
+        const cx = w / 2;
+        const arrowStyle = (visible) => ({
+          opacity: visible ? 1 : 0, transition: 'opacity 0.3s',
+        });
+        const revealOp = step === 8 ? 0.4 : 0;
+
+        // Step 3: External Data → Sovereign Database
+        const s3vis = step === 3 || step === 8;
+        arrows.push(
+          <g key="arrow-ext-sov" style={arrowStyle(s3vis)}>
+            <path className={s3vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx-80} 570 L ${cx-80} 552`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
+            <path className={s3vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx+80} 570 L ${cx+80} 552`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
+            {step === 3 && <text x={cx} y="565" textAnchor="middle" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Cold-start feed</text>}
+          </g>
+        );
+
+        // Step 4: Bots → Sovereign (within sovereign layer)
+        const s4vis = step === 4 || step === 8;
+        arrows.push(
+          <g key="arrow-bot-sov" style={arrowStyle(s4vis)}>
+            <path className={s4vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx+200} 440 Q ${cx+100} 420 ${cx+50} 400`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
+            {step === 4 && <text x={cx+150} y="415" textAnchor="middle" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Continuous enrichment</text>}
+          </g>
+        );
+
+        // Step 5: Sovereign → MCP
+        const s5vis = step === 5 || step === 8;
+        arrows.push(
+          <g key="arrow-sov-mcp" style={arrowStyle(s5vis)}>
+            <path className={s5vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx} 340 L ${cx} 322`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
+            {step === 5 && <text x={cx+70} y="334" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Live queries at runtime</text>}
+          </g>
+        );
+
+        // Step 6: MCP → AI
+        const s6vis = step === 6 || step === 8;
+        arrows.push(
+          <g key="arrow-mcp-ai" style={arrowStyle(s6vis)}>
+            <path className={s6vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx} 220 L ${cx} 202`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
+            {step === 6 && <text x={cx+70} y="214" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Structured findings</text>}
+          </g>
+        );
+
+        // Step 7: AI → Journeys + return loop
+        const s7vis = step === 7 || step === 8;
+        arrows.push(
+          <g key="arrow-ai-journeys" style={arrowStyle(s7vis)}>
+            <path className={s7vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx} 120 L ${cx} 102`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
+            {step === 7 && <text x={cx+80} y="114" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Personalised at runtime</text>}
+          </g>
+        );
+        // Return arrow: journeys → sovereign (down right edge)
+        arrows.push(
+          <g key="arrow-return" style={arrowStyle(s7vis)}>
+            <path className={s7vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${w-pad-10} 100 Q ${w-pad+50} 220 ${w-pad-10} 340`} fill="none" stroke="#c8f0d0" strokeWidth="2.5" markerEnd="url(#arrow-green)" opacity={step === 8 ? 0.4 : 1} />
+            {step === 7 && <text x={w-pad+20} y="220" fill="#2a7a4f" fontFamily="'Geist Mono', monospace" fontSize="8" textAnchor="start">Signal loop closes</text>}
+          </g>
+        );
+
+        // Step 2 governance: pulse the governance boundary
+        if (step === 2) {
+          arrows.push(
+            <rect key="gov-pulse" x={pad} y={650} width={w - pad * 2} height={50} rx="6" fill="none" stroke="var(--steward)" strokeWidth="2.5" strokeDasharray="8 4">
+              <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+            </rect>
+          );
+        }
+
+        return arrows;
+      })()}
+
+      {/* Stall tags on layers */}
+      {(() => {
+        const tagsByLayer = {};
+        stallsArr.forEach(stallId => {
+          const layerId = STALL_LAYER_MAP[stallId];
+          if (!layerId) return;
+          const stall = STALLS.find(s => s.id === stallId);
+          if (!stall) return;
+          if (!tagsByLayer[layerId]) tagsByLayer[layerId] = [];
+          tagsByLayer[layerId].push({ id: stallId, name: stall.name });
+        });
+        return Object.entries(tagsByLayer).map(([layerId, tags]) => {
+          const layer = SCHEMA_LAYERS.find(l => l.id === layerId);
+          if (!layer) return null;
+          const tagX = w - pad - 8;
+          return tags.map((tag, ti) => {
+            const tagY = layer.y + 6 + ti * 14;
+            const label = `Addresses ${tag.id} ${tag.name}`;
+            const isLayerActive = active && active.has(layerId);
+            return (
+              <g key={tag.id}>
+                <rect x={tagX - 120} y={tagY} width="120" height="12" rx="6"
+                  fill="#f5d97a" opacity="0.9">
+                  {isLayerActive && (
+                    <animate attributeName="opacity" values="0.9;1;0.9" dur="1s" begin="0s" repeatCount="1" />
+                  )}
+                </rect>
+                <text x={tagX - 60} y={tagY + 9} textAnchor="middle"
+                  fill="#1a1a1a" fontFamily="'Geist Mono', monospace" fontSize="7" fontWeight="500">
+                  {label}
+                </text>
+              </g>
+            );
+          });
+        });
+      })()}
     </svg>
   );
 }
 
 /* ─── Architecture schema cards (mobile) ───────────────────────────── */
-function ArchitectureSchemaCards() {
+function ArchitectureSchemaCards({ selectedStalls }) {
+  const stallsArr = selectedStalls || [];
+  const stallTagsFor = (layerId) => stallsArr
+    .filter(sid => STALL_LAYER_MAP[sid] === layerId)
+    .map(sid => { const s = STALLS.find(x => x.id === sid); return s ? `${sid} ${s.name}` : sid; });
   return (
     <div style={schema.cardStack}>
       {SCHEMA_LAYERS.map(layer => {
+        const layerTags = stallTagsFor(layer.id);
         const isSovereign = layer.split;
         if (isSovereign) {
           const cats = layer.sovereignCategories || [];
@@ -2118,6 +2248,11 @@ function ArchitectureSchemaCards() {
           return (
             <div key={layer.id} style={{ ...schema.card, borderLeft: '3px solid var(--signal)' }}>
               <div style={schema.cardLabel}>{layer.label}</div>
+              {layerTags.length > 0 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '8px' }}>
+                  {layerTags.map(t => <span key={t} style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: '#1a1a1a', background: '#f5d97a', borderRadius: '8px', padding: '2px 8px' }}>Addresses {t}</span>)}
+                </div>
+              )}
               {cats.map(cat => (
                 <div key={cat.label} style={{ marginBottom: '8px' }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--steward)', marginBottom: '4px' }}>{cat.label}</div>
@@ -2143,6 +2278,11 @@ function ArchitectureSchemaCards() {
         return (
           <div key={layer.id} style={{ ...schema.card, borderLeft: '1px solid var(--dj-border)' }}>
             <div style={schema.cardLabel}>{layer.label}</div>
+            {layerTags.length > 0 && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '8px' }}>
+                {layerTags.map(t => <span key={t} style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: '#1a1a1a', background: '#f5d97a', borderRadius: '8px', padding: '2px 8px' }}>Addresses {t}</span>)}
+              </div>
+            )}
             <div style={schema.cardPills}>
               {allComps.map(c => (
                 <span key={c.id} style={{
@@ -2159,17 +2299,26 @@ function ArchitectureSchemaCards() {
   );
 }
 
+/* ─── Stall-to-layer mapping for tags ──────────────────────────────── */
+const STALL_LAYER_MAP = {
+  S1: 'layer-mcp',        S2: 'layer-journeys',   S3: 'layer-governance',
+  S4: 'layer-governance',  S5: 'layer-journeys',   S6: 'layer-sovereign',
+  S7: 'layer-sovereign',   S8: 'layer-sovereign',  S9: 'layer-journeys',
+};
+
 /* ─── Schema stepper annotation builder ─────────────────────────────── */
 const STEP_CONFIG = [
-  { active: null, secondary: null, label: null, nav: [null, 'Start with the heart →'] },
-  { active: 'layer-sovereign', secondary: null, nav: ['← Back', 'Next: what feeds it →'] },
-  { active: 'layer-external', secondary: 'layer-sovereign', nav: ['← The heart', 'Next: continuous enrichment →'] },
-  { active: 'layer-sovereign', secondary: null, nav: ['← External data', 'Next: how it thinks →'], botFocus: true },
-  { active: 'layer-mcp', secondary: 'layer-sovereign', nav: ['← Bots', 'Next: the runtime →'] },
-  { active: 'layer-ai', secondary: ['layer-mcp', 'layer-sovereign'], nav: ['← Intelligence', 'Next: actor journeys →'] },
-  { active: 'layer-journeys', secondary: 'layer-ai', nav: ['← AI engine', 'Next: your sovereign boundary →'] },
-  { active: null, secondary: null, allActive: true, nav: ['← Actor journeys', null] },
+  { active: null, secondary: null, nav: [null, 'Start with the heart →'] },                                    // 0: full schema
+  { active: 'layer-sovereign', secondary: null, nav: ['← Back', 'Next: the boundary →'] },                     // 1: sovereign
+  { active: 'layer-governance', secondary: 'layer-sovereign', nav: ['← The heart', 'Next: what feeds it →'] },  // 2: governance
+  { active: 'layer-external', secondary: 'layer-sovereign', nav: ['← Governance', 'Next: continuous enrichment →'] }, // 3: external
+  { active: 'layer-sovereign', secondary: null, nav: ['← External data', 'Next: how it thinks →'], botFocus: true }, // 4: bots
+  { active: 'layer-mcp', secondary: 'layer-sovereign', nav: ['← Bots', 'Next: the runtime →'] },               // 5: MCP
+  { active: 'layer-ai', secondary: ['layer-mcp', 'layer-sovereign'], nav: ['← Intelligence', 'Next: actor journeys →'] }, // 6: AI
+  { active: 'layer-journeys', secondary: 'layer-ai', nav: ['← AI engine', 'Next: your sovereign boundary →'] }, // 7: journeys
+  { active: null, secondary: null, allActive: true, nav: ['← Actor journeys', null] },                          // 8: reveal
 ];
+const TOTAL_STEPS = STEP_CONFIG.length;
 
 function buildStepAnnotation(step, journeyState, config) {
   const qa = journeyState.qualifierAnswers || {};
@@ -2193,6 +2342,18 @@ function buildStepAnnotation(step, journeyState, config) {
       return { title: `The heart of your ${config.configName}`, body };
     }
     case 2: {
+      let body = '';
+      if (stalls.includes('S4') || stalls.includes('S6'))
+        body = 'Incumbent Lock requires governance infrastructure that makes value circulation enforceable — the audit trail records what flows across the boundary and under what terms.';
+      else if (stalls.includes('S2'))
+        body = 'Coordinating stall means alignment without accountability — identity-first governance changes this. Every actor, every action, fully auditable.';
+      else
+        body = 'Identity-first governance at every level — Supercluster \u2192 Cluster \u2192 Group \u2192 Actor. Every actor holds one system identity. Permissions are explicit, inherited, and auditable.';
+      if ((qa.protect || []).includes('sovereignty'))
+        body += ` Economic sovereignty is enforced at the governance layer — no data leaves the ${clusterLabel} boundary without consent recorded here.`;
+      return { title: 'The boundary that protects it', body };
+    }
+    case 3: {
       const GAP_DESC = {
         discovery: 'Your coordination gap is discovery — actors can\'t find each other. The Govt Support Directory surfaces programme listings and funding routes so actors find support before any human broker is involved.',
         flow: 'Your coordination gap is knowledge flow — intelligence doesn\'t reach the actors who need it. The Community Services API makes knowledge outside institutional boundaries visible inside them.',
@@ -2203,7 +2364,7 @@ function buildStepAnnotation(step, journeyState, config) {
         ' All external data lives at the supercluster level — available to every cluster, never duplicated.';
       return { title: 'What feeds your ecosystem before any actor joins', body };
     }
-    case 3: {
+    case 4: {
       let body = 'Four autonomous bots write structured signals into your sovereign database continuously. ';
       if (stalls.includes('S1') || stalls.includes('S7')) body += 'Evidence Ingestion Bot is critical for your configuration — it structures incoming evidence so it informs decisions rather than accumulating as justification. ';
       if (stalls.includes('S8') || stalls.includes('S9')) body += 'Signal Monitoring Bot detects when activity grows without conversion — essential given your stall pattern. ';
@@ -2211,14 +2372,14 @@ function buildStepAnnotation(step, journeyState, config) {
       body += 'Health Monitoring Bot tracks system health across all clusters continuously. Cold-start solved: the platform knows the ecosystem before any actor joins.';
       return { title: 'Continuous enrichment', body };
     }
-    case 4: {
+    case 5: {
       const tools = getActiveToolNames(journeyState);
       let body = `Each tool is a structured call from the AI to your live sovereign database. Active for your configuration: ${tools.slice(0, 6).join(', ')}. `;
       if (stacks.length > 0) body += `These tools detect ${stacks[0].name} and surface the leverage entry point — intelligence assembled at runtime, not pre-baked.`;
       else body += 'Intelligence assembled at runtime — not pre-baked, not static.';
       return { title: 'How your ecosystem thinks', body };
     }
-    case 5: {
+    case 6: {
       const PRI_ENGINE = {
         talent: 'Journey Construction is your primary engine — personalised pathways for every actor.',
         capital: 'Signal Propagation is your primary engine — surfacing pipeline formation to external capital.',
@@ -2229,8 +2390,7 @@ function buildStepAnnotation(step, journeyState, config) {
       const body = 'The AI is the runtime, not a feature. ' + (PRI_ENGINE[qa.priority] || 'All reasoning capabilities active.') + ' Every actor experience is constructed here, from live data, on demand.';
       return { title: 'The runtime, not a feature', body };
     }
-    case 6: {
-      // Get foregrounded actors
+    case 7: {
       const fgActors = [];
       const seen = new Set();
       (qa.protect || []).forEach(p => {
@@ -2241,7 +2401,7 @@ function buildStepAnnotation(step, journeyState, config) {
       if (!seen.has('Stewards')) fgActors.push('Stewards');
       return { title: 'What your actors experience', body: null, cascadeActors: fgActors.slice(0, 3) };
     }
-    case 7: {
+    case 8: {
       let body = `Your sovereign boundary — ${config.configName}. Not a platform you adopt. Infrastructure you own.`;
       if (protectStr) body += ` ${protectStr} — protected by architecture, not by policy.`;
       body += ' The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem\'s actors.';
@@ -2325,7 +2485,7 @@ function DigitalOSStage() {
         <div style={s3.configBadge}>{config.configName}</div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--dj-chalk-muted)', letterSpacing: '0.08em' }}>
-            Step {schemaStep + 1} of 8
+            Step {schemaStep + 1} of {TOTAL_STEPS}
           </span>
           <button style={styles.btnGhost} onClick={() => setSchemaStep(-1)}>Back to overview</button>
         </div>
@@ -2336,10 +2496,12 @@ function DigitalOSStage() {
         <ArchitectureSchemaSVG
           activeLayer={stepCfg.allActive ? SCHEMA_LAYERS.map(l => l.id) : stepCfg.active}
           secondaryLayers={stepCfg.secondary}
+          selectedStalls={journeyState.stalls}
+          currentStep={schemaStep}
         />
       </div>
       <div className="schema-mobile">
-        <ArchitectureSchemaCards />
+        <ArchitectureSchemaCards selectedStalls={journeyState.stalls} />
       </div>
 
       {/* Step 0: full schema label */}
@@ -2398,7 +2560,7 @@ function DigitalOSStage() {
             </svg>
             {stepCfg.nav[0] || 'Back'}
           </button>
-          {schemaStep < 7 && (
+          {schemaStep < TOTAL_STEPS - 1 && (
             <button style={styles.btnSignal} onClick={() => setSchemaStep(s => s + 1)}>
               {stepCfg.nav[1] || 'Next'}
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '4px' }}>

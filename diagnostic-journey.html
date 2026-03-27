@@ -2841,29 +2841,56 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
   if (transitionType === 'stalls-to-qualifiers') {
     return (
       <div style={trans.card}>
+        {/* Heading */}
+        <h2 style={trans.heading}>
+          Your ecosystem isn't stalling in {stalls.length} places. It's running one pattern.
+        </h2>
+
+        {/* Explainer */}
+        <p style={trans.subtext}>
+          A stack is a set of behaviours that reinforce each other. Fixing one leaves the others intact. The pattern persists.
+        </p>
+
+        {/* Stack cards */}
         {stacks.length > 0 ? (
-          <div style={{ marginBottom: '20px' }}>
-            {stacks.map(s => (
-              <p key={s.id} style={trans.text}>{s.name} — {s.logic ? s.logic.charAt(0).toLowerCase() + s.logic.slice(1, s.logic.indexOf('.') + 1) : ''}</p>
-            ))}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+            {stacks.map(s => {
+              const triggerNames = (s.triggers || []).map(id => { const st = STALLS.find(x => x.id === id); return st ? st.name : id; });
+              // One sentence reinforcement logic — truncate to first sentence, max ~30 words
+              let logic = s.logic || '';
+              const firstSentence = logic.split('.')[0];
+              logic = firstSentence.split(/\s+/).length > 30 ? firstSentence.split(/\s+/).slice(0, 30).join(' ') + '...' : firstSentence + '.';
+              return (
+                <div key={s.id} style={trans.stackCard}>
+                  <div style={trans.stackCardName}>{s.name}</div>
+                  <p style={trans.stackCardLogic}>{logic}</p>
+                  <div style={trans.stackCardPills}>
+                    {triggerNames.map(name => (
+                      <span key={name} style={trans.stallPill}>{name}</span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         ) : (
-          <p style={trans.text}>{stalls.length} independent stall{stalls.length !== 1 ? 's' : ''} identified — {stallNames.join(', ')}. No reinforcing combinations detected.</p>
+          <p style={trans.subtext}>{stalls.length} independent stall{stalls.length !== 1 ? 's' : ''} identified — {stallNames.join(', ')}. No reinforcing combinations detected.</p>
         )}
-        <p style={trans.subtext}>
-          These patterns don't resolve through individual interventions. To identify where leverage is, we need to understand your ecosystem's configuration. {QUALIFIER_QUESTIONS.length} questions.
+
+        {/* Bottom line */}
+        <p style={{ ...trans.subtext, textAlign: 'center', marginBottom: '24px' }}>
+          Interventions that target individual stalls leave this pattern intact. To find where it breaks, we need to know more about your ecosystem.
         </p>
+
+        {/* Buttons — no Back, just Stop + Continue */}
         <div style={trans.actions}>
-          {backBtn}
-          <div style={{ display: 'flex', gap: '10px', marginLeft: 'auto' }}>
-            <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
-            <button style={styles.btnSignal} onClick={onContinue}>
-              Continue
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
+          <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
+          <button style={{ ...styles.btnSignal, marginLeft: 'auto', background: '#7dd3c8', color: '#1e2f45' }} onClick={onContinue}>
+            Continue
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
         </div>
       </div>
     );
@@ -4491,6 +4518,51 @@ const trans = {
     gap: '12px',
     justifyContent: 'flex-end',
     flexWrap: 'wrap',
+  },
+  heading: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '26px',
+    fontWeight: 400,
+    lineHeight: 1.3,
+    color: '#1e2f45',
+    letterSpacing: '-0.02em',
+    marginBottom: '12px',
+  },
+  stackCard: {
+    border: '1px solid #1e2f45',
+    borderLeft: '3px solid #7dd3c8',
+    borderRadius: '6px',
+    padding: '16px 18px',
+    background: 'var(--dj-bg)',
+  },
+  stackCardName: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '17px',
+    fontWeight: 400,
+    color: '#1e2f45',
+    marginBottom: '6px',
+  },
+  stackCardLogic: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    lineHeight: 1.55,
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '10px',
+  },
+  stackCardPills: {
+    display: 'flex',
+    gap: '6px',
+    flexWrap: 'wrap',
+  },
+  stallPill: {
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '10px',
+    fontWeight: 500,
+    letterSpacing: '0.04em',
+    color: '#0c9488',
+    background: 'rgba(125,211,200,0.12)',
+    borderRadius: '3px',
+    padding: '3px 8px',
   },
 };
 

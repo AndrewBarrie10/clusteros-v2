@@ -2673,29 +2673,23 @@ function ReportModal({ phase, journeyState, onClose }) {
 }
 
 /* ─── Sticky bar component ─────────────────────────────────────────── */
-function StickyBar({ phase, journeyState, onForward }) {
+function StickyBar({ phase, journeyState }) {
   const [showReportModal, setShowReportModal] = useState(false);
 
   const reportLabel = phase <= 1 ? 'Behaviours' : phase <= 3 ? 'Behaviours + Leverage' : 'Behaviours + Leverage + Digital OS';
-  const forwardLabel = phase <= 3 ? 'Add Leverage →' : phase <= 5 ? 'Add Digital OS →' : 'Talk to us →';
-  const isContactPhase = phase >= 6;
 
   return (
     <React.Fragment>
       <div style={sticky.bar}>
         <div style={sticky.barInner}>
-          {/* Left: Get my report */}
+          {/* Left: logo */}
+          <a href="/" style={sticky.logo}>Cluster<span style={sticky.logoSpan}>OS</span></a>
+
+          {/* Right: Get my report */}
           <button style={sticky.btnAmber} onClick={() => setShowReportModal(true)}>
             <span>Get my report</span>
             <span style={sticky.btnSub}>{reportLabel}</span>
           </button>
-
-          {/* Right: forward pull */}
-          {isContactPhase ? (
-            <a href="/get-started.html" style={sticky.btnGreen}>Talk to us →</a>
-          ) : (
-            <button style={sticky.btnGreen} onClick={onForward}>{forwardLabel}</button>
-          )}
         </div>
       </div>
 
@@ -3021,7 +3015,7 @@ function DiagnosticJourney() {
         </nav>
 
         {/* ── Sticky bar ── */}
-        <StickyBar phase={phase} journeyState={journeyState} onForward={goNext} />
+        <StickyBar phase={phase} journeyState={journeyState} />
 
         {/* ── Exit modal ── */}
         {showExitModal && (
@@ -4390,14 +4384,28 @@ const sticky = {
     height: '56px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '0',
+    justifyContent: 'flex-end',
   },
   barInner: {
     display: 'flex',
     alignItems: 'center',
     height: '100%',
     width: '100%',
+  },
+  logo: {
+    fontFamily: "'Instrument Serif', serif",
+    fontSize: '18px',
+    color: '#1a1a1a',
+    textDecoration: 'none',
+    letterSpacing: '-0.01em',
+    flexShrink: 0,
+    padding: '0 24px',
+  },
+  logoSpan: {
+    fontFamily: "'Geist Mono', monospace",
+    fontWeight: 600,
+    fontSize: '14px',
+    color: '#2a7a4f',
   },
   btnAmber: {
     fontFamily: "'Geist Mono', monospace",
@@ -4419,6 +4427,7 @@ const sticky = {
     cursor: 'pointer',
     transition: 'opacity 0.15s',
     gap: '2px',
+    marginLeft: 'auto',
   },
   btnSub: {
     fontSize: '8px',
@@ -4426,25 +4435,6 @@ const sticky = {
     letterSpacing: '0.04em',
     textTransform: 'none',
     opacity: 0.8,
-  },
-  btnGreen: {
-    fontFamily: "'Geist Mono', monospace",
-    fontSize: '11px',
-    fontWeight: 700,
-    letterSpacing: '0.08em',
-    textTransform: 'uppercase',
-    textDecoration: 'none',
-    padding: '0 1.4rem',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    whiteSpace: 'nowrap',
-    background: 'var(--signal)',
-    color: '#fff',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'opacity 0.15s',
-    marginLeft: 'auto',
   },
 
   /* Report modal */

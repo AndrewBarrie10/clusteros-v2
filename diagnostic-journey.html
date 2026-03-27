@@ -1962,14 +1962,25 @@ const SCHEMA_LAYERS = [
     ]},
 ];
 
-function ArchitectureSchemaSVG() {
+function ArchitectureSchemaSVG({ activeLayer, secondaryLayers }) {
   const pad = 20, w = 900;
+  const active = activeLayer ? new Set(Array.isArray(activeLayer) ? activeLayer : [activeLayer]) : null;
+  const secondary = secondaryLayers ? new Set(Array.isArray(secondaryLayers) ? secondaryLayers : [secondaryLayers]) : new Set();
+
+  function layerOpacity(layerId) {
+    if (!active) return 1; // no highlighting = all visible
+    if (active.has(layerId)) return 1;
+    if (secondary.has(layerId)) return 0.4;
+    return 0.15;
+  }
+
   return (
     <svg viewBox="0 0 900 720" style={{ width: '100%', height: 'auto', display: 'block' }}>
       {SCHEMA_LAYERS.map(layer => {
         const isSovereign = layer.split;
+        const op = layerOpacity(layer.id);
         return (
-          <g key={layer.id}>
+          <g key={layer.id} style={{ opacity: op, transition: 'opacity 0.4s ease' }}>
             {/* Layer background */}
             <rect x={pad} y={layer.y} width={w - pad * 2} height={layer.h}
               rx="6" fill={isSovereign ? 'rgba(200,240,208,0.15)' : 'var(--dj-surface)'}
@@ -2148,6 +2159,98 @@ function ArchitectureSchemaCards() {
   );
 }
 
+/* ─── Schema stepper annotation builder ─────────────────────────────── */
+const STEP_CONFIG = [
+  { active: null, secondary: null, label: null, nav: [null, 'Start with the heart →'] },
+  { active: 'layer-sovereign', secondary: null, nav: ['← Back', 'Next: what feeds it →'] },
+  { active: 'layer-external', secondary: 'layer-sovereign', nav: ['← The heart', 'Next: continuous enrichment →'] },
+  { active: 'layer-sovereign', secondary: null, nav: ['← External data', 'Next: how it thinks →'], botFocus: true },
+  { active: 'layer-mcp', secondary: 'layer-sovereign', nav: ['← Bots', 'Next: the runtime →'] },
+  { active: 'layer-ai', secondary: ['layer-mcp', 'layer-sovereign'], nav: ['← Intelligence', 'Next: actor journeys →'] },
+  { active: 'layer-journeys', secondary: 'layer-ai', nav: ['← AI engine', 'Next: your sovereign boundary →'] },
+  { active: null, secondary: null, allActive: true, nav: ['← Actor journeys', null] },
+];
+
+function buildStepAnnotation(step, journeyState, config) {
+  const qa = journeyState.qualifierAnswers || {};
+  const stalls = journeyState.stalls || [];
+  const stacks = journeyState.detectedStacks || [];
+  const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'your ecosystem';
+  const anchorLabel = config.anchorLabel || 'Anchors';
+  const protections = (qa.protect || []).map(p => PROTECT_LABELS[p]).filter(Boolean);
+  const protectStr = protections.length > 0
+    ? (protections.length === 1 ? protections[0] : protections.slice(0, -1).join(', ') + ' and ' + protections[protections.length - 1])
+    : '';
+
+  switch (step) {
+    case 1: {
+      let body = `The heart of your ${config.configName}. This sovereign database holds everything your ${clusterLabel} knows — structured around five domains. `;
+      body += `Structure tracks your ${clusterLabel} hierarchy from supercluster down to individual pathways and events. `;
+      body += `Actors holds profiles for every participant including your ${anchorLabel} anchor, with journey states that show where each actor is and where they are heading. `;
+      if (stacks.length > 0) body += `Intelligence holds the stall records and leverage hypotheses your diagnostic has already identified — ${stacks[0].name} is recorded here as a structural finding, not an anecdote. `;
+      else if (stalls.length > 0) body += `Intelligence holds the stall records your diagnostic has identified — ${stalls.length} behavioural patterns recorded as structural findings, not anecdotes. `;
+      body += 'Signals tracks what the system is reading in real time — behavioural patterns, health scores, pipeline formation.';
+      return { title: `The heart of your ${config.configName}`, body };
+    }
+    case 2: {
+      const GAP_DESC = {
+        discovery: 'Your coordination gap is discovery — actors can\'t find each other. The Govt Support Directory surfaces programme listings and funding routes so actors find support before any human broker is involved.',
+        flow: 'Your coordination gap is knowledge flow — intelligence doesn\'t reach the actors who need it. The Community Services API makes knowledge outside institutional boundaries visible inside them.',
+        access: 'Your coordination gap is membrane permeability — outside actors can\'t engage. Publication Databases give investors and partners credible entry points through research rather than cold outreach.',
+        conversion: 'Your coordination gap is conversion — activity doesn\'t become outcomes. Professional Identity makes conversion visible by giving actors persistent, enrichable identities.',
+      };
+      const body = (GAP_DESC[qa.gap] || 'External data feeds your ecosystem before any actor joins — solving the cold-start problem so new actors see a populated ecosystem from day one.') +
+        ' All external data lives at the supercluster level — available to every cluster, never duplicated.';
+      return { title: 'What feeds your ecosystem before any actor joins', body };
+    }
+    case 3: {
+      let body = 'Four autonomous bots write structured signals into your sovereign database continuously. ';
+      if (stalls.includes('S1') || stalls.includes('S7')) body += 'Evidence Ingestion Bot is critical for your configuration — it structures incoming evidence so it informs decisions rather than accumulating as justification. ';
+      if (stalls.includes('S8') || stalls.includes('S9')) body += 'Signal Monitoring Bot detects when activity grows without conversion — essential given your stall pattern. ';
+      if (stalls.includes('S2') || stalls.includes('S5')) body += 'Actor Enrichment Bot enriches profiles from system behaviour rather than self-report — breaking dependency on brokered introductions. ';
+      body += 'Health Monitoring Bot tracks system health across all clusters continuously. Cold-start solved: the platform knows the ecosystem before any actor joins.';
+      return { title: 'Continuous enrichment', body };
+    }
+    case 4: {
+      const tools = getActiveToolNames(journeyState);
+      let body = `Each tool is a structured call from the AI to your live sovereign database. Active for your configuration: ${tools.slice(0, 6).join(', ')}. `;
+      if (stacks.length > 0) body += `These tools detect ${stacks[0].name} and surface the leverage entry point — intelligence assembled at runtime, not pre-baked.`;
+      else body += 'Intelligence assembled at runtime — not pre-baked, not static.';
+      return { title: 'How your ecosystem thinks', body };
+    }
+    case 5: {
+      const PRI_ENGINE = {
+        talent: 'Journey Construction is your primary engine — personalised pathways for every actor.',
+        capital: 'Signal Propagation is your primary engine — surfacing pipeline formation to external capital.',
+        research: 'Role-Aware Reframing is your primary engine — translating research into commercial language.',
+        supply: 'Actor Matching is your primary engine — mapping supply chain capability to procurement signals.',
+        growth: 'Steward Interrogation is your primary engine — live insight into system health.',
+      };
+      const body = 'The AI is the runtime, not a feature. ' + (PRI_ENGINE[qa.priority] || 'All reasoning capabilities active.') + ' Every actor experience is constructed here, from live data, on demand.';
+      return { title: 'The runtime, not a feature', body };
+    }
+    case 6: {
+      // Get foregrounded actors
+      const fgActors = [];
+      const seen = new Set();
+      (qa.protect || []).forEach(p => {
+        const actor = PROTECT_ACTOR_MAP[p];
+        if (actor && ACTOR_CASCADES[actor] && !seen.has(actor)) { fgActors.push(actor); seen.add(actor); }
+      });
+      if (config.anchorLabel && ACTOR_CASCADES[config.anchorLabel] && !seen.has(config.anchorLabel)) { fgActors.push(config.anchorLabel); seen.add(config.anchorLabel); }
+      if (!seen.has('Stewards')) fgActors.push('Stewards');
+      return { title: 'What your actors experience', body: null, cascadeActors: fgActors.slice(0, 3) };
+    }
+    case 7: {
+      let body = `Your sovereign boundary — ${config.configName}. Not a platform you adopt. Infrastructure you own.`;
+      if (protectStr) body += ` ${protectStr} — protected by architecture, not by policy.`;
+      body += ' The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem\'s actors.';
+      return { title: config.configName, body, showCTA: true };
+    }
+    default: return null;
+  }
+}
+
 /* ─── Stage 3: Digital OS (recommendation only, qualifiers moved) ── */
 function DigitalOSStage() {
   const { journeyState, updateJourneyState } = useJourney();
@@ -2160,10 +2263,10 @@ function DigitalOSStage() {
     }
   }, [journeyState.qualifierAnswers, journeyState.osConfig, journeyState.stalls, journeyState.detectedStacks, updateJourneyState]);
 
-  const [showSchema, setShowSchema] = useState(false);
+  const [schemaStep, setSchemaStep] = useState(-1);
 
   const reviseFromStart = useCallback(() => {
-    setShowSchema(false);
+    setSchemaStep(-1);
     updateJourneyState({ osConfig: null, qualifierAnswers: {}, _reviseQualifiers: true });
   }, [updateJourneyState]);
 
@@ -2179,71 +2282,132 @@ function DigitalOSStage() {
 
   const config = journeyState.osConfig;
 
-  if (showSchema) {
+  // Overview — config summary + dense schema + Start button
+  if (schemaStep === -1) {
     return (
       <div style={s3.containerWide}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-          <div style={s3.configBadge}>{config.configName}</div>
-          <button style={styles.btnGhost} onClick={() => setShowSchema(false)}>
-            Back to overview
-          </button>
+          <div style={s3.configBadge}>Your configuration</div>
+          <button style={styles.btnGhost} onClick={reviseFromStart}>Revise answers</button>
         </div>
-
-        <div className="schema-desktop">
-          <ArchitectureSchemaSVG />
-        </div>
-        <div className="schema-mobile">
-          <ArchitectureSchemaCards />
-        </div>
-
-        <div style={s3.ctaBox}>
-          <h3 style={s3.ctaHeading}>Talk to us about your configuration</h3>
-          <p style={s3.ctaBody}>
-            This diagnostic has identified your stalls, mapped your stacks, and derived an architecture recommendation.
-            The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem's actors.
+        <h2 style={s3.configName}>{config.configName}</h2>
+        <p style={s3.configSummary}>
+          Based on {journeyState.stalls.length} behavioural stall{journeyState.stalls.length !== 1 ? 's' : ''},{' '}
+          {(journeyState.detectedStacks || []).length} reinforcing stack{(journeyState.detectedStacks || []).length !== 1 ? 's' : ''},{' '}
+          and your qualifier responses.
+        </p>
+        <p style={s3.configDescription}>{buildConfigDescription(config)}</p>
+        <div style={s3.section}>
+          <InfrastructureDiagramEmbed />
+          <p style={schema.orientation}>
+            This is ClusterOS fully deployed — the complete digital and cognitive infrastructure for a regional operating system.
+            Over the next steps we will show you which parts matter most for your {CLUSTER_TYPE_LABELS[(journeyState.qualifierAnswers || {}).clusterType] || 'ecosystem'} and why, starting with the heart of the system.
           </p>
-          <a href="/get-started.html" style={s3.ctaButton}>
-            Get started
+          <button style={styles.btnSignal} onClick={() => setSchemaStep(0)}>
+            Show me my configuration
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
               <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </a>
+          </button>
         </div>
       </div>
     );
   }
 
+  // Stepper — steps 0-7
+  const stepCfg = STEP_CONFIG[schemaStep] || STEP_CONFIG[0];
+  const annotation = schemaStep > 0 ? buildStepAnnotation(schemaStep, journeyState, config) : null;
+
   return (
     <div style={s3.containerWide}>
+      {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-        <div style={s3.configBadge}>Your configuration</div>
-        <button style={styles.btnGhost} onClick={reviseFromStart}>
-          Revise answers
-        </button>
+        <div style={s3.configBadge}>{config.configName}</div>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--dj-chalk-muted)', letterSpacing: '0.08em' }}>
+            Step {schemaStep + 1} of 8
+          </span>
+          <button style={styles.btnGhost} onClick={() => setSchemaStep(-1)}>Back to overview</button>
+        </div>
       </div>
-      <h2 style={s3.configName}>{config.configName}</h2>
-      <p style={s3.configSummary}>
-        Based on {journeyState.stalls.length} behavioural stall{journeyState.stalls.length !== 1 ? 's' : ''},{' '}
-        {(journeyState.detectedStacks || []).length} reinforcing stack{(journeyState.detectedStacks || []).length !== 1 ? 's' : ''},{' '}
-        and your qualifier responses.
-      </p>
 
-      <p style={s3.configDescription}>{buildConfigDescription(config)}</p>
-
-      {/* Step 0: Dense schema */}
-      <div style={s3.section}>
-        <InfrastructureDiagramEmbed />
-        <p style={schema.orientation}>
-          This is ClusterOS fully deployed — the complete digital and cognitive infrastructure for a regional operating system.
-          Over the next steps we will show you which parts matter most for your {CLUSTER_TYPE_LABELS[(journeyState.qualifierAnswers || {}).clusterType] || 'ecosystem'} and why, starting with the heart of the system.
-        </p>
-        <button style={styles.btnSignal} onClick={() => setShowSchema(true)}>
-          Show me my configuration
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-            <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
+      {/* SVG schema with layer highlighting */}
+      <div className="schema-desktop">
+        <ArchitectureSchemaSVG
+          activeLayer={stepCfg.allActive ? SCHEMA_LAYERS.map(l => l.id) : stepCfg.active}
+          secondaryLayers={stepCfg.secondary}
+        />
       </div>
+      <div className="schema-mobile">
+        <ArchitectureSchemaCards />
+      </div>
+
+      {/* Step 0: full schema label */}
+      {schemaStep === 0 && (
+        <div style={{ textAlign: 'center', padding: '16px 0' }}>
+          <p style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', color: 'var(--dj-chalk)', marginBottom: '16px' }}>
+            This is ClusterOS fully deployed. Every layer exists in service of your sovereign ecosystem.
+          </p>
+          <button style={styles.btnSignal} onClick={() => setSchemaStep(1)}>
+            Start with the heart
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Annotation panel (steps 1-7) */}
+      {annotation && (
+        <div style={schema.annotPanel}>
+          <h3 style={schema.annotTitle}>{annotation.title}</h3>
+          {annotation.body && <p style={schema.annotBody}>{annotation.body}</p>}
+          {annotation.cascadeActors && annotation.cascadeActors.map(name => {
+            const c = ACTOR_CASCADES[name];
+            if (!c) return null;
+            return (
+              <div key={name} style={schema.cascadeCard}>
+                <div style={schema.cascadeActor}>{name}</div>
+                <div style={schema.cascadeFlow}>
+                  <span style={schema.cascadeStep}>{c.action}</span>
+                  <span style={schema.cascadeArrow}>&darr;</span>
+                  <span style={schema.cascadeStep}>{c.signal}</span>
+                  <span style={schema.cascadeArrow}>&darr;</span>
+                  <span style={schema.cascadeStep}>{c.effect}</span>
+                </div>
+              </div>
+            );
+          })}
+          {annotation.showCTA && (
+            <a href="/get-started.html" style={s3.ctaButton}>
+              Talk to us about your configuration
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          )}
+        </div>
+      )}
+
+      {/* Navigation (steps 1-7) */}
+      {schemaStep > 0 && (
+        <div style={schema.stepNav}>
+          <button style={styles.btnGhost} onClick={() => setSchemaStep(s => Math.max(s - 1, 0))}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginRight: '4px' }}>
+              <path d="M8.5 3L4.5 7L8.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            {stepCfg.nav[0] || 'Back'}
+          </button>
+          {schemaStep < 7 && (
+            <button style={styles.btnSignal} onClick={() => setSchemaStep(s => s + 1)}>
+              {stepCfg.nav[1] || 'Next'}
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '4px' }}>
+                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -3856,6 +4020,69 @@ const schema = {
     border: '1px solid var(--dj-border)',
     borderRadius: '3px',
     padding: '3px 7px',
+  },
+  /* Stepper annotation panel */
+  annotPanel: {
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderLeft: '3px solid var(--steward)',
+    borderRadius: '8px',
+    padding: '24px',
+    marginTop: '20px',
+  },
+  annotTitle: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '20px',
+    fontWeight: 400,
+    color: 'var(--dj-chalk)',
+    marginBottom: '12px',
+    letterSpacing: '-0.01em',
+  },
+  annotBody: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '15px',
+    fontWeight: 400,
+    lineHeight: 1.7,
+    color: 'var(--dj-chalk)',
+    letterSpacing: '-0.01em',
+  },
+  /* Cascade cards in Step 6 */
+  cascadeCard: {
+    border: '1px solid var(--dj-border)',
+    borderRadius: '6px',
+    padding: '12px 14px',
+    marginTop: '12px',
+    background: 'var(--dj-bg)',
+  },
+  cascadeActor: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '15px',
+    color: 'var(--dj-chalk)',
+    marginBottom: '8px',
+  },
+  cascadeFlow: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '2px',
+  },
+  cascadeStep: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '11px',
+    color: 'var(--dj-chalk-dim)',
+    lineHeight: 1.4,
+  },
+  cascadeArrow: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '10px',
+    color: 'var(--steward)',
+    padding: '0 0 0 2px',
+  },
+  /* Step navigation */
+  stepNav: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '16px',
+    gap: '12px',
   },
 };
 

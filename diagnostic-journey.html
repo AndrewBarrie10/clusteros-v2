@@ -2540,9 +2540,21 @@ function DigitalOSStage() {
       )}
 
       {/* Annotation panel (steps 1-8) */}
-      {annotation && (
+      {annotation && (() => {
+        const STEP_LAYER_KEY = { 1: 'sovereignDatabase', 2: 'governance', 3: 'externalData', 4: 'continuousEnrichment', 5: 'intelligence', 6: 'runtime', 7: 'actorJourneys' };
+        const dc = (journeyState.digitalCommentary || {})[STEP_LAYER_KEY[schemaStep]] || null;
+        return (
         <div style={schema.annotPanel}>
           <h3 style={schema.annotTitle}>{annotation.title}</h3>
+          {/* Digital commentary inside/outside (if available for this step) */}
+          {dc && (
+            <div style={{ marginBottom: '16px' }}>
+              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', color: '#d97706', marginBottom: '4px' }}>FROM THE INSIDE</div>
+              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: 'var(--dj-chalk-dim)', marginBottom: '12px' }}>{dc.inside}</p>
+              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', color: '#0c9488', marginBottom: '4px' }}>FROM THE OUTSIDE</div>
+              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: 'var(--dj-chalk-dim)' }}>{dc.outside}</p>
+            </div>
+          )}
           {annotation.body && <p style={schema.annotBody}><BoldText text={annotation.body} /></p>}
           {annotation.cascadeActors && annotation.cascadeActors.map(name => {
             const c = ACTOR_CASCADES[name];
@@ -2586,9 +2598,10 @@ function DigitalOSStage() {
             </a>
           )}
         </div>
-      )}
+        );
+      })()}
 
-      {/* Navigation (steps 1-7) */}
+      {/* Navigation (steps 1-8) */}
       {schemaStep > 0 && (
         <div style={schema.stepNav}>
           <button style={styles.btnGhost} onClick={() => setSchemaStep(s => Math.max(s - 1, 0))}>
@@ -2640,6 +2653,7 @@ function ReportModal({ phase, journeyState, onClose }) {
       stacks: stacks.map(s => ({ name: s.name, sev: 'high', desc: s.logic || '' })),
       commentary: '',
       stackCommentary: journeyState.stackCommentary || {},
+      digitalCommentary: journeyState.digitalCommentary || null,
       submitted_at: new Date().toISOString(),
       qualifier_answers: qa,
       config_name: (journeyState.osConfig || {}).configName || '',
@@ -2939,6 +2953,7 @@ function DiagnosticJourney() {
     qualifierAnswers: {},
     osConfig: null,
     stackCommentary: {},
+    digitalCommentary: null,
   });
 
   const updateJourneyState = useCallback((patch) => {
@@ -3006,29 +3021,31 @@ function DiagnosticJourney() {
   /* ── Commentary fetch after qualifiers complete ── */
   const handleQualifierComplete = useCallback(() => {
     const stacks = journeyState.detectedStacks || [];
-    if (stacks.length === 0) { setPhase(3); return; }
-
-    setLoadingCommentary(true);
     const qa = journeyState.qualifierAnswers || {};
     const STAGE_LABEL_MAP = { early: 'Early-stage', established: 'Established', mature: 'Mature' };
     const PRIORITY_LABEL_MAP = { talent: 'Retain & grow local talent', capital: 'Attract external capital', research: 'Convert research to commercial activity', supply: 'Build anchor supply chains', growth: 'Drive economic growth' };
     const GAP_LABEL_MAP = { discovery: "Actors can't find each other", flow: "Knowledge doesn't flow between groups", access: "Outside actors can't engage", conversion: "Activity isn't converting to outcomes" };
     const PROTECT_LABEL_MAP = { knowledge: 'Local knowledge staying local', ip: 'Institutional IP and research', trust: 'Community relationships and trust', talent: 'Founder and talent pipeline', sovereignty: 'Economic sovereignty' };
 
-    const calls = stacks.map(stack => {
-      const stallNames = (stack.triggers || []).map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; }).join(' and ');
-      const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'Regional Speciality';
-      const anchorLabel = ANCHOR_LABELS[qa.anchorType] || 'Anchors';
-      const scaleLabel = STAGE_LABEL_MAP[qa.stage] || 'Established';
-      const priorityLabel = PRIORITY_LABEL_MAP[qa.priority] || 'Drive economic growth';
-      const gapLabel = GAP_LABEL_MAP[qa.gap] || '';
-      const protectList = (qa.protect || []).map(p => PROTECT_LABEL_MAP[p] || p).join(', ');
+    const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'Regional Speciality';
+    const anchorLabel = ANCHOR_LABELS[qa.anchorType] || 'Anchors';
+    const scaleLabel = STAGE_LABEL_MAP[qa.stage] || 'Established';
+    const priorityLabel = PRIORITY_LABEL_MAP[qa.priority] || 'Drive economic growth';
+    const gapLabel = GAP_LABEL_MAP[qa.gap] || '';
+    const protectList = (qa.protect || []).map(p => PROTECT_LABEL_MAP[p] || p).join(', ');
 
+    // If no stacks and no qualifier data worth sending, skip
+    if (stacks.length === 0 && !qa.clusterType) { setPhase(3); return; }
+
+    setLoadingCommentary(true);
+
+    // 1. Stack commentary calls (one per stack)
+    const stackCalls = stacks.map(stack => {
+      const stallNames = (stack.triggers || []).map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; }).join(' and ');
       const prompt = `You are a diagnostic analyst for ClusterOS. A ${clusterLabel} with a ${anchorLabel} anchor has identified the following behavioural stall pattern: ${stack.name} — a reinforcing combination of ${stallNames}. The reinforcing logic is: ${stack.logic || ''}. The leverage entry point is: ${stack.entry || ''}. Their strategic priority is ${priorityLabel}. Their biggest coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their ecosystem is ${scaleLabel} stage.\n\nWrite three short paragraphs — one each for DIAGNOSIS, CONSEQUENCE, and MECHANISM — that are specific to this configuration. DIAGNOSIS: what this stack pattern means for this specific ecosystem type. CONSEQUENCE: what remains locked if this stack is not addressed, given their priority and anchor type. MECHANISM: the specific intervention approach that addresses the entry point, connected to their protection priorities. Be concrete. Do not be generic. Each paragraph 2-3 sentences maximum.`;
 
       return fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt }),
       })
         .then(r => r.ok ? r.json() : null)
@@ -3036,19 +3053,48 @@ function DiagnosticJourney() {
           if (!data) return null;
           const text = data.commentary || data.text || (typeof data === 'string' ? data : '');
           if (!text) return null;
-          // Parse DIAGNOSIS / CONSEQUENCE / MECHANISM sections
-          const parsed = parseCommentary(text);
-          return { stackId: stack.id, ...parsed };
+          return { stackId: stack.id, ...parseCommentary(text) };
         })
-        .catch(err => { console.warn(`Commentary fetch failed for ${stack.id}:`, err.message); return null; });
+        .catch(err => { console.warn(`Stack commentary failed for ${stack.id}:`, err.message); return null; });
     });
 
-    Promise.all(calls).then(results => {
+    // 2. Digital commentary call (one call for all 7 layers)
+    const stackDescs = stacks.map(s => `${s.name} — ${s.logic || ''}`).join('; ');
+    const digitalPrompt = `You are writing the narrative for a digital infrastructure recommendation for a regional innovation ecosystem steward. Write in the voice of a trusted senior advisor — specific, direct, no jargon. Think McKinsey partner who also understands complex adaptive systems.\n\nThis steward runs a ${clusterLabel} with a ${anchorLabel} anchor. Their ecosystem is ${scaleLabel} stage. Their strategic priority is ${priorityLabel}. Their coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their diagnostic has identified these stacks: ${stackDescs || 'no reinforcing stacks detected — independent stall patterns'}.\n\nWrite commentary for each of the following 7 infrastructure layers. For each layer write exactly two short sections:\n\nFROM THE INSIDE: 2 sentences maximum. What actors in this ecosystem currently experience without this layer — the specific friction, invisibility, or wasted motion that this steward's ecosystem has, given their stalls and stacks.\n\nFROM THE OUTSIDE: 2 sentences maximum. What this steward specifically gains when this layer is working — the signal, pattern, or evidence that becomes visible to them, connected to their priority and coordination gap.\n\nLayers to cover:\n1. SOVEREIGN DATABASE — the structured record layer\n2. GOVERNANCE — federated boundary and consent layer\n3. EXTERNAL DATA — cold-start and membrane layer\n4. CONTINUOUS ENRICHMENT — bot network layer\n5. INTELLIGENCE — MCP tool substrate layer\n6. RUNTIME — AI reasoning engine layer\n7. ACTOR JOURNEYS — personalised pathway layer\n\nRules:\n- Name detected stacks and stalls in the text where relevant — they are proper nouns, not generic descriptions\n- Never use the words "platform", "solution", "leverage" or "dashboard"\n- Never explain what ClusterOS is — the steward already completed the diagnostic\n- Write as if continuing a conversation that started in the Leverage section\n- Each FROM THE INSIDE must describe something this specific steward will recognise from their own ecosystem\n- Each FROM THE OUTSIDE must connect to their stated priority: ${priorityLabel}\n\nReturn as JSON only, no preamble:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governance":{"inside":"...","outside":"..."},"externalData":{"inside":"...","outside":"..."},"continuousEnrichment":{"inside":"...","outside":"..."},"intelligence":{"inside":"...","outside":"..."},"runtime":{"inside":"...","outside":"..."},"actorJourneys":{"inside":"...","outside":"..."}}`;
+
+    const digitalCall = fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: digitalPrompt }),
+    })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (!data) return null;
+        const text = data.commentary || data.text || '';
+        try {
+          // Try parsing as JSON directly
+          const parsed = typeof text === 'string' ? JSON.parse(text) : text;
+          if (parsed.sovereignDatabase) return parsed;
+        } catch (e) {}
+        // Try extracting JSON from text
+        try {
+          const jsonMatch = text.match(/\{[\s\S]*\}/);
+          if (jsonMatch) return JSON.parse(jsonMatch[0]);
+        } catch (e) {}
+        return null;
+      })
+      .catch(err => { console.warn('Digital commentary failed:', err.message); return null; });
+
+    // Wait for all calls
+    Promise.all([Promise.all(stackCalls), digitalCall]).then(([stackResults, digitalResult]) => {
       const commentary = {};
-      results.forEach(r => {
+      stackResults.forEach(r => {
         if (r) commentary[r.stackId] = { diagnosis: r.diagnosis, consequence: r.consequence, mechanism: r.mechanism };
       });
-      setJourneyState(prev => ({ ...prev, stackCommentary: { ...prev.stackCommentary, ...commentary } }));
+      setJourneyState(prev => ({
+        ...prev,
+        stackCommentary: { ...prev.stackCommentary, ...commentary },
+        digitalCommentary: digitalResult || prev.digitalCommentary || null,
+      }));
       setLoadingCommentary(false);
       setPhase(3);
     });

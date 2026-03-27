@@ -3218,15 +3218,21 @@ function DiagnosticJourney() {
         .then(r => r.ok ? r.json() : null)
         .then(data => {
           if (!data) return null;
-          // Handle multiple response formats: { commentary }, { text }, { content: [{ text }] }
+          // Extract text from any response format
           let text = data.commentary || data.text || '';
           if (!text && Array.isArray(data.content) && data.content[0]) text = data.content[0].text || '';
           if (!text && typeof data === 'string') text = data;
-          if (!text) { console.warn(`Stack commentary for ${stack.id}: no text in response`, Object.keys(data)); return null; }
-          text = text.replace(/```[a-z]*\s*/gi, '').trim();
+          if (!text) { console.warn(`[Stack ${stack.id}] No text in response. Keys:`, Object.keys(data)); return null; }
+          // Strip markdown code fences robustly
+          text = String(text)
+            .replace(/^```json\s*/i, '')
+            .replace(/^```\s*/i, '')
+            .replace(/```\s*$/i, '')
+            .trim();
+          console.log(`[Stack ${stack.id}] Cleaned text:`, text.substring(0, 100));
           return { stackId: stack.id, ...parseCommentary(text) };
         })
-        .catch(err => { console.warn(`Stack commentary failed for ${stack.id}:`, err.message); return null; });
+        .catch(err => { console.warn(`[Stack ${stack.id}] Fetch failed:`, err.message); return null; });
     });
 
     // 2. Digital commentary call (one call for all 7 layers)
@@ -3234,7 +3240,7 @@ function DiagnosticJourney() {
     const digitalPrompt = `You are writing the narrative for a digital infrastructure recommendation for a regional innovation ecosystem steward. Write in the voice of a trusted senior advisor — specific, direct, no jargon. Think McKinsey partner who also understands complex adaptive systems.\n\nThis steward runs a ${clusterLabel} with a ${anchorLabel} anchor. Their ecosystem is ${scaleLabel} stage. Their strategic priority is ${priorityLabel}. Their coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their diagnostic has identified these stacks: ${stackDescs || 'no reinforcing stacks detected — independent stall patterns'}.\n\nWrite commentary for each of the following 7 infrastructure layers. For each layer write exactly two short sections:\n\nFROM THE INSIDE: 2 sentences maximum. What actors in this ecosystem currently experience without this layer — the specific friction, invisibility, or wasted motion that this steward's ecosystem has, given their stalls and stacks.\n\nFROM THE OUTSIDE: 2 sentences maximum. What this steward specifically gains when this layer is working — the signal, pattern, or evidence that becomes visible to them, connected to their priority and coordination gap.\n\nLayers to cover:\n1. SOVEREIGN DATABASE — the structured record layer\n2. GOVERNANCE — federated boundary and consent layer\n3. EXTERNAL DATA — cold-start and membrane layer\n4. CONTINUOUS ENRICHMENT — bot network layer\n5. INTELLIGENCE — MCP tool substrate layer\n6. RUNTIME — AI reasoning engine layer\n7. ACTOR JOURNEYS — personalised pathway layer\n\nRules:\n- Name detected stacks and stalls in the text where relevant — they are proper nouns, not generic descriptions\n- Never use the words "platform", "solution", "leverage" or "dashboard"\n- Never explain what ClusterOS is — the steward already completed the diagnostic\n- Write as if continuing a conversation that started in the Leverage section\n- Each FROM THE INSIDE must describe something this specific steward will recognise from their own ecosystem\n- Each FROM THE OUTSIDE must connect to their stated priority: ${priorityLabel}\n\nReturn as JSON only, no preamble:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governance":{"inside":"...","outside":"..."},"externalData":{"inside":"...","outside":"..."},"continuousEnrichment":{"inside":"...","outside":"..."},"intelligence":{"inside":"...","outside":"..."},"runtime":{"inside":"...","outside":"..."},"actorJourneys":{"inside":"...","outside":"..."}}`;
 
     const digitalCall = (function() {
-      console.log('[Digital Commentary] Firing API call with prompt length:', digitalPrompt.length);
+      console.log('[Digital Commentary] Firing API call');
       return fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: digitalPrompt }),
@@ -3245,65 +3251,66 @@ function DiagnosticJourney() {
         })
         .then(rawText => {
           if (!rawText) { console.warn('[Digital Commentary] Empty response'); return null; }
-          console.log('[Digital Commentary] Raw text (first 500 chars):', rawText.substring(0, 500));
 
-          // Parse the raw response
+          // Step 1: Parse the API wrapper
           let data;
-          try { data = JSON.parse(rawText); } catch (e) { console.warn('[Digital Commentary] Raw text is not JSON:', e.message); return null; }
-          console.log('[Digital Commentary] Parsed wrapper keys:', Object.keys(data));
+          try { data = JSON.parse(rawText); } catch (e) { console.error('[Digital Commentary] API response not JSON:', e.message); return null; }
 
-          // Extract the text content from all possible response formats:
-          // Format A: { commentary: "..." }
-          // Format B: { text: "..." }
-          // Format C: { content: [{ text: "..." }] }  (Anthropic-style)
-          // Format D: { sovereignDatabase: {...}, ... }  (direct JSON)
-          let content = '';
-          if (data.sovereignDatabase) {
-            console.log('[Digital Commentary] Data IS the result object directly');
-            return data;
-          }
-          if (data.commentary) content = data.commentary;
-          else if (data.text) content = data.text;
-          else if (Array.isArray(data.content) && data.content[0] && data.content[0].text) content = data.content[0].text;
-          else if (typeof data === 'string') content = data;
-          console.log('[Digital Commentary] Extracted content type:', typeof content, 'length:', String(content || '').length);
-          console.log('[Digital Commentary] Content preview:', String(content || '').substring(0, 200));
+          // Step 2: Extract the inner text from any response format
+          let innerText = '';
+          if (data.sovereignDatabase) { console.log('[Digital Commentary] Direct result object'); return data; }
+          if (data.commentary) innerText = data.commentary;
+          else if (data.text) innerText = data.text;
+          else if (Array.isArray(data.content) && data.content[0] && data.content[0].text) innerText = data.content[0].text;
+          else if (typeof data === 'string') innerText = data;
 
-          if (typeof content === 'object' && content.sovereignDatabase) {
-            console.log('[Digital Commentary] Content is already parsed object');
-            return content;
-          }
+          if (!innerText) { console.warn('[Digital Commentary] No text extracted. Keys:', Object.keys(data)); return null; }
+          console.log('[Digital Commentary] Inner text (first 200):', String(innerText).substring(0, 200));
 
-          // Content is a string — clean and parse
-          if (typeof content === 'string' && content) {
-            // Strip markdown code fences and any preamble
-            let cleaned = content.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
-            console.log('[Digital Commentary] After stripping fences:', cleaned.substring(0, 200));
-            // Try direct parse
-            try {
-              const parsed = JSON.parse(cleaned);
-              if (parsed.sovereignDatabase) { console.log('[Digital Commentary] SUCCESS: parsed from cleaned content'); return parsed; }
-            } catch (e) { console.log('[Digital Commentary] Direct parse failed:', e.message); }
-            // Try extracting JSON block from surrounding text
+          // If innerText is already an object
+          if (typeof innerText === 'object' && innerText.sovereignDatabase) { console.log('[Digital Commentary] Inner text is object'); return innerText; }
+
+          // Step 3: Clean markdown fences robustly
+          let cleaned = String(innerText)
+            .replace(/^```json\s*/i, '')
+            .replace(/^```\s*/i, '')
+            .replace(/```\s*$/i, '')
+            .trim();
+          console.log('[Digital Commentary] After fence strip (first 200):', cleaned.substring(0, 200));
+
+          // Step 4: Parse the cleaned text
+          try {
+            const parsed = JSON.parse(cleaned);
+            if (parsed.sovereignDatabase) {
+              console.log('[Digital Commentary] SUCCESS — parsed. Keys:', Object.keys(parsed));
+              return parsed;
+            }
+          } catch (e) {
+            console.error('[Digital Commentary] Parse failed:', e.message);
+            // Last resort: extract JSON block
             const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
             if (jsonMatch) {
               try {
                 const parsed = JSON.parse(jsonMatch[0]);
-                if (parsed.sovereignDatabase) { console.log('[Digital Commentary] SUCCESS: parsed from extracted JSON block'); return parsed; }
-              } catch (e) { console.log('[Digital Commentary] JSON block parse failed:', e.message); }
+                if (parsed.sovereignDatabase) { console.log('[Digital Commentary] SUCCESS — extracted JSON block'); return parsed; }
+              } catch (e2) { console.error('[Digital Commentary] JSON block parse also failed:', e2.message); }
             }
+            console.error('[Digital Commentary] Raw cleaned text:', cleaned.substring(0, 500));
           }
-
-          console.warn('[Digital Commentary] FAILED: could not parse response. Full data:', JSON.stringify(data).substring(0, 500));
           return null;
         })
-        .catch(err => { console.warn('[Digital Commentary] Fetch failed:', err.message); return null; });
+        .catch(err => { console.error('[Digital Commentary] Fetch error:', err.message); return null; });
     })();
 
     // Wait for all calls
     Promise.all([Promise.all(stackCalls), digitalCall]).then(([stackResults, digitalResult]) => {
       console.log('[Commentary] Stack results:', stackResults.filter(Boolean).length, 'Digital result:', !!digitalResult);
-      if (digitalResult) console.log('[Commentary] Digital keys:', Object.keys(digitalResult));
+      if (digitalResult) {
+        console.log('[Commentary] Digital commentary loaded:', digitalResult);
+        console.log('[Commentary] Digital keys:', Object.keys(digitalResult));
+      } else {
+        console.warn('[Commentary] Digital commentary is NULL — fallback text will show');
+      }
       const commentary = {};
       stackResults.forEach(r => {
         if (r) commentary[r.stackId] = { diagnosis: r.diagnosis, consequence: r.consequence, mechanism: r.mechanism };

@@ -1934,14 +1934,13 @@ const SCHEMA_LAYERS = [
       { id: 'comp-steward-diag', label: 'get_steward_diagnostic()', mono: true },
       { id: 'comp-open-funding', label: 'get_open_funding()', mono: true },
     ]},
-  { id: 'layer-sovereign', label: 'SOVEREIGN ECOSYSTEM DATABASE + BOT NETWORK', y: 340, h: 100, split: true,
-    sovereign: [
-      { id: 'comp-profiles', label: 'Actor profiles' },
-      { id: 'comp-signals', label: 'Signal history' },
-      { id: 'comp-stall-records', label: 'Stall records' },
-      { id: 'comp-lev-hyp', label: 'Leverage hypotheses' },
-      { id: 'comp-evidence', label: 'Evidence base' },
-      { id: 'comp-journey-st', label: 'Journey state' },
+  { id: 'layer-sovereign', label: 'SOVEREIGN ECOSYSTEM DATABASE + BOT NETWORK', y: 340, h: 210, split: true,
+    sovereignCategories: [
+      { label: 'STRUCTURE', items: ['Supercluster', 'Clusters', 'Groups', 'Pathways', 'Events', 'Resources'] },
+      { label: 'ACTORS', items: ['Actor profiles', 'Identity & permissions', 'Journey states', 'Progression records'] },
+      { label: 'INTELLIGENCE', items: ['Evidence base', 'Stall records', 'Leverage hypotheses', 'Diagnostic outputs'] },
+      { label: 'ACTIVITY', items: ['Group activity', 'Event records', 'Chat history', 'Collaboration outcomes'] },
+      { label: 'SIGNALS', items: ['Behavioural signals', 'Health scores', 'Pipeline formation', 'Value flow records'] },
     ],
     bots: [
       { id: 'comp-bot-evidence', label: 'Evidence Ingestion Bot' },
@@ -1949,14 +1948,14 @@ const SCHEMA_LAYERS = [
       { id: 'comp-bot-enrich', label: 'Actor Enrichment Bot' },
       { id: 'comp-bot-health', label: 'Health Monitoring Bot' },
     ]},
-  { id: 'layer-external', label: 'EXTERNAL DATA SOURCES', y: 460, h: 60,
+  { id: 'layer-external', label: 'EXTERNAL DATA SOURCES', y: 570, h: 60,
     comps: [
       { id: 'comp-govt', label: 'Govt Support Directory' },
       { id: 'comp-community', label: 'Community Services API' },
       { id: 'comp-publications', label: 'Publication Databases' },
       { id: 'comp-professional', label: 'Professional Identity' },
     ]},
-  { id: 'layer-governance', label: 'FEDERATED GOVERNANCE LAYER', y: 540, h: 50,
+  { id: 'layer-governance', label: 'FEDERATED GOVERNANCE LAYER', y: 650, h: 50,
     comps: [
       { id: 'comp-gov-hierarchy', label: 'Supercluster → Cluster → Group → Actor' },
       { id: 'comp-gov-access', label: 'Identity-first · Role-based access · Full audit trail' },
@@ -1966,7 +1965,7 @@ const SCHEMA_LAYERS = [
 function ArchitectureSchemaSVG() {
   const pad = 20, w = 900;
   return (
-    <svg viewBox="0 0 900 610" style={{ width: '100%', height: 'auto', display: 'block' }}>
+    <svg viewBox="0 0 900 720" style={{ width: '100%', height: 'auto', display: 'block' }}>
       {SCHEMA_LAYERS.map(layer => {
         const isSovereign = layer.split;
         return (
@@ -2010,62 +2009,77 @@ function ArchitectureSchemaSVG() {
               });
             })()}
 
-            {/* Split layout for sovereign */}
+            {/* Split layout for sovereign — sub-categories + bots */}
             {isSovereign && (() => {
               const splitX = pad + 12;
-              const splitW = (w - pad * 2 - 24) * 0.6;
-              const botX = splitX + splitW + 8;
-              const botW = (w - pad * 2 - 24) * 0.4 - 8;
-              const compY = layer.y + 24;
-              const compH = layer.h - 34;
-              const sovCols = 3;
-              const sovRows = 2;
-              const sovCW = (splitW - 4) / sovCols;
-              const sovCH = (compH - 4) / sovRows;
+              const totalW = w - pad * 2 - 24;
+              const splitW = totalW * 0.65;
+              const botX = splitX + splitW + 10;
+              const botW = totalW * 0.35 - 10;
+              const startY = layer.y + 24;
+              const sovH = layer.h - 34;
+              const cats = layer.sovereignCategories || [];
+              const catCount = cats.length;
+              const catH = (sovH - (catCount - 1) * 4) / catCount;
               const botCols = 2;
               const botRows = 2;
               const botCW = (botW - 4) / botCols;
-              const botCH = (compH - 4) / botRows;
+              const botCH = 28;
               return (
                 <React.Fragment>
                   {/* Sovereign section background */}
-                  <rect x={splitX} y={compY} width={splitW} height={compH}
-                    rx="3" fill="rgba(200,240,208,0.1)" stroke="rgba(42,122,79,0.2)" strokeWidth="0.8" />
-                  {layer.sovereign.map((c, ci) => {
-                    const col = ci % sovCols;
-                    const row = Math.floor(ci / sovCols);
+                  <rect x={splitX} y={startY} width={splitW} height={sovH}
+                    rx="4" fill="rgba(200,240,208,0.1)" stroke="rgba(42,122,79,0.2)" strokeWidth="0.8" />
+                  {/* Sub-categories */}
+                  {cats.map((cat, ci) => {
+                    const catY = startY + 4 + ci * (catH + 4);
+                    const pillW = (splitW - 16) / Math.min(cat.items.length, 6);
                     return (
-                      <g key={c.id}>
-                        <rect x={splitX + 2 + col * sovCW} y={compY + 2 + row * sovCH}
-                          width={sovCW - 4} height={sovCH - 4}
-                          rx="2" fill="var(--dj-bg)" stroke="var(--dj-border)" strokeWidth="0.5" />
-                        <text x={splitX + 2 + col * sovCW + (sovCW - 4) / 2}
-                          y={compY + 2 + row * sovCH + (sovCH - 4) / 2 + 1}
-                          textAnchor="middle" dominantBaseline="middle"
-                          fill="var(--dj-chalk-dim)" fontFamily="'Geist', system-ui" fontSize="7.5">
-                          {c.label}
+                      <g key={cat.label}>
+                        {/* Category label */}
+                        <text x={splitX + 8} y={catY + 10}
+                          fill="var(--steward)" fontFamily="'Geist Mono', monospace"
+                          fontSize="6" fontWeight="600" letterSpacing="0.1em">
+                          {cat.label}
                         </text>
+                        {/* Items as pills */}
+                        {cat.items.map((item, ii) => {
+                          const ix = splitX + 8 + ii * pillW;
+                          const iy = catY + 16;
+                          const ih = catH - 20;
+                          return (
+                            <g key={item}>
+                              <rect x={ix} y={iy} width={pillW - 3} height={Math.max(ih, 14)}
+                                rx="2" fill="var(--dj-bg)" stroke="var(--dj-border)" strokeWidth="0.5" />
+                              <text x={ix + (pillW - 3) / 2} y={iy + Math.max(ih, 14) / 2 + 1}
+                                textAnchor="middle" dominantBaseline="middle"
+                                fill="var(--dj-chalk-dim)" fontFamily="'Geist', system-ui" fontSize="6.5">
+                                {item}
+                              </text>
+                            </g>
+                          );
+                        })}
                       </g>
                     );
                   })}
                   {/* Bot section */}
-                  <rect x={botX} y={compY} width={botW} height={compH}
-                    rx="3" fill="var(--dj-bg)" stroke="var(--dj-border)" strokeWidth="0.8" />
-                  <text x={botX + 6} y={compY - 2}
+                  <rect x={botX} y={startY} width={botW} height={sovH}
+                    rx="4" fill="var(--dj-bg)" stroke="var(--dj-border)" strokeWidth="0.8" />
+                  <text x={botX + 8} y={startY + 12}
                     fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace"
-                    fontSize="6.5" letterSpacing="0.08em">BOT NETWORK</text>
+                    fontSize="6" fontWeight="600" letterSpacing="0.1em">BOT NETWORK</text>
                   {layer.bots.map((c, ci) => {
                     const col = ci % botCols;
                     const row = Math.floor(ci / botCols);
+                    const bx = botX + 6 + col * botCW;
+                    const by = startY + 22 + row * (botCH + 4);
                     return (
                       <g key={c.id}>
-                        <rect x={botX + 2 + col * botCW} y={compY + 2 + row * botCH}
-                          width={botCW - 4} height={botCH - 4}
+                        <rect x={bx} y={by} width={botCW - 4} height={botCH}
                           rx="2" fill="var(--dj-surface)" stroke="var(--dj-border)" strokeWidth="0.5" />
-                        <text x={botX + 2 + col * botCW + (botCW - 4) / 2}
-                          y={compY + 2 + row * botCH + (botCH - 4) / 2 + 1}
+                        <text x={bx + (botCW - 4) / 2} y={by + botCH / 2 + 1}
                           textAnchor="middle" dominantBaseline="middle"
-                          fill="var(--dj-chalk-dim)" fontFamily="'Geist', system-ui" fontSize="7">
+                          fill="var(--dj-chalk-dim)" fontFamily="'Geist', system-ui" fontSize="6.5">
                           {c.label}
                         </text>
                       </g>
@@ -2087,14 +2101,36 @@ function ArchitectureSchemaCards() {
     <div style={schema.cardStack}>
       {SCHEMA_LAYERS.map(layer => {
         const isSovereign = layer.split;
-        const allComps = isSovereign
-          ? [...layer.sovereign, ...layer.bots]
-          : (layer.comps || []);
+        if (isSovereign) {
+          const cats = layer.sovereignCategories || [];
+          const bots = layer.bots || [];
+          return (
+            <div key={layer.id} style={{ ...schema.card, borderLeft: '3px solid var(--signal)' }}>
+              <div style={schema.cardLabel}>{layer.label}</div>
+              {cats.map(cat => (
+                <div key={cat.label} style={{ marginBottom: '8px' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--steward)', marginBottom: '4px' }}>{cat.label}</div>
+                  <div style={schema.cardPills}>
+                    {cat.items.map(item => (
+                      <span key={item} style={schema.pill}>{item}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid var(--dj-border)' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--dj-chalk-muted)', marginBottom: '4px' }}>BOT NETWORK</div>
+                <div style={schema.cardPills}>
+                  {bots.map(b => (
+                    <span key={b.id} style={schema.pill}>{b.label}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        }
+        const allComps = layer.comps || [];
         return (
-          <div key={layer.id} style={{
-            ...schema.card,
-            borderLeft: isSovereign ? '3px solid var(--signal)' : '1px solid var(--dj-border)',
-          }}>
+          <div key={layer.id} style={{ ...schema.card, borderLeft: '1px solid var(--dj-border)' }}>
             <div style={schema.cardLabel}>{layer.label}</div>
             <div style={schema.cardPills}>
               {allComps.map(c => (

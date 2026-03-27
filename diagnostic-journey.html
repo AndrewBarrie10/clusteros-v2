@@ -2326,6 +2326,16 @@ const STEP_CONFIG = [
 ];
 const TOTAL_STEPS = STEP_CONFIG.length;
 
+/* ─── Helper: render text with **bold** markers as React elements ── */
+function BoldText({ text }) {
+  if (!text) return null;
+  const parts = text.split(/\*\*(.+?)\*\*/g);
+  return parts.map((part, i) => i % 2 === 1
+    ? React.createElement('strong', { key: i }, part)
+    : part
+  );
+}
+
 function buildStepAnnotation(step, journeyState, config) {
   const qa = journeyState.qualifierAnswers || {};
   const stalls = journeyState.stalls || [];
@@ -2336,99 +2346,86 @@ function buildStepAnnotation(step, journeyState, config) {
   const protectStr = protections.length > 0
     ? (protections.length === 1 ? protections[0] : protections.slice(0, -1).join(', ') + ' and ' + protections[protections.length - 1])
     : '';
-
-  // Helper: get stall names mapped to a specific layer
-  const stallsOnLayer = (layerId) => stalls
-    .filter(id => STALL_LAYER_MAP[id] === layerId)
-    .map(id => { const s = STALLS.find(x => x.id === id); return s ? `${id} ${s.name}` : id; });
   const stackNames = stacks.map(s => s.name);
-  const allStackStr = stackNames.length > 0 ? stackNames.join(', ') : '';
+  const allStackBold = stackNames.map(n => `**${n}**`).join(', ');
+  const allStackPlain = stackNames.join(', ');
 
   switch (step) {
+    // Step 1: Sovereign Database
     case 1: {
-      const sovStalls = stallsOnLayer('layer-sovereign');
-      let body = `The heart of your ${config.configName}. This sovereign database holds everything your ${clusterLabel} knows — structured around five domains. `;
-      if (stacks.length > 0) {
-        body += `Your ${allStackStr} stack${stacks.length > 1 ? 's' : ''} persist${stacks.length === 1 ? 's' : ''} because evidence and narrative are interchangeable. The Sovereign Database separates structured evidence from narrative — ${stacks[0].name} loses its reinforcement mechanism when evidence has a record that exists independently of the story told about it. `;
-      } else if (sovStalls.length > 0) {
-        body += `This layer directly addresses ${sovStalls.join(', ')} — these stall patterns become visible and addressable when the database holds structured records rather than anecdotes. `;
-      }
-      body += `Actors holds profiles for every participant including your ${anchorLabel} anchor. Signals tracks what the system reads in real time — behavioural patterns, health scores, pipeline formation.`;
+      let body = `Most ecosystems run on institutional memory — reports, relationships, informal knowledge held by individuals. When people leave, it leaves with them. The Sovereign Database gives your ${clusterLabel} a structured record that belongs to the ecosystem, not to any organisation within it. Every actor profile, every stall finding, every leverage hypothesis your diagnostic has already identified — recorded here as a structural fact, not an anecdote.`;
+      if (allStackBold) body += ` ${allStackBold} lose their reinforcement when evidence has a record that exists independently of the story told about it.`;
       return { title: `The heart of your ${config.configName}`, body };
     }
+    // Step 2: Governance
     case 2: {
-      const govStalls = stallsOnLayer('layer-governance');
-      let body = '';
-      if (stalls.includes('S4') || stalls.includes('S6'))
-        body = `Incumbent Lock requires governance infrastructure that makes value circulation enforceable — the audit trail records what flows across the boundary and under what terms.`;
-      else if (stalls.includes('S2'))
-        body = 'Coordinating stall means alignment without accountability — identity-first governance changes this. Every actor, every action, fully auditable.';
-      else
-        body = 'Identity-first governance at every level — Supercluster \u2192 Cluster \u2192 Group \u2192 Actor. Every actor holds one system identity. Permissions are explicit, inherited, and auditable.';
-      if (govStalls.length > 0) body += ` This layer directly addresses ${govStalls.join(', ')}.`;
+      let body = 'Value leaves ecosystems quietly. A researcher takes IP to a better-funded institution. A founder relocates to be closer to a customer. An anchor stops attending and nobody notices until the pipeline is empty. The Federated Governance layer makes these movements visible by requiring a consent record for every flow across the ecosystem boundary. You cannot extract what the audit trail has already claimed.';
+      if (stalls.includes('S4')) body += ' This directly addresses **S4 Extracting** — extraction persists precisely because it currently leaves no trace.';
+      if (stalls.includes('S3')) body += ' This directly addresses **S3 Forgiving** — accountability becomes structural when every action has an audit trail.';
       if ((qa.protect || []).includes('sovereignty'))
-        body += ` Economic sovereignty is enforced at the governance layer — no data leaves the ${clusterLabel} boundary without consent recorded here.`;
+        body += ` Economic sovereignty is enforced here — no data leaves the ${clusterLabel} boundary without consent recorded at the governance layer.`;
       return { title: 'The boundary that protects it', body };
     }
+    // Step 3: External Data Sources
     case 3: {
       const GAP_DESC = {
-        discovery: 'Your coordination gap is discovery — actors can\'t find each other. The Govt Support Directory surfaces programme listings and funding routes so actors find support before any human broker is involved.',
-        flow: 'Your coordination gap is knowledge flow — intelligence doesn\'t reach the actors who need it. The Community Services API makes knowledge outside institutional boundaries visible inside them.',
-        access: 'Your coordination gap is membrane permeability — outside actors can\'t engage. Publication Databases give investors and partners credible entry points through research rather than cold outreach.',
-        conversion: 'Your coordination gap is conversion — activity doesn\'t become outcomes. Professional Identity makes conversion visible by giving actors persistent, enrichable identities.',
+        discovery: `Your biggest coordination gap is discovery — actors who should connect don't know each other exists. Government Support Directory and Professional Identity solve the cold-start problem: your ecosystem knows who is available before anyone has to make an introduction.`,
+        flow: `Your biggest coordination gap is knowledge circulation — research findings and commercial intelligence sit in separate silos. Publication Databases feed structured knowledge into the ecosystem layer, available to every cluster without anyone having to broker it.`,
+        access: `Your biggest coordination gap is membrane permeability — outside investors, diaspora talent, and global partners can't find a structured entry point. Professional Identity and Publication Databases give them one, resolved at the supercluster level before any cluster has to manage it.`,
+        conversion: `Your biggest coordination gap is conversion — activity is happening but outcomes aren't compounding. Community Services API and Professional Identity make actor progression visible as structured signal, not anecdote. The system reads conversion, not just activity.`,
       };
-      const body = (GAP_DESC[qa.gap] || 'External data feeds your ecosystem before any actor joins — solving the cold-start problem so new actors see a populated ecosystem from day one.') +
-        ' All external data lives at the supercluster level — available to every cluster, never duplicated.';
+      const body = GAP_DESC[qa.gap] || 'Without external data at the supercluster level, every new ecosystem starts empty. Actors arrive and see nothing. The cold-start problem kills momentum before the platform generates its own signal.';
       return { title: 'What feeds your ecosystem before any actor joins', body };
     }
+    // Step 4: Bots / Continuous enrichment
     case 4: {
-      let body = 'Four autonomous bots write structured signals into your sovereign database continuously. ';
-      if (stalls.includes('S1') || stalls.includes('S7')) body += 'Evidence Ingestion Bot is critical for your configuration — it structures incoming evidence so it informs decisions rather than accumulating as justification. ';
-      if (stalls.includes('S8') || stalls.includes('S9')) body += 'Signal Monitoring Bot detects when activity grows without conversion — essential given your stall pattern. ';
-      if (stalls.includes('S2') || stalls.includes('S5')) body += 'Actor Enrichment Bot enriches profiles from system behaviour rather than self-report — breaking dependency on brokered introductions. ';
-      body += 'Health Monitoring Bot tracks system health across all clusters continuously. Cold-start solved: the platform knows the ecosystem before any actor joins.';
+      const body = 'Every ecosystem has a cold-start problem: the platform only becomes useful once it knows enough about the ecosystem to be useful. The bot network solves this without requiring anyone to manually enter data. Evidence Ingestion Bot reads public sources continuously and writes structured findings to your sovereign database. Actor Enrichment Bot updates profiles from behaviour rather than self-report. Health Monitoring Bot tracks system health across all clusters. By the time your first actor joins, the ecosystem already knows itself.';
       return { title: 'Continuous enrichment', body };
     }
+    // Step 5: MCP Intelligence
     case 5: {
-      const tools = getActiveToolNames(journeyState);
-      const mcpStalls = stallsOnLayer('layer-mcp');
-      let body = `Each tool is a structured call from the AI to your live sovereign database. Active for your configuration: ${tools.slice(0, 6).join(', ')}. `;
-      if (stacks.length > 0) body += `These tools detect ${allStackStr} and surface the leverage entry point — intelligence assembled at runtime, not pre-baked.`;
-      else body += 'Intelligence assembled at runtime — not pre-baked, not static.';
-      if (mcpStalls.length > 0) body += ` This layer directly addresses ${mcpStalls.join(', ')}.`;
+      let body = `Reports get written, circulated, and overtaken by events. By the time a report reaches a board, the ecosystem has moved. This layer replaces reports with live queries. When you ask what is stalling, the system reads current actor behaviour — not last quarter's narrative. When you ask where a founder dropped out, it checks the journey record, not the programme manager's recollection.`;
+      if (allStackBold) body += ` ${allStackBold} lose their fuel source when findings are separated from the process of producing them.`;
       return { title: 'How your ecosystem thinks', body };
     }
+    // Step 6: AI Engine — renamed heading
     case 6: {
-      const PRI_ENGINE = {
-        talent: 'Journey Construction is your primary engine — personalised pathways for every actor.',
-        capital: 'Signal Propagation is your primary engine — surfacing pipeline formation to external capital.',
-        research: 'Role-Aware Reframing is your primary engine — translating research into commercial language.',
-        supply: 'Actor Matching is your primary engine — mapping supply chain capability to procurement signals.',
-        growth: 'Steward Interrogation is your primary engine — live insight into system health.',
-      };
-      let body = 'The AI is the runtime, not a feature. ' + (PRI_ENGINE[qa.priority] || 'All reasoning capabilities active.') + ' Every actor experience is constructed here, from live data, on demand.';
-      body += ' The AI reads signals for every actor type — but for stewards it surfaces something different: not a pathway, but a system health briefing. What is moving. What is stalling. Where intervention would have the most effect. Adaptive governance, not retrospective reporting.';
-      return { title: 'The runtime, not a feature', body };
+      const body = `A founder joins and declares their technology domain. The system reads that against live procurement signals from your ${anchorLabel} anchor and constructs their pathway — not a generic onboarding flow, but a specific sequence of connections, groups, and milestones based on what this ecosystem actually has. A researcher publishes a finding. The system reads it against active founder profiles and surfaces it to the three founders most likely to need it. You interrogate the ecosystem. The system reads the same signals and tells you what is stalling, what is converting, and where one intervention would have the most effect. Same data. Different questions. Different outputs.`;
+      return { title: 'How your ecosystem makes decisions', body };
     }
+    // Step 7: Actor Journeys — anchor-type-driven cards
     case 7: {
-      const journeyStalls = stallsOnLayer('layer-journeys');
-      const fgActors = [];
-      const seen = new Set();
-      (qa.protect || []).forEach(p => {
-        const actor = PROTECT_ACTOR_MAP[p];
-        if (actor && ACTOR_CASCADES[actor] && !seen.has(actor)) { fgActors.push(actor); seen.add(actor); }
-      });
-      if (config.anchorLabel && ACTOR_CASCADES[config.anchorLabel] && !seen.has(config.anchorLabel)) { fgActors.push(config.anchorLabel); seen.add(config.anchorLabel); }
-      if (!seen.has('Stewards')) fgActors.push('Stewards');
-      let body = journeyStalls.length > 0 ? `This layer directly addresses ${journeyStalls.join(', ')} — journey infrastructure changes what the system rewards.` : null;
-      return { title: 'What your actors experience', body, cascadeActors: fgActors.slice(0, 3) };
+      const actorMap = {
+        'University': ['Researchers', 'Founders', 'Stewards'],
+        'Research institute': ['Researchers', 'Founders', 'Stewards'],
+        'Large corporate': ['Founders', config.anchorLabel, 'Stewards'],
+        'Public agency': ['Founders', 'Researchers', 'Stewards'],
+        'Hospital': ['Founders', 'Researchers', 'Stewards'],
+      };
+      const actors = (actorMap[anchorLabel] || ['Founders', 'Researchers', 'Stewards'])
+        .filter(a => ACTOR_CASCADES[a]);
+      return { title: 'What your actors experience', body: null, cascadeActors: actors.slice(0, 3) };
     }
+    // Step 8: Final reveal + steward section
     case 8: {
       let body = `Your sovereign boundary — ${config.configName}. Not a platform you adopt. Infrastructure you own.`;
       if (protectStr) body += ` ${protectStr} — protected by architecture, not by policy.`;
-      if (allStackStr) body += ` This configuration directly addresses ${allStackStr}.`;
+      if (allStackBold) body += ` This configuration directly addresses ${allStackBold}.`;
       body += ' The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem\'s actors.';
-      return { title: config.configName, body, showCTA: true };
+
+      // Steward section data
+      const stewardSection = {
+        heading: 'What you see',
+        subheading: 'STEWARD INTERROGATION',
+        body: `Your ${clusterLabel} is running ${allStackBold || 'independent stall patterns'}. ClusterOS gives you a single interrogation surface against live ecosystem data. Not a dashboard — a diagnostic cockpit. Ask what is stalling. Ask where founders are dropping out. Ask whether your ${anchorLabel} anchor is generating procurement signal or just attending events. The answer is assembled from live signals, not from whatever was last reported.`,
+        bullets: [
+          'Stall detection updates as actor behaviour changes — not when someone writes a report',
+          'Stack analysis surfaces which interventions would break the reinforcing logic',
+          'Board-ready evidence generated from the same data your actors are already producing',
+        ],
+      };
+
+      return { title: config.configName, body, stewardSection, showCTA: true };
     }
     default: return null;
   }
@@ -2542,11 +2539,11 @@ function DigitalOSStage() {
         </div>
       )}
 
-      {/* Annotation panel (steps 1-7) */}
+      {/* Annotation panel (steps 1-8) */}
       {annotation && (
         <div style={schema.annotPanel}>
           <h3 style={schema.annotTitle}>{annotation.title}</h3>
-          {annotation.body && <p style={schema.annotBody}>{annotation.body}</p>}
+          {annotation.body && <p style={schema.annotBody}><BoldText text={annotation.body} /></p>}
           {annotation.cascadeActors && annotation.cascadeActors.map(name => {
             const c = ACTOR_CASCADES[name];
             if (!c) return null;
@@ -2563,8 +2560,25 @@ function DigitalOSStage() {
               </div>
             );
           })}
+
+          {/* Steward section (Step 8 final reveal) */}
+          {annotation.stewardSection && (
+            <div style={schema.stewardSection}>
+              <h3 style={schema.stewardHeading}>{annotation.stewardSection.heading}</h3>
+              <div style={schema.stewardSub}>{annotation.stewardSection.subheading}</div>
+              <p style={schema.stewardBody}><BoldText text={annotation.stewardSection.body} /></p>
+              <ul style={schema.stewardBullets}>
+                {annotation.stewardSection.bullets.map((b, i) => (
+                  <li key={i} style={schema.stewardBullet}>
+                    <span style={{ color: '#c8f0d0', marginRight: '8px' }}>{'\u2022'}</span>{b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {annotation.showCTA && (
-            <a href="/get-started.html" style={s3.ctaButton}>
+            <a href="/get-started.html" style={{ ...s3.ctaButton, marginTop: '24px' }}>
               Talk to us about your configuration
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
                 <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -4551,6 +4565,52 @@ const schema = {
     padding: '0 0 0 2px',
   },
   /* Step navigation */
+  /* Steward section (final reveal) */
+  stewardSection: {
+    marginTop: '24px',
+    borderTop: '2px solid #0c9488',
+    background: '#1e2f45',
+    borderRadius: '8px',
+    padding: '24px',
+  },
+  stewardHeading: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '22px',
+    fontWeight: 400,
+    color: '#e8edf5',
+    marginBottom: '4px',
+  },
+  stewardSub: {
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '9px',
+    fontWeight: 600,
+    letterSpacing: '0.12em',
+    color: '#7dd3c8',
+    marginBottom: '16px',
+  },
+  stewardBody: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '14px',
+    lineHeight: 1.7,
+    color: '#e8edf5',
+    marginBottom: '16px',
+  },
+  stewardBullets: {
+    listStyle: 'none',
+    padding: 0,
+    margin: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+  },
+  stewardBullet: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    lineHeight: 1.5,
+    color: '#e8edf5',
+    paddingLeft: '16px',
+    position: 'relative',
+  },
   stepNav: {
     display: 'flex',
     justifyContent: 'space-between',

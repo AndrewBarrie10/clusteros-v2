@@ -51,11 +51,18 @@ body { min-height: 100vh; }
   .s0-outputs { grid-template-columns: 1fr !important; }
   .s0-cta-btn { width: 100% !important; justify-content: center !important; }
   .stage0-main { padding: 24px !important; }
-  /* Stepper header: centre step counter, hide config badge and back-to-overview */
+  /* Stepper header: hide everything except mobile stepper card's own counter */
   .stepper-header { justify-content: center !important; }
   .stepper-config-badge { display: none !important; }
   .stepper-back-overview { display: none !important; }
-  .stepper-counter { font-size: 11px !important; }
+  .stepper-counter { display: none !important; }
+  /* Cap commentary length on mobile */
+  .digital-body {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 @media (max-width: 600px) {
   .nav-bar-journey { flex-direction: column-reverse !important; gap: 8px !important; padding: 12px 16px !important; }
@@ -2623,9 +2630,9 @@ function DigitalOSStage() {
           {schemaStep >= 1 && schemaStep <= 7 && (dc && dc.inside ? (
             <div>
               <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', color: '#f5d97a', marginBottom: '6px' }}>FROM THE INSIDE</div>
-              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.inside}</p>
+              <p className="digital-body" style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.inside}</p>
               <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', color: '#2a6b5e', marginTop: '16px', marginBottom: '6px' }}>FROM THE OUTSIDE</div>
-              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.outside}</p>
+              <p className="digital-body" style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.outside}</p>
             </div>
           ) : (
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', fontStyle: 'italic' }}>

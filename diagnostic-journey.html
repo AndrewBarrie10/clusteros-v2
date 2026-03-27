@@ -471,15 +471,14 @@ function LeverageCard({ stack, protections, priority, commentary }) {
     .map(p => PROTECT_LEVERAGE[p])
     .filter(Boolean);
 
-  // Use cached commentary if available, otherwise build from stack data
+  // Use cached commentary (parsed 3-part object) if available, otherwise build from stack data
   let diagnosis, consequence, mechanism;
-  if (commentary) {
-    // Commentary is a single text block — use it as the diagnosis, keep default consequence/mechanism
-    diagnosis = commentary;
-    consequence = stack.entry
+  if (commentary && commentary.diagnosis) {
+    diagnosis = commentary.diagnosis;
+    consequence = commentary.consequence || (stack.entry
       ? `The leverage target is ${stack.entry.charAt(0).toLowerCase()}${stack.entry.slice(1)}`
-      : '';
-    mechanism = stack.entry || 'Address the contributing stalls directly.';
+      : '');
+    mechanism = commentary.mechanism || stack.entry || 'Address the contributing stalls directly.';
   } else {
     diagnosis = stack.logic || '';
     consequence = stack.entry
@@ -2938,6 +2937,23 @@ function DiagnosticJourney() {
   }, [phase]);
   const cancelExit = useCallback(() => { setShowExitModal(false); }, []);
 
+  /* ── Parse commentary response into 3 sections ── */
+  function parseCommentary(text) {
+    const sections = { diagnosis: '', consequence: '', mechanism: '' };
+    // Try to split on DIAGNOSIS / CONSEQUENCE / MECHANISM labels
+    const diagMatch = text.match(/DIAGNOSIS[:\s]*(.+?)(?=CONSEQUENCE|$)/is);
+    const consMatch = text.match(/CONSEQUENCE[:\s]*(.+?)(?=MECHANISM|$)/is);
+    const mechMatch = text.match(/MECHANISM[:\s]*(.+?)$/is);
+    if (diagMatch) sections.diagnosis = diagMatch[1].trim();
+    if (consMatch) sections.consequence = consMatch[1].trim();
+    if (mechMatch) sections.mechanism = mechMatch[1].trim();
+    // If parsing failed (no labels found), use full text as diagnosis
+    if (!sections.diagnosis && !sections.consequence && !sections.mechanism) {
+      sections.diagnosis = text.trim();
+    }
+    return sections;
+  }
+
   /* ── Commentary fetch after qualifiers complete ── */
   const handleQualifierComplete = useCallback(() => {
     const stacks = journeyState.detectedStacks || [];
@@ -2950,30 +2966,39 @@ function DiagnosticJourney() {
     const GAP_LABEL_MAP = { discovery: "Actors can't find each other", flow: "Knowledge doesn't flow between groups", access: "Outside actors can't engage", conversion: "Activity isn't converting to outcomes" };
     const PROTECT_LABEL_MAP = { knowledge: 'Local knowledge staying local', ip: 'Institutional IP and research', trust: 'Community relationships and trust', talent: 'Founder and talent pipeline', sovereignty: 'Economic sovereignty' };
 
-    const calls = stacks.map(stack =>
-      fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
+    const calls = stacks.map(stack => {
+      const stallNames = (stack.triggers || []).map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; }).join(' and ');
+      const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'Regional Speciality';
+      const anchorLabel = ANCHOR_LABELS[qa.anchorType] || 'Anchors';
+      const scaleLabel = STAGE_LABEL_MAP[qa.stage] || 'Established';
+      const priorityLabel = PRIORITY_LABEL_MAP[qa.priority] || 'Drive economic growth';
+      const gapLabel = GAP_LABEL_MAP[qa.gap] || '';
+      const protectList = (qa.protect || []).map(p => PROTECT_LABEL_MAP[p] || p).join(', ');
+
+      const prompt = `You are a diagnostic analyst for ClusterOS. A ${clusterLabel} with a ${anchorLabel} anchor has identified the following behavioural stall pattern: ${stack.name} — a reinforcing combination of ${stallNames}. The reinforcing logic is: ${stack.logic || ''}. The leverage entry point is: ${stack.entry || ''}. Their strategic priority is ${priorityLabel}. Their biggest coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their ecosystem is ${scaleLabel} stage.\n\nWrite three short paragraphs — one each for DIAGNOSIS, CONSEQUENCE, and MECHANISM — that are specific to this configuration. DIAGNOSIS: what this stack pattern means for this specific ecosystem type. CONSEQUENCE: what remains locked if this stack is not addressed, given their priority and anchor type. MECHANISM: the specific intervention approach that addresses the entry point, connected to their protection priorities. Be concrete. Do not be generic. Each paragraph 2-3 sentences maximum.`;
+
+      return fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          stackId: stack.id,
-          stackName: stack.name,
-          stalls: stack.triggers || [],
-          clusterType: CLUSTER_TYPE_LABELS[qa.clusterType] || 'Regional Speciality',
-          anchorType: (ANCHOR_LABELS[qa.anchorType] || 'Anchors'),
-          scale: STAGE_LABEL_MAP[qa.stage] || 'Established',
-          priority: PRIORITY_LABEL_MAP[qa.priority] || 'Drive economic growth',
-          gap: GAP_LABEL_MAP[qa.gap] || '',
-          protect: (qa.protect || []).map(p => PROTECT_LABEL_MAP[p] || p),
-        }),
+        body: JSON.stringify({ prompt }),
       })
         .then(r => r.ok ? r.json() : null)
-        .then(data => data ? { stackId: stack.id, commentary: data.commentary || data.text || JSON.stringify(data) } : null)
-        .catch(err => { console.warn(`Commentary fetch failed for ${stack.id}:`, err.message); return null; })
-    );
+        .then(data => {
+          if (!data) return null;
+          const text = data.commentary || data.text || (typeof data === 'string' ? data : '');
+          if (!text) return null;
+          // Parse DIAGNOSIS / CONSEQUENCE / MECHANISM sections
+          const parsed = parseCommentary(text);
+          return { stackId: stack.id, ...parsed };
+        })
+        .catch(err => { console.warn(`Commentary fetch failed for ${stack.id}:`, err.message); return null; });
+    });
 
     Promise.all(calls).then(results => {
       const commentary = {};
-      results.forEach(r => { if (r) commentary[r.stackId] = r.commentary; });
+      results.forEach(r => {
+        if (r) commentary[r.stackId] = { diagnosis: r.diagnosis, consequence: r.consequence, mechanism: r.mechanism };
+      });
       setJourneyState(prev => ({ ...prev, stackCommentary: { ...prev.stackCommentary, ...commentary } }));
       setLoadingCommentary(false);
       setPhase(3);

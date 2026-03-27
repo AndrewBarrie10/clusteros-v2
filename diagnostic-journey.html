@@ -41,6 +41,20 @@ body { min-height: 100vh; }
 @media (min-width: 769px) { .schema-mobile { display: none !important; } }
 @media (max-width: 768px) { .schema-desktop { display: none !important; } }
 @keyframes pulse-dot { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+
+/* Suppress site sticky bar — journey has its own */
+.sticky-bar, .sticky-bar-inner, .sticky-btn { display: none !important; }
+
+/* Mobile responsive — 375px minimum */
+@media (max-width: 600px) {
+  .s0-outputs { grid-template-columns: 1fr !important; }
+  .nav-bar-journey { flex-direction: column-reverse !important; gap: 8px !important; padding: 12px 16px !important; }
+  .nav-bar-journey > div { flex: none !important; width: 100% !important; }
+  .nav-bar-journey button { width: 100% !important; justify-content: center !important; }
+}
+@media (max-width: 480px) {
+  .sticky-sub-label { display: none !important; }
+}
 </style>
 </head>
 <body>
@@ -2598,12 +2612,7 @@ function DigitalOSStage() {
           )}
 
           {annotation.showCTA && (
-            <a href="/get-started.html" style={{ ...s3.ctaButton, marginTop: '24px' }}>
-              Talk to us about your configuration
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
+            <TalkToUsCTA journeyState={journeyState} style={{ ...s3.ctaButton, marginTop: '24px' }} />
           )}
         </div>
         );
@@ -2732,6 +2741,67 @@ function ReportModal({ phase, journeyState, onClose }) {
 }
 
 /* ─── Sticky bar component ─────────────────────────────────────────── */
+/* ─── Talk to us CTA with contact modal ────────────────────────────── */
+function TalkToUsCTA({ journeyState, style }) {
+  const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!name || !email) return;
+    setSending(true);
+    const qa = journeyState.qualifierAnswers || {};
+    const configName = (journeyState.osConfig || {}).configName || '';
+    try {
+      await fetch('https://clusteros-v3-production.up.railway.app/api/v1/contact-request', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          first_name: name, email, cluster_name: '',
+          engagement_type: 'diagnostic-request',
+          message: `Config: ${configName}. Cluster: ${qa.clusterType || ''}. Stacks: ${(journeyState.detectedStacks || []).map(s => s.name).join(', ')}. Stage: digital-os`,
+          submitted_at: new Date().toISOString(),
+        }),
+      });
+    } catch (e) { console.error('Contact request error:', e); }
+    setSent(true);
+  };
+
+  if (sent) {
+    return <span style={{ ...style, background: '#c8f0d0', color: '#09101f', cursor: 'default' }}>We'll be in touch. &rarr;</span>;
+  }
+
+  return (
+    <React.Fragment>
+      <button style={style} onClick={() => setShowModal(true)}>
+        Talk to us about your configuration
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+          <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
+      {showModal && (
+        <div style={sticky.modalOverlay} onClick={() => setShowModal(false)}>
+          <div style={sticky.modal} onClick={e => e.stopPropagation()}>
+            <h3 style={sticky.modalTitle}>Talk to us about your configuration</h3>
+            <div style={sticky.field}>
+              <label style={sticky.label}>Your name</label>
+              <input style={sticky.input} type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Full name" />
+            </div>
+            <div style={sticky.field}>
+              <label style={sticky.label}>Your email</label>
+              <input style={sticky.input} type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="work@example.com" />
+            </div>
+            <button style={{ ...sticky.submitBtn, opacity: (name && email) ? 1 : 0.4 }} onClick={handleSubmit} disabled={sending || !name || !email}>
+              {sending ? 'Sending...' : 'Send →'}
+            </button>
+          </div>
+        </div>
+      )}
+    </React.Fragment>
+  );
+}
+
 function StickyBar({ phase, journeyState }) {
   const [showReportModal, setShowReportModal] = useState(false);
 
@@ -2747,7 +2817,7 @@ function StickyBar({ phase, journeyState }) {
           {/* Right: Get my report */}
           <button style={sticky.btnAmber} onClick={() => setShowReportModal(true)}>
             <span>Get my report</span>
-            <span style={sticky.btnSub}>{reportLabel}</span>
+            <span className="sticky-sub-label" style={sticky.btnSub}>{reportLabel}</span>
           </button>
         </div>
       </div>
@@ -3214,32 +3284,42 @@ function DiagnosticJourney() {
   // Stage 0 — intro screen (no step indicator, no nav, no sticky bar)
   if (phase === -1) {
     return (
-      <div style={styles.shell}>
-        <main style={{ ...styles.main, alignItems: 'center' }}>
+      <div style={{ minHeight: '100vh', background: 'var(--dj-bg)', display: 'flex', flexDirection: 'column' }}>
+        {/* Minimal header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 32px' }}>
+          <a href="/" style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', color: 'var(--dj-chalk)', textDecoration: 'none', letterSpacing: '-0.01em' }}>
+            Cluster<span style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, fontSize: '14px', color: '#2a7a4f' }}>OS</span>
+          </a>
+          <a href="https://clusteros.io" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--dj-chalk-muted)', textDecoration: 'none', letterSpacing: '0.04em' }}>
+            &larr; Back to site
+          </a>
+        </div>
+        {/* Content */}
+        <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px 32px' }}>
           <div style={s0.container}>
-            <h1 style={s0.heading}>A behavioural diagnostic for your innovation ecosystem</h1>
+            <h1 style={s0.heading}>Find out what's holding your ecosystem back.</h1>
             <p style={s0.body}>
-              This diagnostic identifies the behavioural patterns preventing your ecosystem from compounding value. It works by asking you to recognise stalls — substitution behaviours your ecosystem has adopted instead of the outcomes you're trying to produce.
+              Select the behavioural patterns you recognise in your ecosystem. We'll identify the reinforcing dynamics — and show you what to do about them.
             </p>
-            <p style={s0.body}>
-              You will identify stalls, detect reinforcing combinations, and receive a configuration recommendation for your digital infrastructure. Each stage produces a standalone report. The whole journey takes 10–15 minutes.
-            </p>
-            <div style={s0.outputRow}>
+            <div className="s0-outputs" style={s0.outputRow}>
               <div style={s0.outputCard}>
-                <div style={s0.outputLabel}>Behaviours</div>
-                <div style={s0.outputText}>Stall identification and stack detection</div>
+                <div style={s0.outputLabel}>Report</div>
+                <div style={s0.outputText}>Stall profile and stack analysis, emailed to you</div>
               </div>
               <div style={s0.outputCard}>
                 <div style={s0.outputLabel}>Leverage</div>
-                <div style={s0.outputText}>Intervention hypotheses targeted at your specific configuration</div>
+                <div style={s0.outputText}>Intervention hypotheses with confidence ratings</div>
               </div>
               <div style={s0.outputCard}>
                 <div style={s0.outputLabel}>Digital OS</div>
-                <div style={s0.outputText}>A personalised infrastructure recommendation</div>
+                <div style={s0.outputText}>Infrastructure configuration recommendation</div>
               </div>
             </div>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginBottom: '24px' }}>
+              8–12 minutes
+            </p>
             <button style={s0.cta} onClick={() => setPhase(0)}>
-              Begin diagnostic
+              Start the diagnostic
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '8px' }}>
                 <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -3312,7 +3392,7 @@ function DiagnosticJourney() {
 
         {/* ── Navigation bar (hidden on transition cards) ── */}
         {phase !== 1 && phase !== 3 && phase !== 5 && (
-          <nav style={styles.navBar}>
+          <nav className="nav-bar-journey" style={styles.navBar}>
             <div style={styles.navLeft}>
               {!isFirst && (
                 <button style={styles.btnGhost} onClick={goBack}>
@@ -4855,11 +4935,11 @@ const s0 = {
     fontSize: '12px',
     fontWeight: 600,
     letterSpacing: '0.04em',
-    color: '#fff',
-    background: 'var(--steward)',
+    color: '#09101f',
+    background: '#7dd3c8',
     border: 'none',
     borderRadius: '4px',
-    padding: '12px 28px',
+    padding: '14px 32px',
     cursor: 'pointer',
     transition: 'opacity 0.2s',
   },

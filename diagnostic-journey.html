@@ -38,6 +38,8 @@ body { min-height: 100vh; }
 #root { min-height: 100vh; display: flex; flex-direction: column; }
 @media (max-width: 680px) { .stall-grid { grid-template-columns: repeat(2, 1fr) !important; } }
 @media (max-width: 420px) { .stall-grid { grid-template-columns: 1fr !important; } }
+@media (min-width: 769px) { .schema-mobile { display: none !important; } }
+@media (max-width: 768px) { .schema-desktop { display: none !important; } }
 </style>
 </head>
 <body>
@@ -1746,6 +1748,211 @@ function QualifierQuestions({ onComplete }) {
   );
 }
 
+/* ─── Architecture schema SVG (desktop) ────────────────────────────── */
+const SCHEMA_LAYERS = [
+  { id: 'layer-journeys', label: 'ACTOR JOURNEYS', y: 20, h: 80,
+    comps: [
+      { id: 'comp-founder', label: 'Founder Journey' },
+      { id: 'comp-anchor', label: 'Anchor Journey' },
+      { id: 'comp-researcher', label: 'Researcher Journey' },
+      { id: 'comp-steward', label: 'Steward Interrogation' },
+    ]},
+  { id: 'layer-ai', label: 'AI REASONING ENGINE', y: 120, h: 80,
+    comps: [
+      { id: 'comp-journey-construction', label: 'Journey Construction' },
+      { id: 'comp-signal-prop', label: 'Signal Propagation' },
+      { id: 'comp-reframing', label: 'Role-Aware Reframing' },
+      { id: 'comp-actor-matching', label: 'Actor Matching' },
+      { id: 'comp-stall-detection', label: 'Stall Detection' },
+      { id: 'comp-steward-int', label: 'Steward Interrogation' },
+    ]},
+  { id: 'layer-mcp', label: 'MCP INTELLIGENCE SUBSTRATE', y: 220, h: 100,
+    comps: [
+      { id: 'comp-detect-stalls', label: 'detect_stalls()', mono: true },
+      { id: 'comp-leverage', label: 'get_leverage_hypotheses()', mono: true },
+      { id: 'comp-matched', label: 'get_matched_connections()', mono: true },
+      { id: 'comp-propagate', label: 'propagate_signal()', mono: true },
+      { id: 'comp-actor-profile', label: 'get_actor_profile()', mono: true },
+      { id: 'comp-journey-state', label: 'get_journey_state()', mono: true },
+      { id: 'comp-ingest', label: 'ingest_evidence()', mono: true },
+      { id: 'comp-enrich', label: 'enrich_actor_profile()', mono: true },
+      { id: 'comp-steward-diag', label: 'get_steward_diagnostic()', mono: true },
+      { id: 'comp-open-funding', label: 'get_open_funding()', mono: true },
+    ]},
+  { id: 'layer-sovereign', label: 'SOVEREIGN ECOSYSTEM DATABASE + BOT NETWORK', y: 340, h: 100, split: true,
+    sovereign: [
+      { id: 'comp-profiles', label: 'Actor profiles' },
+      { id: 'comp-signals', label: 'Signal history' },
+      { id: 'comp-stall-records', label: 'Stall records' },
+      { id: 'comp-lev-hyp', label: 'Leverage hypotheses' },
+      { id: 'comp-evidence', label: 'Evidence base' },
+      { id: 'comp-journey-st', label: 'Journey state' },
+    ],
+    bots: [
+      { id: 'comp-bot-evidence', label: 'Evidence Ingestion Bot' },
+      { id: 'comp-bot-signal', label: 'Signal Monitoring Bot' },
+      { id: 'comp-bot-enrich', label: 'Actor Enrichment Bot' },
+      { id: 'comp-bot-health', label: 'Health Monitoring Bot' },
+    ]},
+  { id: 'layer-external', label: 'EXTERNAL DATA SOURCES', y: 460, h: 60,
+    comps: [
+      { id: 'comp-govt', label: 'Govt Support Directory' },
+      { id: 'comp-community', label: 'Community Services API' },
+      { id: 'comp-publications', label: 'Publication Databases' },
+      { id: 'comp-professional', label: 'Professional Identity' },
+    ]},
+  { id: 'layer-governance', label: 'FEDERATED GOVERNANCE LAYER', y: 540, h: 50,
+    comps: [
+      { id: 'comp-gov-hierarchy', label: 'Supercluster → Cluster → Group → Actor' },
+      { id: 'comp-gov-access', label: 'Identity-first · Role-based access · Full audit trail' },
+    ]},
+];
+
+function ArchitectureSchemaSVG() {
+  const pad = 20, w = 900;
+  return (
+    <svg viewBox="0 0 900 610" style={{ width: '100%', height: 'auto', display: 'block' }}>
+      {SCHEMA_LAYERS.map(layer => {
+        const isSovereign = layer.split;
+        return (
+          <g key={layer.id}>
+            {/* Layer background */}
+            <rect x={pad} y={layer.y} width={w - pad * 2} height={layer.h}
+              rx="6" fill={isSovereign ? 'rgba(200,240,208,0.15)' : 'var(--dj-surface)'}
+              stroke="var(--dj-border)" strokeWidth="1" />
+            {/* Layer label */}
+            <text x={pad + 12} y={layer.y + 14}
+              fill="var(--steward)" fontFamily="'Geist Mono', monospace"
+              fontSize="8" fontWeight="600" letterSpacing="0.1em">
+              {isSovereign ? '\u2605 ' + layer.label : layer.label}
+            </text>
+
+            {/* Components */}
+            {!isSovereign && layer.comps && (() => {
+              const cols = layer.comps.length;
+              const cw = (w - pad * 2 - 24) / cols;
+              return layer.comps.map((c, ci) => {
+                const cx = pad + 12 + ci * cw;
+                const cy = layer.y + 24;
+                const ch = layer.h - 34;
+                return (
+                  <g key={c.id}>
+                    <rect x={cx} y={cy} width={cw - 4} height={ch}
+                      rx="3" fill="var(--dj-bg)" stroke="var(--dj-border)" strokeWidth="0.8" />
+                    <text x={cx + (cw - 4) / 2} y={cy + ch / 2 + 1}
+                      textAnchor="middle" dominantBaseline="middle"
+                      fill="var(--dj-chalk-dim)"
+                      fontFamily={c.mono ? "'Geist Mono', monospace" : "'Geist', system-ui"}
+                      fontSize={c.mono ? '7' : '8'}>
+                      {c.label}
+                    </text>
+                  </g>
+                );
+              });
+            })()}
+
+            {/* Split layout for sovereign */}
+            {isSovereign && (() => {
+              const splitX = pad + 12;
+              const splitW = (w - pad * 2 - 24) * 0.6;
+              const botX = splitX + splitW + 8;
+              const botW = (w - pad * 2 - 24) * 0.4 - 8;
+              const compY = layer.y + 24;
+              const compH = layer.h - 34;
+              const sovCols = 3;
+              const sovRows = 2;
+              const sovCW = (splitW - 4) / sovCols;
+              const sovCH = (compH - 4) / sovRows;
+              const botCols = 2;
+              const botRows = 2;
+              const botCW = (botW - 4) / botCols;
+              const botCH = (compH - 4) / botRows;
+              return (
+                <React.Fragment>
+                  {/* Sovereign section background */}
+                  <rect x={splitX} y={compY} width={splitW} height={compH}
+                    rx="3" fill="rgba(200,240,208,0.1)" stroke="rgba(42,122,79,0.2)" strokeWidth="0.8" />
+                  {layer.sovereign.map((c, ci) => {
+                    const col = ci % sovCols;
+                    const row = Math.floor(ci / sovCols);
+                    return (
+                      <g key={c.id}>
+                        <rect x={splitX + 2 + col * sovCW} y={compY + 2 + row * sovCH}
+                          width={sovCW - 4} height={sovCH - 4}
+                          rx="2" fill="var(--dj-bg)" stroke="var(--dj-border)" strokeWidth="0.5" />
+                        <text x={splitX + 2 + col * sovCW + (sovCW - 4) / 2}
+                          y={compY + 2 + row * sovCH + (sovCH - 4) / 2 + 1}
+                          textAnchor="middle" dominantBaseline="middle"
+                          fill="var(--dj-chalk-dim)" fontFamily="'Geist', system-ui" fontSize="7.5">
+                          {c.label}
+                        </text>
+                      </g>
+                    );
+                  })}
+                  {/* Bot section */}
+                  <rect x={botX} y={compY} width={botW} height={compH}
+                    rx="3" fill="var(--dj-bg)" stroke="var(--dj-border)" strokeWidth="0.8" />
+                  <text x={botX + 6} y={compY - 2}
+                    fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace"
+                    fontSize="6.5" letterSpacing="0.08em">BOT NETWORK</text>
+                  {layer.bots.map((c, ci) => {
+                    const col = ci % botCols;
+                    const row = Math.floor(ci / botCols);
+                    return (
+                      <g key={c.id}>
+                        <rect x={botX + 2 + col * botCW} y={compY + 2 + row * botCH}
+                          width={botCW - 4} height={botCH - 4}
+                          rx="2" fill="var(--dj-surface)" stroke="var(--dj-border)" strokeWidth="0.5" />
+                        <text x={botX + 2 + col * botCW + (botCW - 4) / 2}
+                          y={compY + 2 + row * botCH + (botCH - 4) / 2 + 1}
+                          textAnchor="middle" dominantBaseline="middle"
+                          fill="var(--dj-chalk-dim)" fontFamily="'Geist', system-ui" fontSize="7">
+                          {c.label}
+                        </text>
+                      </g>
+                    );
+                  })}
+                </React.Fragment>
+              );
+            })()}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/* ─── Architecture schema cards (mobile) ───────────────────────────── */
+function ArchitectureSchemaCards() {
+  return (
+    <div style={schema.cardStack}>
+      {SCHEMA_LAYERS.map(layer => {
+        const isSovereign = layer.split;
+        const allComps = isSovereign
+          ? [...layer.sovereign, ...layer.bots]
+          : (layer.comps || []);
+        return (
+          <div key={layer.id} style={{
+            ...schema.card,
+            borderLeft: isSovereign ? '3px solid var(--signal)' : '1px solid var(--dj-border)',
+          }}>
+            <div style={schema.cardLabel}>{layer.label}</div>
+            <div style={schema.cardPills}>
+              {allComps.map(c => (
+                <span key={c.id} style={{
+                  ...schema.pill,
+                  fontFamily: c.mono ? "'Geist Mono', monospace" : "'Geist', system-ui",
+                  fontSize: c.mono ? '9px' : '10px',
+                }}>{c.label}</span>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /* ─── Stage 3: Digital OS (recommendation only, qualifiers moved) ── */
 function DigitalOSStage() {
   const { journeyState, updateJourneyState } = useJourney();
@@ -1758,7 +1965,10 @@ function DigitalOSStage() {
     }
   }, [journeyState.qualifierAnswers, journeyState.osConfig, journeyState.stalls, journeyState.detectedStacks, updateJourneyState]);
 
+  const [showSchema, setShowSchema] = useState(false);
+
   const reviseFromStart = useCallback(() => {
+    setShowSchema(false);
     updateJourneyState({ osConfig: null, qualifierAnswers: {}, _reviseQualifiers: true });
   }, [updateJourneyState]);
 
@@ -1790,43 +2000,50 @@ function DigitalOSStage() {
 
       <p style={s3.configDescription}>{buildConfigDescription(config)}</p>
 
-      {/* Infrastructure priorities */}
-      <div style={s3.section}>
-        <div style={s3.sectionLabel}>Infrastructure priorities</div>
-        {config.priorities.map((p, i) => (
-          <div key={i} style={s3.priorityCard}>
-            <div style={s3.priorityNum}>{String(i + 1).padStart(2, '0')}</div>
-            <div>
-              <div style={s3.priorityName}>{p.name}</div>
-              <div style={s3.priorityDesc}>{p.desc}</div>
-            </div>
+      {/* Digital OS content — Step 0 dense schema then interactive SVG */}
+      {!showSchema ? (
+        <div style={s3.section}>
+          {/* Step 0: Dense schema placeholder */}
+          <div style={schema.placeholder}>
+            <span style={schema.placeholderLabel}>ClusterOS Digital Infrastructure — full schema</span>
           </div>
-        ))}
-      </div>
+          <p style={schema.orientation}>
+            This is ClusterOS fully deployed — the complete digital and cognitive infrastructure for a regional operating system.
+            Over the next steps we will show you which parts matter most for your {CLUSTER_TYPE_LABELS[(journeyState.qualifierAnswers || {}).clusterType] || 'ecosystem'} and why, starting with the heart of the system.
+          </p>
+          <button style={styles.btnSignal} onClick={() => setShowSchema(true)}>
+            Show me my configuration
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      ) : (
+        <div style={s3.section}>
+          {/* Interactive SVG schema */}
+          <div className="schema-desktop">
+            <ArchitectureSchemaSVG />
+          </div>
+          <div className="schema-mobile">
+            <ArchitectureSchemaCards />
+          </div>
 
-      {/* Membrane diagram */}
-      <div style={s3.section}>
-        <div style={s3.sectionLabel}>Ecosystem membrane</div>
-        <MembraneDiagram config={config} />
-      </div>
-
-      {/* Infrastructure sections */}
-      <InfrastructureSection journeyState={journeyState} config={config} />
-
-      {/* CTA */}
-      <div style={s3.ctaBox}>
-        <h3 style={s3.ctaHeading}>Talk to us about your configuration</h3>
-        <p style={s3.ctaBody}>
-          This diagnostic has identified your stalls, mapped your stacks, and derived an architecture recommendation.
-          The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem's actors.
-        </p>
-        <a href="/get-started.html" style={s3.ctaButton}>
-          Get started
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-            <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </a>
-      </div>
+          {/* CTA */}
+          <div style={s3.ctaBox}>
+            <h3 style={s3.ctaHeading}>Talk to us about your configuration</h3>
+            <p style={s3.ctaBody}>
+              This diagnostic has identified your stalls, mapped your stacks, and derived an architecture recommendation.
+              The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem's actors.
+            </p>
+            <a href="/get-started.html" style={s3.ctaButton}>
+              Get started
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -3393,6 +3610,73 @@ function App() {
   );
   return <DiagnosticJourney />;
 }
+
+/* ─── Schema styles ────────────────────────────────────────────────── */
+const schema = {
+  placeholder: {
+    background: '#0a0f1a',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '8px',
+    padding: '60px 32px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    aspectRatio: '16 / 9',
+    marginBottom: '20px',
+  },
+  placeholderLabel: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '12px',
+    fontWeight: 500,
+    letterSpacing: '0.06em',
+    color: '#576275',
+    textAlign: 'center',
+  },
+  orientation: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '17px',
+    fontWeight: 400,
+    lineHeight: 1.65,
+    color: 'var(--dj-chalk)',
+    letterSpacing: '-0.01em',
+    marginBottom: '24px',
+  },
+  /* Mobile card stack */
+  cardStack: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+  },
+  card: {
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '6px',
+    padding: '12px 14px',
+  },
+  cardLabel: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '9px',
+    fontWeight: 600,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    color: 'var(--steward)',
+    marginBottom: '8px',
+  },
+  cardPills: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '4px',
+  },
+  pill: {
+    fontFamily: "'Geist', system-ui",
+    fontSize: '10px',
+    color: 'var(--dj-chalk-dim)',
+    background: 'var(--dj-bg)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '3px',
+    padding: '3px 7px',
+  },
+};
 
 /* ─── Mount ────────────────────────────────────────────────────────── */
 const root = ReactDOM.createRoot(document.getElementById('root'));

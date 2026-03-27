@@ -1620,14 +1620,12 @@ function InfrastructureSection({ journeyState, config }) {
 }
 
 /* ─── Stage 3: Digital OS ──────────────────────────────────────────── */
-function DigitalOSStage() {
+/* ─── Qualifier questions (standalone, used between Stage 1 and 2) ── */
+function QualifierQuestions({ onComplete }) {
   const { journeyState, updateJourneyState } = useJourney();
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState(journeyState.qualifierAnswers || {});
   const [multiSelect, setMultiSelect] = useState(answers.protect || []);
-  const [showRecommendation, setShowRecommendation] = useState(
-    journeyState.osConfig !== null
-  );
 
   const q = QUALIFIER_QUESTIONS[currentQ];
   const totalQ = QUALIFIER_QUESTIONS.length;
@@ -1652,92 +1650,19 @@ function DigitalOSStage() {
     setAnswers(finalAnswers);
     const config = deriveOSConfig(finalAnswers, journeyState.stalls, journeyState.detectedStacks || []);
     updateJourneyState({ qualifierAnswers: finalAnswers, osConfig: config });
-    setShowRecommendation(true);
-  }, [answers, multiSelect, journeyState.stalls, journeyState.detectedStacks, updateJourneyState]);
+    onComplete();
+  }, [answers, multiSelect, journeyState.stalls, journeyState.detectedStacks, updateJourneyState, onComplete]);
 
   const goBackQ = useCallback(() => {
-    if (showRecommendation) {
-      setShowRecommendation(false);
-      setCurrentQ(totalQ - 1);
-      setMultiSelect(answers.protect || []);
-      updateJourneyState({ osConfig: null });
-    } else if (currentQ > 0) {
+    if (currentQ > 0) {
       const prevQ = currentQ - 1;
       setCurrentQ(prevQ);
       if (QUALIFIER_QUESTIONS[prevQ].multi) {
         setMultiSelect(answers[QUALIFIER_QUESTIONS[prevQ].id] || []);
       }
     }
-  }, [currentQ, showRecommendation, totalQ, answers, updateJourneyState]);
+  }, [currentQ, answers]);
 
-  const reviseFromStart = useCallback(() => {
-    setShowRecommendation(false);
-    setCurrentQ(0);
-    updateJourneyState({ osConfig: null });
-  }, [updateJourneyState]);
-
-  // Show recommendation
-  if (showRecommendation && journeyState.osConfig) {
-    const config = journeyState.osConfig;
-    return (
-      <div style={s3.containerWide}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-          <div style={s3.configBadge}>Your configuration</div>
-          <button style={styles.btnGhost} onClick={reviseFromStart}>
-            Revise answers
-          </button>
-        </div>
-        <h2 style={s3.configName}>{config.configName}</h2>
-        <p style={s3.configSummary}>
-          Based on {journeyState.stalls.length} behavioural stall{journeyState.stalls.length !== 1 ? 's' : ''},{' '}
-          {(journeyState.detectedStacks || []).length} reinforcing stack{(journeyState.detectedStacks || []).length !== 1 ? 's' : ''},{' '}
-          and your qualifier responses.
-        </p>
-
-        <p style={s3.configDescription}>{buildConfigDescription(config)}</p>
-
-        {/* Infrastructure priorities */}
-        <div style={s3.section}>
-          <div style={s3.sectionLabel}>Infrastructure priorities</div>
-          {config.priorities.map((p, i) => (
-            <div key={i} style={s3.priorityCard}>
-              <div style={s3.priorityNum}>{String(i + 1).padStart(2, '0')}</div>
-              <div>
-                <div style={s3.priorityName}>{p.name}</div>
-                <div style={s3.priorityDesc}>{p.desc}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Membrane diagram */}
-        <div style={s3.section}>
-          <div style={s3.sectionLabel}>Ecosystem membrane</div>
-          <MembraneDiagram config={config} />
-        </div>
-
-        {/* Infrastructure sections */}
-        <InfrastructureSection journeyState={journeyState} config={config} />
-
-        {/* CTA */}
-        <div style={s3.ctaBox}>
-          <h3 style={s3.ctaHeading}>Talk to us about your configuration</h3>
-          <p style={s3.ctaBody}>
-            This diagnostic has identified your stalls, mapped your stacks, and derived an architecture recommendation.
-            The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem's actors.
-          </p>
-          <a href="/get-started.html" style={s3.ctaButton}>
-            Get started
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    );
-  }
-
-  // Show qualifier question
   return (
     <div style={s3.container}>
       <div style={s3.qProgress}>
@@ -1819,6 +1744,91 @@ function DigitalOSStage() {
   );
 }
 
+/* ─── Stage 3: Digital OS (recommendation only, qualifiers moved) ── */
+function DigitalOSStage() {
+  const { journeyState, updateJourneyState } = useJourney();
+
+  // Compute osConfig if qualifierAnswers exist but osConfig doesn't
+  useEffect(() => {
+    if (journeyState.qualifierAnswers && Object.keys(journeyState.qualifierAnswers).length > 0 && !journeyState.osConfig) {
+      const config = deriveOSConfig(journeyState.qualifierAnswers, journeyState.stalls, journeyState.detectedStacks || []);
+      updateJourneyState({ osConfig: config });
+    }
+  }, [journeyState.qualifierAnswers, journeyState.osConfig, journeyState.stalls, journeyState.detectedStacks, updateJourneyState]);
+
+  const reviseFromStart = useCallback(() => {
+    updateJourneyState({ osConfig: null, qualifierAnswers: {}, _reviseQualifiers: true });
+  }, [updateJourneyState]);
+
+  if (!journeyState.osConfig) {
+    return (
+      <div style={s3.container}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--dj-chalk-muted)' }}>
+          Computing your configuration...
+        </span>
+      </div>
+    );
+  }
+
+  const config = journeyState.osConfig;
+  return (
+    <div style={s3.containerWide}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+        <div style={s3.configBadge}>Your configuration</div>
+        <button style={styles.btnGhost} onClick={reviseFromStart}>
+          Revise answers
+        </button>
+      </div>
+      <h2 style={s3.configName}>{config.configName}</h2>
+      <p style={s3.configSummary}>
+        Based on {journeyState.stalls.length} behavioural stall{journeyState.stalls.length !== 1 ? 's' : ''},{' '}
+        {(journeyState.detectedStacks || []).length} reinforcing stack{(journeyState.detectedStacks || []).length !== 1 ? 's' : ''},{' '}
+        and your qualifier responses.
+      </p>
+
+      <p style={s3.configDescription}>{buildConfigDescription(config)}</p>
+
+      {/* Infrastructure priorities */}
+      <div style={s3.section}>
+        <div style={s3.sectionLabel}>Infrastructure priorities</div>
+        {config.priorities.map((p, i) => (
+          <div key={i} style={s3.priorityCard}>
+            <div style={s3.priorityNum}>{String(i + 1).padStart(2, '0')}</div>
+            <div>
+              <div style={s3.priorityName}>{p.name}</div>
+              <div style={s3.priorityDesc}>{p.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Membrane diagram */}
+      <div style={s3.section}>
+        <div style={s3.sectionLabel}>Ecosystem membrane</div>
+        <MembraneDiagram config={config} />
+      </div>
+
+      {/* Infrastructure sections */}
+      <InfrastructureSection journeyState={journeyState} config={config} />
+
+      {/* CTA */}
+      <div style={s3.ctaBox}>
+        <h3 style={s3.ctaHeading}>Talk to us about your configuration</h3>
+        <p style={s3.ctaBody}>
+          This diagnostic has identified your stalls, mapped your stacks, and derived an architecture recommendation.
+          The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem's actors.
+        </p>
+        <a href="/get-started.html" style={s3.ctaButton}>
+          Get started
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+            <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Exit confirmation modal ──────────────────────────────────────── */
 function ExitModal({ stage, onConfirm, onCancel }) {
   return (
@@ -1890,21 +1900,23 @@ function ExitSummary({ exitedAt, journeyState }) {
 }
 
 /* ─── Transition card between stages ───────────────────────────────── */
-function TransitionCard({ fromStage, journeyState, onContinue, onStop }) {
+function TransitionCard({ transitionType, journeyState, onContinue, onStop }) {
   const stalls = journeyState.stalls || [];
   const stacks = journeyState.detectedStacks || [];
   const stallNames = stalls.map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; });
+  const qa = journeyState.qualifierAnswers || {};
 
-  if (fromStage === 0) {
+  // Transition: Stage 1 (stalls) → Qualifier questions
+  if (transitionType === 'stalls-to-qualifiers') {
     const stackNames = stacks.map(s => s.name);
     const stallStr = stallNames.join(', ');
     let body = `You've identified ${stalls.length} stall${stalls.length !== 1 ? 's' : ''} — ${stallStr}. `;
     if (stacks.length > 0) {
-      body += `Your ecosystem is running ${stackNames.join(', ')}. Stacks are harder to break than individual stalls because removing one stall does not remove the conditions that sustain it. `;
+      body += `Your ecosystem is running ${stackNames.join(', ')}. `;
     } else {
       body += 'No reinforcing stacks detected — your stalls appear independent. ';
     }
-    body += 'The next stage shows you where to intervene first — and what changes if you do.';
+    body += `Before we show you where to intervene, we need a little more context about your ecosystem. ${QUALIFIER_QUESTIONS.length} quick questions.`;
 
     return (
       <div style={trans.card}>
@@ -1912,7 +1924,7 @@ function TransitionCard({ fromStage, journeyState, onContinue, onStop }) {
         <div style={trans.actions}>
           <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
           <button style={styles.btnSignal} onClick={onContinue}>
-            Continue to Leverage
+            Continue
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
               <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -1922,7 +1934,29 @@ function TransitionCard({ fromStage, journeyState, onContinue, onStop }) {
     );
   }
 
-  if (fromStage === 1) {
+  // Transition: Qualifiers completed → Stage 2 Leverage
+  if (transitionType === 'qualifiers-to-leverage') {
+    const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'your ecosystem';
+    const anchorLabel = ANCHOR_LABELS[qa.anchorType] || 'Anchors';
+    const body = `Thank you. Based on your ${clusterLabel} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor, here is where your leverage is. Your answers will shape everything that follows.`;
+
+    return (
+      <div style={trans.card}>
+        <p style={trans.text}>{body}</p>
+        <div style={trans.actions}>
+          <button style={styles.btnSignal} onClick={onContinue}>
+            See your leverage
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Transition: Stage 2 Leverage → Stage 3 Digital OS
+  if (transitionType === 'leverage-to-os') {
     let target = '';
     let entryText = '';
     if (stacks.length > 0) {
@@ -1954,60 +1988,78 @@ function TransitionCard({ fromStage, journeyState, onContinue, onStop }) {
 }
 
 /* ─── Main app ─────────────────────────────────────────────────────── */
+/* ─── Flow phases:
+     0: behaviours (Stage 1)
+     1: transition stalls→qualifiers
+     2: qualifier questions
+     3: transition qualifiers→leverage
+     4: leverage (Stage 2)
+     5: transition leverage→os
+     6: digital os (Stage 3)
+   ── */
 function DiagnosticJourney() {
-  const [currentStage, setCurrentStage]   = useState(0);
-  const [completedUpTo, setCompletedUpTo] = useState(0);
+  const [phase, setPhase] = useState(0);
+  const [exited, setExited] = useState(false);
+  const [exitedAt, setExitedAt] = useState(null);
   const [showExitModal, setShowExitModal] = useState(false);
-  const [exited, setExited]               = useState(false);
-  const [exitedAt, setExitedAt]           = useState(null);
-  const [showTransition, setShowTransition] = useState(false);
 
   /* ── Carried-forward state ── */
   const [journeyState, setJourneyState] = useState({
-    stalls: [],           // selected stall IDs from Stage 1
-    stacks: [],           // detected stack names from Stage 1
-    leverageHypotheses: [],  // generated in Stage 2
-    qualifierAnswers: {},    // qualifier responses from Stage 3
-    osConfig: null,          // generated in Stage 3
+    stalls: [],
+    stacks: [],
+    leverageHypotheses: [],
+    qualifierAnswers: {},
+    osConfig: null,
   });
 
   const updateJourneyState = useCallback((patch) => {
-    setJourneyState(prev => ({ ...prev, ...patch }));
+    setJourneyState(prev => {
+      const next = { ...prev, ...patch };
+      // Clear internal flag after read
+      delete next._reviseQualifiers;
+      return next;
+    });
   }, []);
 
-  /* ── Navigation ── */
+  // Handle "Revise answers" from Stage 3
+  useEffect(() => {
+    if (journeyState._reviseQualifiers) {
+      setPhase(2); // jump to qualifier questions
+    }
+  }, [journeyState._reviseQualifiers]);
+
+  /* ── Phase navigation ── */
   const goNext = useCallback(() => {
-    // Intercept stages 0 and 1 to show transition card first
-    if ((currentStage === 0 || currentStage === 1) && !showTransition) {
-      setShowTransition(true);
-      return;
-    }
-    setShowTransition(false);
-    const next = currentStage + 1;
-    if (next < STAGES.length) {
-      setCompletedUpTo(prev => Math.max(prev, next));
-      setCurrentStage(next);
-    }
-  }, [currentStage, showTransition]);
+    if (phase === 0) setPhase(1);       // behaviours → transition
+    else if (phase === 1) setPhase(2);  // transition → qualifiers
+    else if (phase === 2) setPhase(3);  // qualifiers done → transition (called by QualifierQuestions onComplete)
+    else if (phase === 3) setPhase(4);  // transition → leverage
+    else if (phase === 4) setPhase(5);  // leverage → transition
+    else if (phase === 5) setPhase(6);  // transition → digital os
+  }, [phase]);
 
   const goBack = useCallback(() => {
-    if (showTransition) { setShowTransition(false); return; }
-    if (currentStage > 0) setCurrentStage(currentStage - 1);
-  }, [currentStage, showTransition]);
+    if (phase === 1) setPhase(0);       // transition → behaviours
+    else if (phase === 2) setPhase(0);  // qualifiers → behaviours (back to stall selection)
+    else if (phase === 3) setPhase(2);  // transition → qualifiers
+    else if (phase === 4) setPhase(3);  // leverage → transition (which auto-shows post-qualifier)
+    else if (phase === 5) setPhase(4);  // transition → leverage
+    else if (phase === 6) setPhase(4);  // digital os → leverage
+  }, [phase]);
 
-  const requestExit = useCallback(() => {
-    setShowExitModal(true);
-  }, []);
-
+  const requestExit = useCallback(() => { setShowExitModal(true); }, []);
   const confirmExit = useCallback(() => {
     setShowExitModal(false);
-    setExitedAt(currentStage);
+    // Map phase to stage for exit summary
+    const stageIndex = phase <= 1 ? 0 : phase <= 3 ? 0 : phase <= 5 ? 1 : 2;
+    setExitedAt(stageIndex);
     setExited(true);
-  }, [currentStage]);
+  }, [phase]);
+  const cancelExit = useCallback(() => { setShowExitModal(false); }, []);
 
-  const cancelExit = useCallback(() => {
-    setShowExitModal(false);
-  }, []);
+  // Map phase to stage index for indicators
+  const currentStage = phase <= 2 ? 0 : phase <= 4 ? 1 : 2;
+  const completedUpTo = phase >= 4 ? (phase >= 6 ? 2 : 1) : 0;
 
   /* ── Context value ── */
   const ctx = useMemo(() => ({
@@ -2023,9 +2075,38 @@ function DiagnosticJourney() {
     return <ExitSummary exitedAt={exitedAt} journeyState={journeyState} />;
   }
 
-  const stage    = STAGES[currentStage];
-  const isFirst  = currentStage === 0;
-  const isLast   = currentStage === STAGES.length - 1;
+  const stage = STAGES[currentStage];
+  const isFirst = phase === 0;
+  const isLast = phase === 6;
+
+  // Determine what to show in main content area
+  let mainContent;
+  if (phase === 0) {
+    mainContent = <BehavioursStage />;
+  } else if (phase === 1) {
+    mainContent = (
+      <TransitionCard transitionType="stalls-to-qualifiers" journeyState={journeyState}
+        onContinue={goNext}
+        onStop={() => { console.log('stop-behaviours'); setExitedAt(0); setExited(true); }} />
+    );
+  } else if (phase === 2) {
+    mainContent = <QualifierQuestions onComplete={() => setPhase(3)} />;
+  } else if (phase === 3) {
+    mainContent = (
+      <TransitionCard transitionType="qualifiers-to-leverage" journeyState={journeyState}
+        onContinue={goNext} onStop={() => {}} />
+    );
+  } else if (phase === 4) {
+    mainContent = <LeverageStage />;
+  } else if (phase === 5) {
+    mainContent = (
+      <TransitionCard transitionType="leverage-to-os" journeyState={journeyState}
+        onContinue={goNext}
+        onStop={() => { console.log('stop-leverage'); setExitedAt(1); setExited(true); }} />
+    );
+  } else {
+    mainContent = <DigitalOSStage />;
+  }
 
   return (
     <JourneyContext.Provider value={ctx}>
@@ -2035,23 +2116,7 @@ function DiagnosticJourney() {
 
         {/* ── Stage content area ── */}
         <main style={styles.main}>
-          {showTransition ? (
-            <TransitionCard
-              fromStage={currentStage}
-              journeyState={journeyState}
-              onContinue={goNext}
-              onStop={() => {
-                console.log(currentStage === 0 ? 'stop-behaviours' : 'stop-leverage');
-                // TODO: wire to email capture / report generation
-                setExitedAt(currentStage);
-                setExited(true);
-              }}
-            />
-          ) : currentStage === 0 ? <BehavioursStage />
-            : currentStage === 1 ? <LeverageStage />
-            : currentStage === 2 ? <DigitalOSStage />
-            : <StagePlaceholder stage={stage} />
-          }
+          {mainContent}
         </main>
 
         {/* ── Navigation bar ── */}
@@ -2072,16 +2137,13 @@ function DiagnosticJourney() {
             </button>
           </div>
           <div style={styles.navRight}>
-            {!isLast ? (
+            {/* Show Continue only during stage content phases (behaviours=0, leverage=4) */}
+            {(phase === 0 || phase === 4) && (
               <button style={styles.btnSignal} onClick={goNext}>
                 Continue
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
                   <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-              </button>
-            ) : (
-              <button style={styles.btnSignal} onClick={goNext}>
-                Finish
               </button>
             )}
           </div>

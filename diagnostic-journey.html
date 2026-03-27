@@ -2337,24 +2337,35 @@ function buildStepAnnotation(step, journeyState, config) {
     ? (protections.length === 1 ? protections[0] : protections.slice(0, -1).join(', ') + ' and ' + protections[protections.length - 1])
     : '';
 
+  // Helper: get stall names mapped to a specific layer
+  const stallsOnLayer = (layerId) => stalls
+    .filter(id => STALL_LAYER_MAP[id] === layerId)
+    .map(id => { const s = STALLS.find(x => x.id === id); return s ? `${id} ${s.name}` : id; });
+  const stackNames = stacks.map(s => s.name);
+  const allStackStr = stackNames.length > 0 ? stackNames.join(', ') : '';
+
   switch (step) {
     case 1: {
+      const sovStalls = stallsOnLayer('layer-sovereign');
       let body = `The heart of your ${config.configName}. This sovereign database holds everything your ${clusterLabel} knows — structured around five domains. `;
-      body += `Structure tracks your ${clusterLabel} hierarchy from supercluster down to individual pathways and events. `;
-      body += `Actors holds profiles for every participant including your ${anchorLabel} anchor, with journey states that show where each actor is and where they are heading. `;
-      if (stacks.length > 0) body += `Intelligence holds the stall records and leverage hypotheses your diagnostic has already identified — ${stacks[0].name} is recorded here as a structural finding, not an anecdote. `;
-      else if (stalls.length > 0) body += `Intelligence holds the stall records your diagnostic has identified — ${stalls.length} behavioural patterns recorded as structural findings, not anecdotes. `;
-      body += 'Signals tracks what the system is reading in real time — behavioural patterns, health scores, pipeline formation.';
+      if (stacks.length > 0) {
+        body += `Your ${allStackStr} stack${stacks.length > 1 ? 's' : ''} persist${stacks.length === 1 ? 's' : ''} because evidence and narrative are interchangeable. The Sovereign Database separates structured evidence from narrative — ${stacks[0].name} loses its reinforcement mechanism when evidence has a record that exists independently of the story told about it. `;
+      } else if (sovStalls.length > 0) {
+        body += `This layer directly addresses ${sovStalls.join(', ')} — these stall patterns become visible and addressable when the database holds structured records rather than anecdotes. `;
+      }
+      body += `Actors holds profiles for every participant including your ${anchorLabel} anchor. Signals tracks what the system reads in real time — behavioural patterns, health scores, pipeline formation.`;
       return { title: `The heart of your ${config.configName}`, body };
     }
     case 2: {
+      const govStalls = stallsOnLayer('layer-governance');
       let body = '';
       if (stalls.includes('S4') || stalls.includes('S6'))
-        body = 'Incumbent Lock requires governance infrastructure that makes value circulation enforceable — the audit trail records what flows across the boundary and under what terms.';
+        body = `Incumbent Lock requires governance infrastructure that makes value circulation enforceable — the audit trail records what flows across the boundary and under what terms.`;
       else if (stalls.includes('S2'))
         body = 'Coordinating stall means alignment without accountability — identity-first governance changes this. Every actor, every action, fully auditable.';
       else
         body = 'Identity-first governance at every level — Supercluster \u2192 Cluster \u2192 Group \u2192 Actor. Every actor holds one system identity. Permissions are explicit, inherited, and auditable.';
+      if (govStalls.length > 0) body += ` This layer directly addresses ${govStalls.join(', ')}.`;
       if ((qa.protect || []).includes('sovereignty'))
         body += ` Economic sovereignty is enforced at the governance layer — no data leaves the ${clusterLabel} boundary without consent recorded here.`;
       return { title: 'The boundary that protects it', body };
@@ -2380,9 +2391,11 @@ function buildStepAnnotation(step, journeyState, config) {
     }
     case 5: {
       const tools = getActiveToolNames(journeyState);
+      const mcpStalls = stallsOnLayer('layer-mcp');
       let body = `Each tool is a structured call from the AI to your live sovereign database. Active for your configuration: ${tools.slice(0, 6).join(', ')}. `;
-      if (stacks.length > 0) body += `These tools detect ${stacks[0].name} and surface the leverage entry point — intelligence assembled at runtime, not pre-baked.`;
+      if (stacks.length > 0) body += `These tools detect ${allStackStr} and surface the leverage entry point — intelligence assembled at runtime, not pre-baked.`;
       else body += 'Intelligence assembled at runtime — not pre-baked, not static.';
+      if (mcpStalls.length > 0) body += ` This layer directly addresses ${mcpStalls.join(', ')}.`;
       return { title: 'How your ecosystem thinks', body };
     }
     case 6: {
@@ -2398,6 +2411,7 @@ function buildStepAnnotation(step, journeyState, config) {
       return { title: 'The runtime, not a feature', body };
     }
     case 7: {
+      const journeyStalls = stallsOnLayer('layer-journeys');
       const fgActors = [];
       const seen = new Set();
       (qa.protect || []).forEach(p => {
@@ -2406,11 +2420,13 @@ function buildStepAnnotation(step, journeyState, config) {
       });
       if (config.anchorLabel && ACTOR_CASCADES[config.anchorLabel] && !seen.has(config.anchorLabel)) { fgActors.push(config.anchorLabel); seen.add(config.anchorLabel); }
       if (!seen.has('Stewards')) fgActors.push('Stewards');
-      return { title: 'What your actors experience', body: null, cascadeActors: fgActors.slice(0, 3) };
+      let body = journeyStalls.length > 0 ? `This layer directly addresses ${journeyStalls.join(', ')} — journey infrastructure changes what the system rewards.` : null;
+      return { title: 'What your actors experience', body, cascadeActors: fgActors.slice(0, 3) };
     }
     case 8: {
       let body = `Your sovereign boundary — ${config.configName}. Not a platform you adopt. Infrastructure you own.`;
       if (protectStr) body += ` ${protectStr} — protected by architecture, not by policy.`;
+      if (allStackStr) body += ` This configuration directly addresses ${allStackStr}.`;
       body += ' The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem\'s actors.';
       return { title: config.configName, body, showCTA: true };
     }
@@ -2786,19 +2802,20 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop }) {
 
   // Transition: Stage 1 (stalls) → Qualifier questions
   if (transitionType === 'stalls-to-qualifiers') {
-    const stackNames = stacks.map(s => s.name);
-    const stallStr = stallNames.join(', ');
-    let body = `You've identified ${stalls.length} stall${stalls.length !== 1 ? 's' : ''} — ${stallStr}. `;
-    if (stacks.length > 0) {
-      body += `Your ecosystem is running ${stackNames.join(', ')}. `;
-    } else {
-      body += 'No reinforcing stacks detected — your stalls appear independent. ';
-    }
-    body += `Before we show you where to intervene, we need a little more context about your ecosystem. ${QUALIFIER_QUESTIONS.length} quick questions.`;
-
     return (
       <div style={trans.card}>
-        <p style={trans.text}>{body}</p>
+        {stacks.length > 0 ? (
+          <div style={{ marginBottom: '20px' }}>
+            {stacks.map(s => (
+              <p key={s.id} style={trans.text}>{s.name} — {s.logic ? s.logic.charAt(0).toLowerCase() + s.logic.slice(1, s.logic.indexOf('.') + 1) : ''}</p>
+            ))}
+          </div>
+        ) : (
+          <p style={trans.text}>{stalls.length} independent stall{stalls.length !== 1 ? 's' : ''} identified — {stallNames.join(', ')}. No reinforcing combinations detected.</p>
+        )}
+        <p style={trans.subtext}>
+          These patterns don't resolve through individual interventions. To identify where leverage is, we need to understand your ecosystem's configuration. {QUALIFIER_QUESTIONS.length} questions.
+        </p>
         <div style={trans.actions}>
           <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
           <button style={styles.btnSignal} onClick={onContinue}>
@@ -2816,7 +2833,8 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop }) {
   if (transitionType === 'qualifiers-to-leverage') {
     const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'your ecosystem';
     const anchorLabel = ANCHOR_LABELS[qa.anchorType] || 'Anchors';
-    const body = `Thank you. Based on your ${clusterLabel} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor, here is where your leverage is. Your answers will shape everything that follows.`;
+    const stackNameList = stacks.length > 0 ? stacks.map(s => s.name).join(', ') : 'independent stall patterns';
+    const body = `You've told us enough to locate your leverage. ${articleFor(clusterLabel)} ${clusterLabel} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor running ${stackNameList} has a specific intervention entry point. Here's where it is.`;
 
     return (
       <div style={trans.card}>
@@ -2835,16 +2853,8 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop }) {
 
   // Transition: Stage 2 Leverage → Stage 3 Digital OS
   if (transitionType === 'leverage-to-os') {
-    let target = '';
-    let entryText = '';
-    if (stacks.length > 0) {
-      target = stacks[0].name;
-      entryText = stacks[0].entry ? ` — ${stacks[0].entry.charAt(0).toLowerCase()}${stacks[0].entry.slice(1)}` : '';
-    } else if (stalls.length > 0) {
-      target = stallNames[0];
-      entryText = ' — addressing the stall patterns independently';
-    }
-    const body = `Your leverage hypothesis targets ${target}${entryText}. The next stage translates this into infrastructure — what your ecosystem needs to be built on, configured for your specific context.`;
+    const allStackNames = stacks.length > 0 ? stacks.map(s => s.name).join(', ') : stallNames.join(', ');
+    const body = `Your leverage hypotheses target ${allStackNames} — the reinforcing logic between stalls, not individual stalls in isolation. The next stage translates this into infrastructure: what your ecosystem needs to be built on, configured for your specific context.`;
 
     return (
       <div style={trans.card}>
@@ -4373,8 +4383,15 @@ const trans = {
     fontWeight: 400,
     lineHeight: 1.6,
     color: 'var(--dj-chalk)',
-    marginBottom: '28px',
+    marginBottom: '12px',
     letterSpacing: '-0.01em',
+  },
+  subtext: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '14px',
+    lineHeight: 1.6,
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '24px',
   },
   actions: {
     display: 'flex',

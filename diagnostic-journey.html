@@ -1921,7 +1921,7 @@ const SCHEMA_LAYERS = [
       { id: 'comp-stall-detection', label: 'Stall Detection' },
       { id: 'comp-steward-int', label: 'Steward Interrogation' },
     ]},
-  { id: 'layer-mcp', label: 'MCP INTELLIGENCE SUBSTRATE', y: 220, h: 100,
+  { id: 'layer-mcp', label: 'MCP INTELLIGENCE SUBSTRATE', y: 220, h: 100, cols: 5,
     comps: [
       { id: 'comp-detect-stalls', label: 'detect_stalls()', mono: true },
       { id: 'comp-leverage', label: 'get_leverage_hypotheses()', mono: true },
@@ -1984,21 +1984,25 @@ function ArchitectureSchemaSVG() {
 
             {/* Components */}
             {!isSovereign && layer.comps && (() => {
-              const cols = layer.comps.length;
-              const cw = (w - pad * 2 - 24) / cols;
+              const perRow = layer.cols || layer.comps.length;
+              const rows = Math.ceil(layer.comps.length / perRow);
+              const cw = (w - pad * 2 - 24) / perRow;
+              const totalH = layer.h - 34;
+              const rowH = (totalH - (rows - 1) * 4) / rows;
               return layer.comps.map((c, ci) => {
-                const cx = pad + 12 + ci * cw;
-                const cy = layer.y + 24;
-                const ch = layer.h - 34;
+                const col = ci % perRow;
+                const row = Math.floor(ci / perRow);
+                const cx = pad + 12 + col * cw;
+                const cy = layer.y + 24 + row * (rowH + 4);
                 return (
                   <g key={c.id}>
-                    <rect x={cx} y={cy} width={cw - 4} height={ch}
+                    <rect x={cx} y={cy} width={cw - 4} height={rowH}
                       rx="3" fill="var(--dj-bg)" stroke="var(--dj-border)" strokeWidth="0.8" />
-                    <text x={cx + (cw - 4) / 2} y={cy + ch / 2 + 1}
+                    <text x={cx + (cw - 4) / 2} y={cy + rowH / 2 + 1}
                       textAnchor="middle" dominantBaseline="middle"
                       fill="var(--dj-chalk-dim)"
                       fontFamily={c.mono ? "'Geist Mono', monospace" : "'Geist', system-ui"}
-                      fontSize={c.mono ? '7' : '8'}>
+                      fontSize={c.mono ? '6.5' : '8'}>
                       {c.label}
                     </text>
                   </g>

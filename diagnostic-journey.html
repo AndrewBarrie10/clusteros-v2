@@ -1749,6 +1749,161 @@ function QualifierQuestions({ onComplete }) {
 }
 
 /* ─── Architecture schema SVG (desktop) ────────────────────────────── */
+/* ─── Embedded infrastructure diagram from digital-infrastructure ──── */
+function InfrastructureDiagramEmbed() {
+  return (
+    <div style={{ width: '100%', background: 'var(--dj-surface)', border: '1px solid var(--dj-border)', borderRadius: '6px', overflow: 'hidden' }}>
+      <svg viewBox="0 0 960 680" style={{ width: '100%', height: 'auto', display: 'block' }} xmlns="http://www.w3.org/2000/svg" fontFamily="'Geist Mono', monospace">
+        <defs>
+          <marker id="di-arrow-signal" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c8f0d0"/></marker>
+          <marker id="di-arrow-chalk" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1a1a1a"/></marker>
+          <marker id="di-arrow-muted" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7a95b0"/></marker>
+        </defs>
+
+        {/* Background layers */}
+        <rect x="0" y="0" width="960" height="680" fill="#f7f4ef"/>
+        <rect x="0" y="10" width="960" height="110" fill="#111c2e" opacity="0.7"/>
+        <rect x="0" y="130" width="960" height="110" fill="#0d1625" opacity="0.9"/>
+        <rect x="0" y="250" width="960" height="110" fill="#111c2e" opacity="0.7"/>
+        <rect x="0" y="370" width="960" height="110" fill="#0d1625" opacity="0.9"/>
+        <rect x="0" y="490" width="960" height="110" fill="#111c2e" opacity="0.7"/>
+        <rect x="0" y="600" width="960" height="80" fill="#0d1625" opacity="0.9"/>
+
+        {/* Layer labels */}
+        <text x="14" y="76" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,76)">ACTOR EXPERIENCE</text>
+        <text x="14" y="196" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,196)">INTELLIGENCE</text>
+        <text x="14" y="316" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,316)">PROTOCOL</text>
+        <text x="14" y="436" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,436)">DATA LAYER</text>
+        <text x="14" y="556" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,556)">EXTERNAL SIGNALS</text>
+        <text x="14" y="656" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,656)">GOVERNANCE</text>
+        <line x1="30" y1="10" x2="30" y2="670" stroke="#ddd8cf" strokeWidth="0.5"/>
+
+        {/* Layer 1: Actor Journeys */}
+        <rect x="50" y="22" width="170" height="96" rx="2" fill="#111c2e" stroke="#ddd8cf" strokeWidth="1"/>
+        <rect x="50" y="22" width="170" height="18" rx="2" fill="#1e3a28"/><rect x="50" y="34" width="170" height="6" fill="#1e3a28"/>
+        <text x="135" y="34" fill="#c8f0d0" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">FOUNDER JOURNEY</text>
+        <text x="60" y="58" fill="#c2cfe0" fontSize="7.5">Personalised pathway</text>
+        <text x="60" y="72" fill="#c2cfe0" fontSize="7.5">Step unlock logic</text>
+        <text x="60" y="86" fill="#c2cfe0" fontSize="7.5">Matched connections</text>
+        <text x="60" y="100" fill="#c2cfe0" fontSize="7.5">Support programme alerts</text>
+        <text x="60" y="113" fill="#3a5570" fontSize="7" fontStyle="italic">Generated at runtime</text>
+
+        <rect x="240" y="22" width="170" height="96" rx="2" fill="#111c2e" stroke="#ddd8cf" strokeWidth="1"/>
+        <rect x="240" y="22" width="170" height="18" rx="2" fill="#2e2a14"/><rect x="240" y="34" width="170" height="6" fill="#2e2a14"/>
+        <text x="325" y="34" fill="#f5d97a" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">ANCHOR JOURNEY</text>
+        <text x="250" y="58" fill="#c2cfe0" fontSize="7.5">Capability scouting</text>
+        <text x="250" y="72" fill="#c2cfe0" fontSize="7.5">RFI signal management</text>
+        <text x="250" y="86" fill="#c2cfe0" fontSize="7.5">Supply chain visibility</text>
+        <text x="250" y="100" fill="#c2cfe0" fontSize="7.5">No premature disclosure</text>
+        <text x="250" y="113" fill="#3a5570" fontSize="7" fontStyle="italic">Generated at runtime</text>
+
+        <rect x="430" y="22" width="170" height="96" rx="2" fill="#111c2e" stroke="#ddd8cf" strokeWidth="1"/>
+        <rect x="430" y="22" width="170" height="18" rx="2" fill="#162e2d"/><rect x="430" y="34" width="170" height="6" fill="#162e2d"/>
+        <text x="515" y="34" fill="#7dd3c8" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">RESEARCHER JOURNEY</text>
+        <text x="440" y="58" fill="#c2cfe0" fontSize="7.5">Demand signal translation</text>
+        <text x="440" y="72" fill="#c2cfe0" fontSize="7.5">Commercial opportunity map</text>
+        <text x="440" y="86" fill="#c2cfe0" fontSize="7.5">IP boundary controls</text>
+        <text x="440" y="100" fill="#c2cfe0" fontSize="7.5">Research partner matching</text>
+        <text x="440" y="113" fill="#3a5570" fontSize="7" fontStyle="italic">Generated at runtime</text>
+
+        <rect x="620" y="22" width="310" height="96" rx="2" fill="#111c2e" stroke="#c8f0d0" strokeWidth="1.5"/>
+        <rect x="620" y="22" width="310" height="18" rx="2" fill="#f0ece4"/><rect x="620" y="34" width="310" height="6" fill="#f0ece4"/>
+        <text x="775" y="34" fill="#1a1a1a" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">STEWARD INTERROGATION</text>
+        <text x="630" y="58" fill="#c2cfe0" fontSize="7.5">System health signals (4 per cluster)</text>
+        <text x="630" y="72" fill="#c2cfe0" fontSize="7.5">Stall detection · Stack analysis</text>
+        <text x="630" y="86" fill="#c2cfe0" fontSize="7.5">Open-ended diagnostic interrogation</text>
+        <text x="630" y="100" fill="#c2cfe0" fontSize="7.5">Leverage hypothesis surfacing</text>
+        <text x="630" y="113" fill="#3a5570" fontSize="7" fontStyle="italic">Not a dashboard — questions nobody designed for</text>
+
+        {/* Layer 2: AI Reasoning Engine */}
+        <rect x="50" y="142" width="880" height="88" rx="2" fill="#1a3a28"/>
+        <text x="490" y="163" fill="#c8f0d0" fontSize="8" fontWeight="500" letterSpacing="1.5" textAnchor="middle">AI REASONING ENGINE</text>
+        <line x1="50" y1="170" x2="930" y2="170" stroke="#2a5038" strokeWidth="0.5"/>
+        <text x="140" y="190" fill="#7ecf96" fontSize="7.5" textAnchor="middle">Journey Construction</text>
+        <text x="280" y="190" fill="#7ecf96" fontSize="7.5" textAnchor="middle">Signal Propagation</text>
+        <text x="420" y="190" fill="#7ecf96" fontSize="7.5" textAnchor="middle">Role-Aware Reframing</text>
+        <text x="560" y="190" fill="#7ecf96" fontSize="7.5" textAnchor="middle">Actor Matching</text>
+        <text x="700" y="190" fill="#7ecf96" fontSize="7.5" textAnchor="middle">Stall Detection</text>
+        <text x="840" y="190" fill="#7ecf96" fontSize="7.5" textAnchor="middle">Steward Interrogation</text>
+        <text x="490" y="223" fill="#c8f0d0" fontSize="7" textAnchor="middle">The AI is the runtime, not a feature. Every actor experience is constructed here, from live data, on demand.</text>
+
+        {/* Layer 3: MCP Substrate */}
+        <rect x="50" y="262" width="880" height="98" rx="2" fill="#111c2e" stroke="#1a1a1a" strokeWidth="1.5"/>
+        <rect x="50" y="262" width="880" height="16" rx="2" fill="#f0ece4"/><rect x="50" y="272" width="880" height="6" fill="#f0ece4"/>
+        <text x="490" y="273" fill="#1a1a1a" fontSize="7.5" fontWeight="500" letterSpacing="1.5" textAnchor="middle">MODEL CONTEXT PROTOCOL (MCP) — INTELLIGENCE SUBSTRATE</text>
+        {[['get_actor_profile()',65],['get_cluster_signals()',205],['detect_stalls()',345],['get_matched_connections()',485],['propagate_signal()',625],['get_steward_diagnostic()',765]].map(([t,x])=>(
+          <g key={t}><rect x={x} y="288" width={x===765?150:130} height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" strokeWidth="0.8"/>
+          <text x={x+(x===765?75:65)} y="301" fill="#c8f0d0" fontSize="7" textAnchor="middle" fontWeight="500">{t}</text></g>
+        ))}
+        {[['get_journey_state()',65],['search_support_programmes()',205],['get_open_funding()',345],['ingest_evidence()',485],['enrich_actor_profile()',625],['get_leverage_hypotheses()',765]].map(([t,x])=>(
+          <g key={t}><rect x={x} y="316" width={x===765?150:130} height="20" rx="2" fill="#0d1625" stroke="#ddd8cf" strokeWidth="0.8"/>
+          <text x={x+(x===765?75:65)} y="329" fill="#c8f0d0" fontSize="7" textAnchor="middle" fontWeight="500">{t}</text></g>
+        ))}
+        <text x="490" y="354" fill="#3a5570" fontSize="7" textAnchor="middle">Each tool is a structured call from the AI to the live database. Intelligence is not pre-baked — it is assembled from real data, at the moment it is needed.</text>
+
+        {/* Layer 4: Sovereign Database + Bots */}
+        <rect x="46" y="378" width="458" height="106" rx="4" fill="none" stroke="#c8f0d0" strokeWidth="1.5" opacity="0.6"/>
+        <rect x="50" y="382" width="450" height="98" rx="2" fill="#0d1f14" stroke="#2a7a4f" strokeWidth="1.5"/>
+        <rect x="50" y="382" width="450" height="20" rx="2" fill="#1e3a28"/><rect x="50" y="396" width="450" height="6" fill="#1e3a28"/>
+        <text x="62" y="395" fill="#c8f0d0" fontSize="9" fontWeight="700">★</text>
+        <text x="295" y="396" fill="#c8f0d0" fontSize="8.5" fontWeight="700" letterSpacing="1.5" textAnchor="middle">SOVEREIGN ECOSYSTEM DATABASE</text>
+        <text x="65" y="416" fill="#c8f0d0" fontSize="7.5" fontWeight="500">Supercluster  ·  Clusters  ·  Groups  ·  Actors</text>
+        <text x="65" y="430" fill="#a8c4b0" fontSize="7.5">Actor profiles  ·  Signal history  ·  Journey state  ·  Evidence base</text>
+        <text x="65" y="444" fill="#a8c4b0" fontSize="7.5">Diagnostic outputs  ·  Stall records  ·  Leverage hypotheses</text>
+        <text x="65" y="460" fill="#5a8a6a" fontSize="7">One dedicated instance per regional EDA. Data does not leave the regional tenant.</text>
+        <text x="65" y="472" fill="#5a8a6a" fontSize="7">No cross-region data sharing. Full role-based access control. Sovereign by design.</text>
+
+        <rect x="515" y="382" width="415" height="98" rx="2" fill="#111c2e" stroke="#ddd8cf" strokeWidth="1"/>
+        <rect x="515" y="382" width="415" height="16" rx="2" fill="#1e3a28"/><rect x="515" y="392" width="415" height="6" fill="#1e3a28"/>
+        <text x="722" y="393" fill="#c8f0d0" fontSize="7.5" fontWeight="500" letterSpacing="1" textAnchor="middle">AUTONOMOUS BOT NETWORK</text>
+        {[['Evidence\nIngestion Bot',528],['Signal\nMonitoring Bot',628],['Actor\nEnrichment Bot',728],['Health\nMonitoring Bot',828]].map(([t,x])=>{
+          const lines=t.split('\n'); return (
+          <g key={t}><rect x={x} y="406" width="90" height="34" rx="2" fill="#0d1625" stroke="#ddd8cf" strokeWidth="0.8"/>
+          <text x={x+45} y="420" fill="#c8f0d0" fontSize="7" textAnchor="middle" fontWeight="500">{lines[0]}</text>
+          <text x={x+45} y="431" fill="#c8f0d0" fontSize="7" textAnchor="middle" fontWeight="500">{lines[1]}</text></g>);
+        })}
+        <text x="722" y="460" fill="#3a5570" fontSize="7" textAnchor="middle">Scheduled AI agents. Write structured signals into the database on a defined cadence.</text>
+        <text x="722" y="472" fill="#3a5570" fontSize="7" textAnchor="middle">Cold-start solved: the platform knows the ecosystem before any actor joins.</text>
+
+        {/* Layer 5: External Data Sources */}
+        {[['GOVT SUPPORT DIRECTORY',50,170,['Live programme listings','Funding routes by stage','Advisor networks'],'Ingested weekly via scrape · Open licence'],
+          ['COMMUNITY SERVICES API',265,200,['Wellbeing services by location','Founder peer networks','Community assets'],'REST API · CC BY 4.0'],
+          ['PUBLICATION DATABASES',480,200,['Research outputs','Grant announcements','Patent filings'],'Feeds researcher journey signals'],
+          ['PROFESSIONAL IDENTITY',695,235,['Professional profile import','Research identity (ORCID)','Behavioural enrichment'],'Progressive — never compulsory']
+        ].map(([title,x,w2,items,note])=>(
+          <g key={title}>
+            <rect x={x} y="502" width={w2} height="88" rx="2" fill="#111c2e" stroke="#ddd8cf" strokeWidth="1"/>
+            <rect x={x} y="502" width={w2} height="14" rx="2" fill="#ddd8cf"/>
+            <text x={x+w2/2} y="512" fill="#7a95b0" fontSize="7" fontWeight="500" letterSpacing="0.8" textAnchor="middle">{title}</text>
+            {items.map((it,ii)=><text key={ii} x={x+12} y={530+ii*13} fill="#c2cfe0" fontSize="7.5">{it}</text>)}
+            <text x={x+12} y="570" fill="#3a5570" fontSize="7">{note}</text>
+          </g>
+        ))}
+
+        {/* Layer 6: Governance */}
+        <rect x="50" y="610" width="880" height="58" rx="2" fill="#f0ece4"/>
+        <text x="490" y="630" fill="#1a1a1a" fontSize="7.5" fontWeight="500" letterSpacing="1.5" textAnchor="middle">FEDERATED GOVERNANCE LAYER</text>
+        <line x1="50" y1="636" x2="930" y2="636" stroke="#ddd8cf" strokeWidth="0.5"/>
+        <text x="220" y="650" fill="#3a5570" fontSize="7" textAnchor="middle">Supercluster  ›  Cluster  ›  Group  ›  Actor</text>
+        <text x="490" y="650" fill="#3a5570" fontSize="7" textAnchor="middle">Identity-first · Role-based access · Full audit trail</text>
+        <text x="760" y="650" fill="#3a5570" fontSize="7" textAnchor="middle">Institutional autonomy preserved at every level</text>
+        <text x="490" y="662" fill="#c8f0d0" fontSize="7" textAnchor="middle">Data residency is jurisdictional. Each EDA operates a sovereign instance. The platform does not centralise regional data.</text>
+
+        {/* Connection wires */}
+        <line x1="135" y1="118" x2="135" y2="142" stroke="#c8f0d0" strokeWidth="1.5" markerEnd="url(#di-arrow-signal)"/>
+        <line x1="325" y1="118" x2="325" y2="142" stroke="#c8f0d0" strokeWidth="1.5" markerEnd="url(#di-arrow-signal)"/>
+        <line x1="515" y1="118" x2="515" y2="142" stroke="#c8f0d0" strokeWidth="1.5" markerEnd="url(#di-arrow-signal)"/>
+        <line x1="775" y1="118" x2="775" y2="142" stroke="#1a1a1a" strokeWidth="2" markerEnd="url(#di-arrow-chalk)"/>
+        <line x1="490" y1="230" x2="490" y2="262" stroke="#c8f0d0" strokeWidth="1.5" markerEnd="url(#di-arrow-signal)"/>
+        <line x1="275" y1="360" x2="275" y2="382" stroke="#1a1a1a" strokeWidth="1.5" markerEnd="url(#di-arrow-chalk)"/>
+        <line x1="700" y1="360" x2="700" y2="382" stroke="#c8f0d0" strokeWidth="1.5" markerEnd="url(#di-arrow-signal)"/>
+        <line x1="150" y1="502" x2="150" y2="480" stroke="#c8f0d0" strokeWidth="1.2" markerEnd="url(#di-arrow-signal)"/>
+        <line x1="365" y1="502" x2="365" y2="480" stroke="#c8f0d0" strokeWidth="1.2" markerEnd="url(#di-arrow-signal)"/>
+      </svg>
+    </div>
+  );
+}
+
 const SCHEMA_LAYERS = [
   { id: 'layer-journeys', label: 'ACTOR JOURNEYS', y: 20, h: 80,
     comps: [
@@ -1983,6 +2138,41 @@ function DigitalOSStage() {
   }
 
   const config = journeyState.osConfig;
+
+  if (showSchema) {
+    return (
+      <div style={s3.containerWide}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+          <div style={s3.configBadge}>{config.configName}</div>
+          <button style={styles.btnGhost} onClick={() => setShowSchema(false)}>
+            Back to overview
+          </button>
+        </div>
+
+        <div className="schema-desktop">
+          <ArchitectureSchemaSVG />
+        </div>
+        <div className="schema-mobile">
+          <ArchitectureSchemaCards />
+        </div>
+
+        <div style={s3.ctaBox}>
+          <h3 style={s3.ctaHeading}>Talk to us about your configuration</h3>
+          <p style={s3.ctaBody}>
+            This diagnostic has identified your stalls, mapped your stacks, and derived an architecture recommendation.
+            The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem's actors.
+          </p>
+          <a href="/get-started.html" style={s3.ctaButton}>
+            Get started
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={s3.containerWide}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
@@ -2000,50 +2190,20 @@ function DigitalOSStage() {
 
       <p style={s3.configDescription}>{buildConfigDescription(config)}</p>
 
-      {/* Digital OS content — Step 0 dense schema then interactive SVG */}
-      {!showSchema ? (
-        <div style={s3.section}>
-          {/* Step 0: Dense schema placeholder */}
-          <div style={schema.placeholder}>
-            <span style={schema.placeholderLabel}>ClusterOS Digital Infrastructure — full schema</span>
-          </div>
-          <p style={schema.orientation}>
-            This is ClusterOS fully deployed — the complete digital and cognitive infrastructure for a regional operating system.
-            Over the next steps we will show you which parts matter most for your {CLUSTER_TYPE_LABELS[(journeyState.qualifierAnswers || {}).clusterType] || 'ecosystem'} and why, starting with the heart of the system.
-          </p>
-          <button style={styles.btnSignal} onClick={() => setShowSchema(true)}>
-            Show me my configuration
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      ) : (
-        <div style={s3.section}>
-          {/* Interactive SVG schema */}
-          <div className="schema-desktop">
-            <ArchitectureSchemaSVG />
-          </div>
-          <div className="schema-mobile">
-            <ArchitectureSchemaCards />
-          </div>
-
-          {/* CTA */}
-          <div style={s3.ctaBox}>
-            <h3 style={s3.ctaHeading}>Talk to us about your configuration</h3>
-            <p style={s3.ctaBody}>
-              This diagnostic has identified your stalls, mapped your stacks, and derived an architecture recommendation.
-              The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem's actors.
-            </p>
-            <a href="/get-started.html" style={s3.ctaButton}>
-              Get started
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      )}
+      {/* Step 0: Dense schema */}
+      <div style={s3.section}>
+        <InfrastructureDiagramEmbed />
+        <p style={schema.orientation}>
+          This is ClusterOS fully deployed — the complete digital and cognitive infrastructure for a regional operating system.
+          Over the next steps we will show you which parts matter most for your {CLUSTER_TYPE_LABELS[(journeyState.qualifierAnswers || {}).clusterType] || 'ecosystem'} and why, starting with the heart of the system.
+        </p>
+        <button style={styles.btnSignal} onClick={() => setShowSchema(true)}>
+          Show me my configuration
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+            <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+      </div>
     </div>
   );
 }
@@ -3613,25 +3773,6 @@ function App() {
 
 /* ─── Schema styles ────────────────────────────────────────────────── */
 const schema = {
-  placeholder: {
-    background: '#0a0f1a',
-    border: '1px solid var(--dj-border)',
-    borderRadius: '8px',
-    padding: '60px 32px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    aspectRatio: '16 / 9',
-    marginBottom: '20px',
-  },
-  placeholderLabel: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '12px',
-    fontWeight: 500,
-    letterSpacing: '0.06em',
-    color: '#576275',
-    textAlign: 'center',
-  },
   orientation: {
     fontFamily: 'var(--font-serif)',
     fontSize: '17px',

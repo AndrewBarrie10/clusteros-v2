@@ -2794,11 +2794,20 @@ function ExitSummary({ exitedAt, journeyState }) {
 }
 
 /* ─── Transition card between stages ───────────────────────────────── */
-function TransitionCard({ transitionType, journeyState, onContinue, onStop }) {
+function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBack }) {
   const stalls = journeyState.stalls || [];
   const stacks = journeyState.detectedStacks || [];
   const stallNames = stalls.map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; });
   const qa = journeyState.qualifierAnswers || {};
+
+  const backBtn = onBack ? (
+    <button style={styles.btnGhost} onClick={onBack}>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginRight: '6px' }}>
+        <path d="M8.5 3L4.5 7L8.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+      Back
+    </button>
+  ) : null;
 
   // Transition: Stage 1 (stalls) → Qualifier questions
   if (transitionType === 'stalls-to-qualifiers') {
@@ -2817,13 +2826,16 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop }) {
           These patterns don't resolve through individual interventions. To identify where leverage is, we need to understand your ecosystem's configuration. {QUALIFIER_QUESTIONS.length} questions.
         </p>
         <div style={trans.actions}>
-          <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
-          <button style={styles.btnSignal} onClick={onContinue}>
-            Continue
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+          {backBtn}
+          <div style={{ display: 'flex', gap: '10px', marginLeft: 'auto' }}>
+            <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
+            <button style={styles.btnSignal} onClick={onContinue}>
+              Continue
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+                <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -2833,14 +2845,27 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop }) {
   if (transitionType === 'qualifiers-to-leverage') {
     const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'your ecosystem';
     const anchorLabel = ANCHOR_LABELS[qa.anchorType] || 'Anchors';
-    const stackNameList = stacks.length > 0 ? stacks.map(s => s.name).join(', ') : 'independent stall patterns';
-    const body = `You've told us enough to locate your leverage. ${articleFor(clusterLabel)} ${clusterLabel} with ${articleFor(anchorLabel).toLowerCase()} ${anchorLabel} anchor running ${stackNameList} has a specific intervention entry point. Here's where it is.`;
 
     return (
       <div style={trans.card}>
-        <p style={trans.text}>{body}</p>
+        <p style={trans.text}>
+          You've told us enough to locate your leverage. {articleFor(clusterLabel)} {clusterLabel} with {articleFor(anchorLabel).toLowerCase()} {anchorLabel} anchor running:
+        </p>
+        {stacks.length > 0 ? (
+          <div style={{ margin: '0 0 16px 0' }}>
+            {stacks.map(s => (
+              <div key={s.id} style={trans.stackLine}>— {s.name}</div>
+            ))}
+          </div>
+        ) : (
+          <div style={{ margin: '0 0 16px 0' }}>
+            <div style={trans.stackLine}>— independent stall patterns</div>
+          </div>
+        )}
+        <p style={trans.text}>has a specific intervention entry point. Here's where it is.</p>
         <div style={trans.actions}>
-          <button style={styles.btnSignal} onClick={onContinue}>
+          {backBtn}
+          <button style={{ ...styles.btnSignal, marginLeft: 'auto' }} onClick={onContinue}>
             See your leverage
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
               <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -3084,6 +3109,7 @@ function DiagnosticJourney() {
     mainContent = (
       <TransitionCard transitionType="stalls-to-qualifiers" journeyState={journeyState}
         onContinue={goNext}
+        onBack={() => setPhase(0)}
         onStop={() => { console.log('stop-behaviours'); setExitedAt(0); setExited(true); }} />
     );
   } else if (phase === 2 && loadingCommentary) {
@@ -3110,7 +3136,7 @@ function DiagnosticJourney() {
   } else if (phase === 3) {
     mainContent = (
       <TransitionCard transitionType="qualifiers-to-leverage" journeyState={journeyState}
-        onContinue={goNext} onStop={() => {}} />
+        onContinue={goNext} onBack={() => setPhase(2)} onStop={() => {}} />
     );
   } else if (phase === 4) {
     mainContent = <LeverageStage />;
@@ -4392,6 +4418,13 @@ const trans = {
     lineHeight: 1.6,
     color: 'var(--dj-chalk-muted)',
     marginBottom: '24px',
+  },
+  stackLine: {
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '13px',
+    color: '#0c9488',
+    lineHeight: 1.8,
+    paddingLeft: '4px',
   },
   actions: {
     display: 'flex',

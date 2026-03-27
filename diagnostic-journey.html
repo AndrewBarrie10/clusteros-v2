@@ -2575,6 +2575,137 @@ function DigitalOSStage() {
   );
 }
 
+/* ─── Report capture modal ─────────────────────────────────────────── */
+function ReportModal({ phase, journeyState, onClose }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [ecosystem, setEcosystem] = useState('');
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const stageLabel = phase <= 1 ? 'behaviours' : phase <= 3 ? 'leverage' : 'digital_os';
+  const qa = journeyState.qualifierAnswers || {};
+  const stalls = journeyState.stalls || [];
+  const stacks = journeyState.detectedStacks || [];
+  const healthRatio = stalls.length / 9;
+  const healthScore = stalls.length === 0 ? 100 : Math.round((1 - healthRatio) * 100);
+
+  const handleSubmit = async () => {
+    if (!name || !email) return;
+    setSending(true);
+
+    const payload = {
+      stage: stageLabel,
+      name, email, ecosystem,
+      sector: qa.clusterType || 'ecosystem',
+      region: qa.clusterType || 'regional',
+      stalls: stalls.map(id => { const s = STALLS.find(x => x.id === id); return { id, short: s ? s.name : id }; }),
+      health: healthScore,
+      stacks: stacks.map(s => ({ name: s.name, sev: 'high', desc: s.logic || '' })),
+      commentary: '',
+      submitted_at: new Date().toISOString(),
+      qualifier_answers: qa,
+      config_name: (journeyState.osConfig || {}).configName || '',
+    };
+
+    try {
+      await fetch('https://clusteros-v3-production.up.railway.app/api/v1/report-request', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch (e) { console.error('Railway report error:', e); }
+
+    try {
+      await fetch('https://clusteros-v3-production.up.railway.app/api/v1/contact-request', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          first_name: name, email, cluster_name: ecosystem,
+          engagement_type: 'diagnostic-report',
+          message: `Stalls: ${stalls.join(', ')}. Health: ${healthScore}. Stacks: ${stacks.map(s=>s.name).join(', ')}`,
+          submitted_at: new Date().toISOString(),
+        }),
+      });
+    } catch (e) { console.error('HubSpot error:', e); }
+
+    setSent(true);
+    setTimeout(onClose, 3000);
+  };
+
+  return (
+    <div style={sticky.modalOverlay} onClick={onClose}>
+      <div style={sticky.modal} onClick={e => e.stopPropagation()}>
+        {sent ? (
+          <div style={{ textAlign: 'center', padding: '24px 0' }}>
+            <p style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', color: 'var(--dj-chalk)' }}>
+              Your report is on its way to {email}.
+            </p>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginTop: '8px' }}>
+              Check your inbox in the next minute.
+            </p>
+          </div>
+        ) : (
+          <React.Fragment>
+            <h3 style={sticky.modalTitle}>Get your diagnostic report</h3>
+            <p style={sticky.modalSub}>
+              {stageLabel === 'behaviours' ? 'Behaviours report' : stageLabel === 'leverage' ? 'Behaviours + Leverage report' : 'Full diagnostic report'}
+              {' · '}{stalls.length} stall{stalls.length !== 1 ? 's' : ''} identified
+            </p>
+            <div style={sticky.field}>
+              <label style={sticky.label}>Your name</label>
+              <input style={sticky.input} type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Full name" />
+            </div>
+            <div style={sticky.field}>
+              <label style={sticky.label}>Your email</label>
+              <input style={sticky.input} type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="work@example.com" />
+            </div>
+            <div style={sticky.field}>
+              <label style={sticky.label}>Your ecosystem name</label>
+              <input style={sticky.input} type="text" value={ecosystem} onChange={e => setEcosystem(e.target.value)} placeholder="e.g. Edinburgh Life Sciences" />
+            </div>
+            <button style={{ ...sticky.submitBtn, opacity: (name && email) ? 1 : 0.4 }} onClick={handleSubmit} disabled={sending || !name || !email}>
+              {sending ? 'Sending...' : 'Send my report →'}
+            </button>
+          </React.Fragment>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Sticky bar component ─────────────────────────────────────────── */
+function StickyBar({ phase, journeyState, onForward }) {
+  const [showReportModal, setShowReportModal] = useState(false);
+
+  const reportLabel = phase <= 1 ? 'Behaviours' : phase <= 3 ? 'Behaviours + Leverage' : 'Behaviours + Leverage + Digital OS';
+  const forwardLabel = phase <= 3 ? 'Add Leverage →' : phase <= 5 ? 'Add Digital OS →' : 'Talk to us →';
+  const isContactPhase = phase >= 6;
+
+  return (
+    <React.Fragment>
+      <div style={sticky.bar}>
+        <div style={sticky.barInner}>
+          {/* Left: Get my report */}
+          <button style={sticky.btnAmber} onClick={() => setShowReportModal(true)}>
+            <span>Get my report</span>
+            <span style={sticky.btnSub}>{reportLabel}</span>
+          </button>
+
+          {/* Right: forward pull */}
+          {isContactPhase ? (
+            <a href="/get-started.html" style={sticky.btnGreen}>Talk to us →</a>
+          ) : (
+            <button style={sticky.btnGreen} onClick={onForward}>{forwardLabel}</button>
+          )}
+        </div>
+      </div>
+
+      {showReportModal && (
+        <ReportModal phase={phase} journeyState={journeyState} onClose={() => setShowReportModal(false)} />
+      )}
+    </React.Fragment>
+  );
+}
+
 /* ─── Exit confirmation modal ──────────────────────────────────────── */
 function ExitModal({ stage, onConfirm, onCancel }) {
   return (
@@ -2877,13 +3008,7 @@ function DiagnosticJourney() {
               </button>
             )}
           </div>
-          <div style={styles.navCenter}>
-            <button style={styles.btnExit} onClick={requestExit}>
-              Stop here
-            </button>
-          </div>
           <div style={styles.navRight}>
-            {/* Show Continue only during stage content phases (behaviours=0, leverage=4) */}
             {(phase === 0 || phase === 4) && (
               <button style={styles.btnSignal} onClick={goNext}>
                 Continue
@@ -2894,6 +3019,9 @@ function DiagnosticJourney() {
             )}
           </div>
         </nav>
+
+        {/* ── Sticky bar ── */}
+        <StickyBar phase={phase} journeyState={journeyState} onForward={goNext} />
 
         {/* ── Exit modal ── */}
         {showExitModal && (
@@ -2953,7 +3081,7 @@ const styles = {
     overflowY: 'auto',
     display: 'flex',
     justifyContent: 'center',
-    padding: '24px 32px 32px',
+    padding: '24px 32px 72px',
   },
 
   /* Stage placeholder */
@@ -4246,6 +4374,151 @@ const schema = {
     justifyContent: 'space-between',
     marginTop: '16px',
     gap: '12px',
+  },
+};
+
+/* ─── Sticky bar styles ────────────────────────────────────────────── */
+const sticky = {
+  bar: {
+    position: 'fixed',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 950,
+    background: '#f7f4ef',
+    borderTop: '1px solid #ddd8cf',
+    height: '56px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '0',
+  },
+  barInner: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '100%',
+    width: '100%',
+  },
+  btnAmber: {
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '11px',
+    fontWeight: 700,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase',
+    textDecoration: 'none',
+    padding: '0 1.4rem',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    whiteSpace: 'nowrap',
+    background: '#d97706',
+    color: '#fff',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'opacity 0.15s',
+    gap: '2px',
+  },
+  btnSub: {
+    fontSize: '8px',
+    fontWeight: 400,
+    letterSpacing: '0.04em',
+    textTransform: 'none',
+    opacity: 0.8,
+  },
+  btnGreen: {
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '11px',
+    fontWeight: 700,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase',
+    textDecoration: 'none',
+    padding: '0 1.4rem',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    whiteSpace: 'nowrap',
+    background: 'var(--signal)',
+    color: '#fff',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'opacity 0.15s',
+    marginLeft: 'auto',
+  },
+
+  /* Report modal */
+  modalOverlay: {
+    position: 'fixed',
+    inset: 0,
+    background: 'rgba(26,26,26,0.4)',
+    backdropFilter: 'blur(4px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1100,
+  },
+  modal: {
+    background: 'var(--dj-bg)',
+    border: '1px solid var(--dj-border)',
+    borderRadius: '12px',
+    padding: '32px',
+    maxWidth: '420px',
+    width: '90%',
+  },
+  modalTitle: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '22px',
+    fontWeight: 400,
+    color: 'var(--dj-chalk)',
+    marginBottom: '4px',
+  },
+  modalSub: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '10px',
+    color: 'var(--dj-chalk-muted)',
+    letterSpacing: '0.04em',
+    marginBottom: '20px',
+  },
+  field: {
+    marginBottom: '14px',
+  },
+  label: {
+    display: 'block',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '9px',
+    fontWeight: 600,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    color: 'var(--dj-chalk-muted)',
+    marginBottom: '4px',
+  },
+  input: {
+    width: '100%',
+    fontFamily: 'var(--font-sans)',
+    fontSize: '14px',
+    padding: '10px 12px',
+    borderRadius: '4px',
+    border: '1px solid var(--dj-border)',
+    background: 'var(--dj-surface)',
+    color: 'var(--dj-chalk)',
+    outline: 'none',
+  },
+  submitBtn: {
+    width: '100%',
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '11px',
+    fontWeight: 700,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase',
+    color: '#fff',
+    background: 'var(--signal)',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '12px 24px',
+    cursor: 'pointer',
+    marginTop: '8px',
+    transition: 'opacity 0.15s',
   },
 };
 

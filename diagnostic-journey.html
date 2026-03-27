@@ -3031,16 +3031,15 @@ function DiagnosticJourney() {
   /* ── Parse commentary response into 3 sections ── */
   function parseCommentary(text) {
     const sections = { diagnosis: '', consequence: '', mechanism: '' };
-    // Try to split on DIAGNOSIS / CONSEQUENCE / MECHANISM labels
+    const strip = s => s.replace(/\*\*/g, '').trim();
     const diagMatch = text.match(/DIAGNOSIS[:\s]*(.+?)(?=CONSEQUENCE|$)/is);
     const consMatch = text.match(/CONSEQUENCE[:\s]*(.+?)(?=MECHANISM|$)/is);
     const mechMatch = text.match(/MECHANISM[:\s]*(.+?)$/is);
-    if (diagMatch) sections.diagnosis = diagMatch[1].trim();
-    if (consMatch) sections.consequence = consMatch[1].trim();
-    if (mechMatch) sections.mechanism = mechMatch[1].trim();
-    // If parsing failed (no labels found), use full text as diagnosis
+    if (diagMatch) sections.diagnosis = strip(diagMatch[1]);
+    if (consMatch) sections.consequence = strip(consMatch[1]);
+    if (mechMatch) sections.mechanism = strip(mechMatch[1]);
     if (!sections.diagnosis && !sections.consequence && !sections.mechanism) {
-      sections.diagnosis = text.trim();
+      sections.diagnosis = strip(text);
     }
     return sections;
   }
@@ -3069,7 +3068,7 @@ function DiagnosticJourney() {
     // 1. Stack commentary calls (one per stack)
     const stackCalls = stacks.map(stack => {
       const stallNames = (stack.triggers || []).map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; }).join(' and ');
-      const prompt = `You are a diagnostic analyst for ClusterOS. A ${clusterLabel} with a ${anchorLabel} anchor has identified the following behavioural stall pattern: ${stack.name} — a reinforcing combination of ${stallNames}. The reinforcing logic is: ${stack.logic || ''}. The leverage entry point is: ${stack.entry || ''}. Their strategic priority is ${priorityLabel}. Their biggest coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their ecosystem is ${scaleLabel} stage.\n\nWrite three short paragraphs — one each for DIAGNOSIS, CONSEQUENCE, and MECHANISM — that are specific to this configuration. DIAGNOSIS: what this stack pattern means for this specific ecosystem type. CONSEQUENCE: what remains locked if this stack is not addressed, given their priority and anchor type. MECHANISM: the specific intervention approach that addresses the entry point, connected to their protection priorities. Be concrete. Do not be generic. Each paragraph 2-3 sentences maximum.`;
+      const prompt = `You are a diagnostic analyst for ClusterOS. A ${clusterLabel} with a ${anchorLabel} anchor has identified the following behavioural stall pattern: ${stack.name} — a reinforcing combination of ${stallNames}. The reinforcing logic is: ${stack.logic || ''}. The leverage entry point is: ${stack.entry || ''}. Their strategic priority is ${priorityLabel}. Their biggest coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their ecosystem is ${scaleLabel} stage.\n\nWrite three sections — DIAGNOSIS, CONSEQUENCE, MECHANISM.\n\nEach section is exactly one sentence. Maximum 30 words per sentence. No exceptions.\n\nDIAGNOSIS: What this specific stack pattern means for this ecosystem type and anchor combination. Name the stack.\nCONSEQUENCE: What remains locked if this stack is not addressed, connected directly to their stated priority.\nMECHANISM: The single most targeted intervention that addresses the entry point. Be concrete and specific to this configuration.\n\nRules:\n- Do not use markdown formatting. No asterisks, no bold markers, no bullet points.\n- Do not use the words "platform", "solution", "leverage" or "dashboard".\n- Do not add preamble, labels, or any text outside the three sections.\n- Write for a Chief Executive who recognises their ecosystem in every sentence.\n- Each section must start with its label followed by a colon.\n\nFormat:\nDIAGNOSIS: [one sentence]\nCONSEQUENCE: [one sentence]\nMECHANISM: [one sentence]`;
 
       return fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },

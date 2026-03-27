@@ -2145,36 +2145,36 @@ function ArchitectureSchemaSVG({ activeLayer, secondaryLayers, selectedStalls, c
           </g>
         );
 
-        // Step 5: Sovereign → MCP
+        // Step 5: Sovereign ↔ MCP (bidirectional)
         const s5vis = step === 5 || step === 8;
         arrows.push(
           <g key="arrow-sov-mcp" style={arrowStyle(s5vis)}>
-            <path className={s5vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx} 340 L ${cx} 322`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
-            {step === 5 && <text x={cx+70} y="334" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Live queries at runtime</text>}
+            <path className={s5vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx} 340 L ${cx} 322`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" markerStart="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
+            {step === 5 && <text x={cx+70} y="334" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Live queries ↔ findings</text>}
           </g>
         );
 
-        // Step 6: MCP → AI
+        // Step 6: MCP ↔ AI (bidirectional)
         const s6vis = step === 6 || step === 8;
         arrows.push(
           <g key="arrow-mcp-ai" style={arrowStyle(s6vis)}>
-            <path className={s6vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx} 220 L ${cx} 202`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
-            {step === 6 && <text x={cx+70} y="214" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Structured findings</text>}
+            <path className={s6vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx} 220 L ${cx} 202`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" markerStart="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
+            {step === 6 && <text x={cx+70} y="214" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Findings ↔ intelligence</text>}
           </g>
         );
 
-        // Step 7: AI → Journeys + return loop
+        // Step 7: AI ↔ Journeys (bidirectional) + return loop
         const s7vis = step === 7 || step === 8;
         arrows.push(
           <g key="arrow-ai-journeys" style={arrowStyle(s7vis)}>
-            <path className={s7vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx} 120 L ${cx} 102`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
-            {step === 7 && <text x={cx+80} y="114" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Personalised at runtime</text>}
+            <path className={s7vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${cx} 120 L ${cx} 102`} fill="none" stroke="#7dd3c8" strokeWidth="2" markerEnd="url(#arrow-teal)" markerStart="url(#arrow-teal)" opacity={step === 8 ? 0.4 : 1} />
+            {step === 7 && <text x={cx+80} y="114" fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace" fontSize="8">Pathways ↔ signals</text>}
           </g>
         );
         // Return arrow: journeys → sovereign (down right edge)
         arrows.push(
           <g key="arrow-return" style={arrowStyle(s7vis)}>
-            <path className={s7vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${w-pad-10} 100 Q ${w-pad+50} 220 ${w-pad-10} 340`} fill="none" stroke="#c8f0d0" strokeWidth="2.5" markerEnd="url(#arrow-green)" opacity={step === 8 ? 0.4 : 1} />
+            <path className={s7vis && step !== 8 ? 'flow-arrow' : ''} d={`M ${w-pad-10} 100 Q ${w-pad+50} 220 ${w-pad-10} 340`} fill="none" stroke="#c8f0d0" strokeWidth="3" markerEnd="url(#arrow-green)" opacity={step === 8 ? 0.4 : 0.9} />
             {step === 7 && <text x={w-pad+20} y="220" fill="#2a7a4f" fontFamily="'Geist Mono', monospace" fontSize="8" textAnchor="start">Signal loop closes</text>}
           </g>
         );
@@ -2387,7 +2387,8 @@ function buildStepAnnotation(step, journeyState, config) {
         supply: 'Actor Matching is your primary engine — mapping supply chain capability to procurement signals.',
         growth: 'Steward Interrogation is your primary engine — live insight into system health.',
       };
-      const body = 'The AI is the runtime, not a feature. ' + (PRI_ENGINE[qa.priority] || 'All reasoning capabilities active.') + ' Every actor experience is constructed here, from live data, on demand.';
+      let body = 'The AI is the runtime, not a feature. ' + (PRI_ENGINE[qa.priority] || 'All reasoning capabilities active.') + ' Every actor experience is constructed here, from live data, on demand.';
+      body += ' The AI reads signals for every actor type — but for stewards it surfaces something different: not a pathway, but a system health briefing. What is moving. What is stalling. Where intervention would have the most effect. Adaptive governance, not retrospective reporting.';
       return { title: 'The runtime, not a feature', body };
     }
     case 7: {
@@ -4211,31 +4212,31 @@ const schema = {
   /* Cascade cards in Step 6 */
   cascadeCard: {
     border: '1px solid var(--dj-border)',
-    borderRadius: '6px',
-    padding: '12px 14px',
-    marginTop: '12px',
+    borderRadius: '4px',
+    padding: '8px 10px',
+    marginTop: '8px',
     background: 'var(--dj-bg)',
   },
   cascadeActor: {
     fontFamily: 'var(--font-serif)',
-    fontSize: '15px',
+    fontSize: '13px',
     color: 'var(--dj-chalk)',
-    marginBottom: '8px',
+    marginBottom: '4px',
   },
   cascadeFlow: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '2px',
+    gap: '1px',
   },
   cascadeStep: {
     fontFamily: 'var(--font-sans)',
-    fontSize: '11px',
+    fontSize: '10px',
     color: 'var(--dj-chalk-dim)',
-    lineHeight: 1.4,
+    lineHeight: 1.3,
   },
   cascadeArrow: {
     fontFamily: 'var(--font-sans)',
-    fontSize: '10px',
+    fontSize: '9px',
     color: 'var(--steward)',
     padding: '0 0 0 2px',
   },

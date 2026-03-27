@@ -51,6 +51,11 @@ body { min-height: 100vh; }
   .s0-outputs { grid-template-columns: 1fr !important; }
   .s0-cta-btn { width: 100% !important; justify-content: center !important; }
   .stage0-main { padding: 24px !important; }
+  /* Stepper header: centre step counter, hide config badge and back-to-overview */
+  .stepper-header { justify-content: center !important; }
+  .stepper-config-badge { display: none !important; }
+  .stepper-back-overview { display: none !important; }
+  .stepper-counter { font-size: 11px !important; }
 }
 @media (max-width: 600px) {
   .nav-bar-journey { flex-direction: column-reverse !important; gap: 8px !important; padding: 12px 16px !important; }
@@ -2564,13 +2569,13 @@ function DigitalOSStage() {
   return (
     <div style={s3.containerWide}>
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-        <div style={s3.configBadge}>{config.configName}</div>
+      <div className="stepper-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+        <div className="stepper-config-badge" style={s3.configBadge}>{config.configName}</div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--dj-chalk-muted)', letterSpacing: '0.08em' }}>
+          <span className="stepper-counter" style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--dj-chalk-muted)', letterSpacing: '0.08em' }}>
             Step {schemaStep + 1} of {TOTAL_STEPS}
           </span>
-          <button style={styles.btnGhost} onClick={() => setSchemaStep(-1)}>Back to overview</button>
+          <button className="stepper-back-overview" style={styles.btnGhost} onClick={() => setSchemaStep(-1)}>Back to overview</button>
         </div>
       </div>
 
@@ -3439,8 +3444,8 @@ function DiagnosticJourney() {
           {mainContent}
         </main>
 
-        {/* ── Navigation bar (hidden on transition cards) ── */}
-        {phase !== 1 && phase !== 3 && phase !== 5 && (
+        {/* ── Navigation bar (hidden on transition cards and Stage 3 which has its own stepper nav) ── */}
+        {phase !== 1 && phase !== 3 && phase !== 5 && phase !== 6 && (
           <nav className="nav-bar-journey" style={styles.navBar}>
             <div style={styles.navLeft}>
               {!isFirst && (

@@ -2542,21 +2542,28 @@ function DigitalOSStage() {
       {/* Annotation panel (steps 1-8) */}
       {annotation && (() => {
         const STEP_LAYER_KEY = { 1: 'sovereignDatabase', 2: 'governance', 3: 'externalData', 4: 'continuousEnrichment', 5: 'intelligence', 6: 'runtime', 7: 'actorJourneys' };
-        const dc = (journeyState.digitalCommentary || {})[STEP_LAYER_KEY[schemaStep]] || null;
+        const layerKey = STEP_LAYER_KEY[schemaStep];
+        const dcObj = journeyState.digitalCommentary;
+        const dc = (dcObj && layerKey && dcObj[layerKey]) ? dcObj[layerKey] : null;
+        if (schemaStep >= 1 && schemaStep <= 7) {
+          console.log('[Render Step', schemaStep, '] layerKey:', layerKey, 'digitalCommentary exists:', !!dcObj, 'dc:', dc);
+        }
         return (
         <div style={schema.annotPanel}>
           <h3 style={schema.annotTitle}>{annotation.title}</h3>
           {/* Digital commentary inside/outside — replaces body text when available */}
-          {dc ? (
+          {dc && dc.inside ? (
             <div>
-              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', color: '#d97706', marginBottom: '6px' }}>FROM THE INSIDE</div>
+              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', color: '#f5d97a', marginBottom: '6px' }}>FROM THE INSIDE</div>
               <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)', marginBottom: '16px' }}>{dc.inside}</p>
-              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', color: '#0c9488', marginBottom: '6px' }}>FROM THE OUTSIDE</div>
+              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', color: '#7dd3c8', marginBottom: '6px' }}>FROM THE OUTSIDE</div>
               <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.outside}</p>
             </div>
-          ) : annotation.body ? (
-            <p style={schema.annotBody}><BoldText text={annotation.body} /></p>
-          ) : null}
+          ) : (
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', fontStyle: 'italic' }}>
+              Commentary is being prepared for your configuration.
+            </p>
+          )}
           {annotation.cascadeActors && annotation.cascadeActors.map(name => {
             const c = ACTOR_CASCADES[name];
             if (!c) return null;
@@ -3090,56 +3097,78 @@ function DiagnosticJourney() {
     const digitalPrompt = `You are writing the narrative for a digital infrastructure recommendation for a regional innovation ecosystem steward. Write in the voice of a trusted senior advisor — specific, direct, no jargon. Think McKinsey partner who also understands complex adaptive systems.\n\nThis steward runs a ${clusterLabel} with a ${anchorLabel} anchor. Their ecosystem is ${scaleLabel} stage. Their strategic priority is ${priorityLabel}. Their coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their diagnostic has identified these stacks: ${stackDescs || 'no reinforcing stacks detected — independent stall patterns'}.\n\nWrite commentary for each of the following 7 infrastructure layers. For each layer write exactly two short sections:\n\nFROM THE INSIDE: 2 sentences maximum. What actors in this ecosystem currently experience without this layer — the specific friction, invisibility, or wasted motion that this steward's ecosystem has, given their stalls and stacks.\n\nFROM THE OUTSIDE: 2 sentences maximum. What this steward specifically gains when this layer is working — the signal, pattern, or evidence that becomes visible to them, connected to their priority and coordination gap.\n\nLayers to cover:\n1. SOVEREIGN DATABASE — the structured record layer\n2. GOVERNANCE — federated boundary and consent layer\n3. EXTERNAL DATA — cold-start and membrane layer\n4. CONTINUOUS ENRICHMENT — bot network layer\n5. INTELLIGENCE — MCP tool substrate layer\n6. RUNTIME — AI reasoning engine layer\n7. ACTOR JOURNEYS — personalised pathway layer\n\nRules:\n- Name detected stacks and stalls in the text where relevant — they are proper nouns, not generic descriptions\n- Never use the words "platform", "solution", "leverage" or "dashboard"\n- Never explain what ClusterOS is — the steward already completed the diagnostic\n- Write as if continuing a conversation that started in the Leverage section\n- Each FROM THE INSIDE must describe something this specific steward will recognise from their own ecosystem\n- Each FROM THE OUTSIDE must connect to their stated priority: ${priorityLabel}\n\nReturn as JSON only, no preamble:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governance":{"inside":"...","outside":"..."},"externalData":{"inside":"...","outside":"..."},"continuousEnrichment":{"inside":"...","outside":"..."},"intelligence":{"inside":"...","outside":"..."},"runtime":{"inside":"...","outside":"..."},"actorJourneys":{"inside":"...","outside":"..."}}`;
 
     const digitalCall = (function() {
-      console.log('[Digital Commentary] Firing API call...');
+      console.log('[Digital Commentary] Firing API call with prompt length:', digitalPrompt.length);
       return fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: digitalPrompt }),
       })
-        .then(r => { console.log('[Digital Commentary] Response status:', r.status); return r.ok ? r.json() : null; })
-        .then(data => {
-          console.log('[Digital Commentary] Raw response:', data);
-          if (!data) return null;
-          const text = data.commentary || data.text || '';
-          // Try parsing the text as JSON
-          const tryParse = (str) => {
-            try {
-              const parsed = JSON.parse(str);
-              if (parsed.sovereignDatabase) return parsed;
-            } catch (e) {}
-            // Try extracting JSON block from text
-            try {
-              const jsonMatch = str.match(/\{[\s\S]*\}/);
-              if (jsonMatch) {
-                const parsed = JSON.parse(jsonMatch[0]);
-                if (parsed.sovereignDatabase) return parsed;
-              }
-            } catch (e) {}
-            return null;
-          };
-          // Try text field first, then the entire data object
-          let result = typeof text === 'string' && text ? tryParse(text) : null;
-          if (!result && typeof data === 'object') {
-            // Maybe the response IS the JSON object directly
-            if (data.sovereignDatabase) result = data;
-          }
-          console.log('[Digital Commentary] Parsed result:', result);
-          return result;
+        .then(r => {
+          console.log('[Digital Commentary] Response status:', r.status);
+          return r.ok ? r.text() : null;
         })
-        .catch(err => { console.warn('[Digital Commentary] Failed:', err.message); return null; });
+        .then(rawText => {
+          if (!rawText) { console.warn('[Digital Commentary] Empty response'); return null; }
+          console.log('[Digital Commentary] Raw text (first 300 chars):', rawText.substring(0, 300));
+
+          // Parse the response — it may be double-encoded
+          let data;
+          try { data = JSON.parse(rawText); } catch (e) { console.warn('[Digital Commentary] Raw text is not JSON'); return null; }
+
+          // data is the API wrapper: { commentary: "..." } or { text: "..." }
+          let content = data.commentary || data.text || '';
+          console.log('[Digital Commentary] Content field type:', typeof content, 'length:', (content || '').length);
+
+          // If content is already an object with the right keys, use it
+          if (typeof content === 'object' && content.sovereignDatabase) {
+            console.log('[Digital Commentary] Content is already parsed object');
+            return content;
+          }
+
+          // Content is a string — clean and parse
+          if (typeof content === 'string') {
+            // Strip markdown code fences
+            content = content.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+            // Try direct parse
+            try {
+              const parsed = JSON.parse(content);
+              if (parsed.sovereignDatabase) { console.log('[Digital Commentary] Parsed from content string'); return parsed; }
+            } catch (e) {}
+            // Try extracting JSON block
+            const jsonMatch = content.match(/\{[\s\S]*\}/);
+            if (jsonMatch) {
+              try {
+                const parsed = JSON.parse(jsonMatch[0]);
+                if (parsed.sovereignDatabase) { console.log('[Digital Commentary] Parsed from extracted JSON block'); return parsed; }
+              } catch (e) {}
+            }
+          }
+
+          // Last resort: check if data itself has the keys
+          if (data.sovereignDatabase) { console.log('[Digital Commentary] Data object has keys directly'); return data; }
+
+          console.warn('[Digital Commentary] Could not parse response into expected format');
+          return null;
+        })
+        .catch(err => { console.warn('[Digital Commentary] Fetch failed:', err.message); return null; });
     })();
 
     // Wait for all calls
     Promise.all([Promise.all(stackCalls), digitalCall]).then(([stackResults, digitalResult]) => {
       console.log('[Commentary] Stack results:', stackResults.filter(Boolean).length, 'Digital result:', !!digitalResult);
+      if (digitalResult) console.log('[Commentary] Digital keys:', Object.keys(digitalResult));
       const commentary = {};
       stackResults.forEach(r => {
         if (r) commentary[r.stackId] = { diagnosis: r.diagnosis, consequence: r.consequence, mechanism: r.mechanism };
       });
-      setJourneyState(prev => ({
-        ...prev,
-        stackCommentary: { ...prev.stackCommentary, ...commentary },
-        digitalCommentary: digitalResult || prev.digitalCommentary || null,
-      }));
+      setJourneyState(prev => {
+        const next = {
+          ...prev,
+          stackCommentary: { ...prev.stackCommentary, ...commentary },
+          digitalCommentary: digitalResult || prev.digitalCommentary || null,
+        };
+        console.log('[Commentary] Stored digitalCommentary:', !!next.digitalCommentary);
+        return next;
+      });
       setLoadingCommentary(false);
       setPhase(3);
     });

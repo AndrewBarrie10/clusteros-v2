@@ -40,6 +40,7 @@ body { min-height: 100vh; }
 @media (max-width: 420px) { .stall-grid { grid-template-columns: 1fr !important; } }
 @media (min-width: 769px) { .schema-mobile { display: none !important; } }
 @media (max-width: 768px) { .schema-desktop { display: none !important; } }
+@keyframes pulse-dot { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
 </style>
 </head>
 <body>
@@ -462,7 +463,7 @@ const PROTECT_LEVERAGE = {
 };
 
 /* ─── Leverage hypothesis card (provocation format) ────────────────── */
-function LeverageCard({ stack, protections, priority }) {
+function LeverageCard({ stack, protections, priority, commentary }) {
   const triggerNames = stack.triggers
     .map(id => STALLS.find(s => s.id === id))
     .filter(Boolean);
@@ -470,21 +471,27 @@ function LeverageCard({ stack, protections, priority }) {
     .map(p => PROTECT_LEVERAGE[p])
     .filter(Boolean);
 
-  // DIAGNOSIS: what this stack means
-  const diagnosis = stack.logic || '';
-
-  // CONSEQUENCE: what remains locked — connect to Q3 priority
-  let consequence = stack.entry
-    ? `Without intervention, this stack remains self-reinforcing. The leverage target is ${stack.entry.charAt(0).toLowerCase()}${stack.entry.slice(1)}`
-    : 'Without intervention, this stack continues to reinforce itself.';
-  if (priority === 'talent') consequence += ' Talent retention cannot improve while this pattern holds.';
-  else if (priority === 'capital') consequence += ' Investment readiness cannot improve while this pattern holds.';
-  else if (priority === 'research') consequence += ' Research commercialisation cannot progress while this pattern holds.';
-  else if (priority === 'supply') consequence += ' Supply chain development stalls while this pattern holds.';
-  else if (priority === 'growth') consequence += ' Economic growth is constrained while this pattern holds.';
-
-  // MECHANISM: actionable recommendation from entry point
-  const mechanism = stack.entry || 'Address the contributing stalls directly — the stack breaks when the reinforcing conditions are removed.';
+  // Use cached commentary if available, otherwise build from stack data
+  let diagnosis, consequence, mechanism;
+  if (commentary) {
+    // Commentary is a single text block — use it as the diagnosis, keep default consequence/mechanism
+    diagnosis = commentary;
+    consequence = stack.entry
+      ? `The leverage target is ${stack.entry.charAt(0).toLowerCase()}${stack.entry.slice(1)}`
+      : '';
+    mechanism = stack.entry || 'Address the contributing stalls directly.';
+  } else {
+    diagnosis = stack.logic || '';
+    consequence = stack.entry
+      ? `Without intervention, this stack remains self-reinforcing. The leverage target is ${stack.entry.charAt(0).toLowerCase()}${stack.entry.slice(1)}`
+      : 'Without intervention, this stack continues to reinforce itself.';
+    if (priority === 'talent') consequence += ' Talent retention cannot improve while this pattern holds.';
+    else if (priority === 'capital') consequence += ' Investment readiness cannot improve while this pattern holds.';
+    else if (priority === 'research') consequence += ' Research commercialisation cannot progress while this pattern holds.';
+    else if (priority === 'supply') consequence += ' Supply chain development stalls while this pattern holds.';
+    else if (priority === 'growth') consequence += ' Economic growth is constrained while this pattern holds.';
+    mechanism = stack.entry || 'Address the contributing stalls directly — the stack breaks when the reinforcing conditions are removed.';
+  }
 
   return (
     <div style={s2.card}>
@@ -569,7 +576,7 @@ function LeverageStage() {
       {detectedStacks.length > 0 ? (
         <div style={s2.section}>
           {detectedStacks.map(stack => (
-            <LeverageCard key={stack.id} stack={stack} protections={protections} priority={(journeyState.qualifierAnswers || {}).priority} />
+            <LeverageCard key={stack.id} stack={stack} protections={protections} priority={(journeyState.qualifierAnswers || {}).priority} commentary={(journeyState.stackCommentary || {})[stack.id]} />
           ))}
         </div>
       ) : (
@@ -2603,6 +2610,7 @@ function ReportModal({ phase, journeyState, onClose }) {
       health: healthScore,
       stacks: stacks.map(s => ({ name: s.name, sev: 'high', desc: s.logic || '' })),
       commentary: '',
+      stackCommentary: journeyState.stackCommentary || {},
       submitted_at: new Date().toISOString(),
       qualifier_answers: qa,
       config_name: (journeyState.osConfig || {}).configName || '',
@@ -2869,10 +2877,11 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop }) {
      6: digital os (Stage 3)
    ── */
 function DiagnosticJourney() {
-  const [phase, setPhase] = useState(-1); // -1 = intro, 0 = behaviours, 1-5 = transitions/qualifiers, 6 = digital os
+  const [phase, setPhase] = useState(-1);
   const [exited, setExited] = useState(false);
   const [exitedAt, setExitedAt] = useState(null);
   const [showExitModal, setShowExitModal] = useState(false);
+  const [loadingCommentary, setLoadingCommentary] = useState(false);
 
   /* ── Carried-forward state ── */
   const [journeyState, setJourneyState] = useState({
@@ -2881,6 +2890,7 @@ function DiagnosticJourney() {
     leverageHypotheses: [],
     qualifierAnswers: {},
     osConfig: null,
+    stackCommentary: {},
   });
 
   const updateJourneyState = useCallback((patch) => {
@@ -2927,6 +2937,48 @@ function DiagnosticJourney() {
     setExited(true);
   }, [phase]);
   const cancelExit = useCallback(() => { setShowExitModal(false); }, []);
+
+  /* ── Commentary fetch after qualifiers complete ── */
+  const handleQualifierComplete = useCallback(() => {
+    const stacks = journeyState.detectedStacks || [];
+    if (stacks.length === 0) { setPhase(3); return; }
+
+    setLoadingCommentary(true);
+    const qa = journeyState.qualifierAnswers || {};
+    const STAGE_LABEL_MAP = { early: 'Early-stage', established: 'Established', mature: 'Mature' };
+    const PRIORITY_LABEL_MAP = { talent: 'Retain & grow local talent', capital: 'Attract external capital', research: 'Convert research to commercial activity', supply: 'Build anchor supply chains', growth: 'Drive economic growth' };
+    const GAP_LABEL_MAP = { discovery: "Actors can't find each other", flow: "Knowledge doesn't flow between groups", access: "Outside actors can't engage", conversion: "Activity isn't converting to outcomes" };
+    const PROTECT_LABEL_MAP = { knowledge: 'Local knowledge staying local', ip: 'Institutional IP and research', trust: 'Community relationships and trust', talent: 'Founder and talent pipeline', sovereignty: 'Economic sovereignty' };
+
+    const calls = stacks.map(stack =>
+      fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          stackId: stack.id,
+          stackName: stack.name,
+          stalls: stack.triggers || [],
+          clusterType: CLUSTER_TYPE_LABELS[qa.clusterType] || 'Regional Speciality',
+          anchorType: (ANCHOR_LABELS[qa.anchorType] || 'Anchors'),
+          scale: STAGE_LABEL_MAP[qa.stage] || 'Established',
+          priority: PRIORITY_LABEL_MAP[qa.priority] || 'Drive economic growth',
+          gap: GAP_LABEL_MAP[qa.gap] || '',
+          protect: (qa.protect || []).map(p => PROTECT_LABEL_MAP[p] || p),
+        }),
+      })
+        .then(r => r.ok ? r.json() : null)
+        .then(data => data ? { stackId: stack.id, commentary: data.commentary || data.text || JSON.stringify(data) } : null)
+        .catch(err => { console.warn(`Commentary fetch failed for ${stack.id}:`, err.message); return null; })
+    );
+
+    Promise.all(calls).then(results => {
+      const commentary = {};
+      results.forEach(r => { if (r) commentary[r.stackId] = r.commentary; });
+      setJourneyState(prev => ({ ...prev, stackCommentary: { ...prev.stackCommentary, ...commentary } }));
+      setLoadingCommentary(false);
+      setPhase(3);
+    });
+  }, [journeyState.detectedStacks, journeyState.qualifierAnswers]);
 
   // Map phase to stage index for indicators
   const currentStage = phase <= 2 ? 0 : phase <= 4 ? 1 : 2;
@@ -2999,8 +3051,27 @@ function DiagnosticJourney() {
         onContinue={goNext}
         onStop={() => { console.log('stop-behaviours'); setExitedAt(0); setExited(true); }} />
     );
+  } else if (phase === 2 && loadingCommentary) {
+    mainContent = (
+      <div style={{ width: '100%', maxWidth: '480px', textAlign: 'center', padding: '80px 0' }}>
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 400, color: 'var(--dj-chalk)', marginBottom: '12px' }}>
+          Preparing your leverage analysis
+        </h2>
+        <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--dj-chalk-muted)', marginBottom: '24px' }}>
+          Analysing your configuration against detected stacks
+        </p>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '6px' }}>
+          {[0,1,2].map(i => (
+            <div key={i} style={{
+              width: '8px', height: '8px', borderRadius: '50%', background: 'var(--steward)',
+              animation: `pulse-dot 1.2s ease-in-out ${i * 0.2}s infinite`,
+            }} />
+          ))}
+        </div>
+      </div>
+    );
   } else if (phase === 2) {
-    mainContent = <QualifierQuestions onComplete={() => setPhase(3)} />;
+    mainContent = <QualifierQuestions onComplete={handleQualifierComplete} />;
   } else if (phase === 3) {
     mainContent = (
       <TransitionCard transitionType="qualifiers-to-leverage" journeyState={journeyState}

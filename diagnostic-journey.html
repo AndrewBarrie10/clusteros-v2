@@ -2867,7 +2867,7 @@ function DigitalOSStage() {
         }
         return (
         <div style={schema.annotPanel}>
-          <h3 className="annot-title-desktop" style={schema.annotTitle}>{annotation.title}</h3>
+          {schemaStep < 8 && <h3 className="annot-title-desktop" style={schema.annotTitle}>{annotation.title}</h3>}
 
           {/* Tech recommendation badge — renders from local techConfig, independent of API */}
           {(() => {

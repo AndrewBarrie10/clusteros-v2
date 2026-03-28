@@ -208,6 +208,7 @@ function loadKnowledge() {
           entry:      s.leverage_entry || s.entry || '',
           effect:     s.expected_effect || s.effect || '',
           confidence: s.confidence || 'Medium',
+          comparators: s.clusters || s.comparators || s.cluster_examples || [],
         }));
       }
       knowledgeLoaded = true;
@@ -2991,7 +2992,7 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
       <div style={trans.card}>
         {/* Heading */}
         <h2 style={trans.heading}>
-          Your ecosystem isn't stalling in {stalls.length} places. It's running one pattern.
+          Your ecosystem isn't stalling in {stalls.length} places. It's running {stacks.length} reinforcing pattern{stacks.length !== 1 ? 's' : ''}.
         </h2>
 
         {/* Explainer */}
@@ -3004,10 +3005,10 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
             {stacks.map(s => {
               const triggerNames = (s.triggers || []).map(id => { const st = STALLS.find(x => x.id === id); return st ? st.name : id; });
-              // One sentence reinforcement logic — truncate to first sentence, max ~30 words
               let logic = s.logic || '';
               const firstSentence = logic.split('.')[0];
               logic = firstSentence.split(/\s+/).length > 30 ? firstSentence.split(/\s+/).slice(0, 30).join(' ') + '...' : firstSentence + '.';
+              const comparators = (s.comparators || []).slice(0, 3);
               return (
                 <div key={s.id} style={trans.stackCard}>
                   <div style={trans.stackCardName}>{s.name}</div>
@@ -3017,6 +3018,18 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
                       <span key={name} style={trans.stallPill}>{name}</span>
                     ))}
                   </div>
+                  {comparators.length > 0 && (
+                    <div style={{ marginTop: '10px' }}>
+                      <span style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', marginRight: '6px' }}>Also detected in:</span>
+                      {comparators.map((c, i) => {
+                        const name = typeof c === 'string' ? c : (c.name || c.region || '');
+                        return name ? <span key={i} style={trans.comparatorPill}>{name}</span> : null;
+                      })}
+                    </div>
+                  )}
+                  <a href="#" data-stack-id={s.id} style={{ display: 'inline-block', marginTop: '8px', fontFamily: 'var(--font-sans)', fontSize: '12px', color: '#0c9488', textDecoration: 'none' }}>
+                    &rarr; Read the Lab Note
+                  </a>
                 </div>
               );
             })}
@@ -3025,12 +3038,20 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
           <p style={trans.subtext}>{stalls.length} independent stall{stalls.length !== 1 ? 's' : ''} identified — {stallNames.join(', ')}. No reinforcing combinations detected.</p>
         )}
 
-        {/* Bottom line */}
-        <p style={{ ...trans.subtext, textAlign: 'center', marginBottom: '24px' }}>
-          Interventions that target individual stalls leave this pattern intact. To find where it breaks, we need to know more about your ecosystem.
-        </p>
+        {/* Handover section */}
+        <div style={{ marginTop: '24px', borderTop: '1px solid #1e2f45', paddingTop: '24px' }}>
+          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '20px', fontWeight: 400, color: 'var(--dj-chalk)', marginBottom: '12px', letterSpacing: '-0.01em' }}>
+            Where does this pattern break?
+          </h3>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk-dim)', marginBottom: '12px' }}>
+            Stacks don't break through effort — they break through structural intervention at a specific entry point. To identify that entry point for your ecosystem, we need to understand your configuration: what type of cluster you run, who your anchor is, what you're trying to protect, and where coordination is failing.
+          </p>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk-dim)', marginBottom: '24px' }}>
+            6 questions. Your answers will shape everything that follows — the leverage hypotheses, the infrastructure recommendation, and the report you receive.
+          </p>
+        </div>
 
-        {/* Buttons — no Back, just Stop + Continue */}
+        {/* Buttons */}
         <div style={trans.actions}>
           <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
           <button style={{ ...styles.btnSignal, marginLeft: 'auto', background: '#7dd3c8', color: '#1e2f45' }} onClick={onContinue}>
@@ -4814,6 +4835,17 @@ const trans = {
     background: 'rgba(125,211,200,0.12)',
     borderRadius: '3px',
     padding: '3px 8px',
+  },
+  comparatorPill: {
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '9px',
+    fontWeight: 500,
+    color: '#e8edf5',
+    background: '#1e2f45',
+    borderRadius: '3px',
+    padding: '3px 7px',
+    marginRight: '4px',
+    display: 'inline-block',
   },
 };
 

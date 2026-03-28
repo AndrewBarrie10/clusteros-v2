@@ -2682,7 +2682,8 @@ function DigitalOSStage() {
           {/* Tech recommendation badge — renders from local techConfig, independent of API */}
           {(() => {
             const tc = journeyState.techConfig;
-            if (!tc) { if (schemaStep >= 1 && schemaStep <= 7) console.warn('[TechBadge] techConfig is null on step', schemaStep); return null; }
+            if (!tc) { if (schemaStep >= 1 && schemaStep <= 7) console.warn('[TechBadge] techConfig is NULL on step', schemaStep); return null; }
+            console.log('[TechBadge] Step', schemaStep, '| aiRuntime:', tc.aiRuntime?.label, '| intelligence:', tc.intelligenceSubstrate?.label, '| governance:', tc.governanceAccess?.label, '| clusters:', tc.sovereignDatabase?.clusters?.length);
             const STEP_TECH = {
               1: tc.sovereignDatabase ? { pills: tc.sovereignDatabase.clusters, type: 'clusters' } : null,
               2: tc.governanceAccess ? { label: tc.governanceAccess.label, rationale: tc.governanceAccess.rationale, delivery: tc.governanceAccess.delivery } : null,
@@ -3420,6 +3421,12 @@ function DiagnosticJourney() {
     console.log('[Digital] 1. Building prompt. techConfig:', !!techConfig, 'stacks:', stacks.length, 'qa:', qa.clusterType);
 
     const digitalPrompt = `You are writing infrastructure commentary for a regional innovation ecosystem steward.
+
+CRITICAL: Write for a Chief Executive of a regional development agency, not a software engineer.
+Never use: "dual-write protocols", "read-only projections", "federated permission checks", "mutation", "sovereign clusters", or any database/engineering terminology.
+Instead describe what the steward SEES and EXPERIENCES.
+FROM THE INSIDE = what actors experience today without this layer.
+FROM THE OUTSIDE = what the steward gains when this layer works.
 
 Ecosystem: ${clusterLabel} cluster, ${anchorLabel} anchor, ${scaleLabel} stage.
 Priority: ${priorityLabel}. Coordination gap: ${gapLabel}. Protecting: ${protectList || 'not specified'}.

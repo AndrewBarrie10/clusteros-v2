@@ -3460,6 +3460,58 @@ function DiagnosticJourney() {
     digitalCommentary: null,
   });
 
+  /*
+   * COMMENTARY ARCHITECTURE — READ BEFORE MODIFYING
+   *
+   * The Digital OS step commentary uses a two-layer approach:
+   *
+   * LAYER 1 — LOCAL COMPUTATION (permanent, deterministic)
+   * buildLayerCommentary() computes the configuration structure from journey state:
+   * - Which sovereign database clusters to prioritise (driven by detected stalls)
+   * - Which bots to prioritise (driven by scale + anchor type)
+   * - Which governance model applies (driven by anchor type + protection priorities)
+   * - Which actor journeys to foreground (driven by anchor type)
+   * - SLM vs LLM decision (driven by protection priorities)
+   * - MCP vs Clawbot decision (driven by scale + anchor type)
+   * This layer is fast, offline-capable, and never API-dependent.
+   * Do not replace this with API calls.
+   *
+   * LAYER 2 — API PROSE (enrichment, currently active)
+   * The explanatory prose connecting structure to this specific ecosystem
+   * is currently generated locally via branching logic (~50 paths).
+   * This works for the first ~30 stewards but will hit a ceiling at scale:
+   * - Same stall combinations produce identical prose regardless of anchor × priority
+   * - New stall combinations fall through to generic text
+   * - Prose becomes recognisably templated at volume
+   *
+   * PLANNED SCALE ARCHITECTURE (implement when steward volume warrants):
+   * 1. Keep local structure computation (Layer 1) unchanged
+   * 2. Add API prose enrichment — prompt receives locally-computed structure as context:
+   *    "Here are the clusters already selected and why. Write 2 sentences connecting
+   *    this cluster selection to what this steward told us about their ecosystem."
+   *    Model explains decisions already made — it doesn't make them.
+   * 3. Cache API responses in Railway PostgreSQL keyed on configuration hash:
+   *    hash = stall_ids + anchor_type + scale + priority + gap + protect_array
+   *    Same configuration → instant cached response, no API call
+   *    New configuration → API call, store result, serve from cache thereafter
+   * 4. Railway PDF generator receives full structured payload:
+   *    local structure + cached prose + diagnostic findings → assembled report
+   *    No client-side PDF generation
+   *
+   * CONFIGURATION HASH FUNCTION (to implement when caching):
+   * function buildConfigHash(journeyState) {
+   *   const key = [
+   *     journeyState.selectedStalls.sort().join(','),
+   *     journeyState.qualifierAnswers.anchorType,
+   *     journeyState.qualifierAnswers.scale,
+   *     journeyState.qualifierAnswers.priority,
+   *     journeyState.qualifierAnswers.gap,
+   *     (journeyState.qualifierAnswers.protect || []).sort().join(',')
+   *   ].join('|');
+   *   return btoa(key); // base64 encode for use as cache key
+   * }
+   */
+
   const updateJourneyState = useCallback((patch) => {
     setJourneyState(prev => {
       const next = { ...prev, ...patch };

@@ -2284,15 +2284,22 @@ const STEP_LAYER_ID = {
   4: 'layer-sovereign', 5: 'layer-mcp', 6: 'layer-ai', 7: 'layer-journeys',
 };
 
+const LAYER_BORDER_COLOR = {
+  1: '#c8f0d0', 2: '#7dd3c8', 3: '#1e2f45', 4: '#1e2f45',
+  5: '#f5d97a', 6: '#f5d97a', 7: '#1e2f45', 8: '#7dd3c8',
+};
+
 function MobileSchemaStep({ schemaStep, configName, selectedStalls }) {
   const layerLabel = STEP_LAYER_LABEL[schemaStep] || '';
   const layerId = STEP_LAYER_ID[schemaStep];
   const stallTags = (selectedStalls || [])
     .filter(sid => STALL_LAYER_MAP[sid] === layerId)
     .map(sid => { const s = STALLS.find(x => x.id === sid); return s ? `${sid} ${s.name}` : sid; });
+  const borderColor = LAYER_BORDER_COLOR[schemaStep] || 'var(--dj-border)';
+  const isSovereign = schemaStep === 1;
 
   return (
-    <div style={{ padding: '4px 0' }}>
+    <div style={{ padding: '4px 0', borderLeft: `3px solid ${borderColor}`, paddingLeft: '16px', borderRadius: isSovereign ? '4px' : '0' }}>
       <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '10px', color: 'var(--dj-chalk-muted)', letterSpacing: '0.08em', marginBottom: '8px' }}>
         STEP {schemaStep + 1} OF {TOTAL_STEPS}
       </div>
@@ -2596,6 +2603,37 @@ function DigitalOSStage() {
         return (
         <div style={schema.annotPanel}>
           <h3 className="annot-title-desktop" style={schema.annotTitle}>{annotation.title}</h3>
+
+          {/* Tech recommendation badge */}
+          {(() => {
+            const tc = journeyState.techConfig;
+            if (!tc) return null;
+            const STEP_TECH = {
+              1: tc.sovereignDatabase ? { pills: tc.sovereignDatabase.clusters, type: 'clusters' } : null,
+              2: tc.governanceAccess ? { label: tc.governanceAccess.label, rationale: tc.governanceAccess.rationale, delivery: tc.governanceAccess.delivery } : null,
+              5: tc.intelligenceSubstrate ? { label: tc.intelligenceSubstrate.label, rationale: tc.intelligenceSubstrate.rationale, delivery: tc.intelligenceSubstrate.delivery } : null,
+              6: tc.aiRuntime ? { label: tc.aiRuntime.label, rationale: tc.aiRuntime.rationale, delivery: tc.aiRuntime.delivery } : null,
+            };
+            const tech = STEP_TECH[schemaStep];
+            if (!tech) return null;
+            if (tech.type === 'clusters' && tech.pills && tech.pills.length > 0) {
+              return (
+                <div style={{ marginBottom: '14px' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+                    {tech.pills.map(p => <span key={p} style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#0c9488', background: 'rgba(12,148,136,0.1)', border: '1px solid rgba(12,148,136,0.2)', borderRadius: '3px', padding: '3px 7px' }}>{p}</span>)}
+                  </div>
+                </div>
+              );
+            }
+            const badgeColor = tech.delivery === 'live' ? '#c8f0d0' : '#f5d97a';
+            return (
+              <div style={{ marginBottom: '14px' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.04em', color: '#09101f', background: badgeColor, borderRadius: '3px', padding: '4px 10px', display: 'inline-block', marginBottom: '6px' }}>{tech.label}</span>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', lineHeight: 1.5, color: 'var(--dj-chalk-muted)' }}>{tech.rationale}</p>
+              </div>
+            );
+          })()}
+
           {/* Digital commentary inside/outside — replaces body text when available (steps 1-7 only) */}
           {schemaStep >= 1 && schemaStep <= 7 && (dc && dc.inside ? (
             <div>
@@ -2702,6 +2740,7 @@ function ReportModal({ phase, journeyState, onClose }) {
       commentary: '',
       stackCommentary: journeyState.stackCommentary || {},
       digitalCommentary: journeyState.digitalCommentary || null,
+      techConfig: journeyState.techConfig || null,
       submitted_at: new Date().toISOString(),
       qualifier_answers: qa,
       config_name: (journeyState.osConfig || {}).configName || '',
@@ -3174,6 +3213,38 @@ function DiagnosticJourney() {
 
     setLoadingCommentary(true);
 
+    // Compute techConfig
+    const protect = qa.protect || [];
+    const selectedStalls = journeyState.stalls || [];
+    const techConfig = {
+      aiRuntime: (protect.includes('sovereignty') || protect.includes('ip'))
+        ? { recommendation: 'SLM', label: 'Small Language Model — on-premise', rationale: 'Your protection priorities require inference that stays within your sovereign boundary. A Small Language Model deployed within your infrastructure keeps all reasoning inside your ecosystem.', delivery: 'scoped' }
+        : { recommendation: 'LLM', label: 'Large Language Model — Anthropic Claude', rationale: 'Cloud inference via Anthropic API. Role-aware and ecosystem-context-aware. Every response is grounded in your sovereign database.', delivery: 'live' },
+      intelligenceSubstrate: (qa.stage === 'early' || qa.anchorType === 'none')
+        ? { recommendation: 'Clawbot', label: 'Clawbot — lightweight intelligence agent', rationale: 'At early stage, full MCP infrastructure is ahead of where your ecosystem is. Clawbot handles signal monitoring, stall detection, and actor matching with lower overhead.', delivery: 'scoped' }
+        : { recommendation: 'MCP', label: 'MCP Intelligence Substrate', rationale: 'Full Model Context Protocol substrate. Each AI capability is a structured tool call against your live sovereign database.', delivery: 'live' },
+      governanceAccess: (qa.anchorType === 'public' || qa.anchorType === 'hospital')
+        ? { model: 'regulatory', label: 'Regulatory compliance model', rationale: 'Public sector anchor requires GDPR-aligned data residency, full audit trail, and explicit consent records for every cross-boundary data flow.', delivery: 'scoped' }
+        : protect.includes('trust')
+          ? { model: 'relationship-first', label: 'Relationship-first access model', rationale: 'Trust tiers built on existing institutional structures. Actors gain access through verified relationships before role-based permissions apply.', delivery: 'scoped' }
+          : { model: 'standard', label: 'Federated governance — standard', rationale: 'Identity-first, role-based access across the full hierarchy. Full audit trail. Every data flow across the sovereign boundary requires a consent record.', delivery: 'live' },
+      sovereignDatabase: {
+        clusters: [
+          ...(selectedStalls.includes('S2') ? ['Coordination pathways'] : []),
+          ...(selectedStalls.includes('S6') ? ['Anchor engagement pipeline'] : []),
+          ...(selectedStalls.includes('S1') ? ['Evidence & validation records'] : []),
+          ...(selectedStalls.includes('S7') ? ['Narrative vs outcome tracking'] : []),
+          ...(selectedStalls.includes('S4') ? ['Value flow audit trail'] : []),
+          ...(selectedStalls.includes('S9') ? ['Permission & dependency records'] : []),
+          ...(selectedStalls.includes('S3') ? ['Talent retention signals'] : []),
+          ...(selectedStalls.includes('S5') ? ['Intermediary relationship map'] : []),
+          ...(selectedStalls.includes('S8') ? ['Activity-to-outcome conversion'] : []),
+        ],
+        clusterType: qa.clusterType,
+      },
+    };
+    setJourneyState(prev => ({ ...prev, techConfig }));
+
     // 1. Stack commentary calls (one per stack)
     const stackCalls = stacks.map(stack => {
       const stallNames = (stack.triggers || []).map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; }).join(' and ');
@@ -3205,7 +3276,7 @@ function DiagnosticJourney() {
 
     // 2. Digital commentary call (one call for all 7 layers)
     const stackDescs = stacks.map(s => `${s.name} — ${s.logic || ''}`).join('; ');
-    const digitalPrompt = `You are writing the narrative for a digital infrastructure recommendation for a regional innovation ecosystem steward. Write in the voice of a trusted senior advisor — specific, direct, no jargon. Think McKinsey partner who also understands complex adaptive systems.\n\nThis steward runs a ${clusterLabel} with a ${anchorLabel} anchor. Their ecosystem is ${scaleLabel} stage. Their strategic priority is ${priorityLabel}. Their coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their diagnostic has identified these stacks: ${stackDescs || 'no reinforcing stacks detected — independent stall patterns'}.\n\nWrite commentary for each of the following 7 infrastructure layers. For each layer write exactly two short sections:\n\nFROM THE INSIDE: 2 sentences maximum. What actors in this ecosystem currently experience without this layer — the specific friction, invisibility, or wasted motion that this steward's ecosystem has, given their stalls and stacks.\n\nFROM THE OUTSIDE: 2 sentences maximum. What this steward specifically gains when this layer is working — the signal, pattern, or evidence that becomes visible to them, connected to their priority and coordination gap.\n\nLayers to cover:\n1. sovereignDatabase — the structured record layer\n2. governanceAccess — governance and access control layer\n3. integrationLayer — external data and cold-start layer\n4. automationLayer — bot network and continuous enrichment\n5. intelligenceSubstrate — intelligence tool substrate\n6. aiRuntime — AI reasoning engine\n7. applicationLayer — personalised pathway and actor experience layer\n\nRules:\n- Name detected stacks and stalls in the text where relevant — they are proper nouns, not generic descriptions\n- Never use the words "platform", "solution", "leverage" or "dashboard"\n- Never explain what ClusterOS is — the steward already completed the diagnostic\n- Write as if continuing a conversation that started in the Leverage section\n- Each FROM THE INSIDE must describe something this specific steward will recognise from their own ecosystem\n- Each FROM THE OUTSIDE must connect to their stated priority: ${priorityLabel}\n\nReturn as JSON only, no preamble:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
+    const digitalPrompt = `You are writing the narrative for a digital infrastructure recommendation for a regional innovation ecosystem steward. Write in the voice of a trusted senior advisor — specific, direct, no jargon. Think McKinsey partner who also understands complex adaptive systems.\n\nThis steward runs a ${clusterLabel} with a ${anchorLabel} anchor. Their ecosystem is ${scaleLabel} stage. Their strategic priority is ${priorityLabel}. Their coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their diagnostic has identified these stacks: ${stackDescs || 'no reinforcing stacks detected — independent stall patterns'}.\n\nWrite commentary for each of the following 7 infrastructure layers. For each layer write exactly two short sections:\n\nFROM THE INSIDE: 2 sentences maximum. What actors in this ecosystem currently experience without this layer — the specific friction, invisibility, or wasted motion that this steward's ecosystem has, given their stalls and stacks.\n\nFROM THE OUTSIDE: 2 sentences maximum. What this steward specifically gains when this layer is working — the signal, pattern, or evidence that becomes visible to them, connected to their priority and coordination gap.\n\nLayers to cover:\n1. sovereignDatabase — the structured record layer\n2. governanceAccess — governance and access control layer\n3. integrationLayer — external data and cold-start layer\n4. automationLayer — bot network and continuous enrichment\n5. intelligenceSubstrate — intelligence tool substrate\n6. aiRuntime — AI reasoning engine\n7. applicationLayer — personalised pathway and actor experience layer\n\nRules:\n- Name detected stacks and stalls in the text where relevant — they are proper nouns, not generic descriptions\n- Never use the words "platform", "solution", "leverage" or "dashboard"\n- Never explain what ClusterOS is — the steward already completed the diagnostic\n- Write as if continuing a conversation that started in the Leverage section\n- Each FROM THE INSIDE must describe something this specific steward will recognise from their own ecosystem\n- Each FROM THE OUTSIDE must connect to their stated priority: ${priorityLabel}\n\nTechnology configuration for this ecosystem:\n- AI Runtime: ${techConfig.aiRuntime.label} — ${techConfig.aiRuntime.rationale}\n- Intelligence Substrate: ${techConfig.intelligenceSubstrate.label} — ${techConfig.intelligenceSubstrate.rationale}\n- Governance model: ${techConfig.governanceAccess.label} — ${techConfig.governanceAccess.rationale}\n- Sovereign Database priority clusters: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}\n\nWrite commentary that references these specific technology choices. Do not present generic options — present the recommendation that has already been made for this configuration.\n\nReturn as JSON only, no preamble:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
 
     const digitalCall = (function() {
       console.log('[Digital Commentary] Firing API call');

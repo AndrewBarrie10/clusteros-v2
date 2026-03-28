@@ -238,7 +238,7 @@ function loadKnowledge() {
                  cs.stalls_involved.every(sid => triggerSet.has(sid)))
               )
             );
-            rule.comparators = matchedClusters.slice(0, 5).map(c => c.name || c.id);
+            rule.comparators = matchedClusters.slice(0, 5).map(c => ({ name: c.name || c.id, slug: c.id }));
 
             // Compute co-occurring stalls across matched clusters
             const coStallCounts = {};
@@ -898,6 +898,14 @@ const PROTECT_INFRA = {
   talent:      'the talent pipeline tracker keeps visibility over founders and skills within the ecosystem',
   sovereignty: 'the sovereign data membrane and permissioned access layer protect economic self-determination',
 };
+
+function toClusterSlug(name) {
+  return name.toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[àáâãäå]/g, 'a').replace(/[èéêë]/g, 'e').replace(/[ìíîï]/g, 'i')
+    .replace(/[òóôõö]/g, 'o').replace(/[ùúûü]/g, 'u').replace(/[ñ]/g, 'n')
+    .replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+}
 
 function articleFor(name) {
   // Words starting with U that sound like "yoo" take "A" not "An"
@@ -3076,9 +3084,9 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
                     <div style={{ marginTop: '10px' }}>
                       <span style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', marginRight: '6px' }}>Also detected in:</span>
                       {comparators.map((c, i) => {
-                        const name = typeof c === 'string' ? c : (c.name || c.region || '');
-                        const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-                        return name ? <a key={i} className="comparator-pill" href={`https://clusteros.io/clusters/${slug}`} target="_blank" rel="noopener" style={trans.comparatorPill}>{name}</a> : null;
+                        const name = typeof c === 'string' ? c : (c.name || '');
+                        const slug = typeof c === 'object' && c.slug ? c.slug : toClusterSlug(name);
+                        return name ? <a key={i} className="comparator-pill" href={`/clusters/${slug}.html`} target="_blank" rel="noopener" style={trans.comparatorPill}>{name}</a> : null;
                       })}
                     </div>
                   )}
@@ -3098,28 +3106,32 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
           // Compute blind spot: most common co-occurring stall across comparator clusters not selected by steward
           const stallSet = new Set(stalls);
           const coStallAgg = {};
-          let totalComparators = 0;
+          // D = total unique comparator clusters across all detected stacks
+          const allComparatorNames = new Set();
           stacks.forEach(s => {
             if (s.coStallCounts) {
               Object.entries(s.coStallCounts).forEach(([sid, count]) => {
                 if (!stallSet.has(sid)) coStallAgg[sid] = (coStallAgg[sid] || 0) + count;
               });
-              totalComparators = Math.max(totalComparators, s.comparatorTotal || 0);
             }
+            (s.comparators || []).forEach(c => { const n = typeof c === 'string' ? c : (c.name || ''); if (n) allComparatorNames.add(n); });
           });
+          const totalUniqueComparators = allComparatorNames.size;
           const sorted = Object.entries(coStallAgg).sort((a, b) => b[1] - a[1]);
           if (sorted.length === 0) return null;
           const [blindSpotId, blindSpotCount] = sorted[0];
           const blindSpotStall = STALLS.find(s => s.id === blindSpotId);
           if (!blindSpotStall) return null;
-          const pct = totalComparators > 0 ? Math.round((blindSpotCount / totalComparators) * 100) : null;
+          // N = count of comparator clusters showing the blind spot stall
+          const rawPct = totalUniqueComparators > 0 ? Math.round((blindSpotCount / totalUniqueComparators) * 100) : 0;
+          const pct = rawPct > 0 && !isNaN(rawPct) ? Math.min(rawPct, 100) : null;
           const stackNameStr = stacks.map(s => s.name).join(' and ');
           return (
             <div style={trans.blindSpotBox}>
               <div style={trans.blindSpotLabel}>STEWARD'S BLIND SPOT</div>
               <h4 style={trans.blindSpotHeading}>{blindSpotStall.name} — you didn't identify this.</h4>
               <p style={trans.blindSpotBody}>
-                Ecosystems running {stackNameStr} also show {blindSpotStall.name}{pct ? ` in ${pct}% of cases` : ' frequently'}. Either it isn't present in your ecosystem — or it hasn't surfaced yet.
+                Ecosystems running {stackNameStr} also show {blindSpotStall.name}{pct ? ` in ${pct}% of cases` : ' in the majority of similar ecosystems'}. Either it isn't present in your ecosystem — or it hasn't surfaced yet.
               </p>
               <button
                 style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '13px', color: '#0c9488', padding: 0 }}

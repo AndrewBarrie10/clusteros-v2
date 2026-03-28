@@ -2719,8 +2719,10 @@ function DigitalOSStage() {
             </div>
           ) : (
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 0' }}>
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#7dd3c8', animation: 'pulse-dot 1.2s ease-in-out infinite' }} />
-              <span style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)' }}>Generating your configuration commentary...</span>
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#7dd3c8', animation: 'pulse-dot 1.2s ease-in-out infinite', flexShrink: 0 }} />
+              <span style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)' }}>
+                Generating your configuration commentary...
+              </span>
             </div>
           ))}
           {annotation.cascadeActors && annotation.cascadeActors.map(name => {
@@ -3415,70 +3417,63 @@ function DiagnosticJourney() {
 
     // 2. Digital commentary call (one call for all 7 layers)
     const stackDescs = stacks.map(s => `${s.name} — ${s.logic || ''}`).join('; ');
-    const digitalPrompt = `You are writing the narrative for a digital infrastructure recommendation for a regional innovation ecosystem steward. Write in the voice of a trusted senior advisor — specific, direct, no jargon. Think McKinsey partner who also understands complex adaptive systems.\n\nThis steward runs a ${clusterLabel} with a ${anchorLabel} anchor. Their ecosystem is ${scaleLabel} stage. Their strategic priority is ${priorityLabel}. Their coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their diagnostic has identified these stacks: ${stackDescs || 'no reinforcing stacks detected — independent stall patterns'}.\n\nWrite commentary for each of the following 7 infrastructure layers. For each layer write exactly two short sections:\n\nFROM THE INSIDE: 2 sentences maximum. What actors in this ecosystem currently experience without this layer — the specific friction, invisibility, or wasted motion that this steward's ecosystem has, given their stalls and stacks.\n\nFROM THE OUTSIDE: 2 sentences maximum. What this steward specifically gains when this layer is working — the signal, pattern, or evidence that becomes visible to them, connected to their priority and coordination gap.\n\nLayers to cover:\n1. sovereignDatabase — the structured record layer\n2. governanceAccess — governance and access control layer\n3. integrationLayer — external data and cold-start layer\n4. automationLayer — bot network and continuous enrichment\n5. intelligenceSubstrate — intelligence tool substrate\n6. aiRuntime — AI reasoning engine\n7. applicationLayer — personalised pathway and actor experience layer\n\nRules:\n- Name detected stacks and stalls in the text where relevant — they are proper nouns, not generic descriptions\n- Never use the words "platform", "solution", "leverage" or "dashboard"\n- Never explain what ClusterOS is — the steward already completed the diagnostic\n- Write as if continuing a conversation that started in the Leverage section\n- Each FROM THE INSIDE must describe something this specific steward will recognise from their own ecosystem\n- Each FROM THE OUTSIDE must connect to their stated priority: ${priorityLabel}\n\nTechnology configuration for this ecosystem:\n- AI Runtime: ${techConfig.aiRuntime.label} — ${techConfig.aiRuntime.rationale}\n- Intelligence Substrate: ${techConfig.intelligenceSubstrate.label} — ${techConfig.intelligenceSubstrate.rationale}\n- Governance model: ${techConfig.governanceAccess.label} — ${techConfig.governanceAccess.rationale}\n- Sovereign Database priority clusters: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}\n\nWrite commentary that references these specific technology choices. Do not present generic options — present the recommendation that has already been made for this configuration.\n\nReturn as JSON only, no preamble:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
+    console.log('[Digital] 1. Building prompt. techConfig:', !!techConfig, 'stacks:', stacks.length, 'qa:', qa.clusterType);
 
-    const digitalCall = (function() {
-      console.log('[Digital Commentary] Firing API call');
-      return fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: digitalPrompt }),
+    const digitalPrompt = `You are writing infrastructure commentary for a regional innovation ecosystem steward. Write as a trusted senior advisor — direct, specific, no jargon. Never use the words "platform", "solution", "leverage", or "dashboard".\n\nThis steward runs a ${clusterLabel} with a ${anchorLabel} anchor. Their ecosystem is ${scaleLabel} stage. Their strategic priority is ${priorityLabel}. Their coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their diagnostic has identified these stacks: ${stackDescs || 'no reinforcing stacks detected'}.\n\nTechnology configuration:\n- AI Runtime: ${techConfig.aiRuntime.label}\n- Intelligence: ${techConfig.intelligenceSubstrate.label}\n- Governance: ${techConfig.governanceAccess.label}\n- DB priorities: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}\n\nWrite commentary for 7 layers. For each write exactly two sections:\nFROM THE INSIDE: 2 sentences. What actors experience without this layer.\nFROM THE OUTSIDE: 2 sentences. What the steward gains when it works.\n\nLayers: sovereignDatabase, governanceAccess, integrationLayer, automationLayer, intelligenceSubstrate, aiRuntime, applicationLayer\n\nRules: Name stacks/stalls where relevant. No markdown. Return JSON only:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
+
+    // Simplified retry prompt (shorter, more likely to get clean JSON)
+    const retryPrompt = `Write infrastructure commentary as JSON for a ${clusterLabel} with ${anchorLabel} anchor. Stacks: ${stackDescs || 'none'}. Priority: ${priorityLabel}.\n\nFor each layer write "inside" (what actors experience without it) and "outside" (what the steward gains). 2 sentences each. No markdown.\n\nReturn ONLY this JSON:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
+
+    function parseDigitalResponse(rawText) {
+      if (!rawText) return null;
+      let data;
+      try { data = JSON.parse(rawText); } catch (e) { console.error('[Digital] Raw not JSON:', e.message, rawText.substring(0, 200)); return null; }
+      // Direct result
+      if (data.sovereignDatabase) return data;
+      // Extract inner text
+      let inner = data.commentary || data.text || '';
+      if (!inner && Array.isArray(data.content) && data.content[0]) inner = data.content[0].text || '';
+      if (!inner) { console.error('[Digital] No inner text. Response keys:', Object.keys(data)); return null; }
+      if (typeof inner === 'object' && inner.sovereignDatabase) return inner;
+      // Clean and parse
+      let cleaned = String(inner).replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
+      console.log('[Digital] Cleaned (first 300):', cleaned.substring(0, 300));
+      try {
+        const p = JSON.parse(cleaned);
+        if (p.sovereignDatabase) return p;
+      } catch (e) {
+        const m = cleaned.match(/\{[\s\S]*\}/);
+        if (m) { try { const p = JSON.parse(m[0]); if (p.sovereignDatabase) return p; } catch (e2) {} }
+        console.error('[Digital] All parse attempts failed. Cleaned text:', cleaned.substring(0, 500));
+      }
+      return null;
+    }
+
+    const digitalCall = fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: digitalPrompt }),
+    })
+      .then(r => { console.log('[Digital] 2. Response status:', r.status); return r.ok ? r.text() : null; })
+      .then(raw => {
+        console.log('[Digital] 3. Raw response length:', (raw || '').length);
+        const result = parseDigitalResponse(raw);
+        if (result) { console.log('[Digital] 4. SUCCESS on first attempt. Keys:', Object.keys(result)); return result; }
+        // Retry with simplified prompt
+        console.warn('[Digital] 5. First attempt failed — retrying with simplified prompt');
+        return fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: retryPrompt }),
+        })
+          .then(r2 => r2.ok ? r2.text() : null)
+          .then(raw2 => {
+            console.log('[Digital] 6. Retry response length:', (raw2 || '').length);
+            const result2 = parseDigitalResponse(raw2);
+            if (result2) { console.log('[Digital] 7. SUCCESS on retry. Keys:', Object.keys(result2)); return result2; }
+            console.error('[Digital] 8. BOTH ATTEMPTS FAILED');
+            return null;
+          });
       })
-        .then(r => {
-          console.log('[Digital Commentary] Response status:', r.status);
-          return r.ok ? r.text() : null;
-        })
-        .then(rawText => {
-          if (!rawText) { console.warn('[Digital Commentary] Empty response'); return null; }
-
-          // Step 1: Parse the API wrapper
-          let data;
-          try { data = JSON.parse(rawText); } catch (e) { console.error('[Digital Commentary] API response not JSON:', e.message); return null; }
-
-          // Step 2: Extract the inner text from any response format
-          let innerText = '';
-          if (data.sovereignDatabase) { console.log('[Digital Commentary] Direct result object'); return data; }
-          if (data.commentary) innerText = data.commentary;
-          else if (data.text) innerText = data.text;
-          else if (Array.isArray(data.content) && data.content[0] && data.content[0].text) innerText = data.content[0].text;
-          else if (typeof data === 'string') innerText = data;
-
-          if (!innerText) { console.warn('[Digital Commentary] No text extracted. Keys:', Object.keys(data)); return null; }
-          console.log('[Digital Commentary] Inner text (first 200):', String(innerText).substring(0, 200));
-
-          // If innerText is already an object
-          if (typeof innerText === 'object' && innerText.sovereignDatabase) { console.log('[Digital Commentary] Inner text is object'); return innerText; }
-
-          // Step 3: Clean markdown fences robustly
-          let cleaned = String(innerText)
-            .replace(/^```json\s*/i, '')
-            .replace(/^```\s*/i, '')
-            .replace(/```\s*$/i, '')
-            .trim();
-          console.log('[Digital Commentary] After fence strip (first 200):', cleaned.substring(0, 200));
-
-          // Step 4: Parse the cleaned text
-          try {
-            const parsed = JSON.parse(cleaned);
-            if (parsed.sovereignDatabase) {
-              console.log('[Digital Commentary] SUCCESS — parsed. Keys:', Object.keys(parsed));
-              return parsed;
-            }
-          } catch (e) {
-            console.error('[Digital Commentary] Parse failed:', e.message);
-            // Last resort: extract JSON block
-            const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
-            if (jsonMatch) {
-              try {
-                const parsed = JSON.parse(jsonMatch[0]);
-                if (parsed.sovereignDatabase) { console.log('[Digital Commentary] SUCCESS — extracted JSON block'); return parsed; }
-              } catch (e2) { console.error('[Digital Commentary] JSON block parse also failed:', e2.message); }
-            }
-            console.error('[Digital Commentary] Raw cleaned text:', cleaned.substring(0, 500));
-          }
-          return null;
-        })
-        .catch(err => { console.error('[Digital Commentary] Fetch error:', err.message); return null; });
-    })();
+      .catch(err => { console.error('[Digital] Fetch error:', err.message); return null; });
 
     // Wait for all calls
     Promise.all([Promise.all(stackCalls), digitalCall]).then(([stackResults, digitalResult]) => {

@@ -3420,81 +3420,28 @@ function DiagnosticJourney() {
     const stackDescs = stacks.map(s => s.name).join(', ');
     console.log('[Digital] 1. Building prompt. techConfig:', !!techConfig, 'stacks:', stacks.length, 'qa:', qa.clusterType);
 
-    // Compute ecosystem context for prompt enrichment
-    const forefrontedActors = (() => {
-      const at = qa.anchorType;
-      if (at === 'university' || at === 'research') return ['Researchers', 'Founders', 'Steward'];
-      if (at === 'corporate') return ['Founders', 'Anchor supply chain', 'Steward'];
-      return ['Founders', 'Researchers', 'Steward'];
-    })();
+    const digitalPrompt = `You are writing a briefing for a senior ecosystem leader — think CEO of a regional development agency or a cluster manager presenting to their board. Plain English only. No technical terms.
 
-    const digitalPrompt = `You are writing infrastructure commentary for a regional innovation ecosystem steward.
+This ecosystem: ${clusterLabel}, ${anchorLabel} anchor, ${scaleLabel} stage.
+What they are trying to do: ${priorityLabel}.
+Where coordination is failing: ${gapLabel || 'not specified'}.
+What they are protecting: ${protectList || 'not specified'}.
+Patterns detected: ${stackDescs || 'none'}.
 
-CRITICAL: Write for a Chief Executive of a regional development agency, not a software engineer.
-Never use: "dual-write protocols", "read-only projections", "federated permission checks", "mutation", "sovereign clusters", or any database/engineering terminology.
-Instead describe what the steward SEES and EXPERIENCES.
-FROM THE INSIDE = what actors experience today without this layer.
-FROM THE OUTSIDE = what the steward gains when this layer works.
+Write commentary for 7 infrastructure layers. For each, write exactly:
+FROM THE INSIDE: What people in this ecosystem experience today — the friction, the invisibility, the wasted effort. 2 sentences. Name real actors (founders, researchers, anchors) doing real things.
+FROM THE OUTSIDE: What the ecosystem leader sees when this layer is working — what becomes visible, what they can act on. 2 sentences. Connect to: ${priorityLabel}.
 
-Ecosystem: ${clusterLabel} cluster, ${anchorLabel} anchor, ${scaleLabel} stage.
-Priority: ${priorityLabel}. Coordination gap: ${gapLabel}. Protecting: ${protectList || 'not specified'}.
-Stacks detected: ${stackDescs || 'none'}.
+Example of the register I want:
+FROM THE INSIDE: Researchers publish findings that never reach the companies who need them. Founders spend months in introductions that a connected directory would resolve in minutes.
+FROM THE OUTSIDE: You can see which research is generating commercial interest before anyone has to broker it. Your anchor knows which founders are ready before they knock on the door.
 
-Technology decisions already made:
-AI Runtime: ${techConfig.aiRuntime.label}
-Intelligence: ${techConfig.intelligenceSubstrate.label}
-Governance: ${techConfig.governanceAccess.label}
-Sovereign DB clusters: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}
+Layers: sovereignDatabase, governanceAccess, integrationLayer, automationLayer, intelligenceSubstrate, aiRuntime, applicationLayer.
 
-Ecosystem-specific structure for this configuration:
+Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
 
-Sovereign Database priority clusters: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}.
-These are the specific data structures that matter most for this ecosystem — reference them by name in the sovereignDatabase commentary.
-
-Foregrounded actor journeys: ${forefrontedActors.join(', ')}.
-These are the actors this ecosystem actually has — reference them in the applicationLayer commentary. Do not mention actor types that are not in this list.
-
-Protection priorities this steward named: ${protectList || 'not specified'}.
-Reference these in the governanceAccess commentary — explain specifically how the governance layer protects these things.
-
-Coordination gap: ${gapLabel || 'not specified'}.
-Reference this gap in the integrationLayer commentary — explain specifically which external data sources address this gap and how.
-
-Strategic priority: ${priorityLabel}.
-Every FROM THE OUTSIDE section should connect back to this priority — what does the steward gain that helps them achieve this?
-
-Write as if you know this specific ecosystem. Name the specific clusters, actors, and priorities. Do not write generically.
-
-For the aiRuntime section specifically:
-FROM THE INSIDE: Describe what stewards and actors experience today when they need intelligence — the manual work, the guesswork, the lag between asking a question and getting an answer.
-FROM THE OUTSIDE: Describe what the steward gains — what questions they can now ask, how fast they get answers, and what they can do with those answers.
-Do NOT describe how the AI works technically. Do NOT mention MCP, substrates, boundaries, or inference architecture.
-Write as if explaining to a CEO why having Claude as their ecosystem's intelligence layer changes what they can do — not how it works.
-
-For the intelligenceSubstrate section:
-FROM THE INSIDE: Describe the manual coordination work that currently happens — the spreadsheets, the email introductions, the programme manager as human router.
-FROM THE OUTSIDE: Describe what replaces that — what the steward sees automatically, without anyone having to do the routing manually.
-Do NOT use the words "substrate", "MCP", "tool calls", "runtime", or any technical infrastructure terms.
-
-MANDATORY REQUIREMENTS — these must appear verbatim in your response:
-- In the aiRuntime section, you MUST use the phrase "${techConfig.aiRuntime.label}"
-- In the intelligenceSubstrate section, you MUST use the phrase "${techConfig.intelligenceSubstrate.label}"
-- In the governanceAccess section, you MUST use the phrase "${techConfig.governanceAccess.label}"
-- In the sovereignDatabase section, you MUST reference these specific clusters: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}
-Do not describe generic infrastructure. Describe THIS configuration with THESE specific technology choices.
-
-Return ONLY a JSON object. No text before or after. No markdown. No explanation.
-The JSON must have exactly these 7 keys: sovereignDatabase, governanceAccess, integrationLayer, automationLayer, intelligenceSubstrate, aiRuntime, applicationLayer.
-Each key maps to an object with exactly two string keys: "inside" and "outside".
-Each string is 2 sentences maximum.
-Reference the technology decisions above in the relevant layers.
-
-{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
-
-    // Simplified retry prompt (includes techConfig labels for reliability)
-    const retryPrompt = `Write infrastructure commentary as JSON for a ${clusterLabel} with ${anchorLabel} anchor. Stacks: ${stackDescs || 'none'}. Priority: ${priorityLabel}. AI Runtime: ${techConfig.aiRuntime.label}. Intelligence: ${techConfig.intelligenceSubstrate.label}.
-
-Return ONLY JSON, nothing else:
+    // Simplified retry prompt
+    const retryPrompt = `Briefing for a CEO. ${clusterLabel}, ${anchorLabel} anchor. Priority: ${priorityLabel}. Stacks: ${stackDescs || 'none'}. For each of 7 layers write inside (what actors experience) and outside (what the leader gains). 2 sentences each. Plain English only. Return JSON only:
 {"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
 
     function extractJSON(text) {

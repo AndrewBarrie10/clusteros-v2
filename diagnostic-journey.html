@@ -3417,37 +3417,65 @@ function DiagnosticJourney() {
     });
 
     // 2. Digital commentary call (one call for all 7 layers)
-    const stackDescs = stacks.map(s => `${s.name} — ${s.logic || ''}`).join('; ');
+    const stackDescs = stacks.map(s => s.name).join(', ');
     console.log('[Digital] 1. Building prompt. techConfig:', !!techConfig, 'stacks:', stacks.length, 'qa:', qa.clusterType);
 
-    const digitalPrompt = `You are writing infrastructure commentary for a regional innovation ecosystem steward. Write as a trusted senior advisor — direct, specific, no jargon. Never use the words "platform", "solution", "leverage", or "dashboard".\n\nThis steward runs a ${clusterLabel} with a ${anchorLabel} anchor. Their ecosystem is ${scaleLabel} stage. Their strategic priority is ${priorityLabel}. Their coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their diagnostic has identified these stacks: ${stackDescs || 'no reinforcing stacks detected'}.\n\nTechnology configuration already determined for this ecosystem:\n- AI Runtime: ${techConfig.aiRuntime.label}. ${techConfig.aiRuntime.rationale}\n- Intelligence layer: ${techConfig.intelligenceSubstrate.label}. ${techConfig.intelligenceSubstrate.rationale}\n- Governance model: ${techConfig.governanceAccess.label}. ${techConfig.governanceAccess.rationale}\n- Sovereign Database priority clusters: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}\n\nReference these specific technology choices in the relevant layer commentary. The aiRuntime commentary must mention ${techConfig.aiRuntime.label} specifically. The intelligenceSubstrate commentary must mention ${techConfig.intelligenceSubstrate.label} specifically. The governanceAccess commentary must mention ${techConfig.governanceAccess.label} specifically.\n\nWrite commentary for 7 layers. For each write exactly two sections:\nFROM THE INSIDE: 2 sentences. What actors experience without this layer.\nFROM THE OUTSIDE: 2 sentences. What the steward gains when it works.\n\nLayers: sovereignDatabase, governanceAccess, integrationLayer, automationLayer, intelligenceSubstrate, aiRuntime, applicationLayer\n\nRules: Name stacks/stalls where relevant. No markdown. Return JSON only:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
+    const digitalPrompt = `You are writing infrastructure commentary for a regional innovation ecosystem steward.
 
-    // Simplified retry prompt (shorter, more likely to get clean JSON)
-    const retryPrompt = `Write infrastructure commentary as JSON for a ${clusterLabel} with ${anchorLabel} anchor. Stacks: ${stackDescs || 'none'}. Priority: ${priorityLabel}.\n\nFor each layer write "inside" (what actors experience without it) and "outside" (what the steward gains). 2 sentences each. No markdown.\n\nReturn ONLY this JSON:\n{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
+Ecosystem: ${clusterLabel} cluster, ${anchorLabel} anchor, ${scaleLabel} stage.
+Priority: ${priorityLabel}. Coordination gap: ${gapLabel}. Protecting: ${protectList || 'not specified'}.
+Stacks detected: ${stackDescs || 'none'}.
+
+Technology decisions already made:
+AI Runtime: ${techConfig.aiRuntime.label}
+Intelligence: ${techConfig.intelligenceSubstrate.label}
+Governance: ${techConfig.governanceAccess.label}
+Sovereign DB clusters: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}
+
+Return ONLY a JSON object. No text before or after. No markdown. No explanation.
+The JSON must have exactly these 7 keys: sovereignDatabase, governanceAccess, integrationLayer, automationLayer, intelligenceSubstrate, aiRuntime, applicationLayer.
+Each key maps to an object with exactly two string keys: "inside" and "outside".
+Each string is 2 sentences maximum.
+Reference the technology decisions above in the relevant layers.
+
+{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
+
+    // Simplified retry prompt (includes techConfig labels for reliability)
+    const retryPrompt = `Write infrastructure commentary as JSON for a ${clusterLabel} with ${anchorLabel} anchor. Stacks: ${stackDescs || 'none'}. Priority: ${priorityLabel}. AI Runtime: ${techConfig.aiRuntime.label}. Intelligence: ${techConfig.intelligenceSubstrate.label}.
+
+Return ONLY JSON, nothing else:
+{"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
+
+    function extractJSON(text) {
+      if (!text) return null;
+      // Strip markdown fences
+      text = String(text).replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
+      // Direct parse
+      try { const p = JSON.parse(text); if (p.sovereignDatabase) return p; } catch(e) {}
+      // Find first { and last } and extract
+      const start = text.indexOf('{');
+      const end = text.lastIndexOf('}');
+      if (start !== -1 && end !== -1 && end > start) {
+        try { const p = JSON.parse(text.slice(start, end + 1)); if (p.sovereignDatabase) return p; } catch(e) {}
+      }
+      // Remove everything before first { and after last }
+      const jsonOnly = text.replace(/^[^{]*/, '').replace(/[^}]*$/, '');
+      try { const p = JSON.parse(jsonOnly); if (p.sovereignDatabase) return p; } catch(e) {}
+      console.error('[Digital] All JSON extraction failed. Text:', text.substring(0, 500));
+      return null;
+    }
 
     function parseDigitalResponse(rawText) {
       if (!rawText) return null;
       let data;
-      try { data = JSON.parse(rawText); } catch (e) { console.error('[Digital] Raw not JSON:', e.message, rawText.substring(0, 200)); return null; }
-      // Direct result
+      try { data = JSON.parse(rawText); } catch (e) { console.error('[Digital] Raw not JSON:', e.message); return null; }
       if (data.sovereignDatabase) return data;
-      // Extract inner text
       let inner = data.commentary || data.text || '';
       if (!inner && Array.isArray(data.content) && data.content[0]) inner = data.content[0].text || '';
-      if (!inner) { console.error('[Digital] No inner text. Response keys:', Object.keys(data)); return null; }
+      if (!inner) { console.error('[Digital] No inner text. Keys:', Object.keys(data)); return null; }
       if (typeof inner === 'object' && inner.sovereignDatabase) return inner;
-      // Clean and parse
-      let cleaned = String(inner).replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
-      console.log('[Digital] Cleaned (first 300):', cleaned.substring(0, 300));
-      try {
-        const p = JSON.parse(cleaned);
-        if (p.sovereignDatabase) return p;
-      } catch (e) {
-        const m = cleaned.match(/\{[\s\S]*\}/);
-        if (m) { try { const p = JSON.parse(m[0]); if (p.sovereignDatabase) return p; } catch (e2) {} }
-        console.error('[Digital] All parse attempts failed. Cleaned text:', cleaned.substring(0, 500));
-      }
-      return null;
+      console.log('[Digital] Inner text to extract from (first 300):', String(inner).substring(0, 300));
+      return extractJSON(inner);
     }
 
     const digitalCall = fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
@@ -3504,8 +3532,8 @@ function DiagnosticJourney() {
   }, [journeyState.detectedStacks, journeyState.qualifierAnswers]);
 
   // Map phase to stage index for indicators
-  const currentStage = phase <= 2 ? 0 : phase <= 4 ? 1 : 2;
-  const completedUpTo = phase >= 4 ? (phase >= 6 ? 2 : 1) : 0;
+  const currentStage = phase <= 2 ? 0 : phase <= 5 ? 1 : 2;
+  const completedUpTo = phase >= 6 ? 2 : phase >= 4 ? 1 : 0;
 
   /* ── Context value ── */
   const ctx = useMemo(() => ({

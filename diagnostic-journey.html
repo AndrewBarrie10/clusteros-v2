@@ -43,6 +43,9 @@ body { min-height: 100vh; }
 @media (min-width: 769px) { .schema-mobile-stepper { display: none !important; } }
 @keyframes pulse-dot { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
 
+/* Comparator pill hover */
+a.comparator-pill:hover { background: #2a3f55 !important; }
+
 /* Suppress site sticky bar — journey has its own */
 .sticky-bar, .sticky-bar-inner, .sticky-btn { display: none !important; }
 
@@ -222,16 +225,35 @@ function loadKnowledge() {
         .then(cr => cr.ok ? cr.json() : [])
         .then(allClusters => {
           if (!Array.isArray(allClusters) || allClusters.length === 0) return;
+          // Map cluster stall names to stall IDs
+          const stallNameToId = {};
+          STALLS.forEach(s => { stallNameToId[s.name.toLowerCase()] = s.id; });
+
           STACK_RULES.forEach(rule => {
             const triggerSet = new Set(rule.triggers);
-            const matches = allClusters.filter(c =>
+            const matchedClusters = allClusters.filter(c =>
               (c.stacks || []).some(cs =>
                 (cs.canonical_id === rule.id) ||
                 (cs.stalls_involved && cs.stalls_involved.length === triggerSet.size &&
                  cs.stalls_involved.every(sid => triggerSet.has(sid)))
               )
-            ).slice(0, 5);
-            rule.comparators = matches.map(c => c.name || c.id);
+            );
+            rule.comparators = matchedClusters.slice(0, 5).map(c => c.name || c.id);
+
+            // Compute co-occurring stalls across matched clusters
+            const coStallCounts = {};
+            matchedClusters.forEach(c => {
+              (c.stalls || []).forEach(cs => {
+                // Map cluster stall name to ID
+                const csName = (cs.name || '').split(' instead of')[0].split(' around')[0].trim().toLowerCase();
+                const sid = stallNameToId[csName];
+                if (sid && !triggerSet.has(sid)) {
+                  coStallCounts[sid] = (coStallCounts[sid] || 0) + 1;
+                }
+              });
+            });
+            rule.coStallCounts = coStallCounts;
+            rule.comparatorTotal = matchedClusters.length;
           });
           console.log('[Knowledge API] Cluster comparators loaded for', STACK_RULES.filter(r => (r.comparators || []).length > 0).length, 'stacks');
         })
@@ -718,16 +740,23 @@ function HealthIndicator({ count }) {
 }
 
 /* ─── Stall card ───────────────────────────────────────────────────── */
-function StallCard({ stall, selected, onToggle }) {
+function StallCard({ stall, selected, onToggle, highlighted }) {
   return (
     <button
       onClick={() => onToggle(stall.id)}
       style={{
         ...s1.card,
-        borderColor: selected ? 'var(--signal)' : 'var(--dj-border)',
+        borderColor: selected ? 'var(--signal)' : highlighted ? '#f5d97a' : 'var(--dj-border)',
         background: selected ? 'rgba(42,122,79,0.06)' : 'var(--dj-surface)',
+        boxShadow: highlighted && !selected ? '0 0 0 2px #f5d97a' : 'none',
+        position: 'relative',
       }}
     >
+      {highlighted && !selected && (
+        <div style={{ position: 'absolute', top: '-10px', left: '12px', fontFamily: "'Geist Mono', monospace", fontSize: '8px', fontWeight: 600, letterSpacing: '0.08em', color: '#c8a000', background: '#fff8e7', border: '1px solid #f5d97a', borderRadius: '3px', padding: '2px 6px' }}>
+          SUGGESTED — based on global patterns
+        </div>
+      )}
       <div style={s1.cardHeader}>
         <span style={{
           ...s1.cardId,
@@ -816,6 +845,7 @@ function BehavioursStage() {
             stall={stall}
             selected={selected.includes(stall.id)}
             onToggle={toggleStall}
+            highlighted={journeyState.blindSpotStall === stall.id}
           />
         ))}
       </div>
@@ -2995,7 +3025,7 @@ function ExitSummary({ exitedAt, journeyState }) {
 }
 
 /* ─── Transition card between stages ───────────────────────────────── */
-function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBack }) {
+function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBack, updateJourneyState }) {
   const stalls = journeyState.stalls || [];
   const stacks = journeyState.detectedStacks || [];
   const stallNames = stalls.map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; });
@@ -3047,7 +3077,8 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
                       <span style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', marginRight: '6px' }}>Also detected in:</span>
                       {comparators.map((c, i) => {
                         const name = typeof c === 'string' ? c : (c.name || c.region || '');
-                        return name ? <span key={i} style={trans.comparatorPill}>{name}</span> : null;
+                        const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                        return name ? <a key={i} className="comparator-pill" href={`https://clusteros.io/clusters/${slug}`} target="_blank" rel="noopener" style={trans.comparatorPill}>{name}</a> : null;
                       })}
                     </div>
                   )}
@@ -3061,6 +3092,47 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
         ) : (
           <p style={trans.subtext}>{stalls.length} independent stall{stalls.length !== 1 ? 's' : ''} identified — {stallNames.join(', ')}. No reinforcing combinations detected.</p>
         )}
+
+        {/* Blind Spot */}
+        {(() => {
+          // Compute blind spot: most common co-occurring stall across comparator clusters not selected by steward
+          const stallSet = new Set(stalls);
+          const coStallAgg = {};
+          let totalComparators = 0;
+          stacks.forEach(s => {
+            if (s.coStallCounts) {
+              Object.entries(s.coStallCounts).forEach(([sid, count]) => {
+                if (!stallSet.has(sid)) coStallAgg[sid] = (coStallAgg[sid] || 0) + count;
+              });
+              totalComparators = Math.max(totalComparators, s.comparatorTotal || 0);
+            }
+          });
+          const sorted = Object.entries(coStallAgg).sort((a, b) => b[1] - a[1]);
+          if (sorted.length === 0) return null;
+          const [blindSpotId, blindSpotCount] = sorted[0];
+          const blindSpotStall = STALLS.find(s => s.id === blindSpotId);
+          if (!blindSpotStall) return null;
+          const pct = totalComparators > 0 ? Math.round((blindSpotCount / totalComparators) * 100) : null;
+          const stackNameStr = stacks.map(s => s.name).join(' and ');
+          return (
+            <div style={trans.blindSpotBox}>
+              <div style={trans.blindSpotLabel}>STEWARD'S BLIND SPOT</div>
+              <h4 style={trans.blindSpotHeading}>{blindSpotStall.name} — you didn't identify this.</h4>
+              <p style={trans.blindSpotBody}>
+                Ecosystems running {stackNameStr} also show {blindSpotStall.name}{pct ? ` in ${pct}% of cases` : ' frequently'}. Either it isn't present in your ecosystem — or it hasn't surfaced yet.
+              </p>
+              <button
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '13px', color: '#0c9488', padding: 0 }}
+                onClick={() => {
+                  if (updateJourneyState) updateJourneyState({ blindSpotStall: blindSpotId });
+                  if (onBack) onBack();
+                }}
+              >
+                &rarr; Go back and check
+              </button>
+            </div>
+          );
+        })()}
 
         {/* Handover section */}
         <div style={{ marginTop: '24px', borderTop: '1px solid #1e2f45', paddingTop: '24px' }}>
@@ -3493,7 +3565,8 @@ function DiagnosticJourney() {
       <TransitionCard transitionType="stalls-to-qualifiers" journeyState={journeyState}
         onContinue={goNext}
         onBack={() => setPhase(0)}
-        onStop={() => { console.log('stop-behaviours'); setExitedAt(0); setExited(true); }} />
+        onStop={() => { console.log('stop-behaviours'); setExitedAt(0); setExited(true); }}
+        updateJourneyState={updateJourneyState} />
     );
   } else if (phase === 2 && loadingCommentary) {
     mainContent = (
@@ -4860,16 +4933,49 @@ const trans = {
     borderRadius: '3px',
     padding: '3px 8px',
   },
+  blindSpotBox: {
+    background: '#fff8e7',
+    border: '1px solid #f5d97a',
+    borderLeft: '3px solid #f5d97a',
+    borderRadius: '6px',
+    padding: '20px 24px',
+    marginTop: '24px',
+  },
+  blindSpotLabel: {
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '11px',
+    fontWeight: 600,
+    letterSpacing: '0.08em',
+    color: '#c8a000',
+    marginBottom: '6px',
+  },
+  blindSpotHeading: {
+    fontFamily: 'var(--font-serif)',
+    fontSize: '18px',
+    fontWeight: 400,
+    color: 'var(--dj-chalk)',
+    marginBottom: '8px',
+  },
+  blindSpotBody: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: '14px',
+    lineHeight: 1.6,
+    color: 'var(--dj-chalk-dim)',
+    marginBottom: '12px',
+  },
   comparatorPill: {
     fontFamily: "'Geist Mono', monospace",
     fontSize: '9px',
     fontWeight: 500,
     color: '#e8edf5',
     background: '#1e2f45',
-    borderRadius: '3px',
-    padding: '3px 7px',
+    borderRadius: '4px',
+    padding: '4px 8px',
     marginRight: '4px',
     display: 'inline-block',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    transition: 'background 0.15s',
   },
 };
 

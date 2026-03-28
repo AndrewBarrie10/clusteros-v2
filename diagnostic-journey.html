@@ -3423,39 +3423,28 @@ function DiagnosticJourney() {
     const stackDescs = stacks.map(s => s.name).join(', ');
     console.log('[Digital] 1. Building prompt. techConfig:', !!techConfig, 'stacks:', stacks.length, 'qa:', qa.clusterType);
 
-    const digitalPrompt = `You are writing a briefing for a senior ecosystem leader — think CEO of a regional development agency or a cluster manager presenting to their board. Plain English only. No technical terms.
+    const stallNameList = (journeyState.stalls || []).map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; }).join(', ');
+    const digitalPrompt = `Plain English briefing for a CEO. No technical terms. No jargon.
 
-This ecosystem: ${clusterLabel}, ${anchorLabel} anchor, ${scaleLabel} stage.
-What they are trying to do: ${priorityLabel}.
-Where coordination is failing: ${gapLabel || 'not specified'}.
-What they are protecting: ${protectList || 'not specified'}.
-Patterns detected: ${stackDescs || 'none'}.
+This is a ${clusterLabel} with a ${anchorLabel} anchor at ${scaleLabel} stage. They want to ${priorityLabel}. Their coordination gap: ${gapLabel || 'unspecified'}. They are protecting: ${protectList || 'unspecified'}. Their ecosystem is running these reinforcing patterns: ${stackDescs || 'none detected'}. Stalls identified: ${stallNameList || 'none'}.
 
-Write commentary for 7 infrastructure layers. For each, write exactly:
-FROM THE INSIDE: What people in this ecosystem experience today — the friction, the invisibility, the wasted effort. 2 sentences. Name real actors (founders, researchers, anchors) doing real things.
-FROM THE OUTSIDE: What the ecosystem leader sees when this layer is working — what becomes visible, what they can act on. 2 sentences. Connect to: ${priorityLabel}.
+For each of 7 layers, write FROM THE INSIDE (what actors experience today — the friction) and FROM THE OUTSIDE (what the steward gains). 2 sentences each. Connect every FROM THE OUTSIDE to: ${priorityLabel}.
 
-Example of the register I want:
-FROM THE INSIDE: Researchers publish findings that never reach the companies who need them. Founders spend months in introductions that a connected directory would resolve in minutes.
-FROM THE OUTSIDE: You can see which research is generating commercial interest before anyone has to broker it. Your anchor knows which founders are ready before they knock on the door.
+Layer-specific instructions — weave these facts into the commentary, do not ignore them:
 
-Technology and configuration decisions for this ecosystem — for each layer, explain in plain English why this specific ecosystem gets this specific configuration. Connect every decision to their protection priorities, scale, anchor type, coordination gap, and detected stacks. Do not describe technology generically.
+sovereignDatabase: This ecosystem's priority data clusters are ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}. FROM THE INSIDE must describe what happens when ${stallNameList || 'these stall patterns'} go unrecorded. FROM THE OUTSIDE must explain what the steward sees when stall records and evidence exist as structured data they own.
 
-Sovereign Database: Priority clusters are ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}. These exist because of the stalls detected — explain what actor behaviour each cluster captures that currently goes unrecorded, and why owning this data matters for their strategic priority.
+governanceAccess: This ecosystem uses ${techConfig.governanceAccess.label}. FROM THE INSIDE must describe what actors experience when ${protectList || 'ecosystem assets'} have no structural protection. FROM THE OUTSIDE must explain what becomes enforceable.
 
-Governance and Access: Model is ${techConfig.governanceAccess.label}. Explain why this governance model fits this anchor type and these protection priorities. What does it make possible that would not be possible without it?
+integrationLayer: The gap is "${gapLabel || 'unspecified'}". FROM THE INSIDE must name the specific friction this gap creates for ${anchorLabel} anchors and founders. FROM THE OUTSIDE must name which data source solves it.
 
-Integration Layer: Their coordination gap is ${gapLabel || 'not specified'}. Explain which of the four external data sources (Govt Support Directory, Community Services API, Publication Databases, Professional Identity) matters most for this gap and why — what does it feed into the sovereign database that this ecosystem currently lacks?
+automationLayer: At ${scaleLabel} stage with ${stackDescs || 'these patterns'}. FROM THE INSIDE must describe the manual data work someone is doing today. FROM THE OUTSIDE must describe what runs automatically.
 
-Automation Layer: Their ecosystem is ${scaleLabel} stage. Explain which bots matter most right now for this configuration — Evidence Ingestion Bot solves cold start, Actor Enrichment Bot reduces dependency on self-reporting, Signal Monitoring Bot surfaces health patterns, Health Monitoring Bot tracks system-wide signals. Prioritise based on their scale and detected stacks.
+intelligenceSubstrate: This ecosystem gets ${techConfig.intelligenceSubstrate.label}. FROM THE INSIDE must describe the spreadsheets and email introductions — the programme manager as human router. FROM THE OUTSIDE must describe what the steward sees without anyone having to manually compile it.
 
-Intelligence Substrate: ${techConfig.intelligenceSubstrate.label}. Explain why this ecosystem gets this choice — connect to their scale, anchor maturity, and coordination gap. What does this make possible for a steward running this specific configuration?
+aiRuntime: This ecosystem gets ${techConfig.aiRuntime.label}. FROM THE INSIDE must describe what happens when a steward asks "what is stalling?" today — the lag, the guesswork, the out-of-date report. FROM THE OUTSIDE must describe what questions the steward can now ask and get answered immediately.
 
-AI Runtime: ${techConfig.aiRuntime.label}. Explain why this ecosystem gets this inference approach — connect to their protection priorities and what they are protecting. What questions can the steward now ask that they could not answer before?
-
-Application Layer: Their anchor is ${anchorLabel} and their priority is ${priorityLabel}. Explain which actor journeys matter most for this configuration and why — what does each journey produce for the steward as signal, not just for the actor as experience?
-
-Layers: sovereignDatabase, governanceAccess, integrationLayer, automationLayer, intelligenceSubstrate, aiRuntime, applicationLayer.
+applicationLayer: The anchor is ${anchorLabel}. FROM THE INSIDE must name what founders and ${anchorLabel === 'Anchors' ? 'researchers' : anchorLabel + ' partners'} experience when pathways are invisible. FROM THE OUTSIDE must describe what signal each actor journey produces for the steward.
 
 Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governanceAccess":{"inside":"...","outside":"..."},"integrationLayer":{"inside":"...","outside":"..."},"automationLayer":{"inside":"...","outside":"..."},"intelligenceSubstrate":{"inside":"...","outside":"..."},"aiRuntime":{"inside":"...","outside":"..."},"applicationLayer":{"inside":"...","outside":"..."}}`;
 

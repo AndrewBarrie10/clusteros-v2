@@ -2641,12 +2641,18 @@ function DigitalOSStage() {
 
       {/* Step 0: full schema label */}
       {schemaStep === 0 && (
-        <div style={{ textAlign: 'center', padding: '16px 0' }}>
-          <p style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', color: 'var(--dj-chalk)', marginBottom: '16px' }}>
-            This is ClusterOS fully deployed. Every layer exists in service of your sovereign ecosystem.
+        <div style={{ padding: '20px 0' }}>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 400, color: 'var(--dj-chalk)', marginBottom: '10px', letterSpacing: '-0.01em' }}>
+            Your {config.configName} — fully configured.
+          </h2>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk-dim)', marginBottom: '8px' }}>
+            This is the infrastructure stack recommended for your ecosystem, built around what your diagnostic found. Step through each layer to see what it does, why it's in your configuration, and what it addresses.
+          </p>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginBottom: '20px' }}>
+            {TOTAL_STEPS} layers{(journeyState.detectedStacks || []).length > 0 ? ` · ${(journeyState.detectedStacks || []).map(s => s.name).join(', ')}` : ''}
           </p>
           <button style={styles.btnSignal} onClick={() => setSchemaStep(1)}>
-            Start with the heart
+            Walk through your stack
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
               <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -2706,9 +2712,10 @@ function DigitalOSStage() {
               <p className="digital-body" style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.outside}</p>
             </div>
           ) : (
-            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', fontStyle: 'italic' }}>
-              Commentary is being prepared for your configuration.
-            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 0' }}>
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#7dd3c8', animation: 'pulse-dot 1.2s ease-in-out infinite' }} />
+              <span style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)' }}>Generating your configuration commentary...</span>
+            </div>
           ))}
           {annotation.cascadeActors && annotation.cascadeActors.map(name => {
             const c = ACTOR_CASCADES[name];
@@ -3122,16 +3129,13 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
           const [blindSpotId, blindSpotCount] = sorted[0];
           const blindSpotStall = STALLS.find(s => s.id === blindSpotId);
           if (!blindSpotStall) return null;
-          // N = count of comparator clusters showing the blind spot stall
-          const rawPct = totalUniqueComparators > 0 ? Math.round((blindSpotCount / totalUniqueComparators) * 100) : 0;
-          const pct = rawPct > 0 && !isNaN(rawPct) ? Math.min(rawPct, 100) : null;
           const stackNameStr = stacks.map(s => s.name).join(' and ');
           return (
             <div style={trans.blindSpotBox}>
               <div style={trans.blindSpotLabel}>STEWARD'S BLIND SPOT</div>
               <h4 style={trans.blindSpotHeading}>{blindSpotStall.name} — you didn't identify this.</h4>
               <p style={trans.blindSpotBody}>
-                Ecosystems running {stackNameStr} also show {blindSpotStall.name}{pct ? ` in ${pct}% of cases` : ' in the majority of similar ecosystems'}. Either it isn't present in your ecosystem — or it hasn't surfaced yet.
+                Ecosystems running {stackNameStr} also show {blindSpotStall.name}. Either it isn't present in your ecosystem — or it hasn't surfaced yet.
               </p>
               <button
                 style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '13px', color: '#0c9488', padding: 0 }}
@@ -5157,8 +5161,14 @@ const schema = {
   stepNav: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginTop: '16px',
     gap: '12px',
+    position: 'sticky',
+    bottom: '60px',
+    background: 'var(--dj-bg)',
+    padding: '12px 0',
+    borderTop: '1px solid var(--dj-border)',
+    zIndex: 10,
+    marginTop: '16px',
   },
 };
 

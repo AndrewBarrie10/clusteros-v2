@@ -3420,6 +3420,14 @@ function DiagnosticJourney() {
     const stackDescs = stacks.map(s => s.name).join(', ');
     console.log('[Digital] 1. Building prompt. techConfig:', !!techConfig, 'stacks:', stacks.length, 'qa:', qa.clusterType);
 
+    // Compute ecosystem context for prompt enrichment
+    const forefrontedActors = (() => {
+      const at = qa.anchorType;
+      if (at === 'university' || at === 'research') return ['Researchers', 'Founders', 'Steward'];
+      if (at === 'corporate') return ['Founders', 'Anchor supply chain', 'Steward'];
+      return ['Founders', 'Researchers', 'Steward'];
+    })();
+
     const digitalPrompt = `You are writing infrastructure commentary for a regional innovation ecosystem steward.
 
 CRITICAL: Write for a Chief Executive of a regional development agency, not a software engineer.
@@ -3437,6 +3445,25 @@ AI Runtime: ${techConfig.aiRuntime.label}
 Intelligence: ${techConfig.intelligenceSubstrate.label}
 Governance: ${techConfig.governanceAccess.label}
 Sovereign DB clusters: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}
+
+Ecosystem-specific structure for this configuration:
+
+Sovereign Database priority clusters: ${techConfig.sovereignDatabase.clusters.join(', ') || 'general'}.
+These are the specific data structures that matter most for this ecosystem — reference them by name in the sovereignDatabase commentary.
+
+Foregrounded actor journeys: ${forefrontedActors.join(', ')}.
+These are the actors this ecosystem actually has — reference them in the applicationLayer commentary. Do not mention actor types that are not in this list.
+
+Protection priorities this steward named: ${protectList || 'not specified'}.
+Reference these in the governanceAccess commentary — explain specifically how the governance layer protects these things.
+
+Coordination gap: ${gapLabel || 'not specified'}.
+Reference this gap in the integrationLayer commentary — explain specifically which external data sources address this gap and how.
+
+Strategic priority: ${priorityLabel}.
+Every FROM THE OUTSIDE section should connect back to this priority — what does the steward gain that helps them achieve this?
+
+Write as if you know this specific ecosystem. Name the specific clusters, actors, and priorities. Do not write generically.
 
 MANDATORY REQUIREMENTS — these must appear verbatim in your response:
 - In the aiRuntime section, you MUST use the phrase "${techConfig.aiRuntime.label}"

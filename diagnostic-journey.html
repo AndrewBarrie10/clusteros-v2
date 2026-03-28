@@ -2483,6 +2483,196 @@ function BoldText({ text }) {
   );
 }
 
+/* ─── Locally-computed layer commentary ─────────────────────────────── */
+function buildLayerCommentary(layerKey, journeyState, config) {
+  const stalls = journeyState.stalls || [];
+  const stacks = journeyState.detectedStacks || [];
+  const qa = journeyState.qualifierAnswers || {};
+  const tc = journeyState.techConfig || {};
+  const anchorLabel = config.anchorLabel || 'Anchors';
+  const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'your ecosystem';
+  const stackNames = stacks.map(s => s.name).join(' and ');
+  const stallNames = stalls.map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; });
+  const protections = (qa.protect || []).map(p => PROTECT_LABELS[p]).filter(Boolean);
+  const protectStr = protections.join(', ');
+  const has = id => stalls.includes(id);
+
+  switch (layerKey) {
+
+    case 'sovereignDatabase': {
+      const clusters = (tc.sovereignDatabase || {}).clusters || [];
+      let body = `Your ${clusterLabel} needs a sovereign database that belongs to the ecosystem, not to any organisation within it. `;
+      if (has('S1') && has('S7')) body += `Right now, evidence gets produced to justify the ecosystem's existence rather than to inform decisions. Reports get written, circulated, and filed — then the next funding round starts the same evidence-gathering exercise from scratch because the findings live in someone's inbox, not in a record the ecosystem owns. `;
+      else if (has('S1')) body += `Your ecosystem keeps re-proving its case — every new stakeholder, every funding round restarts the evidence cycle. The Sovereign Database holds structured findings that persist across cycles, so proof accumulates rather than resets. `;
+      else if (has('S7')) body += `Narrative substitutes for evidence in your ecosystem. The Sovereign Database separates structured outcomes from the stories told about them — what actually converted vs what was reported as progress. `;
+      if (has('S4')) body += `Value is leaving through your ${anchorLabel} anchor's established channels without anyone tracking where it goes. The Value flow audit trail changes this — you can see what crosses the boundary and whether it circulates locally first. `;
+
+      if (clusters.length > 0) {
+        body += `\n\nPriority data clusters for your configuration:\n`;
+        clusters.forEach(c => {
+          if (c === 'Evidence & validation records') body += `• Evidence & validation records — captures every research output, programme outcome, and diagnostic finding as structured data. Directly addresses Re-proving: evidence accumulates as record, not as justification material in someone's slide deck.\n`;
+          else if (c === 'Narrative vs outcome tracking') body += `• Narrative vs outcome tracking — separates what your ecosystem is reporting from what it's actually producing. Directly addresses Narrating: when the board asks "what did that programme produce?", the answer is a structured record, not a narrative.\n`;
+          else if (c === 'Value flow audit trail') body += `• Value flow audit trail — tracks where procurement, talent, and IP flow. Directly addresses Extracting: you see whether value is circulating locally or leaving through your anchor's channels.\n`;
+          else if (c === 'Coordination pathways') body += `• Coordination pathways — records which actors are connecting, through what mechanisms, and whether those connections produce transactions. Directly addresses Coordinating: coordination becomes measurable infrastructure, not an end in itself.\n`;
+          else if (c === 'Anchor engagement pipeline') body += `• Anchor engagement pipeline — tracks your ${anchorLabel} anchor's engagement with ecosystem actors over time. Shows whether the anchor is actively circulating value or passively attending.\n`;
+          else if (c === 'Permission & dependency records') body += `• Permission & dependency records — maps who is waiting for whom and what conditions would unblock action. Directly addresses Waiting: dependency becomes visible as a structural pattern.\n`;
+          else if (c === 'Talent retention signals') body += `• Talent retention signals — tracks where talent goes after ecosystem programmes. Directly addresses Forgiving: poor outcomes become visible before they compound.\n`;
+          else if (c === 'Intermediary relationship map') body += `• Intermediary relationship map — shows which connections run through brokers and which form directly. Directly addresses Mediating: brokered relationships become visible as a pattern, not an assumption.\n`;
+          else if (c === 'Activity-to-outcome conversion') body += `• Activity-to-outcome conversion — measures what converts from starts to outcomes. Directly addresses Scaling Activity: you see graduation rates, not just cohort sizes.\n`;
+          else body += `• ${c}\n`;
+        });
+      }
+
+      body += `\nStructure: Supercluster → Clusters → Groups → Pathways → Events → Resources — each level maps to the coordination structures your ${clusterLabel} actually runs.`;
+      return body;
+    }
+
+    case 'governanceAccess': {
+      const govLabel = (tc.governanceAccess || {}).label || 'Federated governance';
+      let body = '';
+      if (has('S4')) body += `Your ${anchorLabel} anchor generates value that currently leaves the ecosystem without anyone recording it. ${govLabel} makes every cross-boundary flow visible and consent-recorded. Extracting persists precisely because it currently leaves no trace — the audit trail changes this.\n\n`;
+      else if (has('S2')) body += `Your ecosystem produces alignment without accountability — committees meet, MoUs get signed, but no audit trail records what was agreed or whether it was delivered. ${govLabel} changes this: every actor, every action, fully auditable.\n\n`;
+      else body += `${govLabel} gives every actor in your ${clusterLabel} a verified identity with explicit permissions. Trust scales because new actors don't need personal introductions — they need verified credentials.\n\n`;
+
+      body += `Access tiers for your configuration:\n`;
+      body += `• Institutional tier — your ${anchorLabel} and its direct partners. Full access within the cluster boundary.\n`;
+      body += `• Ecosystem tier — founders, SMEs, support organisations within your region. Access to demand signals and opportunity matching.\n`;
+      body += `• External tier — investors, diaspora, corporate scouts. Curated access to pipeline signals only. No actor data without consent.\n\n`;
+
+      if (protections.length > 0) body += `Your protection priorities — ${protectStr} — are enforced at this layer by architecture, not by policy. `;
+      if ((qa.protect || []).includes('sovereignty')) body += `No data crosses the regional boundary without consent recorded at the governance layer. `;
+      if ((qa.protect || []).includes('ip')) body += `Institutional IP is protected through explicit access controls — research moves between groups without leaking beyond the boundary. `;
+      if ((qa.protect || []).includes('trust')) body += `Existing relationship structures are preserved through trust tiers — openness and confidentiality coexist without leakage. `;
+      return body;
+    }
+
+    case 'integrationLayer': {
+      let body = '';
+      if (qa.gap === 'discovery') {
+        body = `Your coordination gap is discovery — actors who should connect don't know each other exists. A new founder joins your ecosystem and sees nothing. No directory, no programme listing, no way to find who else is working on what they need.\n\n`;
+        body += `Priority sources for your configuration:\n`;
+        body += `• Govt Support Directory — live programme listings, funding routes by stage, advisor networks. Ingested weekly. Your founders find support before anyone has to manually introduce them.\n`;
+        body += `• Professional Identity — ORCID integration, professional profile import. Your ${anchorLabel}'s researchers already have verified identities elsewhere. Import means the database inherits credibility it didn't have to build.\n`;
+      } else if (qa.gap === 'flow') {
+        body = `Your coordination gap is knowledge flow — research findings and commercial intelligence sit in separate silos. Your ${anchorLabel} produces outputs that never reach the founders who could use them.\n\n`;
+        body += `Priority sources for your configuration:\n`;
+        body += `• Publication Databases — research outputs, grant announcements, patent filings. These feed your Research Translation cluster directly. A researcher publishes — the database knows before anyone has to email anyone.\n`;
+        body += `• Community Services API — peer networks, community assets, wellbeing services. Knowledge outside institutional boundaries becomes visible inside them.\n`;
+      } else if (qa.gap === 'access') {
+        body = `Your coordination gap is membrane permeability — outside investors, diaspora talent, and global partners can't find a credible entry point. Your ecosystem is opaque from the outside.\n\n`;
+        body += `Priority sources for your configuration:\n`;
+        body += `• Publication Databases — outside actors find credible entry points through research rather than cold outreach. Your ${anchorLabel}'s published work becomes the membrane through which external engagement happens.\n`;
+        body += `• Professional Identity — persistent, enrichable identities give external actors something to connect to.\n`;
+      } else if (qa.gap === 'conversion') {
+        body = `Your coordination gap is conversion — activity is happening but outcomes aren't compounding. Your ecosystem can't distinguish programmes that work from programmes that don't.\n\n`;
+        body += `Priority sources for your configuration:\n`;
+        body += `• Professional Identity — conversion becomes visible when actors have persistent identities that track progression, not just participation.\n`;
+        body += `• Community Services API — makes actor progression visible as structured signal. The system reads conversion, not just activity.\n`;
+      } else {
+        body = `External data feeds your ecosystem before any actor joins — solving the cold-start problem.\n\n`;
+        body += `All four sources active: Govt Support Directory, Community Services API, Publication Databases, Professional Identity.\n`;
+      }
+      body += `\nAll external data lives at the supercluster level — available to every cluster, never duplicated.`;
+      if (has('S1')) body += ` This directly addresses Re-proving: evidence already exists in the system. The case doesn't need to be re-made because the structured record is already there.`;
+      return body;
+    }
+
+    case 'automationLayer': {
+      const scale = qa.stage || 'established';
+      let body = `Every ecosystem has a cold-start problem: the system only becomes useful once it knows enough to be useful. The bot network solves this without requiring anyone to manually enter data.\n\n`;
+      body += `Priority bots for your configuration:\n`;
+
+      if (has('S1') || has('S7')) {
+        body += `• Evidence Ingestion Bot (highest priority) — reads your ${anchorLabel}'s public outputs continuously and writes structured findings to the sovereign database. `;
+        body += `Directly addresses ${has('S1') ? 'Re-proving' : ''}${has('S1') && has('S7') ? ' and ' : ''}${has('S7') ? 'Narrating' : ''}: evidence accumulates as structured record, not as justification material. By the time your first founder joins, the system already knows what research your anchor is producing.\n`;
+      }
+      if (has('S8') || has('S9')) {
+        body += `• Signal Monitoring Bot — watches for activity that isn't converting. A programme runs for 18 months producing events and newsletter mentions but no commercial conversations. The bot flags this as a pattern. `;
+        body += `Directly addresses ${has('S8') ? 'Scaling Activity' : ''}${has('S8') && has('S9') ? ' and ' : ''}${has('S9') ? 'Waiting' : ''}: activity that looks like progress but isn't converting becomes visible.\n`;
+      }
+      if (has('S2') || has('S5')) {
+        body += `• Actor Enrichment Bot — enriches actor profiles from system behaviour rather than self-report. You see what actors actually do, not just what they say they do. `;
+        body += `Directly addresses ${has('S2') ? 'Coordinating' : ''}${has('S2') && has('S5') ? ' and ' : ''}${has('S5') ? 'Mediating' : ''}: connection patterns become visible without depending on broker-reported data.\n`;
+      }
+      body += `• Health Monitoring Bot — tracks system health across all clusters continuously. You see ecosystem vital signs without waiting for someone to compile a quarterly report.\n`;
+
+      if (scale === 'early') body += `\nAt early stage, Evidence Ingestion and Health Monitoring are your priorities. The other bots become more important as your actor base scales.`;
+      return body;
+    }
+
+    case 'intelligenceSubstrate': {
+      const intel = (tc.intelligenceSubstrate || {});
+      const isClawbot = intel.recommendation === 'Clawbot';
+      let body = `Your ecosystem gets ${intel.label || 'intelligence infrastructure'}.\n\n`;
+
+      body += `What this replaces: Today, when you need to know who should connect to whom, a programme manager checks a spreadsheet, makes a mental match, and sends an email introduction. When you need to know what's stalling, someone interviews stakeholders and writes a report. When a founder needs support, they wait for a human broker to notice them.\n\n`;
+
+      if (isClawbot) {
+        body += `At your current stage, Clawbot handles the essential intelligence functions — stall detection, signal monitoring, and actor matching — with lower infrastructure overhead. As your ecosystem scales and generates more structured signal, it upgrades to the full intelligence substrate without data migration.\n\n`;
+      }
+
+      body += `What this means in practice for your ${clusterLabel}:\n`;
+      body += `• When you ask "which ${anchorLabel} outputs are generating commercial interest?", you get a structured answer from live data — not last quarter's narrative.\n`;
+      if (has('S4')) body += `• When you ask "is our anchor circulating value or extracting it?", you get a value flow analysis from real transaction records.\n`;
+      if (has('S1')) body += `• When you ask "are we still Re-proving?", you get a stall detection reading from current actor behaviour — not a consultant's opinion.\n`;
+      if (has('S2') || has('S5')) body += `• When you ask "who should connect to whom?", you get matched connections based on declared capability and live demand signals — not whoever the programme manager happens to know.\n`;
+      body += `• Every answer is assembled from your sovereign database at the moment you ask — not compiled from whatever was last reported.`;
+      return body;
+    }
+
+    case 'aiRuntime': {
+      const ai = (tc.aiRuntime || {});
+      const isSLM = ai.recommendation === 'SLM';
+      let body = `Your ecosystem gets ${ai.label || 'AI runtime'}.\n\n`;
+
+      body += `What changes for you: Today when you need to know what's stalling, you commission a review. Someone interviews stakeholders, compiles findings, writes a report. By the time it reaches your board, the ecosystem has moved. The findings describe a system that no longer exists in exactly that form.\n\n`;
+
+      body += `With this runtime, you ask:\n`;
+      body += `• "What is stalling?" — and get an answer assembled from live signals, not from whatever was last reported.\n`;
+      body += `• "Where did our last cohort of founders end up?" — and get a journey record, not a programme manager's recollection.\n`;
+      if (has('S4')) body += `• "Is our ${anchorLabel} generating procurement signal or just attending events?" — and get a structured comparison from real behaviour data.\n`;
+      if (has('S1') || has('S7')) body += `• "What evidence do we actually have vs what are we claiming?" — and get a separation of structured findings from narrative reporting.\n`;
+      body += `• "Where would one intervention have the most effect?" — and get a leverage hypothesis ranked by confidence from your diagnostic data.\n\n`;
+
+      if (isSLM) {
+        body += `Why on-premise: your protection priorities require that inference stays within your sovereign boundary. ${protectStr ? protectStr + ' — ' : ''}no actor data, no stall findings, no ecosystem intelligence leaves for external processing. The trade-off is a smaller model with less general capability, but every query stays inside your boundary.`;
+      } else {
+        body += `Why cloud inference: your protection priorities are handled at the governance layer — the audit trail and consent records protect what crosses the boundary. The AI reasons against your data without your data leaving your sovereign boundary for training. You get the full reasoning capability rather than a constrained on-premise model.`;
+      }
+      return body;
+    }
+
+    case 'applicationLayer': {
+      const anchor = qa.anchorType || 'none';
+      let body = `Your ${anchorLabel} anchor determines which actor journeys matter most.\n\n`;
+
+      // Researcher journey — always relevant for research/university anchors
+      if (['university', 'research'].includes(anchor)) {
+        body += `Researcher Journey — a researcher declares a research output and tags it to the knowledge taxonomy. The system reads that against live founder demand signals and surfaces matched connections. The researcher pursued their own interest — getting credit for their work. You see which research domains have commercial traction, measured by actual connection density, not by someone's assessment of "commercialisation potential."\n\n`;
+      }
+
+      // Founder journey — always present
+      body += `Founder Journey — a founder registers their technology domain and capability stage. The system reads that against your ${anchorLabel}'s active signals and constructs a pathway — not a generic accelerator programme, but a specific sequence of connections based on what your ecosystem actually has. `;
+      if (has('S9')) body += `Directly addresses Waiting: the founder sees their next step without waiting for a gatekeeper to notice them. `;
+      if (has('S5')) body += `Directly addresses Mediating: the connection happens through infrastructure, not through a human broker. `;
+      body += `You see pipeline formation as a structured signal — who is progressing, who has stalled, who has left.\n\n`;
+
+      // Anchor journey — for corporate/supply anchors
+      if (['corporate'].includes(anchor)) {
+        body += `Anchor Supply Chain Journey — your ${anchorLabel} posts procurement requirements as structured signals, visible only to actors whose capability matches. No public tender, no cold outreach. Directly addresses Extracting: procurement decisions stay local because the matching happens inside the ecosystem boundary. You see supply chain conversion as measurable flow.\n\n`;
+      }
+
+      // Steward journey — always present
+      body += `Steward Journey — you interrogate the ecosystem against live signals. Not a dashboard — a diagnostic conversation. "What is stalling?" produces a structured answer from current actor behaviour. "Where should I intervene?" produces a leverage hypothesis ranked by confidence. `;
+      if (stackNames) body += `Your ${stackNames} ${stacks.length > 1 ? 'patterns become' : 'pattern becomes'} visible as structural findings that update as actor behaviour changes — not as a static report that ages from the moment it's written. `;
+      body += `Adaptive governance, not retrospective reporting.`;
+      return body;
+    }
+
+    default: return null;
+  }
+}
+
 function buildStepAnnotation(step, journeyState, config) {
   const qa = journeyState.qualifierAnswers || {};
   const stalls = journeyState.stalls || [];
@@ -2713,22 +2903,16 @@ function DigitalOSStage() {
             );
           })()}
 
-          {/* Digital commentary inside/outside — replaces body text when available (steps 1-7 only) */}
-          {schemaStep >= 1 && schemaStep <= 7 && (dc && dc.inside ? (
-            <div>
-              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', color: '#f5d97a', marginBottom: '6px' }}>FROM THE INSIDE</div>
-              <p className="digital-body" style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.inside}</p>
-              <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', color: '#2a6b5e', marginTop: '16px', marginBottom: '6px' }}>FROM THE OUTSIDE</div>
-              <p className="digital-body" style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}>{dc.outside}</p>
-            </div>
-          ) : (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 0' }}>
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#7dd3c8', animation: 'pulse-dot 1.2s ease-in-out infinite', flexShrink: 0 }} />
-              <span style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)' }}>
-                Generating your configuration commentary...
-              </span>
-            </div>
-          ))}
+          {/* Layer commentary — locally computed from journey state */}
+          {schemaStep >= 1 && schemaStep <= 7 && (() => {
+            const commentary = buildLayerCommentary(layerKey, journeyState, config);
+            if (!commentary) return null;
+            return (
+              <div style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk)', whiteSpace: 'pre-line' }}>
+                {commentary}
+              </div>
+            );
+          })()}
           {annotation.cascadeActors && annotation.cascadeActors.map(name => {
             const c = ACTOR_CASCADES[name];
             if (!c) return null;

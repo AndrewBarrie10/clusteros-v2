@@ -182,6 +182,7 @@ function loadKnowledge() {
   knowledgePromise = fetch(KNOWLEDGE_API)
     .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
     .then(k => {
+      console.log('[Knowledge API] Top-level keys:', Object.keys(k));
       // Map stalls
       if (k.stalls && k.stalls.length > 0) {
         STALLS = k.stalls.map(s => ({
@@ -199,6 +200,8 @@ function loadKnowledge() {
       }
       // Map stacks
       if (k.stacks && k.stacks.length > 0) {
+        console.log('[Knowledge API] Raw stack object keys:', Object.keys(k.stacks[0]));
+        console.log('[Knowledge API] First raw stack:', JSON.stringify(k.stacks[0]).substring(0, 500));
         STACK_RULES = k.stacks.map(s => ({
           id:         s.id || s.canonical_id || '',
           name:       s.name || '',
@@ -213,6 +216,26 @@ function loadKnowledge() {
       }
       knowledgeLoaded = true;
       console.log(`Knowledge API loaded: ${STALLS.length} stalls, ${STACK_RULES.length} stacks`);
+
+      // Load cluster comparators from clusters.json (non-blocking)
+      return fetch('/clusters.json')
+        .then(cr => cr.ok ? cr.json() : [])
+        .then(allClusters => {
+          if (!Array.isArray(allClusters) || allClusters.length === 0) return;
+          STACK_RULES.forEach(rule => {
+            const triggerSet = new Set(rule.triggers);
+            const matches = allClusters.filter(c =>
+              (c.stacks || []).some(cs =>
+                (cs.canonical_id === rule.id) ||
+                (cs.stalls_involved && cs.stalls_involved.length === triggerSet.size &&
+                 cs.stalls_involved.every(sid => triggerSet.has(sid)))
+              )
+            ).slice(0, 5);
+            rule.comparators = matches.map(c => c.name || c.id);
+          });
+          console.log('[Knowledge API] Cluster comparators loaded for', STACK_RULES.filter(r => (r.comparators || []).length > 0).length, 'stacks');
+        })
+        .catch(e => console.warn('[Knowledge API] clusters.json not loaded:', e.message));
     })
     .catch(err => {
       console.warn('Knowledge API unavailable — using fallback definitions:', err.message);
@@ -764,6 +787,7 @@ function BehavioursStage() {
     const detected = STACK_RULES.filter(
       rule => rule.triggers.every(t => next.includes(t))
     );
+    if (detected.length > 0) console.log('[Stack Detection] Detected stack object:', JSON.stringify(detected[0]));
     updateJourneyState({
       stalls: next,
       stacks: detected.map(s => s.name),

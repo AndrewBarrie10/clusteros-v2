@@ -40,7 +40,7 @@ body { min-height: 100vh; }
 @media (max-width: 420px) { .stall-grid { grid-template-columns: 1fr !important; } }
 @media (min-width: 769px) { .schema-mobile { display: none !important; } }
 @media (max-width: 768px) { .schema-desktop { display: none !important; } }
-@media (min-width: 769px) { .schema-mobile-stepper { display: none !important; } }
+@media (min-width: 769px) { .schema-mobile-stepper { display: none !important; } .mobile-expand-toggle { display: none !important; } .annot-panel-collapsed { display: block !important; } }
 @keyframes pulse-dot { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
 
 /* Comparator pill hover */
@@ -65,6 +65,11 @@ a.comparator-pill:hover { background: #2a3f55 !important; }
   .stepper-counter { display: none !important; }
   /* Hide annotation panel title on mobile — MobileSchemaStep already shows layer heading */
   .annot-title-desktop { display: none !important; }
+  /* Collapsible annotation panel on mobile */
+  .annot-panel-collapsed { display: none !important; }
+  .annot-panel-expanded { display: block !important; }
+  /* Hide expand toggle on desktop */
+  .mobile-expand-toggle { display: inline !important; }
   /* Cap commentary length on mobile */
   .digital-body {
     display: -webkit-box !important;
@@ -2356,7 +2361,7 @@ const LAYER_BORDER_COLOR = {
   5: '#f5d97a', 6: '#f5d97a', 7: '#1e2f45', 8: '#7dd3c8',
 };
 
-function MobileSchemaStep({ schemaStep, configName, selectedStalls }) {
+function MobileSchemaStep({ schemaStep, configName, selectedStalls, expanded, onToggle }) {
   const layerLabel = STEP_LAYER_LABEL[schemaStep] || '';
   const layerId = STEP_LAYER_ID[schemaStep];
   const stallTags = (selectedStalls || [])
@@ -2366,18 +2371,21 @@ function MobileSchemaStep({ schemaStep, configName, selectedStalls }) {
   const isSovereign = schemaStep === 1;
 
   return (
-    <div style={{ padding: '4px 0', borderLeft: `3px solid ${borderColor}`, paddingLeft: '16px', borderRadius: isSovereign ? '4px' : '0' }}>
+    <div style={{ padding: '4px 0', borderLeft: `${isSovereign ? '4px' : '3px'} solid ${borderColor}`, paddingLeft: '16px', borderRadius: isSovereign ? '4px' : '0', background: isSovereign ? 'rgba(200,240,208,0.06)' : 'transparent' }}>
       <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '10px', color: 'var(--dj-chalk-muted)', letterSpacing: '0.08em', marginBottom: '8px' }}>
         STEP {schemaStep + 1} OF {TOTAL_STEPS}
       </div>
       <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', color: 'var(--steward)', background: 'rgba(12,148,136,0.08)', border: '1px solid rgba(12,148,136,0.2)', borderRadius: '3px', padding: '3px 8px', display: 'inline-block', marginBottom: '12px' }}>
         {configName || 'Your configuration'}
       </div>
-      <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: 400, color: 'var(--dj-chalk)', marginBottom: '10px', letterSpacing: '-0.01em' }}>
-        {layerLabel}
-      </h3>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }} onClick={onToggle}>
+        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: 400, color: 'var(--dj-chalk)', letterSpacing: '-0.01em', margin: 0 }}>
+          {layerLabel}
+        </h3>
+        <span className="mobile-expand-toggle" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--dj-chalk-muted)', transition: 'transform 0.2s', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
+      </div>
       {stallTags.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px', marginBottom: '4px' }}>
           {stallTags.map(t => (
             <span key={t} style={{ fontFamily: "'Geist Mono', monospace", fontSize: '9px', fontWeight: 500, color: '#1a1a1a', background: '#f5d97a', borderRadius: '8px', padding: '3px 8px' }}>
               Addresses {t}
@@ -2681,6 +2689,7 @@ function buildStepAnnotation(step, journeyState, config) {
   const qa = journeyState.qualifierAnswers || {};
   const stalls = journeyState.stalls || [];
   const stacks = journeyState.detectedStacks || [];
+  const has = id => stalls.includes(id);
   const clusterLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'your ecosystem';
   const anchorLabel = config.anchorLabel || 'Anchors';
   const protections = (qa.protect || []).map(p => PROTECT_LABELS[p]).filter(Boolean);
@@ -2793,7 +2802,13 @@ function DigitalOSStage() {
     }
   }, [journeyState.qualifierAnswers, journeyState.osConfig, journeyState.stalls, journeyState.detectedStacks, updateJourneyState]);
 
-  const [schemaStep, setSchemaStep] = useState(0); // Start directly on stepper step 0
+  const [schemaStep, setSchemaStep] = useState(0);
+  const [mobileExpanded, setMobileExpanded] = useState(true); // sovereign (step 1) starts expanded
+
+  // Reset expanded state when step changes — sovereign expanded by default, others collapsed
+  useEffect(() => {
+    setMobileExpanded(schemaStep === 1 || schemaStep === 8);
+  }, [schemaStep]);
 
   const reviseFromStart = useCallback(() => {
     setSchemaStep(0);
@@ -2854,7 +2869,7 @@ function DigitalOSStage() {
         />
       </div>
       <div className="schema-mobile-stepper">
-        <MobileSchemaStep schemaStep={schemaStep} configName={config.configName} selectedStalls={journeyState.stalls} />
+        <MobileSchemaStep schemaStep={schemaStep} configName={config.configName} selectedStalls={journeyState.stalls} expanded={mobileExpanded} onToggle={() => setMobileExpanded(prev => !prev)} />
       </div>
 
       {/* Step 0: CTA button below diagram */}
@@ -2879,7 +2894,7 @@ function DigitalOSStage() {
           console.log('[Render Step', schemaStep, '] layerKey:', layerKey, 'digitalCommentary exists:', !!dcObj, 'dc:', dc);
         }
         return (
-        <div style={schema.annotPanel}>
+        <div className={mobileExpanded ? 'annot-panel-expanded' : 'annot-panel-collapsed'} style={schema.annotPanel}>
           {schemaStep < 8 && <h3 className="annot-title-desktop" style={schema.annotTitle}>{annotation.title}</h3>}
 
           {/* Tech recommendation badge — renders from local techConfig, independent of API */}

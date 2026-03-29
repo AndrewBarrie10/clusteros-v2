@@ -94,7 +94,7 @@ a.comparator-pill:hover { background: #2a3f55 !important; }
 <div id="root"></div>
 
 <script type="text/babel" data-type="module">
-const { useState, useCallback, useMemo, useEffect, createContext, useContext } = React;
+const { useState, useCallback, useMemo, useEffect, useRef, createContext, useContext } = React;
 
 /* ─── Stage definitions ────────────────────────────────────────────── */
 const STAGES = [
@@ -3176,26 +3176,89 @@ function TalkToUsCTA({ journeyState, style }) {
   );
 }
 
-function StickyBar({ phase, journeyState }) {
+function StickyBar({ phase, journeyState, onContinue }) {
   const [showReportModal, setShowReportModal] = useState(false);
-
+  const stalls = journeyState.stalls || [];
+  const stacks = journeyState.detectedStacks || [];
   const reportLabel = phase <= 1 ? 'Behaviours' : phase <= 3 ? 'Behaviours + Leverage' : 'Behaviours + Leverage + Digital OS';
 
+  // Stage 0 or no stalls selected: logo only
+  if (phase <= -1 || (phase === 0 && stalls.length === 0)) {
+    return (
+      <div style={sticky.bar}>
+        <div style={sticky.barInner}>
+          <a href="/" style={sticky.logo}>Cluster<span style={sticky.logoSpan}>OS</span></a>
+        </div>
+      </div>
+    );
+  }
+
+  // Stage 1 with stacks detected but before transition: show teal CTA
+  if (phase === 0 && stacks.length > 0) {
+    return (
+      <div style={sticky.bar}>
+        <div style={sticky.barInner}>
+          <a href="/" style={sticky.logo}>Cluster<span style={sticky.logoSpan}>OS</span></a>
+          <button style={sticky.btnTeal} onClick={onContinue}>
+            See where this breaks
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Stage 1 transition (phase 1): report + continue
+  if (phase === 1) {
+    return (
+      <React.Fragment>
+        <div style={sticky.bar}>
+          <div style={sticky.barInner}>
+            <a href="/" style={sticky.logo}>Cluster<span style={sticky.logoSpan}>OS</span></a>
+            <div style={{ display: 'flex', marginLeft: 'auto', height: '100%' }}>
+              <button style={sticky.btnGhostAmber} onClick={() => setShowReportModal(true)}>Get report</button>
+              <button style={sticky.btnTeal} onClick={onContinue}>
+                Continue
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
+                  <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        {showReportModal && (
+          <ReportModal phase={phase} journeyState={journeyState} onClose={() => setShowReportModal(false)} />
+        )}
+      </React.Fragment>
+    );
+  }
+
+  // Stage 1 stalls selected but no stacks: just logo + stall count indicator
+  if (phase === 0 && stalls.length > 0 && stacks.length === 0) {
+    return (
+      <div style={sticky.bar}>
+        <div style={sticky.barInner}>
+          <a href="/" style={sticky.logo}>Cluster<span style={sticky.logoSpan}>OS</span></a>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--dj-chalk-muted)', marginLeft: 'auto', paddingRight: '16px' }}>{stalls.length} stall{stalls.length !== 1 ? 's' : ''} selected</span>
+        </div>
+      </div>
+    );
+  }
+
+  // Stage 2+ : amber GET MY REPORT
   return (
     <React.Fragment>
       <div style={sticky.bar}>
         <div style={sticky.barInner}>
-          {/* Left: logo */}
           <a href="/" style={sticky.logo}>Cluster<span style={sticky.logoSpan}>OS</span></a>
-
-          {/* Right: Get my report */}
           <button style={sticky.btnAmber} onClick={() => setShowReportModal(true)}>
             <span>Get my report</span>
             <span className="sticky-sub-label" style={sticky.btnSub}>{reportLabel}</span>
           </button>
         </div>
       </div>
-
       {showReportModal && (
         <ReportModal phase={phase} journeyState={journeyState} onClose={() => setShowReportModal(false)} />
       )}
@@ -3970,7 +4033,7 @@ Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governa
         )}
 
         {/* ── Sticky bar ── */}
-        <StickyBar phase={phase} journeyState={journeyState} />
+        <StickyBar phase={phase} journeyState={journeyState} onContinue={goNext} />
 
         {/* ── Exit modal ── */}
         {showExitModal && (
@@ -5614,6 +5677,43 @@ const sticky = {
     letterSpacing: '0.04em',
     textTransform: 'none',
     opacity: 0.8,
+  },
+  btnTeal: {
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '11px',
+    fontWeight: 700,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase',
+    textDecoration: 'none',
+    padding: '0 1.4rem',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    whiteSpace: 'nowrap',
+    background: '#7dd3c8',
+    color: '#1e2f45',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'opacity 0.15s',
+    marginLeft: 'auto',
+  },
+  btnGhostAmber: {
+    fontFamily: "'Geist Mono', monospace",
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase',
+    padding: '0 1rem',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    whiteSpace: 'nowrap',
+    background: 'transparent',
+    color: '#d97706',
+    border: 'none',
+    borderRight: '1px solid #ddd8cf',
+    cursor: 'pointer',
+    transition: 'opacity 0.15s',
   },
 
   /* Report modal */

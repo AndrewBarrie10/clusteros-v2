@@ -775,6 +775,11 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   .bar-action-platform { background: var(--green); color: #fff; border-right: none; }
   .bar-action-platform:hover { opacity: 0.85; }
   @media (max-width: 480px) { .bar-case-hide { display: none; } }
+  @media (max-width: 768px) {
+    .bar-action-primary, .bar-action-platform { display: none !important; }
+    .bar-action-amber { width: 100%; text-align: center; justify-content: center; border-right: none; }
+    .bar-actions { width: 100%; }
+  }
 
   /* push page content above the bar */
   body { padding-bottom: 56px; }

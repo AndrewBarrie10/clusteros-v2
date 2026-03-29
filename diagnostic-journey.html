@@ -39,8 +39,9 @@ body { min-height: 100vh; }
 @media (max-width: 680px) { .stall-grid { grid-template-columns: repeat(2, 1fr) !important; } }
 @media (max-width: 420px) { .stall-grid { grid-template-columns: 1fr !important; } }
 @media (min-width: 769px) { .schema-mobile { display: none !important; } }
-@media (max-width: 768px) { .schema-desktop { display: none !important; } }
-@media (min-width: 769px) { .schema-mobile-stepper { display: none !important; } .mobile-expand-toggle { display: none !important; } .annot-panel-collapsed { display: block !important; } }
+@media (max-width: 768px) { .schema-desktop { display: none !important; } .desktop-stepper-wrap { display: none !important; } }
+@media (min-width: 769px) { .mobile-accordion-wrap { display: none !important; } }
+@media (min-width: 769px) { .schema-mobile-stepper { display: none !important; } .mobile-expand-toggle { display: none !important; } .annot-panel-collapsed { display: block !important; } .mobile-accordion-wrap { display: none !important; } }
 @keyframes pulse-dot { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
 
 /* Comparator pill hover */
@@ -2361,6 +2362,175 @@ const LAYER_BORDER_COLOR = {
   5: '#f5d97a', 6: '#f5d97a', 7: '#1e2f45', 8: '#7dd3c8',
 };
 
+/* ─── Mobile accordion for Stage 3 ────────────────────────────────── */
+const ACCORDION_LAYERS = [
+  { key: 'sovereignDatabase', step: 1, label: 'Sovereign Database' },
+  { key: 'governanceAccess', step: 2, label: 'Governance & Access' },
+  { key: 'integrationLayer', step: 3, label: 'Integration Layer' },
+  { key: 'automationLayer', step: 4, label: 'Automation Layer' },
+  { key: 'intelligenceSubstrate', step: 5, label: 'Intelligence Substrate' },
+  { key: 'aiRuntime', step: 6, label: 'AI Runtime' },
+  { key: 'applicationLayer', step: 7, label: 'Application Layer' },
+];
+
+function MobileAccordion({ journeyState, config }) {
+  const [expandedKey, setExpandedKey] = useState('sovereignDatabase');
+  const [stewardExpanded, setStewardExpanded] = useState(false);
+  const stalls = journeyState.stalls || [];
+  const stacks = journeyState.detectedStacks || [];
+  const tc = journeyState.techConfig || {};
+
+  const STEP_TECH_MAP = {
+    sovereignDatabase: tc.sovereignDatabase ? { pills: tc.sovereignDatabase.clusters, type: 'clusters' } : null,
+    governanceAccess: tc.governanceAccess ? { label: tc.governanceAccess.label, delivery: tc.governanceAccess.delivery, rationale: tc.governanceAccess.rationale } : null,
+    intelligenceSubstrate: tc.intelligenceSubstrate ? { label: tc.intelligenceSubstrate.label, delivery: tc.intelligenceSubstrate.delivery, rationale: tc.intelligenceSubstrate.rationale } : null,
+    aiRuntime: tc.aiRuntime ? { label: tc.aiRuntime.label, delivery: tc.aiRuntime.delivery, rationale: tc.aiRuntime.rationale } : null,
+  };
+
+  // Build steward annotation for the final card
+  const stewardAnnotation = useMemo(() => {
+    if (!config) return null;
+    const qa = journeyState.qualifierAnswers || {};
+    const anchorLabel = config.anchorLabel || 'Anchors';
+    const stackNames = stacks.map(s => `**${s.name}**`).join(' and ');
+    const has = id => stalls.includes(id);
+    const stewardQuestions = [];
+    if (has('S1') || has('S7')) stewardQuestions.push(`"Are we still **Re-proving**?" — you get a live reading of whether evidence is informing decisions or accumulating as justification.`);
+    if (has('S4')) stewardQuestions.push(`"Is our ${anchorLabel} circulating value or extracting it?" — you get a value flow analysis from real transaction records.`);
+    if (has('S2') || has('S5')) stewardQuestions.push(`"Who is connecting to whom — and is it working?" — you see which connections run through brokers and which form directly.`);
+    if (has('S9')) stewardQuestions.push(`"Who is waiting for permission that could act now?" — dependency patterns become visible before they become structural.`);
+    if (has('S8')) stewardQuestions.push(`"Which programmes are producing starts but not outcomes?" — graduation rates alongside cohort sizes.`);
+    stewardQuestions.push(`"Where would one intervention have the most effect right now?" — a leverage hypothesis from current actor behaviour.`);
+    return { stackNames, stewardQuestions };
+  }, [journeyState, config, stalls, stacks]);
+
+  return (
+    <div>
+      {/* Header */}
+      <div style={{ marginBottom: '20px' }}>
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: 400, color: 'var(--dj-chalk)', marginBottom: '8px' }}>
+          Your {config.configName} — fully configured.
+        </h2>
+        <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', lineHeight: 1.5 }}>
+          This is the infrastructure stack recommended for your ecosystem. Tap each layer to see what it does and why it's in your configuration.
+        </p>
+      </div>
+
+      {/* Accordion layers */}
+      {ACCORDION_LAYERS.map(layer => {
+        const isExpanded = expandedKey === layer.key;
+        const borderColor = LAYER_BORDER_COLOR[layer.step] || 'var(--dj-border)';
+        const isSovereign = layer.key === 'sovereignDatabase';
+        const layerId = STEP_LAYER_ID[layer.step];
+        const stallTags = stalls
+          .filter(sid => STALL_LAYER_MAP[sid] === layerId)
+          .map(sid => { const s = STALLS.find(x => x.id === sid); return s ? `${sid} ${s.name}` : sid; });
+        const tech = STEP_TECH_MAP[layer.key];
+        const commentary = buildLayerCommentary(layer.key, journeyState, config);
+
+        return (
+          <div key={layer.key} style={{
+            background: isExpanded ? '#fff' : '#f5f0e8',
+            border: isExpanded ? '1px solid #7dd3c8' : '1px solid #1e2f45',
+            borderLeft: isExpanded ? '3px solid #7dd3c8' : (isSovereign ? '3px solid #c8f0d0' : '1px solid #1e2f45'),
+            borderRadius: '8px',
+            padding: '16px',
+            marginBottom: '8px',
+            transition: 'all 0.2s ease',
+          }}>
+            {/* Header row — always visible */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+              onClick={() => setExpandedKey(isExpanded ? null : layer.key)}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 400, color: '#1e2f45', margin: 0 }}>
+                {layer.label}
+              </h3>
+              <span style={{ color: '#7dd3c8', fontSize: '14px', flexShrink: 0, marginLeft: '8px' }}>{isExpanded ? '▼' : '▶'}</span>
+            </div>
+
+            {/* Tech badge — visible when collapsed too */}
+            {tech && !tech.type && (
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.06em', color: '#1e2f45', background: tech.delivery === 'live' ? '#c8f0d0' : '#f5d97a', borderRadius: '4px', padding: '3px 8px', display: 'inline-block', marginTop: '8px' }}>{tech.label}</span>
+            )}
+
+            {/* Stall tags — visible when collapsed too */}
+            {stallTags.length > 0 && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '8px' }}>
+                {stallTags.map(t => (
+                  <span key={t} style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 500, color: '#1a1a1a', background: '#f5d97a', borderRadius: '6px', padding: '2px 6px' }}>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Expanded content */}
+            {isExpanded && (
+              <div style={{ marginTop: '16px', borderTop: '1px solid var(--dj-border)', paddingTop: '16px' }}>
+                {/* Sovereign DB cluster pills */}
+                {tech && tech.type === 'clusters' && tech.pills && tech.pills.length > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginBottom: '12px' }}>
+                    {tech.pills.map(p => <span key={p} style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#1e2f45', background: '#7dd3c8', borderRadius: '4px', padding: '3px 8px' }}>{p}</span>)}
+                  </div>
+                )}
+
+                {/* Tech rationale */}
+                {tech && tech.rationale && (
+                  <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: '#6b7a8d', fontStyle: 'italic', marginBottom: '12px' }}>{tech.rationale}</p>
+                )}
+
+                {/* Layer commentary */}
+                {commentary && (
+                  <div style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.65, color: 'var(--dj-chalk)', whiteSpace: 'pre-line' }}>
+                    {commentary}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Final card — Full Architecture / Steward section */}
+      <div style={{
+        background: stewardExpanded ? '#1e2f45' : '#1e2f45',
+        border: '1px solid #1e2f45',
+        borderRadius: '8px',
+        padding: '16px',
+        marginBottom: '8px',
+        marginTop: '16px',
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+          onClick={() => setStewardExpanded(prev => !prev)}>
+          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 400, color: '#e8edf5', margin: 0 }}>
+            Full Architecture
+          </h3>
+          <span style={{ color: '#7dd3c8', fontSize: '14px', flexShrink: 0, marginLeft: '8px' }}>{stewardExpanded ? '▼' : '▶'}</span>
+        </div>
+        {!stewardExpanded && (
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: '#8a95a8', marginTop: '4px' }}>Tap to see what you see as steward</p>
+        )}
+
+        {stewardExpanded && stewardAnnotation && (
+          <div style={{ marginTop: '16px', borderTop: '1px solid rgba(125,211,200,0.2)', paddingTop: '16px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.12em', color: '#7dd3c8', marginBottom: '12px' }}>STEWARD INTERROGATION</div>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.65, color: '#e8edf5', marginBottom: '16px' }}>
+              Today when your board asks what's working, someone compiles a report. With this configuration, you ask questions and get answers from live signals:
+            </p>
+            {stewardAnnotation.stewardQuestions.map((q, i) => (
+              <div key={i} style={{ padding: '8px 0', borderBottom: i < stewardAnnotation.stewardQuestions.length - 1 ? '1px solid rgba(125,211,200,0.1)' : 'none' }}>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: '#e8edf5' }}><BoldText text={q} /></p>
+              </div>
+            ))}
+            <div style={{ marginTop: '20px' }}>
+              <TalkToUsCTA journeyState={journeyState} style={{ display: 'inline-flex', alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.04em', color: '#1e2f45', background: '#7dd3c8', border: 'none', borderRadius: '4px', padding: '12px 24px', cursor: 'pointer', textDecoration: 'none' }} />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function MobileSchemaStep({ schemaStep, configName, selectedStalls, expanded, onToggle }) {
   const layerLabel = STEP_LAYER_LABEL[schemaStep] || '';
   const layerId = STEP_LAYER_ID[schemaStep];
@@ -2833,6 +3003,13 @@ function DigitalOSStage() {
 
   return (
     <div style={s3.containerWide}>
+      {/* Mobile accordion — replaces stepper on mobile */}
+      <div className="mobile-accordion-wrap">
+        <MobileAccordion journeyState={journeyState} config={config} />
+      </div>
+
+      {/* Desktop stepper — hidden on mobile */}
+      <div className="desktop-stepper-wrap">
       {/* Header */}
       <div className="stepper-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
         <div className="stepper-config-badge" style={s3.configBadge}>{config.configName}</div>
@@ -3010,6 +3187,7 @@ function DigitalOSStage() {
           )}
         </div>
       )}
+      </div>{/* end desktop-stepper-wrap */}
     </div>
   );
 }

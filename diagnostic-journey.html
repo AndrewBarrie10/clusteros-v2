@@ -3306,16 +3306,26 @@ function TalkToUsCTA({ journeyState, style }) {
     setSending(true);
     const qa = journeyState.qualifierAnswers || {};
     const configName = (journeyState.osConfig || {}).configName || '';
+    const nameParts = name.trim().split(/\s+/);
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+    const payload = {
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      cluster_name: configName || qa.clusterType || '',
+      org_name: '',
+      engagement_type: 'diagnostic-request',
+      message: `Diagnostic request — ${configName}. Cluster type: ${qa.clusterType || ''}. Stacks: ${(journeyState.detectedStacks || []).map(s => s.name).join(', ')}. Stage: digital-os`,
+      submitted_at: new Date().toISOString(),
+    };
+    console.log('Contact request payload:', payload);
     try {
-      await fetch('https://clusteros-v3-production.up.railway.app/api/v1/contact-request', {
+      const res = await fetch('https://clusteros-v3-production.up.railway.app/api/v1/contact-request', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          first_name: name, email, cluster_name: '',
-          engagement_type: 'diagnostic-request',
-          message: `Config: ${configName}. Cluster: ${qa.clusterType || ''}. Stacks: ${(journeyState.detectedStacks || []).map(s => s.name).join(', ')}. Stage: digital-os`,
-          submitted_at: new Date().toISOString(),
-        }),
+        body: JSON.stringify(payload),
       });
+      console.log('Contact request status:', res.status);
     } catch (e) { console.error('Contact request error:', e); }
     setSent(true);
   };

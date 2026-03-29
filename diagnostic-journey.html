@@ -51,6 +51,10 @@ a.comparator-pill:hover { background: #2a3f55 !important; }
 
 /* Mobile responsive — 375px minimum */
 @media (max-width: 768px) {
+  /* Stage progress indicator — prevent overflow */
+  .step-node { min-width: 80px !important; }
+  .step-label { font-size: 9px !important; letter-spacing: 0.04em !important; }
+  .step-subtitle { display: none !important; }
   .s0-outputs { grid-template-columns: 1fr !important; }
   .s0-cta-btn { width: 100% !important; justify-content: center !important; }
   .stage0-main { padding: 24px !important; }
@@ -452,7 +456,7 @@ function StepIndicator({ current, completedUpTo }) {
                 background: isReachable ? 'var(--steward)' : 'var(--dj-border)',
               }} />
             )}
-            <div style={styles.stepNode}>
+            <div className="step-node" style={styles.stepNode}>
               <div style={{
                 ...styles.stepDot,
                 background: isActive ? 'var(--signal)' : isCompleted ? 'var(--steward)' : 'var(--dj-border)',
@@ -472,7 +476,7 @@ function StepIndicator({ current, completedUpTo }) {
                 )}
               </div>
               <div style={{ marginTop: '8px', textAlign: 'center' }}>
-                <div style={{
+                <div className="step-label" style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: '10px',
                   fontWeight: 600,
@@ -481,7 +485,7 @@ function StepIndicator({ current, completedUpTo }) {
                   color: isActive ? 'var(--dj-chalk)' : isCompleted ? 'var(--steward)' : 'var(--dj-chalk-muted)',
                   marginBottom: '2px',
                 }}>{stage.label}</div>
-                <div style={{
+                <div className="step-subtitle" style={{
                   fontFamily: 'var(--font-sans)',
                   fontSize: '11px',
                   color: 'var(--dj-chalk-muted)',
@@ -2750,15 +2754,24 @@ function buildStepAnnotation(step, journeyState, config) {
       if (allStackBold) body += ` This configuration directly addresses ${allStackBold}.`;
       body += ' The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem\'s actors.';
 
-      // Steward section data
+      // Steward section data — locally computed from diagnostic findings
+      const stewardQuestions = [];
+      if (has('S1') || has('S7')) stewardQuestions.push(`"Are we still **Re-proving**?" — you get a live reading of whether evidence is informing decisions or accumulating as justification. If your ${anchorLabel} published 40 research outputs last quarter and 3 generated commercial conversations, you see that ratio without anyone compiling a report.`);
+      if (has('S4')) stewardQuestions.push(`"Is our ${anchorLabel} circulating value or extracting it?" — you get a value flow analysis showing where procurement, talent, and IP crossed the boundary and whether it came back. Not an annual audit. A live signal.`);
+      if (has('S2') || has('S5')) stewardQuestions.push(`"Who is connecting to whom — and is it working?" — you see which connections happened through infrastructure and which still run through brokers. When a programme manager leaves, you see which connections go with them.`);
+      if (has('S9')) stewardQuestions.push(`"Who is waiting for permission that could act now?" — you see which actors are blocked by dependency rather than capability. The gatekeeper pattern becomes visible before it becomes structural.`);
+      if (has('S8')) stewardQuestions.push(`"Which programmes are producing starts but not outcomes?" — you see graduation rates alongside cohort sizes. Activity that looks like progress but isn't converting surfaces as a pattern.`);
+      stewardQuestions.push(`"Where would one intervention have the most effect right now?" — you get a leverage hypothesis ranked by confidence, derived from live stall detection against your ${stackNames || 'detected patterns'}. Not a consultant's recommendation from three months ago. A structural reading from current actor behaviour.`);
+
       const stewardSection = {
         heading: 'What you see',
         subheading: 'STEWARD INTERROGATION',
-        body: `Your ${clusterLabel} is running ${allStackBold || 'independent stall patterns'}. ClusterOS gives you a single interrogation surface against live ecosystem data. Not a dashboard — a diagnostic cockpit. Ask what is stalling. Ask where founders are dropping out. Ask whether your ${anchorLabel} anchor is generating procurement signal or just attending events. The answer is assembled from live signals, not from whatever was last reported.`,
+        body: `Today when your board asks what's working, someone compiles a report from programme managers' recollections, annual surveys, and whatever data was last collected. By the time it reaches the table, it describes an ecosystem that no longer exists in exactly that form.\n\nWith this configuration, you ask questions and get answers assembled from live signals — the same data your actors are already producing by pursuing their own interests. Here are the questions your diagnostic has unlocked:`,
+        stewardQuestions,
         bullets: [
-          'Stall detection updates as actor behaviour changes — not when someone writes a report',
-          'Stack analysis surfaces which interventions would break the reinforcing logic',
-          'Board-ready evidence generated from the same data your actors are already producing',
+          `Your ${stackNames || 'stall patterns'} ${stacks.length > 1 ? 'are' : 'is'} tracked continuously — not as a static finding from this diagnostic, but as a live reading that updates as actor behaviour changes`,
+          `Board evidence is generated from the same data your actors are already producing — no additional reporting burden, no survey fatigue, no lag between reality and record`,
+          `Intervention targeting is structural, not political — the system shows where one change would break the reinforcing logic, regardless of which organisation would prefer the status quo`,
         ],
       };
 
@@ -2936,10 +2949,20 @@ function DigitalOSStage() {
               <h3 style={schema.stewardHeading}>{annotation.stewardSection.heading}</h3>
               <div style={schema.stewardSub}>{annotation.stewardSection.subheading}</div>
               <p style={schema.stewardBody}><BoldText text={annotation.stewardSection.body} /></p>
+              {/* Diagnostic-specific steward questions */}
+              {annotation.stewardSection.stewardQuestions && (
+                <div style={{ margin: '16px 0' }}>
+                  {annotation.stewardSection.stewardQuestions.map((q, i) => (
+                    <div key={i} style={{ padding: '12px 0', borderBottom: i < annotation.stewardSection.stewardQuestions.length - 1 ? '1px solid rgba(125,211,200,0.15)' : 'none' }}>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: '#e8edf5' }}><BoldText text={q} /></p>
+                    </div>
+                  ))}
+                </div>
+              )}
               <ul style={schema.stewardBullets}>
                 {annotation.stewardSection.bullets.map((b, i) => (
                   <li key={i} style={schema.stewardBullet}>
-                    <span style={{ color: '#c8f0d0', marginRight: '8px' }}>{'\u2022'}</span>{b}
+                    <span style={{ color: '#c8f0d0', marginRight: '8px' }}>{'\u2022'}</span><BoldText text={b} />
                   </li>
                 ))}
               </ul>
@@ -5655,6 +5678,7 @@ const sticky = {
 
 /* ─── Mount ────────────────────────────────────────────────────────── */
 const root = ReactDOM.createRoot(document.getElementById('root'));
+console.log('[Mobile Debug] viewport width:', window.innerWidth, 'height:', window.innerHeight);
 root.render(<App />);
 </script>
 </body>

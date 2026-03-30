@@ -4056,7 +4056,7 @@ Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governa
       }
       const commentary = {};
       stackResults.forEach(r => {
-        if (r) commentary[r.stackId] = { diagnosis: r.diagnosis, consequence: r.consequence, mechanism: r.mechanism };
+        if (r) commentary[r.stackId] = { diagnosis: r.diagnosis, consequence: r.consequence, mechanism: r.mechanism, protection_context: r.protection_context };
       });
       setJourneyState(prev => {
         const next = {

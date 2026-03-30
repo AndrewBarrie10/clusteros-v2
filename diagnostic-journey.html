@@ -3222,6 +3222,8 @@ function ReportModal({ phase, journeyState, onClose }) {
       commentary: '',
       stackCommentary: journeyState.stackCommentary || {},
       digitalCommentary: journeyState.digitalCommentary || null,
+      layerCommentary: journeyState.digitalCommentary || {},
+      detectedStacks: journeyState.detectedStacks || [],
       techConfig: journeyState.techConfig || null,
       submitted_at: new Date().toISOString(),
       qualifier_answers: qa,

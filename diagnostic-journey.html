@@ -4055,6 +4055,8 @@ Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governa
           ...prev,
           stackCommentary: { ...prev.stackCommentary, ...commentary },
           digitalCommentary: digitalResult || prev.digitalCommentary || null,
+          layerCommentary: digitalResult || prev.digitalCommentary || {},
+          detectedStacks: prev.detectedStacks || [],
         };
         console.log('[Commentary] Stored digitalCommentary:', !!next.digitalCommentary);
         return next;

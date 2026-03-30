@@ -2746,7 +2746,11 @@ function buildLayerCommentary(layerKey, journeyState, config) {
       if (protections.length > 0) {
         body += `Your protection priorities are enforced at this layer by architecture, not by policy.\n\n`;
         if ((qa.protect || []).includes('ip')) {
-          body += `Institutional IP: research outputs are tagged at creation with access controls that travel with the data. When a researcher publishes internally, the system knows which groups can see it and which cannot — before anyone has to ask.\n`;
+          if (qa.anchorType === 'corporate') {
+            body += `Institutional IP: commercial outputs and procurement signals are tagged at creation with access controls. Your anchor's innovation pipeline stays inside the ecosystem boundary — visible to matched actors, not to the broader market.\n`;
+          } else {
+            body += `Institutional IP: research outputs are tagged at creation with access controls that travel with the data. When a researcher publishes internally, the system knows which groups can see it and which cannot — before anyone has to ask.\n`;
+          }
         }
         if ((qa.protect || []).includes('knowledge')) {
           body += `Local knowledge: the external tier has read-only access to curated pipeline signals. No actor data, no research outputs, no internal findings reach outside actors without explicit consent recorded at this layer.\n`;

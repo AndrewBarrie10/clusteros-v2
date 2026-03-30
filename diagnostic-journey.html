@@ -3222,7 +3222,15 @@ function ReportModal({ phase, journeyState, onClose }) {
       commentary: '',
       stackCommentary: journeyState.stackCommentary || {},
       digitalCommentary: journeyState.digitalCommentary || null,
-      layerCommentary: journeyState.digitalCommentary || {},
+      layerCommentary: (() => {
+      const keys = ['sovereignDatabase','governanceAccess','integrationLayer','automationLayer','intelligenceSubstrate','aiRuntime','applicationLayer'];
+      const result = {};
+      const config = journeyState.osConfig || {};
+      keys.forEach(key => {
+        result[key] = buildLayerCommentary(key, journeyState, config);
+      });
+      return result;
+    })(),
       detectedStacks: journeyState.detectedStacks || [],
       techConfig: journeyState.techConfig || null,
       submitted_at: new Date().toISOString(),

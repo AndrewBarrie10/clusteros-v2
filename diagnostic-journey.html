@@ -283,6 +283,7 @@ const QUALIFIER_QUESTIONS = [
       { value: 'regional',    label: 'Regional Speciality',  desc: 'Place-based cluster with sector focus and local identity' },
       { value: 'national',    label: 'National Supercluster', desc: 'Cross-regional network with national strategic significance' },
       { value: 'corporate',   label: 'Corporate',             desc: 'Anchor-led ecosystem organised around corporate R&D or supply chain' },
+      { value: 'city',        label: 'City cluster',           desc: 'Urban cluster with place-based identity and city-scale coordination' },
     ]},
   { id: 'anchorType', question: 'Who is the primary anchor in your ecosystem?', multi: false,
     options: [
@@ -1105,10 +1106,10 @@ const ACTOR_CASCADES = {
 
 /* ─── Walkthrough layer definitions ────────────────────────────────── */
 const CLUSTER_TYPE_SENTENCES = {
-  regional: 'a place-based cluster', national: 'a nationally significant supercluster', corporate: 'an anchor-led enterprise ecosystem',
+  regional: 'a place-based cluster', national: 'a nationally significant supercluster', corporate: 'an anchor-led enterprise ecosystem', city: 'a city-scale cluster',
 };
 const CLUSTER_TYPE_LABELS = {
-  regional: 'Regional Speciality', national: 'National Supercluster', corporate: 'Corporate',
+  regional: 'Regional Speciality', national: 'National Supercluster', corporate: 'Corporate', city: 'City Cluster',
 };
 
 const ARCH_LAYERS = [
@@ -2683,11 +2684,32 @@ function buildLayerCommentary(layerKey, journeyState, config) {
 
     case 'sovereignDatabase': {
       const clusters = (tc.sovereignDatabase || {}).clusters || [];
-      let body = `Your ${clusterLabel} needs a sovereign database that belongs to the ecosystem, not to any organisation within it. `;
-      if (has('S1') && has('S7')) body += `Right now, evidence gets produced to justify the ecosystem's existence rather than to inform decisions. Reports get written, circulated, and filed — then the next funding round starts the same evidence-gathering exercise from scratch because the findings live in someone's inbox, not in a record the ecosystem owns. `;
-      else if (has('S1')) body += `Your ecosystem keeps re-proving its case — every new stakeholder, every funding round restarts the evidence cycle. The Sovereign Database holds structured findings that persist across cycles, so proof accumulates rather than resets. `;
-      else if (has('S7')) body += `Narrative substitutes for evidence in your ecosystem. The Sovereign Database separates structured outcomes from the stories told about them — what actually converted vs what was reported as progress. `;
-      if (has('S4')) body += `Value is leaving through your ${anchorLabel} anchor's established channels without anyone tracking where it goes. The Value flow audit trail changes this — you can see what crosses the boundary and whether it circulates locally first. `;
+      const clusterTypeLabel = CLUSTER_TYPE_LABELS[qa.clusterType] || 'your ecosystem';
+
+      // Opening paragraph — varies by anchor × priority × gap
+      let body = '';
+      if (qa.anchorType === 'university' || qa.anchorType === 'research') {
+        body = `Your ${clusterTypeLabel} needs a sovereign database that belongs to the ecosystem, not to any organisation within it. Right now, research outputs leave through your ${anchorLabel} anchor's publication channels — structured knowledge that your ecosystem funded but doesn't own. `;
+        if (qa.priority === 'talent') body += `The Sovereign Database changes this: every researcher output, every founder progression, every talent signal becomes a structured record the ecosystem holds. Not in a journal. Not in your anchor's systems. In yours.`;
+        else if (qa.priority === 'research') body += `The Sovereign Database captures every research output as structured evidence — tagged, searchable, matched against commercial demand signals. The translation layer your ecosystem currently lacks.`;
+        else body += `The Sovereign Database holds the cumulative record your ecosystem has been building without anywhere to put it.`;
+      } else if (qa.anchorType === 'corporate') {
+        body = `Your ${clusterTypeLabel} needs a sovereign database that belongs to the ecosystem, not to your ${anchorLabel} anchor. `;
+        if (has('S4')) body += `Right now, value flows through your anchor's procurement and talent channels without any ecosystem-level record. The Sovereign Database changes this — every transaction that crosses your boundary leaves a trace. `;
+        else body += `Your ${anchorLabel} anchor generates signals — procurement requirements, innovation demand, capability gaps — that never reach the actors best placed to respond. The Sovereign Database is where those signals land. `;
+        if (qa.priority === 'supply') body += `Supply chain visibility starts here: structured capability records against structured procurement signals.`;
+        else if (qa.priority === 'capital') body += `Investment-readiness starts here: structured evidence of anchor engagement with ecosystem actors.`;
+      } else if (qa.anchorType === 'public') {
+        body = `Your ${clusterTypeLabel} needs a sovereign database that belongs to the ecosystem, not to any programme cycle. `;
+        body += `Public agency anchors generate evidence that dissipates between funding rounds — reports filed, findings circulated, lessons lost when programmes end or leadership changes. The Sovereign Database holds structured findings that persist across cycles, so proof accumulates rather than resets. `;
+        if (qa.priority === 'capital') body += `External investors need to see a credible evidence base, not a fresh pitch every time. The database builds that base continuously.`;
+        else if (qa.priority === 'growth') body += `Growth evidence — what worked, what converted, what scaled — accumulates as a structural record rather than a narrative in someone's annual report.`;
+      } else {
+        body = `Your ${clusterTypeLabel} needs a sovereign database that belongs to the ecosystem, not to any organisation within it. `;
+        if (has('S1')) body += `Your ecosystem keeps re-proving its case — every new stakeholder, every funding round restarts the evidence cycle. The Sovereign Database holds structured findings that persist across cycles, so proof accumulates rather than resets. `;
+        if (has('S4')) body += `Value is leaving through your anchor's established channels without anyone tracking where it goes. The Value flow audit trail changes this — you can see what crosses the boundary and whether it circulates locally first. `;
+        if (!has('S1') && !has('S4')) body += `Every actor profile, every stall finding, every leverage hypothesis is recorded here as a structural fact that belongs to the ecosystem — not to the programme manager who compiled it. `;
+      }
 
       if (clusters.length > 0) {
         body += `\n\nPriority data clusters for your configuration:\n`;
@@ -2721,10 +2743,24 @@ function buildLayerCommentary(layerKey, journeyState, config) {
       body += `• Ecosystem tier — founders, SMEs, support organisations within your region. Access to demand signals and opportunity matching.\n`;
       body += `• External tier — investors, diaspora, corporate scouts. Curated access to pipeline signals only. No actor data without consent.\n\n`;
 
-      if (protections.length > 0) body += `Your protection priorities — ${protectStr} — are enforced at this layer by architecture, not by policy. `;
-      if ((qa.protect || []).includes('sovereignty')) body += `No data crosses the regional boundary without consent recorded at the governance layer. `;
-      if ((qa.protect || []).includes('ip')) body += `Institutional IP is protected through explicit access controls — research moves between groups without leaking beyond the boundary. `;
-      if ((qa.protect || []).includes('trust')) body += `Existing relationship structures are preserved through trust tiers — openness and confidentiality coexist without leakage. `;
+      if (protections.length > 0) {
+        body += `Your protection priorities are enforced at this layer by architecture, not by policy.\n\n`;
+        if ((qa.protect || []).includes('ip')) {
+          body += `Institutional IP: research outputs are tagged at creation with access controls that travel with the data. When a researcher publishes internally, the system knows which groups can see it and which cannot — before anyone has to ask.\n`;
+        }
+        if ((qa.protect || []).includes('knowledge')) {
+          body += `Local knowledge: the external tier has read-only access to curated pipeline signals. No actor data, no research outputs, no internal findings reach outside actors without explicit consent recorded at this layer.\n`;
+        }
+        if ((qa.protect || []).includes('sovereignty')) {
+          body += `Economic sovereignty: no data crosses the regional boundary without consent recorded at the governance layer. Your ${clusterLabel}'s intelligence stays inside your boundary — available to your actors, invisible to external systems.\n`;
+        }
+        if ((qa.protect || []).includes('trust')) {
+          body += `Community trust: the relationship tier preserves existing informal structures. New actors gain access through verified credentials, not cold introductions — but the platform never exposes who knows whom to actors outside the group.\n`;
+        }
+        if ((qa.protect || []).includes('talent')) {
+          body += `Talent pipeline: founder and talent records are held at the cluster level, not the supercluster. External actors — investors, corporates, scouts — see pipeline formation signals, not individual profiles, until the actor explicitly consents to visibility.\n`;
+        }
+      }
       return body;
     }
 

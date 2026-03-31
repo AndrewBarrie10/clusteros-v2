@@ -636,11 +636,30 @@ function LeverageCard({ stack, protections, priority, commentary }) {
           <span style={s2.provLabel}>Mechanism</span>
           <span style={s2.provText}>{mechanism}</span>
         </div>
+        {stack.regime && (
+          <div style={s2.field}>
+            <span style={{ ...s2.provLabel, color: '#d97706' }}>What this locks in</span>
+            <span style={{ ...s2.provText, fontStyle: 'italic' }}>{stack.regime}</span>
+          </div>
+        )}
+        {stack.effect && (
+          <div style={s2.field}>
+            <span style={{ ...s2.provLabel, color: '#0c9488' }}>Expected effect</span>
+            <span style={s2.provText}>{stack.effect}</span>
+          </div>
+        )}
         {protectModifiers.length > 0 && (
           <div style={s2.field}>
             <span style={{ ...s2.provLabel, color: 'var(--founder)' }}>Protection context</span>
             <span style={s2.provText}>
               {protectModifiers.join(' ')}
+            </span>
+          </div>
+        )}
+        {(stack.comparators || []).length > 0 && (
+          <div style={{ padding: '8px 0 0', borderTop: '1px solid rgba(255,255,255,0.06)', marginTop: '8px' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--dj-chalk-muted)', letterSpacing: '0.06em' }}>
+              This configuration appears in {stack.comparatorTotal || (stack.comparators || []).length} diagnosed ecosystems
             </span>
           </div>
         )}
@@ -3701,6 +3720,43 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
 
   // Transition: Stage 1 (stalls) → Qualifier questions
   if (transitionType === 'stalls-to-qualifiers') {
+    // Compute linchpin stall (appears in most stacks)
+    const stallLoadMap = {};
+    stacks.forEach(s => { (s.triggers || []).forEach(id => { stallLoadMap[id] = (stallLoadMap[id] || 0) + 1; }); });
+    let linchpinId = null, linchpinCount = 0;
+    Object.entries(stallLoadMap).forEach(([id, count]) => { if (count > linchpinCount) { linchpinId = id; linchpinCount = count; } });
+    const linchpinStall = linchpinId ? STALLS.find(s => s.id === linchpinId) : null;
+
+    // Compute blind spots (top 3 with percentages)
+    const stallSet = new Set(stalls);
+    const coStallAgg = {};
+    let totalComparatorClusters = 0;
+    stacks.forEach(s => {
+      if (s.coStallCounts) {
+        Object.entries(s.coStallCounts).forEach(([sid, count]) => {
+          if (!stallSet.has(sid)) coStallAgg[sid] = (coStallAgg[sid] || 0) + count;
+        });
+      }
+      totalComparatorClusters = Math.max(totalComparatorClusters, s.comparatorTotal || 0);
+    });
+    const blindSpots = Object.entries(coStallAgg)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3)
+      .map(([sid, count]) => {
+        const st = STALLS.find(s => s.id === sid);
+        const pct = totalComparatorClusters > 0 ? Math.round(count / totalComparatorClusters * 100) : 0;
+        return { id: sid, name: st ? st.name : sid, sub: st ? st.sub : '', pct };
+      })
+      .filter(bs => bs.pct >= 15 || Object.entries(coStallAgg).length <= 3);
+    if (blindSpots.length === 0 && Object.entries(coStallAgg).length > 0) {
+      const [sid, count] = Object.entries(coStallAgg).sort((a, b) => b[1] - a[1])[0];
+      const st = STALLS.find(s => s.id === sid);
+      blindSpots.push({ id: sid, name: st ? st.name : sid, sub: st ? st.sub : '', pct: totalComparatorClusters > 0 ? Math.round(count / totalComparatorClusters * 100) : 0 });
+    }
+
+    // Stall frequency data
+    const stallFreqs = window._CLUSTER_STALL_FREQ || {};
+
     return (
       <div style={trans.card}>
         {/* Heading */}
@@ -3713,6 +3769,18 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
           A stack is a set of behaviours that reinforce each other. Fixing one leaves the others intact. The pattern persists.
         </p>
 
+        {/* Linchpin identification */}
+        {stacks.length > 1 && linchpinStall && linchpinCount > 1 && (
+          <div style={{ padding: '12px 16px', background: 'rgba(125,211,200,0.08)', border: '1px solid rgba(125,211,200,0.2)', borderLeft: '3px solid #7dd3c8', borderRadius: '0 4px 4px 0', marginBottom: '16px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7dd3c8', marginBottom: '6px' }}>
+              {stacks.length} configurations · 1 structural linchpin
+            </div>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-dim)', lineHeight: 1.6, margin: 0 }}>
+              <strong style={{ color: 'var(--dj-chalk)' }}>{linchpinStall.name}</strong> appears in {linchpinCount === stacks.length ? 'all' : linchpinCount} of your {stacks.length} configurations. Your ecosystem doesn't have {stacks.length} separate problems — it has one structural condition that manifests as {stacks.length} reinforcing patterns.
+            </p>
+          </div>
+        )}
+
         {/* Stack cards */}
         {stacks.length > 0 ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
@@ -3721,23 +3789,39 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
               let logic = s.logic || '';
               const firstSentence = logic.split('.')[0];
               logic = firstSentence.split(/\s+/).length > 30 ? firstSentence.split(/\s+/).slice(0, 30).join(' ') + '...' : firstSentence + '.';
+              const regime = s.regime || '';
               const comparators = (s.comparators || []).slice(0, 3);
               return (
                 <div key={s.id} style={trans.stackCard}>
                   <div style={trans.stackCardName}>{s.name}</div>
                   <p style={trans.stackCardLogic}>{logic}</p>
+                  {regime && (
+                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: '#d97706', lineHeight: 1.55, margin: '8px 0 0', fontStyle: 'italic' }}>
+                      What this locks in: {regime.split('.')[0]}.
+                    </p>
+                  )}
                   <div style={trans.stackCardPills}>
-                    {triggerNames.map(name => (
-                      <span key={name} style={trans.stallPill}>{name}</span>
-                    ))}
+                    {triggerNames.map(name => {
+                      const stallId = STALLS.find(x => x.name === name)?.id;
+                      const freq = stallId ? stallFreqs[name] : null;
+                      const load = stallId ? (stallLoadMap[stallId] || 0) : 0;
+                      return (
+                        <span key={name} style={{ ...trans.stallPill, borderLeft: load >= stacks.length && stacks.length > 1 ? '3px solid #7dd3c8' : undefined }}>
+                          {name}
+                          {freq > 0 && <span style={{ marginLeft: '6px', opacity: 0.6, fontSize: '10px' }}>{freq}%</span>}
+                        </span>
+                      );
+                    })}
                   </div>
                   {comparators.length > 0 && (
                     <div style={{ marginTop: '10px' }}>
-                      <span style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', marginRight: '6px' }}>Also detected in:</span>
+                      <span style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', marginRight: '6px' }}>
+                        Detected in {s.comparatorTotal || comparators.length} ecosystem{(s.comparatorTotal || comparators.length) !== 1 ? 's' : ''}:
+                      </span>
                       {comparators.map((c, i) => {
                         const name = typeof c === 'string' ? c : (c.name || '');
                         const slug = typeof c === 'object' && c.slug ? c.slug : toClusterSlug(name);
-                        return name ? <a key={i} className="comparator-pill" href={`/clusters/${slug}.html`} target="_blank" rel="noopener" style={trans.comparatorPill}>{name}</a> : null;
+                        return name ? <a key={i} className="comparator-pill" href={`/clusters/${slug}`} target="_blank" rel="noopener" style={trans.comparatorPill}>{name}</a> : null;
                       })}
                     </div>
                   )}
@@ -3752,47 +3836,38 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
           <p style={trans.subtext}>{stalls.length} independent stall{stalls.length !== 1 ? 's' : ''} identified — {stallNames.join(', ')}. No reinforcing combinations detected.</p>
         )}
 
-        {/* Blind Spot */}
-        {(() => {
-          // Compute blind spot: most common co-occurring stall across comparator clusters not selected by steward
-          const stallSet = new Set(stalls);
-          const coStallAgg = {};
-          // D = total unique comparator clusters across all detected stacks
-          const allComparatorNames = new Set();
-          stacks.forEach(s => {
-            if (s.coStallCounts) {
-              Object.entries(s.coStallCounts).forEach(([sid, count]) => {
-                if (!stallSet.has(sid)) coStallAgg[sid] = (coStallAgg[sid] || 0) + count;
-              });
-            }
-            (s.comparators || []).forEach(c => { const n = typeof c === 'string' ? c : (c.name || ''); if (n) allComparatorNames.add(n); });
-          });
-          const totalUniqueComparators = allComparatorNames.size;
-          const sorted = Object.entries(coStallAgg).sort((a, b) => b[1] - a[1]);
-          if (sorted.length === 0) return null;
-          const [blindSpotId, blindSpotCount] = sorted[0];
-          const blindSpotStall = STALLS.find(s => s.id === blindSpotId);
-          if (!blindSpotStall) return null;
-          const stackNameStr = stacks.map(s => s.name).join(' and ');
-          return (
-            <div style={trans.blindSpotBox}>
-              <div style={trans.blindSpotLabel}>STEWARD'S BLIND SPOT</div>
-              <h4 style={trans.blindSpotHeading}>{blindSpotStall.name} — you didn't identify this.</h4>
-              <p style={trans.blindSpotBody}>
-                Ecosystems running {stackNameStr} also show {blindSpotStall.name}. Either it isn't present in your ecosystem — or it hasn't surfaced yet.
+        {/* Blind Spots (up to 3) */}
+        {blindSpots.length > 0 && (
+          <div style={trans.blindSpotBox}>
+            <div style={trans.blindSpotLabel}>STEWARD'S BLIND SPOT</div>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'var(--dj-chalk-dim)', lineHeight: 1.6, marginBottom: '12px' }}>
+              Based on {totalComparatorClusters > 0 ? totalComparatorClusters : 'diagnosed'} ecosystems sharing your configuration, these stalls appear frequently but you didn't identify them:
+            </p>
+            {blindSpots.map((bs, i) => (
+              <div key={bs.id} style={{ padding: '10px 14px', background: 'rgba(217,119,6,0.06)', border: '1px solid rgba(217,119,6,0.15)', borderRadius: '4px', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
+                  <strong style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk)' }}>{bs.name}</strong>
+                  {bs.pct > 0 && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#d97706', fontWeight: 700 }}>{bs.pct}%</span>}
+                </div>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', lineHeight: 1.5, margin: 0, fontStyle: 'italic' }}>{bs.sub}</p>
+              </div>
+            ))}
+            <div style={{ padding: '10px 14px', background: 'rgba(217,119,6,0.08)', borderRadius: '4px', marginTop: '8px' }}>
+              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: '#d97706', lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}>
+                {blindSpots[0].name.split(' ')[0]} appears in {blindSpots[0].pct > 0 ? `${blindSpots[0].pct}% of` : ''} ecosystems with this configuration. If it's genuinely absent here, that's structurally interesting. If it's been normalised to invisibility, this diagnostic has surfaced something important.
               </p>
-              <button
-                style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '13px', color: '#0c9488', padding: 0 }}
-                onClick={() => {
-                  if (updateJourneyState) updateJourneyState({ blindSpotStall: blindSpotId });
-                  if (onBack) onBack();
-                }}
-              >
-                &rarr; Go back and check
-              </button>
             </div>
-          );
-        })()}
+            <button
+              style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '13px', color: '#0c9488', padding: '8px 0 0' }}
+              onClick={() => {
+                if (updateJourneyState) updateJourneyState({ blindSpotStall: blindSpots[0].id });
+                if (onBack) onBack();
+              }}
+            >
+              &rarr; Go back and check
+            </button>
+          </div>
+        )}
 
         {/* Handover section */}
         <div style={{ marginTop: '24px', borderTop: '1px solid #1e2f45', paddingTop: '24px' }}>
@@ -3842,7 +3917,14 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
             <div style={trans.stackLine}>— independent stall patterns</div>
           </div>
         )}
-        <p style={trans.text}>has a specific intervention entry point. Here's where it is.</p>
+        {/* Qualifier profile summary */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', margin: '0 0 16px', padding: '12px 14px', background: 'rgba(125,211,200,0.06)', border: '1px solid rgba(125,211,200,0.15)', borderRadius: '4px' }}>
+          {qa.clusterType && <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--dj-chalk-muted)' }}>Cluster: <span style={{ color: 'var(--dj-chalk)' }}>{CLUSTER_TYPE_LABELS[qa.clusterType] || qa.clusterType}</span></div>}
+          {qa.anchorType && <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--dj-chalk-muted)' }}>Anchor: <span style={{ color: 'var(--dj-chalk)' }}>{anchorLabel}</span></div>}
+          {qa.priority && <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--dj-chalk-muted)' }}>Priority: <span style={{ color: 'var(--dj-chalk)' }}>{qa.priority}</span></div>}
+          {qa.gap && <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--dj-chalk-muted)' }}>Gap: <span style={{ color: 'var(--dj-chalk)' }}>{qa.gap}</span></div>}
+        </div>
+        <p style={trans.text}>has a specific intervention entry point calibrated to this profile. Here's where it is.</p>
         <div style={trans.actions}>
           {backBtn}
           <button style={{ ...styles.btnSignal, marginLeft: 'auto' }} onClick={onContinue}>
@@ -3861,9 +3943,46 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
     const allStackNames = stacks.length > 0 ? stacks.map(s => s.name).join(', ') : stallNames.join(', ');
     const body = `Your leverage hypotheses target ${allStackNames} — the reinforcing logic between stalls, not individual stalls in isolation. The next stage translates this into infrastructure: what your ecosystem needs to be built on, configured for your specific context.`;
 
+    // Steward interrogation preview — stall-specific questions
+    const stewardQs = [];
+    if (stalls.includes('S2')) stewardQs.push('Which coordination structures have produced zero committed actions this quarter?');
+    if (stalls.includes('S6')) stewardQs.push('Which new entrants have capability that incumbents haven\'t seen?');
+    if (stalls.includes('S5')) stewardQs.push('How many connections formed directly vs through intermediaries?');
+    if (stalls.includes('S4')) stewardQs.push('Where is value leaving the ecosystem — and what would retain it?');
+    if (stalls.includes('S7')) stewardQs.push('What evidence do we actually have vs what are we claiming?');
+    if (stalls.includes('S1')) stewardQs.push('What\'s the evidence base for our next funding case — right now?');
+    if (stalls.includes('S9')) stewardQs.push('Which actors could act right now without waiting for permission?');
+
     return (
       <div style={trans.card}>
         <p style={trans.text}>{body}</p>
+
+        {/* Steward interrogation preview */}
+        {stewardQs.length > 0 && (
+          <div style={{ marginBottom: '20px', padding: '16px 18px', background: 'rgba(42,122,79,0.06)', border: '1px solid rgba(42,122,79,0.15)', borderRadius: '4px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#2a7a4f', marginBottom: '10px' }}>
+              What the infrastructure lets you ask
+            </div>
+            {stewardQs.slice(0, 3).map((q, i) => (
+              <p key={i} style={{ fontFamily: 'var(--font-serif)', fontSize: '14px', color: 'var(--dj-chalk)', lineHeight: 1.45, margin: '0 0 8px', fontStyle: 'italic' }}>
+                "{q}"
+              </p>
+            ))}
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', margin: '10px 0 0', lineHeight: 1.5 }}>
+              Every answer assembled from live signals. Not from whatever was last reported. The Digital OS stage configures the 7-layer architecture that makes these questions answerable.
+            </p>
+          </div>
+        )}
+
+        {/* 7 layers preview */}
+        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', marginBottom: '20px' }}>
+          {['Governance', 'Sovereign Database', 'Integration', 'Automation', 'Intelligence', 'AI Runtime', 'Application'].map(name => (
+            <span key={name} style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.04em', padding: '3px 8px', borderRadius: '2px', background: 'rgba(125,211,200,0.08)', border: '1px solid rgba(125,211,200,0.15)', color: 'var(--dj-chalk-muted)' }}>
+              {name}
+            </span>
+          ))}
+        </div>
+
         <div style={trans.actions}>
           <button style={styles.btnGhost} onClick={onStop}>Stop & get my report</button>
           <button style={styles.btnSignal} onClick={onContinue}>

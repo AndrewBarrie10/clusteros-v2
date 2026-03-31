@@ -201,6 +201,18 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 .doc-footer-right{font-family:var(--mono);font-size:9px;color:var(--border-2);text-align:right}
 .doc-footer-legal{font-size:10px;color:var(--ink-muted);line-height:1.6;padding-top:12px;border-top:1px solid var(--border)}
 
+/* Loading & error states */
+.report-loading,.report-error{position:fixed;inset:0;z-index:200;background:var(--page);display:flex;align-items:center;justify-content:center}
+.report-loading-inner,.report-error-inner{text-align:center;max-width:400px;padding:40px}
+.report-loading-logo{font-family:var(--serif);font-size:22px;color:var(--ink);margin-bottom:16px}
+.report-loading-logo span{font-family:var(--mono);font-size:16px;color:var(--green);font-weight:700}
+.report-loading-text{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+.report-error-heading{font-family:var(--serif);font-size:24px;color:var(--ink);margin-bottom:12px}
+.report-error-text{font-size:13px;color:var(--ink-dim);line-height:1.65;font-weight:300;margin-bottom:24px}
+.report-error-cta{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:var(--green);color:#fff;padding:12px 24px;border-radius:3px;text-decoration:none;display:inline-block}
+.report-error-cta:hover{background:var(--green-dim)}
+
 /* Preview toolbar */
 .preview-toolbar{position:sticky;top:0;z-index:100;background:#1a1a1a;padding:10px 20px;display:flex;align-items:center;gap:12px;font-family:var(--mono)}
 .preview-toolbar-label{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
@@ -379,7 +391,26 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 </style>
 </head>
 <body>
-<div class="screen-wrapper">
+
+<!-- Loading state -->
+<div id="report-loading" class="report-loading" style="display:none">
+  <div class="report-loading-inner">
+    <div class="report-loading-logo">Cluster<span>OS</span></div>
+    <div class="report-loading-text">Loading your report...</div>
+  </div>
+</div>
+
+<!-- Error state -->
+<div id="report-error" class="report-error" style="display:none">
+  <div class="report-error-inner">
+    <div class="report-loading-logo">Cluster<span>OS</span></div>
+    <div class="report-error-heading">Report not found</div>
+    <p class="report-error-text" id="report-error-msg"></p>
+    <a href="/diagnostic-journey.html" class="report-error-cta">Start a new diagnostic</a>
+  </div>
+</div>
+
+<div class="screen-wrapper" id="report-content">
   <div class="screen-header">
     <a href="/" class="screen-logo">Cluster<span>OS</span></a>
     <button class="btn-print" onclick="window.print()">
@@ -721,21 +752,61 @@ const LAYER_NAMES = [
   ['applicationLayer',       'Application Layer'],
 ];
 
+// ── API ──────────────────────────────────────────────────────
+const API_BASE = 'https://clusteros-v3-production.up.railway.app/api/v1';
+
+function showLoading() {
+  document.getElementById('report-loading').style.display = 'flex';
+  document.getElementById('report-content').style.display = 'none';
+}
+function hideLoading() {
+  document.getElementById('report-loading').style.display = 'none';
+  document.getElementById('report-content').style.display = '';
+}
+function showError(reportId, msg) {
+  document.getElementById('report-loading').style.display = 'none';
+  document.getElementById('report-content').style.display = 'none';
+  const errEl = document.getElementById('report-error');
+  errEl.style.display = 'flex';
+  document.getElementById('report-error-msg').textContent =
+    `Report "${reportId}" could not be loaded. ${msg || 'It may have expired or the link may be incorrect.'}`;
+}
+
 // ── INIT ────────────────────────────────────────────────────
-function init() {
+async function init() {
   const urlParams = new URLSearchParams(window.location.search);
-  const demoStage = urlParams.get('demo'); // ?demo=behaviours | leverage | digital_os
+  const reportId  = urlParams.get('id');    // ?id=RPT-20260331-EDI  (hosted report)
+  const demoStage = urlParams.get('demo');  // ?demo=behaviours | leverage | digital_os
 
   let d = null;
-  if (demoStage) {
+
+  // ── Path 1: Hosted report — fetch from API by ID ──
+  if (reportId) {
+    showLoading();
+    try {
+      const res = await fetch(`${API_BASE}/report/${encodeURIComponent(reportId)}`);
+      if (!res.ok) throw new Error(`Report not found (${res.status})`);
+      d = await res.json();
+    } catch (err) {
+      showError(reportId, err.message);
+      return;
+    }
+    hideLoading();
+  }
+
+  // ── Path 2: Demo preview ──
+  if (!d && demoStage) {
     d = getDemoData(demoStage);
-  } else {
+  }
+
+  // ── Path 3: localStorage / window global (browser print path) ──
+  if (!d) {
     try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
     if (!d) d = window.CLUSTEROS_REPORT || getDemoData();
   }
 
-  // ── Preview toolbar (hidden in print) ──
-  if (demoStage || !localStorage.getItem('CLUSTEROS_REPORT')) {
+  // ── Preview toolbar (hidden in print) — only show in demo/fallback mode ──
+  if (!reportId && (demoStage || !localStorage.getItem('CLUSTEROS_REPORT'))) {
     const toolbar = document.createElement('div');
     toolbar.className = 'preview-toolbar';
     toolbar.innerHTML = `
@@ -1092,7 +1163,10 @@ function getDemoData(stageOverride) {
   };
 }
 
-init();
+init().catch(err => {
+  console.error('[Report] Init failed:', err);
+  showError('', err.message);
+});
 </script>
 </body>
 </html>

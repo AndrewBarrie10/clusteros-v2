@@ -3247,6 +3247,8 @@ function ReportModal({ phase, journeyState, onClose }) {
   const healthRatio = stalls.length / 9;
   const healthScore = stalls.length === 0 ? 100 : Math.round((1 - healthRatio) * 100);
 
+  const [reportUrl, setReportUrl] = useState(null);
+
   const handleSubmit = async () => {
     if (!name || !email) return;
     setSending(true);
@@ -3278,12 +3280,22 @@ function ReportModal({ phase, journeyState, onClose }) {
       config_name: (journeyState.osConfig || {}).configName || '',
     };
 
+    let reportId = null;
     try {
-      await fetch('https://clusteros-v3-production.up.railway.app/api/v1/report-request', {
+      const res = await fetch('https://clusteros-v3-production.up.railway.app/api/v1/report-request', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
+      if (res.ok) {
+        const data = await res.json();
+        reportId = data.report_id || data.id || null;
+      }
     } catch (e) { console.error('Railway report error:', e); }
+
+    // Build report URL — hosted report page
+    if (reportId) {
+      setReportUrl(`/diagnostic-report.html?id=${encodeURIComponent(reportId)}`);
+    }
 
     try {
       await fetch('https://clusteros-v3-production.up.railway.app/api/v1/contact-request', {
@@ -3293,12 +3305,12 @@ function ReportModal({ phase, journeyState, onClose }) {
           engagement_type: 'diagnostic-report',
           message: `Stalls: ${stalls.join(', ')}. Health: ${healthScore}. Stacks: ${stacks.map(s=>s.name).join(', ')}`,
           submitted_at: new Date().toISOString(),
+          report_id: reportId || '',
         }),
       });
     } catch (e) { console.error('HubSpot error:', e); }
 
     setSent(true);
-    setTimeout(onClose, 3000);
   };
 
   return (
@@ -3307,11 +3319,23 @@ function ReportModal({ phase, journeyState, onClose }) {
         {sent ? (
           <div style={{ textAlign: 'center', padding: '24px 0' }}>
             <p style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', color: 'var(--dj-chalk)' }}>
-              Your report is on its way to {email}.
+              Your report is ready.
             </p>
-            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginTop: '8px' }}>
-              Check your inbox in the next minute.
-            </p>
+            {reportUrl ? (
+              <React.Fragment>
+                <a href={reportUrl} target="_blank" rel="noopener"
+                  style={{ display: 'inline-block', marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'var(--dj-teal)', color: '#fff', padding: '12px 24px', borderRadius: '3px', textDecoration: 'none' }}>
+                  View your report →
+                </a>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'var(--dj-chalk-muted)', marginTop: '12px' }}>
+                  A copy has also been sent to {email}
+                </p>
+              </React.Fragment>
+            ) : (
+              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginTop: '8px' }}>
+                A link to your report has been sent to {email}.
+              </p>
+            )}
           </div>
         ) : (
           <React.Fragment>
@@ -3333,7 +3357,7 @@ function ReportModal({ phase, journeyState, onClose }) {
               <input style={sticky.input} type="text" value={ecosystem} onChange={e => setEcosystem(e.target.value)} placeholder="e.g. Edinburgh Life Sciences" />
             </div>
             <button style={{ ...sticky.submitBtn, opacity: (name && email) ? 1 : 0.4 }} onClick={handleSubmit} disabled={sending || !name || !email}>
-              {sending ? 'Sending...' : 'Send my report →'}
+              {sending ? 'Generating...' : 'Get my report →'}
             </button>
           </React.Fragment>
         )}

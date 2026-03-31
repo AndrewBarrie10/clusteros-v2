@@ -3275,6 +3275,7 @@ function ReportModal({ phase, journeyState, onClose }) {
   const healthScore = stalls.length === 0 ? 100 : Math.round((1 - healthRatio) * 100);
 
   const [reportUrl, setReportUrl] = useState(null);
+  const reportUrlRef = useRef(null);
 
   const handleSubmit = async () => {
     if (!name || !email) return;
@@ -3359,13 +3360,12 @@ function ReportModal({ phase, journeyState, onClose }) {
       }
     } catch (e) { console.error('Railway report error:', e); }
 
-    // Build report URL — hosted if Railway returned an ID, localStorage fallback otherwise
-    if (reportId) {
-      setReportUrl(`/diagnostic-report.html?id=${encodeURIComponent(reportId)}`);
-    } else {
-      // Railway didn't return an ID — use localStorage path
-      setReportUrl('/diagnostic-report.html');
-    }
+    // Build report URL — always set before marking as sent
+    const finalReportUrl = reportId
+      ? `/diagnostic-report.html?id=${encodeURIComponent(reportId)}`
+      : '/diagnostic-report.html';
+    reportUrlRef.current = finalReportUrl;
+    setReportUrl(finalReportUrl);
 
     try {
       await fetch('https://clusteros-v3-production.up.railway.app/api/v1/contact-request', {
@@ -3391,9 +3391,9 @@ function ReportModal({ phase, journeyState, onClose }) {
             <p style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', color: 'var(--dj-chalk)' }}>
               Your report is ready.
             </p>
-            {reportUrl ? (
+            {(reportUrl || reportUrlRef.current) ? (
               <React.Fragment>
-                <a href={reportUrl} target="_blank" rel="noopener"
+                <a href={reportUrl || reportUrlRef.current} target="_blank" rel="noopener"
                   style={{ display: 'inline-block', marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'var(--dj-teal)', color: '#fff', padding: '12px 24px', borderRadius: '3px', textDecoration: 'none' }}>
                   View your report →
                 </a>

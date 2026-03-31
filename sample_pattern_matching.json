@@ -1,0 +1,136 @@
+{
+  "P1_TelAviv": {
+    "cluster": "Tel Aviv AI & Deep Tech",
+    "active_stalls": [
+      "Mediating instead of coupling"
+    ],
+    "similar_clusters": [
+      {
+        "id": "scotland-life-sciences",
+        "name": "Scotland Life Sciences",
+        "score": 2.5,
+        "shared_stalls": [
+          "Mediating instead of coupling"
+        ],
+        "regime_match": true,
+        "anchor_match": true
+      },
+      {
+        "id": "cheltenham-cyber-security",
+        "name": "Cheltenham Cyber Security",
+        "score": 2.5,
+        "shared_stalls": [
+          "Mediating instead of coupling"
+        ],
+        "regime_match": true,
+        "anchor_match": true
+      },
+      {
+        "id": "dubai-logistics-tech",
+        "name": "Dubai Logistics Tech",
+        "score": 2,
+        "shared_stalls": [
+          "Mediating instead of coupling"
+        ],
+        "regime_match": true,
+        "anchor_match": false
+      }
+    ]
+  },
+  "P3_BangaloreFinTech": {
+    "cluster": "Bangalore FinTech",
+    "active_stalls": [
+      "Coordinating instead of deciding",
+      "Stabilizing around incumbents",
+      "Scaling activity instead of throughput",
+      "Waiting for permission"
+    ],
+    "similar_clusters": [
+      {
+        "id": "lima-fintech",
+        "name": "Lima FinTech",
+        "score": 5.5,
+        "shared_stalls": [
+          "Coordinating instead of deciding",
+          "Scaling activity instead of throughput",
+          "Stabilizing around incumbents",
+          "Waiting for permission"
+        ],
+        "regime_match": true,
+        "anchor_match": true
+      },
+      {
+        "id": "mexico-city-fintech",
+        "name": "Mexico City FinTech",
+        "score": 5.5,
+        "shared_stalls": [
+          "Coordinating instead of deciding",
+          "Scaling activity instead of throughput",
+          "Stabilizing around incumbents",
+          "Waiting for permission"
+        ],
+        "regime_match": true,
+        "anchor_match": true
+      },
+      {
+        "id": "cairo-fintech-digital-tech",
+        "name": "Cairo FinTech & Digital Tech",
+        "score": 5,
+        "shared_stalls": [
+          "Coordinating instead of deciding",
+          "Scaling activity instead of throughput",
+          "Stabilizing around incumbents",
+          "Waiting for permission"
+        ],
+        "regime_match": true,
+        "anchor_match": false
+      }
+    ]
+  },
+  "P2_Detroit": {
+    "cluster": "Detroit & Michigan Mobility & Auto Tech",
+    "active_stalls": [
+      "Mediating instead of coupling",
+      "Stabilizing around incumbents",
+      "Waiting for permission"
+    ],
+    "similar_clusters": [
+      {
+        "id": "taipei-ai-software",
+        "name": "Taipei AI & Software",
+        "score": 3.5,
+        "shared_stalls": [
+          "Mediating instead of coupling",
+          "Stabilizing around incumbents",
+          "Waiting for permission"
+        ],
+        "regime_match": false,
+        "anchor_match": true
+      },
+      {
+        "id": "almaty-fintech-tech",
+        "name": "Almaty FinTech & Tech",
+        "score": 3.5,
+        "shared_stalls": [
+          "Mediating instead of coupling",
+          "Stabilizing around incumbents",
+          "Waiting for permission"
+        ],
+        "regime_match": false,
+        "anchor_match": true
+      },
+      {
+        "id": "karachi-fintech",
+        "name": "Karachi FinTech",
+        "score": 3.5,
+        "shared_stalls": [
+          "Mediating instead of coupling",
+          "Stabilizing around incumbents",
+          "Waiting for permission"
+        ],
+        "regime_match": false,
+        "anchor_match": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,329 @@
+{
+  "P1": {
+    "id": "tel-aviv-ai-deep-tech",
+    "name": "Tel Aviv AI & Deep Tech",
+    "city": "Tel Aviv",
+    "country": "IL",
+    "lat": 32.0853,
+    "lng": 34.7818,
+    "regime": "mature",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.3,
+        "confidence": "low"
+      }
+    ],
+    "stacks": [
+      {
+        "canonical_id": "STK-30",
+        "stack_name": "Network-Activity Stabilisation",
+        "stalls_involved": [
+          "S2",
+          "S5",
+          "S8"
+        ],
+        "description": "Coordinating behaviors (S2: extensive network infrastructure without exclusionary decisions) co-occur with intermediation (S5: accelerators/platforms mediating connections) and activity scaling (S8: program proliferation). X-side of S2 (network building) plausibly sustained by X-side of S5 (intermediary structures absorbing complexity) and X-side of S8 (expanding program offerings). Each stall mai",
+        "absorbed_signals": "Uncertainty (multiple pathways maintained), Complexity (intermediaries absorb transaction costs), Pressure (activity expansion signals responsiveness)",
+        "confidence": "medium"
+      },
+      {
+        "canonical_id": "STK-08",
+        "stack_name": "Establishment-Optionality Stabilisation",
+        "stalls_involved": [
+          "S1",
+          "S2"
+        ],
+        "description": "Re-proving behaviors (S1: temporal concentrations of similar program establishment across 2012-2019 and 2024) co-occur with coordinating behaviors (S2: network infrastructure without decisions). X-side of S1 (repeated establishment of similar structures) plausibly sustained by X-side of S2 (network building without exclusion), as each new establishment maintains relationships without foreclosing o",
+        "absorbed_signals": "Uncertainty (risk distribution through multiple establishments), Pressure (visible institutional activity), Opportunity (maintaining access to multiple pathways)",
+        "confidence": "low"
+      },
+      {
+        "canonical_id": "STK-34",
+        "stack_name": "Narrative-Incumbent Stabilisation",
+        "stalls_involved": [
+          "S6",
+          "S7"
+        ],
+        "description": "Incumbent integration behaviors (S6: multinational R&D centers, corporate partnerships) co-occur with narrative construction (S7: governance bodies, national announcements). X-side of S6 (engaging established multinationals) plausibly sustained by X-side of S7 (establishing governance structures, announcing initiatives), as narrative frameworks may legitimate incumbent relationships. Both observab",
+        "absorbed_signals": "Uncertainty (governance structures coordinate expectations), Pressure (announcements signal commitment), Complexity (incumbent relationships provide established channels)",
+        "confidence": "low"
+      },
+      {
+        "canonical_id": "STK-02",
+        "stack_name": "Multi-Layer Intermediation Stabilisation",
+        "stalls_involved": [
+          "S2",
+          "S5"
+        ],
+        "description": "Coordinating behaviors (S2: extensive network infrastructure) co-occur with mediating behaviors (S5: intermediary structures). X-side of S2 (university support units, partnerships, investment networks) plausibly sustained by X-side of S5 (accelerators, platforms mediating connections), as intermediary layers may absorb complexity that would otherwise require exclusionary network decisions. Overlap",
+        "absorbed_signals": "Complexity (intermediaries reduce transaction costs), Uncertainty (mediation defers direct coupling decisions), Pressure (network activity demonstrates engagement)",
+        "confidence": "medium"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If outcomes from direct university-corporate partnerships () were made observable to intermediary organizations (, , ), it might reduce the system's ability to absorb complexity through intermediation without exposing comparative performance.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Tel Aviv AI & Deep Tech exhibits 6 observable stalls with Mediating instead of coupling and Re-proving instead of narrowing as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-17191903",
+    "_evidence_count": 87,
+    "_evidence_tier": "P1",
+    "_pipeline_version": "v2.1",
+    "_lifecycle_stage": "mature",
+    "_anchor_type": "university"
+  },
+  "P3": {
+    "id": "bangalore-fintech",
+    "name": "Bangalore FinTech",
+    "city": "Bangalore",
+    "country": "IN",
+    "lat": 12.9516,
+    "lng": 77.6146,
+    "regime": "growing",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Extracting without reinvesting",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.5,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "canonical_id": "STK-42",
+        "stack_name": "Incumbent-Mediated Expansion",
+        "stalls_involved": [
+          "S6",
+          "S5",
+          "S2"
+        ],
+        "description": "X-side of STALL_06 (stabilizing around incumbents through co-location, partnerships, founder backgrounds) plausibly sustains X-side of STALL_05 (mediating through banking partners and accelerators) by establishing incumbent relationships as primary network topology; X-side of STALL_05 plausibly sustains X-side of STALL_02 (coordinating through collaboration with banks/regulators) by creating inter",
+        "absorbed_signals": "Uncertainty (regulatory compliance pathways), Pressure (legitimacy requirements in regulated environment), Complexity (multi-stakeholder coordination in financial services)",
+        "confidence": "medium"
+      },
+      {
+        "canonical_id": "STK-04",
+        "stack_name": "Activity-Narrative Stabilization",
+        "stalls_involved": [
+          "S8",
+          "S7"
+        ],
+        "description": "X-side of STALL_08 (scaling support activities through accelerators, incubators, research centers, policies) plausibly sustains X-side of STALL_07 (narrating collaborative/open-source identity) by generating visible ecosystem activity that supports narrative claims; X-side of STALL_07 plausibly sustains X-side of STALL_08 by providing cultural justification for continued program proliferation with",
+        "absorbed_signals": "Pressure (ecosystem development expectations), Opportunity (signaling to talent/partners/regulators), Uncertainty (outcome measurement in early-stage support)",
+        "confidence": "low"
+      },
+      {
+        "canonical_id": "STK-47",
+        "stack_name": "Exploration-Accumulation Coupling",
+        "stalls_involved": [
+          "S1",
+          "S4"
+        ],
+        "description": "X-side of STALL_01 (re-proving through platform expansion and acquisitions) plausibly sustains X-side of STALL_04 (extracting value through fundraising and profitability) by maintaining growth narrative that attracts capital; X-side of STALL_04 plausibly sustains X-side of STALL_01 by providing resources for continued exploratory expansion without requiring strategic narrowing",
+        "absorbed_signals": "Opportunity (adjacent market capture), Pressure (growth expectations in venture-backed model), Complexity (diversified fintech service landscape)",
+        "confidence": "low"
+      },
+      {
+        "canonical_id": "STK-13",
+        "stack_name": "Permission-Incumbent Alignment",
+        "stalls_involved": [
+          "S9",
+          "S6"
+        ],
+        "description": "X-side of STALL_09 (waiting for permission through policy engagement, funding allocation, regulatory compliance) plausibly sustains X-side of STALL_06 (stabilizing around incumbents through institutional partnerships) by creating regulatory pathways that favor incumbent integration; X-side of STALL_06 plausibly sustains X-side of STALL_09 by establishing incumbent relationships as primary legitima",
+        "absorbed_signals": "Uncertainty (regulatory evolution), Pressure (compliance requirements), Disruption (policy changes requiring adaptation)",
+        "confidence": "medium"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If fintech companies established direct technical infrastructure connections (e.g., API interoperability, shared settlement rails) that did not route through banking partners, it might reduce the system's ability to absorb regulatory uncertainty through incumbent mediation without requiring new compliance pathways",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Bangalore FinTech exhibits 8 observable stalls with Coordinating instead of deciding and Stabilizing around incumbents as primary behavioural patterns. 4 stabilisation stacks identified.",
+    "_run_id": "2026Q1-17183912",
+    "_evidence_count": 90,
+    "_evidence_tier": "P3",
+    "_pipeline_version": "v2.1",
+    "_lifecycle_stage": "growing",
+    "_anchor_type": "corporate"
+  },
+  "P2": {
+    "id": "detroit-michigan-mobility-auto-tech",
+    "name": "Detroit & Michigan Mobility & Auto Tech",
+    "city": "Detroit",
+    "country": "US",
+    "lat": 42.3314,
+    "lng": -83.0458,
+    "regime": "transitioning",
+    "stalls": [
+      {
+        "name": "Re-proving instead of narrowing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Coordinating instead of deciding",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Mediating instead of coupling",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Stabilizing around incumbents",
+        "intensity": 0.5,
+        "confidence": "medium"
+      },
+      {
+        "name": "Narrating instead of testing",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Scaling activity instead of throughput",
+        "intensity": 0.3,
+        "confidence": "low"
+      },
+      {
+        "name": "Waiting for permission",
+        "intensity": 0.5,
+        "confidence": "medium"
+      }
+    ],
+    "stacks": [
+      {
+        "canonical_id": "STK-33",
+        "stack_name": "Capital-Intermediary Stabilisation",
+        "stalls_involved": [
+          "S1",
+          "S2",
+          "S5"
+        ],
+        "description": "Repeated capital deployment through partnerships and joint ventures (STALL_1, STALL_2) occurs alongside persistent intermediary layer (STALL_5). Partnership formation activity may sustain intermediary organizations by generating coordination demand; intermediary presence may enable continued partnership formation by reducing transaction costs. Both patterns absorb uncertainty about technology traj",
+        "absorbed_signals": "Uncertainty (technology evolution), Complexity (multi-domain integration), Pressure (capital deployment expectations)",
+        "confidence": "low"
+      },
+      {
+        "canonical_id": "STK-09",
+        "stack_name": "Incumbent-Intermediary Configuration",
+        "stalls_involved": [
+          "S5",
+          "S6"
+        ],
+        "description": "Dense intermediary layer (STALL_5) co-occurs with incumbent geographic and organizational continuity (STALL_6). Intermediary organizations may reduce pressure on incumbents to directly couple with new entrants by providing buffered engagement channels. Incumbent stability may sustain intermediary organizations by providing anchor clients and legitimacy. Configuration absorbs disruption signals whi",
+        "absorbed_signals": "Disruption (new technology domains), Uncertainty (market structure evolution), Complexity (ecosystem fragmentation)",
+        "confidence": "medium"
+      },
+      {
+        "canonical_id": "STK-44",
+        "stack_name": "Announcement-Coordination Coupling",
+        "stalls_involved": [
+          "S1",
+          "S2",
+          "S7"
+        ],
+        "description": "Investment announcements (STALL_7) co-occur with partnership formation (STALL_2) and capital deployment activity (STALL_1). Announcement activity may generate coordination demand that sustains partnership formation; partnership formation may enable continued announcement activity by providing declarative content. Combined pattern absorbs pressure to demonstrate strategic action without requiring o",
+        "absorbed_signals": "Pressure (stakeholder expectations), Uncertainty (technology viability), Opportunity (signaling value)",
+        "confidence": "low"
+      },
+      {
+        "canonical_id": "STK-26",
+        "stack_name": "Infrastructure-Activity Expansion",
+        "stalls_involved": [
+          "S5",
+          "S8"
+        ],
+        "description": "Intermediary organizations (STALL_5) co-occur with programmatic infrastructure expansion (STALL_8). Incubator and association proliferation may sustain intermediary layer by generating service delivery activity; intermediary presence may enable continued infrastructure expansion by demonstrating ecosystem support demand. Combined pattern absorbs complexity and opportunity signals through activity ",
+        "absorbed_signals": "Complexity (diverse actor types), Opportunity (entrepreneurial activity), Pressure (ecosystem development expectations)",
+        "confidence": "low"
+      },
+      {
+        "canonical_id": "STK-07",
+        "stack_name": "Permission-Coordination Sequence",
+        "stalls_involved": [
+          "S2",
+          "S9"
+        ],
+        "description": "Partnership formation and coordination activity (STALL_2) co-occur with regulatory legitimacy-seeking (STALL_9). Waiting for regulatory clarity may sustain coordination activity by deferring unilateral action; coordination through partnerships may reduce pressure to act before regulatory enablement. Combined pattern absorbs uncertainty and risk while distributing decision authority.",
+        "absorbed_signals": "Uncertainty (regulatory landscape), Pressure (deployment expectations), Complexity (legal risk)",
+        "confidence": "medium"
+      }
+    ],
+    "leverage": {
+      "hypothesis": "If joint venture and partnership agreements were required to disclose decision authority, resource commitment timelines, and exit conditions, it might reduce the system's ability to absorb technology uncertainty through partnership formation without exposing governance trade-offs.",
+      "target_stack": "STK-01",
+      "timeline": "6-12 months"
+    },
+    "summary": "Detroit & Michigan Mobility & Auto Tech exhibits 7 observable stalls with Mediating instead of coupling and Stabilizing around incumbents as primary behavioural patterns. 5 stabilisation stacks identified.",
+    "_run_id": "2026Q1-17130424",
+    "_evidence_count": 95,
+    "_evidence_tier": "P2",
+    "_pipeline_version": "v2.1",
+    "_lifecycle_stage": "transitioning",
+    "_anchor_type": "corporate"
+  }
+}

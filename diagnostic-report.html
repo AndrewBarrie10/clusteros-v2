@@ -1514,8 +1514,9 @@ async function init() {
     document.getElementById('report-prepared-for').textContent = `Prepared for ${d.name}`;
   }
 
-  // ── Resume links — use report ID if hosted, or 'local' to signal reading from storage ──
-  const resumeParam = reportId ? `?resume=${encodeURIComponent(reportId)}` : '?resume=local';
+  // ── Resume links — encode stage + stalls in URL (no storage dependency) ──
+  const resumeStallStr = stallIds.join(',');
+  const resumeParam = `?resume=${d.stage || 'behaviours'}&stalls=${encodeURIComponent(resumeStallStr)}`;
 
   // ── Stage badge ──
   document.getElementById('stage-badge').innerHTML = `

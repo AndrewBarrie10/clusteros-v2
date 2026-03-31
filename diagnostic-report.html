@@ -1449,7 +1449,9 @@ async function init() {
   if (!d) {
     try { d = JSON.parse(sessionStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
     if (!d) { try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {} }
-    if (!d) d = window.CLUSTEROS_REPORT || getDemoData();
+    if (!d) d = window.CLUSTEROS_REPORT || null;
+    if (!d && window.opener) { try { d = window.opener.CLUSTEROS_REPORT || null; } catch(e) {} }
+    if (!d) d = getDemoData();
   }
 
   // ── Wait for cluster data ──

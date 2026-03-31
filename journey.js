@@ -706,11 +706,10 @@ const journey = {
   _openReport() {
     _track('report_opened', { stack: this.stackResult?.name || this.selectedStalls.join('+'), stall_count: this.selectedStalls.length });
     const report = this._buildReport();
-    try {
-      sessionStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report));
+    try { sessionStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report)); } catch(e) {}
     try { localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report)); } catch(e) {}
-    } catch(e) {}
-    window.open('/diagnostic-report.html', '_blank');
+    const w = window.open('/diagnostic-report.html', '_blank');
+    if (w) w.CLUSTEROS_REPORT = report;
   },
 
   // ══ FORK 2: INFRASTRUCTURE ════════════════════════════

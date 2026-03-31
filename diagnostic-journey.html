@@ -3045,7 +3045,7 @@ function buildStepAnnotation(step, journeyState, config) {
 
 /* ─── Stage 3: Digital OS (recommendation only, qualifiers moved) ── */
 function DigitalOSStage() {
-  const { journeyState, updateJourneyState } = useJourney();
+  const { journeyState, updateJourneyState, goBack } = useJourney();
 
   // Compute osConfig if qualifierAnswers exist but osConfig doesn't
   useEffect(() => {
@@ -3251,7 +3251,23 @@ function DigitalOSStage() {
         );
       })()}
 
-      {/* Navigation (steps 1-8) */}
+      {/* Navigation — step 0 has back-to-leverage, steps 1+ have internal nav */}
+      {schemaStep === 0 && goBack && (
+        <div className="schema-step-nav" style={schema.stepNav}>
+          <button style={styles.btnGhost} onClick={goBack}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginRight: '4px' }}>
+              <path d="M8.5 3L4.5 7L8.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            ← Back to leverage
+          </button>
+          <button style={styles.btnSignal} onClick={() => setSchemaStep(1)}>
+            {stepCfg.nav[1] || 'Start'}
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '4px' }}>
+              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
       {schemaStep > 0 && (
         <div className="schema-step-nav" style={schema.stepNav}>
           <button style={styles.btnGhost} onClick={() => setSchemaStep(s => Math.max(s - 1, 0))}>

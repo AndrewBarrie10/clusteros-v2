@@ -147,6 +147,53 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 .stall-ref-name{font-size:12px;color:var(--ink);font-weight:500}
 .stall-ref-def{font-size:11px;color:var(--ink-dim);line-height:1.6;font-weight:300}
 
+/* Stage badge */
+.doc-stage-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:2px;margin-bottom:16px}
+.doc-stage-badge.behaviours{color:var(--amber);border:1px solid rgba(217,119,6,0.3);background:rgba(217,119,6,0.06)}
+.doc-stage-badge.leverage{color:var(--teal);border:1px solid rgba(12,148,136,0.3);background:rgba(12,148,136,0.06)}
+.doc-stage-badge.digital_os{color:var(--green);border:1px solid rgba(42,122,79,0.3);background:rgba(42,122,79,0.06)}
+
+/* Locked/teaser sections */
+.doc-section-locked{position:relative;margin-bottom:36px;padding:28px 24px;border:1px dashed var(--border-2);border-radius:3px;background:linear-gradient(180deg,var(--surface) 0%,rgba(240,236,228,0.3) 100%)}
+.locked-badge{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.locked-badge::before{content:'';display:inline-block;width:12px;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%238c8780'%3E%3Cpath d='M11.5 6V4.5a3.5 3.5 0 10-7 0V6H3v8h10V6h-1.5zM6 4.5a2 2 0 114 0V6H6V4.5z'/%3E%3C/svg%3E") no-repeat center/contain}
+.locked-heading{font-family:var(--serif);font-size:18px;color:var(--ink);font-weight:400;line-height:1.25;margin-bottom:10px}
+.locked-heading em{font-style:italic;color:var(--green)}
+.locked-teaser{font-size:12px;color:var(--ink-dim);line-height:1.65;font-weight:300;margin-bottom:16px}
+.locked-preview{padding:12px 16px;background:rgba(255,255,255,0.6);border:1px solid var(--border);border-radius:3px;margin-bottom:16px}
+.locked-preview-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px}
+.locked-preview-items{display:flex;gap:6px;flex-wrap:wrap}
+.locked-preview-pill{font-family:var(--mono);font-size:9px;font-weight:700;padding:3px 8px;border-radius:2px;color:var(--ink-muted);background:var(--surface);border:1px solid var(--border)}
+.locked-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.06em;color:var(--green);text-decoration:none;padding:8px 16px;border:1px solid rgba(42,122,79,0.3);border-radius:3px;background:rgba(42,122,79,0.04)}
+.locked-cta:hover{background:rgba(42,122,79,0.08)}
+
+/* Continue banner */
+.continue-banner{background:var(--green-dim);padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:36px;border-radius:3px}
+.continue-banner-text{flex:1}
+.continue-banner-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px}
+.continue-banner-heading{font-family:var(--serif);font-size:18px;color:#fff;line-height:1.25}
+.continue-banner-heading em{font-style:italic;color:var(--signal)}
+.continue-banner-sub{font-size:11px;color:rgba(255,255,255,0.65);margin-top:6px;font-weight:300;line-height:1.5}
+.continue-banner-action{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:#fff;color:var(--green-dim);padding:12px 22px;border-radius:3px;text-decoration:none;white-space:nowrap;flex-shrink:0}
+
+/* Qualifier context card (Stage 2+) */
+.qualifier-context{margin-bottom:28px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:3px}
+.qualifier-context-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.qualifier-context-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.qualifier-context-item{display:flex;flex-direction:column;gap:2px}
+.qualifier-context-key{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted)}
+.qualifier-context-val{font-size:12px;color:var(--ink);font-weight:500}
+
+/* Digital OS layer cards (Stage 3) */
+.layer-card{margin-bottom:12px;border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.layer-card-head{background:var(--green-dim);padding:12px 16px;display:flex;align-items:center;gap:10px}
+.layer-card-num{font-family:var(--mono);font-size:9px;font-weight:700;color:rgba(255,255,255,0.5)}
+.layer-card-name{font-family:var(--serif);font-size:15px;color:#fff;font-weight:400}
+.layer-card-body{padding:14px 16px;background:var(--surface);font-size:12px;color:var(--ink-dim);line-height:1.65;font-weight:300;white-space:pre-line}
+
+/* Hidden by stage */
+.stage-hidden{display:none}
+
 /* Footer */
 .doc-footer{margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
 .doc-footer-main{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
@@ -185,7 +232,35 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
   .leverage-block,
   .full-diag-box,
   .next-step,
-  .stall-ref-item{break-inside:avoid;page-break-inside:avoid}
+  .stall-ref-item,
+  .doc-section-locked,
+  .continue-banner,
+  .qualifier-context,
+  .layer-card{break-inside:avoid;page-break-inside:avoid}
+
+  /* ── Locked sections ── */
+  .doc-section-locked{background:var(--surface)!important;border-color:var(--border-2)!important}
+  .locked-preview{background:rgba(255,255,255,0.6)!important}
+  .locked-cta{background:rgba(42,122,79,0.04)!important;border-color:rgba(42,122,79,0.3)!important}
+
+  /* ── Continue banner ── */
+  .continue-banner{background:var(--green-dim)!important;color:#fff!important}
+  .continue-banner-heading{color:#fff!important}
+  .continue-banner-heading em{color:var(--signal)!important}
+  .continue-banner-action{background:#fff!important;color:var(--green-dim)!important}
+
+  /* ── Qualifier context ── */
+  .qualifier-context{background:var(--surface)!important}
+
+  /* ── Layer cards ── */
+  .layer-card-head{background:var(--green-dim)!important}
+  .layer-card-name{color:#fff!important}
+  .layer-card-body{background:var(--surface)!important}
+
+  /* ── Stage badge ── */
+  .doc-stage-badge.behaviours{background:rgba(217,119,6,0.06)!important;border-color:rgba(217,119,6,0.3)!important}
+  .doc-stage-badge.leverage{background:rgba(12,148,136,0.06)!important;border-color:rgba(12,148,136,0.3)!important}
+  .doc-stage-badge.digital_os{background:rgba(42,122,79,0.06)!important;border-color:rgba(42,122,79,0.3)!important}
 
   /* ── Prevent orphan headings — keep heading with first content ── */
   .doc-section-heading{orphans:3;widows:3}
@@ -324,48 +399,57 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
       <div class="doc-ecosystem-tags" id="ecosystem-tags"></div>
     </div>
 
+    <!-- Stage badge -->
+    <div id="stage-badge"></div>
+
+    <!-- Qualifier context (Stage 2+) -->
+    <div id="qualifier-context" class="stage-hidden"></div>
+
     <div class="doc-caveat">
       <div class="doc-caveat-icon">NOTE</div>
-      <div class="doc-caveat-text">
-        <strong>This is a self-diagnostic report.</strong> It is based on your own assessment of your ecosystem's behaviours — not a full evidence-based ClusterOS diagnostic. Its purpose is to orient: to name the pattern you're seeing and show where it sits in 200+ completed diagnostics. A full diagnostic analyses 50–170 evidence items per cluster, verifies findings against structured evidence, and produces confidence-tiered results. The differences are described in Section 7.
+      <div class="doc-caveat-text" id="caveat-text">
+        <strong>This is a self-diagnostic report.</strong> It is based on your own assessment of your ecosystem's behaviours — not a full evidence-based ClusterOS diagnostic. Its purpose is to orient: to name the pattern you're seeing and show where it sits in 200+ completed diagnostics. A full diagnostic analyses 50–170 evidence items per cluster, verifies findings against structured evidence, and produces confidence-tiered results.
       </div>
     </div>
 
-    <!-- 1. Stalls -->
+    <!-- 1. Stalls (all stages) -->
     <div class="doc-section">
       <div class="doc-section-label"><span class="doc-section-num">1</span>Stalls identified</div>
       <div class="doc-section-heading">What your ecosystem is <em>substituting</em></div>
-      <p class="doc-body">Based on your behaviour selections, the following structural stalls were identified. Each is a behavioural substitution — the ecosystem doing something visible and rewarding instead of something that would produce compounding value. Stall definitions and leverage directions are drawn from the ClusterOS stall science framework, developed across 200+ ecosystem diagnostics. A full reference for all nine stalls appears in the Appendix.</p>
+      <p class="doc-body" id="stall-body">Based on your behaviour selections, the following structural stalls were identified. Each is a behavioural substitution — the ecosystem doing something visible and rewarding instead of something that would produce compounding value. Stall definitions and leverage directions are drawn from the ClusterOS stall science framework, developed across 200+ ecosystem diagnostics.</p>
       <div class="stall-list" id="stall-list"></div>
       <div class="freq-note">Frequency reflects appearance across 200+ completed ClusterOS diagnostics.</div>
     </div>
 
-    <!-- 2. Stack -->
+    <!-- 2. Stack (all stages) -->
     <div class="doc-section">
       <div class="doc-section-label"><span class="doc-section-num">2</span>Your stack</div>
       <div class="doc-section-heading">Why single interventions <em>keep failing</em></div>
-      <p class="doc-body">When stalls appear together they form a reinforcing configuration — each providing cover for the others. Addressing one without the rest produces temporary change that the system absorbs. The stack is the unit of intervention, not the individual stall. Your ecosystem has one stack. That is where the leverage analysis begins.</p>
+      <p class="doc-body" id="stack-body">When stalls appear together they form a reinforcing configuration — each providing cover for the others. Addressing one without the rest produces temporary change that the system absorbs. The stack is the unit of intervention, not the individual stall.</p>
       <div class="stack-card" id="stack-card"></div>
     </div>
 
-    <!-- 3. Comparators -->
-    <div class="doc-section">
+    <!-- Stage 1 locked teasers (replaced by real sections at Stage 2+) -->
+    <div id="locked-sections"></div>
+
+    <!-- 3. Comparators (Stage 2+) -->
+    <div class="doc-section stage-hidden" id="section-comparators">
       <div class="doc-section-label"><span class="doc-section-num">3</span>Structural comparators</div>
       <div class="doc-section-heading">Ecosystems with <em>the same configuration</em></div>
-      <p class="doc-body">These ecosystems from the ClusterOS diagnostic database show a structurally similar configuration. The resemblance is not in sector, geography, or maturity — it is in how the system stabilises. Each has been through the full diagnostic. Where the configuration has shifted, the trigger is noted. Full diagnostic profiles are available online.</p>
+      <p class="doc-body" id="comparator-body">These ecosystems from the ClusterOS diagnostic database show a structurally similar configuration. The resemblance is not in sector, geography, or maturity — it is in how the system stabilises. Each has been through the full diagnostic. Where the configuration has shifted, the trigger is noted.</p>
       <div class="comparator-list" id="comparator-list"></div>
     </div>
 
-    <!-- 4. Why this persists -->
-    <div class="doc-section">
+    <!-- 4. Why this persists (Stage 2+) -->
+    <div class="doc-section stage-hidden" id="section-cas">
       <div class="doc-section-label"><span class="doc-section-num">4</span>Why this persists</div>
       <div class="doc-section-heading">The <em>structural logic</em> behind the pattern</div>
       <p class="doc-body">Understanding why the pattern regenerates is more important than naming it. Every ecosystem that has tried to address this configuration through new programmes, governance reform, or leadership change has found the pattern reasserts itself. That is not a failure of will. It is a property of complex adaptive systems without the right substrate.</p>
       <div class="cas-block" id="cas-block"></div>
     </div>
 
-    <!-- 5. What changes with infrastructure -->
-    <div class="doc-section">
+    <!-- 5. What changes with infrastructure (Stage 2+) -->
+    <div class="doc-section stage-hidden" id="section-infra">
       <div class="doc-section-label"><span class="doc-section-num">5</span>What changes with infrastructure</div>
       <div class="doc-section-heading">What ClusterOS would <em>specifically do</em> for this configuration</div>
       <p class="doc-body">ClusterOS is not a programme. It is the substrate that changes what the rational choice is for each actor — not by directing behaviour but by making compounding connections cheaper to form than the current substitution. For your specific configuration, these are the structural changes that would occur.</p>
@@ -373,15 +457,26 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
       <p class="infra-note" id="infra-note"></p>
     </div>
 
-    <!-- 6. Leverage hypothesis -->
-    <div class="doc-section">
+    <!-- 6. Leverage hypothesis (Stage 2+) -->
+    <div class="doc-section stage-hidden" id="section-leverage">
       <div class="doc-section-label"><span class="doc-section-num">6</span>Leverage hypothesis</div>
       <div class="doc-section-heading">The entry point <em>most likely to shift the configuration</em></div>
-      <p class="doc-body">A leverage hypothesis is not a strategy. It is a small, testable intervention aimed at the structural element whose removal makes the stack untenable. The goal is not to fix everything — it is to find the one thing that makes everything else moveable.</p>
+      <p class="doc-body" id="leverage-body">A leverage hypothesis is not a strategy. It is a small, testable intervention aimed at the structural element whose removal makes the stack untenable. The goal is not to fix everything — it is to find the one thing that makes everything else moveable.</p>
       <div class="leverage-block" id="leverage-block"></div>
     </div>
 
-    <!-- 7. What a full diagnostic adds -->
+    <!-- Stage 2 locked teaser for Digital OS (replaced at Stage 3) -->
+    <div id="locked-digital-os"></div>
+
+    <!-- 8. Digital OS architecture (Stage 3 only) -->
+    <div class="doc-section stage-hidden" id="section-digital-os">
+      <div class="doc-section-label"><span class="doc-section-num">8</span>Your Digital OS architecture</div>
+      <div class="doc-section-heading">The infrastructure <em>configured for your ecosystem</em></div>
+      <p class="doc-body">Based on your qualifier answers and architecture selections, ClusterOS has generated a specific infrastructure configuration for your ecosystem. Each layer addresses a structural function — from sovereign data ownership to AI-powered intelligence. This is not a product roadmap. It is the substrate your ecosystem needs to make compounding behaviour the rational choice.</p>
+      <div id="layer-cards"></div>
+    </div>
+
+    <!-- 7. What a full diagnostic adds (all stages) -->
     <div class="doc-section">
       <div class="doc-section-label"><span class="doc-section-num">7</span>What a full diagnostic would add</div>
       <div class="doc-section-heading">The difference between <em>self-assessment and evidence</em></div>
@@ -392,14 +487,8 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
       </div>
     </div>
 
-    <!-- Next step -->
-    <div class="next-step">
-      <div>
-        <div class="next-step-label">The next step</div>
-        <div class="next-step-heading">Your ecosystem is in here.<br><em>Let's find it properly.</em></div>
-      </div>
-      <a href="/request.html" class="next-step-action">Request a full diagnostic</a>
-    </div>
+    <!-- Continue banner / Next step (stage-aware) -->
+    <div id="next-step-area"></div>
 
     <!-- ── APPENDIX ─────────────────────────────────────────── -->
     <div class="appendix">
@@ -599,11 +688,44 @@ const ALL_STALLS = [
 ];
 
 // ── INIT ────────────────────────────────────────────────────
+// ── QUALIFIER LABELS ──────────────────────────────────────
+const QUALIFIER_LABELS = {
+  clusterType: { regional:'Regional Speciality', national:'National Supercluster', corporate:'Corporate', city:'City Cluster' },
+  anchorType:  { university:'University', research:'Research Institute', corporate:'Large Corporate', public:'Public Agency', hospital:'Hospital', none:'No anchor yet' },
+  stage:       { early:'Early-stage', established:'Established', mature:'Mature' },
+  priority:    { talent:'Retain & grow talent', capital:'Attract capital', research:'Research commercialisation', supply:'Build supply chains', growth:'Economic growth' },
+  gap:         { discovery:"Actors can't find each other", flow:"Knowledge doesn't flow", access:"Outside actors can't engage", conversion:"Activity isn't converting" },
+};
+
+const STAGE_LABELS = {
+  behaviours: 'Behaviours report',
+  leverage:   'Behaviours + Leverage report',
+  digital_os: 'Full diagnostic report',
+};
+
+const LAYER_NAMES = [
+  ['sovereignDatabase',      'Sovereign Ecosystem Database'],
+  ['governanceAccess',       'Governance & Access'],
+  ['integrationLayer',       'Integration Layer'],
+  ['automationLayer',        'Automation Layer'],
+  ['intelligenceSubstrate',  'Intelligence Substrate'],
+  ['aiRuntime',              'AI Runtime'],
+  ['applicationLayer',       'Application Layer'],
+];
+
+// ── INIT ────────────────────────────────────────────────────
 function init() {
   let d = null;
   try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
   if (!d) d = window.CLUSTEROS_REPORT || getDemoData();
 
+  // ── Stage detection ──
+  const stage = d.stage || 'behaviours'; // 'behaviours' | 'leverage' | 'digital_os'
+  const isLeverage = stage === 'leverage' || stage === 'digital_os';
+  const isDigitalOS = stage === 'digital_os';
+  const qa = d.qualifier_answers || {};
+
+  // ── Header / meta ──
   const now = new Date();
   const yr = now.getFullYear();
   document.getElementById('report-date').textContent = now.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
@@ -619,7 +741,41 @@ function init() {
     .filter(t => t && t.trim())
     .map(t => `<span class="doc-tag">${t}</span>`).join('');
 
-  // 1. Stalls
+  // ── Stage badge ──
+  document.getElementById('stage-badge').innerHTML = `
+    <div class="doc-stage-badge ${stage}">${STAGE_LABELS[stage] || 'Self-diagnostic report'}</div>`;
+
+  // ── Qualifier context (Stage 2+) ──
+  if (isLeverage && Object.keys(qa).length > 0) {
+    const qCtx = document.getElementById('qualifier-context');
+    qCtx.classList.remove('stage-hidden');
+    const items = [
+      qa.clusterType && { key:'Cluster type', val: (QUALIFIER_LABELS.clusterType[qa.clusterType] || qa.clusterType) },
+      qa.anchorType  && { key:'Primary anchor', val: (QUALIFIER_LABELS.anchorType[qa.anchorType] || qa.anchorType) },
+      qa.stage       && { key:'Stage', val: (QUALIFIER_LABELS.stage[qa.stage] || qa.stage) },
+      qa.priority    && { key:'Priority', val: (QUALIFIER_LABELS.priority[qa.priority] || qa.priority) },
+      qa.gap         && { key:'Coordination gap', val: (QUALIFIER_LABELS.gap[qa.gap] || qa.gap) },
+    ].filter(Boolean);
+    qCtx.innerHTML = `
+      <div class="qualifier-context">
+        <div class="qualifier-context-label">Your ecosystem profile</div>
+        <div class="qualifier-context-grid">
+          ${items.map(i => `<div class="qualifier-context-item"><span class="qualifier-context-key">${i.key}</span><span class="qualifier-context-val">${i.val}</span></div>`).join('')}
+        </div>
+      </div>`;
+  }
+
+  // ── Caveat — varies by stage ──
+  const caveatEl = document.getElementById('caveat-text');
+  if (stage === 'behaviours') {
+    caveatEl.innerHTML = '<strong>This is a behaviours-only report.</strong> You identified your ecosystem\'s stalls and detected the reinforcing stack — but stopped before the leverage analysis. The comparator ecosystems, structural explanation, and intervention hypothesis are generated in the next stage. This report names the pattern. The leverage stage explains how to shift it.';
+  } else if (stage === 'leverage') {
+    caveatEl.innerHTML = '<strong>This is a behaviours + leverage report.</strong> It includes your stall identification, structural comparators, and a leverage hypothesis calibrated to your ecosystem\'s qualifier profile. The Digital OS stage — which configures the specific infrastructure architecture for your ecosystem — was not completed. That stage produces the layer-by-layer specification.';
+  } else {
+    caveatEl.innerHTML = '<strong>This is your full self-diagnostic report.</strong> It includes stall identification, leverage analysis calibrated to your ecosystem profile, and a Digital OS architecture configured to your specific needs. It is based on your own assessment — not a full evidence-based ClusterOS diagnostic. A full diagnostic analyses 50–170 evidence items per cluster, verifies findings against structured evidence, and produces confidence-tiered results.';
+  }
+
+  // ── 1. Stalls (all stages — but leverage direction only shown at Stage 2+) ──
   document.getElementById('stall-list').innerHTML = (d.stalls || []).map(s => `
     <div class="stall-item">
       <div class="stall-item-header">
@@ -628,10 +784,10 @@ function init() {
         <span class="stall-item-freq">Appears in <span>${s.freq || '—'}%</span> of diagnostics</span>
       </div>
       ${s.definition ? `<p class="stall-item-def">${s.definition}</p>` : ''}
-      ${s.leverage ? `<div><div class="stall-leverage-label">Leverage direction</div><p class="stall-item-leverage">${s.leverage}</p></div>` : ''}
+      ${isLeverage && s.leverage ? `<div><div class="stall-leverage-label">Leverage direction</div><p class="stall-item-leverage">${s.leverage}</p></div>` : ''}
     </div>`).join('');
 
-  // 2. Stack
+  // ── 2. Stack (all stages — but leverage only shown at Stage 2+) ──
   const stack = d.stack || {};
   document.getElementById('stack-card').innerHTML = `
     <div class="stack-card-head">
@@ -640,45 +796,14 @@ function init() {
     </div>
     <div class="stack-card-body">
       <p class="stack-card-desc">${stack.description || ''}</p>
-      ${stack.leverage ? `<div class="stack-leverage-dir"><div class="stack-leverage-label">Leverage direction</div><p class="stack-leverage-text">${stack.leverage}</p></div>` : ''}
+      ${isLeverage && stack.leverage ? `<div class="stack-leverage-dir"><div class="stack-leverage-label">Leverage direction</div><p class="stack-leverage-text">${stack.leverage}</p></div>` : ''}
     </div>`;
 
-  // 3. Comparators — compact cards with "what shifted" sales magnet
-  document.getElementById('comparator-list').innerHTML = (d.comparators || []).map(c => {
-    const shifted = WHAT_SHIFTED[c.id] || null;
-    const profileUrl = c.id ? `/clusters/${c.id}.html` : null;
-    return `
-    <div class="comparator-card">
-      <div class="comp-card-main">
-        <div>
-          <div class="comp-card-name">${c.region || c.name || ''}</div>
-          <div class="comp-card-loc">${c.loc || ''}</div>
-          <div class="comp-card-badges">
-            ${c.sector ? `<span class="comp-sector-badge">${c.sector}</span>` : ''}
-            ${c.pattern ? `<span class="comp-pattern-badge">${c.pattern}</span>` : ''}
-          </div>
-        </div>
-        ${profileUrl ? `<a class="comp-card-link" href="${profileUrl}" target="_blank">Full profile →</a>` : ''}
-      </div>
-      ${shifted ? `
-      <div class="comp-shifted">
-        <span class="comp-shifted-label">What shifted</span>
-        <span class="comp-shifted-text">${shifted} <em class="comp-shifted-cta">Detail available in the full diagnostic.</em></span>
-      </div>` : `
-      <div class="comp-shifted">
-        <span class="comp-shifted-label">What shifted</span>
-        <span class="comp-shifted-cta">Available in the full diagnostic for this cluster.</span>
-      </div>`}
-    </div>`;
-  }).join('');
-
-  // 4. CAS
-  // Find best matching STACK_CONTENT key — try all pairs from selected stalls
+  // ── Resolve stack content for sections 3-6 ──
   const _stalls = (stack.stalls || []);
   let stackKey = _stalls.slice().sort().join('+');
   let content = STACK_CONTENT[stackKey];
   if (!content && _stalls.length > 2) {
-    // Try every pair combination until one matches
     for (let i = 0; i < _stalls.length && !content; i++) {
       for (let j = i+1; j < _stalls.length && !content; j++) {
         const pairKey = [_stalls[i], _stalls[j]].sort().join('+');
@@ -687,26 +812,184 @@ function init() {
     }
   }
   content = content || STACK_CONTENT.default;
-  document.getElementById('cas-block').innerHTML = `
-    <div class="cas-block-label">Complex Adaptive Systems — why this pattern is structural</div>
-    <div class="cas-block-text">${content.cas}</div>`;
 
-  // 5. Infrastructure
-  document.getElementById('infra-list').innerHTML = content.infra.map(item => `
-    <div class="infra-item"><div class="infra-dot"></div><div class="infra-text">${item}</div></div>`).join('');
-  document.getElementById('infra-note').textContent = content.infraNote;
+  // ══════════════════════════════════════════════════════════
+  // STAGE 1 (behaviours only): Show locked teasers for sections 3-6
+  // ══════════════════════════════════════════════════════════
+  if (stage === 'behaviours') {
+    const comparatorNames = (d.comparators || []).slice(0, 4).map(c => c.region || c.name || '').filter(Boolean);
+    document.getElementById('locked-sections').innerHTML = `
+      <!-- Locked: Comparators -->
+      <div class="doc-section-locked">
+        <div class="locked-badge">Continue to unlock</div>
+        <div class="locked-heading">Ecosystems with <em>your exact configuration</em></div>
+        <p class="locked-teaser">Your ${stack.name || 'stack'} configuration matches ${comparatorNames.length || 'several'} ecosystems in the ClusterOS diagnostic database. Each has been through the full diagnostic — and in some cases, the configuration has already shifted. The leverage analysis stage reveals which comparators match, what triggered the shift, and what you can learn from their trajectory.</p>
+        ${comparatorNames.length > 0 ? `
+        <div class="locked-preview">
+          <div class="locked-preview-label">Matching ecosystems identified</div>
+          <div class="locked-preview-items">
+            ${comparatorNames.map(n => `<span class="locked-preview-pill">${n}</span>`).join('')}
+          </div>
+        </div>` : ''}
+        <a href="/diagnostic-journey.html" class="locked-cta">Continue to leverage analysis →</a>
+      </div>
 
-  // 6. Leverage
-  document.getElementById('leverage-block').innerHTML = `
-    <div class="leverage-hypothesis">"${stack.leverage || 'A leverage hypothesis will be generated in your full diagnostic.'}"</div>
-    <div class="leverage-note">This is an orientation hypothesis based on pattern matching against 221 diagnostics. A full diagnostic tests this against evidence specific to your ecosystem and assigns a confidence tier.</div>`;
+      <!-- Locked: Why this persists -->
+      <div class="doc-section-locked">
+        <div class="locked-badge">Continue to unlock</div>
+        <div class="locked-heading">Why this pattern <em>keeps regenerating</em></div>
+        <p class="locked-teaser">Every ecosystem with this configuration has tried new programmes, governance reform, or leadership change — and found the pattern reasserts itself. The leverage analysis explains exactly why, using Complex Adaptive Systems theory specific to your stack. This isn't theory. It's the structural reason your last three initiatives didn't stick.</p>
+        <a href="/diagnostic-journey.html" class="locked-cta">Continue to leverage analysis →</a>
+      </div>
 
-  // 7. Full diagnostic
+      <!-- Locked: Leverage hypothesis -->
+      <div class="doc-section-locked">
+        <div class="locked-badge">Continue to unlock</div>
+        <div class="locked-heading">Where to <em>actually intervene</em></div>
+        <p class="locked-teaser">A leverage hypothesis identifies the single structural element whose removal makes the whole stack untenable. It's not a strategy — it's the one thing that makes everything else moveable. The leverage stage generates this hypothesis for your specific configuration, calibrated by your ecosystem's anchor type, strategic priority, and coordination gap.</p>
+        <a href="/diagnostic-journey.html" class="locked-cta">Continue to leverage analysis →</a>
+      </div>
+    `;
+
+    // Continue banner for Stage 1
+    document.getElementById('next-step-area').innerHTML = `
+      <div class="continue-banner">
+        <div class="continue-banner-text">
+          <div class="continue-banner-label">You've named the pattern</div>
+          <div class="continue-banner-heading">Now find out <em>how to break it.</em></div>
+          <div class="continue-banner-sub">The leverage analysis takes 3 minutes. It adds comparator ecosystems, structural explanation, and an intervention hypothesis calibrated to your ecosystem.</div>
+        </div>
+        <a href="/diagnostic-journey.html" class="continue-banner-action">Continue your journey</a>
+      </div>`;
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // STAGE 2+ (leverage): Show full sections 3-6
+  // ══════════════════════════════════════════════════════════
+  if (isLeverage) {
+    // Unhide sections
+    ['section-comparators','section-cas','section-infra','section-leverage'].forEach(id => {
+      document.getElementById(id).classList.remove('stage-hidden');
+    });
+
+    // 3. Comparators
+    document.getElementById('comparator-list').innerHTML = (d.comparators || []).map(c => {
+      const shifted = WHAT_SHIFTED[c.id] || null;
+      const profileUrl = c.id ? `/clusters/${c.id}.html` : null;
+      return `
+      <div class="comparator-card">
+        <div class="comp-card-main">
+          <div>
+            <div class="comp-card-name">${c.region || c.name || ''}</div>
+            <div class="comp-card-loc">${c.loc || ''}</div>
+            <div class="comp-card-badges">
+              ${c.sector ? `<span class="comp-sector-badge">${c.sector}</span>` : ''}
+              ${c.pattern ? `<span class="comp-pattern-badge">${c.pattern}</span>` : ''}
+            </div>
+          </div>
+          ${profileUrl ? `<a class="comp-card-link" href="${profileUrl}" target="_blank">Full profile →</a>` : ''}
+        </div>
+        ${shifted ? `
+        <div class="comp-shifted">
+          <span class="comp-shifted-label">What shifted</span>
+          <span class="comp-shifted-text">${shifted} <em class="comp-shifted-cta">Detail available in the full diagnostic.</em></span>
+        </div>` : `
+        <div class="comp-shifted">
+          <span class="comp-shifted-label">What shifted</span>
+          <span class="comp-shifted-cta">Available in the full diagnostic for this cluster.</span>
+        </div>`}
+      </div>`;
+    }).join('');
+
+    // 4. CAS
+    document.getElementById('cas-block').innerHTML = `
+      <div class="cas-block-label">Complex Adaptive Systems — why this pattern is structural</div>
+      <div class="cas-block-text">${content.cas}</div>`;
+
+    // 5. Infrastructure
+    document.getElementById('infra-list').innerHTML = content.infra.map(item => `
+      <div class="infra-item"><div class="infra-dot"></div><div class="infra-text">${item}</div></div>`).join('');
+    document.getElementById('infra-note').textContent = content.infraNote;
+
+    // 6. Leverage
+    const leverageNote = isDigitalOS
+      ? 'This hypothesis is calibrated to your ecosystem profile and Digital OS architecture configuration. A full diagnostic tests this against evidence specific to your ecosystem and assigns a confidence tier.'
+      : 'This is an orientation hypothesis based on pattern matching against 221 diagnostics. A full diagnostic tests this against evidence specific to your ecosystem and assigns a confidence tier.';
+    document.getElementById('leverage-block').innerHTML = `
+      <div class="leverage-hypothesis">"${stack.leverage || 'A leverage hypothesis will be generated in your full diagnostic.'}"</div>
+      <div class="leverage-note">${leverageNote}</div>`;
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // STAGE 2 only: Show locked teaser for Digital OS
+  // ══════════════════════════════════════════════════════════
+  if (stage === 'leverage') {
+    document.getElementById('locked-digital-os').innerHTML = `
+      <div class="doc-section-locked">
+        <div class="locked-badge">Continue to unlock</div>
+        <div class="locked-heading">Your Digital OS <em>architecture</em></div>
+        <p class="locked-teaser">Your ecosystem profile — ${(QUALIFIER_LABELS.clusterType[qa.clusterType] || 'your cluster type')} with ${(QUALIFIER_LABELS.anchorType[qa.anchorType] || 'your anchor')} anchor, prioritising ${(QUALIFIER_LABELS.priority[qa.priority] || 'growth')} — maps to a specific 7-layer infrastructure architecture. The Digital OS stage configures each layer to your stall pattern: sovereign database structure, governance model, integration priorities, intelligence substrate, and AI runtime. It takes 5 minutes and produces the infrastructure specification.</p>
+        <div class="locked-preview">
+          <div class="locked-preview-label">7 architecture layers</div>
+          <div class="locked-preview-items">
+            ${LAYER_NAMES.map(([,name]) => `<span class="locked-preview-pill">${name}</span>`).join('')}
+          </div>
+        </div>
+        <a href="/diagnostic-journey.html" class="locked-cta">Continue to Digital OS →</a>
+      </div>`;
+
+    // Continue banner for Stage 2
+    document.getElementById('next-step-area').innerHTML = `
+      <div class="continue-banner">
+        <div class="continue-banner-text">
+          <div class="continue-banner-label">You've found the leverage point</div>
+          <div class="continue-banner-heading">Now see the <em>infrastructure that delivers it.</em></div>
+          <div class="continue-banner-sub">The Digital OS stage configures a 7-layer architecture specific to your ecosystem. It takes 5 minutes and completes your diagnostic.</div>
+        </div>
+        <a href="/diagnostic-journey.html" class="continue-banner-action">Continue your journey</a>
+      </div>`;
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // STAGE 3 (digital_os): Show architecture layers
+  // ══════════════════════════════════════════════════════════
+  if (isDigitalOS) {
+    const lc = d.layerCommentary || {};
+    const hasLayers = Object.values(lc).some(v => v && v.trim());
+    if (hasLayers) {
+      document.getElementById('section-digital-os').classList.remove('stage-hidden');
+      document.getElementById('layer-cards').innerHTML = LAYER_NAMES.map(([key, name], i) => {
+        const commentary = lc[key];
+        if (!commentary || !commentary.trim()) return '';
+        return `
+        <div class="layer-card">
+          <div class="layer-card-head">
+            <span class="layer-card-num">L${i+1}</span>
+            <span class="layer-card-name">${name}</span>
+          </div>
+          <div class="layer-card-body">${commentary}</div>
+        </div>`;
+      }).join('');
+    }
+
+    // Next step for Stage 3: full diagnostic CTA
+    document.getElementById('next-step-area').innerHTML = `
+      <div class="continue-banner">
+        <div class="continue-banner-text">
+          <div class="continue-banner-label">The next step</div>
+          <div class="continue-banner-heading">Your ecosystem is in here.<br><em>Let's find it properly.</em></div>
+          <div class="continue-banner-sub">This self-diagnostic named the pattern and configured the architecture. A full diagnostic verifies it against 50–170 structured evidence items and assigns confidence tiers.</div>
+        </div>
+        <a href="/request.html" class="continue-banner-action">Request a full diagnostic</a>
+      </div>`;
+  }
+
+  // ── 7. Full diagnostic adds (all stages) ──
   const diagContent = FULL_DIAG[stackKey] || FULL_DIAG.default;
   document.getElementById('full-diag-body').innerHTML = (d.fullDiagAdds || diagContent).map(item => `
     <div class="full-diag-item"><div class="full-diag-bullet"></div><div class="full-diag-text">${item}</div></div>`).join('');
 
-  // Appendix: all stalls
+  // ── Appendix: all stalls ──
   document.getElementById('stall-ref-grid').innerHTML = ALL_STALLS.map(s => `
     <div class="stall-ref-item">
       <div class="stall-ref-header">
@@ -719,6 +1002,7 @@ function init() {
 
 function getDemoData() {
   return {
+    stage: 'behaviours',
     ecosystem:'Your Ecosystem', sector:'', geography:'', role:'',
     stalls:[
       { id:'S2', name:'Coordinating instead of deciding', freq:97, definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', leverage:'Identify the actor with the most to lose from the current arrangement and change their constraint. The leverage is never more coordination — it is one actor making an exclusionary choice.' },

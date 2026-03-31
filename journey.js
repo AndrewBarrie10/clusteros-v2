@@ -611,6 +611,7 @@ const journey = {
     }));
 
     window.CLUSTEROS_REPORT = {
+      stage:     'behaviours',
       ecosystem: document.getElementById('jf-eco-name')?.value?.trim() || 'Your Ecosystem',
       sector:    '',
       geography: '',

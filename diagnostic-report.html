@@ -201,8 +201,16 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 .doc-footer-right{font-family:var(--mono);font-size:9px;color:var(--border-2);text-align:right}
 .doc-footer-legal{font-size:10px;color:var(--ink-muted);line-height:1.6;padding-top:12px;border-top:1px solid var(--border)}
 
+/* Preview toolbar */
+.preview-toolbar{position:sticky;top:0;z-index:100;background:#1a1a1a;padding:10px 20px;display:flex;align-items:center;gap:12px;font-family:var(--mono)}
+.preview-toolbar-label{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.preview-toolbar-btn{font-size:10px;font-weight:700;letter-spacing:0.06em;padding:6px 14px;border-radius:3px;text-decoration:none;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);transition:all 0.15s}
+.preview-toolbar-btn:hover{color:#fff;background:rgba(255,255,255,0.15)}
+.preview-toolbar-btn.active{color:#fff;background:var(--green);border-color:var(--green)}
+
 /* Print */
 @media print {
+  .preview-toolbar{display:none!important}
   /* ── Force background colors & images to print ── */
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
 
@@ -715,9 +723,29 @@ const LAYER_NAMES = [
 
 // ── INIT ────────────────────────────────────────────────────
 function init() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const demoStage = urlParams.get('demo'); // ?demo=behaviours | leverage | digital_os
+
   let d = null;
-  try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
-  if (!d) d = window.CLUSTEROS_REPORT || getDemoData();
+  if (demoStage) {
+    d = getDemoData(demoStage);
+  } else {
+    try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
+    if (!d) d = window.CLUSTEROS_REPORT || getDemoData();
+  }
+
+  // ── Preview toolbar (hidden in print) ──
+  if (demoStage || !localStorage.getItem('CLUSTEROS_REPORT')) {
+    const toolbar = document.createElement('div');
+    toolbar.className = 'preview-toolbar';
+    toolbar.innerHTML = `
+      <span class="preview-toolbar-label">Preview mode</span>
+      <a href="?demo=behaviours" class="preview-toolbar-btn ${demoStage === 'behaviours' || (!demoStage && !d.stage) ? 'active' : ''}">Stage 1: Behaviours</a>
+      <a href="?demo=leverage" class="preview-toolbar-btn ${demoStage === 'leverage' ? 'active' : ''}">Stage 2: Leverage</a>
+      <a href="?demo=digital_os" class="preview-toolbar-btn ${demoStage === 'digital_os' ? 'active' : ''}">Stage 3: Digital OS</a>
+    `;
+    document.body.insertBefore(toolbar, document.body.firstChild);
+  }
 
   // ── Stage detection ──
   const stage = d.stage || 'behaviours'; // 'behaviours' | 'leverage' | 'digital_os'
@@ -1000,10 +1028,13 @@ function init() {
     </div>`).join('');
 }
 
-function getDemoData() {
-  return {
-    stage: 'behaviours',
-    ecosystem:'Your Ecosystem', sector:'', geography:'', role:'',
+function getDemoData(stageOverride) {
+  const stage = stageOverride || 'behaviours';
+  const base = {
+    ecosystem: 'Edinburgh Life Sciences',
+    sector: 'Life Sciences',
+    geography: 'Edinburgh, Scotland',
+    role: 'Cluster Manager',
     stalls:[
       { id:'S2', name:'Coordinating instead of deciding', freq:97, definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', leverage:'Identify the actor with the most to lose from the current arrangement and change their constraint. The leverage is never more coordination — it is one actor making an exclusionary choice.' },
       { id:'S6', name:'Stabilising around incumbents', freq:76, definition:'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve the system.', leverage:'New entry pathways that bypass incumbent gatekeepers are the intervention. The leverage is creating routes that do not require incumbent permission — not changing incumbent behaviour.' }
@@ -1016,6 +1047,48 @@ function getDemoData() {
       { region:'Medellin Innovation Ecosystem', loc:'Medellin · Colombia', sector:'Innovation', id:'medellin-innovation-ecosystem', pattern:'Coordinating+Stabilising' }
     ],
     fullDiagAdds: FULL_DIAG['Coordinating+Stabilising']
+  };
+
+  if (stage === 'behaviours') {
+    return { ...base, stage: 'behaviours' };
+  }
+
+  if (stage === 'leverage') {
+    return {
+      ...base,
+      stage: 'leverage',
+      qualifier_answers: {
+        clusterType: 'regional',
+        anchorType: 'university',
+        stage: 'established',
+        priority: 'research',
+        gap: 'conversion',
+        protect: ['knowledge', 'ip', 'talent']
+      }
+    };
+  }
+
+  // digital_os
+  return {
+    ...base,
+    stage: 'digital_os',
+    qualifier_answers: {
+      clusterType: 'regional',
+      anchorType: 'university',
+      stage: 'established',
+      priority: 'research',
+      gap: 'conversion',
+      protect: ['knowledge', 'ip', 'talent']
+    },
+    layerCommentary: {
+      sovereignDatabase: 'Your Edinburgh Life Sciences ecosystem needs a sovereign database that belongs to the ecosystem, not to any organisation within it. Right now, research outputs leave through your University anchor\'s publication channels — structured knowledge that your ecosystem funded but doesn\'t own. The Sovereign Database captures every research output as structured evidence — tagged, searchable, matched against commercial demand signals. The translation layer your ecosystem currently lacks.\n\nPriority data clusters for your configuration:\n\u2022 Evidence & validation records — captures every research output, programme outcome, and diagnostic finding as structured data.\n\u2022 Coordination pathways — records which actors are connecting, through what mechanisms, and whether those connections produce transactions.\n\u2022 Anchor engagement pipeline — tracks your University anchor\'s engagement with ecosystem actors over time.',
+      governanceAccess: 'Your ecosystem produces alignment without accountability — committees meet, MoUs get signed, but no audit trail records what was agreed or whether it was delivered. Federated governance changes this: every actor, every action, fully auditable.\n\nAccess tiers for your configuration:\n\u2022 Institutional tier — your University and its direct partners. Full access within the cluster boundary.\n\u2022 Ecosystem tier — founders, SMEs, support organisations within your region. Access to demand signals and opportunity matching.\n\u2022 External tier — investors, diaspora, corporate scouts. Curated access to pipeline signals only.',
+      integrationLayer: 'Your integration layer connects the sovereign database to external systems — university research portals, Companies House, patent databases, and funder reporting systems. Data flows in structured, not as PDFs or slide decks. The integration layer means your ecosystem stops re-entering the same data into different portals and starts building cumulative evidence automatically.',
+      automationLayer: 'Bot networks handle the coordination overhead your ecosystem currently spends human time on. Matching bots surface relevant connections between researchers and companies. Signal bots flag when procurement RFIs match ecosystem capability. Compliance bots track IP protection obligations automatically. The automation layer doesn\'t replace stewards — it frees them from the mechanical coordination that currently consumes their strategic capacity.',
+      intelligenceSubstrate: 'The intelligence substrate is the MCP tool layer that transforms accumulated signals into actionable intelligence. For your Coordinating + Stabilising configuration, the primary intelligence tools are: connection density mapping (which actors are coupling vs isolating), procurement conversion tracking (which RFIs are reaching founders vs staying in incumbent channels), and stall signal detection (early warning when coordination or stabilisation behaviours re-emerge).',
+      aiRuntime: 'The AI runtime operates on the intelligence substrate to generate steward-facing insights. It does not make decisions — it surfaces the questions a steward should be asking. For your configuration: "Which new entrants have capability that incumbents haven\'t seen?" and "Which coordination structures have produced zero committed actions in the last quarter?" The runtime learns from every interaction, making each subsequent question sharper.',
+      applicationLayer: 'The application layer is what stewards, founders, and anchor institutions actually see and use. For Edinburgh Life Sciences, this includes: a steward dashboard showing live ecosystem health signals, a founder portal for direct procurement matching, an anchor engagement view showing University research-to-market conversion rates, and an investor pipeline view showing de-risked opportunities. Each view draws from the same substrate — different actors see what\'s relevant to their role.'
+    }
   };
 }
 

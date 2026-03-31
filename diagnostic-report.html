@@ -603,6 +603,7 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
       <div class="doc-section-label"><span class="doc-section-num">8</span>Your Digital OS architecture</div>
       <div class="doc-section-heading">The infrastructure <em>configured for your ecosystem</em></div>
       <p class="doc-body">Based on your qualifier answers and architecture selections, ClusterOS has generated a specific infrastructure configuration for your ecosystem. Each layer addresses a structural function — from sovereign data ownership to AI-powered intelligence. This is not a product roadmap. It is the substrate your ecosystem needs to make compounding behaviour the rational choice.</p>
+      <div id="arch-schema-svg" style="margin-bottom:28px"></div>
       <div id="layer-cards"></div>
     </div>
 
@@ -822,6 +823,165 @@ function generateLeverageContent(allStacks, userStackIds, comparators) {
   }
 
   return { leverageText, leverageEffect, convergenceNote };
+}
+
+/**
+ * Architecture Schema SVG — full platform diagram with dynamic stall pills.
+ * Reproduces the diagnostic journey's ArchitectureSchemaSVG in the report's palette.
+ */
+function generateArchSchemaSVG(stallIds) {
+  const pad = 20, w = 860;
+  // Colours matching the report's warm palette
+  const C = {
+    bg: '#f7f4ef', surface: '#f0ece4', border: '#ddd8cf', borderLight: '#e8e2d8',
+    green: '#2a7a4f', greenDim: '#1d5c3a', greenLight: 'rgba(42,122,79,0.08)',
+    teal: '#0c9488', tealLight: 'rgba(200,240,208,0.15)',
+    ink: '#1a1a1a', inkDim: '#5a5650', inkMuted: '#8c8780',
+    pill: '#f5d97a', pillText: '#1a1a1a',
+    white: '#ffffff',
+  };
+
+  const STALL_LAYER_MAP = {
+    S1:'layer-mcp', S2:'layer-journeys', S3:'layer-governance',
+    S4:'layer-governance', S5:'layer-journeys', S6:'layer-sovereign',
+    S7:'layer-sovereign', S8:'layer-sovereign', S9:'layer-journeys',
+  };
+
+  const STALL_SHORT = {
+    S1:'Re-proving',S2:'Coordinating',S3:'Forgiving',S4:'Extracting',
+    S5:'Mediating',S6:'Stabilising',S7:'Narrating',S8:'Scaling',S9:'Waiting'
+  };
+
+  const layers = [
+    { id:'layer-journeys', label:'APPLICATION LAYER', y:20, h:70,
+      comps:['Founder Journey','Anchor Journey','Researcher Journey','Steward Interrogation'] },
+    { id:'layer-ai', label:'AI RUNTIME', y:108, h:70,
+      comps:['Journey Construction','Signal Propagation','Role-Aware Reframing','Actor Matching','Stall Detection','Steward Interrogation'] },
+    { id:'layer-mcp', label:'INTELLIGENCE SUBSTRATE', y:196, h:90, cols:5, mono:true,
+      comps:['detect_stalls()','get_leverage_hypotheses()','get_matched_connections()','propagate_signal()','get_actor_profile()','get_journey_state()','ingest_evidence()','enrich_actor_profile()','get_steward_diagnostic()','get_open_funding()'] },
+    { id:'layer-sovereign', label:'SOVEREIGN DATABASE', y:304, h:195, split:true,
+      categories:[
+        {label:'STRUCTURE',items:['Supercluster','Clusters','Groups','Pathways','Events','Resources']},
+        {label:'ACTORS',items:['Actor profiles','Identity & permissions','Journey states','Progression records']},
+        {label:'INTELLIGENCE',items:['Evidence base','Stall records','Leverage hypotheses','Diagnostic outputs']},
+        {label:'ACTIVITY',items:['Group activity','Event records','Chat history','Collaboration outcomes']},
+        {label:'SIGNALS',items:['Behavioural signals','Health scores','Pipeline formation','Value flow records']},
+      ],
+      bots:['Evidence Ingestion Bot','Signal Monitoring Bot','Actor Enrichment Bot','Health Monitoring Bot'] },
+    { id:'layer-external', label:'INTEGRATION LAYER', y:517, h:55,
+      comps:['Govt Support Directory','Community Services API','Publication Databases','Professional Identity'] },
+    { id:'layer-governance', label:'GOVERNANCE & ACCESS', y:590, h:45,
+      comps:['Supercluster → Cluster → Group → Actor','Identity-first · Role-based access · Full audit trail'] },
+  ];
+
+  // Build stall tags per layer
+  const tagsByLayer = {};
+  (stallIds || []).forEach(sid => {
+    const layerId = STALL_LAYER_MAP[sid];
+    if (!layerId) return;
+    if (!tagsByLayer[layerId]) tagsByLayer[layerId] = [];
+    tagsByLayer[layerId].push({ id: sid, name: STALL_SHORT[sid] || sid });
+  });
+
+  let svg = `<svg viewBox="0 0 ${w} 655" style="width:100%;height:auto;display:block;border:1px solid ${C.border};border-radius:6px;overflow:hidden">`;
+  svg += `<rect x="0" y="0" width="${w}" height="655" fill="${C.bg}"/>`;
+
+  layers.forEach(layer => {
+    const isSov = layer.split;
+    // Layer background
+    svg += `<rect x="${pad}" y="${layer.y}" width="${w-pad*2}" height="${layer.h}" rx="5" fill="${isSov ? C.tealLight : C.surface}" stroke="${isSov ? 'rgba(42,122,79,0.2)' : C.border}" stroke-width="1"/>`;
+    // Layer label
+    svg += `<text x="${pad+12}" y="${layer.y+14}" fill="${C.green}" font-family="'Geist Mono',monospace" font-size="7.5" font-weight="600" letter-spacing="0.1em">${isSov ? '★ '+layer.label : layer.label}</text>`;
+
+    // Regular components
+    if (!isSov && layer.comps) {
+      const perRow = layer.cols || layer.comps.length;
+      const rows = Math.ceil(layer.comps.length / perRow);
+      const cw = (w - pad*2 - 24) / perRow;
+      const totalH = layer.h - 30;
+      const rowH = (totalH - (rows-1)*3) / rows;
+      layer.comps.forEach((comp, ci) => {
+        const col = ci % perRow;
+        const row = Math.floor(ci / perRow);
+        const cx = pad + 12 + col * cw;
+        const cy = layer.y + 22 + row * (rowH + 3);
+        svg += `<rect x="${cx}" y="${cy}" width="${cw-3}" height="${rowH}" rx="3" fill="${C.white}" stroke="${C.borderLight}" stroke-width="0.8"/>`;
+        svg += `<text x="${cx+(cw-3)/2}" y="${cy+rowH/2+1}" text-anchor="middle" dominant-baseline="middle" fill="${C.inkDim}" font-family="${layer.mono ? "'Geist Mono',monospace" : "'Geist',system-ui"}" font-size="${layer.mono ? '6' : '7.5'}">${comp}</text>`;
+      });
+    }
+
+    // Sovereign split layout
+    if (isSov) {
+      const sx = pad + 12;
+      const totalW = w - pad*2 - 24;
+      const splitW = totalW * 0.65;
+      const botX = sx + splitW + 10;
+      const botW = totalW * 0.35 - 10;
+      const startY = layer.y + 22;
+      const sovH = layer.h - 30;
+      const cats = layer.categories;
+      const catH = (sovH - (cats.length-1)*3) / cats.length;
+
+      // Sovereign section bg
+      svg += `<rect x="${sx}" y="${startY}" width="${splitW}" height="${sovH}" rx="4" fill="rgba(200,240,208,0.1)" stroke="rgba(42,122,79,0.15)" stroke-width="0.8"/>`;
+
+      cats.forEach((cat, ci) => {
+        const catY = startY + 3 + ci * (catH + 3);
+        const pillW = (splitW - 16) / Math.min(cat.items.length, 6);
+        svg += `<text x="${sx+8}" y="${catY+9}" fill="${C.teal}" font-family="'Geist Mono',monospace" font-size="5.5" font-weight="600" letter-spacing="0.08em">${cat.label}</text>`;
+        cat.items.forEach((item, ii) => {
+          const ix = sx + 8 + ii * pillW;
+          const iy = catY + 13;
+          const ih = Math.max(catH - 17, 12);
+          svg += `<rect x="${ix}" y="${iy}" width="${pillW-2}" height="${ih}" rx="2" fill="${C.white}" stroke="${C.borderLight}" stroke-width="0.5"/>`;
+          svg += `<text x="${ix+(pillW-2)/2}" y="${iy+ih/2+1}" text-anchor="middle" dominant-baseline="middle" fill="${C.inkMuted}" font-family="'Geist',system-ui" font-size="5.5">${item}</text>`;
+        });
+      });
+
+      // Bot network
+      svg += `<rect x="${botX}" y="${startY}" width="${botW}" height="${sovH}" rx="4" fill="${C.white}" stroke="${C.border}" stroke-width="0.8"/>`;
+      svg += `<text x="${botX+8}" y="${startY+12}" fill="${C.inkMuted}" font-family="'Geist Mono',monospace" font-size="5.5" font-weight="600" letter-spacing="0.08em">BOT NETWORK</text>`;
+      const botCW = (botW - 12) / 2;
+      layer.bots.forEach((bot, bi) => {
+        const col = bi % 2;
+        const row = Math.floor(bi / 2);
+        const bx = botX + 6 + col * (botCW + 2);
+        const by = startY + 20 + row * 28;
+        svg += `<rect x="${bx}" y="${by}" width="${botCW}" height="22" rx="2" fill="${C.surface}" stroke="${C.borderLight}" stroke-width="0.5"/>`;
+        svg += `<text x="${bx+botCW/2}" y="${by+12}" text-anchor="middle" dominant-baseline="middle" fill="${C.inkDim}" font-family="'Geist',system-ui" font-size="6">${bot}</text>`;
+      });
+    }
+
+    // Stall address pills
+    const tags = tagsByLayer[layer.id] || [];
+    tags.forEach((tag, ti) => {
+      const tagX = w - pad - 8;
+      const tagY = layer.y + 5 + ti * 14;
+      const label = `Addresses ${tag.id} ${tag.name}`;
+      const tw = 115;
+      svg += `<rect x="${tagX-tw}" y="${tagY}" width="${tw}" height="12" rx="6" fill="${C.pill}" opacity="0.9"/>`;
+      svg += `<text x="${tagX-tw/2}" y="${tagY+8.5}" text-anchor="middle" fill="${C.pillText}" font-family="'Geist Mono',monospace" font-size="6" font-weight="500">${label}</text>`;
+    });
+  });
+
+  // Flow arrows (static — showing full data flow)
+  const cx = w / 2;
+  const arrowColor = 'rgba(42,122,79,0.3)';
+  svg += `<defs><marker id="rpt-arrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="7" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 4L0 8Z" fill="${arrowColor}"/></marker></defs>`;
+  // External → Sovereign
+  svg += `<path d="M ${cx-80} 517 L ${cx-80} 501" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)"/>`;
+  svg += `<path d="M ${cx+80} 517 L ${cx+80} 501" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)"/>`;
+  // Sovereign ↔ MCP
+  svg += `<path d="M ${cx} 304 L ${cx} 288" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)" marker-start="url(#rpt-arrow)"/>`;
+  // MCP ↔ AI
+  svg += `<path d="M ${cx} 196 L ${cx} 180" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)" marker-start="url(#rpt-arrow)"/>`;
+  // AI ↔ Journeys
+  svg += `<path d="M ${cx} 108 L ${cx} 92" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)" marker-start="url(#rpt-arrow)"/>`;
+  // Return loop (right edge)
+  svg += `<path d="M ${w-pad-10} 90 Q ${w-pad+30} 200 ${w-pad-10} 304" fill="none" stroke="rgba(200,240,208,0.4)" stroke-width="2" marker-end="url(#rpt-arrow)"/>`;
+
+  svg += '</svg>';
+  return svg;
 }
 
 // ── (STACK_CONTENT removed — sections 4-6 now generated from data) ──
@@ -1692,6 +1852,9 @@ async function init() {
     const hasLayers = Object.values(lc).some(v => v && v.trim());
     if (hasLayers) {
       document.getElementById('section-digital-os').classList.remove('stage-hidden');
+
+      // Architecture schema SVG — the full platform diagram
+      document.getElementById('arch-schema-svg').innerHTML = generateArchSchemaSVG(stallIds);
 
       // Layer metadata — colours, roles, tiers, which stalls each addresses
       const LAYER_META = [

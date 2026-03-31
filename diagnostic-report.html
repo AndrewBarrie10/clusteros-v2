@@ -283,27 +283,37 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 /* Print */
 @media print {
   .preview-toolbar{display:none!important}
+
   /* ── Force background colors & images to print ── */
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
 
   /* ── Page setup ── */
-  @page{margin:16mm 14mm 18mm 14mm;size:A4}
+  @page{margin:14mm 12mm 16mm 12mm;size:A4}
 
-  body{background:#fff;padding:0;font-size:12px}
+  body{background:#fff;padding:0;font-size:11px}
 
   /* ── Hide screen-only elements ── */
   .screen-header{display:none}
   .screen-wrapper{max-width:none;padding:0;margin:0}
+  .doc-jumpnav{display:none!important}
 
   /* ── Document container ── */
   .document{box-shadow:none;padding:0;max-width:none}
 
-  /* ── Page break control — keep components together ── */
-  .doc-section{break-inside:auto;page-break-inside:auto}
-  .doc-section-label,
-  .doc-section-heading,
-  .doc-body{break-after:avoid;page-break-after:avoid}
+  /* ═══════════════════════════════════════════════
+     PAGE BREAK STRATEGY
+     - Section headings NEVER orphaned
+     - Cards NEVER split mid-card
+     - Major sections prefer page tops
+     - Architecture SVG gets its own page
+     ═══════════════════════════════════════════════ */
 
+  /* Section headings always stay with their content */
+  .doc-section-label{break-after:avoid!important;page-break-after:avoid!important}
+  .doc-section-heading{break-after:avoid!important;page-break-after:avoid!important}
+  .doc-body{break-after:avoid!important;page-break-after:avoid!important}
+
+  /* Cards and blocks: never split */
   .stall-item,
   .stack-card,
   .comparator-card,
@@ -311,147 +321,156 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
   .infra-item,
   .leverage-block,
   .full-diag-box,
-  .next-step,
-  .stall-ref-item,
-  .doc-section-locked,
   .continue-banner,
+  .doc-section-locked,
   .qualifier-context,
-  .layer-card{break-inside:avoid;page-break-inside:avoid}
+  .layer-card,
+  .blind-spot,
+  .blind-spot-item,
+  .steward-block,
+  .steward-question,
+  .stall-ref-item,
+  .inputs-row,
+  .doc-guide{break-inside:avoid!important;page-break-inside:avoid!important}
 
-  /* ── Locked sections ── */
-  .doc-section-locked{background:var(--surface)!important;border-color:var(--border-2)!important}
-  .locked-preview{background:rgba(255,255,255,0.6)!important}
-  .locked-cta{background:rgba(42,122,79,0.04)!important;border-color:rgba(42,122,79,0.3)!important}
+  /* Sections can break between their children but heading stays with first child */
+  .doc-section{break-inside:auto;page-break-inside:auto}
 
-  /* ── Continue banner ── */
-  .continue-banner{background:var(--green-dim)!important;color:#fff!important}
-  .continue-banner-heading{color:#fff!important}
-  .continue-banner-heading em{color:var(--signal)!important}
-  .continue-banner-action{background:#fff!important;color:var(--green-dim)!important}
-
-  /* ── Qualifier context ── */
-  .qualifier-context{background:var(--surface)!important}
-
-  /* ── Layer cards ── */
-  .layer-card{break-inside:avoid!important}
-  .layer-card-head{-webkit-print-color-adjust:exact!important}
-  .layer-card-body{background:#fff!important}
-  .layer-stall-pill{background:rgba(255,255,255,0.9)!important}
-  .arch-schema-row{-webkit-print-color-adjust:exact!important}
-  .steward-block{background:var(--green-dim)!important;color:#fff!important;break-inside:avoid!important}
-  .steward-question{background:rgba(255,255,255,0.08)!important;border-color:rgba(255,255,255,0.12)!important}
-
-  /* ── Blind spot ── */
-  .blind-spot{background:rgba(217,119,6,0.04)!important;border-left:3px solid var(--amber)!important}
-  .blind-spot-item{background:rgba(217,119,6,0.06)!important;break-inside:avoid;page-break-inside:avoid}
-  .blind-spot-provocation{background:rgba(217,119,6,0.08)!important}
-
-  /* ── Guide & jump nav ── */
-  .doc-guide{background:var(--surface)!important}
-  .doc-jumpnav{display:none!important}
-
-  /* ── Stage badge ── */
-  .doc-stage-badge.behaviours{background:rgba(217,119,6,0.06)!important;border-color:rgba(217,119,6,0.3)!important}
-  .doc-stage-badge.leverage{background:rgba(12,148,136,0.06)!important;border-color:rgba(12,148,136,0.3)!important}
-  .doc-stage-badge.digital_os{background:rgba(42,122,79,0.06)!important;border-color:rgba(42,122,79,0.3)!important}
-
-  /* ── Prevent orphan headings — keep heading with first content ── */
+  /* Orphan/widow protection */
   .doc-section-heading{orphans:3;widows:3}
   .doc-body{orphans:3;widows:3}
-  .cas-block-text,
-  .stack-card-desc,
-  .stall-item-def{orphans:2;widows:2}
+  .cas-block-text,.stack-card-desc,.stall-item-def,.layer-card-body{orphans:2;widows:2}
 
-  /* ── Section breaks for clean page flow ── */
-  .doc-section:nth-of-type(3){break-before:auto}
-  .doc-section:nth-of-type(4){break-before:auto}
-  .appendix{break-before:page;page-break-before:always}
+  /* ── Page break points — clean section starts ── */
 
-  /* ── Warm surface tints — bring the website feel to print ── */
+  /* Stacks section: prefer page top when >1 stack (they're tall) */
+  #section-stack{break-before:auto}
+
+  /* Comparators always start new page (they follow blind spot which is a natural break) */
+  #section-comparators{break-before:page!important;page-break-before:always!important}
+
+  /* Digital OS section: always starts new page (it's the big section) */
+  #section-digital-os{break-before:page!important;page-break-before:always!important}
+
+  /* Architecture SVG: keep on its own page */
+  #arch-schema-svg{break-before:auto;break-after:auto;break-inside:avoid!important;page-break-inside:avoid!important}
+
+  /* Steward block: avoid splitting, prefer page top */
+  .steward-block{break-before:auto}
+
+  /* Appendix always starts new page */
+  .appendix{break-before:page!important;page-break-before:always!important;margin-top:0;padding-top:32px;border-top:2px solid var(--border)}
+
+  /* Each appendix sub-section prefers page top */
+  .appendix > div{break-inside:auto}
+  .appendix-heading{break-after:avoid!important;page-break-after:avoid!important}
+
+  /* ═══════════════════════════════════════════════
+     COLOURS — preserve the warm palette on paper
+     ═══════════════════════════════════════════════ */
+
   .stall-item{background:#f7f4ef!important;border-color:#ddd8cf!important}
   .comparator-card{background:#f7f4ef!important}
   .infra-item{background:#f7f4ef!important}
   .stall-ref-item{background:#f7f4ef!important}
 
-  /* ── Stack card header — preserve the dark green ── */
-  .stack-card-head{background:var(--green-dim)!important;color:#fff!important}
+  .stack-card-head{-webkit-print-color-adjust:exact!important}
   .stack-card-name{color:#fff!important}
   .stack-pill{background:rgba(255,255,255,0.15)!important;border-color:rgba(255,255,255,0.25)!important;color:#fff!important}
   .stack-card-body{background:#f7f4ef!important}
 
-  /* ── CAS block — preserve teal accent ── */
   .cas-block{background:rgba(12,148,136,0.05)!important;border-left:3px solid var(--teal)!important}
-
-  /* ── Leverage block — preserve green accent ── */
   .leverage-block{background:rgba(42,122,79,0.05)!important;border-left:3px solid var(--green)!important}
-
-  /* ── Caveat — preserve amber accent ── */
   .doc-caveat{background:#f7f4ef!important;border-left:3px solid var(--amber)!important}
 
-  /* ── Next step CTA — preserve the dark green block ── */
-  .next-step{background:var(--green-dim)!important;color:#fff!important;border-radius:3px}
-  .next-step-label{color:rgba(255,255,255,0.5)!important}
-  .next-step-heading{color:#fff!important}
-  .next-step-heading em{color:var(--signal)!important}
-  .next-step-action{background:#fff!important;color:var(--green-dim)!important}
+  .continue-banner{background:var(--green-dim)!important;color:#fff!important}
+  .continue-banner-heading{color:#fff!important}
+  .continue-banner-heading em{color:var(--signal)!important}
+  .continue-banner-action{background:#fff!important;color:var(--green-dim)!important}
 
-  /* ── Full diag box ── */
   .full-diag-head{background:#f0ece4!important}
-
-  /* ── Section numbers — preserve green circles ── */
   .doc-section-num{background:var(--green)!important;color:#fff!important}
-
-  /* ── Stall leverage border ── */
   .stall-item-leverage{border-left:2px solid var(--green)!important}
   .stack-leverage-dir{border-left:2px solid var(--green)!important}
-
-  /* ── Infra dots ── */
   .infra-dot{background:var(--green)!important}
   .full-diag-bullet{background:var(--border-2)!important}
 
-  /* ── Links ── */
   .comp-card-link{color:var(--green)!important;text-decoration:none!important}
   a{color:var(--green)!important}
-
-  /* ── Typography refinements for print ── */
-  .doc-ecosystem-name{font-size:30px!important}
-  .doc-section-heading{font-size:20px!important}
-  .doc-body{font-size:12px!important;line-height:1.7!important}
-  .stall-item-def{font-size:11px!important}
-  .stall-item-leverage{font-size:11px!important}
-  .cas-block-text{font-size:12px!important;line-height:1.7!important}
-  .infra-text{font-size:12px!important}
-  .stack-card-desc{font-size:12px!important}
-  .leverage-hypothesis{font-size:16px!important}
-
-  /* ── Tighten spacing for print density ── */
-  .doc-header{padding-bottom:24px;margin-bottom:28px}
-  .doc-ecosystem{margin-bottom:28px}
-  .doc-caveat{margin-bottom:28px}
-  .doc-section{margin-bottom:24px;padding-bottom:24px}
-  .stall-list{gap:8px}
-  .comparator-list{gap:8px}
-  .infra-list{gap:8px}
-  .stall-ref-grid{gap:8px}
-
-  /* ── Comparator badges — preserve color ── */
   .comp-sector-badge{background:rgba(12,148,136,0.08)!important;border-color:rgba(12,148,136,0.2)!important;color:var(--teal)!important}
 
-  /* ── Appendix refinements ── */
-  .appendix{margin-top:0;padding-top:32px;border-top:2px solid var(--border)}
-  .stall-ref-grid{grid-template-columns:1fr 1fr}
-  .stall-ref-def{font-size:10px!important}
+  .doc-section-locked{background:var(--surface)!important;border-color:var(--border-2)!important}
+  .locked-preview{background:rgba(255,255,255,0.6)!important}
+  .locked-cta{background:rgba(42,122,79,0.04)!important;border-color:rgba(42,122,79,0.3)!important}
 
-  /* ── Footer refinements ── */
-  .doc-footer{margin-top:24px;padding-top:16px}
-  .doc-footer-legal{font-size:9px!important}
+  .qualifier-context{background:var(--surface)!important}
+  .doc-guide{background:var(--surface)!important}
 
-  /* ── Ecosystem label decorative line ── */
+  .doc-stage-badge.behaviours{background:rgba(217,119,6,0.06)!important;border-color:rgba(217,119,6,0.3)!important}
+  .doc-stage-badge.leverage{background:rgba(12,148,136,0.06)!important;border-color:rgba(12,148,136,0.3)!important}
+  .doc-stage-badge.digital_os{background:rgba(42,122,79,0.06)!important;border-color:rgba(42,122,79,0.3)!important}
+
+  .blind-spot{background:rgba(217,119,6,0.04)!important;border-left:3px solid var(--amber)!important}
+  .blind-spot-item{background:rgba(217,119,6,0.06)!important}
+  .blind-spot-provocation{background:rgba(217,119,6,0.08)!important}
+
+  /* Layer cards */
+  .layer-card-head{-webkit-print-color-adjust:exact!important}
+  .layer-card-body{background:#fff!important}
+  .layer-stall-pill{background:rgba(255,255,255,0.9)!important}
+  .arch-schema-row{-webkit-print-color-adjust:exact!important}
+  .steward-block{background:var(--green-dim)!important;color:#fff!important}
+  .steward-question{background:rgba(255,255,255,0.08)!important;border-color:rgba(255,255,255,0.12)!important}
+
   .doc-ecosystem-label::after{background:var(--border)!important}
-
-  /* ── Header bottom border ── */
   .doc-header{border-bottom:2px solid var(--ink)!important}
   .appendix{border-top:2px solid var(--border)!important}
+
+  /* ═══════════════════════════════════════════════
+     TYPOGRAPHY — tightened for A4 density
+     ═══════════════════════════════════════════════ */
+
+  .doc-ecosystem-name{font-size:28px!important}
+  .doc-section-heading{font-size:18px!important}
+  .doc-body{font-size:11px!important;line-height:1.65!important}
+  .stall-item-def{font-size:10px!important}
+  .stall-item-leverage{font-size:10px!important}
+  .cas-block-text{font-size:11px!important;line-height:1.65!important}
+  .infra-text{font-size:11px!important}
+  .stack-card-desc{font-size:11px!important}
+  .leverage-hypothesis{font-size:15px!important}
+  .layer-card-body{font-size:10.5px!important;line-height:1.6!important}
+  .comp-shifted-text{font-size:10px!important}
+  .steward-question{font-size:11px!important}
+  .doc-footer-legal{font-size:8px!important}
+
+  /* ═══════════════════════════════════════════════
+     SPACING — tighter for print
+     ═══════════════════════════════════════════════ */
+
+  .doc-header{padding-bottom:20px;margin-bottom:20px}
+  .doc-ecosystem{margin-bottom:16px}
+  .doc-caveat{margin-bottom:16px;padding:12px 16px}
+  .doc-guide{margin-bottom:12px;padding:12px 16px}
+  .doc-section{margin-bottom:20px;padding-bottom:20px}
+  .stall-list{gap:6px}
+  .stall-item{padding:12px 14px}
+  .comparator-list{gap:6px}
+  .infra-list{gap:6px}
+  .stall-ref-grid{gap:6px;grid-template-columns:1fr 1fr}
+  .stall-ref-def{font-size:9px!important}
+  .stall-ref-item{padding:10px 12px}
+  .layer-card{margin-bottom:10px}
+  .layer-card-body{padding:12px 14px}
+  .stack-card{margin-bottom:8px}
+
+  .doc-footer{margin-top:20px;padding-top:12px}
+
+  /* Privacy assurance stays compact */
+  #arch-schema-svg{margin-bottom:20px}
+
+  /* Hide "Read the lab note" and external links in print — they don't work on paper */
+  a[target="_blank"]:not(.comp-card-link):not(.locked-cta):not(.continue-banner-action){display:none!important}
 }
 @media(max-width:680px){
   .document{padding:32px 24px}

@@ -3343,7 +3343,8 @@ function ReportModal({ phase, journeyState, onClose }) {
 
     // Store to localStorage for direct report access
     try {
-      localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(payload));
+      sessionStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(payload));
+      try { localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(payload)); } catch(e) {}
     } catch(e) { console.warn('localStorage write failed:', e); }
 
     let reportId = null;

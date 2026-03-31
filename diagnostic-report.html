@@ -1447,7 +1447,8 @@ async function init() {
 
   // ── Path 3: localStorage / window global (browser print path) ──
   if (!d) {
-    try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
+    try { d = JSON.parse(sessionStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
+    if (!d) { try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {} }
     if (!d) d = window.CLUSTEROS_REPORT || getDemoData();
   }
 
@@ -1473,7 +1474,7 @@ async function init() {
   }
 
   // ── Preview toolbar (hidden in print) — only show in demo/fallback mode ──
-  if (!reportId && (demoStage || !localStorage.getItem('CLUSTEROS_REPORT'))) {
+  if (!reportId && (demoStage || (!sessionStorage.getItem('CLUSTEROS_REPORT') && !localStorage.getItem('CLUSTEROS_REPORT')))) {
     const toolbar = document.createElement('div');
     toolbar.className = 'preview-toolbar';
     toolbar.innerHTML = `

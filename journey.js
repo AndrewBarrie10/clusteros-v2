@@ -707,7 +707,8 @@ const journey = {
     _track('report_opened', { stack: this.stackResult?.name || this.selectedStalls.join('+'), stall_count: this.selectedStalls.length });
     const report = this._buildReport();
     try {
-      localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report));
+      sessionStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report));
+    try { localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report)); } catch(e) {}
     } catch(e) {}
     window.open('/diagnostic-report.html', '_blank');
   },

@@ -645,6 +645,16 @@ const journey = {
         description: stack.description || '',
         leverage:    stack.leverage    || ''
       },
+      detectedStacks: (this.stackResult ? [this.stackResult] : []).map(s => ({
+        id:      s.id || '',
+        name:    s.name || '',
+        stalls:  s.triggers || s.stalls || [],
+        logic:   s.logic || s.reinforcing_logic || '',
+        regime:  s.regime || '',
+        entry:   s.entry || s.leverage_entry || '',
+        effect:  s.effect || '',
+        leverage: s.entry || s.leverage || '',
+      })),
       comparators,
       fullDiagAdds
     };

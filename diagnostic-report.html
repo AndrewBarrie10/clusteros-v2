@@ -999,20 +999,21 @@ function computeBlindSpotsFromData(stallIds, stackStalls, detectedStacks) {
     );
 
     if (matchingClusters.length >= 3) {
-      const scores = {};
+      // Count stalls at medium or high confidence only (low = 68% of database, essentially noise)
+      const counts = {};
       matchingClusters.forEach(cl => {
         (cl.stalls || []).forEach(s => {
+          if (s.confidence !== 'medium' && s.confidence !== 'high') return;
           const id = STALL_NAME_TO_ID[s.name];
           if (!id || active.has(id)) return;
-          const weight = s.confidence === 'high' ? 1.0 : s.confidence === 'medium' ? 0.7 : 0.3;
-          scores[id] = (scores[id] || 0) + weight;
+          counts[id] = (counts[id] || 0) + 1;
         });
       });
 
       const n = matchingClusters.length;
-      let results = Object.entries(scores)
-        .map(([id, score]) => {
-          const pct = Math.round((score / n) * 100);
+      let results = Object.entries(counts)
+        .map(([id, count]) => {
+          const pct = Math.round((count / n) * 100);
           const stall = ALL_STALLS.find(s => s.id === id);
           return { id, name: stall ? stall.name : id, definition: stall ? stall.definition : '', labNote: stall ? stall.labNote : '', pct, sampleSize: n };
         })

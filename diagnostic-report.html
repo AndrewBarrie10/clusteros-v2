@@ -980,34 +980,106 @@ function computeClusterStats(clusters) {
   return { n, stallFreq, pairCoOccurrence, anchorCounts };
 }
 
-function computeBlindSpotsFromData(stallIds, stackStalls) {
-  // Use real data if available, fall back to hardcoded
+/**
+ * Blind spots: aggregate across ALL detected stacks, not just primary.
+ * For each detected stack, find clusters sharing that canonical stack ID.
+ * Across those clusters, count stalls that appear but user didn't identify.
+ * Weight by confidence (high=1.0, medium=0.7).
+ * Guarantees at least 1 result (lowers threshold if needed).
+ */
+function computeBlindSpotsFromData(stallIds, stackStalls, detectedStacks) {
+  const active = new Set(stallIds);
+
+  // If we have clusters.json and detected stacks with canonical IDs, use the better formula
+  if (CLUSTER_DATA && detectedStacks && detectedStacks.length > 0) {
+    const stackIds = detectedStacks.map(s => s.id || '').filter(Boolean);
+    // Find all clusters that share at least one canonical stack
+    const matchingClusters = CLUSTER_DATA.filter(cl =>
+      (cl.stacks || []).some(cs => stackIds.includes(cs.canonical_id))
+    );
+
+    if (matchingClusters.length >= 3) {
+      const scores = {};
+      matchingClusters.forEach(cl => {
+        (cl.stalls || []).forEach(s => {
+          const id = STALL_NAME_TO_ID[s.name];
+          if (!id || active.has(id)) return;
+          const weight = s.confidence === 'high' ? 1.0 : s.confidence === 'medium' ? 0.7 : 0.3;
+          scores[id] = (scores[id] || 0) + weight;
+        });
+      });
+
+      const n = matchingClusters.length;
+      let results = Object.entries(scores)
+        .map(([id, score]) => {
+          const pct = Math.round((score / n) * 100);
+          const stall = ALL_STALLS.find(s => s.id === id);
+          return { id, name: stall ? stall.name : id, definition: stall ? stall.definition : '', labNote: stall ? stall.labNote : '', pct, sampleSize: n };
+        })
+        .sort((a, b) => b.pct - a.pct);
+
+      // Guarantee at least 1: lower threshold progressively
+      let filtered = results.filter(s => s.pct >= 15).slice(0, 3);
+      if (filtered.length === 0 && results.length > 0) {
+        filtered = [results[0]]; // Take the best match regardless of threshold
+      }
+      return filtered;
+    }
+  }
+
+  // Fallback: use pairwise co-occurrence from precomputed stats
   const key = stackStalls.slice().sort().join('+');
   const coData = CLUSTER_STATS ? CLUSTER_STATS.pairCoOccurrence[key] : (CO_OCCURRENCE[key] || {});
-  const active = new Set(stallIds);
-  return Object.entries(coData)
+  let results = Object.entries(coData)
     .filter(([code]) => !active.has(code))
     .map(([code, pct]) => {
       const stall = ALL_STALLS.find(s => s.id === code);
       return { id: code, name: stall ? stall.name : code, definition: stall ? stall.definition : '', labNote: stall ? stall.labNote : '', pct };
     })
-    .filter(s => s.pct >= 15)
-    .sort((a, b) => b.pct - a.pct)
-    .slice(0, 3);
+    .sort((a, b) => b.pct - a.pct);
+
+  let filtered = results.filter(s => s.pct >= 15).slice(0, 3);
+  if (filtered.length === 0 && results.length > 0) filtered = [results[0]];
+
+  // Last resort: if no co-occurrence data at all, pick the most common stall the user didn't select
+  if (filtered.length === 0) {
+    const freq = CLUSTER_STATS ? CLUSTER_STATS.stallFreq : {S6:68,S2:39,S5:38,S4:37,S9:30};
+    const best = Object.entries(freq)
+      .filter(([id]) => !active.has(id))
+      .sort((a, b) => b[1] - a[1])[0];
+    if (best) {
+      const stall = ALL_STALLS.find(s => s.id === best[0]);
+      filtered = [{ id: best[0], name: stall ? stall.name : best[0], definition: stall ? stall.definition : '', labNote: stall ? stall.labNote : '', pct: best[1] }];
+    }
+  }
+  return filtered;
 }
 
 function getStallFreq(stallId) {
   if (CLUSTER_STATS) return CLUSTER_STATS.stallFreq[stallId] || 0;
-  // Fallback
   const fallback = {S1:0,S2:39,S3:1,S4:37,S5:38,S6:68,S7:7,S8:8,S9:30};
   return fallback[stallId] || 0;
 }
 
-function findComparators(stallIds, maxResults) {
+/**
+ * Comparators: match on canonical stack configuration, not just individual stalls.
+ * Score = (shared stack IDs × 10) + (shared stall count × 1) + qualifier bonuses.
+ * Guarantees at least 3 results (fills with stall-overlap matches if needed).
+ */
+function findComparators(stallIds, maxResults, detectedStacks, qualifierAnswers) {
   if (!CLUSTER_DATA) return [];
   const target = new Set(stallIds);
+  const stackIds = (detectedStacks || []).map(s => s.id || '').filter(Boolean);
+  const qa = qualifierAnswers || {};
+  const n = maxResults || 3;
+
   const scored = [];
   CLUSTER_DATA.forEach(cl => {
+    // Stack overlap: how many canonical stack IDs does this cluster share?
+    const clStackIds = (cl.stacks || []).map(s => s.canonical_id).filter(Boolean);
+    const stackOverlap = stackIds.filter(id => clStackIds.includes(id)).length;
+
+    // Stall overlap (medium+high confidence)
     const clStalls = new Set();
     (cl.stalls || []).forEach(s => {
       if (s.confidence === 'medium' || s.confidence === 'high') {
@@ -1015,23 +1087,36 @@ function findComparators(stallIds, maxResults) {
         if (id) clStalls.add(id);
       }
     });
-    const overlap = [...target].filter(s => clStalls.has(s)).length;
-    if (overlap > 0) scored.push({ overlap, cluster: cl });
+    const stallOverlap = [...target].filter(s => clStalls.has(s)).length;
+
+    if (stackOverlap === 0 && stallOverlap === 0) return;
+
+    // Qualifier bonuses
+    let bonus = 0;
+    if (qa.anchorType && cl._anchor_type === qa.anchorType) bonus += 2;
+    if (qa.stage && cl._lifecycle_stage === qa.stage) bonus += 1;
+
+    const score = stackOverlap * 10 + stallOverlap + bonus;
+    scored.push({ score, stackOverlap, stallOverlap, cluster: cl });
   });
-  scored.sort((a, b) => b.overlap - a.overlap);
+
+  scored.sort((a, b) => b.score - a.score);
   const seen = new Set();
-  return scored
+  const results = scored
     .filter(s => { if (seen.has(s.cluster.name)) return false; seen.add(s.cluster.name); return true; })
-    .slice(0, maxResults || 4)
+    .slice(0, n)
     .map(s => ({
       region: s.cluster.name,
       loc: [s.cluster.city, s.cluster.country].filter(Boolean).join(' · '),
       sector: '',
       id: s.cluster.id || '',
-      pattern: '',
+      pattern: s.stackOverlap > 0 ? `${s.stackOverlap} shared stack${s.stackOverlap > 1 ? 's' : ''}` : `${s.stallOverlap} shared stall${s.stallOverlap > 1 ? 's' : ''}`,
       regime: s.cluster.regime || s.cluster._lifecycle_stage || '',
       anchor: s.cluster._anchor_type || '',
+      matchStrength: s.stackOverlap > 0 ? 'stack' : 'stall',
     }));
+
+  return results;
 }
 async function init() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -1085,7 +1170,8 @@ async function init() {
   // ── Enrich comparators from clusters.json if not already present ──
   const stallIds = (d.stalls || []).map(s => s.id || s);
   if ((!d.comparators || d.comparators.length === 0) && CLUSTER_DATA) {
-    d.comparators = findComparators(stallIds, 4);
+    const ds = d.detectedStacks || d.detected_stacks || [];
+    d.comparators = findComparators(stallIds, 3, ds, d.qualifier_answers);
   }
 
   // ── Preview toolbar (hidden in print) — only show in demo/fallback mode ──
@@ -1255,7 +1341,7 @@ async function init() {
   content = content || STACK_CONTENT.default;
 
   // ── Blind spot (all stages — computed from clusters.json or fallback) ──
-  const blindSpots = computeBlindSpotsFromData(stallIds, _stalls);
+  const blindSpots = computeBlindSpotsFromData(stallIds, _stalls, detectedStacks);
   if (blindSpots.length > 0) {
     const topSpot = blindSpots[0];
     const nClusters = CLUSTER_STATS ? CLUSTER_STATS.n : 221;
@@ -1267,7 +1353,7 @@ async function init() {
         <div class="blind-spot-item">
           <div class="blind-spot-item-header">
             <span class="blind-spot-item-name">${bs.name}</span>
-            <span class="blind-spot-item-pct">${bs.pct}% of ecosystems with this stack</span>
+            <span class="blind-spot-item-pct">${bs.pct}% of ${bs.sampleSize ? bs.sampleSize + ' ecosystems' : 'ecosystems'} with this configuration</span>
           </div>
           <div class="blind-spot-item-def">${bs.definition}</div>
           ${bs.labNote ? `<a href="${bs.labNote}" target="_blank" style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber);text-decoration:none;margin-top:4px;display:inline-block">Read the lab note →</a>` : ''}

@@ -3275,6 +3275,7 @@ function ReportModal({ phase, journeyState, onClose }) {
   const healthScore = stalls.length === 0 ? 100 : Math.round((1 - healthRatio) * 100);
 
   const [reportUrl, setReportUrl] = useState(null);
+  const reportUrlRef = useRef(null);
 
   const handleSubmit = async () => {
     if (!name || !email) return;
@@ -3287,7 +3288,20 @@ function ReportModal({ phase, journeyState, onClose }) {
       geography: geographyField || '',
       role: roleField || '',
       region: qa.clusterType || 'regional',
-      stalls: stalls.map(id => { const s = STALLS.find(x => x.id === id); return { id, short: s ? s.name : id }; }),
+      stalls: stalls.map(id => {
+        const s = STALLS.find(x => x.id === id);
+        const sci = (window.STALL_SCIENCE_DATA || {})[s ? s.name : ''] || {};
+        return {
+          id,
+          name: s ? s.name : id,
+          freq: 0, // computed from clusters.json by the report page
+          definition: sci.definition || s?.sub || '',
+          leverage: sci.leverage || (STALL_LEVERAGE || {})[id] || '',
+          signal: sci.signal || '',
+          displaced: sci.y || '',
+          behaviour: sci.x || '',
+        };
+      }),
       health: healthScore,
       stacks: stacks.map(s => ({ name: s.name, sev: 'high', desc: s.logic || '' })),
       commentary: '',
@@ -3302,12 +3316,37 @@ function ReportModal({ phase, journeyState, onClose }) {
       });
       return result;
     })(),
-      detectedStacks: journeyState.detectedStacks || [],
+      detectedStacks: (journeyState.detectedStacks || []).map(s => ({
+        id: s.id || '',
+        name: s.name || '',
+        stalls: s.triggers || s.stalls || [],
+        logic: s.logic || '',
+        regime: s.regime || '',
+        entry: s.entry || '',
+        effect: s.effect || '',
+        leverage: s.entry || s.leverage || '',
+      })),
+      stack: (() => {
+        const primary = (journeyState.detectedStacks || [])[0];
+        if (!primary) return {};
+        return {
+          name: primary.name || '',
+          stalls: (primary.triggers || primary.stalls || []),
+          description: primary.logic || '',
+          leverage: primary.entry || primary.leverage || '',
+        };
+      })(),
       techConfig: journeyState.techConfig || null,
       submitted_at: new Date().toISOString(),
       qualifier_answers: qa,
       config_name: (journeyState.osConfig || {}).configName || '',
     };
+
+    // Store to localStorage for direct report access
+    try {
+      sessionStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(payload));
+      try { localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(payload)); } catch(e) {}
+    } catch(e) { console.warn('localStorage write failed:', e); }
 
     let reportId = null;
     try {
@@ -3321,10 +3360,12 @@ function ReportModal({ phase, journeyState, onClose }) {
       }
     } catch (e) { console.error('Railway report error:', e); }
 
-    // Build report URL — hosted report page
-    if (reportId) {
-      setReportUrl(`/diagnostic-report.html?id=${encodeURIComponent(reportId)}`);
-    }
+    // Build report URL — always set before marking as sent
+    const finalReportUrl = reportId
+      ? `/diagnostic-report.html?id=${encodeURIComponent(reportId)}`
+      : '/diagnostic-report.html';
+    reportUrlRef.current = finalReportUrl;
+    setReportUrl(finalReportUrl);
 
     try {
       await fetch('https://clusteros-v3-production.up.railway.app/api/v1/contact-request', {
@@ -3339,6 +3380,12 @@ function ReportModal({ phase, journeyState, onClose }) {
       });
     } catch (e) { console.error('HubSpot error:', e); }
 
+    // Open the report directly in a new tab
+    const reportWindow = window.open(finalReportUrl, '_blank');
+    if (reportWindow) {
+      try { reportWindow.CLUSTEROS_REPORT = payload; } catch(e) {}
+    }
+
     setSent(true);
   };
 
@@ -3350,21 +3397,16 @@ function ReportModal({ phase, journeyState, onClose }) {
             <p style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', color: 'var(--dj-chalk)' }}>
               Your report is ready.
             </p>
-            {reportUrl ? (
-              <React.Fragment>
-                <a href={reportUrl} target="_blank" rel="noopener"
-                  style={{ display: 'inline-block', marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'var(--dj-teal)', color: '#fff', padding: '12px 24px', borderRadius: '3px', textDecoration: 'none' }}>
-                  View your report →
-                </a>
-                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'var(--dj-chalk-muted)', marginTop: '12px' }}>
-                  A copy has also been sent to {email}
-                </p>
-              </React.Fragment>
-            ) : (
-              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginTop: '8px' }}>
-                A link to your report has been sent to {email}.
-              </p>
-            )}
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginTop: '8px' }}>
+              Your report has opened in a new tab.
+            </p>
+            <a href={reportUrlRef.current || '/diagnostic-report.html'} target="_blank" rel="noopener"
+              style={{ display: 'inline-block', marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'var(--dj-teal)', color: '#fff', padding: '12px 24px', borderRadius: '3px', textDecoration: 'none' }}>
+              Open again →
+            </a>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', marginTop: '10px' }}>
+              A copy has also been sent to {email}
+            </p>
           </div>
         ) : (
           <React.Fragment>

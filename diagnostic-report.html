@@ -184,12 +184,34 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 .qualifier-context-key{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted)}
 .qualifier-context-val{font-size:12px;color:var(--ink);font-weight:500}
 
-/* Digital OS layer cards (Stage 3) */
-.layer-card{margin-bottom:12px;border:1px solid var(--border);border-radius:3px;overflow:hidden}
-.layer-card-head{background:var(--green-dim);padding:12px 16px;display:flex;align-items:center;gap:10px}
-.layer-card-num{font-family:var(--mono);font-size:9px;font-weight:700;color:rgba(255,255,255,0.5)}
-.layer-card-name{font-family:var(--serif);font-size:15px;color:#fff;font-weight:400}
-.layer-card-body{padding:14px 16px;background:var(--surface);font-size:12px;color:var(--ink-dim);line-height:1.65;font-weight:300;white-space:pre-line}
+/* Digital OS layer cards (Stage 3) — enhanced */
+.layer-card{margin-bottom:16px;border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.layer-card-head{padding:14px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.layer-card-num{font-family:var(--mono);font-size:9px;font-weight:700;opacity:0.6}
+.layer-card-name{font-family:var(--serif);font-size:16px;font-weight:400;flex:1}
+.layer-card-role{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px;opacity:0.8}
+.layer-card-tier{font-family:var(--mono);font-size:7px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 6px;border-radius:2px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
+.layer-card-stalls{padding:10px 18px;border-top:1px solid rgba(0,0,0,0.06);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.layer-stall-pill{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:2px;background:rgba(255,255,255,0.9);color:var(--green-dim)}
+.layer-stall-connector{font-size:10px;color:var(--ink-muted);font-weight:300;font-style:italic;margin-left:4px}
+.layer-card-body{padding:16px 18px;background:#fff;font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;white-space:pre-line}
+
+/* Architecture schema */
+.arch-schema{display:flex;flex-direction:column;gap:2px;margin-bottom:24px;border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.arch-schema-row{display:flex;align-items:center;gap:12px;padding:8px 16px}
+.arch-schema-num{font-family:var(--mono);font-size:8px;font-weight:700;width:20px;text-align:center;opacity:0.5}
+.arch-schema-name{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.04em;flex:1}
+.arch-schema-role{font-family:var(--mono);font-size:8px;opacity:0.7}
+.arch-schema-active{display:inline-block;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.7);margin-left:auto}
+
+/* Steward section */
+.steward-block{margin-top:24px;padding:24px;background:var(--green-dim);border-radius:3px;color:#fff}
+.steward-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px}
+.steward-heading{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:14px;line-height:1.25}
+.steward-heading em{font-style:italic;color:var(--signal)}
+.steward-question{padding:10px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:3px;margin-bottom:8px;font-size:12px;color:rgba(255,255,255,0.85);line-height:1.5;font-style:italic}
+.steward-question strong{color:#fff;font-weight:500;font-style:normal}
+.steward-note{font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;margin-top:14px}
 
 /* Hidden by stage */
 .stage-hidden{display:none}
@@ -261,27 +283,37 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 /* Print */
 @media print {
   .preview-toolbar{display:none!important}
+
   /* ── Force background colors & images to print ── */
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
 
   /* ── Page setup ── */
-  @page{margin:16mm 14mm 18mm 14mm;size:A4}
+  @page{margin:14mm 12mm 16mm 12mm;size:A4}
 
-  body{background:#fff;padding:0;font-size:12px}
+  body{background:#fff;padding:0;font-size:11px}
 
   /* ── Hide screen-only elements ── */
   .screen-header{display:none}
   .screen-wrapper{max-width:none;padding:0;margin:0}
+  .doc-jumpnav{display:none!important}
 
   /* ── Document container ── */
   .document{box-shadow:none;padding:0;max-width:none}
 
-  /* ── Page break control — keep components together ── */
-  .doc-section{break-inside:auto;page-break-inside:auto}
-  .doc-section-label,
-  .doc-section-heading,
-  .doc-body{break-after:avoid;page-break-after:avoid}
+  /* ═══════════════════════════════════════════════
+     PAGE BREAK STRATEGY
+     - Section headings NEVER orphaned
+     - Cards NEVER split mid-card
+     - Major sections prefer page tops
+     - Architecture SVG gets its own page
+     ═══════════════════════════════════════════════ */
 
+  /* Section headings always stay with their content */
+  .doc-section-label{break-after:avoid!important;page-break-after:avoid!important}
+  .doc-section-heading{break-after:avoid!important;page-break-after:avoid!important}
+  .doc-body{break-after:avoid!important;page-break-after:avoid!important}
+
+  /* Cards and blocks: never split */
   .stall-item,
   .stack-card,
   .comparator-card,
@@ -289,143 +321,156 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
   .infra-item,
   .leverage-block,
   .full-diag-box,
-  .next-step,
-  .stall-ref-item,
-  .doc-section-locked,
   .continue-banner,
+  .doc-section-locked,
   .qualifier-context,
-  .layer-card{break-inside:avoid;page-break-inside:avoid}
+  .layer-card,
+  .blind-spot,
+  .blind-spot-item,
+  .steward-block,
+  .steward-question,
+  .stall-ref-item,
+  .inputs-row,
+  .doc-guide{break-inside:avoid!important;page-break-inside:avoid!important}
 
-  /* ── Locked sections ── */
-  .doc-section-locked{background:var(--surface)!important;border-color:var(--border-2)!important}
-  .locked-preview{background:rgba(255,255,255,0.6)!important}
-  .locked-cta{background:rgba(42,122,79,0.04)!important;border-color:rgba(42,122,79,0.3)!important}
+  /* Sections can break between their children but heading stays with first child */
+  .doc-section{break-inside:auto;page-break-inside:auto}
 
-  /* ── Continue banner ── */
-  .continue-banner{background:var(--green-dim)!important;color:#fff!important}
-  .continue-banner-heading{color:#fff!important}
-  .continue-banner-heading em{color:var(--signal)!important}
-  .continue-banner-action{background:#fff!important;color:var(--green-dim)!important}
-
-  /* ── Qualifier context ── */
-  .qualifier-context{background:var(--surface)!important}
-
-  /* ── Layer cards ── */
-  .layer-card-head{background:var(--green-dim)!important}
-  .layer-card-name{color:#fff!important}
-  .layer-card-body{background:var(--surface)!important}
-
-  /* ── Blind spot ── */
-  .blind-spot{background:rgba(217,119,6,0.04)!important;border-left:3px solid var(--amber)!important}
-  .blind-spot-item{background:rgba(217,119,6,0.06)!important;break-inside:avoid;page-break-inside:avoid}
-  .blind-spot-provocation{background:rgba(217,119,6,0.08)!important}
-
-  /* ── Guide & jump nav ── */
-  .doc-guide{background:var(--surface)!important}
-  .doc-jumpnav{display:none!important}
-
-  /* ── Stage badge ── */
-  .doc-stage-badge.behaviours{background:rgba(217,119,6,0.06)!important;border-color:rgba(217,119,6,0.3)!important}
-  .doc-stage-badge.leverage{background:rgba(12,148,136,0.06)!important;border-color:rgba(12,148,136,0.3)!important}
-  .doc-stage-badge.digital_os{background:rgba(42,122,79,0.06)!important;border-color:rgba(42,122,79,0.3)!important}
-
-  /* ── Prevent orphan headings — keep heading with first content ── */
+  /* Orphan/widow protection */
   .doc-section-heading{orphans:3;widows:3}
   .doc-body{orphans:3;widows:3}
-  .cas-block-text,
-  .stack-card-desc,
-  .stall-item-def{orphans:2;widows:2}
+  .cas-block-text,.stack-card-desc,.stall-item-def,.layer-card-body{orphans:2;widows:2}
 
-  /* ── Section breaks for clean page flow ── */
-  .doc-section:nth-of-type(3){break-before:auto}
-  .doc-section:nth-of-type(4){break-before:auto}
-  .appendix{break-before:page;page-break-before:always}
+  /* ── Page break points — clean section starts ── */
 
-  /* ── Warm surface tints — bring the website feel to print ── */
+  /* Stacks section: prefer page top when >1 stack (they're tall) */
+  #section-stack{break-before:auto}
+
+  /* Comparators always start new page (they follow blind spot which is a natural break) */
+  #section-comparators{break-before:page!important;page-break-before:always!important}
+
+  /* Digital OS section: always starts new page (it's the big section) */
+  #section-digital-os{break-before:page!important;page-break-before:always!important}
+
+  /* Architecture SVG: keep on its own page */
+  #arch-schema-svg{break-before:auto;break-after:auto;break-inside:avoid!important;page-break-inside:avoid!important}
+
+  /* Steward block: avoid splitting, prefer page top */
+  .steward-block{break-before:auto}
+
+  /* Appendix always starts new page */
+  .appendix{break-before:page!important;page-break-before:always!important;margin-top:0;padding-top:32px;border-top:2px solid var(--border)}
+
+  /* Each appendix sub-section prefers page top */
+  .appendix > div{break-inside:auto}
+  .appendix-heading{break-after:avoid!important;page-break-after:avoid!important}
+
+  /* ═══════════════════════════════════════════════
+     COLOURS — preserve the warm palette on paper
+     ═══════════════════════════════════════════════ */
+
   .stall-item{background:#f7f4ef!important;border-color:#ddd8cf!important}
   .comparator-card{background:#f7f4ef!important}
   .infra-item{background:#f7f4ef!important}
   .stall-ref-item{background:#f7f4ef!important}
 
-  /* ── Stack card header — preserve the dark green ── */
-  .stack-card-head{background:var(--green-dim)!important;color:#fff!important}
+  .stack-card-head{-webkit-print-color-adjust:exact!important}
   .stack-card-name{color:#fff!important}
   .stack-pill{background:rgba(255,255,255,0.15)!important;border-color:rgba(255,255,255,0.25)!important;color:#fff!important}
   .stack-card-body{background:#f7f4ef!important}
 
-  /* ── CAS block — preserve teal accent ── */
   .cas-block{background:rgba(12,148,136,0.05)!important;border-left:3px solid var(--teal)!important}
-
-  /* ── Leverage block — preserve green accent ── */
   .leverage-block{background:rgba(42,122,79,0.05)!important;border-left:3px solid var(--green)!important}
-
-  /* ── Caveat — preserve amber accent ── */
   .doc-caveat{background:#f7f4ef!important;border-left:3px solid var(--amber)!important}
 
-  /* ── Next step CTA — preserve the dark green block ── */
-  .next-step{background:var(--green-dim)!important;color:#fff!important;border-radius:3px}
-  .next-step-label{color:rgba(255,255,255,0.5)!important}
-  .next-step-heading{color:#fff!important}
-  .next-step-heading em{color:var(--signal)!important}
-  .next-step-action{background:#fff!important;color:var(--green-dim)!important}
+  .continue-banner{background:var(--green-dim)!important;color:#fff!important}
+  .continue-banner-heading{color:#fff!important}
+  .continue-banner-heading em{color:var(--signal)!important}
+  .continue-banner-action{background:#fff!important;color:var(--green-dim)!important}
 
-  /* ── Full diag box ── */
   .full-diag-head{background:#f0ece4!important}
-
-  /* ── Section numbers — preserve green circles ── */
   .doc-section-num{background:var(--green)!important;color:#fff!important}
-
-  /* ── Stall leverage border ── */
   .stall-item-leverage{border-left:2px solid var(--green)!important}
   .stack-leverage-dir{border-left:2px solid var(--green)!important}
-
-  /* ── Infra dots ── */
   .infra-dot{background:var(--green)!important}
   .full-diag-bullet{background:var(--border-2)!important}
 
-  /* ── Links ── */
   .comp-card-link{color:var(--green)!important;text-decoration:none!important}
   a{color:var(--green)!important}
-
-  /* ── Typography refinements for print ── */
-  .doc-ecosystem-name{font-size:30px!important}
-  .doc-section-heading{font-size:20px!important}
-  .doc-body{font-size:12px!important;line-height:1.7!important}
-  .stall-item-def{font-size:11px!important}
-  .stall-item-leverage{font-size:11px!important}
-  .cas-block-text{font-size:12px!important;line-height:1.7!important}
-  .infra-text{font-size:12px!important}
-  .stack-card-desc{font-size:12px!important}
-  .leverage-hypothesis{font-size:16px!important}
-
-  /* ── Tighten spacing for print density ── */
-  .doc-header{padding-bottom:24px;margin-bottom:28px}
-  .doc-ecosystem{margin-bottom:28px}
-  .doc-caveat{margin-bottom:28px}
-  .doc-section{margin-bottom:24px;padding-bottom:24px}
-  .stall-list{gap:8px}
-  .comparator-list{gap:8px}
-  .infra-list{gap:8px}
-  .stall-ref-grid{gap:8px}
-
-  /* ── Comparator badges — preserve color ── */
   .comp-sector-badge{background:rgba(12,148,136,0.08)!important;border-color:rgba(12,148,136,0.2)!important;color:var(--teal)!important}
 
-  /* ── Appendix refinements ── */
-  .appendix{margin-top:0;padding-top:32px;border-top:2px solid var(--border)}
-  .stall-ref-grid{grid-template-columns:1fr 1fr}
-  .stall-ref-def{font-size:10px!important}
+  .doc-section-locked{background:var(--surface)!important;border-color:var(--border-2)!important}
+  .locked-preview{background:rgba(255,255,255,0.6)!important}
+  .locked-cta{background:rgba(42,122,79,0.04)!important;border-color:rgba(42,122,79,0.3)!important}
 
-  /* ── Footer refinements ── */
-  .doc-footer{margin-top:24px;padding-top:16px}
-  .doc-footer-legal{font-size:9px!important}
+  .qualifier-context{background:var(--surface)!important}
+  .doc-guide{background:var(--surface)!important}
 
-  /* ── Ecosystem label decorative line ── */
+  .doc-stage-badge.behaviours{background:rgba(217,119,6,0.06)!important;border-color:rgba(217,119,6,0.3)!important}
+  .doc-stage-badge.leverage{background:rgba(12,148,136,0.06)!important;border-color:rgba(12,148,136,0.3)!important}
+  .doc-stage-badge.digital_os{background:rgba(42,122,79,0.06)!important;border-color:rgba(42,122,79,0.3)!important}
+
+  .blind-spot{background:rgba(217,119,6,0.04)!important;border-left:3px solid var(--amber)!important}
+  .blind-spot-item{background:rgba(217,119,6,0.06)!important}
+  .blind-spot-provocation{background:rgba(217,119,6,0.08)!important}
+
+  /* Layer cards */
+  .layer-card-head{-webkit-print-color-adjust:exact!important}
+  .layer-card-body{background:#fff!important}
+  .layer-stall-pill{background:rgba(255,255,255,0.9)!important}
+  .arch-schema-row{-webkit-print-color-adjust:exact!important}
+  .steward-block{background:var(--green-dim)!important;color:#fff!important}
+  .steward-question{background:rgba(255,255,255,0.08)!important;border-color:rgba(255,255,255,0.12)!important}
+
   .doc-ecosystem-label::after{background:var(--border)!important}
-
-  /* ── Header bottom border ── */
   .doc-header{border-bottom:2px solid var(--ink)!important}
   .appendix{border-top:2px solid var(--border)!important}
+
+  /* ═══════════════════════════════════════════════
+     TYPOGRAPHY — tightened for A4 density
+     ═══════════════════════════════════════════════ */
+
+  .doc-ecosystem-name{font-size:28px!important}
+  .doc-section-heading{font-size:18px!important}
+  .doc-body{font-size:11px!important;line-height:1.65!important}
+  .stall-item-def{font-size:10px!important}
+  .stall-item-leverage{font-size:10px!important}
+  .cas-block-text{font-size:11px!important;line-height:1.65!important}
+  .infra-text{font-size:11px!important}
+  .stack-card-desc{font-size:11px!important}
+  .leverage-hypothesis{font-size:15px!important}
+  .layer-card-body{font-size:10.5px!important;line-height:1.6!important}
+  .comp-shifted-text{font-size:10px!important}
+  .steward-question{font-size:11px!important}
+  .doc-footer-legal{font-size:8px!important}
+
+  /* ═══════════════════════════════════════════════
+     SPACING — tighter for print
+     ═══════════════════════════════════════════════ */
+
+  .doc-header{padding-bottom:20px;margin-bottom:20px}
+  .doc-ecosystem{margin-bottom:16px}
+  .doc-caveat{margin-bottom:16px;padding:12px 16px}
+  .doc-guide{margin-bottom:12px;padding:12px 16px}
+  .doc-section{margin-bottom:20px;padding-bottom:20px}
+  .stall-list{gap:6px}
+  .stall-item{padding:12px 14px}
+  .comparator-list{gap:6px}
+  .infra-list{gap:6px}
+  .stall-ref-grid{gap:6px;grid-template-columns:1fr 1fr}
+  .stall-ref-def{font-size:9px!important}
+  .stall-ref-item{padding:10px 12px}
+  .layer-card{margin-bottom:10px}
+  .layer-card-body{padding:12px 14px}
+  .stack-card{margin-bottom:8px}
+
+  .doc-footer{margin-top:20px;padding-top:12px}
+
+  /* Privacy assurance stays compact */
+  #arch-schema-svg{margin-bottom:20px}
+
+  /* Hide "Read the lab note" and external links in print — they don't work on paper */
+  a[target="_blank"]:not(.comp-card-link):not(.locked-cta):not(.continue-banner-action){display:none!important}
 }
 @media(max-width:680px){
   .document{padding:32px 24px}
@@ -577,6 +622,7 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
       <div class="doc-section-label"><span class="doc-section-num">8</span>Your Digital OS architecture</div>
       <div class="doc-section-heading">The infrastructure <em>configured for your ecosystem</em></div>
       <p class="doc-body">Based on your qualifier answers and architecture selections, ClusterOS has generated a specific infrastructure configuration for your ecosystem. Each layer addresses a structural function — from sovereign data ownership to AI-powered intelligence. This is not a product roadmap. It is the substrate your ecosystem needs to make compounding behaviour the rational choice.</p>
+      <div id="arch-schema-svg" style="margin-bottom:28px"></div>
       <div id="layer-cards"></div>
     </div>
 
@@ -660,75 +706,306 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 </div><!-- /.screen-wrapper -->
 
 <script>
-// ── STACK CONTENT ─────────────────────────────────────────
-const STACK_CONTENT = {
-  'Coordinating+Mediating': {
-    cas: "The reason Coordination × Mediation regenerates despite every intervention is structural, not personal. In the absence of a connected substrate, routing through intermediaries and building alignment before acting is the rational choice for every actor involved. No individual is doing anything wrong — the system structure makes this the optimal behaviour. Remove one intermediary and another forms. Redesign the governance and the coordination requirement reasserts itself. The loop is self-sustaining because it simultaneously serves everyone's short-term interests.",
-    infra: ["Founders currently reach corporate partners by demonstrating relevance to the intermediary. In a connected substrate, procurement RFIs reach founders directly, ranked by fit and readiness. The intermediary layer doesn't disappear — it stops being mandatory.", "Stewards currently spend coordination time building alignment before decisions can move. The substrate surfaces decisions as structured signals with relevant actors already matched. Coordination becomes optional rather than prerequisite.", "Every direct connection that forms — founder to corporate, researcher to market — registers as a signal. The substrate learns which connections compound value and surfaces more of them. The coordination reflex weakens as direct coupling becomes the cheaper path."],
-    infraNote: "The Coordination × Mediation stack is present in 5 of 10 Orlando clusters and in Belfast Cyber, Cheltenham Cyber, and multiple Bengaluru configurations. In every case where it has shifted, the trigger was a single high-value direct connection that didn't route through the intermediary layer."
-  },
-  'Narrating+Scaling': {
-    cas: "Narrative × Activity persists because in an unconnected system, describing what you're doing and scaling the activity that generates those descriptions are both rational responses to the incentive structure. Funders reward evidence of activity. Boards reward evidence of momentum. The system produces exactly what the incentive structure demands — and that demand has never required throughput. The loop is not a failure of leadership. It is what a complex adaptive system produces when the feedback signal is activity rather than value.",
-    infra: ["The substrate introduces throughput signals that activity cannot substitute for. When a founder's RFI response converts to procurement, that signal propagates. When it doesn't, that signal propagates too. The system starts distinguishing between activity that compounds and activity that doesn't.", "Stewards currently report on what happened. The substrate interrogation layer lets stewards ask what is happening — which connections are forming, which are stalling, which interventions are producing pipeline movement. Reporting changes from description to diagnosis.", "Every actor in the substrate generates signals by pursuing their own interests. The accumulation of those signals produces a live read of ecosystem health that no programme of coordinated reporting could replicate."],
-    infraNote: "Narrative × Activity is the most frequently identified stack across all 221 diagnostics. It appears in mature and emerging ecosystems alike. Geography, sector, and maturity do not predict its presence. The absence of a substrate does."
-  },
-  'Coordinating+Stabilising': {
-    cas: "Incumbent Anchor Lock-In persists because incumbents are rational actors optimising for their own interests, and in an unconnected ecosystem their interests define what coordination is for. New entrants rationally orient toward incumbent partnership because that's where the visible signal is. The structure isn't maintained by anyone defending it — it's maintained by every actor making the individually rational choice. A substrate doesn't change the actors. It changes what the rational choice is.",
-    infra: ["In a connected substrate, procurement signals from incumbents reach the full founder population simultaneously — not filtered through the incumbent's existing network. New entrants with genuine capability become visible before they've established incumbent relationships.", "Research outputs are matched to procurement needs across the full cluster, not just to the labs the incumbents already know. University-industry connections form outside the incumbent orbit for the first time.", "The steward's interrogation layer shows which actors have low ecosystem reach relative to their capability — identifying the underutilised nodes that the incumbent-oriented structure is suppressing."],
-    infraNote: "The Incumbent Anchor Lock-In stack is structurally identical across defence clusters in Orlando and Belfast, advanced manufacturing in the Basque Country, and digital media in multiple European metros. The incumbents differ. The configuration is the same."
-  },
-  'Extracting+Stabilising': {
-    cas: "The Extraction-Stabilisation regime persists because incumbents benefit from both sides simultaneously — stability preserves their position, and extraction is the mechanism through which they capture value from the ecosystem they anchor. New entrants face a paradox: the actors they need to connect with are the same actors whose interests are served by their remaining dependent. A substrate doesn't change incumbent incentives. It creates routes that don't require incumbent permission.",
-    infra: ["In a connected substrate, high-potential founders generate signals that reach investors, corporates, and anchor institutions simultaneously — not sequentially through incumbent-mediated introductions. The extraction loop requires sequential dependency. Parallel signal propagation breaks it.", "The steward's interrogation layer surfaces which actors are generating value that exits the ecosystem versus circulates within it. The extraction point becomes visible as a structural signal, not a lamented pattern.", "Growth-stage support and procurement pathways that don't route through incumbent relationships become possible when the substrate maps capability directly to demand. The retention constraint becomes a matching problem."],
-    infraNote: "Belfast Cyber Security, Scotland Energy Transition, and multiple Orlando clusters share this configuration. In each case, the extraction dynamic is maintained by a small number of anchor institutions whose procurement and talent policies set the terms for the whole ecosystem."
-  },
-  'Coordinating+Extracting': {
-    cas: "The Coordination-Extraction combination is particularly stable because coordination activity provides legitimacy cover for extraction. The ecosystem appears to be working — meetings happen, partnerships form, reports are produced — while value systematically leaves. The coordination layer absorbs the energy that might otherwise identify or challenge the extraction dynamic. Each reinforces the other: coordination normalises extraction, extraction funds the coordination structures that legitimate it.",
-    infra: ["The substrate tracks where value goes after coordination events produce outcomes. Procurement conversions, talent placements, and IP commercialisation that leave the ecosystem become visible signals rather than unmeasured losses.", "Direct founder-to-corporate connections that don't require ecosystem intermediation reduce the coordination overhead while also creating retention pathways. The substrate makes these connections possible without the coordination tax.", "Steward interrogation surfaces the extraction dynamic explicitly: which coordination investments are producing retained value versus exported value. The question becomes answerable for the first time."],
-    infraNote: "The Coordination-Extraction combination appears in multiple space clusters including Adelaide, Cape Canaveral, and Tel Aviv — all ecosystems with strong national programme involvement where coordination activity serves national rather than local retention objectives."
-  },
-  'Re-proving+Stabilising': {
-    cas: "The Validation-Stability regime persists because incumbent organisations that control access also control the legitimacy threshold. Re-proving is structurally demanded by the same actors whose stability depends on maintaining high entry costs. The ecosystem cannot narrow its case because narrowing would require prioritising some actors over others — and the stability of existing relationships depends on not making that choice.",
-    infra: ["External evidence that bypasses the incumbent legitimacy apparatus — market validation from outside the ecosystem, comparable ecosystem data, customer references that don't route through incumbent endorsement — changes what the re-proving cycle produces.", "The comparator database shows specifically which ecosystems have resolved a similar validation-stability configuration and under what conditions. This evidence is more powerful than any internally produced case.", "The substrate interrogation layer surfaces which decisions are being held pending incumbent validation versus which could proceed on external evidence alone. The re-proving requirement becomes optional where it was previously structural."],
-    infraNote: "Basel Life Sciences, Cheltenham Cyber, and multiple MedTech clusters share this configuration. In each case, the re-proving cycle is maintained by a small number of anchor funders whose approval criteria set the legitimacy threshold for the whole ecosystem."
-  },
-  'Mediating+Stabilising': {
-    cas: "The Gatekeeping Configuration persists because intermediaries and incumbents have aligned interests — intermediaries need incumbents to route connections through, and incumbents need intermediaries to manage the volume of new entrant requests without changing their procurement processes. New entrants face a double filter: demonstrate incumbent relevance to get mediated access, then prove fit to incumbent criteria once inside.",
-    infra: ["Procurement RFIs that reach the full founder population simultaneously — not filtered through intermediary relevance assessment — change what the incumbent sees. Demand is expressed directly. Supply responds directly. The mediation layer becomes optional.", "Capability matching that operates on objective criteria — technology fit, readiness level, track record — rather than relationship proximity changes who gets in front of incumbents.", "The steward's view shows which actors are structurally excluded from incumbent engagement versus which are simply unmatched. The distinction is diagnostic: exclusion requires a structural intervention, mismatch requires a matching improvement."],
-    infraNote: "Boston-Cambridge Life Sciences, Eindhoven Brainport, and Zurich-Zug MedTech all share this configuration. Each has a dominant incumbent cluster with sophisticated procurement processes and a well-established intermediary layer — and each shows the same founder access constraint."
-  },
+// ── DATA-DRIVEN SECTION GENERATORS ───────────────────────
 
-  'Coordinating+Re-proving': {
-    cas: "The Legitimacy Loop is the most common configuration in the ClusterOS database, appearing in 27 of 75 diagnosed clusters. It persists because coordination and re-proving serve the same underlying function: generating legitimacy without committing to a narrowing that would expose anyone to risk. The ecosystem produces evidence of alignment and rationale simultaneously — each reinforcing the other. The case is never quite complete enough to act on, and acting would require the kind of exclusionary choice that the coordination structure exists to avoid.",
-    infra: ["The substrate introduces external evidence that doesn't require internal consensus to be valid. Comparable ecosystem data, market validation signals, and anchor commitments from outside the ecosystem change what the re-proving cycle is for — it can stop justifying the ecosystem's existence and start verifying specific hypotheses.", "Coordination overhead drops when relevant actors are matched directly to relevant decisions. The substrate surfaces 'who needs to be involved in this specific decision' rather than requiring full alignment before any decision can move.", "The steward's interrogation layer surfaces which decisions have been held pending alignment for more than a defined period — making the coordination cost of re-proving visible as a structural signal rather than a normal operational condition."],
-    infraNote: "The Coordinating+Re-proving stack appears across geographies from Abu Dhabi and Canberra to Copenhagen and Glasgow. In every case the trigger for shift was external — a named anchor committing before internal alignment was complete, or an external validation that made the re-proving cycle redundant."
-  },
-  'Extracting+Narrating': {
-    cas: "The Extraction-Narrative configuration is stable because narrating activity provides cover for extraction. The ecosystem produces compelling accounts of its progress — reports, case studies, impact assessments — while value consistently exits. The narrative makes the ecosystem look healthy by the metrics that matter to funders and stakeholders. That legitimacy protects the conditions that allow extraction to continue. Changing the narrative doesn't change the extraction. Changing the narrative is part of how the extraction persists.",
-    infra: ["The substrate tracks value flows, not activity flows. Procurement conversions, talent placements, and IP commercialisation are registered as structured signals — and whether they retain value locally or export it becomes visible data rather than an invisible pattern.", "The steward's interrogation layer distinguishes between activity that circulates value and activity that exports it. The narrative of progress can be tested against evidence of retention for the first time.", "Direct matching between capability and demand — without routing through the intermediary layer that currently extracts rent from every connection — creates retention pathways that don't depend on ecosystem goodwill."],
-    infraNote: "The Extraction-Narrative combination appears in Busan and Estonia Cyber — both ecosystems with strong national programme framing where the narrative of contribution to national goals masks the extraction of local ecosystem value."
-  },
-  'Mediating+Narrating': {
-    cas: "The Brokered Story configuration persists because intermediaries and narrators serve each other's needs. Intermediaries need stories to justify their role — evidence that the connections they facilitate produce value. Narrators need intermediaries to produce the events and collaborations that generate content. Neither requires throughput. Together they produce a coherent account of ecosystem activity that is structurally insulated from market consequence. The story is always about what happened in the coordination layer, not what reached the market.",
-    infra: ["Direct connections that bypass the intermediary layer produce outcomes that generate their own evidence. A procurement conversion between a founder and a corporate doesn't need a story — it is a signal. The substrate accumulates these signals automatically.", "The substrate interrogation layer asks what the intermediary layer is producing in terms of retained value, not activity. The question 'how many introductions were made' is replaced by 'how many introductions converted to commercial outcomes'.", "Narrating intermediary activity becomes structurally less rewarding when the substrate provides a richer, more credible evidence base — live data on connections, conversions, and value flows — that funders and boards find more compelling than case studies."],
-    infraNote: "Scotland Advanced Manufacturing shows this configuration — a well-developed intermediary structure with sophisticated communications that consistently produces rich narratives of ecosystem activity alongside limited evidence of commercial throughput."
-  },
-  'Extracting+Scaling': {
-    cas: "The Activity-Extraction Regime persists because the system is producing exactly what it's designed to produce — activity at the entry end and value capture at the exit end — just not capturing that value locally. More early-stage programmes are launched because early-stage activity is what the incentive structure rewards. The growth-stage gap remains unfilled because filling it would require the system to do something it has never been structured to do. No individual actor is extracting maliciously. The substrate doesn't exist that would make retention the rational choice.",
-    infra: ["The substrate maps the full conversion pipeline — from first signal to growth-stage outcome. The point at which value exits the ecosystem becomes visible as a structural signal, not a lamented pattern. Stewards can see the hole rather than inferring it from absence.", "Growth-stage founders generate high-value signals — procurement readiness, investor appetite, talent demand. In a connected substrate those signals reach the actors who can respond to them. The retention constraint becomes a solvable matching problem rather than a capital market failure.", "Every founder who exits generates exit signals. The substrate accumulates a live picture of what leaves, why, and what would have kept it. That intelligence informs the next intervention before the next cohort exits."],
-    infraNote: "Singapore Biopolis shows this configuration at scale — extensive early-stage activity and world-class research output, with consistent graduation of high-potential companies to markets outside Singapore. The extraction point is growth-stage capital and corporate procurement, not early-stage support."
-  },
-  'Mediating+Waiting': {
-    cas: "The Permission-Mediation configuration is stable because waiting is a form of coordination and intermediaries make waiting productive. The ecosystem doesn't sit idle — it meets, aligns, prepares, and builds relationships while waiting for the signal that will allow it to act. The intermediary layer manages these holding activities. When the signal arrives, the intermediary layer manages the activation. Both stalls protect each other: waiting creates demand for intermediation, and intermediation normalises waiting as the appropriate response to uncertainty.",
-    infra: ["The substrate surfaces actors who could act now — without the awaited permission — by matching their capability to current demand outside the normal activation pathway. One actor moving without waiting demonstrates that the permission dependency is optional.", "The interrogation layer shows how long decisions have been held pending external signals — making the structural cost of waiting visible to stewards and funders rather than invisible as 'due diligence' or 'relationship building'.", "Direct coupling between founders and corporates on specific procurement needs doesn't require the permission signal that the ecosystem is waiting for. The substrate creates these pathways before the activation event — changing what the wait is for."],
-    infraNote: "Bordeaux Metropolitan Innovation and Buffalo Niagara both show this configuration — ecosystems with active intermediary structures and genuine external dependencies (government programme decisions, anchor institution commitments) where the wait has become structural rather than situational."
-  },
-  default: {
-    cas: "This pattern persists because in the absence of a connected substrate, every actor is making individually rational choices that collectively produce the stall. The loop is self-sustaining not because anyone is defending it, but because the system structure makes these behaviours the optimal response to the incentive environment. Changing individual behaviour doesn't address the structural conditions. The pattern reasserts itself because the conditions that produce it remain unchanged. This is the defining property of a complex adaptive system without the right coordination infrastructure.",
-    infra: ["A connected substrate changes what the rational choice is for each actor — not by directing behaviour but by making compounding connections cheaper to form than the current substitution. The stall becomes structurally unavailable when the substrate provides a better alternative.", "Every action taken by every actor generates structured signals. The accumulation of those signals produces intelligence that no programme of coordinated reporting could replicate — and that intelligence is what makes the next actor's rational choice a different one.", "The steward stops managing the ecosystem and starts interrogating it. The substrate surfaces what is actually happening — which connections are forming, which are stalling, where value is accumulating and where it's leaving."],
-    infraNote: "ClusterOS has diagnosed this configuration across multiple geographies and sectors. The substrate response is consistent: change the signal environment that actors operate in, and behaviour changes without directive intervention."
+/**
+ * Section 4: Why this persists (CAS explanation)
+ * Draws from detected stack descriptions and cross-cluster evidence.
+ */
+function generateCASContent(allStacks, stallIds, userStackIds) {
+  // Build the structural explanation from actual stack data
+  const stackDescs = allStacks
+    .map(st => cleanNarrative(st.logic || st.reinforcing_logic || st.description || ''))
+    .filter(Boolean);
+
+  const absorbedAll = allStacks
+    .map(st => st.absorbed_signals || '')
+    .filter(Boolean);
+
+  // Cross-cluster evidence: how many ecosystems share this configuration?
+  let crossClusterNote = '';
+  if (CLUSTER_DATA && userStackIds.length > 0) {
+    const matchCount = CLUSTER_DATA.filter(cl =>
+      (cl.stacks || []).some(s => userStackIds.includes(s.canonical_id))
+    ).length;
+    if (matchCount > 0) {
+      // Count regimes across matching clusters
+      const regimes = {};
+      const countries = new Set();
+      CLUSTER_DATA.filter(cl =>
+        (cl.stacks || []).some(s => userStackIds.includes(s.canonical_id))
+      ).forEach(cl => {
+        regimes[cl.regime || cl._lifecycle_stage || 'unknown'] = (regimes[cl.regime || cl._lifecycle_stage || 'unknown'] || 0) + 1;
+        if (cl.country) countries.add(cl.country);
+      });
+      const regimeStr = Object.entries(regimes).sort((a,b) => b[1]-a[1]).slice(0,3).map(([r,n]) => `${n} ${r}`).join(', ');
+      crossClusterNote = `This configuration appears in ${matchCount} of ${CLUSTER_DATA.length} diagnosed ecosystems across ${countries.size} countries (${regimeStr}). It is not specific to any geography, sector, or stage of development — it is a structural property of ecosystems where these stalls co-occur.`;
+    }
   }
-};
+
+  // What the system absorbs — synthesise across stacks
+  const allSignals = absorbedAll.join(', ');
+  const absorbNote = allSignals ? `The system absorbs ${allSignals.toLowerCase()}. Each of these pressures is real. The stall configuration is the system's way of managing them without structural adaptation.` : '';
+
+  return { stackDescs, crossClusterNote, absorbNote };
+}
+
+/**
+ * Section 5: What changes with infrastructure
+ * Shaped by qualifier answers — what ClusterOS would specifically do.
+ */
+function generateInfraContent(allStacks, stallIds, qa) {
+  const items = [];
+  const anchor = qa.anchorType || '';
+  const priority = qa.priority || '';
+  const gap = qa.gap || '';
+  const anchorLabel = QUALIFIER_LABELS.anchorType[anchor] || 'your anchor';
+
+  // Generate stall-specific infrastructure responses
+  const stallSet = new Set(stallIds);
+
+  if (stallSet.has('S2')) {
+    if (gap === 'conversion') items.push(`Your coordination structures currently absorb decision signals without producing committed outcomes. A connected substrate surfaces decisions as structured signals — who needs to decide what, by when, with what information. Coordination becomes optional because the decisions it was meant to enable now happen through direct matching.`);
+    else if (gap === 'discovery') items.push(`Actors in your ecosystem can't find each other without routing through coordination structures. The substrate makes every actor's capability and need visible — directly, continuously, without requiring anyone to convene a meeting first. The coordination layer doesn't disappear. It stops being the only way things happen.`);
+    else items.push(`Your coordination activity produces alignment without accountability. The substrate introduces structured decision records — what was agreed, by whom, whether it was delivered. When coordination has to produce auditable outcomes rather than meeting minutes, the actors who benefit from perpetual alignment lose their cover.`);
+  }
+  if (stallSet.has('S6')) {
+    if (anchor === 'university' || anchor === 'research') items.push(`Your ${anchorLabel} anchor defines what the ecosystem optimises for. In a connected substrate, research outputs match to procurement needs across the full cluster — not just to the labs the anchor already knows. New entrants with genuine capability become visible before they've established anchor relationships. The incumbent orbit doesn't break. It stops being the only orbit.`);
+    else if (anchor === 'corporate') items.push(`Your ${anchorLabel} anchor's procurement and talent channels currently define who gets access. The substrate makes capability visible independent of incumbent relationship — procurement signals reach the full founder population simultaneously. The anchor's position doesn't change. What changes is whether that position is the only pathway.`);
+    else items.push(`Incumbent structures are preserved because changing them threatens the positions built on the current arrangement. The substrate creates routes that don't require incumbent permission — new pathways form alongside existing ones. The system doesn't need to dismantle what's there. It needs an alternative that works without it.`);
+  }
+  if (stallSet.has('S5')) {
+    items.push(`Every connection in your ecosystem currently routes through an intermediary. The substrate enables direct actor coupling — capability matched to need, without requiring a broker to make the introduction. The intermediary layer doesn't vanish. It stops being mandatory. When direct connections become cheaper than brokered ones, the actors who need connections use whichever route works.`);
+  }
+  if (stallSet.has('S4')) {
+    items.push(`Value is leaving your ecosystem through channels that nobody tracks. The substrate introduces a value flow audit trail — where procurement, talent, and IP flow, whether they circulate locally or exit. Extraction persists because it currently leaves no trace. When every cross-boundary flow is visible, the extraction point becomes a structural finding rather than a suspicion.`);
+  }
+  if (stallSet.has('S7')) {
+    items.push(`Your ecosystem reports activity to demonstrate progress. The substrate replaces narrative with live signals — what is actually converting, which connections are forming, where pipeline is stalling. The steward stops compiling reports and starts interrogating the system. The question changes from "what did we do?" to "what is happening?"`);
+  }
+  if (stallSet.has('S8')) {
+    items.push(`Early-stage activity is scaled without throughput measurement. The substrate tracks conversion — from first signal to commercial outcome. Starts that don't graduate become visible. Resources shift from programmes that generate activity to programmes that generate outcomes. The measurement layer changes what gets funded.`);
+  }
+  if (stallSet.has('S1')) {
+    items.push(`Your ecosystem keeps re-proving its case. The substrate accumulates structured evidence that persists across funding cycles — every programme outcome, every diagnostic finding, every leverage test becomes a permanent record. The case is made once and updated continuously. The re-proving cycle breaks because the evidence base is already there.`);
+  }
+  if (stallSet.has('S9')) {
+    if (priority === 'capital') items.push(`Your ecosystem waits for external signals before acting. The substrate surfaces actors who could act now — matching their capability to current demand outside the normal activation pathway. One actor moving without waiting demonstrates that the permission dependency is optional. External investors see an ecosystem that acts, not one that waits.`);
+    else items.push(`Action is deferred pending external conditions. The substrate creates pathways that don't require the awaited signal — direct coupling between actors on specific needs that exist right now. The system doesn't need permission to start generating value. It needs one demonstrated alternative to waiting.`);
+  }
+  if (stallSet.has('S3')) {
+    items.push(`Poor performance is tolerated to preserve relationships. The substrate makes outcomes visible at the programme level — which interventions produce conversions, which produce activity without outcomes. Accountability becomes a structural property of the system rather than a political choice a steward has to make.`);
+  }
+
+  // Priority-specific infrastructure note
+  let priorityNote = '';
+  if (priority === 'talent') priorityNote = `Your talent retention priority means every infrastructure layer is configured to make talent pathways visible — where talent comes from, where it goes, and what would keep it circulating locally.`;
+  else if (priority === 'capital') priorityNote = `Your capital attraction priority means the substrate is configured to surface investment-ready signals — structured evidence that external investors can evaluate without requiring ecosystem insiders to make the case.`;
+  else if (priority === 'research') priorityNote = `Your research commercialisation priority means the substrate connects research outputs directly to commercial demand signals — structured matching that doesn't depend on technology transfer offices or intermediary interpretation.`;
+  else if (priority === 'supply') priorityNote = `Your supply chain priority means the substrate maps capability to procurement need across the full ecosystem — structured signals that make supplier discovery automatic rather than relationship-dependent.`;
+  else if (priority === 'growth') priorityNote = `Your growth priority means every layer is configured to track what converts — from first connection to commercial outcome — so the system optimises for throughput rather than activity.`;
+
+  return { items, priorityNote };
+}
+
+/**
+ * Section 6: Leverage hypothesis with convergence evidence
+ * Shows the primary leverage entry and how many comparator ecosystems converge.
+ */
+function generateLeverageContent(allStacks, userStackIds, comparators) {
+  // Primary leverage
+  const primary = allStacks[0] || {};
+  const leverageText = primary.entry || primary.leverage_entry || primary.leverage || '';
+  const leverageEffect = primary.effect || '';
+
+  // Convergence: check comparator clusters' leverage hypotheses
+  let convergenceNote = '';
+  if (CLUSTER_DATA && userStackIds.length > 0) {
+    const matchingClusters = CLUSTER_DATA.filter(cl =>
+      (cl.stacks || []).some(s => userStackIds.includes(s.canonical_id))
+    );
+    // Look at their leverage hypotheses for common themes
+    const themes = { coupling: 0, measurement: 0, procurement: 0, transparency: 0, commitment: 0 };
+    matchingClusters.forEach(cl => {
+      const lev = ((cl.leverage || {}).hypothesis || '').toLowerCase();
+      if (lev.includes('direct') || lev.includes('coupling') || lev.includes('bilateral')) themes.coupling++;
+      if (lev.includes('measur') || lev.includes('metric') || lev.includes('observable') || lev.includes('visible')) themes.measurement++;
+      if (lev.includes('procurement') || lev.includes('supply')) themes.procurement++;
+      if (lev.includes('disclos') || lev.includes('transparent') || lev.includes('audit')) themes.transparency++;
+      if (lev.includes('commit') || lev.includes('unilateral') || lev.includes('single')) themes.commitment++;
+    });
+    const topTheme = Object.entries(themes).sort((a,b) => b[1]-a[1])[0];
+    if (topTheme && topTheme[1] > 2) {
+      const themeLabels = { coupling: 'direct coupling pathways', measurement: 'making outcomes measurable', procurement: 'procurement reform', transparency: 'structural transparency', commitment: 'unilateral commitment' };
+      convergenceNote = `Across ${matchingClusters.length} ecosystems sharing your configuration, ${topTheme[1]} (${Math.round(topTheme[1]/matchingClusters.length*100)}%) have leverage hypotheses pointing to ${themeLabels[topTheme[0]] || topTheme[0]}. This convergence is structural — it reflects the consistent vulnerability of this stack type, not a generic recommendation.`;
+    }
+  }
+
+  return { leverageText, leverageEffect, convergenceNote };
+}
+
+/**
+ * Architecture Schema SVG — full platform diagram with dynamic stall pills.
+ * Reproduces the diagnostic journey's ArchitectureSchemaSVG in the report's palette.
+ */
+function generateArchSchemaSVG(stallIds) {
+  const pad = 20, w = 860;
+  // Colours matching the report's warm palette
+  const C = {
+    bg: '#f7f4ef', surface: '#f0ece4', border: '#ddd8cf', borderLight: '#e8e2d8',
+    green: '#2a7a4f', greenDim: '#1d5c3a', greenLight: 'rgba(42,122,79,0.08)',
+    teal: '#0c9488', tealLight: 'rgba(200,240,208,0.15)',
+    ink: '#1a1a1a', inkDim: '#5a5650', inkMuted: '#8c8780',
+    pill: '#f5d97a', pillText: '#1a1a1a',
+    white: '#ffffff',
+  };
+
+  const STALL_LAYER_MAP = {
+    S1:'layer-mcp', S2:'layer-journeys', S3:'layer-governance',
+    S4:'layer-governance', S5:'layer-journeys', S6:'layer-sovereign',
+    S7:'layer-sovereign', S8:'layer-sovereign', S9:'layer-journeys',
+  };
+
+  const STALL_SHORT = {
+    S1:'Re-proving',S2:'Coordinating',S3:'Forgiving',S4:'Extracting',
+    S5:'Mediating',S6:'Stabilising',S7:'Narrating',S8:'Scaling',S9:'Waiting'
+  };
+
+  const layers = [
+    { id:'layer-journeys', label:'APPLICATION LAYER', y:20, h:70,
+      comps:['Founder Journey','Anchor Journey','Researcher Journey','Steward Interrogation'] },
+    { id:'layer-ai', label:'AI RUNTIME', y:108, h:70,
+      comps:['Journey Construction','Signal Propagation','Role-Aware Reframing','Actor Matching','Stall Detection','Steward Interrogation'] },
+    { id:'layer-mcp', label:'INTELLIGENCE SUBSTRATE', y:196, h:90, cols:5, mono:true,
+      comps:['detect_stalls()','get_leverage_hypotheses()','get_matched_connections()','propagate_signal()','get_actor_profile()','get_journey_state()','ingest_evidence()','enrich_actor_profile()','get_steward_diagnostic()','get_open_funding()'] },
+    { id:'layer-sovereign', label:'SOVEREIGN DATABASE', y:304, h:195, split:true,
+      categories:[
+        {label:'STRUCTURE',items:['Supercluster','Clusters','Groups','Pathways','Events','Resources']},
+        {label:'ACTORS',items:['Actor profiles','Identity & permissions','Journey states','Progression records']},
+        {label:'INTELLIGENCE',items:['Evidence base','Stall records','Leverage hypotheses','Diagnostic outputs']},
+        {label:'ACTIVITY',items:['Group activity','Event records','Chat history','Collaboration outcomes']},
+        {label:'SIGNALS',items:['Behavioural signals','Health scores','Pipeline formation','Value flow records']},
+      ],
+      bots:['Evidence Ingestion Bot','Signal Monitoring Bot','Actor Enrichment Bot','Health Monitoring Bot'] },
+    { id:'layer-external', label:'INTEGRATION LAYER', y:517, h:55,
+      comps:['Govt Support Directory','Community Services API','Publication Databases','Professional Identity'] },
+    { id:'layer-governance', label:'GOVERNANCE & ACCESS', y:590, h:45,
+      comps:['Supercluster → Cluster → Group → Actor','Identity-first · Role-based access · Full audit trail'] },
+  ];
+
+  // Build stall tags per layer
+  const tagsByLayer = {};
+  (stallIds || []).forEach(sid => {
+    const layerId = STALL_LAYER_MAP[sid];
+    if (!layerId) return;
+    if (!tagsByLayer[layerId]) tagsByLayer[layerId] = [];
+    tagsByLayer[layerId].push({ id: sid, name: STALL_SHORT[sid] || sid });
+  });
+
+  let svg = `<svg viewBox="0 0 ${w} 655" style="width:100%;height:auto;display:block;border:1px solid ${C.border};border-radius:6px;overflow:hidden">`;
+  svg += `<rect x="0" y="0" width="${w}" height="655" fill="${C.bg}"/>`;
+
+  layers.forEach(layer => {
+    const isSov = layer.split;
+    // Layer background
+    svg += `<rect x="${pad}" y="${layer.y}" width="${w-pad*2}" height="${layer.h}" rx="5" fill="${isSov ? C.tealLight : C.surface}" stroke="${isSov ? 'rgba(42,122,79,0.2)' : C.border}" stroke-width="1"/>`;
+    // Layer label
+    svg += `<text x="${pad+12}" y="${layer.y+14}" fill="${C.green}" font-family="'Geist Mono',monospace" font-size="7.5" font-weight="600" letter-spacing="0.1em">${isSov ? '★ '+layer.label : layer.label}</text>`;
+
+    // Regular components
+    if (!isSov && layer.comps) {
+      const perRow = layer.cols || layer.comps.length;
+      const rows = Math.ceil(layer.comps.length / perRow);
+      const cw = (w - pad*2 - 24) / perRow;
+      const totalH = layer.h - 30;
+      const rowH = (totalH - (rows-1)*3) / rows;
+      layer.comps.forEach((comp, ci) => {
+        const col = ci % perRow;
+        const row = Math.floor(ci / perRow);
+        const cx = pad + 12 + col * cw;
+        const cy = layer.y + 22 + row * (rowH + 3);
+        svg += `<rect x="${cx}" y="${cy}" width="${cw-3}" height="${rowH}" rx="3" fill="${C.white}" stroke="${C.borderLight}" stroke-width="0.8"/>`;
+        svg += `<text x="${cx+(cw-3)/2}" y="${cy+rowH/2+1}" text-anchor="middle" dominant-baseline="middle" fill="${C.inkDim}" font-family="${layer.mono ? "'Geist Mono',monospace" : "'Geist',system-ui"}" font-size="${layer.mono ? '6' : '7.5'}">${comp}</text>`;
+      });
+    }
+
+    // Sovereign split layout
+    if (isSov) {
+      const sx = pad + 12;
+      const totalW = w - pad*2 - 24;
+      const splitW = totalW * 0.65;
+      const botX = sx + splitW + 10;
+      const botW = totalW * 0.35 - 10;
+      const startY = layer.y + 22;
+      const sovH = layer.h - 30;
+      const cats = layer.categories;
+      const catH = (sovH - (cats.length-1)*3) / cats.length;
+
+      // Sovereign section bg
+      svg += `<rect x="${sx}" y="${startY}" width="${splitW}" height="${sovH}" rx="4" fill="rgba(200,240,208,0.1)" stroke="rgba(42,122,79,0.15)" stroke-width="0.8"/>`;
+
+      cats.forEach((cat, ci) => {
+        const catY = startY + 3 + ci * (catH + 3);
+        const pillW = (splitW - 16) / Math.min(cat.items.length, 6);
+        svg += `<text x="${sx+8}" y="${catY+9}" fill="${C.teal}" font-family="'Geist Mono',monospace" font-size="5.5" font-weight="600" letter-spacing="0.08em">${cat.label}</text>`;
+        cat.items.forEach((item, ii) => {
+          const ix = sx + 8 + ii * pillW;
+          const iy = catY + 13;
+          const ih = Math.max(catH - 17, 12);
+          svg += `<rect x="${ix}" y="${iy}" width="${pillW-2}" height="${ih}" rx="2" fill="${C.white}" stroke="${C.borderLight}" stroke-width="0.5"/>`;
+          svg += `<text x="${ix+(pillW-2)/2}" y="${iy+ih/2+1}" text-anchor="middle" dominant-baseline="middle" fill="${C.inkMuted}" font-family="'Geist',system-ui" font-size="5.5">${item}</text>`;
+        });
+      });
+
+      // Bot network
+      svg += `<rect x="${botX}" y="${startY}" width="${botW}" height="${sovH}" rx="4" fill="${C.white}" stroke="${C.border}" stroke-width="0.8"/>`;
+      svg += `<text x="${botX+8}" y="${startY+12}" fill="${C.inkMuted}" font-family="'Geist Mono',monospace" font-size="5.5" font-weight="600" letter-spacing="0.08em">BOT NETWORK</text>`;
+      const botCW = (botW - 12) / 2;
+      layer.bots.forEach((bot, bi) => {
+        const col = bi % 2;
+        const row = Math.floor(bi / 2);
+        const bx = botX + 6 + col * (botCW + 2);
+        const by = startY + 20 + row * 28;
+        svg += `<rect x="${bx}" y="${by}" width="${botCW}" height="22" rx="2" fill="${C.surface}" stroke="${C.borderLight}" stroke-width="0.5"/>`;
+        svg += `<text x="${bx+botCW/2}" y="${by+12}" text-anchor="middle" dominant-baseline="middle" fill="${C.inkDim}" font-family="'Geist',system-ui" font-size="6">${bot}</text>`;
+      });
+    }
+
+    // Stall address pills
+    const tags = tagsByLayer[layer.id] || [];
+    tags.forEach((tag, ti) => {
+      const tagX = w - pad - 8;
+      const tagY = layer.y + 5 + ti * 14;
+      const label = `Addresses ${tag.id} ${tag.name}`;
+      const tw = 115;
+      svg += `<rect x="${tagX-tw}" y="${tagY}" width="${tw}" height="12" rx="6" fill="${C.pill}" opacity="0.9"/>`;
+      svg += `<text x="${tagX-tw/2}" y="${tagY+8.5}" text-anchor="middle" fill="${C.pillText}" font-family="'Geist Mono',monospace" font-size="6" font-weight="500">${label}</text>`;
+    });
+  });
+
+  // Flow arrows (static — showing full data flow)
+  const cx = w / 2;
+  const arrowColor = 'rgba(42,122,79,0.3)';
+  svg += `<defs><marker id="rpt-arrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="7" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 4L0 8Z" fill="${arrowColor}"/></marker></defs>`;
+  // External → Sovereign
+  svg += `<path d="M ${cx-80} 517 L ${cx-80} 501" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)"/>`;
+  svg += `<path d="M ${cx+80} 517 L ${cx+80} 501" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)"/>`;
+  // Sovereign ↔ MCP
+  svg += `<path d="M ${cx} 304 L ${cx} 288" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)" marker-start="url(#rpt-arrow)"/>`;
+  // MCP ↔ AI
+  svg += `<path d="M ${cx} 196 L ${cx} 180" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)" marker-start="url(#rpt-arrow)"/>`;
+  // AI ↔ Journeys
+  svg += `<path d="M ${cx} 108 L ${cx} 92" fill="none" stroke="${arrowColor}" stroke-width="1.5" marker-end="url(#rpt-arrow)" marker-start="url(#rpt-arrow)"/>`;
+  // Return loop (right edge)
+  svg += `<path d="M ${w-pad-10} 90 Q ${w-pad+30} 200 ${w-pad-10} 304" fill="none" stroke="rgba(200,240,208,0.4)" stroke-width="2" marker-end="url(#rpt-arrow)"/>`;
+
+  svg += '</svg>';
+  return svg;
+}
+
+// ── (STACK_CONTENT removed — sections 4-6 now generated from data) ──
+
+
 
 const FULL_DIAG = {
   'Coordinating+Mediating': ["Verification of coordination structure depth — layers, tenure, decision authority", "Intermediary volume analysis — brokered vs direct connections over time", "Decision record analysis — which decisions required full alignment", "Confidence tier for each stall (Tier 1: Robust / Tier 2: Adequate / Tier 3: Indicative)", "Cross-cluster synthesis if the pattern spans multiple clusters", "Leverage hypothesis tested against comparable ecosystem evidence"],
@@ -1170,8 +1447,11 @@ async function init() {
 
   // ── Path 3: localStorage / window global (browser print path) ──
   if (!d) {
-    try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
-    if (!d) d = window.CLUSTEROS_REPORT || getDemoData();
+    try { d = JSON.parse(sessionStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
+    if (!d) { try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {} }
+    if (!d) d = window.CLUSTEROS_REPORT || null;
+    if (!d && window.opener) { try { d = window.opener.CLUSTEROS_REPORT || null; } catch(e) {} }
+    if (!d) d = getDemoData();
   }
 
   // ── Wait for cluster data ──
@@ -1196,7 +1476,7 @@ async function init() {
   }
 
   // ── Preview toolbar (hidden in print) — only show in demo/fallback mode ──
-  if (!reportId && (demoStage || !localStorage.getItem('CLUSTEROS_REPORT'))) {
+  if (!reportId && (demoStage || (!sessionStorage.getItem('CLUSTEROS_REPORT') && !localStorage.getItem('CLUSTEROS_REPORT')))) {
     const toolbar = document.createElement('div');
     toolbar.className = 'preview-toolbar';
     toolbar.innerHTML = `
@@ -1414,19 +1694,16 @@ async function init() {
     </div>`;
   }).join('');
 
-  // ── Resolve stack key ──
+  // ── Resolve stack key (for blind spots / co-occurrence lookup) ──
+  const STALL_SHORT_TO_ID_2 = {'Coordinating':'S2','Narrating':'S7','Scaling':'S8','Stabilising':'S6','Mediating':'S5','Extracting':'S4','Forgiving':'S3','Re-proving':'S1','Waiting':'S9'};
   const _stalls = (stack.stalls || []);
-  let stackKey = _stalls.slice().sort().join('+');
-  let content = STACK_CONTENT[stackKey];
-  if (!content && _stalls.length > 2) {
-    for (let i = 0; i < _stalls.length && !content; i++) {
-      for (let j = i+1; j < _stalls.length && !content; j++) {
-        const pairKey = [_stalls[i], _stalls[j]].sort().join('+');
-        if (STACK_CONTENT[pairKey]) { content = STACK_CONTENT[pairKey]; stackKey = pairKey; }
-      }
-    }
-  }
-  content = content || STACK_CONTENT.default;
+  let stackKey = _stalls.map(s => STALL_SHORT_TO_ID_2[s] || s).sort().join('+');
+
+  // ── Generate data-driven content for sections 4-6 ──
+  const userStackIds = (detectedStacks || []).map(s => s.id || '').filter(Boolean);
+  const casContent = generateCASContent(allStacks, stallIds, userStackIds);
+  const infraContent = generateInfraContent(allStacks, stallIds, qa);
+  const leverageContent = generateLeverageContent(allStacks, userStackIds, d.comparators);
 
   // ── Blind spot (all stages — computed from clusters.json or fallback) ──
   const blindSpots = computeBlindSpotsFromData(stallIds, _stalls, detectedStacks);
@@ -1510,7 +1787,6 @@ async function init() {
     });
 
     // 3. Comparators — evidence-derived narratives from clusters.json
-    const userStackIds = (d.detectedStacks || d.detected_stacks || []).map(s => s.id || '').filter(Boolean);
     document.getElementById('comparator-list').innerHTML = (d.comparators || []).map(c => {
       const narrative = buildComparatorNarrative(c.id, userStackIds);
       const profileUrl = c.id ? `/clusters/${c.id}.html` : null;
@@ -1540,23 +1816,24 @@ async function init() {
       </div>`;
     }).join('');
 
-    // 4. CAS
+    // 4. CAS — data-driven from stack descriptions and cross-cluster evidence
     document.getElementById('cas-block').innerHTML = `
       <div class="cas-block-label">Complex Adaptive Systems — why this pattern is structural</div>
-      <div class="cas-block-text">${content.cas}</div>`;
+      ${casContent.stackDescs.map(desc => `<p class="cas-block-text" style="margin-bottom:14px">${desc}</p>`).join('')}
+      ${casContent.absorbNote ? `<p class="cas-block-text" style="margin-top:12px;font-style:italic">${casContent.absorbNote}</p>` : ''}
+      ${casContent.crossClusterNote ? `<p style="font-family:var(--mono);font-size:10px;color:var(--teal);margin-top:14px;line-height:1.6">${casContent.crossClusterNote}</p>` : ''}`;
 
-    // 5. Infrastructure
-    document.getElementById('infra-list').innerHTML = content.infra.map(item => `
+    // 5. Infrastructure — shaped by qualifier answers and stall-specific interventions
+    document.getElementById('infra-list').innerHTML = infraContent.items.map(item => `
       <div class="infra-item"><div class="infra-dot"></div><div class="infra-text">${item}</div></div>`).join('');
-    document.getElementById('infra-note').textContent = content.infraNote;
+    document.getElementById('infra-note').textContent = infraContent.priorityNote;
 
-    // 6. Leverage
-    const leverageNote = isDigitalOS
-      ? 'This hypothesis is calibrated to your ecosystem profile and Digital OS architecture configuration. A full diagnostic tests this against evidence specific to your ecosystem and assigns a confidence tier.'
-      : 'This is an orientation hypothesis based on pattern matching against 221 diagnostics. A full diagnostic tests this against evidence specific to your ecosystem and assigns a confidence tier.';
+    // 6. Leverage — with convergence evidence from the dataset
     document.getElementById('leverage-block').innerHTML = `
-      <div class="leverage-hypothesis">"${stack.leverage || 'A leverage hypothesis will be generated in your full diagnostic.'}"</div>
-      <div class="leverage-note">${leverageNote}</div>`;
+      <div class="leverage-hypothesis">"${leverageContent.leverageText || 'A leverage hypothesis will be generated from your specific configuration.'}"</div>
+      ${leverageContent.leverageEffect ? `<div style="font-size:12px;color:var(--ink-dim);line-height:1.65;font-weight:300;margin:12px 0;padding-left:12px;border-left:2px solid var(--teal)"><span style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px">Expected effect</span>${leverageContent.leverageEffect}</div>` : ''}
+      ${leverageContent.convergenceNote ? `<div style="font-size:12px;color:var(--teal);line-height:1.6;margin-top:12px;font-style:italic">${leverageContent.convergenceNote}</div>` : ''}
+      <div class="leverage-note">This hypothesis is derived from your ecosystem's specific stall configuration${isDigitalOS ? ' and Digital OS architecture' : ''}, tested against ${CLUSTER_STATS ? CLUSTER_STATS.n : 221} diagnosed ecosystems. A full diagnostic validates this against actor-level evidence and assigns a confidence tier.</div>`;
   }
 
   // ══════════════════════════════════════════════════════════
@@ -1597,18 +1874,90 @@ async function init() {
     const hasLayers = Object.values(lc).some(v => v && v.trim());
     if (hasLayers) {
       document.getElementById('section-digital-os').classList.remove('stage-hidden');
-      document.getElementById('layer-cards').innerHTML = LAYER_NAMES.map(([key, name], i) => {
-        const commentary = lc[key];
+
+      // Architecture schema SVG — the full platform diagram
+      document.getElementById('arch-schema-svg').innerHTML = generateArchSchemaSVG(stallIds);
+
+      // Layer metadata — colours, roles, tiers, which stalls each addresses
+      const LAYER_META = [
+        { key:'sovereignDatabase',     name:'Sovereign Ecosystem Database', role:'Data ownership', tier:'Foundation', color:'#1d5c3a', colorLight:'rgba(29,92,58,0.08)', addresses:['S1','S4','S7'], connectors:{ S1:'Evidence persists across cycles', S4:'Value flows become traceable', S7:'Narrative replaced by structured record' } },
+        { key:'governanceAccess',      name:'Governance & Access',          role:'Trust infrastructure', tier:'Foundation', color:'#2a6b4a', colorLight:'rgba(42,107,74,0.08)', addresses:['S2','S4','S6'], connectors:{ S2:'Coordination becomes auditable', S4:'Extraction requires consent', S6:'New actors enter without incumbent permission' } },
+        { key:'integrationLayer',      name:'Integration Layer',            role:'External signals', tier:'Substrate', color:'#2b7a75', colorLight:'rgba(43,122,117,0.08)', addresses:['S1','S5'], connectors:{ S1:'Evidence imports automatically', S5:'Connections bypass intermediaries' } },
+        { key:'automationLayer',       name:'Automation Layer',             role:'Bot network', tier:'Substrate', color:'#0c9488', colorLight:'rgba(12,148,136,0.08)', addresses:['S2','S5','S8'], connectors:{ S2:'Coordination overhead automated', S5:'Matching happens without brokers', S8:'Activity measured against outcomes' } },
+        { key:'intelligenceSubstrate', name:'Intelligence Substrate',       role:'MCP tools', tier:'Substrate', color:'#2d8a7a', colorLight:'rgba(45,138,122,0.08)', addresses:['S2','S6','S7'], connectors:{ S2:'Decisions surfaced from signals', S6:'Underutilised actors identified', S7:'Live read replaces retrospective report' } },
+        { key:'aiRuntime',             name:'AI Runtime',                   role:'Reasoning engine', tier:'Surface', color:'#3a7a5a', colorLight:'rgba(58,122,90,0.08)', addresses:['S1','S2','S9'], connectors:{ S1:'Evidence base answers the question', S2:'Right actors matched to right decisions', S9:'Actors can act on current data' } },
+        { key:'applicationLayer',      name:'Application Layer',            role:'Actor experience', tier:'Surface', color:'#2a7a4f', colorLight:'rgba(42,122,79,0.08)', addresses:['S5','S6','S8','S9'], connectors:{ S5:'Direct coupling via portal', S6:'New entrants visible to anchors', S8:'Throughput visible at programme level', S9:'Action pathways without permission' } },
+      ];
+
+      // Architecture schema
+      const schemaHTML = `
+        <div class="arch-schema">
+          ${LAYER_META.map((lm, i) => {
+            const active = lm.addresses.some(s => stallIds.includes(s));
+            return `<div class="arch-schema-row" style="background:${lm.color};color:#fff">
+              <span class="arch-schema-num">L${i+1}</span>
+              <span class="arch-schema-name">${lm.name}</span>
+              <span class="arch-schema-role">${lm.role}</span>
+              ${active ? '<span class="arch-schema-active"></span>' : ''}
+            </div>`;
+          }).join('')}
+        </div>
+        <p style="font-family:var(--mono);font-size:9px;color:var(--ink-muted);margin-bottom:24px">Sovereign database at the foundation. Every layer above draws from it. White dots mark layers that directly address your identified stalls.</p>`;
+
+      // Layer cards
+      const layerCardsHTML = LAYER_META.map((lm, i) => {
+        const commentary = lc[lm.key];
         if (!commentary || !commentary.trim()) return '';
+
+        // Which of user's stalls does this layer address?
+        const addressedStalls = lm.addresses.filter(s => stallIds.includes(s));
+
         return `
         <div class="layer-card">
-          <div class="layer-card-head">
-            <span class="layer-card-num">L${i+1}</span>
-            <span class="layer-card-name">${name}</span>
+          <div class="layer-card-head" style="background:${lm.color};color:#fff">
+            <span class="layer-card-num" style="color:rgba(255,255,255,0.5)">L${i+1}</span>
+            <span class="layer-card-name" style="color:#fff">${lm.name}</span>
+            <span class="layer-card-role" style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8)">${lm.role}</span>
+            <span class="layer-card-tier">${lm.tier}</span>
           </div>
+          ${addressedStalls.length > 0 ? `
+          <div class="layer-card-stalls" style="background:${lm.colorLight}">
+            ${addressedStalls.map(sid => {
+              const stall = ALL_STALLS.find(s => s.id === sid);
+              const connector = lm.connectors[sid] || '';
+              return `<span class="layer-stall-pill" style="color:${lm.color}">${stall ? stall.key : sid}</span>${connector ? `<span class="layer-stall-connector">${connector}</span>` : ''}`;
+            }).join('<span style="color:var(--border-2);margin:0 2px">·</span>')}
+          </div>` : ''}
           <div class="layer-card-body">${commentary}</div>
         </div>`;
       }).join('');
+
+      // Steward interrogation section
+      const stewardQuestions = [];
+      if (stallIds.includes('S2')) stewardQuestions.push({ q: 'Which coordination structures have produced zero committed actions this quarter?', why: 'Surfaces where alignment is substituting for decision' });
+      if (stallIds.includes('S6')) stewardQuestions.push({ q: 'Which new entrants have capability that incumbents haven\'t seen?', why: 'Reveals talent the incumbent orbit is suppressing' });
+      if (stallIds.includes('S5')) stewardQuestions.push({ q: 'How many connections formed directly vs through intermediaries this month?', why: 'Measures whether the mediation dependency is weakening' });
+      if (stallIds.includes('S4')) stewardQuestions.push({ q: 'Where is value leaving the ecosystem — and what would retain it?', why: 'Makes the extraction dynamic visible as data' });
+      if (stallIds.includes('S7')) stewardQuestions.push({ q: 'What evidence do we actually have vs what are we claiming?', why: 'Separates structured findings from narrative' });
+      if (stallIds.includes('S8')) stewardQuestions.push({ q: 'What\'s our conversion rate from programme starts to commercial outcomes?', why: 'Distinguishes activity from throughput' });
+      if (stallIds.includes('S1')) stewardQuestions.push({ q: 'What\'s the evidence base for our next funding case — right now, from live data?', why: 'The case is already made when the data accumulates continuously' });
+      if (stallIds.includes('S9')) stewardQuestions.push({ q: 'Which actors could act right now if they had the right data — without waiting for permission?', why: 'Reveals that the dependency is optional for some actors' });
+      if (stallIds.includes('S3')) stewardQuestions.push({ q: 'Which programmes have the lowest outcome-to-activity ratio?', why: 'Makes accountability a structural fact rather than a political choice' });
+
+      const stewardHTML = `
+        <div class="steward-block">
+          <div class="steward-label">What this gives you</div>
+          <div class="steward-heading">The questions you can <em>finally ask</em></div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.65;margin-bottom:16px">Every layer above feeds a single interrogation surface. You don't compile reports. You don't wait for someone to update a spreadsheet. You ask — and the answer is assembled from live signals, not from whatever was last reported. These are the questions your stall configuration makes urgent:</p>
+          ${stewardQuestions.map(sq => `
+          <div class="steward-question">
+            <strong>"${sq.q}"</strong>
+            <span style="display:block;font-size:10px;color:rgba(255,255,255,0.45);margin-top:4px;font-style:normal">${sq.why}</span>
+          </div>`).join('')}
+          <div class="steward-note">Each question draws from your sovereign database, processed by the intelligence substrate, delivered through the AI runtime. The architecture exists to make these questions answerable — in real time, from evidence your ecosystem is already generating.</div>
+        </div>`;
+
+      document.getElementById('layer-cards').innerHTML = schemaHTML + layerCardsHTML + stewardHTML;
     }
 
     // Next step for Stage 3: full diagnostic CTA

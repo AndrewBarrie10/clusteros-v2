@@ -250,10 +250,11 @@ function loadKnowledge() {
             );
             rule.comparators = matchedClusters.slice(0, 5).map(c => ({ name: c.name || c.id, slug: c.id }));
 
-            // Compute co-occurring stalls across matched clusters
+            // Compute co-occurring stalls across matched clusters (medium+high confidence only)
             const coStallCounts = {};
             matchedClusters.forEach(c => {
               (c.stalls || []).forEach(cs => {
+                if (cs.confidence !== 'medium' && cs.confidence !== 'high') return;
                 // Map cluster stall name to ID
                 const csName = (cs.name || '').split(' instead of')[0].split(' around')[0].trim().toLowerCase();
                 const sid = stallNameToId[csName];

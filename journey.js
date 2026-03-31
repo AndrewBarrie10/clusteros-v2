@@ -630,7 +630,7 @@ const journey = {
         return {
           id:         STALL_CODES[s] || s,
           name:       STALL_NAMES[s] || s,
-          freq:       STALL_FREQ[s]  || 50,
+          freq:       STALL_FREQ[s]  || 0,
           definition: sci.definition || '',
           leverage:   sci.leverage   || '',
           signal:     sci.signal     || '',

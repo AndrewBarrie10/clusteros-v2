@@ -1591,7 +1591,8 @@ function getDemoData(stageOverride) {
     geography: 'Edinburgh, Scotland',
     role: 'Cluster Manager',
     detectedStacks: [{
-      name: 'Incumbent Anchor Lock-In',
+      id: 'STK-20',
+      name: 'Incumbent-Coordination Stabilisation',
       stalls: ['S2', 'S6'],
       logic: 'Large incumbents define what coordination is for, and coordination structures form around their needs. New entrants optimise for incumbent partnership because that is where the visible signal is. The structure is not maintained by anyone defending it — it is maintained by every actor making the individually rational choice.',
       regime: 'The ecosystem is locked into serving incumbent anchors — stability protects existing coordination channels, and coordination normalises the stability that prevents new entry pathways from forming.',
@@ -1599,16 +1600,12 @@ function getDemoData(stageOverride) {
       effect: 'One successful direct coupling pathway changes the risk calculus for subsequent actors. The coordination-stabilisation loop weakens as direct coupling becomes demonstrably possible.',
     }],
     stalls:[
-      { id:'S2', name:'Coordinating instead of deciding', freq:97, definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', leverage:'Identify the actor with the most to lose from the current arrangement and change their constraint. The leverage is never more coordination — it is one actor making an exclusionary choice.', signal:'Decision signals', displaced:'Committed action with real consequences', behaviour:'Meetings, partnerships and alignment processes' },
-      { id:'S6', name:'Stabilising around incumbents', freq:76, definition:'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve the system.', leverage:'New entry pathways that bypass incumbent gatekeepers are the intervention. The leverage is creating routes that do not require incumbent permission — not changing incumbent behaviour.', signal:'Adaptation signals', displaced:'Structural evolution and new entry', behaviour:'Preserving existing structures and incumbent relationships' }
+      { id:'S2', name:'Coordinating instead of deciding', definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', leverage:'Identify the actor with the most to lose from the current arrangement and change their constraint. The leverage is never more coordination — it is one actor making an exclusionary choice.', signal:'Decision signals', displaced:'Committed action with real consequences', behaviour:'Meetings, partnerships and alignment processes' },
+      { id:'S6', name:'Stabilising around incumbents', definition:'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve the system.', leverage:'New entry pathways that bypass incumbent gatekeepers are the intervention. The leverage is creating routes that do not require incumbent permission — not changing incumbent behaviour.', signal:'Adaptation signals', displaced:'Structural evolution and new entry', behaviour:'Preserving existing structures and incumbent relationships' }
     ],
-    stack:{ name:'Incumbent Anchor Lock-In', stalls:['Coordinating','Stabilising'], description:'Large incumbents define what coordination is for, and coordination structures form around their needs. New entrants optimise for incumbent partnership. Emergence outside the incumbent orbit remains structurally weak.', leverage:'Fund one thing that does not require incumbent validation to proceed. The goal is not to displace incumbents — it is to demonstrate that the system can produce value without routing through them.' },
-    comparators:[
-      { region:'Birmingham Alabama Innovation', loc:'Birmingham AL · USA', sector:'Innovation', id:'birmingham-alabama-innovation-ecosystem', pattern:'Coordinating+Stabilising' },
-      { region:'Chattanooga Regional Innovation', loc:'Chattanooga TN · USA', sector:'Innovation', id:'chattanooga-regional-innovation-ecosystem', pattern:'Coordinating+Stabilising' },
-      { region:'Colorado Springs Space Technology', loc:'Colorado Springs · USA', sector:'Space & Aerospace', id:'colorado-springs-space-technology', pattern:'Coordinating+Stabilising' },
-      { region:'Medellin Innovation Ecosystem', loc:'Medellin · Colombia', sector:'Innovation', id:'medellin-innovation-ecosystem', pattern:'Coordinating+Stabilising' }
-    ],
+    stack:{ name:'Incumbent-Coordination Stabilisation', stalls:['Coordinating','Stabilising'], description:'Large incumbents define what coordination is for, and coordination structures form around their needs. New entrants optimise for incumbent partnership. Emergence outside the incumbent orbit remains structurally weak.', leverage:'Fund one thing that does not require incumbent validation to proceed. The goal is not to displace incumbents — it is to demonstrate that the system can produce value without routing through them.' },
+    // comparators and frequencies computed dynamically from clusters.json
+    comparators: [],
     fullDiagAdds: FULL_DIAG['Coordinating+Stabilising']
   };
 

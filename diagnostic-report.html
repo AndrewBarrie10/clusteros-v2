@@ -784,6 +784,35 @@ const FULL_DIAG = {
  * Uses shared stack descriptions, absorbed signals, and leverage hypothesis
  * from clusters.json — no hardcoded text.
  */
+const STALL_CODE_TO_NAME = {
+  S1:'Re-proving', S2:'Coordinating', S3:'Forgiving', S4:'Extracting',
+  S5:'Mediating', S6:'Stabilising', S7:'Narrating', S8:'Scaling activity', S9:'Waiting',
+  STALL_01:'Re-proving', STALL_02:'Coordinating', STALL_03:'Forgiving', STALL_04:'Extracting',
+  STALL_05:'Mediating', STALL_06:'Stabilising', STALL_07:'Narrating', STALL_08:'Scaling activity', STALL_09:'Waiting',
+  STALL_1:'Re-proving', STALL_2:'Coordinating', STALL_3:'Forgiving', STALL_4:'Extracting',
+  STALL_5:'Mediating', STALL_6:'Stabilising', STALL_7:'Narrating', STALL_8:'Scaling activity', STALL_9:'Waiting',
+};
+
+function cleanNarrative(text) {
+  if (!text) return '';
+  let cleaned = text;
+  // Replace stall codes with readable names
+  cleaned = cleaned.replace(/(?:STALL_|S)(\d{1,2})/g, (match, num) => {
+    const key = match.startsWith('STALL_') ? match : `S${num}`;
+    return STALL_CODE_TO_NAME[key] || match;
+  });
+  // Remove X-side/Y-side jargon
+  cleaned = cleaned.replace(/X-side of /gi, '');
+  cleaned = cleaned.replace(/Y-side of /gi, '');
+  // Clean parenthetical stall references like "(S2: coordinating through...)"
+  cleaned = cleaned.replace(/\((?:S\d|STALL_\d{1,2}):\s*/gi, '(');
+  // Handle truncation gracefully
+  if (cleaned && !cleaned.endsWith('.') && !cleaned.endsWith('...')) {
+    cleaned = cleaned.replace(/\s+\S*$/, '...');
+  }
+  return cleaned;
+}
+
 function buildComparatorNarrative(comparatorId, userStackIds) {
   if (!CLUSTER_DATA) return null;
   const cl = CLUSTER_DATA.find(c => c.id === comparatorId);
@@ -793,30 +822,19 @@ function buildComparatorNarrative(comparatorId, userStackIds) {
   const sharedStacks = (cl.stacks || []).filter(s => userStackIds.includes(s.canonical_id));
 
   if (sharedStacks.length > 0) {
-    // Use the highest-confidence shared stack's description
     const best = sharedStacks.sort((a, b) => {
       const conf = { high: 3, medium: 2, low: 1 };
       return (conf[b.confidence] || 0) - (conf[a.confidence] || 0);
     })[0];
 
-    let narrative = best.description || '';
-    // Clean up truncated descriptions
-    if (narrative && !narrative.endsWith('.')) {
-      narrative = narrative.replace(/\s+\S*$/, '') + '...';
-    }
-
-    const absorbed = best.absorbed_signals || '';
     const evidenceTag = `${cl._evidence_count || '—'} evidence items · ${cl._evidence_tier || '—'} tier`;
-
-    return { mechanism: narrative, absorbed, evidenceTag, stackName: best.stack_name, leverage: (cl.leverage || {}).hypothesis || '' };
+    return { mechanism: cleanNarrative(best.description), absorbed: best.absorbed_signals || '', evidenceTag, stackName: best.stack_name, leverage: cleanNarrative((cl.leverage || {}).hypothesis) };
   }
 
   // No shared stacks — use overall summary
   const primary = (cl.stacks || [])[0];
   if (primary) {
-    let desc = primary.description || '';
-    if (desc && !desc.endsWith('.')) desc = desc.replace(/\s+\S*$/, '') + '...';
-    return { mechanism: desc, absorbed: primary.absorbed_signals || '', evidenceTag: `${cl._evidence_count || '—'} evidence items · ${cl._evidence_tier || '—'} tier`, stackName: primary.stack_name, leverage: (cl.leverage || {}).hypothesis || '' };
+    return { mechanism: cleanNarrative(primary.description), absorbed: primary.absorbed_signals || '', evidenceTag: `${cl._evidence_count || '—'} evidence items · ${cl._evidence_tier || '—'} tier`, stackName: primary.stack_name, leverage: cleanNarrative((cl.leverage || {}).hypothesis) };
   }
   return null;
 }
@@ -1320,9 +1338,9 @@ async function init() {
         <span class="stall-item-id">${s.id || ''}</span>
         <span class="stall-item-name">${s.name || s}</span>
         ${loadBadge}
-        <span class="stall-item-freq">Appears in <span>${s.freq || '—'}%</span> of diagnostics</span>
+        <span class="stall-item-freq">${s.freq > 0 ? `Appears in <span>${s.freq}%</span> of diagnostics` : `Detected across the dataset`}</span>
       </div>
-      ${(s.signal || s.displaced) ? `<div class="stall-meta">${s.signal ? `Absorbs: <span>${s.signal}</span>` : ''}${s.displaced ? ` · Displaces: <span>${s.displaced}</span>` : ''}</div>` : ''}
+      ${(s.behaviour || s.displaced) ? `<div class="stall-meta">${s.behaviour ? `What you see: <span>${s.behaviour}</span>` : ''}${s.displaced ? ` · What it costs: <span>${s.displaced}</span>` : ''}</div>` : ''}
       ${s.definition ? `<p class="stall-item-def">${s.definition}</p>` : ''}
       ${isLeverage && s.leverage ? `<div><div class="stall-leverage-label">Leverage direction</div><p class="stall-item-leverage">${s.leverage}</p></div>` : ''}
       ${labNote ? `<a href="${labNote}" target="_blank" style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);text-decoration:none;margin-top:8px;display:inline-block">Read the lab note →</a>` : ''}
@@ -1515,9 +1533,9 @@ async function init() {
           <span class="comp-shifted-text">${narrative.mechanism}</span>
         </div>
         ${narrative.absorbed ? `
-        <div class="comp-shifted" style="border-top:none;padding-top:0">
-          <span class="comp-shifted-label">Absorbs</span>
-          <span class="comp-shifted-text" style="font-style:italic">${narrative.absorbed}</span>
+        <div class="comp-shifted" style="border-top:none;padding-top:4px">
+          <span class="comp-shifted-label">System absorbs</span>
+          <span style="display:flex;gap:4px;flex-wrap:wrap">${narrative.absorbed.split(',').map(a => a.trim()).filter(Boolean).map(a => `<span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:2px;background:rgba(12,148,136,0.06);border:1px solid rgba(12,148,136,0.15);color:var(--teal)">${a}</span>`).join('')}</span>
         </div>` : ''}` : ''}
       </div>`;
     }).join('');

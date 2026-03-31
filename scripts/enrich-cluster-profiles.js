@@ -93,19 +93,35 @@ function findSimilar(cluster, allClusters, n = 3) {
   return scored.slice(0, n);
 }
 
+const STALL_CODE_MAP = {
+  S1:'Re-proving', S2:'Coordinating', S3:'Forgiving', S4:'Extracting',
+  S5:'Mediating', S6:'Stabilising', S7:'Narrating', S8:'Scaling activity', S9:'Waiting',
+};
+
+function cleanText(text) {
+  if (!text) return '';
+  let c = text;
+  c = c.replace(/(?:STALL_|S)(\d{1,2})/g, (m, n) => {
+    const num = String(parseInt(n, 10)); // strip leading zeros: '06' → '6'
+    return STALL_CODE_MAP[`S${num}`] || m;
+  });
+  c = c.replace(/X-side of /gi, '');
+  c = c.replace(/Y-side of /gi, '');
+  c = c.replace(/\((?:S\d|STALL_\d{1,2}):\s*/gi, '(');
+  if (c && !c.endsWith('.') && !c.endsWith('...')) c = c.replace(/\s+\S*$/, '...');
+  return c;
+}
+
 function buildNarrative(comparator, sharedStackIds) {
   const cl = comparator;
   const sharedStacks = (cl.stacks || []).filter(s => sharedStackIds.includes(s.canonical_id));
 
   if (sharedStacks.length > 0) {
-    // Use highest-confidence shared stack
     const confOrder = { high: 3, medium: 2, low: 1 };
     const best = sharedStacks.sort((a, b) => (confOrder[b.confidence] || 0) - (confOrder[a.confidence] || 0))[0];
-    let desc = best.description || '';
-    if (desc && !desc.endsWith('.')) desc = desc.replace(/\s+\S*$/, '') + '...';
     return {
       stackName: best.stack_name,
-      mechanism: desc,
+      mechanism: cleanText(best.description),
       absorbed: best.absorbed_signals || '',
       sharedStallNames: (best.stalls_involved || []).map(id => STALL_ID_TO_SHORT[id] || id),
     };
@@ -114,11 +130,9 @@ function buildNarrative(comparator, sharedStackIds) {
   // Fallback to primary stack
   const primary = (cl.stacks || [])[0];
   if (primary) {
-    let desc = primary.description || '';
-    if (desc && !desc.endsWith('.')) desc = desc.replace(/\s+\S*$/, '') + '...';
     return {
       stackName: primary.stack_name,
-      mechanism: desc,
+      mechanism: cleanText(primary.description),
       absorbed: primary.absorbed_signals || '',
       sharedStallNames: (primary.stalls_involved || []).map(id => STALL_ID_TO_SHORT[id] || id),
     };
@@ -200,6 +214,15 @@ function main() {
       skipped++;
       continue;
     }
+
+    // Clean stall codes in existing stack descriptions
+    html = html.replace(/<p class="stack-desc">([\s\S]*?)<\/p>/g, (match, content) => {
+      return `<p class="stack-desc">${cleanText(content)}</p>`;
+    });
+    // Clean leverage hypothesis text
+    html = html.replace(/<p class="leverage-hyp">([\s\S]*?)<\/p>/g, (match, content) => {
+      return `<p class="leverage-hyp">${cleanText(content)}</p>`;
+    });
 
     // Inject CSS if not already present
     if (!html.includes('.sc-match{')) {

@@ -3261,6 +3261,9 @@ function ReportModal({ phase, journeyState, onClose }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [ecosystem, setEcosystem] = useState('');
+  const [sectorField, setSectorField] = useState('');
+  const [geographyField, setGeographyField] = useState('');
+  const [roleField, setRoleField] = useState('');
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -3280,7 +3283,9 @@ function ReportModal({ phase, journeyState, onClose }) {
     const payload = {
       stage: stageLabel,
       name, email, ecosystem,
-      sector: qa.clusterType || 'ecosystem',
+      sector: sectorField || qa.clusterType || '',
+      geography: geographyField || '',
+      role: roleField || '',
       region: qa.clusterType || 'regional',
       stalls: stalls.map(id => { const s = STALLS.find(x => x.id === id); return { id, short: s ? s.name : id }; }),
       health: healthScore,
@@ -3379,6 +3384,20 @@ function ReportModal({ phase, journeyState, onClose }) {
             <div style={sticky.field}>
               <label style={sticky.label}>Your ecosystem name</label>
               <input style={sticky.input} type="text" value={ecosystem} onChange={e => setEcosystem(e.target.value)} placeholder="e.g. Edinburgh Life Sciences" />
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+              <div style={sticky.field}>
+                <label style={sticky.label}>Sector</label>
+                <input style={sticky.input} type="text" value={sectorField} onChange={e => setSectorField(e.target.value)} placeholder="e.g. Life Sciences" />
+              </div>
+              <div style={sticky.field}>
+                <label style={sticky.label}>Geography</label>
+                <input style={sticky.input} type="text" value={geographyField} onChange={e => setGeographyField(e.target.value)} placeholder="e.g. Edinburgh, Scotland" />
+              </div>
+            </div>
+            <div style={sticky.field}>
+              <label style={sticky.label}>Your role</label>
+              <input style={sticky.input} type="text" value={roleField} onChange={e => setRoleField(e.target.value)} placeholder="e.g. Cluster Manager" />
             </div>
             <button style={{ ...sticky.submitBtn, opacity: (name && email) ? 1 : 0.4 }} onClick={handleSubmit} disabled={sending || !name || !email}>
               {sending ? 'Generating...' : 'Get my report →'}

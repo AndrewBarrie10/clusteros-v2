@@ -543,11 +543,20 @@ const journey = {
       'Stabilising':'S6','Mediating':'S5','Extracting':'S4',
       'Forgiving':'S3','Re-proving':'S1','Waiting':'S9'
     };
-    const STALL_FREQ = {
-      'Coordinating':97,'Narrating':91,'Scaling':88,
-      'Stabilising':76,'Mediating':68,'Extracting':61,
-      'Forgiving':54,'Re-proving':47,'Waiting':38
+    // Compute stall frequencies from clusters.json if loaded, otherwise fallback
+    const STALL_FREQ_FALLBACK = {
+      'Coordinating':39,'Narrating':7,'Scaling':8,
+      'Stabilising':68,'Mediating':38,'Extracting':37,
+      'Forgiving':1,'Re-proving':0,'Waiting':30
     };
+    const STALL_FREQ = (() => {
+      try {
+        // clusters.json is loaded by diagnostic-journey.html into STACK_RULES[].comparatorTotal
+        // Compute from raw data if available via a global
+        if (window._CLUSTER_STALL_FREQ) return window._CLUSTER_STALL_FREQ;
+      } catch(e) {}
+      return STALL_FREQ_FALLBACK;
+    })();
     const STALL_NAMES = {
       'Coordinating':'Coordinating instead of deciding',
       'Narrating':'Narrating instead of testing',

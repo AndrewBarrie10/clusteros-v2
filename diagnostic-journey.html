@@ -265,6 +265,29 @@ function loadKnowledge() {
             rule.coStallCounts = coStallCounts;
             rule.comparatorTotal = matchedClusters.length;
           });
+          // Compute stall frequencies from clusters.json for journey.js
+          const _stallFreq = {};
+          const _stallNameMap = {
+            'Re-proving instead of narrowing':'Re-proving','Coordinating instead of deciding':'Coordinating',
+            'Forgiving instead of redesigning':'Forgiving','Extracting without reinvesting':'Extracting',
+            'Mediating instead of coupling':'Mediating','Stabilizing around incumbents':'Stabilising',
+            'Stabilising around incumbents':'Stabilising','Narrating instead of testing':'Narrating',
+            'Scaling activity instead of throughput':'Scaling','Waiting for permission':'Waiting'
+          };
+          const _medHighCounts = {};
+          allClusters.forEach(c => {
+            (c.stalls || []).forEach(s => {
+              if (s.confidence === 'medium' || s.confidence === 'high') {
+                const short = _stallNameMap[s.name];
+                if (short) _medHighCounts[short] = (_medHighCounts[short]||0) + 1;
+              }
+            });
+          });
+          Object.entries(_medHighCounts).forEach(([short, cnt]) => {
+            _stallFreq[short] = Math.round(cnt / allClusters.length * 100);
+          });
+          window._CLUSTER_STALL_FREQ = _stallFreq;
+
           console.log('[Knowledge API] Cluster comparators loaded for', STACK_RULES.filter(r => (r.comparators || []).length > 0).length, 'stacks');
         })
         .catch(e => console.warn('[Knowledge API] clusters.json not loaded:', e.message));

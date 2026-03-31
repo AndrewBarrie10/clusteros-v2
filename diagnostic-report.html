@@ -1713,17 +1713,15 @@ async function init() {
     document.getElementById('blind-spot-area').innerHTML = `
       <div class="blind-spot">
         <div class="blind-spot-label">The steward's blind spot</div>
-        <p class="blind-spot-intro">Based on ${nClusters} diagnosed ecosystems, the stalls below appear frequently in ecosystems sharing your stack configuration — but were not identified in this assessment. Stalls that have been present for a long time often become invisible because they define the operating environment rather than standing out against it.</p>
-        ${blindSpots.map(bs => `
         <div class="blind-spot-item">
           <div class="blind-spot-item-header">
-            <span class="blind-spot-item-name">${bs.name}</span>
-            <span class="blind-spot-item-pct">${bs.pct}% of ${bs.sampleSize ? bs.sampleSize + ' ecosystems' : 'ecosystems'} with this configuration</span>
+            <span class="blind-spot-item-name">${topSpot.name} — you didn't identify this.</span>
+            ${topSpot.pct > 0 ? `<span class="blind-spot-item-pct">${topSpot.pct}% of ${topSpot.sampleSize ? topSpot.sampleSize : ''} ecosystems</span>` : ''}
           </div>
-          <div class="blind-spot-item-def">${bs.definition}</div>
-          ${bs.labNote ? `<a href="${bs.labNote}" target="_blank" style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber);text-decoration:none;margin-top:4px;display:inline-block">Read the lab note →</a>` : ''}
-        </div>`).join('')}
-        <div class="blind-spot-provocation">${topSpot.name.split(' ')[0]} appears in ${topSpot.pct}% of ecosystems with this configuration. If it is genuinely absent here, that is structurally interesting. If it has been normalised to the point of invisibility, this diagnostic has surfaced something important.</div>
+          <div class="blind-spot-item-def">${topSpot.definition}</div>
+          ${topSpot.labNote ? `<a href="${topSpot.labNote}" target="_blank" style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber);text-decoration:none;margin-top:4px;display:inline-block">Read the lab note →</a>` : ''}
+        </div>
+        <div class="blind-spot-provocation">${topSpot.name.split(' ')[0]} appears in ${topSpot.pct > 0 ? topSpot.pct + '% of' : ''} ecosystems with this configuration. If it is genuinely absent here, that is structurally interesting. If it has been normalised to the point of invisibility, this diagnostic has surfaced something important.</div>
       </div>`;
   }
 

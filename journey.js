@@ -616,13 +616,20 @@ const journey = {
       sector:    '',
       geography: '',
       role:      document.getElementById('jf-eco-role')?.value?.trim() || '',
-      stalls:    stalls.map(s => ({
-        id:         STALL_CODES[s] || s,
-        name:       STALL_NAMES[s] || s,
-        freq:       STALL_FREQ[s]  || 50,
-        definition: (window.STALL_SCIENCE_DATA[s] || {}).definition || '',
-        leverage:   (window.STALL_SCIENCE_DATA[s] || {}).leverage   || ''
-      })),
+      stalls:    stalls.map(s => {
+        const sci = window.STALL_SCIENCE_DATA[s] || {};
+        return {
+          id:         STALL_CODES[s] || s,
+          name:       STALL_NAMES[s] || s,
+          freq:       STALL_FREQ[s]  || 50,
+          definition: sci.definition || '',
+          leverage:   sci.leverage   || '',
+          signal:     sci.signal     || '',
+          displaced:  sci.y          || '',
+          behaviour:  sci.x          || '',
+          cost:       sci.cost       || '',
+        };
+      }),
       stack: {
         name:        stack.name        || stalls.join(' + '),
         stalls:      stalls,

@@ -194,6 +194,44 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 /* Hidden by stage */
 .stage-hidden{display:none}
 
+/* How to read this report */
+.doc-guide{margin-bottom:32px;padding:20px 22px;background:var(--surface);border:1px solid var(--border);border-radius:3px}
+.doc-guide-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.doc-guide-text{font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300}
+
+/* Jump navigation */
+.doc-jumpnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
+.doc-jumpnav a{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);border-radius:2px;color:var(--ink-muted);text-decoration:none;transition:all 0.15s}
+.doc-jumpnav a:hover{color:var(--green);border-color:var(--green)}
+.doc-jumpnav a.locked{opacity:0.4;pointer-events:none}
+
+/* Blind spot */
+.blind-spot{margin-top:20px;padding:20px 22px;background:rgba(217,119,6,0.04);border:1px solid rgba(217,119,6,0.2);border-left:3px solid var(--amber);border-radius:0 3px 3px 0}
+.blind-spot-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.blind-spot-intro{font-size:12px;color:var(--ink-dim);line-height:1.65;font-weight:300;margin-bottom:14px}
+.blind-spot-item{padding:10px 14px;background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.15);border-radius:3px;margin-bottom:8px}
+.blind-spot-item-header{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:4px}
+.blind-spot-item-name{font-size:13px;color:var(--ink);font-weight:500}
+.blind-spot-item-pct{font-family:var(--mono);font-size:9px;color:var(--amber);font-weight:700}
+.blind-spot-item-def{font-size:11px;color:var(--ink-dim);line-height:1.55;font-weight:300;font-style:italic}
+.blind-spot-provocation{margin-top:14px;padding:12px 16px;background:rgba(217,119,6,0.08);border-radius:3px;font-size:12px;color:var(--amber);line-height:1.6;font-style:italic;font-weight:300}
+
+/* Stall metadata line */
+.stall-meta{font-family:var(--mono);font-size:8px;letter-spacing:0.04em;color:var(--ink-muted);margin-bottom:8px;display:flex;gap:16px;flex-wrap:wrap}
+.stall-meta span{color:var(--teal);font-weight:700}
+
+/* Diagnostic inputs appendix */
+.inputs-table{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.inputs-row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:8px 12px;border-radius:3px}
+.inputs-row:nth-child(odd){background:var(--surface)}
+.inputs-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);padding-top:2px}
+.inputs-value{font-size:12px;color:var(--ink);font-weight:500}
+.inputs-stall-row{display:flex;align-items:baseline;gap:8px;padding:6px 12px;border-radius:3px}
+.inputs-stall-row:nth-child(odd){background:var(--surface)}
+.inputs-stall-id{font-family:var(--mono);font-size:9px;font-weight:700;color:var(--green);width:24px;flex-shrink:0}
+.inputs-stall-name{font-size:12px;color:var(--ink);font-weight:500;flex:1}
+.inputs-stall-badge{font-family:var(--mono);font-size:8px;font-weight:700;color:var(--amber);letter-spacing:0.06em}
+
 /* Footer */
 .doc-footer{margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
 .doc-footer-main{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
@@ -276,6 +314,15 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
   .layer-card-head{background:var(--green-dim)!important}
   .layer-card-name{color:#fff!important}
   .layer-card-body{background:var(--surface)!important}
+
+  /* ── Blind spot ── */
+  .blind-spot{background:rgba(217,119,6,0.04)!important;border-left:3px solid var(--amber)!important}
+  .blind-spot-item{background:rgba(217,119,6,0.06)!important;break-inside:avoid;page-break-inside:avoid}
+  .blind-spot-provocation{background:rgba(217,119,6,0.08)!important}
+
+  /* ── Guide & jump nav ── */
+  .doc-guide{background:var(--surface)!important}
+  .doc-jumpnav{display:none!important}
 
   /* ── Stage badge ── */
   .doc-stage-badge.behaviours{background:rgba(217,119,6,0.06)!important;border-color:rgba(217,119,6,0.3)!important}
@@ -444,6 +491,15 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
     <!-- Qualifier context (Stage 2+) -->
     <div id="qualifier-context" class="stage-hidden"></div>
 
+    <!-- How to read this report (for shared links / board members) -->
+    <div class="doc-guide" id="doc-guide">
+      <div class="doc-guide-label">How to read this report</div>
+      <div class="doc-guide-text" id="guide-text"></div>
+    </div>
+
+    <!-- Jump navigation -->
+    <div class="doc-jumpnav" id="doc-jumpnav"></div>
+
     <div class="doc-caveat">
       <div class="doc-caveat-icon">NOTE</div>
       <div class="doc-caveat-text" id="caveat-text">
@@ -452,7 +508,7 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
     </div>
 
     <!-- 1. Stalls (all stages) -->
-    <div class="doc-section">
+    <div class="doc-section" id="section-stalls">
       <div class="doc-section-label"><span class="doc-section-num">1</span>Stalls identified</div>
       <div class="doc-section-heading">What your ecosystem is <em>substituting</em></div>
       <p class="doc-body" id="stall-body">Based on your behaviour selections, the following structural stalls were identified. Each is a behavioural substitution — the ecosystem doing something visible and rewarding instead of something that would produce compounding value. Stall definitions and leverage directions are drawn from the ClusterOS stall science framework, developed across 200+ ecosystem diagnostics.</p>
@@ -461,11 +517,13 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
     </div>
 
     <!-- 2. Stack (all stages) -->
-    <div class="doc-section">
+    <div class="doc-section" id="section-stack">
       <div class="doc-section-label"><span class="doc-section-num">2</span>Your stack</div>
       <div class="doc-section-heading">Why single interventions <em>keep failing</em></div>
       <p class="doc-body" id="stack-body">When stalls appear together they form a reinforcing configuration — each providing cover for the others. Addressing one without the rest produces temporary change that the system absorbs. The stack is the unit of intervention, not the individual stall.</p>
       <div class="stack-card" id="stack-card"></div>
+      <!-- Blind spot (all stages) -->
+      <div id="blind-spot-area"></div>
     </div>
 
     <!-- Stage 1 locked teasers (replaced by real sections at Stage 2+) -->
@@ -540,10 +598,35 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
         <div class="stall-ref-grid" id="stall-ref-grid"></div>
       </div>
 
-      <!-- B: Copyright and attribution -->
+      <!-- B: Diagnostic inputs -->
+      <div style="margin-bottom:40px" id="appendix-inputs">
+        <div class="appendix-heading">Diagnostic <em>inputs</em></div>
+        <p class="appendix-intro">This section records the exact inputs that generated this report — what the steward selected and what the diagnostic engine inferred. Its purpose is transparency: readers who weren't present during the assessment can challenge these inputs with reference to their own experience of the ecosystem. Disagreement is productive — if a stall identification is contested, that contest is itself diagnostic information.</p>
+        <div id="inputs-qualifiers"></div>
+        <div id="inputs-stalls-selected"></div>
+        <div id="inputs-stalls-not-selected"></div>
+      </div>
+
+      <!-- C: Methodology -->
+      <div style="margin-bottom:40px">
+        <div class="appendix-heading">Methodology & <em>limitations</em></div>
+        <p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px"><strong style="color:var(--ink);font-weight:500">Self-assessment basis.</strong> This report is generated from stalls identified by the submitting steward through the ClusterOS self-assessment tool. No actor interviews, programme data, capital flow records, or independent observation were used. The quality of the output is bounded by the quality of the input.</p>
+        <p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px"><strong style="color:var(--ink);font-weight:500">What this report can establish.</strong> The structural logic of ecosystems where the identified stall combination is active — including reinforcing mechanisms, leverage entry points, and structural comparators from the 221-cluster dataset. Stack detection, blind spot analysis, and infrastructure configuration are derived from validated structural relationships in the dataset.</p>
+        <p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px"><strong style="color:var(--ink);font-weight:500">What this report cannot establish.</strong> Whether the stalls are correctly identified (requires actor-level evidence). Whether extraction is occurring and at what scale (requires value flow mapping). Which specific actors hold leverage (requires anchor mapping). Whether stacks are structural or phase-specific (requires longitudinal evidence). These gaps are reasons to treat this report as a hypothesis to be tested, not a finding to be acted on without further investigation.</p>
+        <p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300"><strong style="color:var(--ink);font-weight:500">The 221-cluster dataset.</strong> Comparator matching and blind spot analysis draw on 221 clusters across ~45 countries. Co-occurrence rates are derived from clusters where stall identification was conducted at medium or high confidence — not from self-assessments. The dataset underpinning the analysis reflects a higher-quality evidence base than the self-assessment that generated this report.</p>
+      </div>
+
+      <!-- D: About ClusterOS -->
+      <div style="margin-bottom:40px">
+        <div class="appendix-heading">About <em>ClusterOS</em></div>
+        <p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">ClusterOS is a diagnostic intelligence and coordination platform for regional innovation ecosystems. It gives ecosystem stewards the infrastructure to see what is actually happening in their ecosystem, not what was last reported. Built on a sovereign database architecture: the ecosystem's data belongs to the ecosystem, not to a platform vendor.</p>
+        <p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">The ClusterOS diagnostic has processed 221 clusters across ~45 countries. The intelligence layer is built on the Model Context Protocol — every AI capability is a structured tool call against a live sovereign database, producing grounded, auditable, current intelligence.</p>
+        <p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300">Built by Community Lab Ltd, Edinburgh. Founded by Andrew Barrie, previously co-founder of Barrie & Hibbert (acquired by Moody's Analytics).</p>
+      </div>
+
+      <!-- E: Copyright and attribution -->
       <div>
-        <div class="appendix-heading">About this <em>report</em></div>
-        <p style="font-size:13px;color:var(--ink-dim);line-height:1.72;font-weight:300;margin-bottom:16px">This self-diagnostic report was generated using the ClusterOS diagnostic pathway at <strong>clusteros.io</strong>. The stall science framework, stack definitions, comparator database, and leverage hypotheses are proprietary to Community Lab Ltd and are used here under licence for personal and organisational use.</p>
+        <div class="appendix-heading">Copyright & <em>attribution</em></div>
         <div style="padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:3px;font-size:11px;color:var(--ink-muted);line-height:1.7">
           <p style="margin-bottom:8px"><strong style="color:var(--ink);font-weight:500">Copyright:</strong> © <span id="copyright-year"></span> Community Lab Ltd. All rights reserved. ClusterOS is a registered trademark of Community Lab Ltd.</p>
           <p style="margin-bottom:8px"><strong style="color:var(--ink);font-weight:500">Attribution:</strong> If this report is shared, forwarded, or cited, please attribute as follows: <em>"ClusterOS Self-Diagnostic Report, generated at clusteros.io, © Community Lab Ltd."</em></p>
@@ -726,7 +809,37 @@ const ALL_STALLS = [
   { id:'S9', key:'Waiting', name:'Waiting for permission', definition:'Action is deferred pending external conditions — funding decisions, policy clarity, anchor commitment. Waiting becomes structural: the system learns to produce deferral as its primary output.' },
 ];
 
-// ── INIT ────────────────────────────────────────────────────
+// ── CO-OCCURRENCE DATA (from 221-cluster dataset) ──────────
+// Maps stack stall pairs to stalls that frequently co-occur but may be missed
+const CO_OCCURRENCE = {
+  'Coordinating+Mediating':    { S1:18, S9:35 },
+  'Coordinating+Stabilising':  { S4:27, S5:30, S7:13 },
+  'Coordinating+Re-proving':   { S6:33, S9:44 },
+  'Narrating+Scaling':         { S4:27, S5:30, S6:33, S8:13 },
+  'Extracting+Stabilising':    { S2:38, S5:22, S7:28 },
+  'Extracting+Narrating':      { S6:32, S9:28 },
+  'Mediating+Stabilising':     { S1:24, S2:36, S4:28 },
+  'Mediating+Narrating':       { S2:30, S6:25 },
+  'Extracting+Scaling':        { S7:32, S9:28 },
+  'Re-proving+Stabilising':    { S2:40, S5:22 },
+  'Coordinating+Extracting':   { S5:30, S6:38, S7:12 },
+  'Mediating+Waiting':         { S1:20, S2:28 },
+};
+
+function computeBlindSpots(stallIds, stackKey) {
+  const active = new Set(stallIds);
+  const coData = CO_OCCURRENCE[stackKey] || {};
+  return Object.entries(coData)
+    .filter(([code]) => !active.has(code))
+    .map(([code, pct]) => {
+      const stall = ALL_STALLS.find(s => s.id === code);
+      return { id: code, name: stall ? stall.name : code, definition: stall ? stall.definition : '', pct };
+    })
+    .filter(s => s.pct >= 20)
+    .sort((a, b) => b.pct - a.pct)
+    .slice(0, 3);
+}
+
 // ── QUALIFIER LABELS ──────────────────────────────────────
 const QUALIFIER_LABELS = {
   clusterType: { regional:'Regional Speciality', national:'National Supercluster', corporate:'Corporate', city:'City Cluster' },
@@ -840,9 +953,37 @@ async function init() {
     .filter(t => t && t.trim())
     .map(t => `<span class="doc-tag">${t}</span>`).join('');
 
+  // ── Report ID for resume links ──
+  const reportId = new URLSearchParams(window.location.search).get('id') || '';
+  const resumeParam = reportId ? `?resume=${encodeURIComponent(reportId)}` : '';
+
   // ── Stage badge ──
   document.getElementById('stage-badge').innerHTML = `
     <div class="doc-stage-badge ${stage}">${STAGE_LABELS[stage] || 'Self-diagnostic report'}</div>`;
+
+  // ── How to read this report ──
+  const guideTexts = {
+    behaviours: 'This report identifies the behavioural stalls active in your ecosystem and the reinforcing stack they form. It was generated from a self-assessment — not independent evidence. Sections 1–2 describe what was identified. The blind spot section flags stalls that ecosystems like yours often miss. Locked sections show what the leverage analysis stage would add. Share this with colleagues to test whether the identification matches their experience.',
+    leverage: 'This report covers stall identification, structural comparators from 221 ecosystems, and a leverage hypothesis calibrated to your ecosystem profile. Sections 1–2 describe the stalls and stack. Section 3 shows similar ecosystems. Sections 4–6 explain why the pattern persists and where to intervene. The blind spot section flags stalls you may have missed. The Digital OS section is available by continuing the journey.',
+    digital_os: 'This is your complete self-diagnostic report. It covers stall identification, structural comparators, leverage analysis, and a 7-layer Digital OS architecture configured for your ecosystem. Read sections 1–2 for the diagnosis, 3–6 for the analysis, and 8 for the infrastructure specification. The appendices provide full reference material, diagnostic inputs for audit, and methodology notes.'
+  };
+  document.getElementById('guide-text').textContent = guideTexts[stage] || guideTexts.behaviours;
+
+  // ── Jump navigation ──
+  const jumpSections = [
+    { id:'section-stalls', label:'Stalls', always:true },
+    { id:'section-stack', label:'Stack', always:true },
+    { id:'section-comparators', label:'Comparators', locked: stage === 'behaviours' },
+    { id:'section-cas', label:'Why it persists', locked: stage === 'behaviours' },
+    { id:'section-infra', label:'Infrastructure', locked: stage === 'behaviours' },
+    { id:'section-leverage', label:'Leverage', locked: stage === 'behaviours' },
+    { id:'section-digital-os', label:'Digital OS', locked: stage !== 'digital_os' },
+    { id:'appendix-inputs', label:'Inputs' },
+  ];
+  document.getElementById('doc-jumpnav').innerHTML = jumpSections
+    .filter(s => s.always || !s.locked || isLeverage || isDigitalOS)
+    .map(s => `<a href="#${s.id}" class="${s.locked ? 'locked' : ''}">${s.label}</a>`)
+    .join('');
 
   // ── Qualifier context (Stage 2+) ──
   if (isLeverage && Object.keys(qa).length > 0) {
@@ -874,7 +1015,7 @@ async function init() {
     caveatEl.innerHTML = '<strong>This is your full self-diagnostic report.</strong> It includes stall identification, leverage analysis calibrated to your ecosystem profile, and a Digital OS architecture configured to your specific needs. It is based on your own assessment — not a full evidence-based ClusterOS diagnostic. A full diagnostic analyses 50–170 evidence items per cluster, verifies findings against structured evidence, and produces confidence-tiered results.';
   }
 
-  // ── 1. Stalls (all stages — but leverage direction only shown at Stage 2+) ──
+  // ── 1. Stalls (all stages — enriched with signal/displacement at Stage 2+) ──
   document.getElementById('stall-list').innerHTML = (d.stalls || []).map(s => `
     <div class="stall-item">
       <div class="stall-item-header">
@@ -882,6 +1023,7 @@ async function init() {
         <span class="stall-item-name">${s.name || s}</span>
         <span class="stall-item-freq">Appears in <span>${s.freq || '—'}%</span> of diagnostics</span>
       </div>
+      ${(s.signal || s.displaced) ? `<div class="stall-meta">${s.signal ? `Absorbs: <span>${s.signal}</span>` : ''}${s.displaced ? ` · Displaces: <span>${s.displaced}</span>` : ''}</div>` : ''}
       ${s.definition ? `<p class="stall-item-def">${s.definition}</p>` : ''}
       ${isLeverage && s.leverage ? `<div><div class="stall-leverage-label">Leverage direction</div><p class="stall-item-leverage">${s.leverage}</p></div>` : ''}
     </div>`).join('');
@@ -898,7 +1040,7 @@ async function init() {
       ${isLeverage && stack.leverage ? `<div class="stack-leverage-dir"><div class="stack-leverage-label">Leverage direction</div><p class="stack-leverage-text">${stack.leverage}</p></div>` : ''}
     </div>`;
 
-  // ── Resolve stack content for sections 3-6 ──
+  // ── Resolve stack key ──
   const _stalls = (stack.stalls || []);
   let stackKey = _stalls.slice().sort().join('+');
   let content = STACK_CONTENT[stackKey];
@@ -911,6 +1053,27 @@ async function init() {
     }
   }
   content = content || STACK_CONTENT.default;
+
+  // ── Blind spot (all stages) ──
+  const stallIds = (d.stalls || []).map(s => s.id || s);
+  const blindSpots = computeBlindSpots(stallIds, stackKey);
+  if (blindSpots.length > 0) {
+    const topSpot = blindSpots[0];
+    document.getElementById('blind-spot-area').innerHTML = `
+      <div class="blind-spot">
+        <div class="blind-spot-label">The steward's blind spot</div>
+        <p class="blind-spot-intro">Based on the 221-cluster dataset, the stalls below appear frequently in ecosystems sharing your stack configuration — but were not identified in this assessment. Stalls that have been present for a long time often become invisible because they define the operating environment rather than standing out against it.</p>
+        ${blindSpots.map(bs => `
+        <div class="blind-spot-item">
+          <div class="blind-spot-item-header">
+            <span class="blind-spot-item-name">${bs.name}</span>
+            <span class="blind-spot-item-pct">${bs.pct}% of ecosystems with this stack</span>
+          </div>
+          <div class="blind-spot-item-def">${bs.definition}</div>
+        </div>`).join('')}
+        <div class="blind-spot-provocation">${topSpot.name.split(' ')[0]} appears in ${topSpot.pct}% of ecosystems with this configuration. If it is genuinely absent here, that is structurally interesting. If it has been normalised to the point of invisibility, this diagnostic has surfaced something important.</div>
+      </div>`;
+  }
 
   // ══════════════════════════════════════════════════════════
   // STAGE 1 (behaviours only): Show locked teasers for sections 3-6
@@ -930,7 +1093,7 @@ async function init() {
             ${comparatorNames.map(n => `<span class="locked-preview-pill">${n}</span>`).join('')}
           </div>
         </div>` : ''}
-        <a href="/diagnostic-journey.html" class="locked-cta">Continue to leverage analysis →</a>
+        <a href="/diagnostic-journey.html${resumeParam}" class="locked-cta">Continue to leverage analysis →</a>
       </div>
 
       <!-- Locked: Why this persists -->
@@ -938,7 +1101,7 @@ async function init() {
         <div class="locked-badge">Continue to unlock</div>
         <div class="locked-heading">Why this pattern <em>keeps regenerating</em></div>
         <p class="locked-teaser">Every ecosystem with this configuration has tried new programmes, governance reform, or leadership change — and found the pattern reasserts itself. The leverage analysis explains exactly why, using Complex Adaptive Systems theory specific to your stack. This isn't theory. It's the structural reason your last three initiatives didn't stick.</p>
-        <a href="/diagnostic-journey.html" class="locked-cta">Continue to leverage analysis →</a>
+        <a href="/diagnostic-journey.html${resumeParam}" class="locked-cta">Continue to leverage analysis →</a>
       </div>
 
       <!-- Locked: Leverage hypothesis -->
@@ -946,7 +1109,7 @@ async function init() {
         <div class="locked-badge">Continue to unlock</div>
         <div class="locked-heading">Where to <em>actually intervene</em></div>
         <p class="locked-teaser">A leverage hypothesis identifies the single structural element whose removal makes the whole stack untenable. It's not a strategy — it's the one thing that makes everything else moveable. The leverage stage generates this hypothesis for your specific configuration, calibrated by your ecosystem's anchor type, strategic priority, and coordination gap.</p>
-        <a href="/diagnostic-journey.html" class="locked-cta">Continue to leverage analysis →</a>
+        <a href="/diagnostic-journey.html${resumeParam}" class="locked-cta">Continue to leverage analysis →</a>
       </div>
     `;
 
@@ -958,7 +1121,7 @@ async function init() {
           <div class="continue-banner-heading">Now find out <em>how to break it.</em></div>
           <div class="continue-banner-sub">The leverage analysis takes 3 minutes. It adds comparator ecosystems, structural explanation, and an intervention hypothesis calibrated to your ecosystem.</div>
         </div>
-        <a href="/diagnostic-journey.html" class="continue-banner-action">Continue your journey</a>
+        <a href="/diagnostic-journey.html${resumeParam}" class="continue-banner-action">Continue your journey</a>
       </div>`;
   }
 
@@ -1034,7 +1197,7 @@ async function init() {
             ${LAYER_NAMES.map(([,name]) => `<span class="locked-preview-pill">${name}</span>`).join('')}
           </div>
         </div>
-        <a href="/diagnostic-journey.html" class="locked-cta">Continue to Digital OS →</a>
+        <a href="/diagnostic-journey.html${resumeParam}" class="locked-cta">Continue to Digital OS →</a>
       </div>`;
 
     // Continue banner for Stage 2
@@ -1045,7 +1208,7 @@ async function init() {
           <div class="continue-banner-heading">Now see the <em>infrastructure that delivers it.</em></div>
           <div class="continue-banner-sub">The Digital OS stage configures a 7-layer architecture specific to your ecosystem. It takes 5 minutes and completes your diagnostic.</div>
         </div>
-        <a href="/diagnostic-journey.html" class="continue-banner-action">Continue your journey</a>
+        <a href="/diagnostic-journey.html${resumeParam}" class="continue-banner-action">Continue your journey</a>
       </div>`;
   }
 
@@ -1089,14 +1252,62 @@ async function init() {
     <div class="full-diag-item"><div class="full-diag-bullet"></div><div class="full-diag-text">${item}</div></div>`).join('');
 
   // ── Appendix: all stalls ──
-  document.getElementById('stall-ref-grid').innerHTML = ALL_STALLS.map(s => `
-    <div class="stall-ref-item">
+  document.getElementById('stall-ref-grid').innerHTML = ALL_STALLS.map(s => {
+    const isActive = stallIds.includes(s.id);
+    return `
+    <div class="stall-ref-item" style="${isActive ? 'border-left:3px solid var(--green);background:rgba(42,122,79,0.04)' : ''}">
       <div class="stall-ref-header">
         <span class="stall-ref-id">${s.id}</span>
         <span class="stall-ref-name">${s.key}</span>
+        ${isActive ? '<span style="font-family:var(--mono);font-size:7px;font-weight:700;color:var(--green);letter-spacing:0.1em;margin-left:auto">IDENTIFIED</span>' : ''}
       </div>
       <div class="stall-ref-def">${s.definition}</div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+
+  // ── Appendix: diagnostic inputs ──
+  if (isLeverage && Object.keys(qa).length > 0) {
+    const qaRows = [
+      qa.clusterType && { label:'Cluster type', value: QUALIFIER_LABELS.clusterType[qa.clusterType] || qa.clusterType },
+      qa.anchorType  && { label:'Primary anchor', value: QUALIFIER_LABELS.anchorType[qa.anchorType] || qa.anchorType },
+      qa.stage       && { label:'Development stage', value: QUALIFIER_LABELS.stage[qa.stage] || qa.stage },
+      qa.priority    && { label:'Strategic priority', value: QUALIFIER_LABELS.priority[qa.priority] || qa.priority },
+      qa.gap         && { label:'Coordination gap', value: QUALIFIER_LABELS.gap[qa.gap] || qa.gap },
+      qa.protect     && { label:'Protection priorities', value: (qa.protect || []).join(', ') },
+    ].filter(Boolean);
+    document.getElementById('inputs-qualifiers').innerHTML = `
+      <div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px">Qualifier answers</div>
+      <div class="inputs-table">${qaRows.map(r => `
+        <div class="inputs-row"><span class="inputs-label">${r.label}</span><span class="inputs-value">${r.value}</span></div>`).join('')}
+      </div>`;
+  }
+
+  document.getElementById('inputs-stalls-selected').innerHTML = `
+    <div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:10px">Stalls identified by steward</div>
+    <div class="inputs-table">${(d.stalls || []).map(s => `
+      <div class="inputs-stall-row">
+        <span class="inputs-stall-id">${s.id || ''}</span>
+        <span class="inputs-stall-name">${s.name || s}</span>
+        <span class="inputs-stall-badge">Self-reported</span>
+      </div>`).join('')}
+    </div>`;
+
+  const notSelected = ALL_STALLS.filter(s => !stallIds.includes(s.id));
+  if (notSelected.length > 0) {
+    document.getElementById('inputs-stalls-not-selected').innerHTML = `
+      <div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);margin:20px 0 10px">Stalls not identified</div>
+      <p style="font-size:11px;color:var(--ink-muted);line-height:1.6;font-weight:300;font-style:italic;margin-bottom:10px">The blind spot analysis may indicate some warrant reconsideration — particularly those with high co-occurrence rates for the detected stack configuration.</p>
+      <div class="inputs-table">${notSelected.map(s => {
+        const bs = blindSpots.find(b => b.id === s.id);
+        return `
+        <div class="inputs-stall-row">
+          <span class="inputs-stall-id">${s.id}</span>
+          <span class="inputs-stall-name" style="color:var(--ink-muted)">${s.key}</span>
+          ${bs ? `<span class="inputs-stall-badge" style="color:var(--amber)">${bs.pct}% co-occurrence</span>` : ''}
+        </div>`;
+      }).join('')}
+      </div>`;
+  }
 }
 
 function getDemoData(stageOverride) {
@@ -1107,8 +1318,8 @@ function getDemoData(stageOverride) {
     geography: 'Edinburgh, Scotland',
     role: 'Cluster Manager',
     stalls:[
-      { id:'S2', name:'Coordinating instead of deciding', freq:97, definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', leverage:'Identify the actor with the most to lose from the current arrangement and change their constraint. The leverage is never more coordination — it is one actor making an exclusionary choice.' },
-      { id:'S6', name:'Stabilising around incumbents', freq:76, definition:'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve the system.', leverage:'New entry pathways that bypass incumbent gatekeepers are the intervention. The leverage is creating routes that do not require incumbent permission — not changing incumbent behaviour.' }
+      { id:'S2', name:'Coordinating instead of deciding', freq:97, definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', leverage:'Identify the actor with the most to lose from the current arrangement and change their constraint. The leverage is never more coordination — it is one actor making an exclusionary choice.', signal:'Decision signals', displaced:'Committed action with real consequences', behaviour:'Meetings, partnerships and alignment processes' },
+      { id:'S6', name:'Stabilising around incumbents', freq:76, definition:'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve the system.', leverage:'New entry pathways that bypass incumbent gatekeepers are the intervention. The leverage is creating routes that do not require incumbent permission — not changing incumbent behaviour.', signal:'Adaptation signals', displaced:'Structural evolution and new entry', behaviour:'Preserving existing structures and incumbent relationships' }
     ],
     stack:{ name:'Incumbent Anchor Lock-In', stalls:['Coordinating','Stabilising'], description:'Large incumbents define what coordination is for, and coordination structures form around their needs. New entrants optimise for incumbent partnership. Emergence outside the incumbent orbit remains structurally weak.', leverage:'Fund one thing that does not require incumbent validation to proceed. The goal is not to displace incumbents — it is to demonstrate that the system can produce value without routing through them.' },
     comparators:[

@@ -492,6 +492,12 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
     <!-- Qualifier context (Stage 2+) -->
     <div id="qualifier-context" class="stage-hidden"></div>
 
+    <!-- Data privacy assurance -->
+    <div style="padding:12px 16px;background:rgba(42,122,79,0.04);border:1px solid rgba(42,122,79,0.15);border-radius:3px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L2 4v4c0 3.5 2.6 6.4 6 7 3.4-.6 6-3.5 6-7V4L8 1z" stroke="var(--green)" stroke-width="1.2" fill="none"/><path d="M5.5 8l2 2 3.5-3.5" stroke="var(--green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p style="font-size:11px;color:var(--ink-dim);line-height:1.6;font-weight:300;margin:0"><strong style="color:var(--green);font-weight:500">Your data stays yours.</strong> None of the information you provide is stored, shared, or used by ClusterOS for any purpose beyond generating this report. The structural analysis draws on an independent database of <span id="cluster-count">221</span> diagnosed ecosystems — your ecosystem's data is not part of that database and never will be without your explicit consent.</p>
+    </div>
+
     <!-- How to read this report (for shared links / board members) -->
     <div class="doc-guide" id="doc-guide">
       <div class="doc-guide-label">How to read this report</div>
@@ -885,11 +891,155 @@ function showError(reportId, msg) {
     `Report "${reportId}" could not be loaded. ${msg || 'It may have expired or the link may be incorrect.'}`;
 }
 
-// ── INIT ────────────────────────────────────────────────────
+// ── STALL NAME → ID MAP ─────────────────────────────────────
+const STALL_NAME_TO_ID = {
+  'Re-proving instead of narrowing':'S1','Coordinating instead of deciding':'S2',
+  'Forgiving instead of redesigning':'S3','Extracting without reinvesting':'S4',
+  'Mediating instead of coupling':'S5','Stabilizing around incumbents':'S6',
+  'Stabilising around incumbents':'S6','Narrating instead of testing':'S7',
+  'Scaling activity instead of throughput':'S8','Waiting for permission':'S9'
+};
+
+// ── CLUSTER INTELLIGENCE (computed from clusters.json) ───────
+let CLUSTER_DATA = null;
+let CLUSTER_STATS = null;
+
+async function loadClusterData() {
+  try {
+    const res = await fetch('/clusters.json');
+    if (!res.ok) return null;
+    CLUSTER_DATA = await res.json();
+    CLUSTER_STATS = computeClusterStats(CLUSTER_DATA);
+    return CLUSTER_DATA;
+  } catch(e) {
+    console.warn('[Report] clusters.json not available:', e.message);
+    return null;
+  }
+}
+
+function computeClusterStats(clusters) {
+  const n = clusters.length;
+
+  // Stall frequencies (medium+high confidence)
+  const stallCounts = {};
+  ALL_STALLS.forEach(s => { stallCounts[s.id] = 0; });
+  clusters.forEach(c => {
+    (c.stalls || []).forEach(s => {
+      if (s.confidence === 'medium' || s.confidence === 'high') {
+        const id = STALL_NAME_TO_ID[s.name];
+        if (id) stallCounts[id]++;
+      }
+    });
+  });
+  const stallFreq = {};
+  Object.entries(stallCounts).forEach(([id, count]) => {
+    stallFreq[id] = Math.round(count / n * 100);
+  });
+
+  // Co-occurrence: for each pair of stalls, what other stalls co-occur
+  const pairCoOccurrence = {};
+  const clusterStallSets = clusters.map(c => {
+    const sids = new Set();
+    (c.stalls || []).forEach(s => {
+      if (s.confidence === 'medium' || s.confidence === 'high') {
+        const id = STALL_NAME_TO_ID[s.name];
+        if (id) sids.add(id);
+      }
+    });
+    return sids;
+  });
+
+  // Build co-occurrence for all pairs that appear
+  const allIds = ALL_STALLS.map(s => s.id);
+  for (let i = 0; i < allIds.length; i++) {
+    for (let j = i+1; j < allIds.length; j++) {
+      const a = allIds[i], b = allIds[j];
+      const matching = clusterStallSets.filter(s => s.has(a) && s.has(b));
+      if (matching.length < 3) continue; // need minimum sample
+      const co = {};
+      matching.forEach(s => {
+        s.forEach(sid => { if (sid !== a && sid !== b) co[sid] = (co[sid]||0) + 1; });
+      });
+      const key = [a, b].sort().join('+');
+      const result = {};
+      Object.entries(co).forEach(([sid, cnt]) => {
+        const pct = Math.round(cnt / matching.length * 100);
+        if (pct >= 15) result[sid] = pct;
+      });
+      if (Object.keys(result).length > 0) pairCoOccurrence[key] = result;
+    }
+  }
+
+  // Anchor type counts
+  const anchorCounts = {};
+  clusters.forEach(c => {
+    const a = c._anchor_type || 'unknown';
+    anchorCounts[a] = (anchorCounts[a]||0) + 1;
+  });
+
+  return { n, stallFreq, pairCoOccurrence, anchorCounts };
+}
+
+function computeBlindSpotsFromData(stallIds, stackStalls) {
+  // Use real data if available, fall back to hardcoded
+  const key = stackStalls.slice().sort().join('+');
+  const coData = CLUSTER_STATS ? CLUSTER_STATS.pairCoOccurrence[key] : (CO_OCCURRENCE[key] || {});
+  const active = new Set(stallIds);
+  return Object.entries(coData)
+    .filter(([code]) => !active.has(code))
+    .map(([code, pct]) => {
+      const stall = ALL_STALLS.find(s => s.id === code);
+      return { id: code, name: stall ? stall.name : code, definition: stall ? stall.definition : '', labNote: stall ? stall.labNote : '', pct };
+    })
+    .filter(s => s.pct >= 15)
+    .sort((a, b) => b.pct - a.pct)
+    .slice(0, 3);
+}
+
+function getStallFreq(stallId) {
+  if (CLUSTER_STATS) return CLUSTER_STATS.stallFreq[stallId] || 0;
+  // Fallback
+  const fallback = {S1:0,S2:39,S3:1,S4:37,S5:38,S6:68,S7:7,S8:8,S9:30};
+  return fallback[stallId] || 0;
+}
+
+function findComparators(stallIds, maxResults) {
+  if (!CLUSTER_DATA) return [];
+  const target = new Set(stallIds);
+  const scored = [];
+  CLUSTER_DATA.forEach(cl => {
+    const clStalls = new Set();
+    (cl.stalls || []).forEach(s => {
+      if (s.confidence === 'medium' || s.confidence === 'high') {
+        const id = STALL_NAME_TO_ID[s.name];
+        if (id) clStalls.add(id);
+      }
+    });
+    const overlap = [...target].filter(s => clStalls.has(s)).length;
+    if (overlap > 0) scored.push({ overlap, cluster: cl });
+  });
+  scored.sort((a, b) => b.overlap - a.overlap);
+  const seen = new Set();
+  return scored
+    .filter(s => { if (seen.has(s.cluster.name)) return false; seen.add(s.cluster.name); return true; })
+    .slice(0, maxResults || 4)
+    .map(s => ({
+      region: s.cluster.name,
+      loc: [s.cluster.city, s.cluster.country].filter(Boolean).join(' · '),
+      sector: '',
+      id: s.cluster.id || '',
+      pattern: '',
+      regime: s.cluster.regime || s.cluster._lifecycle_stage || '',
+      anchor: s.cluster._anchor_type || '',
+    }));
+}
 async function init() {
   const urlParams = new URLSearchParams(window.location.search);
   const reportId  = urlParams.get('id');    // ?id=RPT-20260331-EDI  (hosted report)
   const demoStage = urlParams.get('demo');  // ?demo=behaviours | leverage | digital_os
+
+  // ── Load cluster intelligence (non-blocking for demo, parallel with API fetch) ──
+  const clusterPromise = loadClusterData();
 
   let d = null;
 
@@ -916,6 +1066,26 @@ async function init() {
   if (!d) {
     try { d = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
     if (!d) d = window.CLUSTEROS_REPORT || getDemoData();
+  }
+
+  // ── Wait for cluster data ──
+  await clusterPromise;
+
+  // ── Derive identification data from qualifiers if not explicit ──
+  if (!d.sector && d.qualifier_answers) d.sector = (QUALIFIER_LABELS.clusterType[d.qualifier_answers.clusterType] || '');
+  if (!d.geography && d.qualifier_answers && d.qualifier_answers.region) d.geography = d.qualifier_answers.region;
+
+  // ── Enrich stall frequencies from real data ──
+  if (d.stalls && CLUSTER_STATS) {
+    d.stalls.forEach(s => {
+      if (s.id) s.freq = getStallFreq(s.id);
+    });
+  }
+
+  // ── Enrich comparators from clusters.json if not already present ──
+  const stallIds = (d.stalls || []).map(s => s.id || s);
+  if ((!d.comparators || d.comparators.length === 0) && CLUSTER_DATA) {
+    d.comparators = findComparators(stallIds, 4);
   }
 
   // ── Preview toolbar (hidden in print) — only show in demo/fallback mode ──
@@ -946,6 +1116,7 @@ async function init() {
   document.getElementById('footer-ref').textContent = ref + ' · Self-diagnostic';
   document.getElementById('copyright-year').textContent = yr;
   document.querySelectorAll('.copyright-year-inline').forEach(el => el.textContent = yr);
+  if (CLUSTER_STATS) document.getElementById('cluster-count').textContent = CLUSTER_STATS.n;
   document.title = 'ClusterOS — ' + (d.ecosystem || 'Self-Diagnostic');
 
   document.getElementById('ecosystem-name').textContent = d.ecosystem || 'Your Ecosystem';
@@ -1035,27 +1206,39 @@ async function init() {
     </div>`;
   }).join('');
 
-  // ── 2. Stack (all stages — deepened with regime/logic from detected stacks) ──
+  // ── 2. Stacks (all stages — render all detected stacks) ──
   const stack = d.stack || {};
   const detectedStacks = d.detectedStacks || d.detected_stacks || [];
-  // Find the matching detected stack for richer data
-  const primaryDetected = detectedStacks.find(s => s.name === stack.name) || detectedStacks[0] || {};
-  const stackRegime = primaryDetected.regime || '';
-  const stackLogic = primaryDetected.logic || primaryDetected.reinforcing_logic || stack.description || '';
-  const stackEntry = primaryDetected.entry || primaryDetected.leverage_entry || '';
-  const stackEffect = primaryDetected.effect || '';
+  // Build array of all stacks to render — primary from d.stack, plus any additional from detected
+  const allStacks = [];
+  if (stack.name) {
+    const matched = detectedStacks.find(s => s.name === stack.name) || {};
+    allStacks.push({ ...stack, ...matched, _primary: true });
+  }
+  detectedStacks.forEach(ds => {
+    if (!allStacks.find(s => s.name === ds.name)) allStacks.push(ds);
+  });
 
-  document.getElementById('stack-card').innerHTML = `
-    <div class="stack-card-head">
-      <div class="stack-card-name">${stack.name || 'Your stack'}</div>
-      <div class="stack-card-pills">${(stack.stalls || []).map(s => `<span class="stack-pill">${s}</span>`).join('')}</div>
-    </div>
-    <div class="stack-card-body">
-      ${stackLogic ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--teal)">Reinforcing logic</div><p class="stack-card-desc" style="margin-bottom:0">${stackLogic}</p></div>` : ''}
-      ${stackRegime ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--amber)">What this locks in</div><p class="stack-card-desc" style="margin-bottom:0">${stackRegime}</p></div>` : ''}
-      ${isLeverage && (stack.leverage || stackEntry) ? `<div class="stack-leverage-dir"><div class="stack-leverage-label">Leverage direction</div><p class="stack-leverage-text">${stack.leverage || stackEntry}</p></div>` : ''}
-      ${isLeverage && stackEffect ? `<div style="margin-top:12px;padding-left:12px;border-left:2px solid var(--teal)"><div class="stall-leverage-label" style="color:var(--teal)">Expected effect</div><p style="font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300">${stackEffect}</p></div>` : ''}
+  document.getElementById('stack-card').innerHTML = allStacks.map((st, idx) => {
+    const stLogic = st.logic || st.reinforcing_logic || st.description || '';
+    const stRegime = st.regime || '';
+    const stEntry = st.entry || st.leverage_entry || st.leverage || '';
+    const stEffect = st.effect || '';
+    const stStalls = st.stalls || [];
+    return `
+    <div class="stack-card" style="${idx > 0 ? 'margin-top:12px' : ''}">
+      <div class="stack-card-head">
+        <div class="stack-card-name">${st.name || 'Stack ' + (idx+1)}</div>
+        <div class="stack-card-pills">${stStalls.map(s => `<span class="stack-pill">${s}</span>`).join('')}</div>
+      </div>
+      <div class="stack-card-body">
+        ${stLogic ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--teal)">Reinforcing logic</div><p class="stack-card-desc" style="margin-bottom:0">${stLogic}</p></div>` : ''}
+        ${stRegime ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--amber)">What this locks in</div><p class="stack-card-desc" style="margin-bottom:0">${stRegime}</p></div>` : ''}
+        ${isLeverage && stEntry ? `<div class="stack-leverage-dir"><div class="stack-leverage-label">Leverage direction</div><p class="stack-leverage-text">${stEntry}</p></div>` : ''}
+        ${isLeverage && stEffect ? `<div style="margin-top:12px;padding-left:12px;border-left:2px solid var(--teal)"><div class="stall-leverage-label" style="color:var(--teal)">Expected effect</div><p style="font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300">${stEffect}</p></div>` : ''}
+      </div>
     </div>`;
+  }).join('');
 
   // ── Resolve stack key ──
   const _stalls = (stack.stalls || []);
@@ -1071,15 +1254,15 @@ async function init() {
   }
   content = content || STACK_CONTENT.default;
 
-  // ── Blind spot (all stages) ──
-  const stallIds = (d.stalls || []).map(s => s.id || s);
-  const blindSpots = computeBlindSpots(stallIds, stackKey);
+  // ── Blind spot (all stages — computed from clusters.json or fallback) ──
+  const blindSpots = computeBlindSpotsFromData(stallIds, _stalls);
   if (blindSpots.length > 0) {
     const topSpot = blindSpots[0];
+    const nClusters = CLUSTER_STATS ? CLUSTER_STATS.n : 221;
     document.getElementById('blind-spot-area').innerHTML = `
       <div class="blind-spot">
         <div class="blind-spot-label">The steward's blind spot</div>
-        <p class="blind-spot-intro">Based on the 221-cluster dataset, the stalls below appear frequently in ecosystems sharing your stack configuration — but were not identified in this assessment. Stalls that have been present for a long time often become invisible because they define the operating environment rather than standing out against it.</p>
+        <p class="blind-spot-intro">Based on ${nClusters} diagnosed ecosystems, the stalls below appear frequently in ecosystems sharing your stack configuration — but were not identified in this assessment. Stalls that have been present for a long time often become invisible because they define the operating environment rather than standing out against it.</p>
         ${blindSpots.map(bs => `
         <div class="blind-spot-item">
           <div class="blind-spot-item-header">
@@ -1087,6 +1270,7 @@ async function init() {
             <span class="blind-spot-item-pct">${bs.pct}% of ecosystems with this stack</span>
           </div>
           <div class="blind-spot-item-def">${bs.definition}</div>
+          ${bs.labNote ? `<a href="${bs.labNote}" target="_blank" style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber);text-decoration:none;margin-top:4px;display:inline-block">Read the lab note →</a>` : ''}
         </div>`).join('')}
         <div class="blind-spot-provocation">${topSpot.name.split(' ')[0]} appears in ${topSpot.pct}% of ecosystems with this configuration. If it is genuinely absent here, that is structurally interesting. If it has been normalised to the point of invisibility, this diagnostic has surfaced something important.</div>
       </div>`;

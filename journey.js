@@ -645,6 +645,16 @@ const journey = {
         description: stack.description || '',
         leverage:    stack.leverage    || ''
       },
+      detectedStacks: (this.stackResult ? [this.stackResult] : []).map(s => ({
+        id:      s.id || '',
+        name:    s.name || '',
+        stalls:  s.triggers || s.stalls || [],
+        logic:   s.logic || s.reinforcing_logic || '',
+        regime:  s.regime || '',
+        entry:   s.entry || s.leverage_entry || '',
+        effect:  s.effect || '',
+        leverage: s.entry || s.leverage || '',
+      })),
       comparators,
       fullDiagAdds
     };
@@ -696,10 +706,10 @@ const journey = {
   _openReport() {
     _track('report_opened', { stack: this.stackResult?.name || this.selectedStalls.join('+'), stall_count: this.selectedStalls.length });
     const report = this._buildReport();
-    try {
-      localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report));
-    } catch(e) {}
-    window.open('/diagnostic-report.html', '_blank');
+    try { sessionStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report)); } catch(e) {}
+    try { localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report)); } catch(e) {}
+    const w = window.open('/diagnostic-report.html', '_blank');
+    if (w) w.CLUSTEROS_REPORT = report;
   },
 
   // ══ FORK 2: INFRASTRUCTURE ════════════════════════════

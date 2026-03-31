@@ -953,8 +953,7 @@ async function init() {
     .filter(t => t && t.trim())
     .map(t => `<span class="doc-tag">${t}</span>`).join('');
 
-  // ── Report ID for resume links ──
-  const reportId = new URLSearchParams(window.location.search).get('id') || '';
+  // ── Resume links ──
   const resumeParam = reportId ? `?resume=${encodeURIComponent(reportId)}` : '';
 
   // ── Stage badge ──

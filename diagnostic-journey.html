@@ -4102,6 +4102,75 @@ function DiagnosticJourney() {
     }
   }, [journeyState._reviseQualifiers]);
 
+  // ── Resume journey from stored report ──
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const resumeId = params.get('resume');
+    if (!resumeId) return;
+
+    (async () => {
+      try {
+        // Try fetching from API
+        let payload = null;
+        try {
+          const res = await fetch(`https://clusteros-v3-production.up.railway.app/api/v1/report/${encodeURIComponent(resumeId)}`);
+          if (res.ok) payload = await res.json();
+        } catch(e) { console.warn('[Resume] API fetch failed:', e); }
+
+        // Fallback to sessionStorage/localStorage
+        if (!payload) {
+          try { payload = JSON.parse(sessionStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
+          if (!payload) { try { payload = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {} }
+        }
+        if (!payload) { console.warn('[Resume] No report data found for', resumeId); return; }
+
+        console.log('[Resume] Restoring journey from', resumeId, 'stage:', payload.stage);
+
+        // Map stall data back to ID array
+        const stallIds = (payload.stalls || []).map(s => typeof s === 'string' ? s : (s.id || s));
+
+        // Find matching STACK_RULES for detected stacks
+        const reportStacks = payload.detectedStacks || payload.detected_stacks || [];
+        const detectedStacks = reportStacks.map(rs => {
+          // Try to find the matching rule by ID or by trigger match
+          const byId = STACK_RULES.find(r => r.id === rs.id);
+          if (byId) return byId;
+          const triggers = rs.stalls || rs.triggers || [];
+          const byTrigger = STACK_RULES.find(r =>
+            r.triggers.length === triggers.length &&
+            r.triggers.every(t => triggers.includes(t))
+          );
+          return byTrigger || { ...rs, triggers: rs.stalls || rs.triggers || [] };
+        });
+
+        // Restore journey state
+        updateJourneyState({
+          stalls: stallIds,
+          stacks: detectedStacks.map(s => s.name),
+          detectedStacks,
+          qualifierAnswers: payload.qualifier_answers || {},
+          stackCommentary: payload.stackCommentary || {},
+          osConfig: payload.config_name ? { configName: payload.config_name } : null,
+        });
+
+        // Set phase based on stage — drop user just after where they stopped
+        const stage = payload.stage || 'behaviours';
+        if (stage === 'behaviours') {
+          setPhase(1); // transition after behaviours — they can continue to qualifiers
+        } else if (stage === 'leverage') {
+          setPhase(4); // leverage stage — they can continue to digital OS
+        } else if (stage === 'digital_os' || stage === 'digital-os') {
+          setPhase(6); // digital OS stage
+        }
+
+        // Clean the URL
+        window.history.replaceState({}, '', window.location.pathname);
+      } catch(e) {
+        console.error('[Resume] Failed to restore journey:', e);
+      }
+    })();
+  }, []); // run once on mount
+
   /* ── Phase navigation ── */
   const goNext = useCallback(() => {
     if (phase === 0) setPhase(1);       // behaviours → transition

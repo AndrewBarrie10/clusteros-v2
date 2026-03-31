@@ -3836,38 +3836,29 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
           <p style={trans.subtext}>{stalls.length} independent stall{stalls.length !== 1 ? 's' : ''} identified — {stallNames.join(', ')}. No reinforcing combinations detected.</p>
         )}
 
-        {/* Blind Spots (up to 3) */}
-        {blindSpots.length > 0 && (
-          <div style={trans.blindSpotBox}>
-            <div style={trans.blindSpotLabel}>STEWARD'S BLIND SPOT</div>
-            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'var(--dj-chalk-dim)', lineHeight: 1.6, marginBottom: '12px' }}>
-              Based on {totalComparatorClusters > 0 ? totalComparatorClusters : 'diagnosed'} ecosystems sharing your configuration, these stalls appear frequently but you didn't identify them:
-            </p>
-            {blindSpots.map((bs, i) => (
-              <div key={bs.id} style={{ padding: '10px 14px', background: 'rgba(217,119,6,0.06)', border: '1px solid rgba(217,119,6,0.15)', borderRadius: '4px', marginBottom: '8px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
-                  <strong style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk)' }}>{bs.name}</strong>
-                  {bs.pct > 0 && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#d97706', fontWeight: 700 }}>{bs.pct}%</span>}
-                </div>
-                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', lineHeight: 1.5, margin: 0, fontStyle: 'italic' }}>{bs.sub}</p>
-              </div>
-            ))}
-            <div style={{ padding: '10px 14px', background: 'rgba(217,119,6,0.08)', borderRadius: '4px', marginTop: '8px' }}>
-              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: '#d97706', lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}>
-                {blindSpots[0].name.split(' ')[0]} appears in {blindSpots[0].pct > 0 ? `${blindSpots[0].pct}% of` : ''} ecosystems with this configuration. If it's genuinely absent here, that's structurally interesting. If it's been normalised to invisibility, this diagnostic has surfaced something important.
+        {/* Blind Spot — single provocation */}
+        {blindSpots.length > 0 && (() => {
+          const bs = blindSpots[0];
+          const stackNameStr = stacks.map(s => s.name).join(' and ');
+          return (
+            <div style={trans.blindSpotBox}>
+              <div style={trans.blindSpotLabel}>STEWARD'S BLIND SPOT</div>
+              <h4 style={trans.blindSpotHeading}>{bs.name} — you didn't identify this.</h4>
+              <p style={trans.blindSpotBody}>
+                {bs.pct > 0 ? `${bs.pct}% of ecosystems` : 'Ecosystems'} running {stackNameStr} also show {bs.name}. Either it isn't present in your ecosystem — or it hasn't surfaced yet.
               </p>
+              <button
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '13px', color: '#0c9488', padding: 0 }}
+                onClick={() => {
+                  if (updateJourneyState) updateJourneyState({ blindSpotStall: bs.id });
+                  if (onBack) onBack();
+                }}
+              >
+                &rarr; Go back and check
+              </button>
             </div>
-            <button
-              style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '13px', color: '#0c9488', padding: '8px 0 0' }}
-              onClick={() => {
-                if (updateJourneyState) updateJourneyState({ blindSpotStall: blindSpots[0].id });
-                if (onBack) onBack();
-              }}
-            >
-              &rarr; Go back and check
-            </button>
-          </div>
-        )}
+          );
+        })()}
 
         {/* Handover section */}
         <div style={{ marginTop: '24px', borderTop: '1px solid #1e2f45', paddingTop: '24px' }}>

@@ -476,6 +476,7 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
       <div class="doc-meta">
         <div class="doc-meta-date" id="report-date"></div>
         <div class="doc-meta-ref" id="report-ref"></div>
+        <div id="report-prepared-for" style="font-family:var(--mono);font-size:9px;color:var(--ink-muted);margin-top:6px"></div>
       </div>
     </div>
 
@@ -604,7 +605,6 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
         <p class="appendix-intro">This section records the exact inputs that generated this report — what the steward selected and what the diagnostic engine inferred. Its purpose is transparency: readers who weren't present during the assessment can challenge these inputs with reference to their own experience of the ecosystem. Disagreement is productive — if a stall identification is contested, that contest is itself diagnostic information.</p>
         <div id="inputs-qualifiers"></div>
         <div id="inputs-stalls-selected"></div>
-        <div id="inputs-stalls-not-selected"></div>
       </div>
 
       <!-- C: Methodology -->
@@ -798,15 +798,15 @@ const WHAT_SHIFTED = {
 };
 
 const ALL_STALLS = [
-  { id:'S1', key:'Re-proving', name:'Re-proving instead of narrowing', definition:'The ecosystem repeats the case for its own existence. Resources flow to justification rather than execution — the case is never quite strong enough to unlock committed action.' },
-  { id:'S2', key:'Coordinating', name:'Coordinating instead of deciding', definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.' },
-  { id:'S3', key:'Forgiving', name:'Forgiving instead of redesigning', definition:'Poor performance is tolerated to preserve relationships. Accountability systems are systematically avoided — the relationship is worth more than the outcome it was supposed to produce.' },
-  { id:'S4', key:'Extracting', name:'Extracting without reinvesting', definition:'Anchor institutions extract value from the ecosystem rather than circulating it. Talent, IP and capital flow outward — the ecosystem produces but does not retain.' },
-  { id:'S5', key:'Mediating', name:'Mediating instead of coupling', definition:'The ecosystem spends its energy managing relationships rather than enabling transactions. Every connection routes through an intermediary — direct actor coupling is structurally unavailable.' },
-  { id:'S6', key:'Stabilising', name:'Stabilising around incumbents', definition:'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve the system — change threatens the positions built on the current arrangement.' },
-  { id:'S7', key:'Narrating', name:'Narrating instead of testing', definition:'The ecosystem produces stories about progress instead of evidence of change. Reporting substitutes for impact — the story of activity becomes the activity.' },
-  { id:'S8', key:'Scaling', name:'Scaling activity instead of throughput', definition:'Early-stage activity is celebrated rather than evaluated. The ecosystem optimises for inputs and starts rather than outcomes — motion is mistaken for momentum.' },
-  { id:'S9', key:'Waiting', name:'Waiting for permission', definition:'Action is deferred pending external conditions — funding decisions, policy clarity, anchor commitment. Waiting becomes structural: the system learns to produce deferral as its primary output.' },
+  { id:'S1', key:'Re-proving', name:'Re-proving instead of narrowing', definition:'The ecosystem repeats the case for its own existence. Resources flow to justification rather than execution — the case is never quite strong enough to unlock committed action.', labNote:'/ln-04-reproving.html' },
+  { id:'S2', key:'Coordinating', name:'Coordinating instead of deciding', definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', labNote:'/ln-01-coordinating.html' },
+  { id:'S3', key:'Forgiving', name:'Forgiving instead of redesigning', definition:'Poor performance is tolerated to preserve relationships. Accountability systems are systematically avoided — the relationship is worth more than the outcome it was supposed to produce.', labNote:'/ln-07-forgiving.html' },
+  { id:'S4', key:'Extracting', name:'Extracting without reinvesting', definition:'Anchor institutions extract value from the ecosystem rather than circulating it. Talent, IP and capital flow outward — the ecosystem produces but does not retain.', labNote:'/ln-08-extracting.html' },
+  { id:'S5', key:'Mediating', name:'Mediating instead of coupling', definition:'The ecosystem spends its energy managing relationships rather than enabling transactions. Every connection routes through an intermediary — direct actor coupling is structurally unavailable.', labNote:'/ln-06-mediating.html' },
+  { id:'S6', key:'Stabilising', name:'Stabilising around incumbents', definition:'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve the system — change threatens the positions built on the current arrangement.', labNote:'/ln-05-incumbents.html' },
+  { id:'S7', key:'Narrating', name:'Narrating instead of testing', definition:'The ecosystem produces stories about progress instead of evidence of change. Reporting substitutes for impact — the story of activity becomes the activity.', labNote:'/ln-02-narrating.html' },
+  { id:'S8', key:'Scaling', name:'Scaling activity instead of throughput', definition:'Early-stage activity is celebrated rather than evaluated. The ecosystem optimises for inputs and starts rather than outcomes — motion is mistaken for momentum.', labNote:'/ln-03-activity.html' },
+  { id:'S9', key:'Waiting', name:'Waiting for permission', definition:'Action is deferred pending external conditions — funding decisions, policy clarity, anchor commitment. Waiting becomes structural: the system learns to produce deferral as its primary output.', labNote:'/ln-09-permission.html' },
 ];
 
 // ── CO-OCCURRENCE DATA (from 221-cluster dataset) ──────────
@@ -952,6 +952,9 @@ async function init() {
   document.getElementById('ecosystem-tags').innerHTML = [d.sector, d.geography, d.role]
     .filter(t => t && t.trim())
     .map(t => `<span class="doc-tag">${t}</span>`).join('');
+  if (d.name) {
+    document.getElementById('report-prepared-for').textContent = `Prepared for ${d.name}`;
+  }
 
   // ── Resume links ──
   const resumeParam = reportId ? `?resume=${encodeURIComponent(reportId)}` : '';
@@ -1014,8 +1017,11 @@ async function init() {
     caveatEl.innerHTML = '<strong>This is your full self-diagnostic report.</strong> It includes stall identification, leverage analysis calibrated to your ecosystem profile, and a Digital OS architecture configured to your specific needs. It is based on your own assessment — not a full evidence-based ClusterOS diagnostic. A full diagnostic analyses 50–170 evidence items per cluster, verifies findings against structured evidence, and produces confidence-tiered results.';
   }
 
-  // ── 1. Stalls (all stages — enriched with signal/displacement at Stage 2+) ──
-  document.getElementById('stall-list').innerHTML = (d.stalls || []).map(s => `
+  // ── 1. Stalls (all stages — enriched with signal/displacement, lab note links) ──
+  document.getElementById('stall-list').innerHTML = (d.stalls || []).map(s => {
+    const ref = ALL_STALLS.find(a => a.id === s.id);
+    const labNote = ref ? ref.labNote : '';
+    return `
     <div class="stall-item">
       <div class="stall-item-header">
         <span class="stall-item-id">${s.id || ''}</span>
@@ -1025,18 +1031,30 @@ async function init() {
       ${(s.signal || s.displaced) ? `<div class="stall-meta">${s.signal ? `Absorbs: <span>${s.signal}</span>` : ''}${s.displaced ? ` · Displaces: <span>${s.displaced}</span>` : ''}</div>` : ''}
       ${s.definition ? `<p class="stall-item-def">${s.definition}</p>` : ''}
       ${isLeverage && s.leverage ? `<div><div class="stall-leverage-label">Leverage direction</div><p class="stall-item-leverage">${s.leverage}</p></div>` : ''}
-    </div>`).join('');
+      ${labNote ? `<a href="${labNote}" target="_blank" style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);text-decoration:none;margin-top:8px;display:inline-block">Read the lab note →</a>` : ''}
+    </div>`;
+  }).join('');
 
-  // ── 2. Stack (all stages — but leverage only shown at Stage 2+) ──
+  // ── 2. Stack (all stages — deepened with regime/logic from detected stacks) ──
   const stack = d.stack || {};
+  const detectedStacks = d.detectedStacks || d.detected_stacks || [];
+  // Find the matching detected stack for richer data
+  const primaryDetected = detectedStacks.find(s => s.name === stack.name) || detectedStacks[0] || {};
+  const stackRegime = primaryDetected.regime || '';
+  const stackLogic = primaryDetected.logic || primaryDetected.reinforcing_logic || stack.description || '';
+  const stackEntry = primaryDetected.entry || primaryDetected.leverage_entry || '';
+  const stackEffect = primaryDetected.effect || '';
+
   document.getElementById('stack-card').innerHTML = `
     <div class="stack-card-head">
       <div class="stack-card-name">${stack.name || 'Your stack'}</div>
       <div class="stack-card-pills">${(stack.stalls || []).map(s => `<span class="stack-pill">${s}</span>`).join('')}</div>
     </div>
     <div class="stack-card-body">
-      <p class="stack-card-desc">${stack.description || ''}</p>
-      ${isLeverage && stack.leverage ? `<div class="stack-leverage-dir"><div class="stack-leverage-label">Leverage direction</div><p class="stack-leverage-text">${stack.leverage}</p></div>` : ''}
+      ${stackLogic ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--teal)">Reinforcing logic</div><p class="stack-card-desc" style="margin-bottom:0">${stackLogic}</p></div>` : ''}
+      ${stackRegime ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--amber)">What this locks in</div><p class="stack-card-desc" style="margin-bottom:0">${stackRegime}</p></div>` : ''}
+      ${isLeverage && (stack.leverage || stackEntry) ? `<div class="stack-leverage-dir"><div class="stack-leverage-label">Leverage direction</div><p class="stack-leverage-text">${stack.leverage || stackEntry}</p></div>` : ''}
+      ${isLeverage && stackEffect ? `<div style="margin-top:12px;padding-left:12px;border-left:2px solid var(--teal)"><div class="stall-leverage-label" style="color:var(--teal)">Expected effect</div><p style="font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300">${stackEffect}</p></div>` : ''}
     </div>`;
 
   // ── Resolve stack key ──
@@ -1261,6 +1279,7 @@ async function init() {
         ${isActive ? '<span style="font-family:var(--mono);font-size:7px;font-weight:700;color:var(--green);letter-spacing:0.1em;margin-left:auto">IDENTIFIED</span>' : ''}
       </div>
       <div class="stall-ref-def">${s.definition}</div>
+      ${s.labNote ? `<a href="${s.labNote}" target="_blank" style="font-family:var(--mono);font-size:7px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);text-decoration:none;margin-top:4px;display:inline-block">Lab note →</a>` : ''}
     </div>`;
   }).join('');
 
@@ -1291,31 +1310,24 @@ async function init() {
       </div>`).join('')}
     </div>`;
 
-  const notSelected = ALL_STALLS.filter(s => !stallIds.includes(s.id));
-  if (notSelected.length > 0) {
-    document.getElementById('inputs-stalls-not-selected').innerHTML = `
-      <div style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);margin:20px 0 10px">Stalls not identified</div>
-      <p style="font-size:11px;color:var(--ink-muted);line-height:1.6;font-weight:300;font-style:italic;margin-bottom:10px">The blind spot analysis may indicate some warrant reconsideration — particularly those with high co-occurrence rates for the detected stack configuration.</p>
-      <div class="inputs-table">${notSelected.map(s => {
-        const bs = blindSpots.find(b => b.id === s.id);
-        return `
-        <div class="inputs-stall-row">
-          <span class="inputs-stall-id">${s.id}</span>
-          <span class="inputs-stall-name" style="color:var(--ink-muted)">${s.key}</span>
-          ${bs ? `<span class="inputs-stall-badge" style="color:var(--amber)">${bs.pct}% co-occurrence</span>` : ''}
-        </div>`;
-      }).join('')}
-      </div>`;
-  }
 }
 
 function getDemoData(stageOverride) {
   const stage = stageOverride || 'behaviours';
   const base = {
+    name: 'Dr Sarah Mitchell',
     ecosystem: 'Edinburgh Life Sciences',
     sector: 'Life Sciences',
     geography: 'Edinburgh, Scotland',
     role: 'Cluster Manager',
+    detectedStacks: [{
+      name: 'Incumbent Anchor Lock-In',
+      stalls: ['S2', 'S6'],
+      logic: 'Large incumbents define what coordination is for, and coordination structures form around their needs. New entrants optimise for incumbent partnership because that is where the visible signal is. The structure is not maintained by anyone defending it — it is maintained by every actor making the individually rational choice.',
+      regime: 'The ecosystem is locked into serving incumbent anchors — stability protects existing coordination channels, and coordination normalises the stability that prevents new entry pathways from forming.',
+      entry: 'Fund one thing that does not require incumbent validation to proceed. The goal is not to displace incumbents — it is to demonstrate that the system can produce value without routing through them.',
+      effect: 'One successful direct coupling pathway changes the risk calculus for subsequent actors. The coordination-stabilisation loop weakens as direct coupling becomes demonstrably possible.',
+    }],
     stalls:[
       { id:'S2', name:'Coordinating instead of deciding', freq:97, definition:'Coordination becomes the output rather than the mechanism. Meetings, partnerships and alignment processes substitute for committed action with real consequences.', leverage:'Identify the actor with the most to lose from the current arrangement and change their constraint. The leverage is never more coordination — it is one actor making an exclusionary choice.', signal:'Decision signals', displaced:'Committed action with real consequences', behaviour:'Meetings, partnerships and alignment processes' },
       { id:'S6', name:'Stabilising around incumbents', freq:76, definition:'The ecosystem optimises for stability over adaptation. Existing structures are preserved even when they no longer serve the system.', leverage:'New entry pathways that bypass incumbent gatekeepers are the intervention. The leverage is creating routes that do not require incumbent permission — not changing incumbent behaviour.', signal:'Adaptation signals', displaced:'Structural evolution and new entry', behaviour:'Preserving existing structures and incumbent relationships' }

@@ -4017,21 +4017,16 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
      6: digital os (Stage 3)
    ── */
 function DiagnosticJourney() {
-  // ── Check for resume on init (synchronous) ──
-  const _resumeParam = new URLSearchParams(window.location.search).get('resume');
-  const _resumePayload = (() => {
-    if (!_resumeParam) return null;
-    let p = null;
-    try { p = JSON.parse(sessionStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {}
-    if (!p) { try { p = JSON.parse(localStorage.getItem('CLUSTEROS_REPORT')); } catch(e) {} }
-    return p;
-  })();
+  // ── Resume from URL params (no storage dependency) ──
+  const _urlParams = new URLSearchParams(window.location.search);
+  const _resumeStage = _urlParams.get('resume'); // 'behaviours' | 'leverage' | 'digital_os'
+  const _resumeStalls = _urlParams.get('stalls'); // 'S1,S2,S5'
+
   const _resumePhase = (() => {
-    if (!_resumePayload) return -1;
-    const stage = _resumePayload.stage || 'behaviours';
-    if (stage === 'behaviours') return 1;
-    if (stage === 'leverage') return 4;
-    if (stage === 'digital_os' || stage === 'digital-os') return 6;
+    if (!_resumeStage || !_resumeStalls) return -1;
+    if (_resumeStage === 'behaviours') return 1;
+    if (_resumeStage === 'leverage') return 4;
+    if (_resumeStage === 'digital_os' || _resumeStage === 'digital-os') return 6;
     return -1;
   })();
 
@@ -4044,36 +4039,27 @@ function DiagnosticJourney() {
   /* ── Carried-forward state ── */
   const [journeyState, setJourneyState] = useState(() => {
     const base = { stalls: [], stacks: [], leverageHypotheses: [], qualifierAnswers: {}, osConfig: null, stackCommentary: {}, digitalCommentary: null };
-    if (!_resumePayload) return base;
+    if (!_resumeStage || !_resumeStalls) return base;
 
-    // Restore state from resume payload
-    const stallIds = (_resumePayload.stalls || []).map(s => typeof s === 'string' ? s : (s.id || s));
-    const reportStacks = _resumePayload.detectedStacks || _resumePayload.detected_stacks || [];
-    const detectedStacks = reportStacks.map(rs => {
-      const byId = STACK_RULES.find(r => r.id === rs.id);
-      if (byId) return byId;
-      const triggers = rs.stalls || rs.triggers || [];
-      const byTrigger = STACK_RULES.find(r =>
-        r.triggers.length === triggers.length &&
-        r.triggers.every(t => triggers.includes(t))
-      );
-      return byTrigger || { ...rs, triggers: rs.stalls || rs.triggers || [] };
-    });
-    const qa = _resumePayload.qualifier_answers || {};
+    // Parse stall IDs from URL
+    const stallIds = _resumeStalls.split(',').filter(Boolean);
+    if (stallIds.length === 0) return base;
 
-    console.log('[Resume] Restoring journey:', stallIds.length, 'stalls,', detectedStacks.length, 'stacks, stage:', _resumePayload.stage);
+    // Detect stacks from stall IDs using STACK_RULES
+    const detectedStacks = STACK_RULES.filter(
+      rule => rule.triggers.every(t => stallIds.includes(t))
+    );
+
+    console.log('[Resume] From URL:', stallIds.length, 'stalls,', detectedStacks.length, 'stacks, stage:', _resumeStage);
 
     // Clean the URL
-    if (_resumeParam) window.history.replaceState({}, '', window.location.pathname);
+    window.history.replaceState({}, '', window.location.pathname);
 
     return {
       ...base,
       stalls: stallIds,
       stacks: detectedStacks.map(s => s.name),
       detectedStacks,
-      qualifierAnswers: qa,
-      stackCommentary: _resumePayload.stackCommentary || {},
-      osConfig: Object.keys(qa).length > 0 ? (_resumePayload.osConfig || { configName: _resumePayload.config_name || '' }) : null,
     };
   });
 

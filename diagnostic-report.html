@@ -156,11 +156,134 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 
 /* Print */
 @media print {
-  body{background:#fff;padding:0}
+  /* ── Force background colors & images to print ── */
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+
+  /* ── Page setup ── */
+  @page{margin:16mm 14mm 18mm 14mm;size:A4}
+
+  body{background:#fff;padding:0;font-size:12px}
+
+  /* ── Hide screen-only elements ── */
   .screen-header{display:none}
-  .document{box-shadow:none;padding:48px 56px}
-  .comp-card-link{color:var(--green)!important}
-  @page{margin:0;size:A4}
+  .screen-wrapper{max-width:none;padding:0;margin:0}
+
+  /* ── Document container ── */
+  .document{box-shadow:none;padding:0;max-width:none}
+
+  /* ── Page break control — keep components together ── */
+  .doc-section{break-inside:auto;page-break-inside:auto}
+  .doc-section-label,
+  .doc-section-heading,
+  .doc-body{break-after:avoid;page-break-after:avoid}
+
+  .stall-item,
+  .stack-card,
+  .comparator-card,
+  .cas-block,
+  .infra-item,
+  .leverage-block,
+  .full-diag-box,
+  .next-step,
+  .stall-ref-item{break-inside:avoid;page-break-inside:avoid}
+
+  /* ── Prevent orphan headings — keep heading with first content ── */
+  .doc-section-heading{orphans:3;widows:3}
+  .doc-body{orphans:3;widows:3}
+  .cas-block-text,
+  .stack-card-desc,
+  .stall-item-def{orphans:2;widows:2}
+
+  /* ── Section breaks for clean page flow ── */
+  .doc-section:nth-of-type(3){break-before:auto}
+  .doc-section:nth-of-type(4){break-before:auto}
+  .appendix{break-before:page;page-break-before:always}
+
+  /* ── Warm surface tints — bring the website feel to print ── */
+  .stall-item{background:#f7f4ef!important;border-color:#ddd8cf!important}
+  .comparator-card{background:#f7f4ef!important}
+  .infra-item{background:#f7f4ef!important}
+  .stall-ref-item{background:#f7f4ef!important}
+
+  /* ── Stack card header — preserve the dark green ── */
+  .stack-card-head{background:var(--green-dim)!important;color:#fff!important}
+  .stack-card-name{color:#fff!important}
+  .stack-pill{background:rgba(255,255,255,0.15)!important;border-color:rgba(255,255,255,0.25)!important;color:#fff!important}
+  .stack-card-body{background:#f7f4ef!important}
+
+  /* ── CAS block — preserve teal accent ── */
+  .cas-block{background:rgba(12,148,136,0.05)!important;border-left:3px solid var(--teal)!important}
+
+  /* ── Leverage block — preserve green accent ── */
+  .leverage-block{background:rgba(42,122,79,0.05)!important;border-left:3px solid var(--green)!important}
+
+  /* ── Caveat — preserve amber accent ── */
+  .doc-caveat{background:#f7f4ef!important;border-left:3px solid var(--amber)!important}
+
+  /* ── Next step CTA — preserve the dark green block ── */
+  .next-step{background:var(--green-dim)!important;color:#fff!important;border-radius:3px}
+  .next-step-label{color:rgba(255,255,255,0.5)!important}
+  .next-step-heading{color:#fff!important}
+  .next-step-heading em{color:var(--signal)!important}
+  .next-step-action{background:#fff!important;color:var(--green-dim)!important}
+
+  /* ── Full diag box ── */
+  .full-diag-head{background:#f0ece4!important}
+
+  /* ── Section numbers — preserve green circles ── */
+  .doc-section-num{background:var(--green)!important;color:#fff!important}
+
+  /* ── Stall leverage border ── */
+  .stall-item-leverage{border-left:2px solid var(--green)!important}
+  .stack-leverage-dir{border-left:2px solid var(--green)!important}
+
+  /* ── Infra dots ── */
+  .infra-dot{background:var(--green)!important}
+  .full-diag-bullet{background:var(--border-2)!important}
+
+  /* ── Links ── */
+  .comp-card-link{color:var(--green)!important;text-decoration:none!important}
+  a{color:var(--green)!important}
+
+  /* ── Typography refinements for print ── */
+  .doc-ecosystem-name{font-size:30px!important}
+  .doc-section-heading{font-size:20px!important}
+  .doc-body{font-size:12px!important;line-height:1.7!important}
+  .stall-item-def{font-size:11px!important}
+  .stall-item-leverage{font-size:11px!important}
+  .cas-block-text{font-size:12px!important;line-height:1.7!important}
+  .infra-text{font-size:12px!important}
+  .stack-card-desc{font-size:12px!important}
+  .leverage-hypothesis{font-size:16px!important}
+
+  /* ── Tighten spacing for print density ── */
+  .doc-header{padding-bottom:24px;margin-bottom:28px}
+  .doc-ecosystem{margin-bottom:28px}
+  .doc-caveat{margin-bottom:28px}
+  .doc-section{margin-bottom:24px;padding-bottom:24px}
+  .stall-list{gap:8px}
+  .comparator-list{gap:8px}
+  .infra-list{gap:8px}
+  .stall-ref-grid{gap:8px}
+
+  /* ── Comparator badges — preserve color ── */
+  .comp-sector-badge{background:rgba(12,148,136,0.08)!important;border-color:rgba(12,148,136,0.2)!important;color:var(--teal)!important}
+
+  /* ── Appendix refinements ── */
+  .appendix{margin-top:0;padding-top:32px;border-top:2px solid var(--border)}
+  .stall-ref-grid{grid-template-columns:1fr 1fr}
+  .stall-ref-def{font-size:10px!important}
+
+  /* ── Footer refinements ── */
+  .doc-footer{margin-top:24px;padding-top:16px}
+  .doc-footer-legal{font-size:9px!important}
+
+  /* ── Ecosystem label decorative line ── */
+  .doc-ecosystem-label::after{background:var(--border)!important}
+
+  /* ── Header bottom border ── */
+  .doc-header{border-bottom:2px solid var(--ink)!important}
+  .appendix{border-top:2px solid var(--border)!important}
 }
 @media(max-width:680px){
   .document{padding:32px 24px}

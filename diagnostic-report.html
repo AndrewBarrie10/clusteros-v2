@@ -779,29 +779,47 @@ const FULL_DIAG = {
   default: ["Evidence collection across 50–170 structured items per cluster", "Confidence tier rating for each stall (Tier 1: Robust / Tier 2: Adequate / Tier 3: Indicative)", "Cross-actor signal analysis — what each actor type is generating", "Comparator ecosystem evidence specific to your configuration", "Verified leverage hypothesis with comparable ecosystem precedent", "Full configuration document for ClusterOS substrate setup"]
 };
 
-const WHAT_SHIFTED = {
-  'birmingham-alabama-innovation-ecosystem': 'A corporate anchor committed to direct procurement from local startups without requiring intermediary endorsement, breaking the coordination dependency in two procurement cycles.',
-  'chattanooga-regional-innovation-ecosystem': 'A fixed-term challenge fund that bypassed alignment consensus — one decision made unilaterally — demonstrated that the coordination requirement was optional, not structural.',
-  'colorado-springs-space-technology': 'Direct university-defence contractor partnerships that didn\'t route through the cluster coordination structure created a replicable direct-coupling pathway.',
-  'madison-regional-innovation-ecosystem': 'A research commercialisation programme operating on market evidence rather than incumbent endorsement changed the legitimacy threshold for the whole ecosystem.',
-  'medellin-innovation-ecosystem': 'A government procurement commitment naming specific startups before they had incumbent validation broke the re-proving cycle that was blocking scale.',
-  'glasgow-city-region-innovation-ecosystem': 'An external investor committing publicly before internal alignment was complete demonstrated that external validation could substitute for internal consensus.',
-  'harwell-space-technology': 'A global prime contractor opened direct SME procurement access without requiring ESA endorsement — the first procurement conversion outside the incumbent orbit.',
-  'belfast-cyber-security': 'Structural analysis showed the extraction point was a talent pipeline gap at growth stage, not a culture problem. Retention required a late-stage funding instrument, not a programme.',
-  'orlando-photonics-and-optics': 'A direct industry-university IP agreement that didn\'t require anchor institution co-signature broke the extraction-stabilisation loop for a specific technology domain.',
-  'scotland-energy-transition': 'A sovereign wealth fund commitment to local reinvestment — conditional on supply chain localisation — changed the extraction dynamic for anchor operators within 18 months.',
-  'cheltenham-cyber-security': 'Direct engagement with startups on specific capability gaps — without requiring intermediary endorsement — changed what the re-proving cycle was producing.',
-  'eindhoven-brainport-innovation-ecosystem': 'Direct procurement coupling between SMEs and ASML — formalised as a supplier development programme bypassing the intermediary layer — broke the gatekeeping configuration in 18 months.',
-  'boston-cambridge-life-sciences': 'A venture-backed spinout that succeeded independently of a major incumbent created the first replicable pathway for founders who didn\'t route through the incumbent relationship.',
-  'zurich-zug-medtech': 'A regulatory fast-track operating on technical merit rather than incumbent endorsement changed who could access the procurement pipeline.',
-  'bengaluru-space-technology': 'ISRO\'s transition to direct commercial contracting with private startups — without requiring intermediary facilitation — broke the coordination-mediation loop.',
-  'glasgow-fintech': 'A regulatory sandbox allowing direct bank-startup collaboration without intermediary coordination broke the mediation dependency in the regulatory context.',
-  'adelaide-space-technology': 'The Australian Space Agency\'s direct contracting with SMEs bypassed the coordination layer that was routing all procurement through incumbents.',
-  'cape-canaveral-space-coast': 'A local supplier programme assessing companies on technical fit rather than incumbent relationship changed the access terms for the whole ecosystem.',
-  'tel-aviv-cyber-security': 'The Unit 8200 alumni network created direct coupling between defence-trained founders and enterprise buyers without requiring ecosystem intermediary facilitation.',
-  'san-francisco-bay-area-life-sciences': 'A biotech accelerator requiring portfolio companies to have LOIs from non-partner corporates changed what counted as validation — external market evidence replaced ecosystem endorsement.',
-  'toulouse-space-technology': 'An open innovation programme providing direct access to procurement decision-makers for SMEs — without routing through the cluster\'s intermediary structure.',
-};
+/**
+ * Generate evidence-derived narrative for a comparator cluster.
+ * Uses shared stack descriptions, absorbed signals, and leverage hypothesis
+ * from clusters.json — no hardcoded text.
+ */
+function buildComparatorNarrative(comparatorId, userStackIds) {
+  if (!CLUSTER_DATA) return null;
+  const cl = CLUSTER_DATA.find(c => c.id === comparatorId);
+  if (!cl) return null;
+
+  const clStackIds = (cl.stacks || []).map(s => s.canonical_id);
+  const sharedStacks = (cl.stacks || []).filter(s => userStackIds.includes(s.canonical_id));
+
+  if (sharedStacks.length > 0) {
+    // Use the highest-confidence shared stack's description
+    const best = sharedStacks.sort((a, b) => {
+      const conf = { high: 3, medium: 2, low: 1 };
+      return (conf[b.confidence] || 0) - (conf[a.confidence] || 0);
+    })[0];
+
+    let narrative = best.description || '';
+    // Clean up truncated descriptions
+    if (narrative && !narrative.endsWith('.')) {
+      narrative = narrative.replace(/\s+\S*$/, '') + '...';
+    }
+
+    const absorbed = best.absorbed_signals || '';
+    const evidenceTag = `${cl._evidence_count || '—'} evidence items · ${cl._evidence_tier || '—'} tier`;
+
+    return { mechanism: narrative, absorbed, evidenceTag, stackName: best.stack_name, leverage: (cl.leverage || {}).hypothesis || '' };
+  }
+
+  // No shared stacks — use overall summary
+  const primary = (cl.stacks || [])[0];
+  if (primary) {
+    let desc = primary.description || '';
+    if (desc && !desc.endsWith('.')) desc = desc.replace(/\s+\S*$/, '') + '...';
+    return { mechanism: desc, absorbed: primary.absorbed_signals || '', evidenceTag: `${cl._evidence_count || '—'} evidence items · ${cl._evidence_tier || '—'} tier`, stackName: primary.stack_name, leverage: (cl.leverage || {}).hypothesis || '' };
+  }
+  return null;
+}
 
 const ALL_STALLS = [
   { id:'S1', key:'Re-proving', name:'Re-proving instead of narrowing', definition:'The ecosystem repeats the case for its own existence. Resources flow to justification rather than execution — the case is never quite strong enough to unlock committed action.', labNote:'/ln-04-reproving.html' },
@@ -1473,9 +1491,10 @@ async function init() {
       document.getElementById(id).classList.remove('stage-hidden');
     });
 
-    // 3. Comparators
+    // 3. Comparators — evidence-derived narratives from clusters.json
+    const userStackIds = (d.detectedStacks || d.detected_stacks || []).map(s => s.id || '').filter(Boolean);
     document.getElementById('comparator-list').innerHTML = (d.comparators || []).map(c => {
-      const shifted = WHAT_SHIFTED[c.id] || null;
+      const narrative = buildComparatorNarrative(c.id, userStackIds);
       const profileUrl = c.id ? `/clusters/${c.id}.html` : null;
       return `
       <div class="comparator-card">
@@ -1484,21 +1503,22 @@ async function init() {
             <div class="comp-card-name">${c.region || c.name || ''}</div>
             <div class="comp-card-loc">${c.loc || ''}</div>
             <div class="comp-card-badges">
-              ${c.sector ? `<span class="comp-sector-badge">${c.sector}</span>` : ''}
               ${c.pattern ? `<span class="comp-pattern-badge">${c.pattern}</span>` : ''}
+              ${narrative ? `<span class="comp-sector-badge">${narrative.evidenceTag}</span>` : ''}
             </div>
           </div>
           ${profileUrl ? `<a class="comp-card-link" href="${profileUrl}" target="_blank">Full profile →</a>` : ''}
         </div>
-        ${shifted ? `
+        ${narrative ? `
         <div class="comp-shifted">
-          <span class="comp-shifted-label">What shifted</span>
-          <span class="comp-shifted-text">${shifted} <em class="comp-shifted-cta">Detail available in the full diagnostic.</em></span>
-        </div>` : `
-        <div class="comp-shifted">
-          <span class="comp-shifted-label">What shifted</span>
-          <span class="comp-shifted-cta">Available in the full diagnostic for this cluster.</span>
-        </div>`}
+          <span class="comp-shifted-label">${narrative.stackName || 'Structural mechanism'}</span>
+          <span class="comp-shifted-text">${narrative.mechanism}</span>
+        </div>
+        ${narrative.absorbed ? `
+        <div class="comp-shifted" style="border-top:none;padding-top:0">
+          <span class="comp-shifted-label">Absorbs</span>
+          <span class="comp-shifted-text" style="font-style:italic">${narrative.absorbed}</span>
+        </div>` : ''}` : ''}
       </div>`;
     }).join('');
 

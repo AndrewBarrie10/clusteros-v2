@@ -418,6 +418,113 @@ const journey = {
         description: 'The ecosystem meets, aligns, and builds relationships while waiting for the signal that will allow it to act. The intermediary layer manages these holding activities productively. Both stalls protect each other: waiting creates demand for intermediation, intermediation normalises waiting.',
         leverage: 'Surface one actor who can act now without the awaited permission. One unilateral move creates a path others can follow. The waiting is structural — breaking it requires demonstrating that movement is possible before the signal arrives.'
       },
+
+      // ── PREVIOUSLY UNCOVERED PAIRS ─────────────────────────────────
+      'Forgiving+Re-proving': {
+        name: 'Justified Tolerance',
+        description: 'Poor performance is tolerated because the case for change is never settled. Re-proving absorbs the energy that accountability would require, and forgiving removes the consequences that would make the case urgent. Each stall removes the pressure the other would create.',
+        leverage: 'Attach one programme renewal to a specific outcome threshold. The threshold does not need to be aggressive — it needs to exist. A defined condition breaks the loop between indefinite tolerance and perpetual justification.'
+      },
+      'Extracting+Re-proving': {
+        name: 'Extraction Under Justification',
+        description: 'Value exits the ecosystem while resources flow to making the case for why the ecosystem matters. The re-proving cycle consumes the attention that would otherwise notice the extraction. The case is always about potential — never about where value actually went.',
+        leverage: 'Introduce a value-retention metric alongside the existing justification evidence. When the case has to account for what stayed, not just what started, the extraction becomes visible as a structural problem.'
+      },
+      'Mediating+Re-proving': {
+        name: 'Brokered Justification',
+        description: 'Intermediaries manage relationships while the ecosystem re-proves its case. Both activities feel productive. Neither produces committed action. The intermediary layer provides the activity that makes re-proving look like progress, and re-proving provides the rationale that justifies continued intermediation.',
+        leverage: 'Require one intermediary-facilitated relationship to produce a committed outcome within a defined period. One conversion requirement changes what both the mediation and the justification have to be about.'
+      },
+      'Re-proving+Stabilising': {
+        name: 'Incumbent Justification Lock',
+        description: 'The ecosystem re-proves its value to justify existing structures, and existing structures define what counts as value. Incumbents are protected because the case is always made in their terms. New entrants cannot challenge because the legitimacy framework belongs to those already at the table.',
+        leverage: 'Introduce one criterion for ecosystem value that incumbents do not control. A metric defined by outcomes rather than institutional endorsement creates space for new actors to demonstrate contribution.'
+      },
+      'Re-proving+Scaling': {
+        name: 'Proof-by-Activity Loop',
+        description: 'The ecosystem scales early-stage activity as evidence that the case is strong, and uses the case to justify more activity. Volume substitutes for validation. The more programmes that launch, the stronger the case appears — but none graduate to outcomes because graduation would end their usefulness as proof.',
+        leverage: 'Separate the evidence base from the activity pipeline. Require one programme to demonstrate graduation-rate evidence rather than start-rate evidence. The distinction breaks the loop where more starts always equals a stronger case.'
+      },
+      'Coordinating+Extracting': {
+        name: 'Coordinated Extraction',
+        description: 'The ecosystem coordinates around anchor institutions that extract value. Coordination structures are designed to serve anchor needs rather than challenge anchor behaviour. The more coordinated the ecosystem becomes, the more efficiently value flows outward through established channels.',
+        leverage: 'Change what coordination is optimised for. Introduce one coordination objective that tracks value circulation rather than anchor satisfaction. The structure does not need to be dismantled — its objective needs to shift.'
+      },
+      'Coordinating+Narrating': {
+        name: 'Alignment-Narrative Cycle',
+        description: 'Coordination generates stories and stories justify further coordination. Meetings produce reports, reports justify meetings. The ecosystem is highly active and well-documented but structurally insulated from market consequence. Both stalls make the other look like progress.',
+        leverage: 'Change the reporting metric for one coordination structure from activity to outcomes. When the narrative has to describe what changed rather than what happened, coordination without consequence loses its justification.'
+      },
+      'Coordinating+Scaling': {
+        name: 'Scaled Alignment',
+        description: 'The ecosystem scales its coordination capacity — more working groups, more alignment processes, more governance — while activity grows to fill the coordination space. Both expand together. Neither produces throughput because both exist to manage complexity rather than reduce it.',
+        leverage: 'Sunset one coordination structure and measure whether the activity it managed continues without it. If it does, the coordination was administrative. If it does not, the activity was dependent on the coordination rather than producing independent value.'
+      },
+      'Coordinating+Waiting': {
+        name: 'Alignment Pending Permission',
+        description: 'The ecosystem coordinates while waiting for an external signal — a funding decision, a policy change, an anchor commitment. Coordination fills the waiting period productively. The waiting justifies why coordination has not yet produced outcomes, and coordination justifies why the waiting is not wasted time.',
+        leverage: 'Identify one decision within the coordination structure that does not depend on the awaited signal. Execute it. Demonstrating that the coordination can produce a committed outcome before the signal arrives breaks the mutual dependency.'
+      },
+      'Extracting+Forgiving': {
+        name: 'Tolerated Extraction',
+        description: 'Value exits the ecosystem and the actors enabling extraction face no consequences. Forgiving protects the relationships through which extraction occurs. Challenging extraction would require the accountability conversation that forgiving systematically avoids.',
+        leverage: 'Introduce a value-flow audit on one anchor relationship. Not a confrontation — a measurement. Making extraction visible through data changes the conversation from relationship management to structural accountability.'
+      },
+      'Forgiving+Mediating': {
+        name: 'Relationship Preservation Loop',
+        description: 'Intermediaries manage relationships, and accountability is avoided to preserve them. Both stalls serve the same function: maintaining the network as it is. The intermediary layer cannot challenge poor performance because its role depends on relationships continuing. Forgiving cannot stop because intermediation normalises tolerance.',
+        leverage: 'Change the intermediary incentive for one programme — reward completed transactions rather than maintained relationships. When the broker benefits from outcomes rather than introductions, the accountability conversation becomes functional rather than threatening.'
+      },
+      'Forgiving+Stabilising': {
+        name: 'Comfortable Incumbency',
+        description: 'Existing actors maintain their positions because poor performance is tolerated and stability is the organising principle. Incumbents are never challenged because forgiving removes accountability and stabilising removes competition. The configuration is comfortable for everyone inside it and impenetrable for everyone outside.',
+        leverage: 'Create one new-entrant pathway that does not require incumbent endorsement. The goal is not to displace incumbents — it is to demonstrate that the ecosystem can produce value from a source that existing structures did not validate.'
+      },
+      'Forgiving+Narrating': {
+        name: 'Narrative Without Accountability',
+        description: 'The ecosystem tells a story of progress while systematically avoiding the evidence that would test it. Narrating provides the cover — things look active. Forgiving provides the mechanism — nothing is stopped. Together they produce a coherent account of an ecosystem that has never tested its own claims.',
+        leverage: 'Apply one outcome metric to the highest-profile programme. Not a review — a published number. When the narrative has to include evidence that can be checked, the forgiving dynamic loses its cover.'
+      },
+      'Forgiving+Waiting': {
+        name: 'Patient Tolerance',
+        description: 'The ecosystem waits for conditions to change while tolerating underperformance in the meantime. Waiting provides the excuse — things will improve when the signal arrives. Forgiving provides the mechanism — nothing is stopped while waiting. Both stalls make inaction feel like patience.',
+        leverage: 'Set an expiry on the waiting period for one programme. Not contingent on the signal arriving — contingent on time. A deadline converts patience into a decision point and forces the accountability that waiting and forgiving jointly defer.'
+      },
+      'Extracting+Stabilising': {
+        name: 'Entrenched Extraction',
+        description: 'Incumbent actors extract value and stability mechanisms protect their position. The ecosystem is structurally organised to serve extractors. New entrants who might circulate value differently cannot gain traction because the stability apparatus exists to maintain the current configuration.',
+        leverage: 'Change one procurement or partnership rule at the anchor level. The extraction is protected by structure, not by intent — changing the structure changes the flow without requiring anchors to volunteer different behaviour.'
+      },
+      'Extracting+Waiting': {
+        name: 'Extraction During Standby',
+        description: 'Value exits the ecosystem while actors wait for the conditions that would justify building retention infrastructure. The waiting provides cover — retention will be addressed when the signal arrives. Meanwhile, every cycle of extraction makes the ecosystem less capable of retaining value when conditions do change.',
+        leverage: 'Build one retention mechanism now, before the awaited signal. A single late-stage instrument — an anchor customer commitment, a local follow-on fund — demonstrates that waiting for conditions to change is not a precondition for changing outcomes.'
+      },
+      'Mediating+Scaling': {
+        name: 'Brokered Growth',
+        description: 'Activity scales through intermediaries. More programmes, more introductions, more facilitated connections — but all routed through brokers. The ecosystem grows in volume while deepening its dependency on mediation. Direct relationships between actors remain structurally weak because every connection passes through the intermediary layer.',
+        leverage: 'Enable one direct connection that bypasses the intermediary. Not all connections need to be direct — but one successful direct transaction demonstrates that the dependency is structural rather than necessary, and opens the path for others.'
+      },
+      'Narrating+Stabilising': {
+        name: 'Narrated Incumbency',
+        description: 'The ecosystem tells a story written by and for incumbents. Stability is maintained because the narrative framework defines success in terms that existing actors already satisfy. New entrants cannot compete on narrative because the story is about continuity, not change.',
+        leverage: 'Introduce one success metric that an incumbent does not currently satisfy. The narrative shifts when the definition of success includes something that requires adaptation rather than continuation.'
+      },
+      'Scaling+Stabilising': {
+        name: 'Stable Proliferation',
+        description: 'Activity scales around existing structures without challenging them. More programmes are added but all operate within the boundaries set by incumbents. Growth is real but shallow — it expands the surface area of the ecosystem without changing its depth or who benefits from it.',
+        leverage: 'Fund one programme that operates outside incumbent oversight. The goal is not to destabilise — it is to demonstrate that growth can come from sources the existing structure did not anticipate or control.'
+      },
+      'Stabilising+Waiting': {
+        name: 'Frozen Configuration',
+        description: 'The ecosystem maintains its current structure while waiting for conditions to change. Stability is justified by the uncertainty of what comes next, and waiting is justified by the stability that makes inaction feel like stewardship. The configuration is frozen — no adaptation, no experimentation, no first movers.',
+        leverage: 'Identify the actor with the least structural investment in the current configuration and give them a mandate to experiment. One actor moving breaks the symmetry between stability and waiting without requiring the whole system to change.'
+      },
+      'Scaling+Waiting': {
+        name: 'Activity While Waiting',
+        description: 'The ecosystem scales early-stage activity while waiting for the conditions that would allow it to mature. Programmes launch and activity grows but nothing graduates because the infrastructure for graduation depends on the awaited signal. Activity fills the waiting period and makes it feel productive.',
+        leverage: 'Graduate one programme without the awaited signal. Define a minimal viable graduation that does not depend on the external condition. One programme crossing the threshold demonstrates that waiting is a choice, not a constraint.'
+      },
     };
 
     // Find best match

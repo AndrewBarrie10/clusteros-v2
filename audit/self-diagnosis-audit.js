@@ -19,23 +19,123 @@ const QUALIFIER_OPTIONS = {
 
 const PROTECT_VALUES = ['knowledge', 'ip', 'trust', 'talent', 'sovereignty'];
 
-// ── CONFIG_NAMES (from diagnostic-journey.html lines 354-373) ────────
+// ── CONFIG_NAMES (from diagnostic-journey.html — expanded) ───────────
 const CONFIG_NAMES = {
+  // Regional
   'regional|university|research':  'Knowledge Commercialisation Cluster',
   'regional|university|talent':    'Knowledge Retention Cluster',
+  'regional|university|capital':   'Research-Led Investment Cluster',
+  'regional|university|supply':    'University Supply Integration Network',
+  'regional|university|growth':    'Academic Growth Cluster',
+  'regional|research|talent':      'Research Talent Pipeline',
+  'regional|research|capital':     'Research Investment Cluster',
+  'regional|research|research':    'Deep Research Cluster',
+  'regional|research|supply':      'Research Supply Network',
+  'regional|research|growth':      'Research-Led Growth Cluster',
   'regional|corporate|supply':     'Anchor Supply Network',
   'regional|corporate|growth':     'Industrial Growth Cluster',
+  'regional|corporate|talent':     'Corporate Talent Cluster',
+  'regional|corporate|capital':    'Corporate Investment Cluster',
+  'regional|corporate|research':   'Corporate R&D Cluster',
   'regional|public|capital':       'Investment-Ready Region',
   'regional|public|growth':        'Regional Development Cluster',
+  'regional|public|talent':        'Public Talent Development Cluster',
+  'regional|public|research':      'Public Research Cluster',
+  'regional|public|supply':        'Public Procurement Cluster',
+  'regional|hospital|talent':      'Clinical Talent Pipeline',
+  'regional|hospital|capital':     'Health Investment Cluster',
+  'regional|hospital|research':    'Clinical Research Cluster',
+  'regional|hospital|supply':      'Health Supply Network',
+  'regional|hospital|growth':      'Health Economy Cluster',
+  'regional|none|talent':          'Emerging Talent Cluster',
+  'regional|none|capital':         'Pre-Anchor Investment Cluster',
+  'regional|none|research':        'Emerging Research Cluster',
+  'regional|none|supply':          'Emerging Supply Network',
+  'regional|none|growth':          'Emerging Growth Cluster',
+  // National
   'national|university|research':  'National Innovation Corridor',
+  'national|university|talent':    'National Talent Corridor',
+  'national|university|supply':    'National Academic Supply Network',
+  'national|university|growth':    'National University Growth Network',
+  'national|research|talent':      'National Research Talent Network',
+  'national|research|research':    'National Research Infrastructure',
+  'national|research|supply':      'National Research Supply Chain',
+  'national|research|growth':      'National Research Growth Network',
   'national|corporate|supply':     'Strategic Supply Chain Network',
+  'national|corporate|talent':     'National Corporate Talent Network',
+  'national|corporate|research':   'National Corporate R&D Network',
+  'national|corporate|growth':     'National Industrial Strategy Network',
   'national|public|growth':        'National Growth Programme',
+  'national|public|talent':        'National Public Talent Programme',
+  'national|public|research':      'National Public Research Programme',
+  'national|public|supply':        'National Public Procurement Network',
+  'national|hospital|talent':      'National Clinical Talent Programme',
+  'national|hospital|research':    'National Health Research Network',
+  'national|hospital|supply':      'National Health Supply Network',
+  'national|hospital|growth':      'National Health Economy Network',
+  'national|none|talent':          'National Emerging Talent Network',
+  'national|none|research':        'National Emerging Research Network',
+  'national|none|supply':          'National Emerging Supply Network',
+  'national|none|growth':          'National Emerging Growth Network',
   'national|*|capital':            'Capital Mobilisation Network',
+  // Enterprise (corporate cluster type)
   'corporate|corporate|supply':    'Supplier Ecosystem Network',
   'corporate|corporate|research':  'Corporate Innovation Cluster',
+  'corporate|corporate|growth':    'Corporate Growth Ecosystem',
+  'corporate|corporate|capital':   'Corporate Investment Ecosystem',
   'corporate|university|research': 'Corporate-Academic Alliance',
+  'corporate|university|talent':   'Corporate-Academic Talent Pipeline',
+  'corporate|university|supply':   'Corporate-Academic Supply Network',
+  'corporate|university|capital':  'Corporate-Academic Investment Alliance',
+  'corporate|university|growth':   'Corporate-Academic Growth Alliance',
+  'corporate|research|research':   'Corporate Deep Research Alliance',
+  'corporate|research|supply':     'Corporate Research Supply Network',
+  'corporate|research|capital':    'Corporate Research Investment Network',
+  'corporate|research|growth':     'Corporate Research Growth Network',
   'corporate|public|growth':       'Corporate Regional Partnership',
+  'corporate|public|capital':      'Corporate Public Investment Partnership',
+  'corporate|public|research':     'Corporate Public Research Partnership',
+  'corporate|public|supply':       'Corporate Public Procurement Partnership',
+  'corporate|hospital|research':   'Corporate Health R&D Alliance',
+  'corporate|hospital|supply':     'Corporate Health Supply Alliance',
+  'corporate|hospital|growth':     'Corporate Health Growth Alliance',
+  'corporate|hospital|capital':    'Corporate Health Investment Alliance',
+  'corporate|none|supply':         'Corporate Emerging Supplier Network',
+  'corporate|none|research':       'Corporate Emerging R&D Network',
+  'corporate|none|growth':         'Corporate Emerging Growth Network',
+  'corporate|none|capital':        'Corporate Emerging Investment Network',
   'corporate|*|talent':            'Internal Talent Ecosystem',
+  // City
+  'city|university|research':      'City Research Cluster',
+  'city|university|talent':        'City University Talent Cluster',
+  'city|university|capital':       'City Research Investment Cluster',
+  'city|university|supply':        'City Academic Supply Cluster',
+  'city|university|growth':        'City University Growth Cluster',
+  'city|research|research':        'City Deep Research Cluster',
+  'city|research|talent':          'City Research Talent Cluster',
+  'city|research|capital':         'City Research Investment Cluster',
+  'city|research|supply':          'City Research Supply Cluster',
+  'city|research|growth':          'City Research Growth Cluster',
+  'city|corporate|supply':         'City Corporate Supply Cluster',
+  'city|corporate|growth':         'City Industrial Cluster',
+  'city|corporate|talent':         'City Corporate Talent Cluster',
+  'city|corporate|capital':        'City Corporate Investment Cluster',
+  'city|corporate|research':       'City Corporate R&D Cluster',
+  'city|public|growth':            'City Development Cluster',
+  'city|public|talent':            'City Public Talent Cluster',
+  'city|public|capital':           'City Public Investment Cluster',
+  'city|public|research':          'City Public Research Cluster',
+  'city|public|supply':            'City Public Procurement Cluster',
+  'city|hospital|talent':          'City Clinical Talent Cluster',
+  'city|hospital|research':        'City Health Research Cluster',
+  'city|hospital|capital':         'City Health Investment Cluster',
+  'city|hospital|supply':          'City Health Supply Cluster',
+  'city|hospital|growth':          'City Health Economy Cluster',
+  'city|none|talent':              'City Emerging Talent Cluster',
+  'city|none|capital':             'City Emerging Investment Cluster',
+  'city|none|research':            'City Emerging Research Cluster',
+  'city|none|supply':              'City Emerging Supply Cluster',
+  'city|none|growth':              'City Emerging Growth Cluster',
 };
 
 const ANCHOR_LABELS = {
@@ -63,7 +163,7 @@ const BEHAVIOURS = [
   { key:'waiting',       stall:'Waiting',      code:'S9' },
 ];
 
-// Named stacks from journey.js _generateStack() — PAIRS
+// Named stacks from journey.js _generateStack() — PAIRS (all 36 now covered)
 const NAMED_STACKS_PAIRS = {
   'Narrating+Scaling':        'Narrative × Activity',
   'Coordinating+Mediating':   'Coordination × Mediation',
@@ -80,6 +180,28 @@ const NAMED_STACKS_PAIRS = {
   'Extracting+Narrating':     'Extraction-Narrative Cover',
   'Mediating+Narrating':      'The Brokered Story',
   'Mediating+Waiting':        'Permission-Mediation Hold',
+  // 21 previously uncovered pairs
+  'Forgiving+Re-proving':     'Justified Tolerance',
+  'Extracting+Re-proving':    'Extraction Under Justification',
+  'Mediating+Re-proving':     'Brokered Justification',
+  'Re-proving+Stabilising':   'Incumbent Justification Lock',
+  'Re-proving+Scaling':       'Proof-by-Activity Loop',
+  'Coordinating+Extracting':  'Coordinated Extraction',
+  'Coordinating+Narrating':   'Alignment-Narrative Cycle',
+  'Coordinating+Scaling':     'Scaled Alignment',
+  'Coordinating+Waiting':     'Alignment Pending Permission',
+  'Extracting+Forgiving':     'Tolerated Extraction',
+  'Forgiving+Mediating':      'Relationship Preservation Loop',
+  'Forgiving+Stabilising':    'Comfortable Incumbency',
+  'Forgiving+Narrating':      'Narrative Without Accountability',
+  'Forgiving+Waiting':        'Patient Tolerance',
+  'Extracting+Stabilising':   'Entrenched Extraction',
+  'Extracting+Waiting':       'Extraction During Standby',
+  'Mediating+Scaling':        'Brokered Growth',
+  'Narrating+Stabilising':    'Narrated Incumbency',
+  'Scaling+Stabilising':      'Stable Proliferation',
+  'Stabilising+Waiting':      'Frozen Configuration',
+  'Scaling+Waiting':          'Activity While Waiting',
 };
 
 // Named stacks — TRIPLES
@@ -116,18 +238,46 @@ function deriveOSConfig(qualifiers, stalls, detectedStacks) {
   const anchorLed = clusterType === 'corporate' || priority === 'supply';
   const sovereignty = protectSet.has('sovereignty') || protectSet.has('knowledge');
 
+  const isEarly  = stage === 'early';
+  const isMature = stage === 'mature';
+
   const priorities = [];
 
+  // Gap-driven
   if (gap === 'discovery' || gap === 'access')
     priorities.push({ name: 'Actor Registry & Discovery Layer' });
   if (gap === 'flow' || researchFocus)
     priorities.push({ name: 'Knowledge Flow Infrastructure' });
   if (gap === 'conversion' || stallSet.has('S7') || stallSet.has('S8'))
     priorities.push({ name: 'Outcome Measurement Layer' });
+
+  // Stage-driven
+  if (isEarly)
+    priorities.push({ name: 'Ecosystem Formation Protocol' });
+  if (isMature)
+    priorities.push({ name: 'Structural Review & Pruning Layer' });
+
+  // Protection-driven
   if (sovereignty || protectSet.has('trust'))
     priorities.push({ name: 'Sovereign Data Membrane' });
+
+  // Stall-driven (all 9)
+  if (stallSet.has('S1'))
+    priorities.push({ name: 'External Validation Mechanism' });
+  if (stallSet.has('S2'))
+    priorities.push({ name: 'Decision Commitment Tracker' });
+  if (stallSet.has('S3'))
+    priorities.push({ name: 'Conditional Continuation Protocol' });
   if (anchorLed || stallSet.has('S4'))
     priorities.push({ name: 'Anchor Accountability Protocol' });
+  if (stallSet.has('S5'))
+    priorities.push({ name: 'Direct Coupling Layer' });
+  if (stallSet.has('S6'))
+    priorities.push({ name: 'New Entrant Pathway' });
+  if (stallSet.has('S9'))
+    priorities.push({ name: 'Unilateral Action Protocol' });
+
+  // Context-driven
   if (talentFocus)
     priorities.push({ name: 'Talent Pipeline Tracker' });
   if (priority === 'capital')
@@ -147,6 +297,8 @@ function deriveOSConfig(qualifiers, stalls, detectedStacks) {
   if (anchorLed) outsideActors.push('Supply chain partners');
   if (priority === 'growth') outsideActors.push('Trade bodies');
   if (clusterType === 'national') outsideActors.push('Regional EDAs');
+  if (isEarly) outsideActors.push('Anchor candidates');
+  if (isMature && !outsideActors.includes('Investors')) outsideActors.push('Scale capital');
   if (protectSet.has('sovereignty') && !outsideActors.includes('Government / Policy')) outsideActors.push('Government / Policy');
   if (protectSet.has('talent') && !outsideActors.includes('Talent networks')) outsideActors.push('Talent networks');
   if (outsideActors.length === 0) outsideActors.push('External partners');
@@ -398,7 +550,7 @@ function auditStackCoverage() {
     key.split('+').forEach(s => { if (stallCounts[s] !== undefined) stallCounts[s]++; });
   });
   Object.entries(stallCounts).sort((a, b) => b[1] - a[1]).forEach(([stall, count]) => {
-    const bar = '█'.repeat(count) + '░'.repeat(8 - count);
+    const maxBar = Math.max(count, 1); const bar = '█'.repeat(Math.min(count, 20)) + '░'.repeat(Math.max(20 - count, 0));
     console.log(`  ${stall.padEnd(14)} │ ${bar} ${count} stacks`);
   });
 }

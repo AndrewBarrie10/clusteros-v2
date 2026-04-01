@@ -108,6 +108,11 @@ function cleanText(text) {
   c = c.replace(/X-side of /gi, '');
   c = c.replace(/Y-side of /gi, '');
   c = c.replace(/\((?:S\d|STALL_\d{1,2}):\s*/gi, '(');
+  // Remove empty parentheses (pipeline artefacts)
+  c = c.replace(/\s*\(\s*\)/g, '');
+  c = c.replace(/\s*\(\s*,[\s,]*\)/g, '');
+  c = c.replace(/\s*\([\s,:-]+\)/g, '');
+  c = c.replace(/  +/g, ' ');
   if (c && !c.endsWith('.') && !c.endsWith('...')) c = c.replace(/\s+\S*$/, '...');
   return c;
 }

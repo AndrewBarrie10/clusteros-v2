@@ -1052,7 +1052,7 @@ setTimeout(function() {
 <div class="f-section">
   <div class="f-num">Finding 4</div>
   <h2 class="f-h">Ecosystems on different continents<br>show <em>identical structures</em></h2>
-  <p class="f-p">The most surprising output of comparative diagnostics is structural resemblance — ecosystems in different countries, different sectors, different political contexts, that show almost identical behavioural configurations. The resemblance is not in what they produce. It is in how the system stabilises. Detroit Mobility and Hanoi Manufacturing share 3 stack configurations. Belfast Cyber and Orlando Simulation share the same incumbent-intermediary structure. The actors are different. The structure is the same.</p>
+  <p class="f-p">The most surprising output of comparative diagnostics is structural resemblance — ecosystems in different countries, different sectors, different political contexts, that show almost identical behavioural configurations. The resemblance is not in what they produce. It is in how the system stabilises. Detroit Mobility and Hanoi Manufacturing share 3 stack configurations. Basel Life Sciences and Bangalore FinTech show the same intermediation-incumbent pattern. Tel Aviv AI and Cheltenham Cyber share identical mediation structures despite having nothing else in common. The actors are different. The structure is the same.</p>
   <div class="resemblances" id="resemblances"></div>
   <div class="pullquote">
     <p>"Once the stabilisation logic becomes visible, similar patterns can be seen across ecosystems that look nothing alike on the surface. A life sciences cluster in Basel and a fintech cluster in Lagos — different in every way that matters to the actors inside them — can show structurally identical diagnostic profiles. That recognition is where stewardship begins."</p>
@@ -1127,19 +1127,18 @@ setTimeout(function() {
   </div>
 </div>
 
-<div class="f-cta" id="cta">
-  <div class="f-cta-inner">
-    <div class="f-num">Your ecosystem</div>
-    <h2 class="cta-h">Find out where yours stalls.<br><em>It takes 10 minutes.</em></h2>
-    <p class="cta-p">The interactive self-diagnostic identifies your stalls, names your stacks, surfaces your blind spot, and generates leverage hypotheses — all calibrated against 221 comparable ecosystems.</p>
-    <a href="/diagnostic-journey" class="cta-btn">Diagnose your ecosystem →</a>
-    <div class="cta-note">Free · Interactive · Informed by 221 ecosystems</div>
+<div style="max-width:780px;margin:0 auto;padding:48px 32px 0;">
+  <div style="border-top:2px solid var(--green);padding-top:32px;">
+    <p style="font-family:var(--font-serif);font-size:22px;color:var(--ink);line-height:1.3;margin:0 0 12px;">Your ecosystem is in here somewhere.</p>
+    <p style="font-size:14px;color:var(--ink-dim);line-height:1.6;margin:0 0 20px;">The interactive self-diagnostic takes 10 minutes. It identifies your stalls, names your stacks, surfaces your blind spot, and generates leverage hypotheses — calibrated against 221 comparable ecosystems.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+      <a href="/diagnostic-journey" style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:var(--green);color:#fff;padding:12px 24px;border-radius:3px;text-decoration:none;">Diagnose your ecosystem →</a>
+      <a href="/data.html" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.06em;color:var(--green);text-decoration:none;">Browse the dataset →</a>
+    </div>
   </div>
-</div>
 
-<div style="max-width:780px;margin:0 auto;padding:32px 32px 0;">
-  <div style="border-top:1px solid var(--border);padding-top:28px;text-align:center;">
-    <p style="font-size:15px;color:var(--ink-dim);line-height:1.6;margin:0;">The dataset behind these findings — 221 ecosystems across 57 countries. <a href="/data.html" style="color:var(--green);text-decoration:none;border-bottom:1px solid rgba(42,122,79,0.3);font-weight:400;">Browse the structured data →</a></p>
+  <div style="border-top:1px solid var(--border);padding-top:28px;margin-top:32px;text-align:center;">
+    <p style="font-size:13px;color:var(--ink-muted);line-height:1.6;margin:0;">221 ecosystems · 57 countries · 14,800+ evidence items · Free · No account required</p>
   </div>
 </div>
 
@@ -1196,10 +1195,6 @@ const FREQ = [
   { id:'S5', name:'Mediating instead of coupling',          sub:'Every connection routes through an intermediary',            pct:100, pctMH:38, cls:'s5' },
   { id:'S4', name:'Extracting without reinvesting',         sub:'Value leaves the ecosystem at growth stage',                 pct:52,  pctMH:37, cls:'s4' },
   { id:'S9', name:'Waiting for permission',                 sub:'Action deferred pending external conditions',               pct:68,  pctMH:30, cls:'s9' },
-  { id:'S8', name:'Scaling activity instead of throughput',  sub:'More starts, not more finishes',                            pct:100, pctMH:8,  cls:'s8' },
-  { id:'S7', name:'Narrating instead of testing',           sub:'Reports substitute for impact measurement',                 pct:90,  pctMH:7,  cls:'s7' },
-  { id:'S1', name:'Re-proving instead of narrowing',        sub:'The case is never quite strong enough to act on',            pct:100, pctMH:0,  cls:'s1' },
-  { id:'S3', name:'Forgiving instead of redesigning',       sub:'Poor performance tolerated to preserve relationships',      pct:3,   pctMH:1,  cls:'s3' },
 ];
 
 function renderFreq() {
@@ -1237,7 +1232,7 @@ const COMMON_STACKS = [
   {
     ids: ['S7','S8'],
     name: 'Narrative-Activity Stabilisation',
-    freq: '31 ecosystems · 14% · 7 continents',
+    freq: '31 ecosystems · 7 continents',
     freqCls: 'very-common',
     detail: 'Programme scaling generates the narrative that justifies more scaling. Neither stall requires anyone to narrow, exclude, or demonstrate market consequence. <strong>The most common stack configuration — and the one that appears across the most geographies.</strong> Present in mature ecosystems and emerging ones alike. Geography does not predict its presence. The absence of a throughput signal does.',
     geos: ['Lagos','Seoul','Toronto','Orlando','Glasgow','São Paulo','Melbourne'],
@@ -1245,7 +1240,7 @@ const COMMON_STACKS = [
   {
     ids: ['S2','S5'],
     name: 'Coordination-Intermediation Stabilisation',
-    freq: '20 ecosystems · 9% · 6 continents',
+    freq: '20 ecosystems · 6 continents',
     freqCls: 'very-common',
     detail: 'Coordination creates demand for intermediaries. Intermediaries make coordination manageable. <strong>The system coheres without ever making an exclusionary decision.</strong> Each stall protects the roles that depend on the other continuing. Especially prevalent where formal public-private cluster organisations exist.',
     geos: ['Belfast','Glasgow','Bangalore','Orlando','Quebec City','Karachi'],
@@ -1253,7 +1248,7 @@ const COMMON_STACKS = [
   {
     ids: ['S6','S5'],
     name: 'Intermediation-Incumbent Stabilisation',
-    freq: '15 ecosystems · 7% · 6 continents',
+    freq: '15 ecosystems · 6 continents',
     freqCls: 'common',
     detail: 'Intermediary organisations reduce pressure on incumbents to couple directly with new entrants. Incumbent stability sustains intermediary organisations by providing anchor clients and legitimacy. <strong>New entrants face a double filter: prove relevance to the intermediary, then prove fit to the incumbent.</strong>',
     geos: ['Detroit','Belfast','Eindhoven','Singapore','Taipei','Almaty'],
@@ -1261,15 +1256,15 @@ const COMMON_STACKS = [
   {
     ids: ['S6','S2'],
     name: 'Coordination-Incumbent Stabilisation',
-    freq: '14 ecosystems · 6% · 6 continents',
+    freq: '14 ecosystems · 6 continents',
     freqCls: 'common',
     detail: 'Large incumbents define what coordination is for. Coordination structures form around incumbent needs. <strong>New entrants optimise for incumbent partnership because that is where the visible signal is.</strong> The structure is not maintained by anyone defending it — it is maintained by every actor making the individually rational choice.',
-    geos: ['Orlando','Basque Country','Colorado Springs','Medellin','Glasgow','Detroit'],
+    geos: ['Basque Country','Colorado Springs','Medellin','Glasgow','Detroit','Seoul'],
   },
   {
     ids: ['S1','S2'],
     name: 'Validation-Coordination Stabilisation',
-    freq: '18 ecosystems · 8% · 5 continents',
+    freq: '18 ecosystems · 5 continents',
     freqCls: 'common',
     detail: 'Re-proving requires broad consensus to be credible. Building consensus generates further coordination requirements. The case is never quite strong enough to act on — <strong>because acting would require the kind of exclusionary choice that the coordination structure exists to avoid.</strong> The most common configuration in ecosystems seeking their first anchor commitment.',
     geos: ['Abu Dhabi','Canberra','Copenhagen','Glasgow','Harwell','Cape Town'],

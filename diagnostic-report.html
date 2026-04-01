@@ -1081,6 +1081,11 @@ function cleanNarrative(text) {
   // Remove X-side/Y-side jargon
   cleaned = cleaned.replace(/X-side of /gi, '');
   cleaned = cleaned.replace(/Y-side of /gi, '');
+  // Remove empty parentheses (pipeline artefacts where entity names were stripped)
+  cleaned = cleaned.replace(/\s*\(\s*\)/g, '');
+  cleaned = cleaned.replace(/\s*\(\s*,[\s,]*\)/g, '');
+  cleaned = cleaned.replace(/\s*\([\s,:-]+\)/g, '');
+  cleaned = cleaned.replace(/  +/g, ' ');
   // Clean parenthetical stall references like "(S2: coordinating through...)"
   cleaned = cleaned.replace(/\((?:S\d|STALL_\d{1,2}):\s*/gi, '(');
   // Handle truncation gracefully

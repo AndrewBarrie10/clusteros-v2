@@ -99,7 +99,7 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 .comp-card-link:hover{color:var(--green-dim)}
 .comp-shifted{padding:10px 16px;border-top:1px solid var(--border);background:#fff;display:flex;gap:10px;align-items:flex-start}
 .comp-shifted-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;flex-shrink:0;padding-top:2px}
-.comp-shifted-text{font-size:11px;color:var(--ink-dim);line-height:1.55;font-weight:300}
+.comp-shifted-text{font-size:11px;color:var(--ink-dim);line-height:1.55;font-weight:300;overflow-wrap:break-word;word-wrap:break-word;min-width:0}
 .comp-shifted-cta{font-size:11px;color:var(--ink-muted);line-height:1.55;font-style:italic}
 
 /* CAS */
@@ -479,6 +479,18 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
   .full-diag-body{grid-template-columns:1fr}
   .stall-ref-grid{grid-template-columns:1fr}
   .next-step{flex-direction:column;align-items:flex-start}
+  .comp-shifted{flex-direction:column;gap:4px}
+  .comp-shifted-label{white-space:normal}
+  .comp-card-main{grid-template-columns:1fr;gap:8px}
+  .comp-card-link{justify-self:start}
+  .qualifier-context-grid{grid-template-columns:1fr}
+  .continue-banner{flex-direction:column;align-items:flex-start}
+  .stack-card-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .stack-card-pills{margin-left:0}
+  .doc-footer-main{flex-direction:column;gap:12px}
+  .doc-footer-right{text-align:left}
+  .inputs-row{grid-template-columns:1fr;gap:4px}
+  .doc-caveat{flex-direction:column;gap:8px}
 }
 </style>
 </head>

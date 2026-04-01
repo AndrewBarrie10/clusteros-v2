@@ -1,0 +1,307 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║         CLUSTEROS SELF-DIAGNOSIS AUDIT REPORT                      ║
+║         Generated: 2026-04-01T16:08:44                          ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+══════════════════════════════════════════════════════════════════════
+AUDIT 1: CONFIGURATION SPACE — UNIQUE OUTPUT PATHS
+══════════════════════════════════════════════════════════════════════
+
+Total qualifier combinations: 46,080
+Unique output fingerprints:  592
+Compression ratio:           77.8:1
+
+→ 592 distinct outputs from 46,080 inputs means
+  many users get identical recommendations.
+
+Config name distribution (unique outputs per config name):
+  248 │ Regional Operating System
+   30 │ Anchor Supply Network
+   30 │ Industrial Growth Cluster
+   30 │ Investment-Ready Region
+   30 │ Regional Development Cluster
+   30 │ Capital Mobilisation Network
+   30 │ Supplier Ecosystem Network
+   30 │ Corporate Regional Partnership
+   28 │ Strategic Supply Chain Network
+   28 │ National Growth Programme
+   15 │ Knowledge Retention Cluster
+   15 │ Internal Talent Ecosystem
+   12 │ Knowledge Commercialisation Cluster
+   12 │ National Innovation Corridor
+   12 │ Corporate-Academic Alliance
+   12 │ Corporate Innovation Cluster
+
+══════════════════════════════════════════════════════════════════════
+AUDIT 2: QUESTION SENSITIVITY — WHICH QUESTIONS CHANGE OUTPUT?
+══════════════════════════════════════════════════════════════════════
+
+Baseline profile:
+  Cluster: regional | Anchor: university | Stage: established
+  Priority: research | Gap: flow | Protect: [ip]
+  → Config: Knowledge Commercialisation Cluster
+  → Priorities: Knowledge Flow Infrastructure, Outcome Measurement Layer, Stack Intervention Monitor
+  → Outside actors: Research partners, Policy actors
+
+Single-question sensitivity (change one question, hold others):
+──────────────────────────────────────────────────────────────────────
+  clusterType    │ 3/4 values change output (75%) │ affects: configName, outsideActors, priorities
+  anchorType     │ 5/6 values change output (83%) │ affects: configName
+  stage          │ 0/3 values change output (0%) │ affects: nothing
+  priority       │ 4/5 values change output (80%) │ affects: configName, priorities, outsideActors
+  gap            │ 2/4 values change output (50%) │ affects: priorities
+  protect (multi) │ 30/32 combos change output (94%) │ affects: priorities, outsideActors
+
+──────────────────────────────────────────────────────────────────────
+CRITICAL TEST: Does "stage" ever change any output?
+  → Stage changes output in ANY combination: NO ← DEAD QUESTION
+
+══════════════════════════════════════════════════════════════════════
+AUDIT 3: STACK COVERAGE — NAMED vs FALLBACK
+══════════════════════════════════════════════════════════════════════
+
+Total possible pairs (9 choose 2): 36
+Named pair stacks:                  15 (42%)
+Uncovered pairs (fallback):         21 (58%)
+
+Covered pairs:
+  ✓ Coordinating+Re-proving             → Legitimacy Loop
+  ✓ Narrating+Re-proving                → Strategy-Validation Stack
+  ✓ Re-proving+Waiting                  → Permission Deadlock
+  ✓ Coordinating+Forgiving              → Alignment Without Accountability
+  ✓ Coordinating+Mediating              → Coordination × Mediation
+  ✓ Coordinating+Stabilising            → Incumbent Anchor Lock-In
+  ✓ Forgiving+Scaling                   → Proliferation Without Pruning
+  ✓ Extracting+Mediating                → Value Leakage Through Intermediation
+  ✓ Extracting+Narrating                → Extraction-Narrative Cover
+  ✓ Extracting+Scaling                  → Activity-Extraction Regime
+  ✓ Mediating+Stabilising               → Gatekeeping Configuration
+  ✓ Mediating+Narrating                 → The Brokered Story
+  ✓ Mediating+Waiting                   → Permission-Mediation Hold
+  ✓ Narrating+Scaling                   → Narrative × Activity
+  ✓ Narrating+Waiting                   → Documented Paralysis
+
+Uncovered pairs (will get generic fallback text):
+  ✗ Forgiving+Re-proving
+  ✗ Extracting+Re-proving
+  ✗ Mediating+Re-proving
+  ✗ Re-proving+Stabilising
+  ✗ Re-proving+Scaling
+  ✗ Coordinating+Extracting
+  ✗ Coordinating+Narrating
+  ✗ Coordinating+Scaling
+  ✗ Coordinating+Waiting
+  ✗ Extracting+Forgiving
+  ✗ Forgiving+Mediating
+  ✗ Forgiving+Stabilising
+  ✗ Forgiving+Narrating
+  ✗ Forgiving+Waiting
+  ✗ Extracting+Stabilising
+  ✗ Extracting+Waiting
+  ✗ Mediating+Scaling
+  ✗ Narrating+Stabilising
+  ✗ Scaling+Stabilising
+  ✗ Stabilising+Waiting
+  ✗ Scaling+Waiting
+
+Total possible triples (9 choose 3): 84
+Named triple stacks:                  3 (4%)
+Uncovered triples:                    81
+
+→ Triples that aren't named fall back to best-matching PAIR (≥50% overlap)
+  or generic text. With 96% uncovered, most 3-stall users get pair-level or generic output.
+
+Stall coverage in named stacks (how often each stall appears):
+  Coordinating   │ ██████░░ 6 stacks
+  Mediating      │ ██████░░ 6 stacks
+  Narrating      │ ██████░░ 6 stacks
+  Scaling        │ █████░░░ 5 stacks
+  Re-proving     │ ████░░░░ 4 stacks
+  Extracting     │ ████░░░░ 4 stacks
+  Waiting        │ ████░░░░ 4 stacks
+  Forgiving      │ ██░░░░░░ 2 stacks
+  Stabilising    │ ██░░░░░░ 2 stacks
+
+══════════════════════════════════════════════════════════════════════
+AUDIT 4: STALL INFLUENCE ON CONFIG OUTPUT
+══════════════════════════════════════════════════════════════════════
+Which stalls actually change deriveOSConfig priorities?
+
+Baseline (no stalls): Actor Registry & Discovery Layer, Sovereign Data Membrane, Coordination Infrastructure
+──────────────────────────────────────────────────────────────────────
+  + Re-proving     │ Actor Registry & Discovery Layer, Sovereign Data Membrane, Coordination Infrastructure   (same)
+  + Coordinating   │ Actor Registry & Discovery Layer, Sovereign Data Membrane, Coordination Infrastructure   (same)
+  + Forgiving      │ Actor Registry & Discovery Layer, Sovereign Data Membrane, Coordination Infrastructure   (same)
+  + Extracting     │ Actor Registry & Discovery Layer, Sovereign Data Membrane, Anchor Accountability Protocol ← CHANGES
+  + Mediating      │ Actor Registry & Discovery Layer, Sovereign Data Membrane, Coordination Infrastructure   (same)
+  + Stabilising    │ Actor Registry & Discovery Layer, Sovereign Data Membrane, Coordination Infrastructure   (same)
+  + Narrating      │ Actor Registry & Discovery Layer, Outcome Measurement Layer, Sovereign Data Membrane ← CHANGES
+  + Scaling        │ Actor Registry & Discovery Layer, Outcome Measurement Layer, Sovereign Data Membrane ← CHANGES
+  + Waiting        │ Actor Registry & Discovery Layer, Sovereign Data Membrane, Coordination Infrastructure   (same)
+
+→ Only stalls S4 (Extracting), S7 (Narrating), S8 (Scaling) have
+  hard-coded influence on infrastructure priorities.
+  The other 6 stalls do NOT change config output at all.
+
+══════════════════════════════════════════════════════════════════════
+AUDIT 5: INFRASTRUCTURE PRIORITY FREQUENCY
+══════════════════════════════════════════════════════════════════════
+How often does each priority appear across all combinations?
+
+Total combinations sampled: 2560
+
+Priority frequency (how often it appears in any slot):
+  100% │ ██████████████████████████████████████████████████ │ Outcome Measurement Layer
+   88% │ ████████████████████████████████████████████░░░░░░ │ Sovereign Data Membrane
+   70% │ ███████████████████████████████████░░░░░░░░░░░░░░░ │ Knowledge Flow Infrastructure
+   50% │ █████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░ │ Actor Registry & Discovery Layer
+   32% │ ████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │ Talent Pipeline Tracker
+   30% │ ███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │ Anchor Accountability Protocol
+   20% │ ██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │ Stack Intervention Monitor
+    8% │ ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │ Investment Signalling Layer
+    0% │ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │ Coordination Infrastructure
+
+Top-slot frequency (how often it appears as #1 priority):
+   50% │ Actor Registry & Discovery Layer
+   40% │ Knowledge Flow Infrastructure
+   10% │ Outcome Measurement Layer
+
+══════════════════════════════════════════════════════════════════════
+AUDIT 6: CONFIG NAME LOOKUP — FALLBACK RATE
+══════════════════════════════════════════════════════════════════════
+
+Total clusterType × anchorType × priority combinations: 120
+  Exact match:                13 (11%)
+  Wildcard match:             12 (10%)
+  Fallback "Regional OS":     95 (79%)
+
+Combinations hitting fallback (get generic "Regional Operating System"):
+  → regional|university|capital
+  → regional|university|supply
+  → regional|university|growth
+  → regional|research|talent
+  → regional|research|capital
+  → regional|research|research
+  → regional|research|supply
+  → regional|research|growth
+  → regional|corporate|talent
+  → regional|corporate|capital
+  → regional|corporate|research
+  → regional|public|talent
+  → regional|public|research
+  → regional|public|supply
+  → regional|hospital|talent
+  → regional|hospital|capital
+  → regional|hospital|research
+  → regional|hospital|supply
+  → regional|hospital|growth
+  → regional|none|talent
+  → regional|none|capital
+  → regional|none|research
+  → regional|none|supply
+  → regional|none|growth
+  → national|university|talent
+  → national|university|supply
+  → national|university|growth
+  → national|research|talent
+  → national|research|research
+  → national|research|supply
+  → national|research|growth
+  → national|corporate|talent
+  → national|corporate|research
+  → national|corporate|growth
+  → national|public|talent
+  → national|public|research
+  → national|public|supply
+  → national|hospital|talent
+  → national|hospital|research
+  → national|hospital|supply
+  → national|hospital|growth
+  → national|none|talent
+  → national|none|research
+  → national|none|supply
+  → national|none|growth
+  → corporate|university|capital
+  → corporate|university|supply
+  → corporate|university|growth
+  → corporate|research|capital
+  → corporate|research|research
+  → corporate|research|supply
+  → corporate|research|growth
+  → corporate|corporate|capital
+  → corporate|corporate|growth
+  → corporate|public|capital
+  → corporate|public|research
+  → corporate|public|supply
+  → corporate|hospital|capital
+  → corporate|hospital|research
+  → corporate|hospital|supply
+  → corporate|hospital|growth
+  → corporate|none|capital
+  → corporate|none|research
+  → corporate|none|supply
+  → corporate|none|growth
+  → city|university|talent
+  → city|university|capital
+  → city|university|research
+  → city|university|supply
+  → city|university|growth
+  → city|research|talent
+  → city|research|capital
+  → city|research|research
+  → city|research|supply
+  → city|research|growth
+  → city|corporate|talent
+  → city|corporate|capital
+  → city|corporate|research
+  → city|corporate|supply
+  → city|corporate|growth
+  → city|public|talent
+  → city|public|capital
+  → city|public|research
+  → city|public|supply
+  → city|public|growth
+  → city|hospital|talent
+  → city|hospital|capital
+  → city|hospital|research
+  → city|hospital|supply
+  → city|hospital|growth
+  → city|none|talent
+  → city|none|capital
+  → city|none|research
+  → city|none|supply
+  → city|none|growth
+
+══════════════════════════════════════════════════════════════════════
+SUMMARY FINDINGS
+══════════════════════════════════════════════════════════════════════
+
+1. DIFFERENTIATION
+   - 592 unique outputs from 46,080 input combinations
+   - Compression ratio of 78:1 means most users get duplicate recommendations
+
+2. DEAD QUESTION
+   - "stage" (early/established/mature) has ZERO influence on any output
+   - It does not affect configName, priorities, or outsideActors
+   - It appears in AI commentary prompt context only — but you confirmed no AI layer
+
+3. STALL BLIND SPOTS
+   - Only 3 of 9 stalls (S4 Extracting, S7 Narrating, S8 Scaling) influence config output
+   - The other 6 stalls affect stack detection but NOT infrastructure recommendations
+   - A user with Coordinating + Forgiving + Waiting gets the same config as someone
+     with no stalls at all (given same qualifiers)
+
+4. STACK COVERAGE GAPS
+   - 15 of 36 possible pairs are named (42%)
+   - 3 of 84 possible triples are named (4%)
+   - Users selecting 3+ behaviours usually get pair-level or generic fallback text
+
+5. CONFIG NAME COVERAGE
+   - Many clusterType × anchorType × priority combos fall through to
+     generic "Regional Operating System" — especially city clusters and hospital anchors
+
+6. PRIORITY ORDERING
+   - Infrastructure priorities are insertion-ordered, not ranked by relevance
+   - "gap" question dominates: it determines the #1 priority in most paths
+   - Stack Intervention Monitor appears whenever stacks are detected (nearly always)
+

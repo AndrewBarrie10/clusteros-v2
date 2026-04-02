@@ -1319,7 +1319,7 @@ function BehavioursStage() {
     <div style={s1.container}>
       <h2 style={styles.stageHeading}>Behaviours</h2>
       <p style={styles.stageSubtitle}>
-        Select up to {MAX_STALLS} behavioural stalls you observe in this ecosystem. Most diagnosed clusters have 3–5 active stalls. Stacks are detected automatically.
+        Which of these behaviours do you recognise in your ecosystem? Select the ones that ring true — most ecosystems have 3–5. Stacks are detected automatically.
       </p>
 
       <HealthIndicator count={selected.length} />
@@ -1343,7 +1343,7 @@ function BehavioursStage() {
       {/* ── Summary line ── */}
       {selected.length > 0 && (
         <div style={s1.summaryLine}>
-          <span>{selected.length} of {MAX_STALLS} stall{selected.length !== 1 ? 's' : ''} selected</span>
+          <span>{selected.length} stall{selected.length !== 1 ? 's' : ''} selected{selected.length >= MAX_STALLS ? ' (maximum)' : ''}</span>
           <span style={s1.summaryDot} />
           <span style={{ color: detectedStacks.length > 0 ? 'var(--founder)' : 'var(--dj-chalk-muted)' }}>
             {detectedStacks.length} stack{detectedStacks.length !== 1 ? 's' : ''} detected{detectedStacks.length > 0 ? ' (showing top 3)' : ''}

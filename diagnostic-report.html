@@ -1615,11 +1615,13 @@ async function init() {
   }
 
   // ── Executive Summary — built from ecosystem description + stack commentary ──
-  const ecoDesc = d.ecosystemDescription || {};
-  const stackCommentary = d.stackCommentary || {};
+  // Guard against reports saved before these fields existed
+  const ecoDesc = (d.ecosystemDescription && typeof d.ecosystemDescription === 'object') ? d.ecosystemDescription : {};
+  const stackCommentary = (d.stackCommentary && typeof d.stackCommentary === 'object') ? d.stackCommentary : {};
   const configName = d.config_name || '';
+  try {
 
-  if (ecoDesc.inside || ecoDesc.outside || Object.keys(stackCommentary).length > 0) {
+  if (ecoDesc.inside || ecoDesc.outside || (stackCommentary && Object.keys(stackCommentary).length > 0)) {
     const execEl = document.getElementById('section-exec-summary');
     execEl.style.display = '';
 
@@ -1710,6 +1712,7 @@ async function init() {
     nextHTML += '</div>';
     document.getElementById('next-steps-content').innerHTML = nextHTML;
   }
+  } catch (e) { console.warn('[Report] Exec summary / next-steps rendering failed (report may predate these fields):', e.message); }
 
   // ── Build stack data early (needed for stall load indicators) ──
   const stack = d.stack || {};

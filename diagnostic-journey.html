@@ -612,6 +612,94 @@ function deriveOSConfig(qualifiers, stalls, detectedStacks) {
   return { configName, priorities: topPriorities, outsideActors: outsideActors.slice(0, 5), insideActors, clusterType: clusterType || 'regional', protections, anchorLabel };
 }
 
+/* ─── Ecosystem Description Generator ─────────────────────────────── */
+/* Builds a structural description of what the ecosystem feels like,   */
+/* grounded in canonical stall/stack data + qualifier context.         */
+/* Returns { inside, outside, absorbed, cost }                         */
+
+const STAGE_CONTEXT = {
+  early:       { tone: 'forming', inside: 'Actors are still proving the cluster thesis exists', outside: 'The ecosystem is pre-traction — there is energy but no structural evidence of conversion' },
+  established: { tone: 'operating', inside: 'Programmes and structures exist, but impact is hard to distinguish from activity', outside: 'The ecosystem looks active — events, partnerships, reports — but it is unclear what converts' },
+  mature:      { tone: 'optimising', inside: 'The system works but has stopped adapting — what was once useful is now structural', outside: 'The ecosystem appears stable and successful, but the stability is protecting the patterns that need to change' },
+};
+
+const ANCHOR_CONTEXT = {
+  university:  { inside: 'Research output is high but commercialisation pathways are unclear or blocked', outside: 'The university dominates the narrative — other actors orbit it rather than transacting independently' },
+  research:    { inside: 'Knowledge is produced but stays within institutional boundaries', outside: 'The research institute generates signal but the ecosystem cannot convert it to commercial activity' },
+  corporate:   { inside: 'The anchor defines what the ecosystem is for — other actors optimise for its procurement cycle', outside: 'The corporate anchor absorbs value that the ecosystem generates — talent, IP, and partnerships flow inward' },
+  public:      { inside: 'Actors navigate funding cycles and compliance requirements rather than building direct relationships', outside: 'The public agency sets the rhythm — everything aligns to its reporting and approval timeline' },
+  hospital:    { inside: 'Clinical needs are clear but the pathway from need to innovation is mediated by institutional process', outside: 'The health system generates demand signals but they are absorbed before reaching founders or researchers' },
+  none:        { inside: 'No single institution anchors the ecosystem — coordination is distributed and often duplicated', outside: 'The ecosystem lacks a credible anchor — external actors cannot find a stable entry point' },
+};
+
+const STALL_INSIDE = {
+  S1: 'Resources go to justification — the case is never quite settled enough to act on',
+  S2: 'Meetings produce alignment documents, not decisions. Coordination is the output',
+  S3: 'Underperformance is tolerated because accountability would damage relationships',
+  S4: 'Value flows out — talent leaves, IP exits, capital goes elsewhere',
+  S5: 'Everything routes through intermediaries. Direct relationships between actors are rare',
+  S6: 'Existing structures are preserved even when they no longer serve. Change feels impossible',
+  S7: 'Stories about progress substitute for evidence of change. Reports are the product',
+  S8: 'New programmes launch but nothing graduates. Activity is celebrated, outcomes are not measured',
+  S9: 'Everyone is waiting — for funding, for policy, for an anchor to commit. The waiting is structural',
+};
+
+const STALL_OUTSIDE = {
+  S1: 'the ecosystem keeps re-making its case rather than delivering results',
+  S2: 'there are many partnerships and working groups but no visible commitments',
+  S3: 'programmes continue regardless of performance — nothing gets stopped',
+  S4: 'the best outcomes (talent, companies, IP) leave the ecosystem',
+  S5: 'engagement requires navigating an intermediary layer before reaching anyone',
+  S6: 'the same institutions dominate every initiative — nothing new emerges',
+  S7: 'communications are polished but evidence of real impact is absent',
+  S8: 'the ecosystem is busy but nothing scales beyond early stage',
+  S9: 'nothing moves — the ecosystem is waiting for conditions that may never arrive',
+};
+
+const PRIORITY_COST = {
+  talent:   'Talent retention cannot improve while these patterns hold — the people you need will continue to leave',
+  capital:  'External capital cannot find a credible entry point while these patterns hold — investors see activity, not conversion',
+  research: 'Research commercialisation stalls while these patterns hold — knowledge stays institutional',
+  supply:   'Supply chain development cannot progress while these patterns hold — procurement circulates outward',
+  growth:   'Economic growth is constrained while these patterns hold — activity substitutes for outcomes',
+};
+
+function buildEcosystemDescription(stalls, detectedStacks, qa) {
+  const stage = STAGE_CONTEXT[qa.stage] || STAGE_CONTEXT.established;
+  const anchor = ANCHOR_CONTEXT[qa.anchorType] || ANCHOR_CONTEXT.none;
+
+  // Inside perspective: stage context + anchor context + top stall experiences
+  const stallInsides = stalls.slice(0, 3).map(id => STALL_INSIDE[id]).filter(Boolean);
+  const insideParts = [stage.inside + '.'];
+  if (qa.anchorType) insideParts.push(anchor.inside + '.');
+  insideParts.push(...stallInsides.map(s => s + '.'));
+  const inside = insideParts.join(' ');
+
+  // Outside perspective: stage framing + what external actors see from stalls
+  const stallOutsides = stalls.slice(0, 3).map(id => STALL_OUTSIDE[id]).filter(Boolean);
+  const outsideParts = [stage.outside + '.'];
+  if (stallOutsides.length > 0) {
+    outsideParts.push('From outside, ' + stallOutsides.join('; ') + '.');
+  }
+  if (qa.anchorType) outsideParts.push(anchor.outside + '.');
+  const outside = outsideParts.join(' ');
+
+  // Absorbed signals — union from detected stacks
+  const absorbedSet = new Set();
+  detectedStacks.forEach(s => {
+    (s.absorbed || '').split(',').map(x => x.trim()).filter(Boolean).forEach(x => absorbedSet.add(x));
+  });
+  const absorbedList = [...absorbedSet];
+  const absorbed = absorbedList.length > 0
+    ? `This ecosystem absorbs ${absorbedList.join(', ').toLowerCase()} — each of these pressures is real. The stall configuration is the system's way of managing them without structural change.`
+    : 'The stalls you identified are managing real pressures — but the system absorbs them rather than adapting.';
+
+  // Cost — what accumulates if nothing changes, tied to priority
+  const cost = PRIORITY_COST[qa.priority] || 'Without intervention, these patterns remain self-reinforcing — each stall provides cover for the others.';
+
+  return { inside, outside, absorbed, cost };
+}
+
 /* ─── Journey context (state carried forward across stages) ────────── */
 const JourneyContext = createContext(null);
 
@@ -813,6 +901,167 @@ function LeverageCard({ stack, protections, priority, commentary }) {
             </span>
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Ecosystem Description Stage (checkpoint between qualifiers and leverage) ── */
+const ecoStyles = {
+  container: { width: '100%', maxWidth: '640px' },
+  heading: { fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 400, color: 'var(--dj-chalk)', marginBottom: '8px', lineHeight: 1.3 },
+  sub: { fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginBottom: '24px', lineHeight: 1.6 },
+  section: { marginBottom: '20px', padding: '16px 20px', background: 'var(--dj-surface)', border: '1px solid var(--dj-border)', borderRadius: '6px' },
+  sectionLabel: { display: 'block', fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '8px' },
+  sectionText: { fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--dj-chalk-dim)', lineHeight: 1.7, margin: 0 },
+  editArea: { width: '100%', minHeight: '80px', padding: '12px 14px', fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--dj-chalk-dim)', lineHeight: 1.7, background: 'var(--dj-surface)', border: '1px solid var(--dj-border)', borderRadius: '4px', resize: 'vertical', outline: 'none' },
+  actions: { display: 'flex', gap: '10px', marginTop: '24px', flexWrap: 'wrap' },
+  btnPrimary: { fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', padding: '12px 24px', border: 'none', borderRadius: '4px', background: 'var(--signal)', color: '#fff', cursor: 'pointer' },
+  btnSecondary: { fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', padding: '12px 24px', border: '1px solid var(--dj-border)', borderRadius: '4px', background: 'transparent', color: 'var(--dj-chalk-dim)', cursor: 'pointer' },
+  btnEdit: { fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 500, letterSpacing: '0.05em', padding: '6px 14px', border: '1px solid var(--dj-border)', borderRadius: '3px', background: 'transparent', color: 'var(--dj-chalk-muted)', cursor: 'pointer', marginTop: '10px' },
+  divider: { height: '1px', background: 'var(--dj-border)', margin: '16px 0' },
+  absorbedBar: { padding: '12px 16px', background: 'rgba(124,111,155,0.06)', border: '1px solid rgba(124,111,155,0.15)', borderRadius: '4px', marginBottom: '16px' },
+  costBar: { padding: '12px 16px', background: 'rgba(212,105,90,0.06)', border: '1px solid rgba(212,105,90,0.15)', borderRadius: '4px', marginBottom: '20px' },
+};
+
+function EcosystemDescriptionStage({ onConfirm, onBack }) {
+  const { journeyState, updateJourneyState } = useJourney();
+  const stalls = journeyState.stalls || [];
+  const stacks = journeyState.detectedStacks || [];
+  const qa = journeyState.qualifierAnswers || {};
+
+  // Generate or retrieve saved description
+  const generated = useMemo(
+    () => buildEcosystemDescription(stalls, stacks, qa),
+    [stalls, stacks, qa]
+  );
+
+  // Editable state — initialised from saved or generated
+  const saved = journeyState.ecosystemDescription || {};
+  const [inside, setInside] = useState(saved.inside || generated.inside);
+  const [outside, setOutside] = useState(saved.outside || generated.outside);
+  const [editingInside, setEditingInside] = useState(false);
+  const [editingOutside, setEditingOutside] = useState(false);
+  const [refining, setRefining] = useState(false);
+
+  // AI refinement
+  const handleAIRefine = useCallback(async (field) => {
+    setRefining(true);
+    const current = field === 'inside' ? inside : outside;
+    const prompt = `You are a diagnostic analyst for ClusterOS. A user is self-diagnosing their innovation ecosystem. They have reviewed an auto-generated description of what their ecosystem feels like ${field === 'inside' ? 'from inside' : 'from outside'} and want to refine it.
+
+Their current text: "${current}"
+
+Context: ${qa.stage || 'established'}-stage ${CLUSTER_TYPE_LABELS[qa.clusterType] || 'regional'} cluster with ${ANCHOR_LABELS[qa.anchorType] || 'no'} anchor. Stalls: ${stalls.map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; }).join(', ')}. Stacks: ${stacks.map(s => s.name).join(', ')}.
+
+Rewrite their text to be sharper and more specific to their context. Keep it 2-4 sentences. Write in second person ("Your ecosystem..."). Do not use jargon. Do not add markdown. Do not add preamble.`;
+
+    try {
+      const res = await fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const text = (data.commentary || data.text || '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
+        if (text) {
+          if (field === 'inside') setInside(text);
+          else setOutside(text);
+        }
+      }
+    } catch (e) { console.warn('[AI Refine] Failed:', e.message); }
+    setRefining(false);
+  }, [inside, outside, stalls, stacks, qa]);
+
+  // Confirm and save to journey state
+  const handleConfirm = useCallback(() => {
+    const desc = {
+      inside,
+      outside,
+      absorbed: generated.absorbed,
+      cost: generated.cost,
+      confirmed: true,
+      edited: inside !== generated.inside || outside !== generated.outside,
+    };
+    updateJourneyState({ ecosystemDescription: desc });
+    onConfirm();
+  }, [inside, outside, generated, updateJourneyState, onConfirm]);
+
+  return (
+    <div style={ecoStyles.container}>
+      <h2 style={ecoStyles.heading}>Does this sound like your ecosystem?</h2>
+      <p style={ecoStyles.sub}>
+        Based on your stalls, stacks, and answers — this is what we think your ecosystem feels like. Edit anything that doesn't ring true. This description shapes your leverage analysis and infrastructure recommendations.
+      </p>
+
+      {/* Inside */}
+      <div style={ecoStyles.section}>
+        <span style={{ ...ecoStyles.sectionLabel, color: 'var(--signal)' }}>From inside the ecosystem</span>
+        {editingInside ? (
+          <div>
+            <textarea
+              style={ecoStyles.editArea}
+              value={inside}
+              onChange={e => setInside(e.target.value)}
+              onBlur={() => setEditingInside(false)}
+              autoFocus
+            />
+            <button style={ecoStyles.btnEdit} onClick={() => handleAIRefine('inside')} disabled={refining}>
+              {refining ? 'Refining...' : 'Refine with AI'}
+            </button>
+          </div>
+        ) : (
+          <div>
+            <p style={ecoStyles.sectionText}>{inside}</p>
+            <button style={ecoStyles.btnEdit} onClick={() => setEditingInside(true)}>Edit</button>
+          </div>
+        )}
+      </div>
+
+      {/* Outside */}
+      <div style={ecoStyles.section}>
+        <span style={{ ...ecoStyles.sectionLabel, color: 'var(--steward)' }}>From outside the ecosystem</span>
+        {editingOutside ? (
+          <div>
+            <textarea
+              style={ecoStyles.editArea}
+              value={outside}
+              onChange={e => setOutside(e.target.value)}
+              onBlur={() => setEditingOutside(false)}
+              autoFocus
+            />
+            <button style={ecoStyles.btnEdit} onClick={() => handleAIRefine('outside')} disabled={refining}>
+              {refining ? 'Refining...' : 'Refine with AI'}
+            </button>
+          </div>
+        ) : (
+          <div>
+            <p style={ecoStyles.sectionText}>{outside}</p>
+            <button style={ecoStyles.btnEdit} onClick={() => setEditingOutside(true)}>Edit</button>
+          </div>
+        )}
+      </div>
+
+      {/* Absorbed signals */}
+      <div style={ecoStyles.absorbedBar}>
+        <span style={{ ...ecoStyles.sectionLabel, color: '#7c6f9b' }}>What the system absorbs</span>
+        <p style={{ ...ecoStyles.sectionText, fontSize: '13px' }}>{generated.absorbed}</p>
+      </div>
+
+      {/* Cost */}
+      <div style={ecoStyles.costBar}>
+        <span style={{ ...ecoStyles.sectionLabel, color: '#d4695a' }}>What this costs</span>
+        <p style={{ ...ecoStyles.sectionText, fontSize: '13px' }}>{generated.cost}</p>
+      </div>
+
+      {/* Actions */}
+      <div style={ecoStyles.actions}>
+        <button style={ecoStyles.btnPrimary} onClick={handleConfirm}>
+          This sounds right — continue to leverage
+        </button>
+        <button style={ecoStyles.btnSecondary} onClick={onBack}>
+          Back — change my answers
+        </button>
       </div>
     </div>
   );
@@ -3494,7 +3743,7 @@ function ReportModal({ phase, journeyState, onClose }) {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const stageLabel = phase <= 1 ? 'behaviours' : phase <= 3 ? 'leverage' : 'digital_os';
+  const stageLabel = phase <= 1 ? 'behaviours' : phase <= 4 ? 'leverage' : 'digital_os';
   const qa = journeyState.qualifierAnswers || {};
   const stalls = journeyState.stalls || [];
   const stacks = journeyState.detectedStacks || [];
@@ -3566,6 +3815,7 @@ function ReportModal({ phase, journeyState, onClose }) {
         };
       })(),
       techConfig: journeyState.techConfig || null,
+      ecosystemDescription: journeyState.ecosystemDescription || null,
       submitted_at: new Date().toISOString(),
       qualifier_answers: qa,
       config_name: (journeyState.osConfig || {}).configName || '',
@@ -3788,7 +4038,7 @@ function StickyBar({ phase, journeyState, onContinue }) {
   const [showReportModal, setShowReportModal] = useState(false);
   const stalls = journeyState.stalls || [];
   const stacks = journeyState.detectedStacks || [];
-  const reportLabel = phase <= 1 ? 'Behaviours' : phase <= 3 ? 'Behaviours + Leverage' : 'Behaviours + Leverage + Digital OS';
+  const reportLabel = phase <= 1 ? 'Behaviours' : phase <= 4 ? 'Behaviours + Leverage' : 'Behaviours + Leverage + Digital OS';
 
   // Stage 0 or no stalls selected: logo only
   if (phase <= -1 || (phase === 0 && stalls.length === 0)) {
@@ -4374,29 +4624,33 @@ function DiagnosticJourney() {
   // (Resume is now handled synchronously via initial state above)
 
   /* ── Phase navigation ── */
+  /* Phases: 0=behaviours, 1=transition, 2=qualifiers, 3=ecosystem-description,
+             4=transition, 5=leverage, 6=transition, 7=digital-os */
   const goNext = useCallback(() => {
     if (phase === 0) setPhase(1);       // behaviours → transition
     else if (phase === 1) setPhase(2);  // transition → qualifiers
-    else if (phase === 2) setPhase(3);  // qualifiers done → transition (called by QualifierQuestions onComplete)
-    else if (phase === 3) setPhase(4);  // transition → leverage
-    else if (phase === 4) setPhase(5);  // leverage → transition
-    else if (phase === 5) setPhase(6);  // transition → digital os
+    else if (phase === 2) setPhase(3);  // qualifiers done → ecosystem description
+    else if (phase === 3) setPhase(4);  // ecosystem description → transition
+    else if (phase === 4) setPhase(5);  // transition → leverage
+    else if (phase === 5) setPhase(6);  // leverage → transition
+    else if (phase === 6) setPhase(7);  // transition → digital os
   }, [phase]);
 
   const goBack = useCallback(() => {
     if (phase === 1) setPhase(0);       // transition → behaviours
     else if (phase === 2) setPhase(0);  // qualifiers → behaviours (back to stall selection)
-    else if (phase === 3) setPhase(2);  // transition → qualifiers
-    else if (phase === 4) setPhase(3);  // leverage → transition (which auto-shows post-qualifier)
-    else if (phase === 5) setPhase(4);  // transition → leverage
-    else if (phase === 6) setPhase(4);  // digital os → leverage
+    else if (phase === 3) setPhase(2);  // ecosystem description → qualifiers
+    else if (phase === 4) setPhase(3);  // transition → ecosystem description
+    else if (phase === 5) setPhase(4);  // leverage → transition
+    else if (phase === 6) setPhase(5);  // transition → leverage
+    else if (phase === 7) setPhase(5);  // digital os → leverage
   }, [phase]);
 
   const requestExit = useCallback(() => { setShowExitModal(true); }, []);
   const confirmExit = useCallback(() => {
     setShowExitModal(false);
     // Map phase to stage for exit summary
-    const stageIndex = phase <= 1 ? 0 : phase <= 3 ? 0 : phase <= 5 ? 1 : 2;
+    const stageIndex = phase <= 1 ? 0 : phase <= 4 ? 0 : phase <= 6 ? 1 : 2;
     setExitedAt(stageIndex);
     setExited(true);
   }, [phase]);
@@ -4418,10 +4672,16 @@ function DiagnosticJourney() {
     return sections;
   }
 
-  /* ── Commentary fetch after qualifiers complete ── */
+  /* ── Qualifier completion → ecosystem description ── */
   const handleQualifierComplete = useCallback(() => {
+    setPhase(3); // go to ecosystem description checkpoint
+  }, []);
+
+  /* ── Commentary fetch after ecosystem description confirmed ── */
+  const handleDescriptionConfirmed = useCallback(() => {
     const stacks = journeyState.detectedStacks || [];
     const qa = journeyState.qualifierAnswers || {};
+    const ecoDesc = journeyState.ecosystemDescription || {};
     const STAGE_LABEL_MAP = { early: 'Early-stage', established: 'Established', mature: 'Mature' };
     const PRIORITY_LABEL_MAP = { talent: 'Retain & grow local talent', capital: 'Attract external capital', research: 'Convert research to commercial activity', supply: 'Build anchor supply chains', growth: 'Drive economic growth' };
     const GAP_LABEL_MAP = { discovery: "Actors can't find each other", flow: "Knowledge doesn't flow between groups", access: "Outside actors can't engage", conversion: "Activity isn't converting to outcomes" };
@@ -4434,8 +4694,12 @@ function DiagnosticJourney() {
     const gapLabel = GAP_LABEL_MAP[qa.gap] || '';
     const protectList = (qa.protect || []).map(p => PROTECT_LABEL_MAP[p] || p).join(', ');
 
+    // User-confirmed ecosystem description — fed into AI prompts
+    const insideDesc = ecoDesc.inside || '';
+    const outsideDesc = ecoDesc.outside || '';
+
     // If no stacks and no qualifier data worth sending, skip
-    if (stacks.length === 0 && !qa.clusterType) { setPhase(3); return; }
+    if (stacks.length === 0 && !qa.clusterType) { setPhase(4); return; }
 
     setLoadingCommentary(true);
 
@@ -4474,7 +4738,7 @@ function DiagnosticJourney() {
     // 1. Stack commentary calls (one per stack)
     const stackCalls = stacks.map(stack => {
       const stallNames = (stack.triggers || []).map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; }).join(' and ');
-      const prompt = `You are a diagnostic analyst for ClusterOS. A ${clusterLabel} with a ${anchorLabel} anchor has identified the following behavioural stall pattern: ${stack.name} — a reinforcing combination of ${stallNames}. The reinforcing logic is: ${stack.logic || ''}. The leverage entry point is: ${stack.entry || ''}. Their strategic priority is ${priorityLabel}. Their biggest coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their ecosystem is ${scaleLabel} stage.\n\nWrite three sections — DIAGNOSIS, CONSEQUENCE, MECHANISM.\n\nEach section is exactly one sentence. Maximum 30 words per sentence. No exceptions.\n\nDIAGNOSIS: What this specific stack pattern means for this ecosystem type and anchor combination. Name the stack.\nCONSEQUENCE: What remains locked if this stack is not addressed, connected directly to their stated priority.\nMECHANISM: The single most targeted intervention that addresses the entry point. Be concrete and specific to this configuration.\n\nRules:\n- Do not use markdown formatting. No asterisks, no bold markers, no bullet points.\n- Do not use the words "platform", "solution", "leverage" or "dashboard".\n- Do not add preamble, labels, or any text outside the three sections.\n- Write for a Chief Executive who recognises their ecosystem in every sentence.\n- Each section must start with its label followed by a colon.\n\nFormat:\nDIAGNOSIS: [one sentence]\nCONSEQUENCE: [one sentence]\nMECHANISM: [one sentence]`;
+      const prompt = `You are a diagnostic analyst for ClusterOS. A ${clusterLabel} with a ${anchorLabel} anchor has identified the following behavioural stall pattern: ${stack.name} — a reinforcing combination of ${stallNames}. The reinforcing logic is: ${stack.logic || ''}. The leverage entry point is: ${stack.entry || ''}. This stack absorbs: ${stack.absorbed || 'unspecified signals'}. Their strategic priority is ${priorityLabel}. Their biggest coordination gap is ${gapLabel}. They are protecting: ${protectList || 'not specified'}. Their ecosystem is ${scaleLabel} stage.${insideDesc ? `\n\nThe user describes their ecosystem from inside: "${insideDesc}"` : ''}${outsideDesc ? `\nFrom outside: "${outsideDesc}"` : ''}\n\nWrite three sections — DIAGNOSIS, CONSEQUENCE, MECHANISM.\n\nEach section is exactly one sentence. Maximum 30 words per sentence. No exceptions.\n\nDIAGNOSIS: What this specific stack pattern means for this ecosystem, grounded in the user's own description of what their ecosystem feels like. Name the stack.\nCONSEQUENCE: What remains locked if this stack is not addressed, connected directly to their stated priority and their description.\nMECHANISM: The single most targeted intervention that addresses the entry point. Be concrete and specific to this configuration.\n\nRules:\n- Do not use markdown formatting. No asterisks, no bold markers, no bullet points.\n- Do not use the words "platform", "solution", "leverage" or "dashboard".\n- Do not add preamble, labels, or any text outside the three sections.\n- Write for a Chief Executive who recognises their ecosystem in every sentence.\n- Each section must start with its label followed by a colon.\n\nFormat:\nDIAGNOSIS: [one sentence]\nCONSEQUENCE: [one sentence]\nMECHANISM: [one sentence]`;
 
       return fetch('https://clusteros-v3-production.up.railway.app/api/v1/commentary', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -4507,9 +4771,12 @@ function DiagnosticJourney() {
     const stallNameList = (journeyState.stalls || []).map(id => { const s = STALLS.find(x => x.id === id); return s ? s.name : id; }).join(', ');
     const digitalPrompt = `Plain English briefing for a CEO. No technical terms. No jargon.
 
-This is a ${clusterLabel} with a ${anchorLabel} anchor at ${scaleLabel} stage. They want to ${priorityLabel}. Their coordination gap: ${gapLabel || 'unspecified'}. They are protecting: ${protectList || 'unspecified'}. Their ecosystem is running these reinforcing patterns: ${stackDescs || 'none detected'}. Stalls identified: ${stallNameList || 'none'}.
+This is a ${clusterLabel} with a ${anchorLabel} anchor at ${scaleLabel} stage. They want to ${priorityLabel}. Their coordination gap: ${gapLabel || 'unspecified'}. They are protecting: ${protectList || 'unspecified'}. Their ecosystem is running these reinforcing patterns: ${stackDescs || 'none detected'}. Stalls identified: ${stallNameList || 'none'}.${insideDesc ? `
 
-For each of 7 layers, write FROM THE INSIDE (what actors experience today — the friction) and FROM THE OUTSIDE (what the steward gains). 2 sentences each. Connect every FROM THE OUTSIDE to: ${priorityLabel}.
+The user describes their ecosystem from inside: "${insideDesc}"` : ''}${outsideDesc ? `
+From outside: "${outsideDesc}"` : ''}
+
+For each of 7 layers, write FROM THE INSIDE (what actors experience today — the friction, grounded in the user's own description) and FROM THE OUTSIDE (what the steward gains). 2 sentences each. Connect every FROM THE OUTSIDE to: ${priorityLabel}.
 
 Layer-specific instructions — weave these facts into the commentary, do not ignore them:
 
@@ -4622,13 +4889,13 @@ Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governa
         return next;
       });
       setLoadingCommentary(false);
-      setPhase(3);
+      setPhase(4);
     });
-  }, [journeyState.detectedStacks, journeyState.qualifierAnswers]);
+  }, [journeyState.detectedStacks, journeyState.qualifierAnswers, journeyState.ecosystemDescription]);
 
   // Map phase to stage index for indicators
-  const currentStage = phase <= 2 ? 0 : phase <= 5 ? 1 : 2;
-  const completedUpTo = phase >= 6 ? 2 : phase >= 4 ? 1 : 0;
+  const currentStage = phase <= 3 ? 0 : phase <= 6 ? 1 : 2;
+  const completedUpTo = phase >= 7 ? 2 : phase >= 5 ? 1 : 0;
 
   /* ── Context value ── */
   const ctx = useMemo(() => ({
@@ -4646,7 +4913,7 @@ Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governa
 
   const stage = STAGES[currentStage];
   const isFirst = phase <= 0;
-  const isLast = phase === 6;
+  const isLast = phase === 7;
 
   // Stage 0 — intro screen (no step indicator, no nav, no sticky bar)
   if (phase === -1) {
@@ -4715,7 +4982,9 @@ Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governa
         onStop={() => { console.log('stop-behaviours'); setExitedAt(0); setExited(true); }}
         updateJourneyState={updateJourneyState} />
     );
-  } else if (phase === 2 && loadingCommentary) {
+  } else if (phase === 2) {
+    mainContent = <QualifierQuestions onComplete={handleQualifierComplete} />;
+  } else if (phase === 3 && loadingCommentary) {
     mainContent = (
       <div style={{ width: '100%', maxWidth: '480px', textAlign: 'center', padding: '80px 0' }}>
         <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 400, color: 'var(--dj-chalk)', marginBottom: '12px' }}>
@@ -4734,16 +5003,21 @@ Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governa
         </div>
       </div>
     );
-  } else if (phase === 2) {
-    mainContent = <QualifierQuestions onComplete={handleQualifierComplete} />;
   } else if (phase === 3) {
     mainContent = (
-      <TransitionCard transitionType="qualifiers-to-leverage" journeyState={journeyState}
-        onContinue={goNext} onBack={() => setPhase(2)} onStop={() => {}} />
+      <EcosystemDescriptionStage
+        onConfirm={handleDescriptionConfirmed}
+        onBack={() => setPhase(2)}
+      />
     );
   } else if (phase === 4) {
-    mainContent = <LeverageStage />;
+    mainContent = (
+      <TransitionCard transitionType="qualifiers-to-leverage" journeyState={journeyState}
+        onContinue={goNext} onBack={() => setPhase(3)} onStop={() => {}} />
+    );
   } else if (phase === 5) {
+    mainContent = <LeverageStage />;
+  } else if (phase === 6) {
     mainContent = (
       <TransitionCard transitionType="leverage-to-os" journeyState={journeyState}
         onContinue={goNext}

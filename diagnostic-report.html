@@ -585,6 +585,13 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
       </div>
     </div>
 
+    <!-- Executive Summary (populated from ecosystem description + stack commentary) -->
+    <div class="doc-section" id="section-exec-summary" style="display:none">
+      <div class="doc-section-label"><span style="background:var(--green);color:#fff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0">★</span>Executive summary</div>
+      <div class="doc-section-heading">Your ecosystem <em>at a glance</em></div>
+      <div id="exec-summary-content"></div>
+    </div>
+
     <!-- 1. Stalls (all stages) -->
     <div class="doc-section" id="section-stalls">
       <div class="doc-section-label"><span class="doc-section-num">1</span>Stalls identified</div>
@@ -661,6 +668,13 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
         <div class="full-diag-head">Specific to your configuration</div>
         <div class="full-diag-body" id="full-diag-body"></div>
       </div>
+    </div>
+
+    <!-- What to do next — concrete actions -->
+    <div class="doc-section" id="section-next-steps" style="display:none">
+      <div class="doc-section-label"><span style="background:var(--green);color:#fff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0">→</span>What to do next</div>
+      <div class="doc-section-heading">From diagnosis <em>to action</em></div>
+      <div id="next-steps-content"></div>
     </div>
 
     <!-- Continue banner / Next step (stage-aware) -->
@@ -1607,6 +1621,105 @@ async function init() {
     caveatEl.innerHTML = '<strong>This is your full self-diagnostic report.</strong> It includes stall identification, leverage analysis calibrated to your ecosystem profile, and a Digital OS architecture configured to your specific needs. It is based on your own assessment — not a full evidence-based ClusterOS diagnostic. A full diagnostic analyses 50–170 evidence items per cluster, verifies findings against structured evidence, and produces confidence-tiered results.';
   }
 
+  // ── Executive Summary — built from ecosystem description + stack commentary ──
+  const ecoDesc = d.ecosystemDescription || {};
+  const stackCommentary = d.stackCommentary || {};
+  const configName = d.config_name || '';
+
+  if (ecoDesc.inside || ecoDesc.outside || Object.keys(stackCommentary).length > 0) {
+    const execEl = document.getElementById('section-exec-summary');
+    execEl.style.display = '';
+
+    let execHTML = '';
+
+    // Ecosystem description — inside/outside
+    if (ecoDesc.inside || ecoDesc.outside) {
+      execHTML += '<div style="padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin-bottom:20px">';
+      execHTML += '<div style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:10px">YOUR ECOSYSTEM</div>';
+      if (ecoDesc.inside) {
+        execHTML += '<div style="margin-bottom:12px"><div style="font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:0.1em;color:var(--ink-muted);margin-bottom:4px">FROM INSIDE</div>';
+        execHTML += '<p style="font-size:13px;color:var(--ink-dim);line-height:1.7;margin:0;font-weight:300">' + ecoDesc.inside + '</p></div>';
+      }
+      if (ecoDesc.outside) {
+        execHTML += '<div><div style="font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:0.1em;color:var(--ink-muted);margin-bottom:4px">FROM OUTSIDE</div>';
+        execHTML += '<p style="font-size:13px;color:var(--ink-dim);line-height:1.7;margin:0;font-weight:300">' + ecoDesc.outside + '</p></div>';
+      }
+      execHTML += '</div>';
+    }
+
+    // What the system absorbs
+    if (ecoDesc.absorbed) {
+      execHTML += '<p style="font-size:13px;color:var(--ink-dim);line-height:1.7;margin:0 0 16px;font-weight:300;font-style:italic">' + ecoDesc.absorbed + '</p>';
+    }
+
+    // Structural diagnosis — per stack
+    const detStacks = d.detectedStacks || d.detected_stacks || [];
+    if (detStacks.length > 0) {
+      execHTML += '<div style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px">STRUCTURAL DIAGNOSIS</div>';
+      detStacks.forEach(st => {
+        const c = stackCommentary[st.id];
+        const diagnosis = (c && c.diagnosis) ? c.diagnosis : (st.logic || st.reinforcing_logic || '');
+        execHTML += '<div style="margin-bottom:12px;padding-left:12px;border-left:2px solid var(--green)">';
+        execHTML += '<div style="font-family:var(--sans);font-size:12px;font-weight:500;color:var(--ink);margin-bottom:3px">' + (st.name || '') + '</div>';
+        execHTML += '<p style="font-size:13px;color:var(--ink-dim);line-height:1.65;margin:0;font-weight:300">' + diagnosis + '</p>';
+        execHTML += '</div>';
+      });
+    }
+
+    // Leverage — where intervention sits
+    if (detStacks.length > 0) {
+      execHTML += '<div style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);margin:20px 0 10px">WHERE LEVERAGE SITS</div>';
+      detStacks.forEach(st => {
+        const c = stackCommentary[st.id];
+        const mechanism = (c && c.mechanism) ? c.mechanism : (st.entry || st.leverage_entry || st.leverage || '');
+        if (mechanism) {
+          execHTML += '<p style="font-size:13px;color:var(--ink-dim);line-height:1.65;margin:0 0 8px;font-weight:300;padding-left:12px;border-left:2px solid var(--teal)">' + mechanism + '</p>';
+        }
+      });
+    }
+
+    // Cost
+    if (ecoDesc.cost) {
+      execHTML += '<div style="padding:12px 16px;background:rgba(217,119,6,0.04);border:1px solid rgba(217,119,6,0.15);border-radius:4px;margin-top:20px">';
+      execHTML += '<p style="font-size:13px;color:var(--ink-dim);line-height:1.6;margin:0;font-weight:300"><strong style="color:var(--amber);font-weight:500">What this costs: </strong>' + ecoDesc.cost + '</p>';
+      execHTML += '</div>';
+    }
+
+    document.getElementById('exec-summary-content').innerHTML = execHTML;
+  }
+
+  // ── What To Do Next section ──
+  {
+    const nextEl = document.getElementById('section-next-steps');
+    nextEl.style.display = '';
+    const qa = d.qualifier_answers || {};
+    const allStackNames = (d.detectedStacks || d.detected_stacks || []).map(s => s.name).filter(Boolean);
+    const stackListText = allStackNames.length <= 1 ? allStackNames.join('') : allStackNames.slice(0, -1).join(', ') + ' and ' + allStackNames[allStackNames.length - 1];
+
+    let nextHTML = '<div style="display:flex;flex-direction:column;gap:16px">';
+
+    // Step 1: Share
+    nextHTML += '<div style="display:flex;gap:14px;align-items:flex-start">';
+    nextHTML += '<div style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:rgba(42,122,79,0.08);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>';
+    nextHTML += '<div><div style="font-size:14px;color:var(--ink);font-weight:500;margin-bottom:4px">Share this report with your leadership team</div>';
+    nextHTML += '<p style="font-size:12px;color:var(--ink-dim);line-height:1.6;margin:0;font-weight:300">The executive summary on page one is designed for board-level readers. The structural diagnosis — not the individual stalls — is what should frame the conversation.' + (stackListText ? ' Your ' + stackListText + ' configuration is the unit of discussion, not any single behaviour.' : '') + '</p></div></div>';
+
+    // Step 2: Validate
+    nextHTML += '<div style="display:flex;gap:14px;align-items:flex-start">';
+    nextHTML += '<div style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:rgba(42,122,79,0.08);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>';
+    nextHTML += '<div><div style="font-size:14px;color:var(--ink);font-weight:500;margin-bottom:4px">Test the diagnosis with your actors</div>';
+    nextHTML += '<p style="font-size:12px;color:var(--ink-dim);line-height:1.6;margin:0;font-weight:300">Show the stall descriptions to 3–5 people in your ecosystem without telling them which ones you selected. Their recognition — or disagreement — is itself diagnostic data. If they recognise the pattern immediately, the finding is strong. If they don\'t, the self-assessment may need revision.</p></div></div>';
+
+    // Step 3: Snapshot
+    nextHTML += '<div style="display:flex;gap:14px;align-items:flex-start">';
+    nextHTML += '<div style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:rgba(42,122,79,0.08);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>';
+    nextHTML += '<div><div style="font-size:14px;color:var(--ink);font-weight:500;margin-bottom:4px">Request a Snapshot Diagnostic</div>';
+    nextHTML += '<p style="font-size:12px;color:var(--ink-dim);line-height:1.6;margin:0;font-weight:300">A Snapshot analyses 50–170 evidence items from your ecosystem, assigns confidence tiers to each finding, and produces a leverage hypothesis tested against real actor behaviour. This self-assessment has named the pattern. A Snapshot proves it — or reveals what you couldn\'t see from inside.</p></div></div>';
+
+    nextHTML += '</div>';
+    document.getElementById('next-steps-content').innerHTML = nextHTML;
+  }
+
   // ── Build stack data early (needed for stall load indicators) ──
   const stack = d.stack || {};
   const detectedStacks = d.detectedStacks || d.detected_stacks || [];
@@ -1711,6 +1824,12 @@ async function init() {
     const stEntry = st.entry || st.leverage_entry || st.leverage || '';
     const stEffect = st.effect || '';
     const stStalls = st.stalls || [];
+    const stAbsorbed = st.absorbed_signals || st.absorbed || '';
+    // AI commentary for this stack (from journey)
+    const sc = stackCommentary[st.id] || {};
+    const aiDiagnosis = sc.diagnosis || '';
+    const aiConsequence = sc.consequence || '';
+    const aiMechanism = sc.mechanism || '';
     return `
     <div class="stack-card" style="${idx > 0 ? 'margin-top:12px' : ''}">
       <div class="stack-card-head">
@@ -1718,6 +1837,8 @@ async function init() {
         <div class="stack-card-pills">${stStalls.map(s => `<span class="stack-pill">${s}</span>`).join('')}</div>
       </div>
       <div class="stack-card-body">
+        ${aiDiagnosis ? `<div style="margin-bottom:14px;padding:12px 14px;background:rgba(42,122,79,0.04);border:1px solid rgba(42,122,79,0.12);border-radius:3px"><div class="stall-leverage-label" style="color:var(--green)">Diagnosis</div><p style="font-size:13px;color:var(--ink);line-height:1.65;font-weight:400;margin:0">${aiDiagnosis}</p>${aiConsequence ? `<div class="stall-leverage-label" style="color:var(--amber);margin-top:10px">Consequence</div><p style="font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300;margin:0">${aiConsequence}</p>` : ''}${aiMechanism ? `<div class="stall-leverage-label" style="color:var(--teal);margin-top:10px">Mechanism</div><p style="font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300;margin:0">${aiMechanism}</p>` : ''}</div>` : ''}
+        ${stAbsorbed ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:#7c6f9b">Signals absorbed</div><p class="stack-card-desc" style="margin-bottom:0">${stAbsorbed}</p></div>` : ''}
         ${stLogic ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--teal)">Reinforcing logic</div><p class="stack-card-desc" style="margin-bottom:0">${stLogic}</p></div>` : ''}
         ${stRegime ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--amber)">What this locks in</div><p class="stack-card-desc" style="margin-bottom:0">${stRegime}</p></div>` : ''}
         ${isLeverage && stEntry ? `<div class="stack-leverage-dir"><div class="stack-leverage-label">Leverage direction</div><p class="stack-leverage-text">${stEntry}</p></div>` : ''}

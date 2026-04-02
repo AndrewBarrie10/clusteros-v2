@@ -766,7 +766,7 @@ function buildEcosystemDescription(stalls, detectedStacks, qa) {
   const stage = STAGE_CONTEXT[qa.stage] || STAGE_CONTEXT.established;
   const anchor = ANCHOR_CONTEXT[qa.anchorType] || ANCHOR_CONTEXT.none;
 
-  // Check stall plausibility against qualifiers
+  // Check stall plausibility against qualifiers — flags are informational only
   const plausibilityFlags = [];
   stalls.forEach(id => {
     const check = isStallPlausible(id, qa.stage, qa.anchorType);
@@ -776,20 +776,16 @@ function buildEcosystemDescription(stalls, detectedStacks, qa) {
     }
   });
 
-  // Filter stacks to only plausible ones
-  const plausibleStacks = detectedStacks.filter(s => isStackPlausible(s, qa.stage, qa.anchorType));
-  const suppressedStacks = detectedStacks.filter(s => !isStackPlausible(s, qa.stage, qa.anchorType));
-
-  // Inside perspective: stage context + anchor context + plausible stall experiences
-  const plausibleStalls = stalls.filter(id => isStallPlausible(id, qa.stage, qa.anchorType).plausible);
-  const stallInsides = plausibleStalls.slice(0, 3).map(id => STALL_INSIDE[id]).filter(Boolean);
+  // Inside perspective: stage context + anchor context + ALL selected stall experiences
+  // (flags inform the user but don't filter the description)
+  const stallInsides = stalls.slice(0, 3).map(id => STALL_INSIDE[id]).filter(Boolean);
   const insideParts = [stage.inside + '.'];
   if (qa.anchorType) insideParts.push(anchor.inside + '.');
   insideParts.push(...stallInsides.map(s => s + '.'));
   const inside = insideParts.join(' ');
 
-  // Outside perspective: stage framing + what external actors see from plausible stalls
-  const stallOutsides = plausibleStalls.slice(0, 3).map(id => STALL_OUTSIDE[id]).filter(Boolean);
+  // Outside perspective: stage framing + what external actors see from ALL selected stalls
+  const stallOutsides = stalls.slice(0, 3).map(id => STALL_OUTSIDE[id]).filter(Boolean);
   const outsideParts = [stage.outside + '.'];
   if (stallOutsides.length > 0) {
     outsideParts.push('From outside, ' + stallOutsides.join('; ') + '.');
@@ -797,9 +793,9 @@ function buildEcosystemDescription(stalls, detectedStacks, qa) {
   if (qa.anchorType) outsideParts.push(anchor.outside + '.');
   const outside = outsideParts.join(' ');
 
-  // Absorbed signals — from plausible stacks only
+  // Absorbed signals — from ALL detected stacks
   const absorbedSet = new Set();
-  plausibleStacks.forEach(s => {
+  detectedStacks.forEach(s => {
     (s.absorbed || '').split(',').map(x => x.trim()).filter(Boolean).forEach(x => absorbedSet.add(x));
   });
   const absorbedList = [...absorbedSet];
@@ -810,7 +806,7 @@ function buildEcosystemDescription(stalls, detectedStacks, qa) {
   // Cost — what accumulates if nothing changes, tied to priority
   const cost = PRIORITY_COST[qa.priority] || 'Without intervention, these patterns remain self-reinforcing — each stall provides cover for the others.';
 
-  return { inside, outside, absorbed, cost, plausibilityFlags, plausibleStacks, suppressedStacks };
+  return { inside, outside, absorbed, cost, plausibilityFlags };
 }
 
 /* ─── Journey context (state carried forward across stages) ────────── */
@@ -1108,7 +1104,8 @@ Rewrite their text to be sharper and more specific to their context. Keep it 2-4
     setRefiningField(null);
   }, [inside, outside, stalls, stacks, qa]);
 
-  // Confirm — save to journey state with plausible stacks, then trigger next phase
+  // Confirm — save description to journey state, keep all detected stacks
+  // Plausibility flags are informational — the user's confirmation overrides them
   const handleConfirm = useCallback(() => {
     const desc = {
       inside,
@@ -1117,21 +1114,13 @@ Rewrite their text to be sharper and more specific to their context. Keep it 2-4
       cost: generated.cost,
       confirmed: true,
       edited: inside !== generated.inside || outside !== generated.outside,
-      plausibleStacks: generated.plausibleStacks,
-      suppressedStacks: generated.suppressedStacks,
       plausibilityFlags: generated.plausibilityFlags,
     };
-    // Update journey state: swap detectedStacks to only plausible ones
-    updateJourneyState({
-      ecosystemDescription: desc,
-      detectedStacks: generated.plausibleStacks,
-      stacks: generated.plausibleStacks.map(s => s.name),
-    });
+    updateJourneyState({ ecosystemDescription: desc });
     onConfirm(desc);
   }, [inside, outside, generated, updateJourneyState, onConfirm]);
 
   const flags = generated.plausibilityFlags || [];
-  const suppressed = generated.suppressedStacks || [];
 
   return (
     <div style={ecoStyles.container}>
@@ -1140,7 +1129,7 @@ Rewrite their text to be sharper and more specific to their context. Keep it 2-4
         This is what we think your ecosystem feels like based on your stalls, stacks, and answers. Edit anything that doesn't ring true — or use AI to sharpen it. This shapes everything that follows.
       </p>
 
-      {/* Plausibility flags — stalls that don't match the qualifier context */}
+      {/* Plausibility flags — informational notes about unusual stall selections */}
       {flags.length > 0 && (
         <div style={{ padding: '14px 16px', background: 'rgba(245,217,122,0.08)', border: '1px solid rgba(245,217,122,0.25)', borderLeft: '3px solid #f5d97a', borderRadius: '0 4px 4px 0', marginBottom: '20px' }}>
           <span style={{ ...ecoStyles.sectionLabel, color: '#c8a000' }}>Worth checking</span>
@@ -1149,11 +1138,6 @@ Rewrite their text to be sharper and more specific to their context. Keep it 2-4
               <strong style={{ color: 'var(--dj-chalk)' }}>{flag.stallName}</strong> — {flag.notes[0]}
             </p>
           ))}
-          {suppressed.length > 0 && (
-            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'var(--dj-chalk-muted)', lineHeight: 1.5, marginTop: '10px', fontStyle: 'italic' }}>
-              {suppressed.length} stack{suppressed.length > 1 ? 's' : ''} ({suppressed.map(s => s.name).join(', ')}) {suppressed.length > 1 ? 'have' : 'has'} been set aside — the reinforcing logic requires conditions your ecosystem doesn't have yet.
-            </p>
-          )}
         </div>
       )}
 

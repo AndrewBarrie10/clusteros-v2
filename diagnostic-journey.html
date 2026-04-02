@@ -133,54 +133,190 @@ const FALLBACK_STALLS = [
 let STALLS = FALLBACK_STALLS;
 
 /* ─── Stack detection rules + leverage hypotheses (fallback + API) ── */
+/* Canonical Stack Definitions v1.0 — source of truth from Stack Canon v1.0 */
+/* 30 canonical stacks: 20 pairs + 10 triples                                */
 const FALLBACK_STACK_RULES = [
-  { id: 'STK-05', name: 'Mediated Dependency Loop',    triggers: ['S5', 'S9'],
-    logic: 'Mediation defers action to external actors, who are themselves waiting — creating a self-reinforcing dependency cycle where no party moves first.',
-    regime: 'The ecosystem is locked into perpetual standby — every actor waits for another to move, and mediation sustains the waiting as productive activity.',
-    entry: 'Identify the actor with the least to lose from unilateral action and change their constraint — not their willingness.',
-    effect: 'One committed move breaks the symmetry of waiting; other actors follow once the cost of inaction exceeds the cost of going second.',
+  // ── PAIRS (20) ─────────────────────────────────────────────────────
+  { id: 'STK-01', name: 'Coordination–Narrative Configuration', triggers: ['S2', 'S7'],
+    absorbed: 'Friction, Uncertainty',
+    logic: 'Coordination requires narrative to justify continued alignment; narrative requires coordination to appear credible and current.',
+    entry: 'The reporting layer — changing what counts as evidence of progress may perturb both stalls simultaneously.',
+    effect: 'The combination absorbs uncertainty without producing behavioural proof.',
     confidence: 'High' },
-  { id: 'STK-12', name: 'Evidence Without Commitment',  triggers: ['S1', 'S7'],
-    logic: 'Re-proving generates narrative to justify existence, while narrating substitutes reporting for impact — evidence accumulates but never converts to committed action.',
-    regime: 'The ecosystem is locked into a justification cycle — evidence is produced to sustain funding, not to inform decisions or trigger execution.',
-    entry: 'Secure a single credible external validator who makes the case once and commits publicly, removing the need for continuous internal re-proving.',
-    effect: 'Resources shift from justification to execution; narrative production drops as the case becomes settled rather than perpetually contested.',
+  { id: 'STK-02', name: 'Coordination–Intermediary Configuration', triggers: ['S2', 'S5'],
+    absorbed: 'Complexity, Friction',
+    logic: 'Coordination creates demand for intermediary infrastructure; intermediaries make coordination manageable; each sustains the other.',
+    entry: 'The coupling layer — one direct actor-to-actor connection that bypasses intermediaries demonstrates an alternative pathway.',
+    effect: 'Complexity is being absorbed rather than reduced.',
     confidence: 'High' },
-  { id: 'STK-03', name: 'Incumbent Lock',               triggers: ['S6', 'S4'],
-    logic: 'Stabilising preserves structures that enable extraction — anchors maintain their position while the ecosystem optimises around them rather than adapting.',
-    regime: 'The ecosystem is locked into serving incumbent anchors — stability protects extraction channels, and extraction funds the stability apparatus.',
-    entry: 'Change anchor procurement or spin-out policy to redirect value circulation, rather than asking anchors to voluntarily change behaviour.',
-    effect: 'Value begins circulating within the ecosystem; new entrants gain access to resources previously captured by incumbents.',
+  { id: 'STK-03', name: 'Validation–Tolerance Configuration', triggers: ['S1', 'S3'],
+    absorbed: 'Demand, Failure',
+    logic: 'Re-proving keeps the option space open; tolerating non-performers reduces pressure to make commitments that would collapse options.',
+    entry: 'The closure layer — one visible programme closure with named accountability may perturb option-keeping behaviour.',
+    effect: 'The system has learned to absorb both demand and failure signals without structural change.',
     confidence: 'Medium' },
-  { id: 'STK-01', name: 'Activity-Alignment Stack',     triggers: ['S7', 'S2'],
-    logic: 'The ecosystem reports activity to justify coordination, and coordinates to generate reportable activity. Neither breaks without changing both.',
-    regime: 'The ecosystem is locked into performative coordination — meetings and reports are the primary output, and both exist to justify the other.',
-    entry: 'Change what gets reported — shift metrics from activity and alignment to outcomes and commitments — before changing governance.',
-    effect: 'Coordination without reportable outcomes loses justification; actors redirect effort toward measurable change.',
+  { id: 'STK-04', name: 'Visibility–Activity Configuration', triggers: ['S7', 'S8'],
+    absorbed: 'Pressure, Uncertainty',
+    logic: 'Activity generates narrative material; narrative legitimises further activity scaling; the system appears productive externally while conversion remains unmeasured.',
+    entry: 'The measurement layer — one conversion metric (not an activity metric) creates visibility into throughput absence.',
+    effect: 'The stack makes the system look healthy from outside while internal conversion remains invisible.',
     confidence: 'High' },
-  { id: 'STK-02', name: 'Justification Stack',          triggers: ['S1', 'S8'],
-    logic: 'Early-stage activity is used as proof of concept rather than evaluated against outcomes. The case for scaling is never quite strong enough.',
-    regime: 'The ecosystem is locked into pilot mode — starts accumulate but never graduate, because each is used as evidence rather than evaluated as progress.',
-    entry: 'Change the measurement layer — redefine success from number of starts to rate of graduation — before changing programme design.',
-    effect: 'Activity that does not convert to outcomes loses funding priority; resources concentrate on fewer, higher-conviction bets.',
+  { id: 'STK-05', name: 'Extraction–Incumbent Configuration', triggers: ['S4', 'S6'],
+    absorbed: 'Success, Disruption',
+    logic: 'Incumbent institutions capture value that new actors generate; extraction reinforces incumbent centrality; disruption becomes less likely.',
+    entry: 'The structural layer — changing anchor procurement or spin-out policy changes the constraint without requiring incumbents to change behaviour.',
+    effect: 'Success signals are absorbed (value exits) while disruption signals are simultaneously suppressed.',
     confidence: 'Medium' },
-  { id: 'STK-04', name: 'Relationship Stack',           triggers: ['S2', 'S5'],
-    logic: 'The ecosystem manages relationships as the primary output. Transactions are replaced by partnerships, and partnerships by further coordination.',
-    regime: 'The ecosystem is locked into relationship maintenance — partnerships are preserved as ends in themselves, substituting for the transactions they were meant to enable.',
-    entry: 'Restructure incentives so that actors benefit from completed transactions, not from maintaining partnership status.',
-    effect: 'Partnerships that do not produce transactions dissolve naturally; remaining relationships become functional rather than ceremonial.',
+  { id: 'STK-06', name: 'Permission–Extraction Configuration', triggers: ['S4', 'S9'],
+    absorbed: 'Opportunity, Success',
+    logic: 'Waiting for external permission delays autonomous action; while waiting, value continues to exit; exit reduces capacity for the autonomous action that would break the wait.',
+    entry: 'The autonomy layer — one unilateral action that does not require permission creates a pathway others can follow.',
+    effect: 'Opportunity and success signals are simultaneously absorbed — particularly costly combination.',
     confidence: 'Medium' },
-  { id: 'STK-06', name: 'Anchor Dependency Stack',      triggers: ['S5', 'S4'],
-    logic: 'The ecosystem organises itself around managing anchor institutions rather than changing their behaviour. Value flows out while relationships are maintained.',
-    regime: 'The ecosystem is locked into anchor servicing — mediation effort flows toward keeping anchors comfortable rather than changing their extraction behaviour.',
-    entry: 'Change anchor procurement or IP policy at the institutional level, creating structural incentives for value to circulate rather than extract.',
-    effect: 'Mediation effort redirects from relationship management to transaction facilitation; anchor behaviour shifts through changed constraints.',
+  { id: 'STK-07', name: 'Coordination–Permission Configuration', triggers: ['S2', 'S9'],
+    absorbed: 'Opportunity, Friction',
+    logic: 'Coordination infrastructure becomes the permission-seeking mechanism; permission-seeking generates more coordination activity; opportunity signals are converted into alignment tasks.',
+    entry: 'The decision layer — one exclusionary choice made without full alignment demonstrates that consequences can be survived.',
+    effect: 'Opportunity is being systematically converted into process.',
+    confidence: 'High' },
+  { id: 'STK-08', name: 'Validation–Coordination Configuration', triggers: ['S1', 'S2'],
+    absorbed: 'Demand, Friction',
+    logic: 'Re-proving requires broad consensus to be credible; building consensus generates further coordination requirements; coordination produces the buy-in that justifies continued re-proving.',
+    entry: 'The commitment layer — a small named commitment with real consequences that does not require full consensus may break the loop.',
+    effect: 'Demand signals are being absorbed through process rather than converted into direction.',
+    confidence: 'High' },
+  { id: 'STK-09', name: 'Intermediary–Incumbent Configuration', triggers: ['S5', 'S6'],
+    absorbed: 'Complexity, Disruption',
+    logic: 'Intermediaries manage relationships with and around incumbents; incumbents depend on intermediary layer to control access; each sustains the other\'s centrality.',
+    entry: 'The access layer — creating direct access pathways that do not route through incumbents or intermediaries demonstrates that coupling is possible.',
+    effect: 'The system is stable but brittle — both complexity and disruption are absorbed simultaneously.',
+    confidence: 'Medium' },
+  { id: 'STK-10', name: 'Coordination–Activity Configuration', triggers: ['S2', 'S8'],
+    absorbed: 'Friction, Pressure',
+    logic: 'Coordination produces programmes and events as outputs; programme proliferation generates coordination requirements; pressure is absorbed by increasing activity rather than throughput.',
+    entry: 'The output definition layer — redefining what coordination is accountable for producing (decisions, not meetings) may perturb the programme generation loop.',
+    effect: 'Both friction and pressure are managed through activity rather than directed change.',
+    confidence: 'Medium' },
+  { id: 'STK-11', name: 'Justification–Validation Configuration', triggers: ['S1', 'S7'],
+    absorbed: 'Demand, Uncertainty',
+    logic: 'Re-proving generates narrative material; narrative provides the case for further validation rounds; uncertainty is absorbed by producing increasingly sophisticated justification rather than testable commitment.',
+    entry: 'The evidence layer — one outcome that cannot be narrativised (a specific company that scaled, a job that stayed) may create a reference point that resists narrative absorption.',
+    effect: 'The combination is particularly effective at absorbing uncertainty without producing credibility.',
+    confidence: 'High' },
+  { id: 'STK-12', name: 'Tolerance–Activity Configuration', triggers: ['S3', 'S8'],
+    absorbed: 'Failure, Pressure',
+    logic: 'Volume of activity creates pressure to continue all programmes; high volume makes individual programme assessment harder; failure signals are absorbed by activity noise.',
+    entry: 'The evaluation layer — public reporting of one programme\'s outcomes with named consequences makes failure signals visible in the noise.',
+    effect: 'Failure signals are being systematically made invisible by scale.',
+    confidence: 'Medium' },
+  { id: 'STK-13', name: 'Incumbent–Permission Configuration', triggers: ['S6', 'S9'],
+    absorbed: 'Opportunity, Disruption',
+    logic: 'Incumbents function as permission gatekeepers; waiting for incumbent endorsement reinforces incumbent authority; opportunity signals are absorbed by the authorisation process.',
+    entry: 'The gatekeeping layer — one actor who acts without incumbent permission and succeeds publicly changes the permission architecture for others.',
+    effect: 'Both opportunity and disruption are absorbed by the same gatekeeping mechanism.',
+    confidence: 'Medium' },
+  { id: 'STK-14', name: 'Intermediary–Permission Configuration', triggers: ['S5', 'S9'],
+    absorbed: 'Opportunity, Complexity',
+    logic: 'Intermediaries become the pathway through which permission is sought; waiting sustains the intermediary convening role; complexity is absorbed by mediation rather than direct actor engagement.',
+    entry: 'The routing layer — one direct actor engagement that bypasses the intermediary permission pathway demonstrates that complexity can be managed without mediation.',
+    effect: 'Opportunity is systematically routed through complexity-absorbing intermediaries.',
+    confidence: 'Medium' },
+  { id: 'STK-20', name: 'Coordination–Incumbent Configuration', triggers: ['S2', 'S6'],
+    absorbed: 'Friction, Disruption',
+    logic: 'Coordination structures integrate incumbents as primary partners; incumbents provide coordination legitimacy and hosting capacity; both sustain without requiring new entrant emergence or exclusionary choices.',
+    entry: 'The membership layer — introducing a coordination mechanism that explicitly excludes incumbents from one decision domain may demonstrate that coordination can operate without incumbent anchoring.',
+    effect: 'Disruption and friction signals are simultaneously absorbed — the system is stable precisely because coordination and incumbency reinforce each other.',
+    confidence: 'Medium' },
+  { id: 'STK-21', name: 'Coordination–Extraction Configuration', triggers: ['S2', 'S4'],
+    absorbed: 'Friction, Success',
+    logic: 'Value exit (talent, capital) is managed through more coordination rather than triggering structural response; ecosystem fragmentation from extraction makes coordination more necessary; success signals are absorbed by the coordination machinery rather than converting to reinvestment obligation.',
+    entry: 'The signal layer — making extraction visible (talent flows, capital destinations) within the coordination infrastructure may create pressure to respond structurally rather than coordinatively.',
+    effect: 'Success signals (extraction events) are being absorbed by friction-management (coordination) rather than triggering reinvestment.',
     confidence: 'Low' },
-  { id: 'STK-07', name: 'Tolerance Stack',              triggers: ['S8', 'S3'],
-    logic: 'Poor performance at scale is tolerated to avoid disrupting the narrative of progress. Accountability is systematically deferred.',
-    regime: 'The ecosystem is locked into tolerance of underperformance — scaling activity provides cover, and forgiving prevents the accountability that would expose it.',
-    entry: 'Introduce conditional continuation — a funder or anchor changes the terms under which they will continue to support, creating accountability without confrontation.',
-    effect: 'Underperforming programmes lose automatic renewal; resources shift toward programmes that demonstrate measurable progress.',
+  { id: 'STK-24', name: 'Extraction–Narrative Configuration', triggers: ['S4', 'S7'],
+    absorbed: 'Success, Uncertainty',
+    logic: 'Value extraction events (talent exits, capital exits, IPOs) generate narrative about ecosystem success and maturity; narrative legitimises continued extraction by framing it as ecosystem contribution; uncertainty about whether extraction is harmful is absorbed by the success narrative rather than triggering reinvestment obligation.',
+    entry: 'The attribution layer — separating extraction metrics (where value goes) from success metrics (what the ecosystem retains) may make the difference between exit and reinvestment visible.',
+    effect: 'Success signals directly feed narrative rather than triggering structural response — the ecosystem learns to celebrate what it loses.',
+    confidence: 'Low' },
+  { id: 'STK-26', name: 'Intermediary–Activity Configuration', triggers: ['S5', 'S8'],
+    absorbed: 'Complexity, Pressure',
+    logic: 'Activity scaling creates demand for intermediary distribution infrastructure; intermediaries make activity scaling operationally manageable across multiple stakeholders; both sustain without requiring direct coupling or conversion measurement.',
+    entry: 'The distribution layer — one programme that delivers directly to actors without intermediary routing demonstrates that scale is achievable without intermediation.',
+    effect: 'Complexity and pressure are both absorbed by the same mechanism — more activity distributed through more intermediaries — making the system appear busy without producing coupling.',
+    confidence: 'Medium' },
+  { id: 'STK-27', name: 'Intermediary–Narrative Configuration', triggers: ['S5', 'S7'],
+    absorbed: 'Complexity, Uncertainty',
+    logic: 'Intermediaries produce narrative about their facilitation role and the connections they enable; narrative legitimises intermediary existence and sustained funding; uncertainty about whether direct coupling would work is absorbed by narrative about the value of mediation rather than by demonstration.',
+    entry: 'The demonstration layer — one documented case of direct coupling that worked without intermediation may shift the burden of proof from "why bypass intermediaries" to "why not."',
+    effect: 'Both signals (complexity and uncertainty) are absorbed through narrative rather than through structural simplification — the system becomes more complex while narrating its own complexity management.',
+    confidence: 'Low' },
+  { id: 'STK-28', name: 'Activity–Permission Configuration', triggers: ['S8', 'S9'],
+    absorbed: 'Pressure, Opportunity',
+    logic: 'Activity scaling absorbs immediate pressure while waiting for permission; the waiting period provides time for further activity to accumulate and demonstrate need; both pressure and opportunity signals are absorbed without requiring conversion measurement or autonomous action.',
+    entry: 'The sequencing layer — one programme that launches before permission is secured, using activity evidence as the permission, may demonstrate that the sequencing can be reversed.',
+    effect: 'Pressure is absorbed by activity, opportunity is absorbed by waiting, and neither signal reaches the structural layer.',
+    confidence: 'Medium' },
+  // ── TRIPLES (10) ────────────────────────────────────────────────────
+  { id: 'STK-15', name: 'Governance Capture Configuration', triggers: ['S2', 'S7', 'S8'],
+    absorbed: 'Friction, Uncertainty, Pressure',
+    logic: 'Coordination generates reports; reports justify programme activity; programme activity generates coordination requirements; all three signals absorbed simultaneously making the system self-referential.',
+    entry: 'The external pressure layer — an outside actor who refuses coordination and demands direct behavioural evidence may create a gap in the self-referential loop.',
+    effect: 'The system has become closed to external signal — not through intent but through accumulated structural reinforcement. This is the most stable configuration — single-point leverage is unlikely to be sufficient.',
+    confidence: 'High' },
+  { id: 'STK-16', name: 'Permission–Validation Configuration', triggers: ['S1', 'S2', 'S9'],
+    absorbed: 'Demand, Friction, Opportunity',
+    logic: 'Re-proving requires coordination to appear credible; coordination requires permission to proceed; waiting extends the re-proving cycle; all three signals absorbed by the validation-permission loop.',
+    entry: 'The unilateral action layer — one actor who validates by doing rather than by coordinating or seeking permission may break all three simultaneously.',
+    effect: 'This configuration is common where the permission architecture is externally imposed rather than internally generated.',
+    confidence: 'Medium' },
+  { id: 'STK-17', name: 'Extraction–Intermediary Configuration', triggers: ['S4', 'S5', 'S6'],
+    absorbed: 'Complexity, Disruption, Success',
+    logic: 'Incumbents extract value via intermediary relationships; intermediaries protect incumbent access; incumbent stability suppresses the disruption that would reduce extraction.',
+    entry: 'The visibility layer — making extraction visible (talent flows, capital flows, procurement destinations) may create conditions for structural change without requiring incumbents to act differently.',
+    effect: 'One of the few configurations where success signals accelerate structural rigidity rather than adaptation.',
+    confidence: 'Low' },
+  { id: 'STK-18', name: 'Process–Permission Configuration', triggers: ['S2', 'S5', 'S9'],
+    absorbed: 'Opportunity, Complexity, Friction',
+    logic: 'Coordination and mediation together constitute a permission architecture; waiting sustains both processes; all three opportunity-absorbing mechanisms reinforce each other.',
+    entry: 'The permission architecture layer — demonstrating that one class of decision does not require this architecture may reduce its perceived necessity.',
+    effect: 'The three stalls collectively constitute a complete permission system that absorbs all opportunity signals before they reach actors.',
+    confidence: 'Medium' },
+  { id: 'STK-19', name: 'Volume–Tolerance Configuration', triggers: ['S1', 'S3', 'S8'],
+    absorbed: 'Demand, Failure, Pressure',
+    logic: 'Activity volume generates demand for more re-proving; re-proving keeps all programmes alive; forgiving keeps non-performers in the portfolio; all three pressure types absorbed by the activity layer.',
+    entry: 'The portfolio layer — one hard exit criterion (a pre-committed threshold, not a performance review) may make the tolerance mechanism visible.',
+    effect: 'The configuration that most effectively decouples activity from outcomes — absorbs demand, failure, and pressure simultaneously.',
+    confidence: 'Medium' },
+  { id: 'STK-22', name: 'Extraction–Permission Configuration', triggers: ['S4', 'S6', 'S9'],
+    absorbed: 'Success, Disruption, Opportunity',
+    logic: 'Incumbents extract value while simultaneously functioning as permission gatekeepers; waiting for incumbent permission delays autonomous actor formation; incumbent centrality reinforces the permission architecture that sustains extraction; all three signals absorbed simultaneously.',
+    entry: 'The permission architecture layer — one actor who bypasses incumbent permission and captures value locally changes the architecture for others; making local reinvestment pathways visible reduces the necessity of incumbent permission.',
+    effect: 'One of the most self-reinforcing configurations — each stall reinforces the others\' stability, making single-point leverage unlikely to be sufficient.',
+    confidence: 'Low' },
+  { id: 'STK-23', name: 'Coordination–Incumbent–Permission Configuration', triggers: ['S2', 'S6', 'S9'],
+    absorbed: 'Friction, Disruption, Opportunity',
+    logic: 'Coordination routes through incumbents as primary nodes; waiting for incumbent-sanctioned decisions sustains the coordination requirement; incumbent authority is reinforced by being the node through which coordination and permission flow simultaneously.',
+    entry: 'The routing layer — one coordination decision made without incumbent involvement demonstrates that the coordination infrastructure can operate through alternative nodes.',
+    effect: 'All three absorbed signals (friction, disruption, opportunity) are routed through the same incumbent node — the system has converged on a single point of stabilisation.',
+    confidence: 'Low' },
+  { id: 'STK-25', name: 'Coordination–Extraction–Permission Configuration', triggers: ['S2', 'S4', 'S9'],
+    absorbed: 'Friction, Success, Opportunity',
+    logic: 'Coordination delays structural response to extraction by converting it into a process task; waiting for permission delays autonomous actor formation that might retain value; extraction continues while coordination and permission-seeking absorb both the response capacity and the opportunity signals.',
+    entry: 'The response layer — one actor who responds to extraction autonomously (retains talent, reinvests locally, without waiting for coordination consensus) demonstrates that response is possible without permission.',
+    effect: 'This configuration systematically converts response capacity into process — every signal that might trigger adaptation is absorbed by coordination or permission-seeking before it can produce structural change.',
+    confidence: 'Low' },
+  { id: 'STK-29', name: 'Validation–Narrative–Permission Configuration', triggers: ['S1', 'S7', 'S9'],
+    absorbed: 'Demand, Uncertainty, Opportunity',
+    logic: 'Re-proving generates narrative material about the ecosystem\'s potential; narrative legitimises continued waiting for external validation; waiting extends the re-proving cycle by creating space for more evidence to accumulate; all three signals absorbed simultaneously making the system appear active while deferring commitment.',
+    entry: 'The external commitment layer — one named external actor making a public commitment (not conditional on further validation) breaks all three simultaneously by collapsing the waiting period and making narrative redundant.',
+    effect: 'The configuration most effective at absorbing the signals that would otherwise force commitment — demand, uncertainty, and opportunity are all converted into validation activity.',
+    confidence: 'Medium' },
+  { id: 'STK-30', name: 'Coordination–Intermediary–Activity Configuration', triggers: ['S2', 'S5', 'S8'],
+    absorbed: 'Complexity, Friction, Pressure',
+    logic: 'Coordination creates demand for intermediary infrastructure; intermediaries distribute activity at scale across stakeholders; activity scaling generates coordination requirements; all three sustain each other — the system becomes increasingly complex to operate while appearing increasingly active.',
+    entry: 'The accountability layer — requiring the coordination body to report on what activity produced (not what it organised) may make the gap between activity and conversion visible across all three stalls simultaneously.',
+    effect: 'A complete operational loop — coordination organises, intermediaries distribute, activity accumulates — and none of the three steps requires conversion measurement. The system can run indefinitely without producing throughput.',
     confidence: 'Medium' },
 ];
 let STACK_RULES = FALLBACK_STACK_RULES;
@@ -638,6 +774,12 @@ function LeverageCard({ stack, protections, priority, commentary }) {
       </div>
 
       <div style={s2.fieldGroup}>
+        {stack.absorbed && (
+          <div style={s2.field}>
+            <span style={{ ...s2.provLabel, color: '#7c6f9b' }}>Signals absorbed</span>
+            <span style={s2.provText}>{stack.absorbed}</span>
+          </div>
+        )}
         <div style={s2.field}>
           <span style={s2.provLabel}>Diagnosis</span>
           <span style={s2.provDiagnosis}>{diagnosis}</span>
@@ -650,12 +792,6 @@ function LeverageCard({ stack, protections, priority, commentary }) {
           <span style={s2.provLabel}>Mechanism</span>
           <span style={s2.provText}>{mechanism}</span>
         </div>
-        {stack.regime && (
-          <div style={s2.field}>
-            <span style={{ ...s2.provLabel, color: '#d97706' }}>What this locks in</span>
-            <span style={{ ...s2.provText, fontStyle: 'italic' }}>{stack.regime}</span>
-          </div>
-        )}
         {stack.effect && (
           <div style={s2.field}>
             <span style={{ ...s2.provLabel, color: '#0c9488' }}>Expected effect</span>
@@ -772,7 +908,7 @@ function LeverageStage() {
 
 /* ─── Health indicator ─────────────────────────────────────────────── */
 function HealthIndicator({ count }) {
-  const max = 9;
+  const max = 5;
   const ratio = count / max;
   // Health DEGRADES as stalls increase: 0 = full health, 9 = critical
   const color = count === 0 ? 'var(--signal)'
@@ -808,15 +944,17 @@ function HealthIndicator({ count }) {
 }
 
 /* ─── Stall card ───────────────────────────────────────────────────── */
-function StallCard({ stall, selected, onToggle, highlighted }) {
+function StallCard({ stall, selected, disabled, onToggle, highlighted }) {
   return (
     <button
-      onClick={() => onToggle(stall.id)}
+      onClick={() => !disabled && onToggle(stall.id)}
       style={{
         ...s1.card,
         borderColor: selected ? 'var(--signal)' : highlighted ? '#f5d97a' : 'var(--dj-border)',
-        background: selected ? 'rgba(42,122,79,0.06)' : 'var(--dj-surface)',
+        background: selected ? 'rgba(42,122,79,0.06)' : disabled ? 'rgba(240,236,228,0.5)' : 'var(--dj-surface)',
         boxShadow: highlighted && !selected ? '0 0 0 2px #f5d97a' : 'none',
+        opacity: disabled ? 0.45 : 1,
+        cursor: disabled ? 'not-allowed' : 'pointer',
         position: 'relative',
       }}
     >
@@ -877,54 +1015,94 @@ function BehavioursStage() {
   const { journeyState, updateJourneyState } = useJourney();
   const selected = journeyState.stalls;
 
+  const MAX_STALLS = 5;
+
   const toggleStall = useCallback((id) => {
-    const next = selected.includes(id)
+    const isDeselect = selected.includes(id);
+    if (!isDeselect && selected.length >= MAX_STALLS) return; // cap at 5
+    const next = isDeselect
       ? selected.filter(s => s !== id)
       : [...selected, id];
-    const detected = STACK_RULES.filter(
+    const allDetected = STACK_RULES.filter(
       rule => rule.triggers.every(t => next.includes(t))
     );
-    if (detected.length > 0) console.log('[Stack Detection] Detected stack object:', JSON.stringify(detected[0]));
+    // Rank: prefer triples over pairs (specificity), then High > Medium > Low confidence
+    const CONF_RANK = { High: 3, Medium: 2, Low: 1 };
+    const ranked = [...allDetected].sort((a, b) => {
+      const sizeDiff = b.triggers.length - a.triggers.length;
+      if (sizeDiff !== 0) return sizeDiff;
+      return (CONF_RANK[b.confidence] || 0) - (CONF_RANK[a.confidence] || 0);
+    });
+    // Suppress pairs that are strict subsets of a displayed triple
+    const top = [];
+    for (const stack of ranked) {
+      const isSubset = top.some(t =>
+        t.triggers.length > stack.triggers.length &&
+        stack.triggers.every(s => t.triggers.includes(s))
+      );
+      if (!isSubset) top.push(stack);
+      if (top.length >= 3) break;
+    }
+    if (top.length > 0) console.log('[Stack Detection] Top stacks:', top.map(s => s.id));
     updateJourneyState({
       stalls: next,
-      stacks: detected.map(s => s.name),
-      detectedStacks: detected,
+      stacks: top.map(s => s.name),
+      detectedStacks: top,
     });
   }, [selected, updateJourneyState]);
 
-  const detectedStacks = useMemo(() =>
-    STACK_RULES.filter(rule => rule.triggers.every(t => selected.includes(t))),
-    [selected]
-  );
+  const detectedStacks = useMemo(() => {
+    const all = STACK_RULES.filter(rule => rule.triggers.every(t => selected.includes(t)));
+    const CONF_RANK = { High: 3, Medium: 2, Low: 1 };
+    const ranked = [...all].sort((a, b) => {
+      const sizeDiff = b.triggers.length - a.triggers.length;
+      if (sizeDiff !== 0) return sizeDiff;
+      return (CONF_RANK[b.confidence] || 0) - (CONF_RANK[a.confidence] || 0);
+    });
+    const top = [];
+    for (const stack of ranked) {
+      const isSubset = top.some(t =>
+        t.triggers.length > stack.triggers.length &&
+        stack.triggers.every(s => t.triggers.includes(s))
+      );
+      if (!isSubset) top.push(stack);
+      if (top.length >= 3) break;
+    }
+    return top;
+  }, [selected]);
 
   return (
     <div style={s1.container}>
       <h2 style={styles.stageHeading}>Behaviours</h2>
       <p style={styles.stageSubtitle}>
-        Select the behavioural stalls you observe in this ecosystem. Stacks — reinforcing combinations — are detected automatically.
+        Select up to {MAX_STALLS} behavioural stalls you observe in this ecosystem. Most diagnosed clusters have 3–5 active stalls. Stacks are detected automatically.
       </p>
 
       <HealthIndicator count={selected.length} />
 
       <div className="stall-grid" style={s1.grid}>
-        {STALLS.map(stall => (
-          <StallCard
-            key={stall.id}
-            stall={stall}
-            selected={selected.includes(stall.id)}
-            onToggle={toggleStall}
-            highlighted={journeyState.blindSpotStall === stall.id}
-          />
-        ))}
+        {STALLS.map(stall => {
+          const isDisabled = !selected.includes(stall.id) && selected.length >= MAX_STALLS;
+          return (
+            <StallCard
+              key={stall.id}
+              stall={stall}
+              selected={selected.includes(stall.id)}
+              disabled={isDisabled}
+              onToggle={toggleStall}
+              highlighted={journeyState.blindSpotStall === stall.id}
+            />
+          );
+        })}
       </div>
 
       {/* ── Summary line ── */}
       {selected.length > 0 && (
         <div style={s1.summaryLine}>
-          <span>{selected.length} stall{selected.length !== 1 ? 's' : ''} active</span>
+          <span>{selected.length} of {MAX_STALLS} stall{selected.length !== 1 ? 's' : ''} selected</span>
           <span style={s1.summaryDot} />
           <span style={{ color: detectedStacks.length > 0 ? 'var(--founder)' : 'var(--dj-chalk-muted)' }}>
-            {detectedStacks.length} stack{detectedStacks.length !== 1 ? 's' : ''} detected
+            {detectedStacks.length} stack{detectedStacks.length !== 1 ? 's' : ''} detected{detectedStacks.length > 0 ? ' (showing top 3)' : ''}
           </span>
         </div>
       )}
@@ -3374,6 +3552,8 @@ function ReportModal({ phase, journeyState, onClose }) {
         entry: s.entry || '',
         effect: s.effect || '',
         leverage: s.entry || s.leverage || '',
+        confidence: s.confidence || '',
+        absorbed_signals: s.absorbed || s.absorbed_signals || '',
       })),
       stack: (() => {
         const primary = (journeyState.detectedStacks || [])[0];
@@ -4091,10 +4271,24 @@ function DiagnosticJourney() {
     const stallIds = _resumeStalls.split(',').filter(Boolean);
     if (stallIds.length === 0) return base;
 
-    // Detect stacks from stall IDs using STACK_RULES
-    const detectedStacks = STACK_RULES.filter(
+    // Detect stacks from stall IDs using STACK_RULES — ranked by specificity + confidence, capped at 3
+    const allDetected = STACK_RULES.filter(
       rule => rule.triggers.every(t => stallIds.includes(t))
     );
+    const _CR = { High: 3, Medium: 2, Low: 1 };
+    const _ranked = [...allDetected].sort((a, b) => {
+      const sd = b.triggers.length - a.triggers.length;
+      return sd !== 0 ? sd : (_CR[b.confidence] || 0) - (_CR[a.confidence] || 0);
+    });
+    const detectedStacks = [];
+    for (const stack of _ranked) {
+      const isSub = detectedStacks.some(t =>
+        t.triggers.length > stack.triggers.length &&
+        stack.triggers.every(s => t.triggers.includes(s))
+      );
+      if (!isSub) detectedStacks.push(stack);
+      if (detectedStacks.length >= 3) break;
+    }
 
     console.log('[Resume] From URL:', stallIds.length, 'stalls,', detectedStacks.length, 'stacks, stage:', _resumeStage);
 
@@ -4103,7 +4297,7 @@ function DiagnosticJourney() {
 
     return {
       ...base,
-      stalls: stallIds,
+      stalls: stallIds.slice(0, 5), // enforce max stall cap
       stacks: detectedStacks.map(s => s.name),
       detectedStacks,
     };

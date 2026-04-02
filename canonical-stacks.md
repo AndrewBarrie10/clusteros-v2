@@ -1,7 +1,7 @@
 # ClusterOS — Canonical Stack Definitions
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Approved  
-**Source:** Derived from Stage 3 (Stall Canon v2.1) and Stage 4 (Stack Canon v1.0) pipeline prompts  
+**Source:** Derived from Stage 3 (Stall Canon v2.1) and Stage 4 (Stack Canon v1.0) pipeline prompts, plus 8 promoted pairs from cluster observations  
 **Embedded in:** clusteros-v2 (this repo) and clusteros-v3 (pipeline repo)
 
 ---
@@ -14,7 +14,7 @@ Each stack entry includes canonical ID, name, component stalls, absorbed signals
 
 ---
 
-## Pair Configurations (20)
+## Pair Configurations (28)
 
 ### STK-01 · Coordination–Narrative Configuration
 **Stalls:** S2 + S7  
@@ -154,6 +154,62 @@ Each stack entry includes canonical ID, name, component stalls, absorbed signals
 **Absorbed:** Pressure, Opportunity  
 **Logic:** Activity scaling absorbs immediate pressure while waiting for permission; the waiting period provides time for further activity to accumulate; both signals are absorbed without requiring conversion measurement or autonomous action.  
 **Leverage entry point:** The sequencing layer — one programme that launches before permission is secured, using activity evidence as the permission, may demonstrate that the sequencing can be reversed.  
+**Confidence:** Medium
+
+### STK-32 · Validation–Activity Configuration
+**Stalls:** S1 + S8  
+**Absorbed:** Uncertainty, Pressure  
+**Logic:** Re-proving generates new programmes as evidence; scaling activity generates demand for further validation rounds; each cycle produces more starts but no graduation threshold.  
+**Leverage entry point:** The graduation layer — one programme evaluated against outcomes rather than used as evidence of effort may break the cycle that converts all activity into justification.  
+**Confidence:** High
+
+### STK-34 · Incumbent–Narrative Configuration
+**Stalls:** S6 + S7  
+**Absorbed:** Disruption, Uncertainty  
+**Logic:** Incumbent institutions generate narrative legitimacy; narrative frames incumbent stability as ecosystem success; disruption signals are absorbed by stories about established actors rather than triggering adaptation.  
+**Leverage entry point:** The attribution layer — separating ecosystem narrative from incumbent announcements may reveal that progress stories are concentrated in actors whose stability is the problem.  
+**Confidence:** Medium
+
+### STK-36 · Validation–Permission Configuration
+**Stalls:** S1 + S9  
+**Absorbed:** Pressure, Opportunity  
+**Logic:** Re-proving generates activity requiring authorisation; waiting for permission extends the re-proving cycle by creating new validation gates; opportunity signals are converted into documentation requirements.  
+**Leverage entry point:** The threshold layer — one pre-committed criterion that triggers action without further permission may collapse the cycle that converts every opportunity into another round of justification.  
+**Confidence:** High
+
+### STK-37 · Validation–Incumbent Configuration
+**Stalls:** S1 + S6  
+**Absorbed:** Pressure, Disruption  
+**Logic:** Re-proving activity flows toward incumbent integration rather than independent validation; incumbents provide the credibility that validation seeks; each validation cycle reinforces incumbent centrality.  
+**Leverage entry point:** The independence layer — one validation outcome that does not require incumbent endorsement may demonstrate that credibility can be established outside the incumbent orbit.  
+**Confidence:** Medium
+
+### STK-38 · Validation–Intermediary Configuration
+**Stalls:** S1 + S5  
+**Absorbed:** Uncertainty, Complexity  
+**Logic:** Re-proving creates demand for coordination across fragmented initiatives; intermediaries provide the structure that validation needs to appear credible; each intermediary layer adds another validation requirement.  
+**Leverage entry point:** The direct evidence layer — one outcome validated without intermediary involvement may demonstrate that credibility does not require mediation.  
+**Confidence:** Medium
+
+### STK-39 · Extraction–Intermediary Configuration
+**Stalls:** S4 + S5  
+**Absorbed:** Pressure, Opportunity  
+**Logic:** Value flows out of the ecosystem through intermediary channels; intermediaries facilitate connections whose benefits accrue elsewhere; the intermediary layer makes extraction operationally smooth rather than structurally visible.  
+**Leverage entry point:** The destination layer — mapping where value goes after intermediary-facilitated introductions may make the extraction visible as a structural pattern rather than a series of individual outcomes.  
+**Confidence:** Low
+
+### STK-40 · Incumbent–Activity Configuration
+**Stalls:** S6 + S8  
+**Absorbed:** Disruption, Pressure  
+**Logic:** Incumbent institutions generate programme activity around their priorities; activity scaling creates the appearance of ecosystem dynamism while entrenching incumbent centrality; pressure to demonstrate progress is absorbed by incumbent-centred programmes.  
+**Leverage entry point:** The independence layer — one programme that operates without incumbent sponsorship or participation may demonstrate that ecosystem activity can exist outside the incumbent orbit.  
+**Confidence:** Medium
+
+### STK-43 · Narrative–Permission Configuration
+**Stalls:** S7 + S9  
+**Absorbed:** Uncertainty, Pressure  
+**Logic:** Narrative production legitimises waiting by framing it as strategic patience; waiting creates time for more narrative to accumulate; both signals are absorbed by documentation rather than action.  
+**Leverage entry point:** The deadline layer — one commitment with a named date that does not depend on external permission may demonstrate that action is possible while the narrative is still being written.  
 **Confidence:** Medium
 
 ---

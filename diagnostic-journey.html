@@ -3615,30 +3615,65 @@ function buildStepAnnotation(step, journeyState, config) {
     }
     // Step 8: Final reveal + steward section
     case 8: {
+      const ecoDesc = journeyState.ecosystemDescription || {};
+      const commentary = journeyState.stackCommentary || {};
+      const priorityLabel = { talent: 'talent retention', capital: 'capital attraction', research: 'research commercialisation', supply: 'supply chain development', growth: 'economic growth' }[qa.priority] || 'strategic progress';
+      const stageLabel = { early: 'early-stage', established: 'established', mature: 'mature' }[qa.stage] || '';
+
+      // Opening — config name + what was found
       let body = `Your sovereign boundary — ${config.configName}. Not a platform you adopt. Infrastructure you own.`;
       if (protectStr) body += ` ${protectStr} — protected by architecture, not by policy.`;
-      if (allStackBold) body += ` This configuration directly addresses ${allStackBold}.`;
-      body += ' The next step is a Snapshot diagnostic — a structured engagement that validates these findings with your ecosystem\'s actors.';
 
-      // Steward section data — locally computed from diagnostic findings
+      // Steward section — the closing argument
+      const insideSummary = ecoDesc.inside || '';
+      const outsideSummary = ecoDesc.outside || '';
+      const absorbedSummary = ecoDesc.absorbed || '';
+
+      // Build the diagnostic finding — what we found, grounded in their words
+      let findingParagraph = '';
+      if (insideSummary) {
+        findingParagraph = `You described your ecosystem from inside: "${insideSummary.length > 200 ? insideSummary.substring(0, 200) + '...' : insideSummary}"`;
+        if (outsideSummary) findingParagraph += ` From outside: "${outsideSummary.length > 200 ? outsideSummary.substring(0, 200) + '...' : outsideSummary}"`;
+      }
+
+      // Build the structural diagnosis — what the stacks mean
+      const stackDiagnoses = stacks.map(s => {
+        const c = commentary[s.id];
+        return c && c.diagnosis ? `**${s.name}**: ${c.diagnosis}` : `**${s.name}**: ${s.logic}`;
+      });
+
+      // Build the leverage summary — what would change
+      const leverageSummaries = stacks.map(s => {
+        const c = commentary[s.id];
+        return c && c.mechanism ? c.mechanism : s.entry;
+      });
+
+      // Steward questions — grounded in specific stalls + ecosystem context
       const stewardQuestions = [];
-      if (has('S1') || has('S7')) stewardQuestions.push(`"Are we still **Re-proving**?" — you get a live reading of whether evidence is informing decisions or accumulating as justification. If your ${anchorLabel} published 40 research outputs last quarter and 3 generated commercial conversations, you see that ratio without anyone compiling a report.`);
-      if (has('S4')) stewardQuestions.push(`"Is our ${anchorLabel} circulating value or extracting it?" — you get a value flow analysis showing where procurement, talent, and IP crossed the boundary and whether it came back. Not an annual audit. A live signal.`);
-      if (has('S2') || has('S5')) stewardQuestions.push(`"Who is connecting to whom — and is it working?" — you see which connections happened through infrastructure and which still run through brokers. When a programme manager leaves, you see which connections go with them.`);
-      if (has('S9')) stewardQuestions.push(`"Who is waiting for permission that could act now?" — you see which actors are blocked by dependency rather than capability. The gatekeeper pattern becomes visible before it becomes structural.`);
-      if (has('S8')) stewardQuestions.push(`"Which programmes are producing starts but not outcomes?" — you see graduation rates alongside cohort sizes. Activity that looks like progress but isn't converting surfaces as a pattern.`);
-      stewardQuestions.push(`"Where would one intervention have the most effect right now?" — you get a leverage hypothesis ranked by confidence, derived from live stall detection against your ${allStackPlain || 'detected patterns'}. Not a consultant's recommendation from three months ago. A structural reading from current actor behaviour.`);
+      if (has('S1') || has('S7')) stewardQuestions.push(`"Is evidence informing decisions or accumulating as justification?" — ${has('S1') && has('S7') ? 'Your Re-proving and Narrating stalls reinforce each other.' : has('S1') ? 'Your Re-proving pattern means the case is never settled.' : 'Your Narrating pattern means reports substitute for proof.'} You get a live ratio: outputs produced vs. outcomes generated. No one compiles this — the system reads it from actor behaviour.`);
+      if (has('S4')) stewardQuestions.push(`"Is our ${anchorLabel} circulating value or extracting it?" — Your Extracting stall means value is leaving. You get a flow analysis: where procurement, talent, and IP crossed the boundary and whether it came back. A live signal, not an annual audit.`);
+      if (has('S2') || has('S5')) stewardQuestions.push(`"Who is connecting to whom — and is it working?" — ${has('S2') && has('S5') ? 'Your Coordinating and Mediating stalls mean relationships substitute for transactions.' : has('S2') ? 'Your Coordinating stall means meetings substitute for commitments.' : 'Your Mediating stall means everything routes through brokers.'} You see which connections produce outcomes and which are ceremonial.`);
+      if (has('S6')) stewardQuestions.push(`"What structures are we preserving that no longer serve?" — Your Stabilising stall means existing arrangements are protected from adaptation. You see which institutional relationships are blocking emergence rather than enabling it.`);
+      if (has('S3')) stewardQuestions.push(`"Which programmes should we stop?" — Your Forgiving stall means poor performance is tolerated to preserve relationships. You see graduation rates alongside programme age. The system names what no one in the room will.`);
+      if (has('S9')) stewardQuestions.push(`"Who is waiting for permission that could act now?" — Your Waiting stall means action is deferred pending conditions that may never arrive. You see dependency patterns before they become structural.`);
+      if (has('S8')) stewardQuestions.push(`"Which programmes are producing starts but not outcomes?" — Your Scaling Activity stall means activity is celebrated rather than evaluated. You see conversion rates alongside cohort sizes. Volume without throughput becomes visible.`);
 
       const stewardSection = {
-        heading: 'What you see',
-        subheading: 'STEWARD INTERROGATION',
-        body: `Today when your board asks what's working, someone compiles a report from programme managers' recollections, annual surveys, and whatever data was last collected. By the time it reaches the table, it describes an ecosystem that no longer exists in exactly that form.\n\nWith this configuration, you ask questions and get answers assembled from live signals — the same data your actors are already producing by pursuing their own interests. Here are the questions your diagnostic has unlocked:`,
+        heading: 'Findings and recommendation',
+        subheading: 'DIAGNOSTIC SUMMARY',
+        findingParagraph,
+        stackDiagnoses,
+        absorbedSummary,
+        leverageSummaries,
         stewardQuestions,
+        recommendation: `The next step is a **Snapshot Diagnostic** — a structured engagement that validates these self-assessment findings against evidence from your ecosystem's actors. A Snapshot analyses 50–170 evidence items per cluster, assigns confidence tiers to each finding, and produces a leverage hypothesis tested against real actor behaviour. This self-assessment has named the pattern. A Snapshot proves it — or reveals what you couldn't see from inside.`,
         bullets: [
-          `Your ${allStackPlain || 'stall patterns'} ${stacks.length > 1 ? 'are' : 'is'} tracked continuously — not as a static finding from this diagnostic, but as a live reading that updates as actor behaviour changes`,
-          `Board evidence is generated from the same data your actors are already producing — no additional reporting burden, no survey fatigue, no lag between reality and record`,
-          `Intervention targeting is structural, not political — the system shows where one change would break the reinforcing logic, regardless of which organisation would prefer the status quo`,
+          `Your ${allStackPlain || 'structural patterns'} ${stacks.length > 1 ? 'are' : 'is'} not a static finding — a Snapshot tracks these as live readings that update as actor behaviour changes`,
+          `Board evidence is generated from data your actors already produce — no additional reporting burden, no survey fatigue, no lag between what's happening and what you see`,
+          `Intervention targeting is structural, not political — the system identifies where one change would break the reinforcing logic, regardless of which organisation would prefer the status quo`,
         ],
+        priorityLabel,
+        stageLabel,
       };
 
       return { title: config.configName, body, stewardSection, showCTA: true };
@@ -3815,17 +3850,72 @@ function DigitalOSStage() {
             <div style={schema.stewardSection}>
               <h3 style={schema.stewardHeading}>{annotation.stewardSection.heading}</h3>
               <div style={schema.stewardSub}>{annotation.stewardSection.subheading}</div>
-              <p style={schema.stewardBody}><BoldText text={annotation.stewardSection.body} /></p>
-              {/* Diagnostic-specific steward questions */}
-              {annotation.stewardSection.stewardQuestions && (
-                <div style={{ margin: '16px 0' }}>
+
+              {/* 1. What you told us — their own ecosystem description */}
+              {annotation.stewardSection.findingParagraph && (
+                <div style={{ padding: '16px', background: 'rgba(12,148,136,0.04)', border: '1px solid rgba(12,148,136,0.12)', borderRadius: '6px', marginBottom: '20px' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--steward)', marginBottom: '8px' }}>YOUR ASSESSMENT</div>
+                  <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.65, color: 'var(--dj-chalk-dim)', margin: 0, fontStyle: 'italic' }}>
+                    <BoldText text={annotation.stewardSection.findingParagraph} />
+                  </p>
+                </div>
+              )}
+
+              {/* 2. What we found — structural diagnosis per stack */}
+              {annotation.stewardSection.stackDiagnoses && annotation.stewardSection.stackDiagnoses.length > 0 && (
+                <div style={{ marginBottom: '20px' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>STRUCTURAL DIAGNOSIS</div>
+                  {annotation.stewardSection.stackDiagnoses.map((d, i) => (
+                    <p key={i} style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk)', margin: '0 0 8px' }}>
+                      <BoldText text={d} />
+                    </p>
+                  ))}
+                  {annotation.stewardSection.absorbedSummary && (
+                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: 'var(--dj-chalk-muted)', margin: '12px 0 0', fontStyle: 'italic' }}>
+                      {annotation.stewardSection.absorbedSummary}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* 3. Where leverage sits — what would change */}
+              {annotation.stewardSection.leverageSummaries && annotation.stewardSection.leverageSummaries.length > 0 && (
+                <div style={{ marginBottom: '20px' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>WHERE LEVERAGE SITS</div>
+                  {annotation.stewardSection.leverageSummaries.map((l, i) => (
+                    <p key={i} style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk-dim)', margin: '0 0 8px', paddingLeft: '12px', borderLeft: '2px solid var(--steward)' }}>
+                      <BoldText text={l} />
+                    </p>
+                  ))}
+                </div>
+              )}
+
+              {/* 4. What becomes visible — steward questions */}
+              {annotation.stewardSection.stewardQuestions && annotation.stewardSection.stewardQuestions.length > 0 && (
+                <div style={{ marginBottom: '20px' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>WHAT BECOMES VISIBLE</div>
+                  <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', margin: '0 0 12px', lineHeight: 1.5 }}>
+                    With this infrastructure deployed, these are the questions you can ask — and get answered from live actor behaviour, not compiled reports:
+                  </p>
                   {annotation.stewardSection.stewardQuestions.map((q, i) => (
-                    <div key={i} style={{ padding: '12px 0', borderBottom: i < annotation.stewardSection.stewardQuestions.length - 1 ? '1px solid var(--dj-border)' : 'none' }}>
-                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}><BoldText text={q} /></p>
+                    <div key={i} style={{ padding: '10px 0', borderBottom: i < annotation.stewardSection.stewardQuestions.length - 1 ? '1px solid var(--dj-border)' : 'none' }}>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}><BoldText text={q} /></p>
                     </div>
                   ))}
                 </div>
               )}
+
+              {/* 5. Recommendation — next step */}
+              {annotation.stewardSection.recommendation && (
+                <div style={{ padding: '16px', background: 'rgba(42,122,79,0.04)', border: '1px solid rgba(42,122,79,0.15)', borderRadius: '6px', marginBottom: '20px' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--signal)', marginBottom: '8px' }}>RECOMMENDATION</div>
+                  <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk)', margin: 0 }}>
+                    <BoldText text={annotation.stewardSection.recommendation} />
+                  </p>
+                </div>
+              )}
+
+              {/* 6. What a Snapshot delivers */}
               <ul style={schema.stewardBullets}>
                 {annotation.stewardSection.bullets.map((b, i) => (
                   <li key={i} style={schema.stewardBullet}>

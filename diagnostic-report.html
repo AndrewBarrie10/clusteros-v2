@@ -650,13 +650,16 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
     <!-- Stage 2 locked teaser for Digital OS (replaced at Stage 3) -->
     <div id="locked-digital-os"></div>
 
-    <!-- 8. Digital OS architecture (Stage 3 only) -->
+    <!-- 8. Digital OS architecture (Stage 3 only) — condensed summary -->
     <div class="doc-section stage-hidden" id="section-digital-os">
       <div class="doc-section-label"><span class="doc-section-num">8</span>Your Digital OS architecture</div>
       <div class="doc-section-heading">The infrastructure <em>configured for your ecosystem</em></div>
-      <p class="doc-body">Based on your qualifier answers and architecture selections, ClusterOS has generated a specific infrastructure configuration for your ecosystem. Each layer addresses a structural function — from sovereign data ownership to AI-powered intelligence. This is not a product roadmap. It is the substrate your ecosystem needs to make compounding behaviour the rational choice.</p>
-      <div id="arch-schema-svg" style="margin-bottom:28px"></div>
-      <div id="layer-cards"></div>
+      <p class="doc-body">Based on your qualifier answers and detected stalls, ClusterOS has generated a specific infrastructure configuration. The full technical specification — 7 layers, tech recommendations, and steward interrogation surface — is available as a separate document.</p>
+      <div id="arch-summary"></div>
+      <div id="arch-schema-svg" style="margin-bottom:20px"></div>
+      <div style="padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin-top:16px">
+        <p style="font-size:13px;color:var(--ink-dim);line-height:1.6;margin:0;font-weight:300"><strong style="color:var(--ink);font-weight:500">Full architecture specification:</strong> The layer-by-layer detail — including AI runtime configuration, governance model, intelligence substrate, and steward interrogation questions — is available in your <a href="/diagnostic-architecture.html" style="color:var(--green);font-weight:500">Technical Architecture Document</a>.</p>
+      </div>
     </div>
 
     <!-- 7. What to do next (merged: full diagnostic + concrete actions) -->
@@ -2008,95 +2011,60 @@ async function init() {
   // ══════════════════════════════════════════════════════════
   // STAGE 3 (digital_os): Show architecture layers
   // ══════════════════════════════════════════════════════════
+  // Layer metadata — shared between report summary and technical doc
+  const LAYER_META = [
+    { key:'sovereignDatabase',     name:'Sovereign Ecosystem Database', role:'Data ownership', tier:'Foundation', color:'#1d5c3a', addresses:['S1','S4','S7'] },
+    { key:'governanceAccess',      name:'Governance & Access',          role:'Trust infrastructure', tier:'Foundation', color:'#2a6b4a', addresses:['S2','S4','S6'] },
+    { key:'integrationLayer',      name:'Integration Layer',            role:'External signals', tier:'Substrate', color:'#2b7a75', addresses:['S1','S5'] },
+    { key:'automationLayer',       name:'Automation Layer',             role:'Bot network', tier:'Substrate', color:'#0c9488', addresses:['S2','S5','S8'] },
+    { key:'intelligenceSubstrate', name:'Intelligence Substrate',       role:'MCP tools', tier:'Substrate', color:'#2d8a7a', addresses:['S2','S6','S7'] },
+    { key:'aiRuntime',             name:'AI Runtime',                   role:'Reasoning engine', tier:'Surface', color:'#3a7a5a', addresses:['S1','S2','S9'] },
+    { key:'applicationLayer',      name:'Application Layer',            role:'Actor experience', tier:'Surface', color:'#2a7a4f', addresses:['S5','S6','S8','S9'] },
+  ];
+
   if (isDigitalOS) {
     const lc = d.layerCommentary || {};
+    const tc = (d.techConfig && typeof d.techConfig === 'object') ? d.techConfig : {};
     const hasLayers = Object.values(lc).some(v => v && v.trim());
-    if (hasLayers) {
+    if (hasLayers || Object.keys(tc).length > 0) {
       document.getElementById('section-digital-os').classList.remove('stage-hidden');
 
-      // Architecture schema SVG — the full platform diagram
+      // Architecture schema SVG
       document.getElementById('arch-schema-svg').innerHTML = generateArchSchemaSVG(stallIds);
 
-      // Layer metadata — colours, roles, tiers, which stalls each addresses
-      const LAYER_META = [
-        { key:'sovereignDatabase',     name:'Sovereign Ecosystem Database', role:'Data ownership', tier:'Foundation', color:'#1d5c3a', colorLight:'rgba(29,92,58,0.08)', addresses:['S1','S4','S7'], connectors:{ S1:'Evidence persists across cycles', S4:'Value flows become traceable', S7:'Narrative replaced by structured record' } },
-        { key:'governanceAccess',      name:'Governance & Access',          role:'Trust infrastructure', tier:'Foundation', color:'#2a6b4a', colorLight:'rgba(42,107,74,0.08)', addresses:['S2','S4','S6'], connectors:{ S2:'Coordination becomes auditable', S4:'Extraction requires consent', S6:'New actors enter without incumbent permission' } },
-        { key:'integrationLayer',      name:'Integration Layer',            role:'External signals', tier:'Substrate', color:'#2b7a75', colorLight:'rgba(43,122,117,0.08)', addresses:['S1','S5'], connectors:{ S1:'Evidence imports automatically', S5:'Connections bypass intermediaries' } },
-        { key:'automationLayer',       name:'Automation Layer',             role:'Bot network', tier:'Substrate', color:'#0c9488', colorLight:'rgba(12,148,136,0.08)', addresses:['S2','S5','S8'], connectors:{ S2:'Coordination overhead automated', S5:'Matching happens without brokers', S8:'Activity measured against outcomes' } },
-        { key:'intelligenceSubstrate', name:'Intelligence Substrate',       role:'MCP tools', tier:'Substrate', color:'#2d8a7a', colorLight:'rgba(45,138,122,0.08)', addresses:['S2','S6','S7'], connectors:{ S2:'Decisions surfaced from signals', S6:'Underutilised actors identified', S7:'Live read replaces retrospective report' } },
-        { key:'aiRuntime',             name:'AI Runtime',                   role:'Reasoning engine', tier:'Surface', color:'#3a7a5a', colorLight:'rgba(58,122,90,0.08)', addresses:['S1','S2','S9'], connectors:{ S1:'Evidence base answers the question', S2:'Right actors matched to right decisions', S9:'Actors can act on current data' } },
-        { key:'applicationLayer',      name:'Application Layer',            role:'Actor experience', tier:'Surface', color:'#2a7a4f', colorLight:'rgba(42,122,79,0.08)', addresses:['S5','S6','S8','S9'], connectors:{ S5:'Direct coupling via portal', S6:'New entrants visible to anchors', S8:'Throughput visible at programme level', S9:'Action pathways without permission' } },
-      ];
+      // Condensed summary — config name, tech choices, active layers
+      const activeLayers = LAYER_META.filter(lm => lm.addresses.some(s => stallIds.includes(s)));
+      let summaryHTML = '';
 
-      // Architecture schema
-      const schemaHTML = `
-        <div class="arch-schema">
-          ${LAYER_META.map((lm, i) => {
-            const active = lm.addresses.some(s => stallIds.includes(s));
-            return `<div class="arch-schema-row" style="background:${lm.color};color:#fff">
-              <span class="arch-schema-num">L${i+1}</span>
-              <span class="arch-schema-name">${lm.name}</span>
-              <span class="arch-schema-role">${lm.role}</span>
-              ${active ? '<span class="arch-schema-active"></span>' : ''}
-            </div>`;
-          }).join('')}
-        </div>
-        <p style="font-family:var(--mono);font-size:9px;color:var(--ink-muted);margin-bottom:24px">Sovereign database at the foundation. Every layer above draws from it. White dots mark layers that directly address your identified stalls.</p>`;
+      // Config name
+      if (configName) {
+        summaryHTML += `<div style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:16px">${configName}</div>`;
+      }
 
-      // Layer cards
-      const layerCardsHTML = LAYER_META.map((lm, i) => {
-        const commentary = lc[lm.key];
-        if (!commentary || !commentary.trim()) return '';
+      // Tech config summary
+      if (tc.aiRuntime || tc.intelligenceSubstrate || tc.governanceAccess) {
+        summaryHTML += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">';
+        if (tc.aiRuntime) summaryHTML += `<span class="doc-tag" style="border-color:var(--green);color:var(--green)">${tc.aiRuntime.label || tc.aiRuntime.recommendation}</span>`;
+        if (tc.intelligenceSubstrate) summaryHTML += `<span class="doc-tag" style="border-color:var(--teal);color:var(--teal)">${tc.intelligenceSubstrate.label || tc.intelligenceSubstrate.recommendation}</span>`;
+        if (tc.governanceAccess) summaryHTML += `<span class="doc-tag" style="border-color:var(--ink-muted)">${tc.governanceAccess.label || tc.governanceAccess.model}</span>`;
+        summaryHTML += '</div>';
+      }
 
-        // Which of user's stalls does this layer address?
-        const addressedStalls = lm.addresses.filter(s => stallIds.includes(s));
-
-        return `
-        <div class="layer-card">
-          <div class="layer-card-head" style="background:${lm.color};color:#fff">
-            <span class="layer-card-num" style="color:rgba(255,255,255,0.5)">L${i+1}</span>
-            <span class="layer-card-name" style="color:#fff">${lm.name}</span>
-            <span class="layer-card-role" style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8)">${lm.role}</span>
-            <span class="layer-card-tier">${lm.tier}</span>
-          </div>
-          ${addressedStalls.length > 0 ? `
-          <div class="layer-card-stalls" style="background:${lm.colorLight}">
-            ${addressedStalls.map(sid => {
-              const stall = ALL_STALLS.find(s => s.id === sid);
-              const connector = lm.connectors[sid] || '';
-              return `<span class="layer-stall-pill" style="color:${lm.color}">${stall ? stall.key : sid}</span>${connector ? `<span class="layer-stall-connector">${connector}</span>` : ''}`;
-            }).join('<span style="color:var(--border-2);margin:0 2px">·</span>')}
-          </div>` : ''}
-          <div class="layer-card-body">${commentary}</div>
+      // Active layers — compact schema
+      summaryHTML += `<div class="arch-schema">`;
+      summaryHTML += LAYER_META.map((lm, i) => {
+        const active = lm.addresses.some(s => stallIds.includes(s));
+        return `<div class="arch-schema-row" style="background:${lm.color};color:#fff">
+          <span class="arch-schema-num">L${i+1}</span>
+          <span class="arch-schema-name">${lm.name}</span>
+          <span class="arch-schema-role">${lm.role}</span>
+          ${active ? '<span class="arch-schema-active"></span>' : ''}
         </div>`;
       }).join('');
+      summaryHTML += `</div>`;
+      summaryHTML += `<p style="font-family:var(--mono);font-size:9px;color:var(--ink-muted);margin:8px 0 0">White dots mark layers that directly address your identified stalls. ${activeLayers.length} of 7 layers active for this configuration.</p>`;
 
-      // Steward interrogation section
-      const stewardQuestions = [];
-      if (stallIds.includes('S2')) stewardQuestions.push({ q: 'Which coordination structures have produced zero committed actions this quarter?', why: 'Surfaces where alignment is substituting for decision' });
-      if (stallIds.includes('S6')) stewardQuestions.push({ q: 'Which new entrants have capability that incumbents haven\'t seen?', why: 'Reveals talent the incumbent orbit is suppressing' });
-      if (stallIds.includes('S5')) stewardQuestions.push({ q: 'How many connections formed directly vs through intermediaries this month?', why: 'Measures whether the mediation dependency is weakening' });
-      if (stallIds.includes('S4')) stewardQuestions.push({ q: 'Where is value leaving the ecosystem — and what would retain it?', why: 'Makes the extraction dynamic visible as data' });
-      if (stallIds.includes('S7')) stewardQuestions.push({ q: 'What evidence do we actually have vs what are we claiming?', why: 'Separates structured findings from narrative' });
-      if (stallIds.includes('S8')) stewardQuestions.push({ q: 'What\'s our conversion rate from programme starts to commercial outcomes?', why: 'Distinguishes activity from throughput' });
-      if (stallIds.includes('S1')) stewardQuestions.push({ q: 'What\'s the evidence base for our next funding case — right now, from live data?', why: 'The case is already made when the data accumulates continuously' });
-      if (stallIds.includes('S9')) stewardQuestions.push({ q: 'Which actors could act right now if they had the right data — without waiting for permission?', why: 'Reveals that the dependency is optional for some actors' });
-      if (stallIds.includes('S3')) stewardQuestions.push({ q: 'Which programmes have the lowest outcome-to-activity ratio?', why: 'Makes accountability a structural fact rather than a political choice' });
-
-      const stewardHTML = `
-        <div class="steward-block">
-          <div class="steward-label">What this gives you</div>
-          <div class="steward-heading">The questions you can <em>finally ask</em></div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.65;margin-bottom:16px">Every layer above feeds a single interrogation surface. You don't compile reports. You don't wait for someone to update a spreadsheet. You ask — and the answer is assembled from live signals, not from whatever was last reported. These are the questions your stall configuration makes urgent:</p>
-          ${stewardQuestions.map(sq => `
-          <div class="steward-question">
-            <strong>"${sq.q}"</strong>
-            <span style="display:block;font-size:10px;color:rgba(255,255,255,0.45);margin-top:4px;font-style:normal">${sq.why}</span>
-          </div>`).join('')}
-          <div class="steward-note">Each question draws from your sovereign database, processed by the intelligence substrate, delivered through the AI runtime. The architecture exists to make these questions answerable — in real time, from evidence your ecosystem is already generating.</div>
-        </div>`;
-
-      document.getElementById('layer-cards').innerHTML = schemaHTML + layerCardsHTML + stewardHTML;
+      document.getElementById('arch-summary').innerHTML = summaryHTML;
     }
 
     // Next step for Stage 3: full diagnostic CTA

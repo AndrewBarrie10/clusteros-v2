@@ -659,26 +659,19 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
       <div id="layer-cards"></div>
     </div>
 
-    <!-- 7. What a full diagnostic adds (all stages) -->
-    <div class="doc-section">
-      <div class="doc-section-label"><span class="doc-section-num">7</span>What a full diagnostic would add</div>
-      <div class="doc-section-heading">The difference between <em>self-assessment and evidence</em></div>
-      <p class="doc-body">This report names your pattern and shows where it sits in the data. A full ClusterOS diagnostic verifies the pattern against structured evidence and produces findings with confidence tiers. For your specific stack, a full diagnostic would add:</p>
-      <div class="full-diag-box">
-        <div class="full-diag-head">Specific to your configuration</div>
-        <div class="full-diag-body" id="full-diag-body"></div>
-      </div>
-    </div>
-
-    <!-- What to do next — concrete actions -->
-    <div class="doc-section" id="section-next-steps" style="display:none">
-      <div class="doc-section-label"><span style="background:var(--green);color:#fff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0">→</span>What to do next</div>
+    <!-- 7. What to do next (merged: full diagnostic + concrete actions) -->
+    <div class="doc-section" id="section-next-steps">
+      <div class="doc-section-label"><span class="doc-section-num">7</span>What to do next</div>
       <div class="doc-section-heading">From diagnosis <em>to action</em></div>
       <div id="next-steps-content"></div>
+      <div style="margin-top:24px">
+        <p class="doc-body" style="margin-bottom:14px"><strong style="color:var(--ink)">What a Snapshot Diagnostic adds to this self-assessment:</strong></p>
+        <div class="full-diag-box">
+          <div class="full-diag-head">Specific to your configuration</div>
+          <div class="full-diag-body" id="full-diag-body"></div>
+        </div>
+      </div>
     </div>
-
-    <!-- Continue banner / Next step (stage-aware) -->
-    <div id="next-step-area"></div>
 
     <!-- ── APPENDIX ─────────────────────────────────────────── -->
     <div class="appendix">
@@ -1690,8 +1683,6 @@ async function init() {
 
   // ── What To Do Next section ──
   {
-    const nextEl = document.getElementById('section-next-steps');
-    nextEl.style.display = '';
     const qa = d.qualifier_answers || {};
     const allStackNames = (d.detectedStacks || d.detected_stacks || []).map(s => s.name).filter(Boolean);
     const stackListText = allStackNames.length <= 1 ? allStackNames.join('') : allStackNames.slice(0, -1).join(', ') + ' and ' + allStackNames[allStackNames.length - 1];
@@ -1714,7 +1705,7 @@ async function init() {
     nextHTML += '<div style="display:flex;gap:14px;align-items:flex-start">';
     nextHTML += '<div style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:rgba(42,122,79,0.08);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>';
     nextHTML += '<div><div style="font-size:14px;color:var(--ink);font-weight:500;margin-bottom:4px">Request a Snapshot Diagnostic</div>';
-    nextHTML += '<p style="font-size:12px;color:var(--ink-dim);line-height:1.6;margin:0;font-weight:300">A Snapshot analyses 50–170 evidence items from your ecosystem, assigns confidence tiers to each finding, and produces a leverage hypothesis tested against real actor behaviour. This self-assessment has named the pattern. A Snapshot proves it — or reveals what you couldn\'t see from inside.</p></div></div>';
+    nextHTML += '<p style="font-size:12px;color:var(--ink-dim);line-height:1.6;margin:0;font-weight:300">This self-assessment has named the pattern. A Snapshot proves it — or reveals what you couldn\'t see from inside. See below for what it adds to your specific configuration.</p></div></div>';
 
     nextHTML += '</div>';
     document.getElementById('next-steps-content').innerHTML = nextHTML;
@@ -1825,11 +1816,6 @@ async function init() {
     const stEffect = st.effect || '';
     const stStalls = st.stalls || [];
     const stAbsorbed = st.absorbed_signals || st.absorbed || '';
-    // AI commentary for this stack (from journey)
-    const sc = stackCommentary[st.id] || {};
-    const aiDiagnosis = sc.diagnosis || '';
-    const aiConsequence = sc.consequence || '';
-    const aiMechanism = sc.mechanism || '';
     return `
     <div class="stack-card" style="${idx > 0 ? 'margin-top:12px' : ''}">
       <div class="stack-card-head">
@@ -1837,7 +1823,6 @@ async function init() {
         <div class="stack-card-pills">${stStalls.map(s => `<span class="stack-pill">${s}</span>`).join('')}</div>
       </div>
       <div class="stack-card-body">
-        ${aiDiagnosis ? `<div style="margin-bottom:14px;padding:12px 14px;background:rgba(42,122,79,0.04);border:1px solid rgba(42,122,79,0.12);border-radius:3px"><div class="stall-leverage-label" style="color:var(--green)">Diagnosis</div><p style="font-size:13px;color:var(--ink);line-height:1.65;font-weight:400;margin:0">${aiDiagnosis}</p>${aiConsequence ? `<div class="stall-leverage-label" style="color:var(--amber);margin-top:10px">Consequence</div><p style="font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300;margin:0">${aiConsequence}</p>` : ''}${aiMechanism ? `<div class="stall-leverage-label" style="color:var(--teal);margin-top:10px">Mechanism</div><p style="font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300;margin:0">${aiMechanism}</p>` : ''}</div>` : ''}
         ${stAbsorbed ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:#7c6f9b">Signals absorbed</div><p class="stack-card-desc" style="margin-bottom:0">${stAbsorbed}</p></div>` : ''}
         ${stLogic ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--teal)">Reinforcing logic</div><p class="stack-card-desc" style="margin-bottom:0">${stLogic}</p></div>` : ''}
         ${stRegime ? `<div style="margin-bottom:14px"><div class="stall-leverage-label" style="color:var(--amber)">What this locks in</div><p class="stack-card-desc" style="margin-bottom:0">${stRegime}</p></div>` : ''}
@@ -1917,7 +1902,7 @@ async function init() {
     `;
 
     // Continue banner for Stage 1
-    document.getElementById('next-step-area').innerHTML = `
+    const _nsa = document.getElementById('next-step-area'); if (_nsa) _nsa.innerHTML = `
       <div class="continue-banner">
         <div class="continue-banner-text">
           <div class="continue-banner-label">You've named the pattern</div>
@@ -2006,7 +1991,7 @@ async function init() {
       </div>`;
 
     // Continue banner for Stage 2
-    document.getElementById('next-step-area').innerHTML = `
+    const _nsa = document.getElementById('next-step-area'); if (_nsa) _nsa.innerHTML = `
       <div class="continue-banner">
         <div class="continue-banner-text">
           <div class="continue-banner-label">You've found the leverage point</div>
@@ -2112,7 +2097,7 @@ async function init() {
     }
 
     // Next step for Stage 3: full diagnostic CTA
-    document.getElementById('next-step-area').innerHTML = `
+    const _nsa = document.getElementById('next-step-area'); if (_nsa) _nsa.innerHTML = `
       <div class="continue-banner">
         <div class="continue-banner-text">
           <div class="continue-banner-label">The next step</div>

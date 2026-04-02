@@ -132,6 +132,55 @@ const FALLBACK_STALLS = [
 ];
 let STALLS = FALLBACK_STALLS;
 
+/* ─── Stall plausibility rules ────────────────────────────────────── */
+/* Maps each stall to the stages and anchor types where it's            */
+/* structurally plausible. null = plausible in any context.             */
+/* Used to suppress implausible stacks and flag in ecosystem description */
+const STALL_PLAUSIBILITY = {
+  S1: { stages: ['established', 'mature'], anchors: null,
+        earlyNote: 'At early stage, you are proving the case for the first time — not re-proving it. If this feels true, your ecosystem may be more established than you think.' },
+  S2: { stages: null, anchors: null },
+  S3: { stages: ['established', 'mature'], anchors: null,
+        earlyNote: 'Tolerance is natural at early stage — not everything can be evaluated yet. This becomes structural only when programmes have been running long enough to underperform.' },
+  S4: { stages: ['established', 'mature'], anchors: ['university', 'research', 'corporate', 'public', 'hospital'],
+        earlyNote: 'Extraction requires something to extract. At early stage, value hasn\'t accumulated enough to flow outward structurally.',
+        noAnchorNote: 'Extraction usually requires an anchor institution. If value is leaving your ecosystem, consider who is acting as the de facto anchor — even if unnamed.' },
+  S5: { stages: ['established', 'mature'], anchors: null,
+        earlyNote: 'Intermediary infrastructure typically hasn\'t formed at early stage. If you already have intermediaries, your ecosystem may be more established than you think.' },
+  S6: { stages: ['established', 'mature'], anchors: ['university', 'research', 'corporate', 'public', 'hospital'],
+        earlyNote: 'Stabilising requires existing structures to preserve. Early-stage ecosystems haven\'t built the structures that this stall protects.',
+        noAnchorNote: 'Without an anchor institution, there\'s no incumbent to stabilise around. If you feel locked in, consider who is playing that structural role.' },
+  S7: { stages: null, anchors: null },
+  S8: { stages: ['early', 'established'], anchors: null,
+        matureNote: 'At maturity, ecosystems rarely scale activity — they optimise or stall differently. If you see this pattern, the ecosystem may not be as mature as it appears.' },
+  S9: { stages: null, anchors: null },
+};
+
+/* Check if a stall is plausible given stage and anchor */
+function isStallPlausible(stallId, stage, anchorType) {
+  const rule = STALL_PLAUSIBILITY[stallId];
+  if (!rule) return { plausible: true };
+  const stageFail = rule.stages && stage && !rule.stages.includes(stage);
+  const anchorFail = rule.anchors && anchorType && !rule.anchors.includes(anchorType);
+  if (!stageFail && !anchorFail) return { plausible: true };
+  const notes = [];
+  if (stageFail && stage === 'early' && rule.earlyNote) notes.push(rule.earlyNote);
+  if (stageFail && stage === 'mature' && rule.matureNote) notes.push(rule.matureNote);
+  if (anchorFail && anchorType === 'none' && rule.noAnchorNote) notes.push(rule.noAnchorNote);
+  if (notes.length === 0) notes.push('This stall is unusual for your ecosystem configuration.');
+  return { plausible: false, notes };
+}
+
+/* Check if a stack is plausible — all component stalls must be plausible */
+function isStackPlausible(stack, stage, anchorType) {
+  const triggers = stack.triggers || [];
+  for (const stallId of triggers) {
+    const check = isStallPlausible(stallId, stage, anchorType);
+    if (!check.plausible) return false;
+  }
+  return true;
+}
+
 /* ─── Stack detection rules + leverage hypotheses (fallback + API) ── */
 /* Canonical Stack Definitions v1.0 — source of truth from Stack Canon v1.0 */
 /* 30 canonical stacks: 20 pairs + 10 triples                                */
@@ -668,15 +717,30 @@ function buildEcosystemDescription(stalls, detectedStacks, qa) {
   const stage = STAGE_CONTEXT[qa.stage] || STAGE_CONTEXT.established;
   const anchor = ANCHOR_CONTEXT[qa.anchorType] || ANCHOR_CONTEXT.none;
 
-  // Inside perspective: stage context + anchor context + top stall experiences
-  const stallInsides = stalls.slice(0, 3).map(id => STALL_INSIDE[id]).filter(Boolean);
+  // Check stall plausibility against qualifiers
+  const plausibilityFlags = [];
+  stalls.forEach(id => {
+    const check = isStallPlausible(id, qa.stage, qa.anchorType);
+    if (!check.plausible) {
+      const stallName = (STALLS.find(s => s.id === id) || {}).name || id;
+      plausibilityFlags.push({ stallId: id, stallName, notes: check.notes });
+    }
+  });
+
+  // Filter stacks to only plausible ones
+  const plausibleStacks = detectedStacks.filter(s => isStackPlausible(s, qa.stage, qa.anchorType));
+  const suppressedStacks = detectedStacks.filter(s => !isStackPlausible(s, qa.stage, qa.anchorType));
+
+  // Inside perspective: stage context + anchor context + plausible stall experiences
+  const plausibleStalls = stalls.filter(id => isStallPlausible(id, qa.stage, qa.anchorType).plausible);
+  const stallInsides = plausibleStalls.slice(0, 3).map(id => STALL_INSIDE[id]).filter(Boolean);
   const insideParts = [stage.inside + '.'];
   if (qa.anchorType) insideParts.push(anchor.inside + '.');
   insideParts.push(...stallInsides.map(s => s + '.'));
   const inside = insideParts.join(' ');
 
-  // Outside perspective: stage framing + what external actors see from stalls
-  const stallOutsides = stalls.slice(0, 3).map(id => STALL_OUTSIDE[id]).filter(Boolean);
+  // Outside perspective: stage framing + what external actors see from plausible stalls
+  const stallOutsides = plausibleStalls.slice(0, 3).map(id => STALL_OUTSIDE[id]).filter(Boolean);
   const outsideParts = [stage.outside + '.'];
   if (stallOutsides.length > 0) {
     outsideParts.push('From outside, ' + stallOutsides.join('; ') + '.');
@@ -684,9 +748,9 @@ function buildEcosystemDescription(stalls, detectedStacks, qa) {
   if (qa.anchorType) outsideParts.push(anchor.outside + '.');
   const outside = outsideParts.join(' ');
 
-  // Absorbed signals — union from detected stacks
+  // Absorbed signals — from plausible stacks only
   const absorbedSet = new Set();
-  detectedStacks.forEach(s => {
+  plausibleStacks.forEach(s => {
     (s.absorbed || '').split(',').map(x => x.trim()).filter(Boolean).forEach(x => absorbedSet.add(x));
   });
   const absorbedList = [...absorbedSet];
@@ -697,7 +761,7 @@ function buildEcosystemDescription(stalls, detectedStacks, qa) {
   // Cost — what accumulates if nothing changes, tied to priority
   const cost = PRIORITY_COST[qa.priority] || 'Without intervention, these patterns remain self-reinforcing — each stall provides cover for the others.';
 
-  return { inside, outside, absorbed, cost };
+  return { inside, outside, absorbed, cost, plausibilityFlags, plausibleStacks, suppressedStacks };
 }
 
 /* ─── Journey context (state carried forward across stages) ────────── */
@@ -974,8 +1038,7 @@ Rewrite their text to be sharper and more specific to their context. Keep it 2-4
     setRefiningField(null);
   }, [inside, outside, stalls, stacks, qa]);
 
-  // Confirm — save to journey state, then trigger next phase
-  // Pass description directly to avoid stale closure in handleDescriptionConfirmed
+  // Confirm — save to journey state with plausible stacks, then trigger next phase
   const handleConfirm = useCallback(() => {
     const desc = {
       inside,
@@ -984,11 +1047,21 @@ Rewrite their text to be sharper and more specific to their context. Keep it 2-4
       cost: generated.cost,
       confirmed: true,
       edited: inside !== generated.inside || outside !== generated.outside,
+      plausibleStacks: generated.plausibleStacks,
+      suppressedStacks: generated.suppressedStacks,
+      plausibilityFlags: generated.plausibilityFlags,
     };
-    updateJourneyState({ ecosystemDescription: desc });
-    // onConfirm receives the description directly so it doesn't need to read stale state
+    // Update journey state: swap detectedStacks to only plausible ones
+    updateJourneyState({
+      ecosystemDescription: desc,
+      detectedStacks: generated.plausibleStacks,
+      stacks: generated.plausibleStacks.map(s => s.name),
+    });
     onConfirm(desc);
   }, [inside, outside, generated, updateJourneyState, onConfirm]);
+
+  const flags = generated.plausibilityFlags || [];
+  const suppressed = generated.suppressedStacks || [];
 
   return (
     <div style={ecoStyles.container}>
@@ -996,6 +1069,23 @@ Rewrite their text to be sharper and more specific to their context. Keep it 2-4
       <p style={ecoStyles.sub}>
         This is what we think your ecosystem feels like based on your stalls, stacks, and answers. Edit anything that doesn't ring true — or use AI to sharpen it. This shapes everything that follows.
       </p>
+
+      {/* Plausibility flags — stalls that don't match the qualifier context */}
+      {flags.length > 0 && (
+        <div style={{ padding: '14px 16px', background: 'rgba(245,217,122,0.08)', border: '1px solid rgba(245,217,122,0.25)', borderLeft: '3px solid #f5d97a', borderRadius: '0 4px 4px 0', marginBottom: '20px' }}>
+          <span style={{ ...ecoStyles.sectionLabel, color: '#c8a000' }}>Worth checking</span>
+          {flags.map((flag, i) => (
+            <p key={i} style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-dim)', lineHeight: 1.6, margin: i === 0 ? 0 : '8px 0 0' }}>
+              <strong style={{ color: 'var(--dj-chalk)' }}>{flag.stallName}</strong> — {flag.notes[0]}
+            </p>
+          ))}
+          {suppressed.length > 0 && (
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'var(--dj-chalk-muted)', lineHeight: 1.5, marginTop: '10px', fontStyle: 'italic' }}>
+              {suppressed.length} stack{suppressed.length > 1 ? 's' : ''} ({suppressed.map(s => s.name).join(', ')}) {suppressed.length > 1 ? 'have' : 'has'} been set aside — the reinforcing logic requires conditions your ecosystem doesn't have yet.
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Inside */}
       <div style={ecoStyles.section}>

@@ -3554,8 +3554,8 @@ function buildStepAnnotation(step, journeyState, config) {
     ? (protections.length === 1 ? protections[0] : protections.slice(0, -1).join(', ') + ' and ' + protections[protections.length - 1])
     : '';
   const stackNames = stacks.map(s => s.name);
-  const allStackBold = stackNames.map(n => `**${n}**`).join(', ');
-  const allStackPlain = stackNames.join(', ');
+  const allStackBold = stackNames.length <= 1 ? stackNames.map(n => `**${n}**`).join('') : stackNames.slice(0, -1).map(n => `**${n}**`).join(', ') + ' and **' + stackNames[stackNames.length - 1] + '**';
+  const allStackPlain = stackNames.length <= 1 ? stackNames.join('') : stackNames.slice(0, -1).join(', ') + ' and ' + stackNames[stackNames.length - 1];
 
   switch (step) {
     // Step 1: Sovereign Database
@@ -3627,7 +3627,7 @@ function buildStepAnnotation(step, journeyState, config) {
       if (has('S2') || has('S5')) stewardQuestions.push(`"Who is connecting to whom — and is it working?" — you see which connections happened through infrastructure and which still run through brokers. When a programme manager leaves, you see which connections go with them.`);
       if (has('S9')) stewardQuestions.push(`"Who is waiting for permission that could act now?" — you see which actors are blocked by dependency rather than capability. The gatekeeper pattern becomes visible before it becomes structural.`);
       if (has('S8')) stewardQuestions.push(`"Which programmes are producing starts but not outcomes?" — you see graduation rates alongside cohort sizes. Activity that looks like progress but isn't converting surfaces as a pattern.`);
-      stewardQuestions.push(`"Where would one intervention have the most effect right now?" — you get a leverage hypothesis ranked by confidence, derived from live stall detection against your ${stackNames || 'detected patterns'}. Not a consultant's recommendation from three months ago. A structural reading from current actor behaviour.`);
+      stewardQuestions.push(`"Where would one intervention have the most effect right now?" — you get a leverage hypothesis ranked by confidence, derived from live stall detection against your ${allStackPlain || 'detected patterns'}. Not a consultant's recommendation from three months ago. A structural reading from current actor behaviour.`);
 
       const stewardSection = {
         heading: 'What you see',
@@ -3635,7 +3635,7 @@ function buildStepAnnotation(step, journeyState, config) {
         body: `Today when your board asks what's working, someone compiles a report from programme managers' recollections, annual surveys, and whatever data was last collected. By the time it reaches the table, it describes an ecosystem that no longer exists in exactly that form.\n\nWith this configuration, you ask questions and get answers assembled from live signals — the same data your actors are already producing by pursuing their own interests. Here are the questions your diagnostic has unlocked:`,
         stewardQuestions,
         bullets: [
-          `Your ${stackNames || 'stall patterns'} ${stacks.length > 1 ? 'are' : 'is'} tracked continuously — not as a static finding from this diagnostic, but as a live reading that updates as actor behaviour changes`,
+          `Your ${allStackPlain || 'stall patterns'} ${stacks.length > 1 ? 'are' : 'is'} tracked continuously — not as a static finding from this diagnostic, but as a live reading that updates as actor behaviour changes`,
           `Board evidence is generated from the same data your actors are already producing — no additional reporting burden, no survey fatigue, no lag between reality and record`,
           `Intervention targeting is structural, not political — the system shows where one change would break the reinforcing logic, regardless of which organisation would prefer the status quo`,
         ],
@@ -3736,18 +3736,6 @@ function DigitalOSStage() {
         <MobileSchemaStep schemaStep={schemaStep} configName={config.configName} selectedStalls={journeyState.stalls} expanded={mobileExpanded} onToggle={() => setMobileExpanded(prev => !prev)} />
       </div>
 
-      {/* Step 0: CTA button below diagram */}
-      {schemaStep === 0 && (
-        <div style={{ padding: '16px 0', textAlign: 'center' }}>
-          <button style={styles.btnSignal} onClick={() => setSchemaStep(1)}>
-            Walk through your stack
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-              <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      )}
-
       {/* Annotation panel (steps 1-8) */}
       {annotation && (() => {
         const STEP_LAYER_KEY = { 1: 'sovereignDatabase', 2: 'governanceAccess', 3: 'integrationLayer', 4: 'automationLayer', 5: 'intelligenceSubstrate', 6: 'aiRuntime', 7: 'applicationLayer' };
@@ -3832,8 +3820,8 @@ function DigitalOSStage() {
               {annotation.stewardSection.stewardQuestions && (
                 <div style={{ margin: '16px 0' }}>
                   {annotation.stewardSection.stewardQuestions.map((q, i) => (
-                    <div key={i} style={{ padding: '12px 0', borderBottom: i < annotation.stewardSection.stewardQuestions.length - 1 ? '1px solid rgba(125,211,200,0.15)' : 'none' }}>
-                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: '#e8edf5' }}><BoldText text={q} /></p>
+                    <div key={i} style={{ padding: '12px 0', borderBottom: i < annotation.stewardSection.stewardQuestions.length - 1 ? '1px solid var(--dj-border)' : 'none' }}>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.65, color: 'var(--dj-chalk)' }}><BoldText text={q} /></p>
                     </div>
                   ))}
                 </div>
@@ -3841,7 +3829,7 @@ function DigitalOSStage() {
               <ul style={schema.stewardBullets}>
                 {annotation.stewardSection.bullets.map((b, i) => (
                   <li key={i} style={schema.stewardBullet}>
-                    <span style={{ color: '#c8f0d0', marginRight: '8px' }}>{'\u2022'}</span><BoldText text={b} />
+                    <span style={{ color: 'var(--steward)', marginRight: '8px' }}>{'\u2022'}</span><BoldText text={b} />
                   </li>
                 ))}
               </ul>
@@ -5202,8 +5190,8 @@ Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governa
           {mainContent}
         </main>
 
-        {/* ── Navigation bar (hidden on transition cards and ecosystem description which have their own nav) ── */}
-        {phase !== 1 && phase !== 3 && phase !== 4 && phase !== 6 && (
+        {/* ── Navigation bar (hidden on transition cards, ecosystem description, and digital OS which have their own nav) ── */}
+        {phase !== 1 && phase !== 3 && phase !== 4 && phase !== 6 && phase !== 7 && (
           <nav className="nav-bar-journey" style={styles.navBar}>
             <div style={styles.navLeft}>
               {!isFirst && (
@@ -6686,8 +6674,9 @@ const schema = {
   /* Steward section (final reveal) */
   stewardSection: {
     marginTop: '24px',
-    borderTop: '2px solid #0c9488',
-    background: '#1e2f45',
+    borderTop: '2px solid var(--steward)',
+    background: 'var(--dj-surface)',
+    border: '1px solid var(--dj-border)',
     borderRadius: '8px',
     padding: '24px',
   },
@@ -6695,7 +6684,7 @@ const schema = {
     fontFamily: 'var(--font-serif)',
     fontSize: '22px',
     fontWeight: 400,
-    color: '#e8edf5',
+    color: 'var(--dj-chalk)',
     marginBottom: '4px',
   },
   stewardSub: {
@@ -6703,29 +6692,29 @@ const schema = {
     fontSize: '9px',
     fontWeight: 600,
     letterSpacing: '0.12em',
-    color: '#7dd3c8',
+    color: 'var(--steward)',
     marginBottom: '16px',
   },
   stewardBody: {
     fontFamily: 'var(--font-sans)',
     fontSize: '14px',
     lineHeight: 1.7,
-    color: '#e8edf5',
+    color: 'var(--dj-chalk-dim)',
     marginBottom: '16px',
   },
   stewardBullets: {
     listStyle: 'none',
     padding: 0,
-    margin: 0,
+    margin: '16px 0 0',
     display: 'flex',
     flexDirection: 'column',
-    gap: '8px',
+    gap: '12px',
   },
   stewardBullet: {
     fontFamily: 'var(--font-sans)',
     fontSize: '13px',
-    lineHeight: 1.5,
-    color: '#e8edf5',
+    lineHeight: 1.6,
+    color: 'var(--dj-chalk-dim)',
     paddingLeft: '16px',
     position: 'relative',
   },

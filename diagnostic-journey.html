@@ -1055,10 +1055,12 @@ function EcosystemDescriptionStage({ onConfirm, onBack }) {
   const [inside, setInside] = useState(saved.inside || generated.inside);
   const [outside, setOutside] = useState(saved.outside || generated.outside);
   const [refiningField, setRefiningField] = useState(null); // 'inside' | 'outside' | null
+  const [refineError, setRefineError] = useState(null);
 
   // AI refinement
   const handleAIRefine = useCallback(async (field) => {
     setRefiningField(field);
+    setRefineError(null);
     const current = field === 'inside' ? inside : outside;
     const prompt = `You are a diagnostic analyst for ClusterOS. A user is self-diagnosing their innovation ecosystem. They have reviewed a description of what their ecosystem feels like ${field === 'inside' ? 'from inside (what actors experience day to day)' : 'from outside (what investors, partners, and talent see)'} and want it sharpened.
 
@@ -1073,18 +1075,36 @@ Rewrite their text to be sharper and more specific to their context. Keep it 2-4
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt }),
       });
-      if (res.ok) {
-        const data = await res.json();
-        let text = data.commentary || data.text || '';
-        if (!text && Array.isArray(data.content) && data.content[0]) text = data.content[0].text || '';
-        if (!text && typeof data === 'string') text = data;
-        text = String(text).replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
-        if (text) {
-          if (field === 'inside') setInside(text);
-          else setOutside(text);
-        }
+      if (!res.ok) {
+        console.warn('[AI Refine] HTTP error:', res.status);
+        setRefineError('AI service unavailable — edit the text directly instead.');
+        setRefiningField(null);
+        return;
       }
-    } catch (e) { console.warn('[AI Refine] Failed:', e.message); }
+      const data = await res.json();
+      console.log('[AI Refine] Response keys:', Object.keys(data));
+      let text = data.commentary || data.text || '';
+      if (!text && Array.isArray(data.content) && data.content[0]) text = data.content[0].text || '';
+      if (!text && typeof data === 'string') text = data;
+      // Try parsing as JSON in case the response is wrapped
+      if (!text) {
+        try {
+          const parsed = typeof data === 'object' ? data : JSON.parse(data);
+          text = parsed.commentary || parsed.text || parsed.message || parsed.output || '';
+        } catch (_) {}
+      }
+      text = String(text).replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
+      if (text) {
+        if (field === 'inside') setInside(text);
+        else setOutside(text);
+      } else {
+        console.warn('[AI Refine] No text extracted from response:', JSON.stringify(data).substring(0, 200));
+        setRefineError('AI returned an empty response — edit the text directly instead.');
+      }
+    } catch (e) {
+      console.warn('[AI Refine] Failed:', e.message);
+      setRefineError('Could not reach AI service — edit the text directly instead.');
+    }
     setRefiningField(null);
   }, [inside, outside, stalls, stacks, qa]);
 
@@ -1180,6 +1200,13 @@ Rewrite their text to be sharper and more specific to their context. Keep it 2-4
           </button>
         </div>
       </div>
+
+      {/* Error feedback */}
+      {refineError && (
+        <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: '#d4695a', margin: '0 0 16px', padding: '8px 12px', background: 'rgba(212,105,90,0.06)', border: '1px solid rgba(212,105,90,0.15)', borderRadius: '4px' }}>
+          {refineError}
+        </p>
+      )}
 
       {/* Structural analysis — absorbed signals + cost */}
       <div style={ecoStyles.structuralSection}>

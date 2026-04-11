@@ -534,132 +534,18 @@ const journey = {
 
 
   _buildReport() {
-    const matched = this._matchClusters(3);
-    const stack   = this.stackResult || {};
-    const stalls  = this.selectedStalls;
-
-    const STALL_CODES = {
-      'Coordinating':'S2','Narrating':'S7','Scaling':'S8',
-      'Stabilising':'S6','Mediating':'S5','Extracting':'S4',
-      'Forgiving':'S3','Re-proving':'S1','Waiting':'S9'
-    };
-    // Compute stall frequencies from clusters.json if loaded, otherwise fallback
-    const STALL_FREQ_FALLBACK = {
-      'Coordinating':39,'Narrating':7,'Scaling':8,
-      'Stabilising':68,'Mediating':38,'Extracting':37,
-      'Forgiving':1,'Re-proving':0,'Waiting':30
-    };
-    const STALL_FREQ = (() => {
-      try {
-        // clusters.json is loaded by diagnostic-journey.html into STACK_RULES[].comparatorTotal
-        // Compute from raw data if available via a global
-        if (window._CLUSTER_STALL_FREQ) return window._CLUSTER_STALL_FREQ;
-      } catch(e) {}
-      return STALL_FREQ_FALLBACK;
-    })();
-    const STALL_NAMES = {
-      'Coordinating':'Coordinating instead of deciding',
-      'Narrating':'Narrating instead of testing',
-      'Scaling':'Scaling activity instead of throughput',
-      'Stabilising':'Stabilising around incumbents',
-      'Mediating':'Mediating instead of coupling',
-      'Extracting':'Extracting without reinvesting',
-      'Forgiving':'Forgiving instead of redesigning',
-      'Re-proving':'Re-proving instead of narrowing',
-      'Waiting':'Waiting for permission'
-    };
-
-    // Full-diag adds per stack
-    const FULL_DIAG = {
-      'Coordinating+Mediating': [
-        'Verification of coordination structure depth — layers, tenure, decision authority',
-        'Intermediary volume analysis — brokered vs direct connections over time',
-        'Decision record analysis — which decisions required full alignment',
-        'Confidence tier for each stall (Tier 1 / 2 / 3)',
-        'Cross-cluster synthesis if the pattern spans multiple clusters',
-        'Leverage hypothesis tested against comparable ecosystem evidence'
-      ],
-      'Narrating+Scaling': [
-        'Document production analysis — strategy volume vs output evidence',
-        'Programme throughput analysis — what scaled vs what produced market outcomes',
-        'Funder incentive mapping — what the reporting structure rewards',
-        'Confidence tier for each stall (Tier 1 / 2 / 3)',
-        'Comparator ecosystem evidence — where Narrative × Activity has shifted and how',
-        'Leverage hypothesis with specific metric recommendations'
-      ],
-      'Coordinating+Stabilising': [
-        'Incumbent network mapping — who controls access to what',
-        'New entrant traction analysis — conversion rates inside vs outside incumbent orbit',
-        'Procurement flow analysis — where RFIs originate and who they reach',
-        'Confidence tier for each stall (Tier 1 / 2 / 3)',
-        'Comparator ecosystem evidence — how similar configurations have opened',
-        'Leverage hypothesis with specific direct-coupling recommendations'
-      ],
-      default: [
-        'Evidence collection across 50-170 structured items per cluster',
-        'Confidence tier rating for each stall (Tier 1: Robust / Tier 2: Adequate / Tier 3: Indicative)',
-        'Cross-actor signal analysis — what each actor type is generating',
-        'Comparator ecosystem evidence specific to your configuration',
-        'Verified leverage hypothesis with comparable ecosystem precedent',
-        'Full configuration document for ClusterOS substrate setup'
-      ]
-    };
-
-    const stackKey = stalls.slice().sort().join('+');
-    const fullDiagAdds = FULL_DIAG[stackKey] || FULL_DIAG.default;
-
-    // Build comparators from matched clusters
-    const pattern = stalls.slice(0,2).join('+');
-    const comparators = matched.slice(0,4).map(c => ({
-      region:  c.name,
-      loc:     [c.city, c.country].filter(Boolean).join(' · '),
-      sector:  c.sector || '',
-      id:      c.id || '',
-      stalls:  c.stalls || [],
-      pattern
-    }));
-
-    window.CLUSTEROS_REPORT = {
-      stage:     'behaviours',
-      ecosystem: document.getElementById('jf-eco-name')?.value?.trim() || 'Your Ecosystem',
-      sector:    '',
-      geography: '',
-      role:      document.getElementById('jf-eco-role')?.value?.trim() || '',
-      stalls:    stalls.map(s => {
-        const sci = window.STALL_SCIENCE_DATA[s] || {};
-        return {
-          id:         STALL_CODES[s] || s,
-          name:       STALL_NAMES[s] || s,
-          freq:       STALL_FREQ[s]  || 0,
-          definition: sci.definition || '',
-          leverage:   sci.leverage   || '',
-          signal:     sci.signal     || '',
-          displaced:  sci.y          || '',
-          behaviour:  sci.x          || '',
-          cost:       sci.cost       || '',
-        };
-      }),
-      stack: {
-        name:        stack.name        || stalls.join(' + '),
-        stalls:      stalls,
-        description: stack.description || '',
-        leverage:    stack.leverage    || ''
-      },
-      detectedStacks: (this.stackResult ? [this.stackResult] : []).map(s => ({
-        id:      s.id || '',
-        name:    s.name || '',
-        stalls:  s.triggers || s.stalls || [],
-        logic:   s.logic || s.reinforcing_logic || '',
-        regime:  s.regime || '',
-        entry:   s.entry || s.leverage_entry || '',
-        effect:  s.effect || '',
-        leverage: s.entry || s.leverage || '',
-      })),
-      comparators,
-      fullDiagAdds
-    };
-
-    return window.CLUSTEROS_REPORT;
+    const report = window.ReportWriter.buildReport({
+      stalls:          this.selectedStalls,
+      stack:           this.stackResult || {},
+      detectedStacks:  this.stackResult ? [this.stackResult] : [],
+      ecosystem:       document.getElementById('jf-eco-name')?.value?.trim() || 'Your Ecosystem',
+      role:            document.getElementById('jf-eco-role')?.value?.trim() || '',
+      stallScience:    window.STALL_SCIENCE_DATA || {},
+      stallFreq:       window._CLUSTER_STALL_FREQ || window.ReportWriter.STALL_FREQ_FALLBACK,
+      matchedClusters: this._matchClusters(3)
+    });
+    window.CLUSTEROS_REPORT = report;
+    return report;
   },
 
   _renderDiagCTA() {
@@ -706,10 +592,7 @@ const journey = {
   _openReport() {
     _track('report_opened', { stack: this.stackResult?.name || this.selectedStalls.join('+'), stall_count: this.selectedStalls.length });
     const report = this._buildReport();
-    try { sessionStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report)); } catch(e) {}
-    try { localStorage.setItem('CLUSTEROS_REPORT', JSON.stringify(report)); } catch(e) {}
-    const w = window.open('/diagnostic-report.html', '_blank');
-    if (w) w.CLUSTEROS_REPORT = report;
+    window.ReportWriter.openReport(report, '/diagnostic-report.html');
   },
 
   // ══ FORK 2: INFRASTRUCTURE ════════════════════════════

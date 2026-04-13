@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClusterOS — Analyst Diagnostic Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a1a1a; --ink-dim:#4a4540; --ink-muted:#8c8780;
+  --page:#f7f4ef; --surface:#f0ece4; --border:#ddd8cf; --border-2:#c8c2b7;
+  --green:#2a7a4f; --green-dim:#1d5c3a; --signal:#c8f0d0;
+  --amber:#d97706; --teal:#0c9488;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Geist',system-ui,sans-serif;
+  --mono:'Geist Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100vh;padding:40px 20px;-webkit-font-smoothing:antialiased}
+.screen-wrapper{max-width:860px;margin:0 auto}
+.screen-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.screen-logo{font-family:var(--serif);font-size:16px;color:var(--ink);text-decoration:none}
+.screen-logo span{font-family:var(--mono);font-size:12px;color:var(--green);font-weight:700}
+.btn-print{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:var(--green);color:#fff;border:none;padding:10px 20px;border-radius:3px;cursor:pointer;display:flex;align-items:center;gap:8px}
+.btn-print:hover{background:var(--green-dim)}
+
+/* Document */
+.document{background:#fff;box-shadow:0 4px 40px rgba(0,0,0,0.12);padding:64px 72px}
+
+/* Header */
+.doc-header{display:grid;grid-template-columns:1fr auto;align-items:start;gap:32px;padding-bottom:32px;border-bottom:2px solid var(--ink);margin-bottom:40px}
+.doc-logo{font-family:var(--serif);font-size:22px;color:var(--ink);margin-bottom:4px}
+.doc-logo span{font-family:var(--mono);font-size:16px;color:var(--green);font-weight:700}
+.doc-type{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-muted);margin-top:6px}
+.doc-meta{text-align:right}
+.doc-meta-date{font-family:var(--mono);font-size:10px;color:var(--ink-muted);margin-bottom:4px}
+.doc-meta-ref{font-family:var(--mono);font-size:9px;color:var(--border-2)}
+
+/* Ecosystem */
+.doc-ecosystem{margin-bottom:40px}
+.doc-ecosystem-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.doc-ecosystem-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.doc-ecosystem-name{font-family:var(--serif);font-size:clamp(26px,4vw,36px);line-height:1.1;letter-spacing:-0.02em;color:var(--ink);margin-bottom:10px}
+.doc-ecosystem-tags{display:flex;gap:8px;flex-wrap:wrap}
+.doc-tag{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border-2);border-radius:2px;color:var(--ink-muted)}
+
+/* Caveat */
+.doc-caveat{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);padding:16px 20px;margin-bottom:40px;display:flex;gap:14px}
+.doc-caveat-icon{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--amber);flex-shrink:0;padding-top:2px}
+.doc-caveat-text{font-size:12px;color:var(--ink-dim);line-height:1.65;font-weight:300}
+.doc-caveat-text strong{color:var(--ink);font-weight:500}
+
+/* Section */
+.doc-section{margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--border)}
+.doc-section:last-of-type{border-bottom:none}
+.doc-section-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.doc-section-num{background:var(--green);color:#fff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
+.doc-section-heading{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:400;margin-bottom:14px;line-height:1.2}
+.doc-section-heading em{font-style:italic;color:var(--green)}
+.doc-body{font-size:13px;color:var(--ink-dim);line-height:1.72;margin-bottom:20px;font-weight:300}
+
+/* Stalls */
+.stall-list{display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+.stall-item{padding:16px 18px;border:1px solid var(--border);border-radius:3px;background:var(--surface)}
+.stall-item.conf-high-border{border-left:4px solid var(--green)}
+.stall-item.conf-medium-border{border-left:4px solid var(--amber)}
+.stall-item.conf-low-border{border:1px dashed var(--border-2);opacity:0.85}
+.stall-item-header{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.stall-item-id{font-family:var(--mono);font-size:9px;font-weight:700;color:var(--green);letter-spacing:0.1em;flex-shrink:0}
+.stall-item-name{font-size:14px;color:var(--ink);font-weight:500;line-height:1.25;flex:1}
+.stall-item-def{font-size:12px;color:var(--ink-dim);line-height:1.65;font-weight:300;margin-bottom:10px}
+.stall-leverage-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:3px}
+.stall-item-leverage{font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300;padding-left:10px;border-left:2px solid var(--green)}
+
+/* Stack */
+.stack-card{border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.stack-card-head{background:var(--green-dim);padding:16px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.stack-card-name{font-family:var(--serif);font-size:18px;color:#fff;font-weight:400}
+.stack-card-pills{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.stack-pill{font-family:var(--mono);font-size:9px;font-weight:700;padding:3px 8px;border-radius:2px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.9)}
+.stack-card-body{padding:18px 20px;background:var(--surface)}
+.stack-card-desc{font-size:13px;color:var(--ink-dim);line-height:1.72;font-weight:300;margin-bottom:14px}
+.stack-leverage-dir{border-left:2px solid var(--green);padding-left:12px}
+.stack-leverage-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:5px}
+.stack-leverage-text{font-size:13px;color:var(--ink);line-height:1.65;font-weight:300}
+
+/* Comparators */
+.comparator-list{display:flex;flex-direction:column;gap:10px}
+.comparator-card{border:1px solid var(--border);border-radius:3px;overflow:hidden;background:var(--surface)}
+.comp-card-main{padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}
+.comp-card-name{font-size:13px;color:var(--ink);font-weight:500;margin-bottom:3px;line-height:1.25}
+.comp-card-loc{font-family:var(--mono);font-size:9px;color:var(--ink-muted);letter-spacing:0.04em;margin-bottom:5px}
+.comp-card-badges{display:flex;gap:6px;flex-wrap:wrap}
+.comp-sector-badge{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);background:rgba(12,148,136,0.08);border:1px solid rgba(12,148,136,0.2);padding:2px 7px;border-radius:2px}
+.comp-pattern-badge{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);background:var(--surface);border:1px solid var(--border);padding:2px 7px;border-radius:2px}
+.comp-card-link{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--green);text-decoration:none;white-space:nowrap;flex-shrink:0;padding-top:2px}
+.comp-card-link:hover{color:var(--green-dim)}
+.comp-shifted{padding:10px 16px;border-top:1px solid var(--border);background:#fff;display:flex;gap:10px;align-items:flex-start}
+.comp-shifted-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;flex-shrink:0;padding-top:2px}
+.comp-shifted-text{font-size:11px;color:var(--ink-dim);line-height:1.55;font-weight:300}
+
+/* Leverage block */
+.leverage-block{padding:22px 24px;border:1px solid rgba(42,122,79,0.3);border-left:3px solid var(--green);background:rgba(42,122,79,0.04);border-radius:0 3px 3px 0}
+.leverage-hypothesis{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--ink);line-height:1.55;margin-bottom:12px}
+.leverage-note{font-size:12px;color:var(--ink-muted);line-height:1.6;font-weight:300}
+
+/* Jump navigation */
+.doc-jumpnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
+.doc-jumpnav a{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);border-radius:2px;color:var(--ink-muted);text-decoration:none;transition:all 0.15s}
+.doc-jumpnav a:hover{color:var(--green);border-color:var(--green)}
+
+/* Appendix */
+.appendix{margin-top:48px;padding-top:40px;border-top:2px solid var(--border)}
+.appendix-title{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:24px}
+.appendix-heading{font-family:var(--serif);font-size:20px;color:var(--ink);font-weight:400;margin-bottom:16px;line-height:1.2}
+.appendix-heading em{font-style:italic;color:var(--green)}
+.appendix-intro{font-size:13px;color:var(--ink-dim);line-height:1.7;margin-bottom:24px;font-weight:300}
+
+/* Footer */
+.doc-footer{margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
+.doc-footer-main{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.doc-footer-left{font-family:var(--mono);font-size:9px;color:var(--ink-muted);line-height:1.7}
+.doc-footer-right{font-family:var(--mono);font-size:9px;color:var(--border-2);text-align:right}
+.doc-footer-legal{font-size:10px;color:var(--ink-muted);line-height:1.6;padding-top:12px;border-top:1px solid var(--border)}
+
+/* Loading & error */
+.report-loading,.report-error{position:fixed;inset:0;z-index:200;background:var(--page);display:flex;align-items:center;justify-content:center}
+.report-loading-inner,.report-error-inner{text-align:center;max-width:400px;padding:40px}
+.report-loading-logo{font-family:var(--serif);font-size:22px;color:var(--ink);margin-bottom:16px}
+.report-loading-logo span{font-family:var(--mono);font-size:16px;color:var(--green);font-weight:700}
+.report-loading-text{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+.report-error-heading{font-family:var(--serif);font-size:24px;color:var(--ink);margin-bottom:12px}
+.report-error-text{font-size:13px;color:var(--ink-dim);line-height:1.65;font-weight:300;margin-bottom:24px}
+.report-error-cta{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:var(--green);color:#fff;padding:12px 24px;border-radius:3px;text-decoration:none;display:inline-block}
+.report-error-cta:hover{background:var(--green-dim)}
+
+/* ── ANALYST-SPECIFIC CSS ── */
+
+/* Confidence badges */
+.conf-badge{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;display:inline-block}
+.conf-high{color:var(--green);background:rgba(42,122,79,0.08);border:1px solid rgba(42,122,79,0.25)}
+.conf-medium{color:var(--amber);background:rgba(217,119,6,0.08);border:1px solid rgba(217,119,6,0.25)}
+.conf-low{color:var(--ink-muted);background:var(--surface);border:1px solid var(--border)}
+
+/* Testability badges — same pattern */
+.test-badge{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;display:inline-block}
+.test-high{color:var(--green);background:rgba(42,122,79,0.08);border:1px solid rgba(42,122,79,0.25)}
+.test-medium{color:var(--amber);background:rgba(217,119,6,0.08);border:1px solid rgba(217,119,6,0.25)}
+.test-low{color:var(--ink-muted);background:var(--surface);border:1px solid var(--border)}
+
+/* Evidence tier badge */
+.tier-badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.08em;padding:3px 10px;border-radius:2px;display:inline-block;color:var(--green);background:rgba(42,122,79,0.06);border:1px solid rgba(42,122,79,0.2)}
+
+/* Domain bar chart */
+.domain-bars{display:flex;flex-direction:column;gap:8px;margin:16px 0}
+.domain-bar-row{display:flex;align-items:center;gap:10px}
+.domain-bar-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-muted);width:100px;text-align:right;flex-shrink:0}
+.domain-bar-track{flex:1;height:20px;background:var(--surface);border:1px solid var(--border);border-radius:2px;overflow:hidden;position:relative}
+.domain-bar-fill{height:100%;background:var(--green);border-radius:1px;transition:width 0.4s ease}
+.domain-bar-count{font-family:var(--mono);font-size:9px;font-weight:700;color:var(--ink-dim);width:36px;flex-shrink:0}
+
+/* Stall evidence grid (X-side / Y-side) */
+.stall-evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+.stall-evidence-col{padding:12px 14px;background:#fff;border:1px solid var(--border);border-radius:3px}
+.stall-evidence-col-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px}
+.stall-evidence-col-label.x-side{color:var(--green)}
+.stall-evidence-col-label.y-side{color:var(--teal)}
+.stall-evidence-col-text{font-size:12px;color:var(--ink-dim);line-height:1.65;font-weight:300}
+
+/* Leverage card (analyst version) */
+.leverage-card{padding:22px 24px;border:1px solid rgba(42,122,79,0.3);border-left:3px solid var(--green);background:rgba(42,122,79,0.04);border-radius:0 3px 3px 0;margin-bottom:14px}
+.leverage-card-header{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.leverage-card-id{font-family:var(--mono);font-size:9px;font-weight:700;color:var(--green);letter-spacing:0.1em}
+.leverage-card-type{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted)}
+.leverage-card-stack{font-family:var(--mono);font-size:8px;color:var(--teal);font-weight:700;letter-spacing:0.06em}
+.leverage-card-focus{font-size:13px;color:var(--ink-dim);line-height:1.65;font-weight:300;margin-bottom:12px}
+.leverage-card-hypothesis{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:12px;padding:12px 16px;background:rgba(42,122,79,0.03);border-radius:3px}
+.leverage-card-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.leverage-card-notes{font-size:12px;color:var(--ink-muted);line-height:1.6;font-weight:300}
+
+/* Interpretive boundary note */
+.interpretive-note{margin-top:12px;padding:10px 14px;background:rgba(217,119,6,0.04);border:1px solid rgba(217,119,6,0.15);border-radius:3px;font-size:11px;color:var(--ink-dim);line-height:1.6;font-weight:300;font-style:italic}
+.interpretive-note strong{color:var(--amber);font-weight:500;font-style:normal}
+
+/* Epistemic items */
+.epistemic-list{display:flex;flex-direction:column;gap:10px}
+.epistemic-item{padding:14px 16px;border-left:3px solid var(--amber);background:rgba(217,119,6,0.03);border:1px solid rgba(217,119,6,0.12);border-left:3px solid var(--amber);border-radius:0 3px 3px 0}
+.epistemic-item-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:4px}
+.epistemic-item-text{font-size:12px;color:var(--ink-dim);line-height:1.65;font-weight:300}
+
+/* Stats box (exec summary) */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:16px 0}
+.stat-card{padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;text-align:center}
+.stat-card-value{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--green);margin-bottom:2px}
+.stat-card-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted)}
+
+/* Next steps CTA */
+.next-step{background:var(--green-dim);padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:24px;border-radius:3px}
+.next-step-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px}
+.next-step-heading{font-family:var(--serif);font-size:20px;color:#fff;line-height:1.2}
+.next-step-heading em{font-style:italic;color:var(--signal)}
+
+/* Next steps numbered list */
+.next-steps-list{display:flex;flex-direction:column;gap:12px}
+.next-step-item{display:flex;gap:14px;align-items:flex-start}
+.next-step-num{width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-family:var(--mono);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.next-step-text{font-size:13px;color:var(--ink-dim);line-height:1.65;font-weight:300}
+.next-step-text strong{color:var(--ink);font-weight:500}
+
+/* Pattern table (Appendix B) */
+.pattern-table{width:100%;border-collapse:collapse;font-size:11px}
+.pattern-table th{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);background:var(--surface)}
+.pattern-table td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--ink-dim);font-weight:300;line-height:1.5;vertical-align:top}
+.pattern-table tr:hover td{background:rgba(42,122,79,0.02)}
+
+/* Domain summary table (Appendix A) */
+.domain-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:20px}
+.domain-table th{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);background:var(--surface)}
+.domain-table td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--ink-dim);font-weight:300}
+
+/* Match type badge (comparators) */
+.match-badge{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:2px 7px;border-radius:2px}
+.match-strong{color:var(--green);background:rgba(42,122,79,0.08);border:1px solid rgba(42,122,79,0.2)}
+.match-moderate{color:var(--amber);background:rgba(217,119,6,0.08);border:1px solid rgba(217,119,6,0.2)}
+.match-weak{color:var(--ink-muted);background:var(--surface);border:1px solid var(--border)}
+
+/* ── PRINT ── */
+@media print {
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+  @page{margin:14mm 12mm 16mm 12mm;size:A4}
+  body{background:#fff;padding:0;font-size:11px}
+  .screen-header{display:none}
+  .screen-wrapper{max-width:none;padding:0;margin:0}
+  .doc-jumpnav{display:none!important}
+  .document{box-shadow:none;padding:0;max-width:none}
+  .doc-section-label{break-after:avoid!important;page-break-after:avoid!important}
+  .doc-section-heading{break-after:avoid!important;page-break-after:avoid!important}
+  .doc-body{break-after:avoid!important;page-break-after:avoid!important}
+  .stall-item,.stack-card,.comparator-card,.leverage-card,.leverage-block,.epistemic-item,.doc-caveat,.stat-card,.interpretive-note{break-inside:avoid!important;page-break-inside:avoid!important}
+  .doc-section{break-inside:auto;page-break-inside:auto}
+  .doc-section-heading{orphans:3;widows:3}
+  .doc-body{orphans:3;widows:3}
+  #section-comparators{break-before:page!important;page-break-before:always!important}
+  .appendix{break-before:page!important;page-break-before:always!important;margin-top:0;padding-top:32px;border-top:2px solid var(--border)}
+  .appendix-heading{break-after:avoid!important;page-break-after:avoid!important}
+  .stall-item{background:#f7f4ef!important;border-color:#ddd8cf!important}
+  .comparator-card{background:#f7f4ef!important}
+  .stack-card-head{-webkit-print-color-adjust:exact!important}
+  .stack-card-name{color:#fff!important}
+  .stack-pill{background:rgba(255,255,255,0.15)!important;border-color:rgba(255,255,255,0.25)!important;color:#fff!important}
+  .stack-card-body{background:#f7f4ef!important}
+  .leverage-card{background:rgba(42,122,79,0.05)!important;border-left:3px solid var(--green)!important}
+  .doc-caveat{background:#f7f4ef!important;border-left:3px solid var(--amber)!important}
+  .doc-section-num{background:var(--green)!important;color:#fff!important}
+  .doc-ecosystem-label::after{background:var(--border)!important}
+  .doc-header{border-bottom:2px solid var(--ink)!important}
+  .appendix{border-top:2px solid var(--border)!important}
+  .doc-ecosystem-name{font-size:28px!important}
+  .doc-section-heading{font-size:18px!important}
+  .doc-body{font-size:11px!important;line-height:1.65!important}
+  .stall-item-def{font-size:10px!important}
+  .leverage-hypothesis,.leverage-card-hypothesis{font-size:15px!important}
+  .doc-footer-legal{font-size:8px!important}
+  .doc-header{padding-bottom:20px;margin-bottom:20px}
+  .doc-ecosystem{margin-bottom:16px}
+  .doc-caveat{margin-bottom:16px;padding:12px 16px}
+  .doc-section{margin-bottom:20px;padding-bottom:20px}
+  .stall-list{gap:6px}
+  .stall-item{padding:12px 14px}
+  .comparator-list{gap:6px}
+  .doc-footer{margin-top:20px;padding-top:12px}
+  .next-step{display:none!important}
+}
+
+/* ── MOBILE ── */
+@media(max-width:680px){
+  .document{padding:32px 24px}
+  .doc-header{grid-template-columns:1fr}
+  .doc-meta{text-align:left}
+  .stall-evidence-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .next-step{flex-direction:column;align-items:flex-start}
+  .comp-card-main{grid-template-columns:1fr;gap:8px}
+  .comp-card-link{justify-self:start}
+  .comp-shifted{flex-direction:column;gap:4px}
+  .stack-card-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .stack-card-pills{margin-left:0}
+  .doc-footer-main{flex-direction:column;gap:12px}
+  .doc-footer-right{text-align:left}
+  .doc-caveat{flex-direction:column;gap:8px}
+  .domain-bar-label{width:70px;font-size:7px}
+  .leverage-card-meta{flex-direction:column;gap:6px}
+}
+
+</style>
+<!-- Mixpanel tracking -->
+<script type="text/javascript">
+  (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+  for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===
+  e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=e.getElementsByTagName("script")[0];e.parentNode.insertBefore(k,e)}})(document,window.mixpanel||[])
+  mixpanel.init('a5cac1b920750b79ab02f9cbf02c8f89', {
+    autocapture: true,
+    record_sessions_percent: 100,
+    api_host: 'https://api-eu.mixpanel.com',
+  })
+</script>
+</head>
+<body>
+
+<!-- Loading state -->
+<div id="report-loading" class="report-loading" style="display:none">
+  <div class="report-loading-inner">
+    <div class="report-loading-logo">Cluster<span>OS</span></div>
+    <div class="report-loading-text">Loading analyst report...</div>
+  </div>
+</div>
+
+<!-- Error state -->
+<div id="report-error" class="report-error" style="display:none">
+  <div class="report-error-inner">
+    <div class="report-loading-logo">Cluster<span>OS</span></div>
+    <div class="report-error-heading">Report not found</div>
+    <p class="report-error-text" id="report-error-msg"></p>
+    <a href="/" class="report-error-cta">Return to ClusterOS</a>
+  </div>
+</div>
+
+<div class="screen-wrapper" id="report-content" style="display:none">
+  <div class="screen-header">
+    <a href="/" class="screen-logo">Cluster<span>OS</span></a>
+    <button class="btn-print" onclick="window.print()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h12v6H6V2zm0 14H4a2 2 0 01-2-2V9a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2v4H6v-4zm2 2v-2h8v2H8zm-2-7a1 1 0 100-2 1 1 0 000 2z"/></svg>
+      Print / Save PDF
+    </button>
+  </div>
+
+  <div class="document">
+    <div id="doc-header"></div>
+    <div id="doc-ecosystem"></div>
+    <div id="doc-jumpnav" class="doc-jumpnav"></div>
+    <div id="doc-caveat"></div>
+    <div id="section-exec-summary"></div>
+    <div id="section-evidence"></div>
+    <div id="section-stalls"></div>
+    <div id="section-stacks"></div>
+    <div id="section-leverage"></div>
+    <div id="section-comparators"></div>
+    <div id="section-epistemic"></div>
+    <div id="section-next-steps"></div>
+    <div class="appendix" id="appendix">
+      <div class="appendix-title">Appendices</div>
+      <div id="appendix-a"></div>
+      <div id="appendix-b"></div>
+      <div id="appendix-c"></div>
+      <div id="appendix-d"></div>
+      <div id="appendix-e"></div>
+    </div>
+    <div id="doc-footer"></div>
+  </div>
+</div>
+
+<script>
+// ── HELPERS ──
+
+function confClass(level) {
+  if (!level) return 'conf-low';
+  const l = level.toLowerCase();
+  if (l === 'high') return 'conf-high';
+  if (l === 'medium') return 'conf-medium';
+  return 'conf-low';
+}
+
+function confBadge(level) {
+  if (!level) return '';
+  return '<span class="conf-badge ' + confClass(level) + '">' + level.toUpperCase() + '</span>';
+}
+
+function testBadge(level) {
+  if (!level) return '';
+  const cls = level.toLowerCase() === 'high' ? 'test-high' : level.toLowerCase() === 'medium' ? 'test-medium' : 'test-low';
+  return '<span class="test-badge ' + cls + '">' + level.toUpperCase() + '</span>';
+}
+
+function matchBadge(type) {
+  if (!type) return '';
+  const l = type.toLowerCase();
+  const cls = l === 'strong' ? 'match-strong' : l === 'moderate' ? 'match-moderate' : 'match-weak';
+  return '<span class="match-badge ' + cls + '">' + type.toUpperCase() + '</span>';
+}
+
+function esc(str) {
+  if (!str) return '';
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+function truncate(str, len) {
+  if (!str) return '';
+  return str.length > len ? str.substring(0, len) + '...' : str;
+}
+
+// ── DATA LOADING ──
+
+async function loadReport() {
+  const loadingEl = document.getElementById('report-loading');
+  const errorEl = document.getElementById('report-error');
+  const contentEl = document.getElementById('report-content');
+
+  // 1. Check for embedded data
+  if (window.ANALYST_REPORT_DATA) {
+    renderReport(window.ANALYST_REPORT_DATA);
+    contentEl.style.display = '';
+    return;
+  }
+
+  // 2. Check URL param
+  const params = new URLSearchParams(window.location.search);
+  const runId = params.get('run_id');
+
+  if (!runId) {
+    // No data source — use sample data for development preview
+    if (typeof SAMPLE_DATA !== 'undefined') {
+      renderReport(SAMPLE_DATA);
+      contentEl.style.display = '';
+      return;
+    }
+    errorEl.style.display = '';
+    document.getElementById('report-error-msg').textContent = 'No report data provided. Pass ?run_id= or embed window.ANALYST_REPORT_DATA.';
+    return;
+  }
+
+  // 3. Fetch from API
+  loadingEl.style.display = '';
+  try {
+    const resp = await fetch('/api/v1/analyst-report/' + encodeURIComponent(runId));
+    if (!resp.ok) throw new Error('Report not found (HTTP ' + resp.status + ')');
+    const data = await resp.json();
+    loadingEl.style.display = 'none';
+    renderReport(data);
+    contentEl.style.display = '';
+  } catch (err) {
+    loadingEl.style.display = 'none';
+    errorEl.style.display = '';
+    document.getElementById('report-error-msg').textContent = err.message;
+  }
+}
+
+// ── RENDER ORCHESTRATOR ──
+
+function renderReport(data) {
+  renderDocHeader(data);
+  renderEcosystem(data);
+  renderJumpNav(data);
+  renderCaveat(data);
+  renderExecSummary(data);
+  renderEvidenceBase(data);
+  renderStalls(data);
+  renderStacks(data);
+  renderLeverage(data);
+  renderComparators(data);
+  renderEpistemic(data);
+  renderNextSteps(data);
+  renderAppendixA(data);
+  renderAppendixB(data);
+  renderAppendixC(data);
+  renderAppendixD(data);
+  renderAppendixE(data);
+  renderFooter(data);
+
+  // Mixpanel
+  if (typeof mixpanel !== 'undefined') {
+    mixpanel.track('Analyst Report Viewed', {
+      run_id: data.run_id,
+      cluster_name: data.cluster_name,
+      stall_count: (data.stalls || []).length,
+      stack_count: (data.stacks || []).length,
+      leverage_count: (data.leverage || []).length,
+      evidence_total: data.evidence ? data.evidence.total_items : 0
+    });
+  }
+}
+
+// ── SECTION RENDERERS ──
+
+function renderDocHeader(data) {
+  document.getElementById('doc-header').innerHTML =
+    '<div class="doc-header">' +
+      '<div>' +
+        '<div class="doc-logo">Cluster<span>OS</span></div>' +
+        '<div class="doc-type">Analyst Diagnostic Report</div>' +
+      '</div>' +
+      '<div class="doc-meta">' +
+        '<div class="doc-meta-date">' + esc(data.generated_at || '') + '</div>' +
+        '<div class="doc-meta-ref">REF: ' + esc(data.run_id || '') + '</div>' +
+      '</div>' +
+    '</div>';
+}
+
+function renderEcosystem(data) {
+  var tags = '';
+  if (data.geography) tags += '<span class="doc-tag">' + esc(data.geography) + '</span>';
+  if (data.sector) tags += '<span class="doc-tag">' + esc(data.sector) + '</span>';
+  if (data.lifecycle_stage) tags += '<span class="doc-tag">' + esc(data.lifecycle_stage) + '</span>';
+  if (data.anchor_type) tags += '<span class="doc-tag">' + esc(data.anchor_type) + ' anchor</span>';
+
+  document.getElementById('doc-ecosystem').innerHTML =
+    '<div class="doc-ecosystem">' +
+      '<div class="doc-ecosystem-label">Ecosystem</div>' +
+      '<div class="doc-ecosystem-name">' + esc(data.cluster_name || 'Untitled Cluster') + '</div>' +
+      '<div class="doc-ecosystem-tags">' + tags + '</div>' +
+    '</div>';
+}
+
+function renderCaveat(data) {
+  document.getElementById('doc-caveat').innerHTML =
+    '<div class="doc-caveat">' +
+      '<div class="doc-caveat-icon">NOTE</div>' +
+      '<div class="doc-caveat-text">' +
+        '<strong>This is an evidence-based analyst report.</strong> It was generated by the ClusterOS v3 pipeline from ' +
+        (data.evidence ? data.evidence.total_items : '—') + ' evidence items spanning ' +
+        (data.evidence ? data.evidence.time_span : '—') + '. Pattern detection is AI-assisted and confidence-tiered. ' +
+        'All findings are hypotheses grounded in evidence, not prescriptions. Confidence levels indicate the strength of supporting evidence, not certainty.' +
+      '</div>' +
+    '</div>';
+}
+
+function renderExecSummary(data) {
+  var ev = data.evidence || {};
+  var stalls = data.stalls || [];
+  var stacks = data.stacks || [];
+  var levs = data.leverage || [];
+
+  var highConfStalls = stalls.filter(function(s) { return s.confidence && s.confidence.toLowerCase() !== 'low'; }).length;
+  var lowConfStalls = stalls.length - highConfStalls;
+
+  var topLev = levs.length > 0 ? truncate(levs[0].hypothesis, 120) : 'None generated';
+
+  var html =
+    '<div class="doc-section" id="sec-exec-summary">' +
+      '<div class="doc-section-label"><span class="doc-section-num">★</span>Executive summary</div>' +
+      '<div class="doc-section-heading">Your ecosystem <em>at a glance</em></div>' +
+      '<div class="stats-grid">' +
+        '<div class="stat-card"><div class="stat-card-value">' + (ev.total_items || 0) + '</div><div class="stat-card-label">Evidence items</div></div>' +
+        '<div class="stat-card"><div class="stat-card-value">' + esc(ev.tier || '—') + '</div><div class="stat-card-label">Evidence tier</div></div>' +
+        '<div class="stat-card"><div class="stat-card-value">' + ((data.patterns || {}).total || 0) + '</div><div class="stat-card-label">Patterns</div></div>' +
+        '<div class="stat-card"><div class="stat-card-value">' + highConfStalls + '/' + lowConfStalls + '</div><div class="stat-card-label">Stalls (med+ / low)</div></div>' +
+        '<div class="stat-card"><div class="stat-card-value">' + stacks.length + '</div><div class="stat-card-label">Stacks</div></div>' +
+        '<div class="stat-card"><div class="stat-card-value">' + levs.length + '</div><div class="stat-card-label">Leverage points</div></div>' +
+      '</div>' +
+      '<p class="doc-body" style="margin-top:16px"><strong style="color:var(--ink)">Top leverage hypothesis:</strong> <em>' + esc(topLev) + '</em></p>' +
+    '</div>';
+
+  document.getElementById('section-exec-summary').innerHTML = html;
+}
+
+function renderEvidenceBase(data) {
+  var ev = data.evidence || {};
+  var domains = ev.domains || {};
+  var total = ev.total_items || 1;
+
+  // Sort domains by count descending
+  var entries = Object.entries(domains).sort(function(a, b) { return b[1] - a[1]; });
+  var maxCount = entries.length > 0 ? entries[0][1] : 1;
+
+  var barsHtml = '';
+  entries.forEach(function(e) {
+    var pct = Math.round((e[1] / maxCount) * 100);
+    barsHtml +=
+      '<div class="domain-bar-row">' +
+        '<div class="domain-bar-label">' + esc(e[0]) + '</div>' +
+        '<div class="domain-bar-track"><div class="domain-bar-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="domain-bar-count">' + e[1] + '</div>' +
+      '</div>';
+  });
+
+  var html =
+    '<div class="doc-section" id="sec-evidence">' +
+      '<div class="doc-section-label"><span class="doc-section-num">1</span>Evidence base</div>' +
+      '<div class="doc-section-heading">What the <em>evidence</em> looks like</div>' +
+      '<p class="doc-body">' +
+        'This analysis draws on <strong style="color:var(--ink)">' + total + ' evidence items</strong> ' +
+        'spanning <strong style="color:var(--ink)">' + esc(ev.time_span || '—') + '</strong>, ' +
+        'classified as <span class="tier-badge">' + esc(ev.tier || '—') + '</span>. ' +
+        'Evidence is distributed across ' + entries.length + ' domains. ' +
+        'Domains with fewer items represent potential gaps in observability, not absence of activity.' +
+      '</p>' +
+      '<div class="domain-bars">' + barsHtml + '</div>' +
+    '</div>';
+
+  document.getElementById('section-evidence').innerHTML = html;
+}
+
+function renderStalls(data) {
+  var stalls = data.stalls || [];
+  if (stalls.length === 0) {
+    document.getElementById('section-stalls').innerHTML = '';
+    return;
+  }
+
+  // Sort: High first, then Medium, then Low
+  var order = { high: 0, medium: 1, low: 2 };
+  stalls.sort(function(a, b) {
+    return (order[(a.confidence || '').toLowerCase()] || 2) - (order[(b.confidence || '').toLowerCase()] || 2);
+  });
+
+  var cardsHtml = '';
+  stalls.forEach(function(s) {
+    var conf = (s.confidence || 'Low').toLowerCase();
+    var borderClass = conf === 'high' ? 'conf-high-border' : conf === 'medium' ? 'conf-medium-border' : 'conf-low-border';
+
+    var xSideHtml = '';
+    if (s.x_side_evidence) {
+      xSideHtml =
+        '<div class="stall-evidence-col">' +
+          '<div class="stall-evidence-col-label x-side">X-side evidence (observable)</div>' +
+          '<div class="stall-evidence-col-text">' + esc(s.x_side_evidence) + '</div>' +
+        '</div>';
+    }
+    var ySideHtml = '';
+    if (s.y_side_visibility) {
+      ySideHtml =
+        '<div class="stall-evidence-col">' +
+          '<div class="stall-evidence-col-label y-side">Y-side visibility (structural)</div>' +
+          '<div class="stall-evidence-col-text">' + esc(s.y_side_visibility) + '</div>' +
+        '</div>';
+    }
+    var gridHtml = (xSideHtml || ySideHtml) ? '<div class="stall-evidence-grid">' + xSideHtml + ySideHtml + '</div>' : '';
+
+    var notesHtml = s.notes ? '<p style="font-size:12px;color:var(--ink-muted);line-height:1.6;font-weight:300;font-style:italic;margin-top:10px">' + esc(s.notes) + '</p>' : '';
+
+    var leverageHtml = '';
+    if (s.leverage) {
+      leverageHtml =
+        '<div style="margin-top:10px">' +
+          '<div class="stall-leverage-label">Leverage direction</div>' +
+          '<div class="stall-item-leverage">' + esc(s.leverage) + '</div>' +
+        '</div>';
+    }
+
+    cardsHtml +=
+      '<div class="stall-item ' + borderClass + '">' +
+        '<div class="stall-item-header">' +
+          '<span class="stall-item-id">' + esc(s.id) + '</span>' +
+          '<span class="stall-item-name">' + esc(s.name) + '</span>' +
+          confBadge(s.confidence) +
+          (s.signal ? ' <span style="font-family:var(--mono);font-size:8px;color:var(--teal);font-weight:700;letter-spacing:0.06em">' + esc(s.signal) + '</span>' : '') +
+        '</div>' +
+        (s.definition ? '<div class="stall-item-def">' + esc(s.definition) + '</div>' : '') +
+        gridHtml +
+        notesHtml +
+        leverageHtml +
+      '</div>';
+  });
+
+  document.getElementById('section-stalls').innerHTML =
+    '<div class="doc-section" id="sec-stalls">' +
+      '<div class="doc-section-label"><span class="doc-section-num">2</span>What we found</div>' +
+      '<div class="doc-section-heading">Detected <em>stalls</em></div>' +
+      '<p class="doc-body">The pipeline identified ' + stalls.length + ' stalls in this ecosystem, sorted by confidence. ' +
+        'Each stall card shows the observable evidence (X-side) and the structural inference (Y-side). ' +
+        'High-confidence stalls are well-supported by cross-domain pattern evidence. Low-confidence stalls are signals worth monitoring but not yet confirmed.</p>' +
+      '<div class="stall-list">' + cardsHtml + '</div>' +
+    '</div>';
+}
+
+function renderStacks(data) {
+  var stacks = data.stacks || [];
+  if (stacks.length === 0) {
+    document.getElementById('section-stacks').innerHTML = '';
+    return;
+  }
+
+  var cardsHtml = '';
+  stacks.forEach(function(st) {
+    var pillsHtml = '';
+    (st.component_stalls || []).forEach(function(sid) {
+      pillsHtml += '<span class="stack-pill">' + esc(sid) + '</span>';
+    });
+
+    var signalsHtml = '';
+    if (st.absorbed_signals) {
+      signalsHtml = '<p style="font-family:var(--mono);font-size:9px;color:var(--ink-muted);margin-top:10px"><strong>Absorbed signals:</strong> ' + esc(st.absorbed_signals) + '</p>';
+    }
+
+    var notesHtml = st.notes ? '<p style="font-size:12px;color:var(--ink-muted);line-height:1.6;font-weight:300;font-style:italic;margin-top:10px">' + esc(st.notes) + '</p>' : '';
+
+    // Interpretive boundary — auto-generated from confidence
+    var conf = (st.confidence || 'Low').toLowerCase();
+    var interpText = '';
+    if (conf === 'high') interpText = 'This stack configuration is well-supported by pattern evidence across multiple domains and time windows.';
+    else if (conf === 'medium') interpText = 'This is a plausible configuration, but one or more component stalls has limited observability. Treat the reinforcing logic as a working hypothesis.';
+    else interpText = 'This is a structural hypothesis based on limited evidence. Exercise caution — the component stalls may co-occur without mutual reinforcement.';
+
+    var interpHtml =
+      '<div class="interpretive-note">' +
+        '<strong>Interpretive boundary:</strong> ' + interpText +
+      '</div>';
+
+    cardsHtml +=
+      '<div class="stack-card">' +
+        '<div class="stack-card-head">' +
+          '<span style="font-family:var(--mono);font-size:9px;font-weight:700;color:rgba(255,255,255,0.6)">' + esc(st.stack_id) + '</span>' +
+          '<span class="stack-card-name">' + esc(st.stack_name) + '</span>' +
+          confBadge(st.confidence) +
+          '<div class="stack-card-pills">' + pillsHtml + '</div>' +
+        '</div>' +
+        '<div class="stack-card-body">' +
+          '<div class="stack-card-desc">' + esc(st.reinforcing_logic) + '</div>' +
+          signalsHtml +
+          notesHtml +
+          interpHtml +
+        '</div>' +
+      '</div>';
+  });
+
+  document.getElementById('section-stacks').innerHTML =
+    '<div class="doc-section" id="sec-stacks">' +
+      '<div class="doc-section-label"><span class="doc-section-num">3</span>Why it persists</div>' +
+      '<div class="doc-section-heading">Reinforcing <em>stacks</em></div>' +
+      '<p class="doc-body">When stalls appear together they form reinforcing configurations — each providing cover for the others. ' +
+        'Addressing one without the rest produces temporary change that the system absorbs. The stack is the unit of intervention, not the individual stall.</p>' +
+      cardsHtml +
+    '</div>';
+}
+
+function renderLeverage(data) {
+  var levs = data.leverage || [];
+  if (levs.length === 0) {
+    document.getElementById('section-leverage').innerHTML = '';
+    return;
+  }
+
+  var cardsHtml = '';
+  levs.forEach(function(lev) {
+    var metaHtml =
+      '<div class="leverage-card-meta">' +
+        (lev.affected_signal ? '<span style="font-family:var(--mono);font-size:9px;color:var(--teal);font-weight:700">Signal: ' + esc(lev.affected_signal) + '</span>' : '') +
+        (lev.testability ? '<span>Testability: ' + testBadge(lev.testability) + '</span>' : '') +
+        (lev.confidence ? '<span>Confidence: ' + confBadge(lev.confidence) + '</span>' : '') +
+      '</div>';
+
+    cardsHtml +=
+      '<div class="leverage-card">' +
+        '<div class="leverage-card-header">' +
+          '<span class="leverage-card-id">' + esc(lev.leverage_id) + '</span>' +
+          '<span class="leverage-card-type">' + esc(lev.leverage_type) + '</span>' +
+          (lev.stack_id ? '<span class="leverage-card-stack">→ ' + esc(lev.stack_id) + '</span>' : '') +
+        '</div>' +
+        (lev.perturbation_focus ? '<div class="leverage-card-focus">' + esc(lev.perturbation_focus) + '</div>' : '') +
+        (lev.hypothesis ? '<div class="leverage-card-hypothesis">' + esc(lev.hypothesis) + '</div>' : '') +
+        metaHtml +
+        (lev.notes ? '<div class="leverage-card-notes">' + esc(lev.notes) + '</div>' : '') +
+      '</div>';
+  });
+
+  document.getElementById('section-leverage').innerHTML =
+    '<div class="doc-section" id="sec-leverage">' +
+      '<div class="doc-section-label"><span class="doc-section-num">4</span>Where leverage sits</div>' +
+      '<div class="doc-section-heading">Experiments <em>to run</em></div>' +
+      '<p class="doc-body">A leverage hypothesis is not a strategy. It is a small, testable intervention aimed at the structural element ' +
+        'whose removal makes the stack untenable. These are framed as experiments — each with a testability rating indicating how ' +
+        'readily the hypothesis can be validated in practice.</p>' +
+      cardsHtml +
+    '</div>';
+}
+
+function renderComparators(data) {
+  var comps = data.comparators || [];
+  if (comps.length === 0) {
+    document.getElementById('section-comparators').innerHTML = '';
+    return;
+  }
+
+  var cardsHtml = '';
+  comps.forEach(function(c) {
+    var stackBadges = '';
+    (c.stacks || []).forEach(function(sid) {
+      stackBadges += '<span class="comp-pattern-badge">' + esc(sid) + '</span>';
+    });
+
+    var shiftedHtml = '';
+    if (c.shifted) {
+      shiftedHtml =
+        '<div class="comp-shifted">' +
+          '<span class="comp-shifted-label">Shifted</span>' +
+          '<span class="comp-shifted-text">' + esc(c.shifted) + '</span>' +
+        '</div>';
+    }
+
+    cardsHtml +=
+      '<div class="comparator-card">' +
+        '<div class="comp-card-main">' +
+          '<div>' +
+            '<div class="comp-card-name">' + esc(c.name) + '</div>' +
+            '<div class="comp-card-loc">' + esc(c.geography) + '</div>' +
+            '<div class="comp-card-badges">' +
+              (c.sector ? '<span class="comp-sector-badge">' + esc(c.sector) + '</span>' : '') +
+              matchBadge(c.match_type) +
+              stackBadges +
+            '</div>' +
+          '</div>' +
+          (c.link ? '<a href="' + esc(c.link) + '" class="comp-card-link">View →</a>' : '') +
+        '</div>' +
+        shiftedHtml +
+      '</div>';
+  });
+
+  document.getElementById('section-comparators').innerHTML =
+    '<div class="doc-section" id="sec-comparators">' +
+      '<div class="doc-section-label"><span class="doc-section-num">5</span>Comparable ecosystems</div>' +
+      '<div class="doc-section-heading">Ecosystems with <em>the same configuration</em></div>' +
+      '<p class="doc-body">These ecosystems from the ClusterOS diagnostic database show a structurally similar configuration. ' +
+        'The resemblance is not in sector, geography, or maturity — it is in how the system stabilises. ' +
+        'Where the configuration has shifted, the trigger is noted.</p>' +
+      '<div class="comparator-list">' + cardsHtml + '</div>' +
+    '</div>';
+}
+
+function renderEpistemic(data) {
+  var items = [];
+  var stalls = data.stalls || [];
+  var ev = data.evidence || {};
+  var domains = ev.domains || {};
+  var total = ev.total_items || 1;
+  var stacks = data.stacks || [];
+
+  // Low confidence stalls
+  var lowStalls = stalls.filter(function(s) { return (s.confidence || '').toLowerCase() === 'low'; });
+  if (lowStalls.length > 0) {
+    var names = lowStalls.map(function(s) { return s.id + ' (' + esc(s.name) + ')'; }).join(', ');
+    items.push({ label: 'Unconfirmed signals', text: 'The following stalls were detected at low confidence and should be treated as signals worth monitoring, not confirmed findings: ' + names + '.' });
+  }
+
+  // Evidence domain gaps
+  var gapDomains = [];
+  Object.entries(domains).forEach(function(e) {
+    var pct = (e[1] / total) * 100;
+    if (pct < 5) gapDomains.push(e[0] + ' (' + Math.round(pct) + '%)');
+  });
+  if (gapDomains.length > 0) {
+    items.push({ label: 'Evidence gaps', text: 'The following domains represent less than 5% of total evidence: ' + gapDomains.join(', ') + '. Findings that depend on these domains have reduced observability.' });
+  }
+
+  // Stack falsifiability
+  stacks.forEach(function(st) {
+    var conf = (st.confidence || 'Low').toLowerCase();
+    if (conf !== 'high') {
+      items.push({ label: 'Stack hypothesis: ' + esc(st.stack_id), text: 'To confirm ' + esc(st.stack_name) + ', you would need to observe that removing one component stall does not reduce the other — i.e., that the reinforcing logic holds under perturbation. Without that test, co-occurrence and mutual reinforcement cannot be distinguished.' });
+    }
+  });
+
+  // Correlation vs causation
+  items.push({ label: 'Correlation vs causation', text: 'Pattern evidence establishes co-occurrence and structural plausibility. It does not establish causation. The reinforcing logic described in stack configurations is a hypothesis about mechanism, not a demonstrated causal chain.' });
+
+  // Point in time
+  items.push({ label: 'Point-in-time analysis', text: 'This report reflects the evidence base at the time of analysis (' + esc(ev.time_span || '—') + '). Ecosystem configurations shift. Findings should be re-validated if more than 12 months have elapsed since the evidence was collected.' });
+
+  var html = '';
+  items.forEach(function(item) {
+    html +=
+      '<div class="epistemic-item">' +
+        '<div class="epistemic-item-label">' + item.label + '</div>' +
+        '<div class="epistemic-item-text">' + item.text + '</div>' +
+      '</div>';
+  });
+
+  document.getElementById('section-epistemic').innerHTML =
+    '<div class="doc-section" id="sec-epistemic">' +
+      '<div class="doc-section-label"><span class="doc-section-num">6</span>What this report cannot tell you</div>' +
+      '<div class="doc-section-heading">Epistemic <em>honesty</em></div>' +
+      '<p class="doc-body">Every diagnostic has boundaries. This section names them explicitly so readers can calibrate their confidence in the findings.</p>' +
+      '<div class="epistemic-list">' + html + '</div>' +
+    '</div>';
+}
+
+function renderNextSteps(data) {
+  var stalls = data.stalls || [];
+  var levs = data.leverage || [];
+  var topLev = levs.length > 0 ? levs[0] : null;
+
+  var step2Text = topLev
+    ? '<strong>Test the top leverage hypothesis.</strong> ' + esc(truncate(topLev.hypothesis, 200)) + (topLev.notes ? ' ' + esc(topLev.notes) : '')
+    : '<strong>Identify a testable leverage hypothesis</strong> from the stack analysis above.';
+
+  document.getElementById('section-next-steps').innerHTML =
+    '<div class="doc-section" id="sec-next-steps">' +
+      '<div class="doc-section-label"><span class="doc-section-num">7</span>What to do next</div>' +
+      '<div class="doc-section-heading">From diagnosis <em>to action</em></div>' +
+      '<div class="next-steps-list">' +
+        '<div class="next-step-item"><span class="next-step-num">1</span><div class="next-step-text"><strong>Validate stall confidence with stakeholder interviews.</strong> Share this report with 3–5 actors who operate inside the ecosystem daily. Where their experience contradicts a stall identification, that disagreement is itself diagnostic information.</div></div>' +
+        '<div class="next-step-item"><span class="next-step-num">2</span><div class="next-step-text">' + step2Text + '</div></div>' +
+        '<div class="next-step-item"><span class="next-step-num">3</span><div class="next-step-text"><strong>Commission a ClusterOS Snapshot.</strong> A Snapshot Diagnostic adds live data integration, actor-level evidence verification, and ongoing monitoring. It turns this point-in-time analysis into a continuous diagnostic.</div></div>' +
+        '<div class="next-step-item"><span class="next-step-num">4</span><div class="next-step-text"><strong>Connect with comparator ecosystem stewards.</strong> The ecosystems identified in the comparator section have navigated similar configurations. Their experience — what worked, what didn\'t — is directly applicable.</div></div>' +
+      '</div>' +
+      '<div class="next-step">' +
+        '<div><div class="next-step-label">Ready to go deeper?</div><div class="next-step-heading">Commission a <em>Snapshot Diagnostic</em></div></div>' +
+      '</div>' +
+    '</div>';
+}
+
+function renderJumpNav(data) {
+  var sections = [
+    { id: 'sec-exec-summary', label: 'Summary' },
+    { id: 'sec-evidence', label: 'Evidence' },
+    { id: 'sec-stalls', label: 'Stalls' },
+    { id: 'sec-stacks', label: 'Stacks' },
+    { id: 'sec-leverage', label: 'Leverage' },
+    { id: 'sec-comparators', label: 'Comparators' },
+    { id: 'sec-epistemic', label: 'Limitations' },
+    { id: 'sec-next-steps', label: 'Next steps' },
+    { id: 'appendix', label: 'Appendices' }
+  ];
+
+  var html = '';
+  sections.forEach(function(s) {
+    html += '<a href="#' + s.id + '">' + s.label + '</a>';
+  });
+  document.getElementById('doc-jumpnav').innerHTML = html;
+}
+
+function renderFooter(data) {
+  var year = new Date().getFullYear();
+  document.getElementById('doc-footer').innerHTML =
+    '<div class="doc-footer">' +
+      '<div class="doc-footer-main">' +
+        '<div class="doc-footer-left">ClusterOS · Community Lab Ltd · Edinburgh<br>clusteros.io · andrew@communitylab.app</div>' +
+        '<div class="doc-footer-right">REF: ' + esc(data.run_id || '') + '<br>' + esc(data.generated_at || '') + '</div>' +
+      '</div>' +
+      '<div class="doc-footer-legal">' +
+        '© ' + year + ' Community Lab Ltd. This report is generated by the ClusterOS v3 pipeline and is provided for analytical purposes. ' +
+        'It does not constitute professional advice. Findings are confidence-tiered hypotheses, not prescriptions. ' +
+        'For a full evidence-based diagnostic, visit clusteros.io. ClusterOS is a trademark of Community Lab Ltd.' +
+      '</div>' +
+    '</div>';
+}
+
+// ── APPENDIX RENDERERS ──
+
+function renderAppendixA(data) {
+  var ev = data.evidence || {};
+  var domains = ev.domains || {};
+  var total = ev.total_items || 1;
+  var entries = Object.entries(domains).sort(function(a, b) { return b[1] - a[1]; });
+
+  var rowsHtml = '';
+  entries.forEach(function(e) {
+    var pct = Math.round((e[1] / total) * 100);
+    rowsHtml += '<tr><td style="font-weight:500;color:var(--ink)">' + esc(e[0]) + '</td><td>' + e[1] + '</td><td>' + pct + '%</td></tr>';
+  });
+  rowsHtml += '<tr style="font-weight:500;border-top:2px solid var(--border)"><td style="color:var(--ink)">TOTAL</td><td>' + total + '</td><td>100%</td></tr>';
+
+  // Top items per domain if available
+  var itemsHtml = '';
+  if (ev.items && ev.items.length > 0) {
+    var byDomain = {};
+    ev.items.forEach(function(item) {
+      var d = item.domain || 'OTHER';
+      if (!byDomain[d]) byDomain[d] = [];
+      byDomain[d].push(item);
+    });
+    Object.keys(byDomain).sort().forEach(function(d) {
+      var domItems = byDomain[d].slice(0, 5);
+      itemsHtml += '<p style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin:16px 0 6px">' + esc(d) + ' (top ' + domItems.length + ')</p>';
+      domItems.forEach(function(item) {
+        itemsHtml += '<p style="font-size:11px;color:var(--ink-dim);line-height:1.6;font-weight:300;margin-bottom:4px;padding-left:12px;border-left:2px solid var(--border)">' +
+          '<span style="font-family:var(--mono);font-size:9px;color:var(--ink-muted)">' + esc(item.evidence_id) + '</span> ' +
+          esc(item.description) +
+          (item.source ? ' <span style="font-style:italic;color:var(--ink-muted)">(' + esc(item.source) + ')</span>' : '') +
+        '</p>';
+      });
+    });
+  }
+
+  document.getElementById('appendix-a').innerHTML =
+    '<div style="margin-bottom:40px">' +
+      '<div class="appendix-heading">Appendix A: Evidence <em>summary</em></div>' +
+      '<p class="appendix-intro">Distribution of evidence across the seven ClusterOS domains. Domains with lower coverage represent potential gaps in observability.</p>' +
+      '<table class="domain-table"><thead><tr><th>Domain</th><th>Count</th><th>Share</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
+      itemsHtml +
+    '</div>';
+}
+
+function renderAppendixB(data) {
+  var patterns = (data.patterns || {}).patterns || [];
+  if (patterns.length === 0) {
+    document.getElementById('appendix-b').innerHTML = '';
+    return;
+  }
+
+  // Sort by confidence then ID
+  var order = { high: 0, medium: 1, low: 2 };
+  patterns.sort(function(a, b) {
+    var d = (order[(a.confidence || '').toLowerCase()] || 2) - (order[(b.confidence || '').toLowerCase()] || 2);
+    return d !== 0 ? d : (a.pattern_id || '').localeCompare(b.pattern_id || '');
+  });
+
+  var rowsHtml = '';
+  patterns.forEach(function(p) {
+    rowsHtml +=
+      '<tr>' +
+        '<td style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--green)">' + esc(p.pattern_id) + '</td>' +
+        '<td style="font-family:var(--mono);font-size:9px">' + esc(p.pattern_type) + '</td>' +
+        '<td>' + esc(truncate(p.description, 80)) + '</td>' +
+        '<td>' + confBadge(p.confidence) + '</td>' +
+        '<td style="font-size:10px">' + esc((p.domains_covered || []).join(', ')) + '</td>' +
+        '<td style="font-family:var(--mono);font-size:10px">' + esc(p.time_window) + '</td>' +
+      '</tr>';
+  });
+
+  document.getElementById('appendix-b').innerHTML =
+    '<div style="margin-bottom:40px">' +
+      '<div class="appendix-heading">Appendix B: Pattern <em>table</em></div>' +
+      '<p class="appendix-intro">All ' + patterns.length + ' patterns detected by the pipeline, sorted by confidence then ID.</p>' +
+      '<div style="overflow-x:auto"><table class="pattern-table"><thead><tr><th>ID</th><th>Type</th><th>Description</th><th>Conf.</th><th>Domains</th><th>Window</th></tr></thead><tbody>' + rowsHtml + '</tbody></table></div>' +
+    '</div>';
+}
+
+function renderAppendixC(data) {
+  var stalls = data.stalls || [];
+  if (stalls.length === 0) {
+    document.getElementById('appendix-c').innerHTML = '';
+    return;
+  }
+
+  var html = '';
+  stalls.forEach(function(s) {
+    html +=
+      '<div class="stall-item" style="margin-bottom:10px">' +
+        '<div class="stall-item-header">' +
+          '<span class="stall-item-id">' + esc(s.id) + '</span>' +
+          '<span class="stall-item-name">' + esc(s.name) + '</span>' +
+          confBadge(s.confidence) +
+        '</div>' +
+        (s.definition ? '<div class="stall-item-def"><strong style="color:var(--ink);font-weight:500">Definition:</strong> ' + esc(s.definition) + '</div>' : '') +
+        (s.x_side_evidence ? '<p style="font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300;margin-bottom:6px"><strong style="color:var(--green);font-weight:500">X-side:</strong> ' + esc(s.x_side_evidence) + '</p>' : '') +
+        (s.y_side_visibility ? '<p style="font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300;margin-bottom:6px"><strong style="color:var(--teal);font-weight:500">Y-side:</strong> ' + esc(s.y_side_visibility) + '</p>' : '') +
+        (s.notes ? '<p style="font-size:12px;color:var(--ink-muted);line-height:1.6;font-weight:300;font-style:italic">' + esc(s.notes) + '</p>' : '') +
+        (s.leverage ? '<div style="margin-top:8px"><div class="stall-leverage-label">Leverage</div><div class="stall-item-leverage">' + esc(s.leverage) + '</div></div>' : '') +
+      '</div>';
+  });
+
+  document.getElementById('appendix-c').innerHTML =
+    '<div style="margin-bottom:40px">' +
+      '<div class="appendix-heading">Appendix C: Full stall <em>assessment</em></div>' +
+      '<p class="appendix-intro">Complete details for all ' + stalls.length + ' assessed stalls, including those at low confidence.</p>' +
+      html +
+    '</div>';
+}
+
+function renderAppendixD(data) {
+  document.getElementById('appendix-d').innerHTML =
+    '<div style="margin-bottom:40px">' +
+      '<div class="appendix-heading">Appendix D: <em>Methodology</em></div>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">' +
+        '<strong style="color:var(--ink);font-weight:500">Five-stage pipeline.</strong> This report was generated by the ClusterOS v3 analyst pipeline, which processes ecosystem evidence through five sequential stages: (1) Evidence collection and classification across seven domains, (2) Cross-domain pattern detection using AI-assisted analysis, (3) Stall identification using the X-side/Y-side framework, (4) Stack detection against the canonical stack library (v1.1, 38 configurations), and (5) Leverage hypothesis generation.' +
+      '</p>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">' +
+        '<strong style="color:var(--ink);font-weight:500">Evidence collection.</strong> Evidence items are collected from public sources, stakeholder interviews, programme data, and ecosystem documentation. Each item is classified by domain (Actors, Institutions, Resources, Environment, Connections, Services, Markets), dated, and assigned a confidence level.' +
+      '</p>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">' +
+        '<strong style="color:var(--ink);font-weight:500">Pattern detection.</strong> Patterns are identified by cross-referencing evidence items across domains and time windows. AI-assisted analysis identifies co-occurrences that human analysts might miss. Each pattern is typed (cross-domain, temporal, structural) and confidence-rated.' +
+      '</p>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">' +
+        '<strong style="color:var(--ink);font-weight:500">Stall identification.</strong> Stalls are identified using the X-side/Y-side framework. X-side refers to observable patterns in the evidence that support a stall hypothesis. Y-side refers to the structural inference — whether the substitution behaviour is directly observable or must be inferred from indirect evidence. Confidence reflects the strength of both sides.' +
+      '</p>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">' +
+        '<strong style="color:var(--ink);font-weight:500">Stack detection.</strong> Detected stalls are matched against the canonical stack library (v1.1) containing 38 configurations derived from 221 diagnosed ecosystems. Stacks are reinforcing configurations where component stalls provide mutual cover. Confidence reflects the strength of the reinforcing logic given available evidence.' +
+      '</p>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">' +
+        '<strong style="color:var(--ink);font-weight:500">Leverage generation.</strong> Each detected stack has a canonical leverage entry point. The pipeline generates specific hypotheses tailored to the ecosystem\'s evidence and context. Testability ratings indicate how readily the hypothesis can be validated through practical experiment.' +
+      '</p>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300">' +
+        '<strong style="color:var(--ink);font-weight:500">Confidence tiers.</strong> HIGH: supported by multiple cross-domain evidence items with direct observability. MEDIUM: supported by evidence but with gaps in one or more domains or limited observability. LOW: structural hypothesis with limited direct evidence — treat as a signal to monitor. The 221-cluster comparator database uses medium and high confidence diagnostics only.' +
+      '</p>' +
+    '</div>';
+}
+
+function renderAppendixE(data) {
+  var year = new Date().getFullYear();
+  document.getElementById('appendix-e').innerHTML =
+    '<div style="margin-bottom:40px">' +
+      '<div class="appendix-heading">About <em>ClusterOS</em></div>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">ClusterOS is a diagnostic and coordination platform for innovation ecosystems. It gives ecosystem leaders the infrastructure to see what is actually happening — not what was last reported. Your ecosystem\'s data belongs to your ecosystem, not to a platform vendor.</p>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:14px">The ClusterOS diagnostic has been applied to 221 clusters across 57 countries. The AI layer produces grounded, auditable analysis from live data — not generated opinions.</p>' +
+      '<p style="font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;margin-bottom:24px">Built by Community Lab Ltd, Edinburgh. Founded by Andrew Barrie, previously co-founder of Barrie &amp; Hibbert (acquired by Moody\'s Analytics).</p>' +
+    '</div>' +
+    '<div>' +
+      '<div class="appendix-heading">Copyright &amp; <em>attribution</em></div>' +
+      '<div style="padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:3px;font-size:11px;color:var(--ink-muted);line-height:1.7">' +
+        '<p style="margin-bottom:8px"><strong style="color:var(--ink);font-weight:500">Copyright:</strong> &copy; ' + year + ' Community Lab Ltd. All rights reserved. ClusterOS is a registered trademark of Community Lab Ltd.</p>' +
+        '<p style="margin-bottom:8px"><strong style="color:var(--ink);font-weight:500">Attribution:</strong> If this report is shared, forwarded, or cited, please attribute as follows: <em>&ldquo;ClusterOS Analyst Diagnostic Report, generated by the ClusterOS v3 pipeline, &copy; Community Lab Ltd.&rdquo;</em></p>' +
+        '<p style="margin-bottom:8px"><strong style="color:var(--ink);font-weight:500">Permitted use:</strong> This report may be shared internally within your organisation, forwarded to funders, partners, or board members, and cited in strategy or policy documents. It may not be reproduced, modified, or republished without written permission from Community Lab Ltd.</p>' +
+        '<p><strong style="color:var(--ink);font-weight:500">Not for redistribution:</strong> The stall science framework, stack definitions, and comparator database contained in this report may not be extracted, reproduced, or incorporated into other products or services without a licence from Community Lab Ltd. Contact: andrew@communitylab.app</p>' +
+      '</div>' +
+    '</div>';
+}
+
+// ── SAMPLE DATA (Glasgow FinTech) ──
+var SAMPLE_DATA = {
+  run_id: '2026Q2-12115552',
+  cluster_name: 'Glasgow FinTech',
+  geography: 'Glasgow City Region, United Kingdom',
+  sector: 'Financial Technology',
+  lifecycle_stage: 'established',
+  anchor_type: 'corporate',
+  generated_at: '2026-04-13',
+  evidence: {
+    total_items: 184,
+    tier: 'Tier 1 - Robust',
+    time_span: '2017-2024',
+    domains: {
+      ACTORS: 45, INSTITUTIONS: 38, RESOURCES: 32,
+      ENVIRONMENT: 28, CONNECTIONS: 22, SERVICES: 12, MARKETS: 7
+    },
+    items: [
+      { evidence_id: 'E001', domain: 'ACTORS', description: 'FinTech Scotland membership grew from 70 to 195 members (2018-2024)', source: 'FinTech Scotland Annual Report 2024', date: '2024', confidence: 'HIGH' },
+      { evidence_id: 'E015', domain: 'RESOURCES', description: 'Scottish Enterprise allocated £12M to FinTech acceleration programmes (2020-2023)', source: 'SE Programme Data', date: '2023', confidence: 'HIGH' },
+      { evidence_id: 'E028', domain: 'INSTITUTIONS', description: 'University of Strathclyde launched MSc in Financial Technology', source: 'University announcement', date: '2021', confidence: 'HIGH' },
+      { evidence_id: 'E042', domain: 'CONNECTIONS', description: 'Cross-referral rate between ecosystem members below 8%', source: 'Network analysis', date: '2023', confidence: 'MEDIUM' },
+      { evidence_id: 'E056', domain: 'ENVIRONMENT', description: 'FCA regulatory sandbox participation by 3 Glasgow-based firms', source: 'FCA records', date: '2022', confidence: 'HIGH' },
+      { evidence_id: 'E071', domain: 'MARKETS', description: 'B2B adoption of Glasgow FinTech products concentrated in 4 incumbent banks', source: 'Market analysis', date: '2024', confidence: 'MEDIUM' }
+    ]
+  },
+  patterns: {
+    total: 34,
+    tier: 'P1',
+    patterns: [
+      { pattern_id: 'P001', pattern_type: 'CROSS-DOMAIN', description: 'Actor growth outpaces connection density — membership scales without proportionate cross-referral', evidence_ids: ['E001','E042'], domains_covered: ['ACTORS','CONNECTIONS'], time_window: '2018-2024', confidence: 'HIGH', notes: '' },
+      { pattern_id: 'P002', pattern_type: 'CROSS-DOMAIN', description: 'Coordination activity (events, working groups) high but decision output (partnerships, procurement) low', evidence_ids: ['E015','E042'], domains_covered: ['RESOURCES','CONNECTIONS'], time_window: '2020-2023', confidence: 'HIGH', notes: '' },
+      { pattern_id: 'P007', pattern_type: 'TEMPORAL', description: 'Programme funding cycles correlate with activity spikes but not conversion spikes', evidence_ids: ['E015'], domains_covered: ['RESOURCES','MARKETS'], time_window: '2020-2024', confidence: 'MEDIUM', notes: '' },
+      { pattern_id: 'P011', pattern_type: 'STRUCTURAL', description: 'Intermediary organisations expanded from 3 to 9 without corresponding increase in direct actor-to-actor connections', evidence_ids: ['E001','E042'], domains_covered: ['ACTORS','INSTITUTIONS','CONNECTIONS'], time_window: '2019-2024', confidence: 'HIGH', notes: '' },
+      { pattern_id: 'P018', pattern_type: 'CROSS-DOMAIN', description: 'Narrative output (reports, press, conference appearances) scales linearly with programme count', evidence_ids: ['E015','E028'], domains_covered: ['RESOURCES','ENVIRONMENT'], time_window: '2020-2024', confidence: 'MEDIUM', notes: '' }
+    ]
+  },
+  stalls: [
+    { id: 'S2', name: 'Coordinating instead of committing', confidence: 'High', x_side_evidence: 'P002, P007, P011, P018', y_side_visibility: 'Observable — coordination layers present without decision accountability', notes: 'Strong pattern of alignment activity without corresponding commitment output.', definition: 'The ecosystem substitutes coordination and convening for binding commitments that would narrow options and create accountability.', leverage: 'The decision layer — one exclusionary choice that requires named accountability.', signal: 'Friction' },
+    { id: 'S7', name: 'Narrating instead of measuring', confidence: 'High', x_side_evidence: 'P018, P002', y_side_visibility: 'Observable — narrative output exceeds measurement infrastructure', notes: 'Reporting infrastructure captures activity metrics but not conversion outcomes.', definition: 'The ecosystem produces narrative accounts of progress in place of structured measurement that would reveal throughput absence.', leverage: 'The measurement layer — introduction of one conversion metric that makes throughput visible.', signal: 'Uncertainty' },
+    { id: 'S8', name: 'Starting instead of finishing', confidence: 'Medium', x_side_evidence: 'P007, P001', y_side_visibility: 'Partially observable — programme starts tracked, completions and outcomes less visible', notes: 'Programme pipeline is broad but graduation rates are not systematically measured.', definition: 'The ecosystem scales early-stage activity without measuring or optimising for conversion to commercial outcomes.', leverage: 'The graduation layer — one tracked conversion metric from programme entry to commercial outcome.', signal: 'Pressure' },
+    { id: 'S5', name: 'Intermediating instead of connecting', confidence: 'Medium', x_side_evidence: 'P011', y_side_visibility: 'Observable — intermediary count grew 3x without proportionate direct connections', notes: 'Intermediary layer is thick relative to ecosystem size.', definition: 'Every connection in the ecosystem routes through an intermediary, creating structural dependency on brokerage.', leverage: 'The coupling layer — one direct actor-to-actor connection that bypasses intermediaries.', signal: 'Complexity' },
+    { id: 'S4', name: 'Extracting instead of circulating', confidence: 'Low', x_side_evidence: 'P001 (indirect)', y_side_visibility: 'Inferred — value flow data insufficient to confirm', notes: 'Limited evidence for extraction. Market concentration in 4 incumbent banks is suggestive but not conclusive.', definition: 'Value generated by new actors is captured by incumbent institutions rather than circulating within the ecosystem.', leverage: 'The circulation layer — visibility into where value flows after initial creation.', signal: 'Success' }
+  ],
+  stacks: [
+    { stack_id: 'STK-04', stack_name: 'Visibility-Activity Configuration', component_stalls: ['S7','S8'], reinforcing_logic: 'Activity generates narrative material; narrative legitimises further activity scaling; the system appears productive externally while conversion remains unmeasured.', absorbed_signals: 'Pressure, Uncertainty', confidence: 'High', notes: 'This is the dominant configuration in Glasgow FinTech. The measurement gap allows activity scaling to continue unchecked.' },
+    { stack_id: 'STK-01', stack_name: 'Coordination-Narrative Configuration', component_stalls: ['S2','S7'], reinforcing_logic: 'Coordination requires narrative to justify continued alignment; narrative requires coordination to appear credible and current.', absorbed_signals: 'Friction, Uncertainty', confidence: 'Medium', notes: 'Secondary configuration. Coordination and narrative are mutually supporting but the reinforcing loop is less tight than STK-04.' }
+  ],
+  leverage: [
+    { leverage_id: 'L001', stack_id: 'STK-04', leverage_type: 'Measurement introduction', perturbation_focus: 'The measurement layer — introduction of one conversion metric that tracks commercial outcomes rather than programme completions.', affected_signal: 'Pressure (redirected from activity to conversion)', hypothesis: 'If a single conversion metric — tracking commercial outcomes rather than programme completions — is introduced and made visible to funders and stewards, the activity-scaling loop will be perturbed because narrative that reports activity without conversion will become visibly insufficient.', testability: 'High', confidence: 'Medium', notes: 'Highly testable. Can be piloted with one programme cohort. Requires funder buy-in to make the metric consequential.' },
+    { leverage_id: 'L002', stack_id: 'STK-01', leverage_type: 'Decision forcing', perturbation_focus: 'The decision layer — one coordination event restructured to require a binding commitment output.', affected_signal: 'Friction (redirected from alignment to accountability)', hypothesis: 'If one working group or steering meeting is restructured to produce a binding decision with named accountability and a deadline, rather than alignment minutes, the coordination-narrative loop will be tested because narrative cannot substitute for an auditable commitment.', testability: 'High', confidence: 'Low', notes: 'Requires willingness from one convener to change format. Low confidence because the coordination-narrative reinforcement may be weaker than observed.' }
+  ],
+  comparators: [
+    { name: 'Edinburgh FinTech', geography: 'Edinburgh, United Kingdom', sector: 'Financial Technology', stacks: ['STK-04','STK-01'], match_type: 'Strong', shifted: 'Configuration partially shifted (2022) following introduction of outcome-based reporting by Scottish Enterprise. Activity-narrative loop weakened but not eliminated.', link: '/clusters/edinburgh-fintech.html' }
+  ]
+};
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', loadReport);
+</script>
+</body>
+</html>

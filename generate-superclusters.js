@@ -180,6 +180,54 @@ function renderLeverage(lev) {
     </div>`).join('');
 }
 
+// Render the regional synthesis fields when the supercluster entry carries
+// them (UK ecosystems supplied by the diagnostic repo). When absent, the
+// template falls back to child-aggregated rendering (Orlando case).
+
+function renderRegionalPatterns(patterns) {
+  if (!patterns || !patterns.length) return '';
+  return `
+  <div class="section">
+    <div class="section-label">Regional patterns · Cross-cluster synthesis</div>
+    <ul class="rp-list">
+      ${patterns.map(p => `<li>${p}</li>`).join('')}
+    </ul>
+  </div>`;
+}
+
+function renderDominantStacksRich(stacks) {
+  if (!stacks || !stacks.length) return '';
+  return stacks.map(s => `
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">${s.name || ''}</span>
+        ${s.confidence ? `<span class="lm-tag">${s.confidence} confidence</span>` : ''}
+        ${s.cluster_count != null ? `<span class="stack-count">${s.cluster_count} cluster${String(s.cluster_count) === '1' ? '' : 's'}</span>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+function renderLeverageRich(hypotheses, children) {
+  if (!hypotheses || !hypotheses.length) return '';
+  // Build a name->id map for linking to the sourcing cluster's profile page.
+  const nameToId = {};
+  for (const c of (children || [])) nameToId[c.name] = c.id;
+  return hypotheses.map(l => {
+    const sourcedId = l._cluster_name ? nameToId[l._cluster_name] : null;
+    return `
+    <div class="leverage-block">
+      <p class="leverage-hyp">"${l.hypothesis}"</p>
+      <div class="leverage-meta">
+        ${l.target_stack ? `<span class="lm-tag">${l.target_stack}</span>` : ''}
+        ${l._cluster_name && sourcedId ? `<span class="lm-tag"><a href="/clusters/${sourcedId}.html">${l._cluster_name}</a></span>` : (l._cluster_name ? `<span class="lm-tag">${l._cluster_name}</span>` : '')}
+        ${l.timeline ? `<span class="lm-tag">${l.timeline}</span>` : ''}
+        ${l._confidence ? `<span class="lm-tag">${l._confidence} confidence</span>` : ''}
+        ${l._testability ? `<span class="lm-tag">${l._testability} testability</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
 function template(sc, children) {
   const aggStalls = aggregateStalls(children);
   const aggStacks = aggregateStacks(children);
@@ -253,6 +301,10 @@ h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:40
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
 .lm-tag{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
 .lm-tag a{color:inherit;text-decoration:none;}
+.rp-list{list-style:none;padding:0;margin:0;}
+.rp-list li{font-size:14px;color:var(--ink-dim);line-height:1.65;padding:0.6rem 0 0.6rem 1.2rem;border-bottom:1px solid var(--border);position:relative;}
+.rp-list li:last-child{border-bottom:none;}
+.rp-list li::before{content:'›';position:absolute;left:0;color:var(--green);font-weight:600;}
 .empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
 .empty code{font-family:var(--font-mono);font-size:12px;color:var(--ink);background:var(--surface);padding:1px 5px;border-radius:2px;}
 footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
@@ -294,6 +346,7 @@ footer a:hover{color:var(--green);}
       <div class="stat-label">Distinct stacks</div>
     </div>
   </div>
+  ${renderRegionalPatterns(sc.regional_patterns)}
   <div class="section">
     <div class="section-label">Constituent clusters</div>
     ${renderClusterTable(children)}
@@ -304,11 +357,19 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div>
-    <div class="stacks-box">${renderStacks(aggStacks)}</div>
+    <div class="stacks-box">${
+      sc.dominant_stacks && sc.dominant_stacks.length
+        ? renderDominantStacksRich(sc.dominant_stacks)
+        : renderStacks(aggStacks)
+    }</div>
   </div>
   <div class="section">
     <div class="section-label">Top leverage hypotheses</div>
-    ${renderLeverage(lev)}
+    ${
+      sc.leverage_hypotheses && sc.leverage_hypotheses.length
+        ? renderLeverageRich(sc.leverage_hypotheses, children)
+        : renderLeverage(lev)
+    }
   </div>
 </main>
 <footer>

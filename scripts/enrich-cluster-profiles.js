@@ -4,15 +4,84 @@
  * Reads clusters.json, computes similarity + shared stacks, and updates
  * the "Structural resemblances" section in each /clusters/{id}.html file.
  *
- * Run: node scripts/enrich-cluster-profiles.js
- * Re-run whenever clusters.json changes.
+ * Usage:
+ *   node scripts/enrich-cluster-profiles.js
+ *     Update every cluster page (default).
+ *
+ *   node scripts/enrich-cluster-profiles.js --only-new
+ *     Update only "new" clusters: country=='GB' AND `parent` field set
+ *     to a known UK supercluster id (read from superclusters.json).
+ *     Resemblances are still computed against the full population.
+ *
+ *   node scripts/enrich-cluster-profiles.js --only id1,id2,id3
+ *     Update only the specified cluster ids (comma-separated).
+ *
+ *   node scripts/enrich-cluster-profiles.js --only-file path/to/ids.txt
+ *     Update only the cluster ids listed in the file (one slug per line,
+ *     blank lines and `#` comments ignored).
+ *
+ * The script always reads the FULL clusters.json so structural-resemblance
+ * matches can find any cluster — the filter only restricts which HTML files
+ * are written.
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const CLUSTERS_JSON = path.join(__dirname, '..', 'clusters.json');
+const SUPERCLUSTERS_JSON = path.join(__dirname, '..', 'superclusters.json');
 const CLUSTERS_DIR = path.join(__dirname, '..', 'clusters');
+
+function parseArgs(argv) {
+  const opts = { onlyNew: false, only: null, onlyFile: null };
+  for (let i = 2; i < argv.length; i++) {
+    const a = argv[i];
+    if (a === '--only-new') {
+      opts.onlyNew = true;
+    } else if (a === '--only') {
+      opts.only = (argv[++i] || '').split(',').map(s => s.trim()).filter(Boolean);
+    } else if (a.startsWith('--only=')) {
+      opts.only = a.slice('--only='.length).split(',').map(s => s.trim()).filter(Boolean);
+    } else if (a === '--only-file') {
+      opts.onlyFile = argv[++i];
+    } else if (a.startsWith('--only-file=')) {
+      opts.onlyFile = a.slice('--only-file='.length);
+    } else if (a === '--help' || a === '-h') {
+      console.log('See file header for usage.'); process.exit(0);
+    } else {
+      console.error(`Unknown argument: ${a}`); process.exit(1);
+    }
+  }
+  return opts;
+}
+
+function loadAllowedIds(opts, clusters) {
+  // No filter → null means "process everything"
+  if (!opts.onlyNew && !opts.only && !opts.onlyFile) return null;
+
+  const allowed = new Set();
+  if (opts.only) opts.only.forEach(id => allowed.add(id));
+  if (opts.onlyFile) {
+    const content = fs.readFileSync(opts.onlyFile, 'utf8');
+    content.split(/\r?\n/).forEach(line => {
+      const id = line.split('#')[0].trim();
+      if (id) allowed.add(id);
+    });
+  }
+  if (opts.onlyNew) {
+    let ukSuperIds = new Set();
+    if (fs.existsSync(SUPERCLUSTERS_JSON)) {
+      const supers = JSON.parse(fs.readFileSync(SUPERCLUSTERS_JSON, 'utf8'));
+      ukSuperIds = new Set(supers.filter(s => s.country === 'GB').map(s => s.id));
+    }
+    for (const c of clusters) {
+      if (c.country === 'GB' && c.parent && ukSuperIds.has(c.parent)) {
+        allowed.add(c.id);
+      }
+    }
+  }
+  return allowed;
+}
 
 const STALL_NAME_TO_ID = {
   'Re-proving instead of narrowing': 'S1',
@@ -185,14 +254,27 @@ const INJECT_CSS = `
 .sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}`;
 
 function main() {
-  // Load clusters
+  const opts = parseArgs(process.argv);
+
+  // Load clusters (full population — needed for resemblance matching even when
+  // we only write a subset of pages).
   const clusters = JSON.parse(fs.readFileSync(CLUSTERS_JSON, 'utf8'));
   console.log(`Loaded ${clusters.length} clusters`);
 
+  const allowed = loadAllowedIds(opts, clusters);
+  if (allowed) {
+    console.log(`Filter active — will update ${allowed.size} cluster page${allowed.size === 1 ? '' : 's'}; existing pages outside the filter will not be touched.`);
+  }
+
   let updated = 0;
   let skipped = 0;
+  let filteredOut = 0;
 
   for (const cluster of clusters) {
+    if (allowed && !allowed.has(cluster.id)) {
+      filteredOut++;
+      continue;
+    }
     const htmlPath = path.join(CLUSTERS_DIR, `${cluster.id}.html`);
     if (!fs.existsSync(htmlPath)) {
       skipped++;
@@ -240,6 +322,7 @@ function main() {
 
   console.log(`Updated: ${updated} cluster profiles`);
   console.log(`Skipped: ${skipped} (no file or no matches)`);
+  if (allowed) console.log(`Filtered out: ${filteredOut} (outside --only / --only-new / --only-file scope, untouched)`);
 }
 
 main();

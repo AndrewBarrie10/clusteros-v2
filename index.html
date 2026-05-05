@@ -229,10 +229,55 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   .cluster-pin.regime-emerging     { background: #3b82f6; box-shadow: 0 1px 5px rgba(59,130,246,0.5); }
   .cluster-pin.regime-stalling     { background: #c0392b; box-shadow: 0 1px 5px rgba(192,57,43,0.5); }
   .cluster-pin.regime-unknown      { background: #8c8780; box-shadow: 0 1px 5px rgba(140,135,128,0.4); }
-  .cluster-pin.regime-supercluster { width: 16px; height: 16px; background: #2a7a4f; border: 2px solid #fff; box-shadow: 0 0 0 2px rgba(42,122,79,0.35), 0 1px 6px rgba(42,122,79,0.55); }
-  .cluster-pin.regime-supercluster:hover { transform: scale(1.4); }
+  /* Supercluster pins — hollow ring matching the legend green, slightly larger
+     than cluster pins so the regional level reads at a glance without
+     introducing a new colour outside the existing palette. */
+  .cluster-pin.regime-supercluster {
+    width: 14px; height: 14px;
+    background: var(--page);
+    border: 2.5px solid #2a7a4f;
+    box-shadow: 0 1px 4px rgba(42,122,79,0.45);
+  }
+  .cluster-pin.regime-supercluster:hover { transform: scale(1.35); }
   #sc-back-btn { position: absolute; top: 12px; right: 12px; z-index: 1000; font-family: var(--font-mono); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 12px; background: var(--page); color: var(--ink); border: 1px solid var(--border); border-radius: 2px; cursor: pointer; display: none; }
   #sc-back-btn:hover { background: var(--surface); }
+  .map-count-secondary { color: var(--ink-muted); }
+
+  /* Supercluster side panel — mirrors #cluster-panel positioning and chrome
+     (320px right rail, slide-in animation) but renders region-level content
+     when a supercluster pin is clicked. Only one of the two panels is open
+     at a time. */
+  #supercluster-panel {
+    display: none; position: fixed; right: 0; top: 52px; bottom: 0;
+    width: 360px; background: var(--page); border-left: 1px solid var(--border);
+    overflow-y: auto; z-index: 900; box-shadow: -8px 0 32px rgba(0,0,0,0.06);
+    animation: slideIn 0.25s ease; padding-bottom: 60px;
+  }
+  #supercluster-panel.open { display: block; }
+  .scp-header { padding: 1.4rem 1.4rem 1rem; border-bottom: 1px solid var(--border); }
+  .scp-close { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); background: none; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em; padding: 0; margin-bottom: 0.8rem; }
+  .scp-close:hover { color: var(--ink); }
+  .scp-eyebrow { font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.4rem; }
+  .scp-name { font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.2; color: var(--ink); margin-bottom: 0.6rem; }
+  .scp-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .scp-tag { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 2px; background: var(--surface); border: 1px solid var(--border); color: var(--ink-dim); }
+  .scp-body { padding: 1.2rem 1.4rem; }
+  .scp-section-label { font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 0.5rem; }
+  .scp-summary { font-size: 13px; color: var(--ink-dim); line-height: 1.65; margin-bottom: 1.4rem; }
+  .scp-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 1.4rem; }
+  .scp-stat-cell { background: var(--page); padding: 0.8rem 1rem; }
+  .scp-stat-num { font-family: var(--font-serif); font-size: 1.5rem; color: var(--green); line-height: 1; margin-bottom: 0.2rem; }
+  .scp-stat-label { font-family: var(--font-mono); font-size: 9px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .scp-config { font-family: var(--font-mono); font-size: 12px; color: var(--green); font-weight: 600; margin-bottom: 1.4rem; padding: 0.6rem 0.8rem; background: rgba(200,240,208,0.18); border-left: 3px solid var(--signal); }
+  .scp-actions { display: flex; flex-direction: column; gap: 0.6rem; }
+  .scp-cta { display: block; text-align: center; font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.7rem 1rem; text-decoration: none; }
+  .scp-cta-primary { background: var(--green); color: #fff; }
+  .scp-cta-primary:hover { background: var(--green-dim); }
+  .scp-cta-secondary { background: var(--surface); color: var(--ink); border: 1px solid var(--border); cursor: pointer; }
+  .scp-cta-secondary:hover { background: var(--page); border-color: var(--green); color: var(--green); }
+  @media (max-width: 768px) {
+    #supercluster-panel { width: 100%; top: auto; bottom: 0; height: 60vh; border-left: none; border-top: 1px solid var(--border); }
+  }
 
   .map-legend { display: flex; gap: 12px; flex-wrap: wrap; padding: 4px 12px 6px; font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); align-items: center; }
   .legend-item { display: flex; align-items: center; gap: 5px; }
@@ -3500,6 +3545,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
       <div class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span>Emerging</div>
       <div class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Transitioning</div>
       <div class="legend-item"><span class="legend-dot" style="background:#8c8780"></span>Unknown</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--page);border:2px solid #2a7a4f;box-sizing:border-box"></span>Ecosystem</div>
     </div>
   </div>
 </section>

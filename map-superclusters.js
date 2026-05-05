@@ -136,6 +136,8 @@
     btn.addEventListener('click', function () { collapse(); });
     mapEl.appendChild(btn);
 
+    buildSuperclusterPanel();
+
     // Pin handlers and className fixup can only run after map.js renders.
     setTimeout(function () { afterRender(); }, 0);
     map.on('layeradd', function (e) {
@@ -146,9 +148,144 @@
     });
   }
 
+  // --- Custom side panel for supercluster pins ------------------------------
+
+  function buildSuperclusterPanel() {
+    if (document.getElementById('supercluster-panel')) return;
+    var aside = document.createElement('aside');
+    aside.id = 'supercluster-panel';
+    aside.setAttribute('role', 'complementary');
+    aside.setAttribute('aria-label', 'Ecosystem details');
+    aside.innerHTML =
+      '<div class="scp-header">' +
+        '<button class="scp-close" type="button">← Close</button>' +
+        '<div class="scp-eyebrow" id="scp-eyebrow">Regional ecosystem</div>' +
+        '<div class="scp-name" id="scp-name">—</div>' +
+        '<div class="scp-meta" id="scp-meta"></div>' +
+      '</div>' +
+      '<div class="scp-body">' +
+        '<p class="scp-section-label">Summary</p>' +
+        '<p class="scp-summary" id="scp-summary">—</p>' +
+        '<div class="scp-stat-row">' +
+          '<div class="scp-stat-cell"><div class="scp-stat-num" id="scp-cluster-count">—</div><div class="scp-stat-label">Clusters diagnosed</div></div>' +
+          '<div class="scp-stat-cell"><div class="scp-stat-num" id="scp-evidence-count">—</div><div class="scp-stat-label">Evidence items</div></div>' +
+        '</div>' +
+        '<p class="scp-section-label">Dominant configuration</p>' +
+        '<div class="scp-config" id="scp-config">—</div>' +
+        '<div class="scp-actions">' +
+          '<a class="scp-cta scp-cta-primary" id="scp-view-link" href="#">View ecosystem →</a>' +
+          '<button class="scp-cta scp-cta-secondary" id="scp-show-on-map" type="button">Show clusters on map →</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(aside);
+    aside.querySelector('.scp-close').addEventListener('click', closeSuperclusterPanel);
+    aside.querySelector('#scp-show-on-map').addEventListener('click', function () {
+      var sid = aside.dataset.scId;
+      if (!sid) return;
+      closeSuperclusterPanel();
+      expand(sid);
+    });
+  }
+
+  function openSuperclusterPanel(sc) {
+    if (!sc) return;
+    // Close map.js's cluster panel if it happens to be open.
+    if (typeof window.closeClusterPanel === 'function') {
+      try { window.closeClusterPanel(); } catch (e) { /* ignore */ }
+    }
+    var aside = document.getElementById('supercluster-panel');
+    if (!aside) return;
+    aside.dataset.scId = sc.id;
+
+    aside.querySelector('#scp-name').textContent = sc.name || '';
+    aside.querySelector('#scp-summary').textContent = sc.summary || '';
+
+    var meta = aside.querySelector('#scp-meta');
+    meta.innerHTML = '';
+    function addTag(text) {
+      if (!text) return;
+      var t = document.createElement('span');
+      t.className = 'scp-tag';
+      t.textContent = text;
+      meta.appendChild(t);
+    }
+    var country = sc._country || sc.country;
+    addTag(country);
+    var n = sc.cluster_count != null ? sc.cluster_count : (sc.cluster_ids ? sc.cluster_ids.length : null);
+    if (n != null) addTag(n + ' cluster' + (String(n) === '1' ? '' : 's'));
+
+    aside.querySelector('#scp-cluster-count').textContent =
+      n != null ? String(n) : '—';
+    aside.querySelector('#scp-evidence-count').textContent =
+      sc.evidence_count != null ? sc.evidence_count.toLocaleString() : '—';
+
+    // Dominant configuration: use the supercluster's regime (which comes from
+    // the diagnostic export — e.g. "Coordination-Intermediary-Activity") if
+    // present. Fall back to the top entry of dominant_stacks. Only the
+    // Orlando supercluster has neither, in which case suppress the section.
+    var configEl = aside.querySelector('#scp-config');
+    var configLabel = '';
+    if (sc.regime && sc.regime !== 'supercluster' && sc.regime !== 'mature') {
+      configLabel = sc.regime;
+    } else if (sc.dominant_stacks && sc.dominant_stacks.length) {
+      var top = sc.dominant_stacks[0];
+      configLabel = top.name + (top.confidence ? ' · ' + top.confidence + ' confidence' : '');
+    }
+    if (configLabel) {
+      configEl.textContent = configLabel;
+      configEl.style.display = '';
+    } else {
+      configEl.textContent = '';
+      configEl.style.display = 'none';
+    }
+
+    aside.querySelector('#scp-view-link').setAttribute('href', '/superclusters/' + sc.id);
+    aside.classList.add('open');
+    document.body.classList.add('panel-open');
+  }
+
+  function closeSuperclusterPanel() {
+    var aside = document.getElementById('supercluster-panel');
+    if (!aside) return;
+    aside.classList.remove('open');
+    document.body.classList.remove('panel-open');
+  }
+
   function afterRender() {
     attachSuperclusterHandlers();
     fixupSuperPinClasses();
+    updateCountDisplay();
+  }
+
+  // The page header has <div class="map-count"><span id="map-count">N</span>
+  // clusters diagnosed</div>. Map.js writes the visible-marker count into
+  // #map-count after every render. We rewrite the whole .map-count parent so
+  // the default (super) view reads "26 ecosystems · 377 clusters diagnosed",
+  // and the expanded view reads "N clusters in {Region}".
+  function updateCountDisplay() {
+    var countEl = document.getElementById('map-count');
+    if (!countEl) return;
+    var parent = countEl.parentElement;
+    if (!parent) return;
+    var supersCount = (allSuperclustersCache || []).length;
+    var clustersTotal = (allClustersCache || []).length;
+
+    if (mode === 'expanded' && expandedId) {
+      var sc = (allSuperclustersCache || []).find(function (s) { return s.id === expandedId; });
+      var n = sc && sc.cluster_count != null ? sc.cluster_count
+            : (allClustersCache || []).filter(function (c) { return c.parent === expandedId; }).length;
+      var regionLabel = sc ? sc.name : 'this region';
+      parent.innerHTML =
+        '<span id="map-count">' + n + '</span> cluster' + (String(n) === '1' ? '' : 's') +
+        ' in ' + escapeHtml(regionLabel);
+    } else {
+      // Default supercluster-level view
+      parent.innerHTML =
+        '<span id="map-count">' + supersCount + '</span> ecosystem' +
+        (String(supersCount) === '1' ? '' : 's') + ' · ' +
+        '<span class="map-count-secondary">' + clustersTotal +
+        ' cluster' + (String(clustersTotal) === '1' ? '' : 's') + ' diagnosed</span>';
+    }
   }
 
   function attachSuperclusterHandlers() {
@@ -162,8 +299,11 @@
       });
       if (!matched) return;
       layer._scClickWrapped = true;
+      // Replace map.js's standard cluster panel handler with our custom
+      // ecosystem panel. expand() is still callable from the panel's
+      // "Show clusters on map" secondary button.
       layer.off('click');
-      layer.on('click', function () { expand(matched.id); });
+      layer.on('click', function () { openSuperclusterPanel(matched); });
     });
   }
 
@@ -224,7 +364,12 @@
         { permanent: false, direction: 'top', offset: [0, -8], className: '' }
       );
       if (c._supercluster) {
-        marker.on('click', function () { expand(c.id); });
+        // wrapper-rendered super pin (after a collapse): find the full
+        // supercluster record and open the custom panel
+        marker.on('click', function () {
+          var sc = (allSuperclustersCache || []).find(function (s) { return s.id === c.id; });
+          openSuperclusterPanel(sc || c);
+        });
       } else {
         marker.on('click', function () { window.location.href = '/clusters/' + c.id + '.html'; });
       }
@@ -261,8 +406,7 @@
       var btn = document.getElementById('sc-back-btn');
       if (btn) btn.style.display = 'block';
 
-      var countEl = document.getElementById('map-count');
-      if (countEl) countEl.textContent = children.length;
+      updateCountDisplay();
     });
   }
 
@@ -287,8 +431,7 @@
       var btn = document.getElementById('sc-back-btn');
       if (btn) btn.style.display = 'none';
 
-      var countEl = document.getElementById('map-count');
-      if (countEl) countEl.textContent = view.length;
+      updateCountDisplay();
     });
   }
 

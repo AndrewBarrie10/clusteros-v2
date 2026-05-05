@@ -81,7 +81,7 @@ function countryName(code) { return COUNTRIES[code] || code; }
 
 const STALL_CODES = {
   're-proving':'S1','coordinating':'S2','forgiving':'S3',
-  'extracting':'S4','mediating':'S5','stabiliz':'S6',
+  'extracting':'S4','mediating':'S5','stabilis':'S6',
   'narrating':'S7','scaling':'S8','waiting':'S9'
 };
 
@@ -91,7 +91,7 @@ const ALL_STALLS = [
   {code:'S3',short:'Forgiving',   key:'forgiving'},
   {code:'S4',short:'Extracting',  key:'extracting'},
   {code:'S5',short:'Mediating',   key:'mediating'},
-  {code:'S6',short:'Stabilising', key:'stabiliz'},
+  {code:'S6',short:'Stabilising', key:'stabilis'},
   {code:'S7',short:'Narrating',   key:'narrating'},
   {code:'S8',short:'Scaling',     key:'scaling'},
   {code:'S9',short:'Waiting',     key:'waiting'},

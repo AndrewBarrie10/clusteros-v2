@@ -159,7 +159,28 @@ function findSimilar(cluster, allClusters, n = 3) {
   }
 
   scored.sort((a, b) => b.score - a.score);
-  return scored.slice(0, n);
+
+  // Diversity cap: at most 1 same-country match in the top n. UK clusters
+  // overwhelmingly score similarly to other UK clusters (94 share the same
+  // 'Permission-Validation' regime, etc.), so without this cap every UK
+  // page's "structural resemblances" was three other UK clusters. Take the
+  // best same-country match, then fill remaining slots with international.
+  // Fall back to same-country fills only if no internationals are available.
+  const SAME_COUNTRY_CAP = 1;
+  const sameCountry = scored.filter(m => m.cluster.country === cluster.country);
+  const diffCountry = scored.filter(m => m.cluster.country !== cluster.country);
+  const picked = [];
+  if (sameCountry.length) picked.push(sameCountry[0]);
+  for (const m of diffCountry) {
+    if (picked.length >= n) break;
+    picked.push(m);
+  }
+  for (let i = 1; picked.length < n && i < sameCountry.length; i++) {
+    picked.push(sameCountry[i]);
+  }
+  // Preserve overall score ordering for whatever ended up selected.
+  picked.sort((a, b) => b.score - a.score);
+  return picked.slice(0, n);
 }
 
 const STALL_CODE_MAP = {

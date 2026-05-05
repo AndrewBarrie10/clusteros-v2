@@ -195,16 +195,66 @@ function renderRegionalPatterns(patterns) {
   </div>`;
 }
 
-function renderDominantStacksRich(stacks) {
+// Map keywords found in supercluster-level stack names onto the 9 stall ids.
+// dominant_stacks names from the diagnostic export are composite labels like
+// "Coordination-Intermediary-Activity" that don't appear verbatim in any
+// child cluster's stack_name list, so we derive component stalls from
+// keywords in the name itself.
+const STACK_NAME_KEYWORD_TO_STALL = [
+  [/re[- ]?prov|validat/i,                'S1'],
+  [/coordinat|governance/i,               'S2'],
+  [/forgiv|toleran/i,                     'S3'],
+  [/extract/i,                            'S4'],
+  [/intermediar|mediat/i,                 'S5'],
+  [/incumbent|capture|stabilis|stabiliz/i,'S6'],
+  [/narrat/i,                             'S7'],
+  [/scal|activity|volume/i,               'S8'],
+  [/permission|waiting|process/i,         'S9'],
+];
+
+function inferStallsFromName(name) {
+  if (!name) return [];
+  const found = new Set();
+  for (const [re, sid] of STACK_NAME_KEYWORD_TO_STALL) {
+    if (re.test(name)) found.add(sid);
+  }
+  return Array.from(found).sort();
+}
+
+function renderDominantStacksRich(stacks, children) {
   if (!stacks || !stacks.length) return '';
-  return stacks.map(s => `
+  // dominant_stacks from the diagnostic export only carries name/confidence/
+  // cluster_count. We try to find a representative description by matching
+  // stack_name across the constituent clusters' stacks[]; when that fails
+  // (the supercluster-level labels are usually composites), we infer the
+  // component stall ids from keywords in the name.
+  function findStackDetail(stackName) {
+    if (!stackName || !children) return null;
+    for (const c of children) {
+      for (const st of (c.stacks || [])) {
+        if (st.stack_name === stackName) return st;
+      }
+    }
+    return null;
+  }
+  return stacks.map(s => {
+    const detail = findStackDetail(s.name);
+    const stallsList = (detail && detail.stalls_involved && detail.stalls_involved.length)
+      ? detail.stalls_involved
+      : inferStallsFromName(s.name);
+    const stalls = stallsList.join(' · ');
+    const desc = detail && detail.description ? detail.description : '';
+    return `
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">${s.name || ''}</span>
+        ${stalls ? `<span class="stack-stalls">${stalls}</span>` : ''}
         ${s.confidence ? `<span class="lm-tag">${s.confidence} confidence</span>` : ''}
         ${s.cluster_count != null ? `<span class="stack-count">${s.cluster_count} cluster${String(s.cluster_count) === '1' ? '' : 's'}</span>` : ''}
       </div>
-    </div>`).join('');
+      ${desc ? `<p class="stack-desc">${desc}</p>` : ''}
+    </div>`;
+  }).join('');
 }
 
 function renderLeverageRich(hypotheses, children) {
@@ -359,7 +409,7 @@ footer a:hover{color:var(--green);}
     <div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div>
     <div class="stacks-box">${
       sc.dominant_stacks && sc.dominant_stacks.length
-        ? renderDominantStacksRich(sc.dominant_stacks)
+        ? renderDominantStacksRich(sc.dominant_stacks, children)
         : renderStacks(aggStacks)
     }</div>
   </div>

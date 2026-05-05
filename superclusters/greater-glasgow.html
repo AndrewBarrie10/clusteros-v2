@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Greater Glasgow — ClusterOS Regional Diagnostic</title>
-<meta name="description" content="Greater Glasgow regional supercluster. Constituent cluster diagnostics pending import from clusteros-v3.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Greater Glasgow — ClusterOS Regional Diagnostic","description":"Greater Glasgow regional supercluster. Constituent cluster diagnostics pending import from clusteros-v3.","url":"https://www.clusteros.io/superclusters/greater-glasgow","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Glasgow","addressCountry":"GB"},"hasPart":[]}</script>
+<meta name="description" content="8 clusters diagnosed across Greater Glasgow, drawing on 978 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuratio">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Greater Glasgow — ClusterOS Regional Diagnostic","description":"8 clusters diagnosed across Greater Glasgow, drawing on 978 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.","url":"https://www.clusteros.io/superclusters/greater-glasgow","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Glasgow","addressCountry":"GB"},"hasPart":[{"@type":"Dataset","name":"Greater Glasgow Digital Creative","url":"https://www.clusteros.io/clusters/greater-glasgow-digital-creative.html"},{"@type":"Dataset","name":"Greater Glasgow Advanced Manufacturing","url":"https://www.clusteros.io/clusters/greater-glasgow-advanced-manufacturing.html"},{"@type":"Dataset","name":"Greater Glasgow Life Sciences","url":"https://www.clusteros.io/clusters/greater-glasgow-life-sciences.html"},{"@type":"Dataset","name":"Greater Glasgow Critical Technologies","url":"https://www.clusteros.io/clusters/greater-glasgow-critical-technologies.html"},{"@type":"Dataset","name":"Greater Glasgow Innovation Ecosystem","url":"https://www.clusteros.io/clusters/greater-glasgow-innovation-ecosystem.html"},{"@type":"Dataset","name":"Greater Glasgow Space","url":"https://www.clusteros.io/clusters/greater-glasgow-space.html"},{"@type":"Dataset","name":"Greater Glasgow Net Zero","url":"https://www.clusteros.io/clusters/greater-glasgow-net-zero.html"},{"@type":"Dataset","name":"Greater Glasgow Fintech","url":"https://www.clusteros.io/clusters/greater-glasgow-fintech.html"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -66,6 +66,10 @@ h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:40
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
 .lm-tag{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
 .lm-tag a{color:inherit;text-decoration:none;}
+.rp-list{list-style:none;padding:0;margin:0;}
+.rp-list li{font-size:14px;color:var(--ink-dim);line-height:1.65;padding:0.6rem 0 0.6rem 1.2rem;border-bottom:1px solid var(--border);position:relative;}
+.rp-list li:last-child{border-bottom:none;}
+.rp-list li::before{content:'›';position:absolute;left:0;color:var(--green);font-weight:600;}
 .empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
 .empty code{font-family:var(--font-mono);font-size:12px;color:var(--ink);background:var(--surface);padding:1px 5px;border-radius:2px;}
 footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
@@ -90,26 +94,80 @@ footer a:hover{color:var(--green);}
   <div class="sc-meta">
     <span class="meta-tag">Glasgow, United Kingdom</span>
     <span class="meta-tag">Supercluster</span>
-    <span class="meta-tag">0 clusters</span>
+    <span class="meta-tag">8 clusters</span>
   </div>
-  <p class="sc-summary">Greater Glasgow regional supercluster. Constituent cluster diagnostics pending import from clusteros-v3.</p>
+  <p class="sc-summary">8 clusters diagnosed across Greater Glasgow, drawing on 978 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.</p>
   <div class="stats-row">
     <div class="stat-cell">
-      <div class="stat-num">0</div>
+      <div class="stat-num">8</div>
       <div class="stat-label">Clusters diagnosed</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">—</div>
+      <div class="stat-num">978</div>
       <div class="stat-label">Evidence items</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">0</div>
+      <div class="stat-num">11</div>
       <div class="stat-label">Distinct stacks</div>
     </div>
   </div>
+  
+  <div class="section">
+    <div class="section-label">Regional patterns · Cross-cluster synthesis</div>
+    <ul class="rp-list">
+      <li>7 of 8 clusters register all three reinforcing backbone configurations at confident levels.</li><li>Anchor concentration — University of Strathclyde appears across 6 of 8 sub-clusters as a configured ecosystem-level anchor.</li><li>Extraction signal — 90 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region.</li>
+    </ul>
+  </div>
   <div class="section">
     <div class="section-label">Constituent clusters</div>
-    <p class="empty">Constituent cluster diagnostics pending import. The supercluster appears on the map but its underlying clusters will populate once <code>uk_clusters_for_website.json</code> is merged from clusteros-v3.</p>
+    <table class="ct">
+    <thead><tr>
+      <th>Cluster</th><th>Regime</th><th>Dominant stalls</th><th>Evidence</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><a href="/clusters/greater-glasgow-digital-creative.html">Greater Glasgow Digital Creative</a></td>
+        <td>Extraction-Narrative</td>
+        <td>Re-proving Instead of Narrowing, Extracting Without Reinvesting, Mediating Instead of Coupling</td>
+        <td>107</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-glasgow-advanced-manufacturing.html">Greater Glasgow Advanced Manufacturing</a></td>
+        <td>Extraction-Narrative</td>
+        <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
+        <td>92</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-glasgow-life-sciences.html">Greater Glasgow Life Sciences</a></td>
+        <td>Extraction-Narrative</td>
+        <td>Re-proving Instead of Narrowing, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
+        <td>95</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-glasgow-critical-technologies.html">Greater Glasgow Critical Technologies</a></td>
+        <td>Extraction-Narrative</td>
+        <td>Extracting Without Reinvesting, Stabilising Around Incumbents, Scaling Activity Instead of Throughput</td>
+        <td>91</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-glasgow-innovation-ecosystem.html">Greater Glasgow Innovation Ecosystem</a></td>
+        <td>Volume-Tolerance</td>
+        <td>Re-proving Instead of Narrowing, Forgiving Instead of Redesigning, Extracting Without Reinvesting</td>
+        <td>264</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-glasgow-space.html">Greater Glasgow Space</a></td>
+        <td>Permission-Validation</td>
+        <td>Re-proving Instead of Narrowing, Coordinating Instead of Deciding, Stabilising Around Incumbents</td>
+        <td>67</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-glasgow-net-zero.html">Greater Glasgow Net Zero</a></td>
+        <td>Volume-Tolerance</td>
+        <td>Stabilising Around Incumbents, Re-proving Instead of Narrowing, Coordinating Instead of Deciding</td>
+        <td>94</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-glasgow-fintech.html">Greater Glasgow Fintech</a></td>
+        <td>Extraction-Intermediary</td>
+        <td>Re-proving Instead of Narrowing, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
+        <td>168</td>
+      </tr>
+    </tbody>
+  </table>
   </div>
   <div class="section">
     <div class="section-label">Aggregate stall pattern · Average intensity across clusters</div>
@@ -117,11 +175,69 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div>
-    <div class="stacks-box"><p class="empty">No regional stack data yet.</p></div>
+    <div class="stacks-box">
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Coordination-Intermediary-Activity</span>
+        <span class="lm-tag">high confidence</span>
+        <span class="stack-count">8 clusters</span>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Extraction-Intermediary</span>
+        <span class="lm-tag">high confidence</span>
+        <span class="stack-count">8 clusters</span>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Governance Capture</span>
+        <span class="lm-tag">high confidence</span>
+        <span class="stack-count">7 clusters</span>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Volume-Tolerance</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="stack-count">8 clusters</span>
+      </div>
+    </div></div>
   </div>
   <div class="section">
     <div class="section-label">Top leverage hypotheses</div>
-    <p class="empty">Leverage hypotheses pending.</p>
+    
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If annual ecosystem reports (e.g., by Scottish Enterprise or Glasgow City Innovation District) separated extraction metrics (graduate hiring by non-local corporates, IP licensing to external entities) from retention metrics (local startup formation, local reinvestment), it might reduce the system's ability to absorb success signals through narrative without making the difference between value creation and value capture visible."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag">Extraction-Narrative</span>
+        <span class="lm-tag"><a href="/clusters/greater-glasgow-digital-creative.html">Greater Glasgow Digital Creative</a></span>
+        <span class="lm-tag">6-12 months</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="lm-tag">high testability</span>
+      </div>
+    </div>
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If one ecosystem reporting body (e.g., Scottish Enterprise annual report) published separate metrics for value extraction (capital raised by companies, employment by companies, with destination geography) and value retention (local employment, local procurement, local IP licensing), it might make the difference visible and reduce uncertainty absorption through aggregated success narratives."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag">Extraction-Narrative</span>
+        <span class="lm-tag"><a href="/clusters/greater-glasgow-advanced-manufacturing.html">Greater Glasgow Advanced Manufacturing</a></span>
+        <span class="lm-tag">6-12 months</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="lm-tag">high testability</span>
+      </div>
+    </div>
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If ecosystem reports (e.g., from Scottish Enterprise, Life Sciences Scotland, or GCID) separated "value created" metrics (spin-offs formed, equity raised, patents filed) from "value retained" metrics (companies headquartered in cluster, employment in cluster, procurement from cluster suppliers), it might reduce the system's ability to absorb success and uncertainty signals through aggregated success narratives without making the distinction between extraction and retention visible and testable."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag">Extraction-Narrative</span>
+        <span class="lm-tag"><a href="/clusters/greater-glasgow-life-sciences.html">Greater Glasgow Life Sciences</a></span>
+        <span class="lm-tag">6-12 months</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="lm-tag">high testability</span>
+      </div>
+    </div>
   </div>
 </main>
 <footer>

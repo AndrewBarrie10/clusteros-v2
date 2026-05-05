@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>North East Combined Authority — ClusterOS Regional Diagnostic</title>
+<meta name="description" content="7 clusters diagnosed across North East Combined Authority, drawing on 664 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activit">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"North East Combined Authority — ClusterOS Regional Diagnostic","description":"7 clusters diagnosed across North East Combined Authority, drawing on 664 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.","url":"https://www.clusteros.io/superclusters/north-east","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Newcastle","addressCountry":"GB"},"hasPart":[{"@type":"Dataset","name":"North East Energy","url":"https://www.clusteros.io/clusters/north-east-energy.html"},{"@type":"Dataset","name":"North East Manufacturing","url":"https://www.clusteros.io/clusters/north-east-manufacturing.html"},{"@type":"Dataset","name":"North East Digital","url":"https://www.clusteros.io/clusters/north-east-digital.html"},{"@type":"Dataset","name":"North East LifeSciences","url":"https://www.clusteros.io/clusters/north-east-life-sciences.html"},{"@type":"Dataset","name":"North East Creative","url":"https://www.clusteros.io/clusters/north-east-creative.html"},{"@type":"Dataset","name":"North East Space","url":"https://www.clusteros.io/clusters/north-east-space.html"},{"@type":"Dataset","name":"North East Innovation Ecosystem","url":"https://www.clusteros.io/clusters/north-east-innovation-ecosystem.html"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1a1a;--ink-dim:#5a5650;--ink-muted:#8c8780;
+  --page:#f7f4ef;--surface:#f0ece4;--border:#ddd8cf;--border-2:#c8c2b7;
+  --green:#2a7a4f;--green-dim:#1d5c3a;--signal:#c8f0d0;
+  --font-serif:'Instrument Serif',Georgia,serif;
+  --font-sans:'Geist',system-ui,sans-serif;
+  --font-mono:'Geist Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);padding-bottom:56px;background:var(--page);color:var(--ink);font-weight:300;line-height:1.6;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;background:rgba(247,244,239,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--green);letter-spacing:0.12em;text-decoration:none;text-transform:uppercase;}
+.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.1em;}
+.nav-back::before{content:'← ';color:var(--ink-muted);}
+.page-wrap{max-width:920px;margin:0 auto;padding:3rem 2rem 5rem;}
+.breadcrumb{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:2rem;}
+.breadcrumb a{color:var(--ink-muted);text-decoration:none;}
+.breadcrumb a:hover{color:var(--green);}
+.breadcrumb span{margin:0 6px;}
+.sc-eyebrow{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1rem;}
+h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:400;line-height:1.15;margin-bottom:1rem;}
+.sc-meta{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:1.2rem;}
+.meta-tag{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:2px;background:var(--surface);color:var(--ink-dim);border:1px solid var(--border);}
+.sc-summary{font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:2.5rem;}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);margin-bottom:2.5rem;}
+.stat-cell{padding:1rem 1.2rem;border-right:1px solid var(--border);}
+.stat-cell:last-child{border-right:none;}
+.stat-num{font-family:var(--font-serif);font-size:2rem;color:var(--green);line-height:1;margin-bottom:0.2rem;}
+.stat-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
+.section{margin-bottom:2.5rem;}
+.section-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
+.ct{width:100%;border-collapse:collapse;font-size:13px;}
+.ct th{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-muted);text-align:left;padding:0.6rem 0.8rem;border-bottom:1px solid var(--border-2);font-weight:600;}
+.ct td{padding:0.7rem 0.8rem;border-bottom:1px solid var(--border);color:var(--ink-dim);}
+.ct td a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);}
+.ct td a:hover{color:var(--green);border-bottom-color:var(--green);}
+.agg-row{display:grid;grid-template-columns:32px 1fr 60px 90px;gap:0.8rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
+.agg-row:last-child{border-bottom:none;}
+.agg-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;}
+.agg-bar-wrap{background:var(--surface);height:6px;border-radius:2px;overflow:hidden;}
+.agg-bar{height:100%;background:var(--green);}
+.agg-pct{font-family:var(--font-mono);font-size:11px;color:var(--ink);}
+.agg-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);}
+.stacks-box{border:1px solid var(--border);}
+.stack-item{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);}
+.stack-item:last-child{border-bottom:none;}
+.stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;flex-wrap:wrap;}
+.stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
+.stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
+.stack-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-left:auto;}
+.stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.leverage-block{border-left:3px solid var(--signal);padding:1rem 1.2rem;background:rgba(200,240,208,0.12);margin-bottom:0.8rem;}
+.leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:0.6rem;}
+.leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.lm-tag{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
+.lm-tag a{color:inherit;text-decoration:none;}
+.rp-list{list-style:none;padding:0;margin:0;}
+.rp-list li{font-size:14px;color:var(--ink-dim);line-height:1.65;padding:0.6rem 0 0.6rem 1.2rem;border-bottom:1px solid var(--border);position:relative;}
+.rp-list li:last-child{border-bottom:none;}
+.rp-list li::before{content:'›';position:absolute;left:0;color:var(--green);font-weight:600;}
+.empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
+.empty code{font-family:var(--font-mono);font-size:12px;color:var(--ink);background:var(--surface);padding:1px 5px;border-radius:2px;}
+footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+footer a{color:var(--ink-muted);text-decoration:none;}
+footer a:hover{color:var(--green);}
+@media(max-width:680px){.stats-row{grid-template-columns:1fr 1fr;}.stat-cell:last-child{border-top:1px solid var(--border);grid-column:span 2;}.agg-row{grid-template-columns:28px 1fr 50px;}.agg-count{display:none;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">ClusterOS</a>
+  <a class="nav-back" href="/national-diagnostic">National Diagnostic</a>
+</nav>
+<main class="page-wrap">
+  <div class="breadcrumb">
+    <a href="/">ClusterOS</a><span>›</span>
+    <a href="/national-diagnostic">National Diagnostic</a><span>›</span>
+    North East Combined Authority
+  </div>
+  <p class="sc-eyebrow">ClusterOS Regional Diagnostic</p>
+  <h1>North East Combined Authority</h1>
+  <div class="sc-meta">
+    <span class="meta-tag">Newcastle, United Kingdom</span>
+    <span class="meta-tag">Supercluster</span>
+    <span class="meta-tag">7 clusters</span>
+  </div>
+  <p class="sc-summary">7 clusters diagnosed across North East Combined Authority, drawing on 664 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.</p>
+  <div class="stats-row">
+    <div class="stat-cell">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Clusters diagnosed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">664</div>
+      <div class="stat-label">Evidence items</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Distinct stacks</div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <div class="section-label">Regional patterns · Cross-cluster synthesis</div>
+    <ul class="rp-list">
+      <li>6 of 7 clusters register all three reinforcing backbone configurations at confident levels.</li><li>Anchor concentration — Northumbria University appears across 3 of 7 sub-clusters as a configured ecosystem-level anchor.</li><li>Pathway scale — 5,006 follow-on funding events tracked against 69 declared spin-offs.</li>
+    </ul>
+  </div>
+  <div class="section">
+    <div class="section-label">Constituent clusters</div>
+    <table class="ct">
+    <thead><tr>
+      <th>Cluster</th><th>Regime</th><th>Dominant stalls</th><th>Evidence</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><a href="/clusters/north-east-energy.html">North East Energy</a></td>
+        <td>Permission-Validation</td>
+        <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Mediating Instead of Coupling</td>
+        <td>78</td>
+      </tr><tr>
+        <td><a href="/clusters/north-east-manufacturing.html">North East Manufacturing</a></td>
+        <td>Permission-Validation</td>
+        <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Mediating Instead of Coupling</td>
+        <td>87</td>
+      </tr><tr>
+        <td><a href="/clusters/north-east-digital.html">North East Digital</a></td>
+        <td>Permission-Validation</td>
+        <td>Coordinating Instead of Deciding, Stabilising Around Incumbents, Waiting for Permission</td>
+        <td>96</td>
+      </tr><tr>
+        <td><a href="/clusters/north-east-life-sciences.html">North East LifeSciences</a></td>
+        <td>Permission-Validation</td>
+        <td>Coordinating Instead of Deciding, Mediating Instead of Coupling, Stabilising Around Incumbents</td>
+        <td>91</td>
+      </tr><tr>
+        <td><a href="/clusters/north-east-creative.html">North East Creative</a></td>
+        <td>Governance Capture</td>
+        <td>Re-proving Instead of Narrowing, Coordinating Instead of Deciding, Stabilising Around Incumbents</td>
+        <td>65</td>
+      </tr><tr>
+        <td><a href="/clusters/north-east-space.html">North East Space</a></td>
+        <td>Coordination-Incumbent-Permission</td>
+        <td>Coordinating Instead of Deciding, Stabilising Around Incumbents</td>
+        <td>62</td>
+      </tr><tr>
+        <td><a href="/clusters/north-east-innovation-ecosystem.html">North East Innovation Ecosystem</a></td>
+        <td>Permission-Validation</td>
+        <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
+        <td>185</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="section">
+    <div class="section-label">Aggregate stall pattern · Average intensity across clusters</div>
+    <p class="empty">No aggregate stall data yet.</p>
+  </div>
+  <div class="section">
+    <div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div>
+    <div class="stacks-box">
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Coordination-Intermediary-Activity</span>
+        <span class="lm-tag">high confidence</span>
+        <span class="stack-count">7 clusters</span>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Extraction-Intermediary</span>
+        <span class="lm-tag">high confidence</span>
+        <span class="stack-count">6 clusters</span>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Governance Capture</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="stack-count">7 clusters</span>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Volume-Tolerance</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="stack-count">7 clusters</span>
+      </div>
+    </div></div>
+  </div>
+  <div class="section">
+    <div class="section-label">Top leverage hypotheses</div>
+    
+    <div class="leverage-block">
+      <p class="leverage-hyp">"A probe could test whether one university research centre (e.g. NICD, IAME) launching a commercial pilot without prior UKRI validation or LEP coordination approval might expose whether the permission-validation loop is structurally necessary or locally adaptive."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag">Permission-Validation</span>
+        <span class="lm-tag"><a href="/clusters/north-east-manufacturing.html">North East Manufacturing</a></span>
+        <span class="lm-tag">6-12 months</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="lm-tag">high testability</span>
+      </div>
+    </div>
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If one coordination decision (e.g., North East Space Skills Advisory Group convening a university-firm skills partnership) were made without routing through Newcastle University (77% HHI incumbent), it might expose whether coordination infrastructure can operate through alternative nodes (Northumbria SPEARS, Durham CAI, Teesside centres)."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag">Coordination-Incumbent-Permission</span>
+        <span class="lm-tag"><a href="/clusters/north-east-space.html">North East Space</a></span>
+        <span class="lm-tag">6-12 months</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="lm-tag">high testability</span>
+      </div>
+    </div>
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If one external funder required North East Creative to report programme outcomes as behavioural evidence (e.g., business actions taken, partnerships formed without intermediation) rather than coordination activity (events held, stakeholders convened), it might expose the gap between coordination volume and direct impact, potentially reducing the system's ability to absorb pressure through coordination-report cycles."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag">Governance Capture</span>
+        <span class="lm-tag"><a href="/clusters/north-east-creative.html">North East Creative</a></span>
+        <span class="lm-tag">6-12 months</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="lm-tag">medium testability</span>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
+  <span>
+    <a href="/">Homepage</a> ·
+    <a href="/national-diagnostic">National Diagnostic</a> ·
+    <a href="/about.html">About</a>
+  </span>
+</footer>
+</body>
+</html>

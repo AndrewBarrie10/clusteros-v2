@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greater Manchester — ClusterOS Regional Diagnostic</title>
-<meta name="description" content="Greater Manchester regional supercluster. Constituent cluster diagnostics pending import from clusteros-v3.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Greater Manchester — ClusterOS Regional Diagnostic","description":"Greater Manchester regional supercluster. Constituent cluster diagnostics pending import from clusteros-v3.","url":"https://www.clusteros.io/superclusters/greater-manchester","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Manchester","addressCountry":"GB"},"hasPart":[]}</script>
+<title>Greater Manchester Combined Authority — ClusterOS Regional Diagnostic</title>
+<meta name="description" content="8 clusters diagnosed across Greater Manchester Combined Authority, drawing on 915 evidence items cross-referenced at entity level. The Coordination-Intermediary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Greater Manchester Combined Authority — ClusterOS Regional Diagnostic","description":"8 clusters diagnosed across Greater Manchester Combined Authority, drawing on 915 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 8 clusters.","url":"https://www.clusteros.io/superclusters/greater-manchester","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Manchester","addressCountry":"GB"},"hasPart":[{"@type":"Dataset","name":"Greater Manchester Health","url":"https://www.clusteros.io/clusters/greater-manchester-health.html"},{"@type":"Dataset","name":"Greater Manchester Low Carbon","url":"https://www.clusteros.io/clusters/greater-manchester-low-carbon.html"},{"@type":"Dataset","name":"Greater Manchester Creative Media","url":"https://www.clusteros.io/clusters/greater-manchester-creative-media.html"},{"@type":"Dataset","name":"Greater Manchester Advanced Materials","url":"https://www.clusteros.io/clusters/greater-manchester-advanced-materials.html"},{"@type":"Dataset","name":"Greater Manchester Innovation Ecosystem","url":"https://www.clusteros.io/clusters/greater-manchester-innovation-ecosystem.html"},{"@type":"Dataset","name":"Greater Manchester Digital","url":"https://www.clusteros.io/clusters/greater-manchester-digital.html"},{"@type":"Dataset","name":"Greater Manchester Financial Services","url":"https://www.clusteros.io/clusters/greater-manchester-financial-services.html"},{"@type":"Dataset","name":"Financial, Professional Services and Fintech","url":"https://www.clusteros.io/clusters/greater-manchester-financial-professional-services-and-fintech.html"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -66,6 +66,10 @@ h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:40
 .leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
 .lm-tag{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
 .lm-tag a{color:inherit;text-decoration:none;}
+.rp-list{list-style:none;padding:0;margin:0;}
+.rp-list li{font-size:14px;color:var(--ink-dim);line-height:1.65;padding:0.6rem 0 0.6rem 1.2rem;border-bottom:1px solid var(--border);position:relative;}
+.rp-list li:last-child{border-bottom:none;}
+.rp-list li::before{content:'›';position:absolute;left:0;color:var(--green);font-weight:600;}
 .empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
 .empty code{font-family:var(--font-mono);font-size:12px;color:var(--ink);background:var(--surface);padding:1px 5px;border-radius:2px;}
 footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
@@ -83,33 +87,87 @@ footer a:hover{color:var(--green);}
   <div class="breadcrumb">
     <a href="/">ClusterOS</a><span>›</span>
     <a href="/national-diagnostic">National Diagnostic</a><span>›</span>
-    Greater Manchester
+    Greater Manchester Combined Authority
   </div>
   <p class="sc-eyebrow">ClusterOS Regional Diagnostic</p>
-  <h1>Greater Manchester</h1>
+  <h1>Greater Manchester Combined Authority</h1>
   <div class="sc-meta">
     <span class="meta-tag">Manchester, United Kingdom</span>
     <span class="meta-tag">Supercluster</span>
-    <span class="meta-tag">0 clusters</span>
+    <span class="meta-tag">8 clusters</span>
   </div>
-  <p class="sc-summary">Greater Manchester regional supercluster. Constituent cluster diagnostics pending import from clusteros-v3.</p>
+  <p class="sc-summary">8 clusters diagnosed across Greater Manchester Combined Authority, drawing on 915 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 8 clusters.</p>
   <div class="stats-row">
     <div class="stat-cell">
-      <div class="stat-num">0</div>
+      <div class="stat-num">8</div>
       <div class="stat-label">Clusters diagnosed</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">—</div>
+      <div class="stat-num">915</div>
       <div class="stat-label">Evidence items</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">0</div>
+      <div class="stat-num">10</div>
       <div class="stat-label">Distinct stacks</div>
     </div>
   </div>
+  
+  <div class="section">
+    <div class="section-label">Regional patterns · Cross-cluster synthesis</div>
+    <ul class="rp-list">
+      <li>7 of 8 clusters register all three reinforcing backbone configurations at confident levels.</li><li>Anchor concentration — The University of Manchester appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.</li><li>Extraction signal — 111 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region.</li>
+    </ul>
+  </div>
   <div class="section">
     <div class="section-label">Constituent clusters</div>
-    <p class="empty">Constituent cluster diagnostics pending import. The supercluster appears on the map but its underlying clusters will populate once <code>uk_clusters_for_website.json</code> is merged from clusteros-v3.</p>
+    <table class="ct">
+    <thead><tr>
+      <th>Cluster</th><th>Regime</th><th>Dominant stalls</th><th>Evidence</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><a href="/clusters/greater-manchester-health.html">Greater Manchester Health</a></td>
+        <td>Intermediary-Narrative</td>
+        <td>Coordinating Instead of Deciding, Mediating Instead of Coupling, Stabilising Around Incumbents</td>
+        <td>91</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-manchester-low-carbon.html">Greater Manchester Low Carbon</a></td>
+        <td>Coordination-Incumbent-Permission</td>
+        <td>Coordinating Instead of Deciding, Stabilising Around Incumbents, Narrating Instead of Testing</td>
+        <td>85</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-manchester-creative-media.html">Greater Manchester Creative Media</a></td>
+        <td>Permission-Validation</td>
+        <td>Extracting Without Reinvesting, Stabilising Around Incumbents, Coordinating Instead of Deciding</td>
+        <td>91</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-manchester-advanced-materials.html">Greater Manchester Advanced Materials</a></td>
+        <td>Extraction-Narrative</td>
+        <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Narrating Instead of Testing</td>
+        <td>84</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-manchester-innovation-ecosystem.html">Greater Manchester Innovation Ecosystem</a></td>
+        <td>Permission-Validation</td>
+        <td>Coordinating Instead of Deciding, Stabilising Around Incumbents, Re-proving Instead of Narrowing</td>
+        <td>224</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-manchester-digital.html">Greater Manchester Digital</a></td>
+        <td>Permission-Validation</td>
+        <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
+        <td>123</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-manchester-financial-services.html">Greater Manchester Financial Services</a></td>
+        <td>Process-Permission</td>
+        <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Mediating Instead of Coupling</td>
+        <td>110</td>
+      </tr><tr>
+        <td><a href="/clusters/greater-manchester-financial-professional-services-and-fintech.html">Financial, Professional Services and Fintech</a></td>
+        <td>—</td>
+        <td>Stabilising Around Incumbents, Waiting for Permission</td>
+        <td>107</td>
+      </tr>
+    </tbody>
+  </table>
   </div>
   <div class="section">
     <div class="section-label">Aggregate stall pattern · Average intensity across clusters</div>
@@ -117,11 +175,69 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div>
-    <div class="stacks-box"><p class="empty">No regional stack data yet.</p></div>
+    <div class="stacks-box">
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Coordination-Intermediary-Activity</span>
+        <span class="lm-tag">high confidence</span>
+        <span class="stack-count">7 clusters</span>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Extraction-Intermediary</span>
+        <span class="lm-tag">high confidence</span>
+        <span class="stack-count">7 clusters</span>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Governance Capture</span>
+        <span class="lm-tag">high confidence</span>
+        <span class="stack-count">7 clusters</span>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">Volume-Tolerance</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="stack-count">7 clusters</span>
+      </div>
+    </div></div>
   </div>
   <div class="section">
     <div class="section-label">Top leverage hypotheses</div>
-    <p class="empty">Leverage hypotheses pending.</p>
+    
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If one successful outcome from the Manchester Academic Health Science Centre partnership (P001, P002, P004: direct partnership between UoM, Christie, MFT) were documented and disseminated as a case study explicitly noting that the outcome was achieved through direct partnership without Health Innovation Manchester intermediation, it might reduce the system's ability to absorb uncertainty signals about direct coupling through intermediary-produced narrative (S7)."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag">Intermediary-Narrative</span>
+        <span class="lm-tag"><a href="/clusters/greater-manchester-health.html">Greater Manchester Health</a></span>
+        <span class="lm-tag">6-12 months</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="lm-tag">high testability</span>
+      </div>
+    </div>
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If one anchor institution (e.g., University of Salford, MMU) launched a new industry partnership or training programme without seeking GMCA coordination approval or waiting for multi-stakeholder validation, it might demonstrate whether unilateral action is viable and reduce perceived necessity of coordination-permission loop."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag">Permission-Validation</span>
+        <span class="lm-tag"><a href="/clusters/greater-manchester-creative-media.html">Greater Manchester Creative Media</a></span>
+        <span class="lm-tag">6-12 months</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="lm-tag">high testability</span>
+      </div>
+    </div>
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If GMCA explicitly designated one class of decision (e.g., university-industry research contracts below £50k, or corporate-startup pilot projects below £25k) as not requiring coordination or partnership facilitation, it might demonstrate that permission architecture is not necessary for all opportunity types, potentially reducing friction and opportunity absorption through coordination."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag">Process-Permission</span>
+        <span class="lm-tag"><a href="/clusters/greater-manchester-financial-services.html">Greater Manchester Financial Services</a></span>
+        <span class="lm-tag">6-12 months</span>
+        <span class="lm-tag">medium confidence</span>
+        <span class="lm-tag">high testability</span>
+      </div>
+    </div>
   </div>
 </main>
 <footer>

@@ -1,0 +1,29 @@
+{
+  "replace": {
+    "glasgow-fintech": "greater-glasgow-fintech",
+    "glasgow-health-life-sciences": "greater-glasgow-life-sciences",
+    "west-midlands-innovation-ecosystem": "west-midlands-innovation-ecosystem",
+    "greater-manchester-innovation-ecosystem": "greater-manchester-innovation-ecosystem",
+    "cambridge-uk-life-sciences": "cambridge-life-sciences"
+  },
+  "keep_standalone": [
+    "harwell-space-technology"
+  ],
+  "retire": [
+    "scotland-health-tech",
+    "scotland-tourism-and-hospitality-tech",
+    "scotland-advanced-manufacturing",
+    "scotland-quantum-and-photonics",
+    "scotland-creative-industries",
+    "scotland-food-and-drink",
+    "scotland-data-and-ai",
+    "scotland-life-sciences",
+    "scotland-energy-transition",
+    "scotland-fintech",
+    "scotland-spacetech",
+    "scotland-cyber-security",
+    "glasgow-city-region-innovation-ecosystem",
+    "belfast-cyber-security",
+    "cheltenham-cyber-security"
+  ]
+}

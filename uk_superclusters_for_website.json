@@ -1,0 +1,2028 @@
+[
+  {
+    "id": "aberdeen-aberdeenshire",
+    "name": "Aberdeen and Aberdeenshire",
+    "type": "supercluster",
+    "city": "Aberdeen",
+    "country": "GB",
+    "lat": 57.15,
+    "lng": -2.094,
+    "cluster_count": 4,
+    "evidence_count": 423,
+    "cluster_ids": [
+      "aberdeen-aberdeenshire-energy",
+      "aberdeen-aberdeenshire-life-sciences",
+      "aberdeen-aberdeenshire-digital",
+      "aberdeen-aberdeenshire-innovation-ecosystem"
+    ],
+    "summary": "4 clusters diagnosed across Aberdeen and Aberdeenshire, drawing on 423 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 4 of 4 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "2 of 4 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — University of Aberdeen appears across 3 of 4 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 2,041 follow-on funding events tracked against 31 declared spin-offs."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "medium",
+        "cluster_count": 4
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 3
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "medium",
+        "cluster_count": 3
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 4
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one energy transition company (e.g., from RGU Energy Transition Accelerator, P026/ev_038, or NZTC Innovation Sprint, P026/ev_033) secured growth capital (Series A+) without requiring public grant, City Region Deal allocation, or incumbent partnership approval, it might reduce the system's ability to absorb opportunity signals through permission-waiting by demonstrating that the permission architecture is optional for at least one pathway.",
+        "target_stack": "Extraction-Permission (Triple)",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-22",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Aberdeen Energy"
+      },
+      {
+        "hypothesis": "If University of Aberdeen published annual data on: (1) PhD graduate destinations (Aberdeen vs. elsewhere), (2) spin-out equity ownership by location, (3) licensing revenue retention vs. distribution, it might reduce the system's ability to absorb success signals without local retention becoming visible as a question.",
+        "target_stack": "Extraction-Intermediary",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-17",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Aberdeen LifeSciences"
+      },
+      {
+        "hypothesis": "If one anchor institution (University of Aberdeen or RGU) launched a single programme without ONE board approval, City Region Deal governance involvement, or multi-stakeholder coordination, it might expose whether the validation-permission loop is structurally necessary or locally adaptive.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Aberdeen and Aberdeenshire Innovation Ecosystem"
+      }
+    ],
+    "_synthesis_slug": "aberdeen_and_aberdeenshire",
+    "_country": "Scotland",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "belfast",
+    "name": "Belfast Region",
+    "type": "supercluster",
+    "city": "Belfast",
+    "country": "GB",
+    "lat": 54.597,
+    "lng": -5.93,
+    "cluster_count": 7,
+    "evidence_count": 628,
+    "cluster_ids": [
+      "belfast-screen",
+      "belfast-maritime-net-zero",
+      "belfast-life-sciences",
+      "belfast-innovation-ecosystem",
+      "belfast-cyber",
+      "belfast-fin-tech",
+      "belfast-advanced-manufacturing"
+    ],
+    "summary": "7 clusters diagnosed across Belfast Region, drawing on 628 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 7 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "6 of 7 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — Queen’s University Belfast appears across 4 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 3,013 follow-on funding events tracked against 26 declared spin-offs."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 7
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one anchor actor (Belfast Harbour or Artemis Technologies) were to commit publicly to a single technological pathway without prior coordination or external validation, it might reduce the system's ability to absorb demand signals through re-proving cycles.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Belfast MaritimeNetZero"
+      },
+      {
+        "hypothesis": "A probe could test whether one governance body (e.g., Dept for Economy NI from P002) publishing annual \"ecosystem value retention report\" (exits by destination, founder relocation, procurement spend by geography) alongside traditional success metrics (total exits, total funding) might reduce the system's ability to absorb extraction signals through success narratives. If retention metrics are low, it may create demand for retention mechanisms.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Belfast Innovation Ecosystem"
+      },
+      {
+        "hypothesis": "If one public reporting body (e.g., Invest NI from P014, or Belfast City Region Deal governance from P006) separated \"value created\" metrics (equity raised, grants won) from \"value retained\" metrics (local employment post-exit, IP licensed back to cluster, follow-on capital from local sources), it might expose whether success narratives reflect ecosystem retention or external extraction.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "Belfast LifeSciences"
+      }
+    ],
+    "_synthesis_slug": "belfast",
+    "_country": "Northern Ireland",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "cambridge",
+    "name": "Cambridgeshire and Peterborough Combined Authority",
+    "type": "supercluster",
+    "city": "Cambridge",
+    "country": "GB",
+    "lat": 52.205,
+    "lng": 0.121,
+    "cluster_count": 9,
+    "evidence_count": 918,
+    "cluster_ids": [
+      "cambridge-life-sciences",
+      "cambridge-digital",
+      "cambridge-climate-tech",
+      "cambridge-quantum",
+      "cambridge-semiconductors",
+      "cambridge-eng-bio",
+      "cambridge-advanced-manufacturing-aerospace-and-industrial-engineering",
+      "cambridge-agri-tech",
+      "cambridge-innovation-ecosystem"
+    ],
+    "summary": "9 clusters diagnosed across Cambridgeshire and Peterborough Combined Authority, drawing on 918 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 9 of 9 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 9 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Cambridge appears across 6 of 9 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 167 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 9
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 9
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 9
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 9
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one anchor institution (ARM or University of Cambridge) committed £5m to a named technology pathway (e.g., flexible electronics, compound semiconductors) without prior coordination or national permission, it might reduce the system's ability to absorb demand signals through re-proving cycles and permission-seeking.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Cambridgeshire Peterborough Semiconductors"
+      },
+      {
+        "hypothesis": "If one documented case of direct coupling (e.g., a manufacturer-to-manufacturer partnership, a company-to-university collaboration) that succeeded without intermediary facilitation were published with attribution (naming the actors and describing how they connected), it might reduce the system's ability to absorb complexity signals without adaptation by shifting the burden of proof from \"intermediaries are necessary\" to \"intermediaries are one option.\"",
+        "target_stack": "Intermediary-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-27",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Cambridgeshire Peterborough Advanced Manufacturing Aerospace and Industrial Engineering"
+      },
+      {
+        "hypothesis": "A probe could test whether one anchor institution (e.g., Cambridge Enterprise, Cambridge Innovation Capital) committing to launch one programme cohort without prior multi-stakeholder coordination or external funder approval might reduce the system's ability to absorb demand signals through re-proving and permission-seeking cycles without strategic commitment.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Cambridge Innovation Ecosystem"
+      }
+    ],
+    "_synthesis_slug": "cambridgeshire_and_peterborough",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "cardiff-capital",
+    "name": "Cardiff Capital Region",
+    "type": "supercluster",
+    "city": "Cardiff",
+    "country": "GB",
+    "lat": 51.482,
+    "lng": -3.179,
+    "cluster_count": 7,
+    "evidence_count": 655,
+    "cluster_ids": [
+      "cardiff-capital-cyber",
+      "cardiff-capital-creative",
+      "cardiff-capital-compound-semiconductors",
+      "cardiff-capital-innovation-ecosystem",
+      "cardiff-capital-advanced-manufacturing",
+      "cardiff-capital-med-tech",
+      "cardiff-capital-fin-tech"
+    ],
+    "summary": "7 clusters diagnosed across Cardiff Capital Region, drawing on 655 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "6 of 7 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — Cardiff University appears across 5 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 3,350 follow-on funding events tracked against 53 declared spin-offs."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 7
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one research institution or anchor (e.g., Cardiff University, Thales) were to launch a defined cyber security product/service without City Deal approval, UKRI validation, or network coordination, it might expose whether the permission–validation loop is structurally necessary or locally constructed.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "CCR Cyber"
+      },
+      {
+        "hypothesis": "If one anchor institution (e.g., Bad Wolf Studios, BBC Wales) were to validate a new programme/partnership by committing resources without prior coordination or external permission, it might reduce the system's ability to absorb demand signals through re-proving cycles.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "CCR Creative"
+      },
+      {
+        "hypothesis": "A probe could test whether documenting one case where two cluster actors (e.g., a university research group and a manufacturing firm) formed a direct partnership without CSA Catapult or CSC intermediation, and publishing a case study showing partnership formation process, timeline, and outcomes, might shift the burden of proof by demonstrating that direct coupling is feasible and whether this reduces subsequent intermediary utilisation for similar partnerships.",
+        "target_stack": "Intermediary-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-27",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "CCR Compound Semiconductors"
+      }
+    ],
+    "_synthesis_slug": "cardiff_capital",
+    "_country": "Wales",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "devon-torbay",
+    "name": "Devon and Torbay Combined County Authority",
+    "type": "supercluster",
+    "city": "Exeter",
+    "country": "GB",
+    "lat": 50.718,
+    "lng": -3.534,
+    "cluster_count": 7,
+    "evidence_count": 512,
+    "cluster_ids": [
+      "devon-torbay-advanced-manufacturing",
+      "devon-torbay-agri-food",
+      "devon-torbay-photonics",
+      "devon-torbay-clean-energy",
+      "devon-torbay-digital",
+      "devon-torbay-marine",
+      "devon-torbay-health-innovation"
+    ],
+    "summary": "7 clusters diagnosed across Devon and Torbay Combined County Authority, drawing on 512 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 7 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "5 of 7 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — University of Exeter appears across 4 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 26 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "medium",
+        "cluster_count": 6
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "medium",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 7
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one anchor (Babcock, Princess Yachts, or Thales) validated a new capability by deploying it operationally without prior UKRI grant, Combined Authority approval, or multi-stakeholder coordination, it might reduce the system's ability to absorb demand signals through re-proving cycles.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "DevonTorbay AdvancedManufacturing"
+      },
+      {
+        "hypothesis": "If one research institution (University of Plymouth, Rothamsted Research, or University of Exeter) were to launch a farmer-facing trial without coordinating through networks (P008) or seeking UKRI validation (P013), it might expose whether validation-by-doing can substitute for validation-by-coordination.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "DevonTorbay AgriFood"
+      },
+      {
+        "hypothesis": "If one NHS trust (e.g., Royal Devon, Torbay) deployed a validated innovation (from P011: 790 follow-on funded projects) into routine care without seeking ICB or SW AHSN coordination approval, it might reveal whether permission architecture serves clinical governance or absorbs opportunity signals.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "DevonTorbay HealthInnovation"
+      }
+    ],
+    "_synthesis_slug": "devon_and_torbay",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "east-midlands",
+    "name": "East Midlands Combined County Authority",
+    "type": "supercluster",
+    "city": "Nottingham",
+    "country": "GB",
+    "lat": 52.951,
+    "lng": -1.15,
+    "cluster_count": 6,
+    "evidence_count": 599,
+    "cluster_ids": [
+      "east-midlands-innovation-ecosystem",
+      "east-midlands-life-sciences",
+      "east-midlands-clean-energy",
+      "east-midlands-transport",
+      "east-midlands-logistics",
+      "east-midlands-digital"
+    ],
+    "summary": "6 clusters diagnosed across East Midlands Combined County Authority, drawing on 599 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 6 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Nottingham appears across 5 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 104 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 6
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one university research group were to launch a commercial pilot without EMCCA/LEP coordination approval, it might reduce the system's ability to absorb opportunity signals without adaptation by demonstrating that validation can occur through market response rather than institutional coordination.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "East Midlands Clean Energy"
+      },
+      {
+        "hypothesis": "If one university-industry partnership (P001, P002, P027, P030) were to launch a demonstrable output (product, service, or measurable capability transfer) without prior coordination through Freeport board (P003), Development Corporation (P005), or Combined Authority (P035), it might reduce the perceived necessity of coordination and permission cycles for other actors by providing an existence proof of unilateral validation.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "East Midlands Logistics"
+      },
+      {
+        "hypothesis": "If one university (e.g., Nottingham Trent via Hive accelerator, or Derby via Innovate UK Edge partnership) launched a pilot programme (e.g., direct corporate partnership, autonomous investment fund) without seeking D2N2/EMCCA coordination approval or UKRI validation, it might reduce the system's ability to absorb opportunity through re-proving and permission-seeking cycles by demonstrating that unilateral action is viable.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "East Midlands Digital"
+      }
+    ],
+    "_synthesis_slug": "east_midlands",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "edinburgh-south-east",
+    "name": "Edinburgh and South East",
+    "type": "supercluster",
+    "city": "Edinburgh",
+    "country": "GB",
+    "lat": 55.953,
+    "lng": -3.189,
+    "cluster_count": 9,
+    "evidence_count": 869,
+    "cluster_ids": [
+      "edinburgh-south-east-agritech",
+      "edinburgh-south-east-life-sciences",
+      "edinburgh-south-east-innovation-ecosystem",
+      "edinburgh-south-east-data-ai",
+      "edinburgh-south-east-advanced-manufacturing",
+      "edinburgh-south-east-fin-tech",
+      "edinburgh-south-east-space",
+      "edinburgh-south-east-scotland-life-sciences",
+      "edinburgh-south-east-scotland-health-tech"
+    ],
+    "summary": "9 clusters diagnosed across Edinburgh and South East, drawing on 869 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 9 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "5 of 9 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — University of Edinburgh appears across 3 of 9 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 200 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 7
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one case of successful direct coupling between a firm and university (bypassing intermediaries) were documented and published by City Region Deal or Scottish Enterprise (e.g., company X contracted directly with University of Edinburgh research group Y, resulting in patent Z and product launch), it might reduce the system's ability to absorb uncertainty about direct coupling through intermediary narrative by shifting the burden of proof to demonstrating why intermediation is necessary.",
+        "target_stack": "Intermediary-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-27",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "ESES Advanced Manufacturing"
+      },
+      {
+        "hypothesis": "If UKRI grant reporting (P006: 590 grants, £626m) and City Region Deal reporting (P005) were required to distinguish between value created locally (revenue/employment in ESES region) and value extracted externally (spin-off HQ relocation, founder emigration, IP licensing to non-local firms), it might reduce the system's ability to absorb uncertainty about extraction by making the distinction between ecosystem contribution and ecosystem retention visible.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "ESES Life Sciences"
+      },
+      {
+        "hypothesis": "If one intermediary or governance body (e.g., FinTech Scotland from P003) published a single case study separating extraction metrics (where talent/capital/IP went: incumbent acquisition, external exit, geographic relocation) from ecosystem retention metrics (what remained: follow-on founding, local reinvestment, cluster employment), it might make the difference between value generation and value retention visible, potentially shifting narrative from \"ecosystem success\" to \"ecosystem leakage.\"",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "ESES FinTech"
+      }
+    ],
+    "_synthesis_slug": "edinburgh_and_south_east",
+    "_country": "Scotland",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "greater-glasgow",
+    "name": "Greater Glasgow",
+    "type": "supercluster",
+    "city": "Glasgow",
+    "country": "GB",
+    "lat": 55.864,
+    "lng": -4.252,
+    "cluster_count": 8,
+    "evidence_count": 978,
+    "cluster_ids": [
+      "greater-glasgow-digital-creative",
+      "greater-glasgow-advanced-manufacturing",
+      "greater-glasgow-life-sciences",
+      "greater-glasgow-critical-technologies",
+      "greater-glasgow-innovation-ecosystem",
+      "greater-glasgow-space",
+      "greater-glasgow-net-zero",
+      "greater-glasgow-fintech"
+    ],
+    "summary": "8 clusters diagnosed across Greater Glasgow, drawing on 978 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "7 of 8 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — University of Strathclyde appears across 6 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 90 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 8
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 8
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 8
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If annual ecosystem reports (e.g., by Scottish Enterprise or Glasgow City Innovation District) separated extraction metrics (graduate hiring by non-local corporates, IP licensing to external entities) from retention metrics (local startup formation, local reinvestment), it might reduce the system's ability to absorb success signals through narrative without making the difference between value creation and value capture visible.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Greater Glasgow Digital Creative"
+      },
+      {
+        "hypothesis": "If one ecosystem reporting body (e.g., Scottish Enterprise annual report) published separate metrics for value extraction (capital raised by companies, employment by companies, with destination geography) and value retention (local employment, local procurement, local IP licensing), it might make the difference visible and reduce uncertainty absorption through aggregated success narratives.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Greater Glasgow Advanced Manufacturing"
+      },
+      {
+        "hypothesis": "If ecosystem reports (e.g., from Scottish Enterprise, Life Sciences Scotland, or GCID) separated \"value created\" metrics (spin-offs formed, equity raised, patents filed) from \"value retained\" metrics (companies headquartered in cluster, employment in cluster, procurement from cluster suppliers), it might reduce the system's ability to absorb success and uncertainty signals through aggregated success narratives without making the distinction between extraction and retention visible and testable.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Greater Glasgow Life Sciences"
+      }
+    ],
+    "_synthesis_slug": "greater_glasgow",
+    "_country": "Scotland",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "greater-lincolnshire",
+    "name": "Greater Lincolnshire Combined County Authority",
+    "type": "supercluster",
+    "city": "Lincoln",
+    "country": "GB",
+    "lat": 53.23,
+    "lng": -0.54,
+    "cluster_count": 6,
+    "evidence_count": 510,
+    "cluster_ids": [
+      "greater-lincolnshire-ports",
+      "greater-lincolnshire-innovation-ecosystem",
+      "greater-lincolnshire-defence",
+      "greater-lincolnshire-manufacturing",
+      "greater-lincolnshire-agri-food",
+      "greater-lincolnshire-energy"
+    ],
+    "summary": "6 clusters diagnosed across Greater Lincolnshire Combined County Authority, drawing on 510 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 5 of 6 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "4 of 6 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — University of Lincoln appears across 3 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 55 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "medium",
+        "cluster_count": 5
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "medium",
+        "cluster_count": 4
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 6
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one class of decision (e.g., sub-£50k innovation grants, or peer-to-peer collaboration agreements) were explicitly exempted from requiring Combined County Authority or Humber Freeport Board approval, it might reduce the system's ability to absorb opportunity signals via coordination and permission-seeking.",
+        "target_stack": "Process-Permission",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-18",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Greater Lincolnshire Innovation Ecosystem"
+      },
+      {
+        "hypothesis": "If one anchor institution (University of Lincoln or British Steel) launched a facility, programme, or partnership without LEP/CCA coordination or multi-stakeholder approval, it might reduce the system's ability to absorb demand signals through re-proving cycles and coordination processes.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Greater Lincolnshire Manufacturing"
+      },
+      {
+        "hypothesis": "If one annual sector report (e.g., by Lincolnshire Food Partnership, P005, or GLLEP, P002) published dual metrics for anchor firms (P018): (a) GVA generated in region, (b) capital reinvested in region (equipment, facilities, local suppliers), it might make visible the difference between value generation (P003: £3.9bn GVA) and value retention, reducing the system's ability to absorb success signals via extraction narrative (S4) and success narrative (S7).",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium (p2-exploratory)",
+        "_testability": "high",
+        "_cluster_name": "Greater Lincolnshire Agri-food"
+      }
+    ],
+    "_synthesis_slug": "greater_lincolnshire",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "london",
+    "name": "Greater London Authority",
+    "type": "supercluster",
+    "city": "London",
+    "country": "GB",
+    "lat": 51.507,
+    "lng": -0.128,
+    "cluster_count": 8,
+    "evidence_count": 1049,
+    "cluster_ids": [
+      "london-climate-tech-net-zero",
+      "london-innovation-ecosystem",
+      "london-transport-logistics-mobility",
+      "london-built-environment-property",
+      "london-ai-data-software",
+      "london-creative-media-fashion",
+      "london-life-sciences-health",
+      "london-financial-services-fin-tech"
+    ],
+    "summary": "8 clusters diagnosed across Greater London Authority, drawing on 1,049 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 8 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — Imperial College London appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 305 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 8
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 8
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "medium",
+        "cluster_count": 8
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 8
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one accelerator (e.g., TfL Accelerator or Plug and Play London) pre-committed to a public exit criterion (e.g., \"Cohort 2026 will be discontinued if <40% of participants achieve Series A or equivalent revenue milestone within 24 months\"), it might reduce the system's ability to absorb demand and failure signals by making the tolerance mechanism explicit and testable.",
+        "target_stack": "Volume-Tolerance",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-19",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "London Transport Logistics Mobility"
+      },
+      {
+        "hypothesis": "If UKRI launched a 2-year pilot programme (£10m, 50 grants) restricted to non-anchor institutions (excluding the 18 configured anchors per P019), it might reduce the system's ability to absorb opportunity signals without adaptation by demonstrating that permission architecture can operate through alternative nodes.",
+        "target_stack": "Extraction-Permission (Triple)",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-22",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "London AI Data Software"
+      },
+      {
+        "hypothesis": "A probe could test whether one accelerator (e.g., Fashion District Incubator, operational since 2019 per P009/P022) commits to a public, non-negotiable closure threshold (e.g., \"if <10% of cohort 2025–2027 achieves £100k revenue by year 3, programme closes in 2028\") makes the tolerance mechanism visible. This does not improve performance but tests whether the volume-tolerance loop (S1+S3+S8) can operate when forgiveness is pre-constrained.",
+        "target_stack": "Volume-Tolerance",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-19",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "London Creative Media Fashion"
+      }
+    ],
+    "_synthesis_slug": "greater_london_authority",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "greater-manchester",
+    "name": "Greater Manchester Combined Authority",
+    "type": "supercluster",
+    "city": "Manchester",
+    "country": "GB",
+    "lat": 53.483,
+    "lng": -2.244,
+    "cluster_count": 8,
+    "evidence_count": 915,
+    "cluster_ids": [
+      "greater-manchester-health",
+      "greater-manchester-low-carbon",
+      "greater-manchester-creative-media",
+      "greater-manchester-advanced-materials",
+      "greater-manchester-innovation-ecosystem",
+      "greater-manchester-digital",
+      "greater-manchester-financial-services",
+      "greater-manchester-financial-professional-services-and-fintech"
+    ],
+    "summary": "8 clusters diagnosed across Greater Manchester Combined Authority, drawing on 915 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 8 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "7 of 8 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — The University of Manchester appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 111 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 7
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one successful outcome from the Manchester Academic Health Science Centre partnership (P001, P002, P004: direct partnership between UoM, Christie, MFT) were documented and disseminated as a case study explicitly noting that the outcome was achieved through direct partnership without Health Innovation Manchester intermediation, it might reduce the system's ability to absorb uncertainty signals about direct coupling through intermediary-produced narrative (S7).",
+        "target_stack": "Intermediary-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-27",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Greater Manchester Health"
+      },
+      {
+        "hypothesis": "If one anchor institution (e.g., University of Salford, MMU) launched a new industry partnership or training programme without seeking GMCA coordination approval or waiting for multi-stakeholder validation, it might demonstrate whether unilateral action is viable and reduce perceived necessity of coordination-permission loop.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Greater Manchester Creative Media"
+      },
+      {
+        "hypothesis": "If GMCA explicitly designated one class of decision (e.g., university-industry research contracts below £50k, or corporate-startup pilot projects below £25k) as not requiring coordination or partnership facilitation, it might demonstrate that permission architecture is not necessary for all opportunity types, potentially reducing friction and opportunity absorption through coordination.",
+        "target_stack": "Process-Permission",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-18",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Greater Manchester Financial Services"
+      }
+    ],
+    "_synthesis_slug": "greater_manchester",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "hull-east-yorkshire",
+    "name": "Hull and East Yorkshire Combined Authority",
+    "type": "supercluster",
+    "city": "Hull",
+    "country": "GB",
+    "lat": 53.744,
+    "lng": -0.333,
+    "cluster_count": 8,
+    "evidence_count": 618,
+    "cluster_ids": [
+      "hull-east-yorkshire-chemicals",
+      "hull-east-yorkshire-advanced-manufacturing",
+      "hull-east-yorkshire-logistics",
+      "hull-east-yorkshire-clean-energy",
+      "hull-east-yorkshire-digital",
+      "hull-east-yorkshire-health-tech",
+      "hull-east-yorkshire-agri-food",
+      "hull-east-yorkshire-innovation-ecosystem"
+    ],
+    "summary": "8 clusters diagnosed across Hull and East Yorkshire Combined Authority, drawing on 618 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 8 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "6 of 8 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — CATCH appears across 2 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 27 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "medium",
+        "cluster_count": 7
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 8
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one actor (e.g., C4 Ventures fund, Aura Innovation Centre, or a new entrant) launched a programme or made an investment decision without seeking Humber Energy Board coordination, Freeport governance approval, or UKRI grant validation, it might demonstrate that validation-by-doing is possible and reduce perceived necessity of re-proving and permission-seeking for other actors.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "HullEastYorkshire CleanEnergy"
+      },
+      {
+        "hypothesis": "If one documented case study were produced showing: (a) how a specific business-research collaboration (e.g., Cranswick's UKRI participation, P003) was initiated, (b) what role intermediaries played vs. direct contact, (c) what transaction costs were incurred, and (d) what outcome was achieved — it might reduce the system's ability to absorb complexity and uncertainty signals by shifting the burden of proof from \"intermediation is necessary\" to \"intermediation adds value beyond direct coupling.\"",
+        "target_stack": "Intermediary-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-27",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "HullEastYorkshire AgriFood"
+      },
+      {
+        "hypothesis": "If one funding programme (e.g., Clean Growth Innovation Programme or Humber Chemical Focus training) pre-committed to a single hard exit criterion (e.g., \"no cohort after 2026 if fewer than 3 spin-offs achieve £500k revenue by 2025\"), it might reduce the system's ability to absorb failure signals without triggering portfolio-level visibility of tolerance mechanisms.",
+        "target_stack": "Volume-Tolerance",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-19",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "HullEastYorkshire Chemicals"
+      }
+    ],
+    "_synthesis_slug": "hull_and_east_yorkshire",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "inverness-highlands",
+    "name": "Inverness and Highlands",
+    "type": "supercluster",
+    "city": "Inverness",
+    "country": "GB",
+    "lat": 57.478,
+    "lng": -4.224,
+    "cluster_count": 8,
+    "evidence_count": 565,
+    "cluster_ids": [
+      "inverness-highlands-tourism",
+      "inverness-highlands-life-sciences",
+      "inverness-highlands-food-drink",
+      "inverness-highlands-space",
+      "inverness-highlands-aquaculture",
+      "inverness-highlands-energy",
+      "inverness-highlands-creative",
+      "inverness-highlands-forestry"
+    ],
+    "summary": "8 clusters diagnosed across Inverness and Highlands, drawing on 565 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 8 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "6 of 8 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — Scottish Association for Marine Science appears across 2 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 2 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "medium",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 8
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one public agency (e.g., Highland Council, HIE, or VisitScotland) launched a single tourism infrastructure project without Regional Leadership Group coordination, without multi-year strategic validation, and without awaiting Scottish Government funding approval — using only existing delegated authority — it might expose whether the validation-permission loop is structurally necessary or locally adaptive.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Highlands and Islands Tourism"
+      },
+      {
+        "hypothesis": "If one external buyer (e.g., major UK retailer, export distributor) refused to engage with coordination structures (Scotland Food & Drink, regional networks) and instead required direct evidence of producer capability (certifications, repeat delivery records, quality audits), it might expose the gap between coordination activity and behavioural proof, potentially reducing the system's ability to absorb pressure through coordination alone.",
+        "target_stack": "Governance Capture",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-15",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "Highlands and Islands FoodDrink"
+      },
+      {
+        "hypothesis": "A probe could test whether one capital allocation decision made without inter-agency coordination (e.g., HIE deploying <£500k to a single recipient without Scottish Enterprise partnership formation) might reduce the perceived necessity of coordination for subsequent similar-scale decisions.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "low",
+        "_testability": "high",
+        "_cluster_name": "Highlands and Islands LifeSciences"
+      }
+    ],
+    "_synthesis_slug": "inverness_and_highlands",
+    "_country": "Scotland",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "lancashire",
+    "name": "Lancashire Combined County Authority",
+    "type": "supercluster",
+    "city": "Preston",
+    "country": "GB",
+    "lat": 53.763,
+    "lng": -2.703,
+    "cluster_count": 6,
+    "evidence_count": 523,
+    "cluster_ids": [
+      "lancashire-clean-energy",
+      "lancashire-innovation-ecosystem",
+      "lancashire-digital-cyber",
+      "lancashire-food-agritech",
+      "lancashire-space",
+      "lancashire-advanced-manufacturing"
+    ],
+    "summary": "6 clusters diagnosed across Lancashire Combined County Authority, drawing on 523 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "5 of 6 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — University of Lancashire appears across 5 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 1,611 follow-on funding events tracked against 156 declared spin-offs."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 5
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 6
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If Lancashire Food Agritech published a case study of one direct firm-to-firm collaboration or direct firm-to-researcher collaboration within the Food Innovation Network (P004, 45 businesses) that occurred without Growth Hub or Boost facilitation, it might shift burden of proof by demonstrating that direct coupling is possible.",
+        "target_stack": "Intermediary-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-27",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Lancashire Food Agritech"
+      },
+      {
+        "hypothesis": "If one intermediary organisation (e.g., Boost Business Lancashire) were to launch a single pilot programme without prior Combined Authority approval, using existing evidence of demand (e.g., 70,381 company incorporations 2021–2025, P016) as post-hoc justification rather than pre-approval, it might reduce the system's ability to absorb opportunity signals through the permission-validation loop by demonstrating that validation can occur through action rather than coordination.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "low",
+        "_testability": "high",
+        "_cluster_name": "Lancashire Innovation Ecosystem"
+      },
+      {
+        "hypothesis": "If one SME or startup launched a cyber security product/service targeting a Lancashire customer without prior partnership membership, public funding application, or intermediary facilitation, it might demonstrate that market validation can occur without coordination or permission, potentially reducing perceived necessity of re-proving and waiting cycles for other actors.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "low",
+        "_testability": "high",
+        "_cluster_name": "Lancashire Digital Cyber"
+      }
+    ],
+    "_synthesis_slug": "lancashire",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "liverpool-city-region",
+    "name": "Liverpool City Region Combined Authority",
+    "type": "supercluster",
+    "city": "Liverpool",
+    "country": "GB",
+    "lat": 53.408,
+    "lng": -2.991,
+    "cluster_count": 7,
+    "evidence_count": 726,
+    "cluster_ids": [
+      "liverpool-city-region-innovation-ecosystem",
+      "liverpool-city-region-visitor-economy",
+      "liverpool-city-region-digital-creative",
+      "liverpool-city-region-maritime-logistics",
+      "liverpool-city-region-advanced-manufacturing",
+      "liverpool-city-region-clean-energy",
+      "liverpool-city-region-health-life-sciences"
+    ],
+    "summary": "7 clusters diagnosed across Liverpool City Region Combined Authority, drawing on 726 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 7 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Liverpool appears across 4 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 50 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 7
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one public report (e.g., annual ecosystem review, Combined Authority performance report) separated extraction metrics (capital leaving region, talent exiting to non-regional employers, IP licensed to external entities) from retention metrics (capital reinvested locally, talent employed regionally, IP commercialised by regional actors) for 2 years, it might reduce the system's ability to absorb uncertainty about extraction through success narratives by making the difference visible.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Liverpool City Region Digital Creative"
+      },
+      {
+        "hypothesis": "If one coordination decision (e.g., funding allocation, network convening, strategy priority) were made without routing through anchor institutions (P018: Peel Ports, University of Liverpool, Mersey Maritime), it might reduce the system's ability to absorb disruption signals through incumbent-mediated coordination.",
+        "target_stack": "Coordination-Incumbent-Permission",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-23",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Liverpool City Region Maritime Logistics"
+      },
+      {
+        "hypothesis": "If one infrastructure actor (e.g., Port of Liverpool, Electricity North West) deployed a clean energy asset without prior consortium formation or national funding approval, it might expose whether the validation-permission loop is structurally necessary or behaviourally chosen.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "Liverpool City Region Clean Energy"
+      }
+    ],
+    "_synthesis_slug": "liverpool_city_region",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "north-east",
+    "name": "North East Combined Authority",
+    "type": "supercluster",
+    "city": "Newcastle",
+    "country": "GB",
+    "lat": 54.978,
+    "lng": -1.614,
+    "cluster_count": 7,
+    "evidence_count": 664,
+    "cluster_ids": [
+      "north-east-energy",
+      "north-east-manufacturing",
+      "north-east-digital",
+      "north-east-life-sciences",
+      "north-east-creative",
+      "north-east-space",
+      "north-east-innovation-ecosystem"
+    ],
+    "summary": "7 clusters diagnosed across North East Combined Authority, drawing on 664 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "6 of 7 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — Northumbria University appears across 3 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 5,006 follow-on funding events tracked against 69 declared spin-offs."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 7
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "medium",
+        "cluster_count": 7
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 7
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "A probe could test whether one university research centre (e.g. NICD, IAME) launching a commercial pilot without prior UKRI validation or LEP coordination approval might expose whether the permission-validation loop is structurally necessary or locally adaptive.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "North East Manufacturing"
+      },
+      {
+        "hypothesis": "If one coordination decision (e.g., North East Space Skills Advisory Group convening a university-firm skills partnership) were made without routing through Newcastle University (77% HHI incumbent), it might expose whether coordination infrastructure can operate through alternative nodes (Northumbria SPEARS, Durham CAI, Teesside centres).",
+        "target_stack": "Coordination-Incumbent-Permission",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-23",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "North East Space"
+      },
+      {
+        "hypothesis": "If one external funder required North East Creative to report programme outcomes as behavioural evidence (e.g., business actions taken, partnerships formed without intermediation) rather than coordination activity (events held, stakeholders convened), it might expose the gap between coordination volume and direct impact, potentially reducing the system's ability to absorb pressure through coordination-report cycles.",
+        "target_stack": "Governance Capture",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-15",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "North East Creative"
+      }
+    ],
+    "_synthesis_slug": "north_east",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "south-yorkshire",
+    "name": "South Yorkshire Mayoral Combined Authority",
+    "type": "supercluster",
+    "city": "Sheffield",
+    "country": "GB",
+    "lat": 53.383,
+    "lng": -1.468,
+    "cluster_count": 4,
+    "evidence_count": 399,
+    "cluster_ids": [
+      "south-yorkshire-healthtech",
+      "south-yorkshire-innovation-ecosystem",
+      "south-yorkshire-digital",
+      "south-yorkshire-advanced-manufacturing"
+    ],
+    "summary": "4 clusters diagnosed across South Yorkshire Mayoral Combined Authority, drawing on 399 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 4 of 4 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 4 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Sheffield appears across 2 of 4 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 3,471 follow-on funding events tracked against 58 declared spin-offs."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 4
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 4
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 4
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 4
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one external funder (e.g., EPSRC or Innovate UK) required grant recipients to report conversion outcomes (e.g., pilot-to-procurement rate, spin-off survival at 3 years) rather than activity metrics (e.g., partnerships formed, programmes launched), it might expose the gap between coordination activity and behavioural proof, potentially reducing the system's ability to absorb pressure through coordination-report-activity cycles.",
+        "target_stack": "Governance Capture",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-15",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "South Yorkshire Healthtech"
+      },
+      {
+        "hypothesis": "If one MCA thematic board (e.g., Innovation Board) were permitted to commit £5M from the Gainshare fund to a single named project without cross-board coordination or UK Government approval, it might reduce the system's ability to absorb demand signals through re-proving cycles. The probe would test whether unilateral action by a governance sub-unit can proceed without triggering coordination requirements or permission-seeking.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "low",
+        "_testability": "medium",
+        "_cluster_name": "South Yorkshire Innovation Ecosystem"
+      },
+      {
+        "hypothesis": "If one listed anchor (e.g., Sheffield Digital, TECH SY) launched a programme without SYMCA coordination or UKRI grant approval (e.g., self-funded cohort, corporate-sponsored pilot), it might expose whether validation-permission loop is necessary or whether unilateral action can proceed without triggering coordination/permission requirements.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "low",
+        "_testability": "medium",
+        "_cluster_name": "South Yorkshire Digital"
+      }
+    ],
+    "_synthesis_slug": "south_yorkshire",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "stirling-clackmannanshire",
+    "name": "Stirling and Clackmannanshire",
+    "type": "supercluster",
+    "city": "Stirling",
+    "country": "GB",
+    "lat": 56.117,
+    "lng": -3.937,
+    "cluster_count": 5,
+    "evidence_count": 359,
+    "cluster_ids": [
+      "stirling-clackmannanshire-food-drink",
+      "stirling-clackmannanshire-manufacturing",
+      "stirling-clackmannanshire-aquaculture",
+      "stirling-clackmannanshire-innovation-ecosystem",
+      "stirling-clackmannanshire-digital"
+    ],
+    "summary": "5 clusters diagnosed across Stirling and Clackmannanshire, drawing on 359 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 5 of 5 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "4 of 5 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — University of Stirling appears across 2 of 5 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 4 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "medium",
+        "cluster_count": 5
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 4
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "medium",
+        "cluster_count": 4
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 5
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If Williams Brothers' operational decisions (product launches, distribution agreements, hiring) were documented and made visible without prior coordination or institutional approval, it might expose that validation-by-doing is already occurring outside the permission-coordination loop, potentially reducing perceived necessity of re-proving cycles for other actors.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Stirling Clackmannanshire FoodDrink"
+      },
+      {
+        "hypothesis": "If one documented case of direct coupling (e.g., two Innovation Park tenants forming a commercial partnership without Business Gateway or university intermediation, with public documentation of the process and outcome) were produced and disseminated, it might reduce the system's ability to absorb complexity signals without adaptation by shifting the burden of proof from \"why direct coupling is necessary\" to \"why intermediation is necessary.\"",
+        "target_stack": "Intermediary-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-27",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Stirling and Clackmannanshire Innovation Ecosystem"
+      },
+      {
+        "hypothesis": "If SAIC or Scottish Government required all publicly funded projects to report separately: (a) value generated (e.g., revenue, IP, products), (b) value retained regionally (e.g., local employment, local procurement, regional IP ownership), and (c) value extracted (difference between a and b), it might make extraction visible as distinct from success, potentially reducing the system's ability to absorb uncertainty about extraction via success narratives.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "Stirling Clackmannanshire Aquaculture"
+      }
+    ],
+    "_synthesis_slug": "stirling_and_clackmannanshire",
+    "_country": "Scotland",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "tay-cities",
+    "name": "Tay Cities Region",
+    "type": "supercluster",
+    "city": "Dundee",
+    "country": "GB",
+    "lat": 56.462,
+    "lng": -2.97,
+    "cluster_count": 6,
+    "evidence_count": 524,
+    "cluster_ids": [
+      "tay-cities-innovation-ecosystem",
+      "tay-cities-creative-tech",
+      "tay-cities-agri-food",
+      "tay-cities-clean-growth",
+      "tay-cities-life-sciences",
+      "tay-cities-engineering"
+    ],
+    "summary": "6 clusters diagnosed across Tay Cities Region, drawing on 524 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 6 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Dundee appears across 2 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 56 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 6
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one ecosystem report (e.g., annual Tay Cities Creative Tech cluster report) separated extraction metrics (studio acquisitions by external entities, graduate employment outside region) from retention metrics (local company formation, local employment, reinvestment in regional infrastructure), it might make the difference between value creation and value capture visible and shift narrative framing.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Tay Cities Creative Tech"
+      },
+      {
+        "hypothesis": "If a Tay Cities company (e.g., CXR Biosciences, Abbott Dundee) launched a clinical study using external clinical infrastructure, it might weaken the permission architecture by demonstrating that clinical validation is accessible without incumbent anchor mediation.",
+        "target_stack": "Extraction-Permission (Triple)",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-22",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "Tay Cities Life Sciences"
+      },
+      {
+        "hypothesis": "If Tay Cities Deal Joint Committee allocated capital to one project led by a non-incumbent actor (not University of Dundee, not MSIP, not established anchor) without requiring incumbent partnership or endorsement, it might demonstrate that coordination infrastructure can route through alternative nodes, potentially reducing incumbent centrality and the system's ability to absorb disruption via incumbent-mediated coordination.",
+        "target_stack": "Coordination-Incumbent-Permission",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-23",
+        "_confidence": "medium",
+        "_testability": "medium",
+        "_cluster_name": "Tay Cities Engineering"
+      }
+    ],
+    "_synthesis_slug": "tay_cities",
+    "_country": "Scotland",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "tees-valley",
+    "name": "Tees Valley Combined Authority",
+    "type": "supercluster",
+    "city": "Middlesbrough",
+    "country": "GB",
+    "lat": 54.568,
+    "lng": -1.235,
+    "cluster_count": 6,
+    "evidence_count": 581,
+    "cluster_ids": [
+      "tees-valley-net-zero",
+      "tees-valley-life-sciences",
+      "tees-valley-logistics",
+      "tees-valley-manufacturing",
+      "tees-valley-digital",
+      "tees-valley-innovation-ecosystem"
+    ],
+    "summary": "6 clusters diagnosed across Tees Valley Combined Authority, drawing on 581 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 6 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — Teesside University appears across 3 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 16 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "medium",
+        "cluster_count": 6
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 6
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one actor (e.g. Teesside University via National Horizons Centre or Launchpad) were to validate a capability claim by deploying it commercially without prior TVCA coordination or external policy designation, it might reduce the system's ability to absorb demand signals through re-proving cycles.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Tees Valley Net Zero"
+      },
+      {
+        "hypothesis": "If one actor (e.g., anchor institution, large manufacturer, or new entrant) launched a testable initiative (e.g., direct manufacturer-to-manufacturer collaboration, autonomous investment outside designated zones, or programme with pre-committed exit criteria) without prior coordination or permission-seeking, it might reduce the system's ability to absorb opportunity via re-proving and waiting loops, exposing whether validation-by-doing is viable.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Tees Valley Manufacturing"
+      },
+      {
+        "hypothesis": "If one business support programme were launched without prior coordination across all 5 local authorities (using mayoral investment powers under devolution deal), it might reduce the system's ability to absorb opportunity signals through validation-permission cycles without requiring structural redesign.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Tees Valley Digital"
+      }
+    ],
+    "_synthesis_slug": "tees_valley",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "thames-valley",
+    "name": "Thames Valley Strategic Mayoral Authority",
+    "type": "supercluster",
+    "city": "Reading",
+    "country": "GB",
+    "lat": 51.454,
+    "lng": -0.973,
+    "cluster_count": 11,
+    "evidence_count": 1209,
+    "cluster_ids": [
+      "thames-valley-quantum",
+      "thames-valley-life-sciences",
+      "thames-valley-creative",
+      "thames-valley-environmental-intelligence",
+      "thames-valley-digital",
+      "thames-valley-business-services",
+      "thames-valley-defence-tech",
+      "thames-valley-space",
+      "thames-valley-energy",
+      "thames-valley-innovation-ecosystem",
+      "thames-valley-engineering"
+    ],
+    "summary": "11 clusters diagnosed across Thames Valley Strategic Mayoral Authority, drawing on 1,209 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 11 of 11 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 11 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Oxford appears across 7 of 11 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 354 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 11
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 11
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 11
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 11
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one coordination decision (e.g., sector working group convenorship, funding allocation panel membership, strategic plan consultation lead) were routed through a non-anchor actor (e.g., scale-up company, non-anchor professional services firm, community organisation), it might demonstrate that coordination infrastructure can operate without incumbent nodes, potentially reducing the system's ability to absorb disruption signals through incumbent-mediated coordination.",
+        "target_stack": "Coordination-Incumbent-Permission",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-23",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Thames Valley Business Services"
+      },
+      {
+        "hypothesis": "If one SME (e.g., defence tech company in P015 MoD award cohort) received pre-approved authority to execute a pilot project (e.g., technology demonstration with named MoD end-user) without LEP coordination (S2) or DASA approval cycle (S9), it might expose whether the permission-validation loop is structurally necessary or substitutable.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "Thames Valley Defence Tech"
+      },
+      {
+        "hypothesis": "If one public funder (e.g., Innovate UK, 58% of UKRI grants per P006) pre-committed to closing the bottom 10% of grant programmes by a named performance metric (e.g., follow-on funding rate, patent filing rate, employment creation) at a fixed review date, it might reduce the system's ability to absorb failure and pressure signals through re-proving and forgiving without exposing whether tolerance is strategic or structural.",
+        "target_stack": "Volume-Tolerance",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-19",
+        "_confidence": "medium",
+        "_testability": "low (requires funder commitment, long feedback loops, system-wide visibility required for closure decision)",
+        "_cluster_name": "Thames Valley Digital"
+      }
+    ],
+    "_synthesis_slug": "thames_valley",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "west-midlands",
+    "name": "West Midlands Combined Authority",
+    "type": "supercluster",
+    "city": "Birmingham",
+    "country": "GB",
+    "lat": 52.486,
+    "lng": -1.891,
+    "cluster_count": 8,
+    "evidence_count": 875,
+    "cluster_ids": [
+      "west-midlands-bpfs",
+      "west-midlands-digital",
+      "west-midlands-logistics",
+      "west-midlands-creative",
+      "west-midlands-advanced-manufacturing",
+      "west-midlands-health-tech",
+      "west-midlands-innovation-ecosystem",
+      "west-midlands-clean-growth"
+    ],
+    "summary": "8 clusters diagnosed across West Midlands Combined Authority, drawing on 875 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 8 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Birmingham appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 5,606 follow-on funding events tracked against 76 declared spin-offs."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 8
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 8
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 8
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 8
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one actor (e.g., university spin-off, logistics operator, innovation intermediary) were enabled to launch a pilot or commercial service without prior UKRI grant approval, WMCA partnership announcement, or multi-stakeholder coordination (e.g., through alternative funding source, regulatory sandbox, or private capital), it might demonstrate that validation-by-doing is possible, potentially reducing the system's ability to absorb opportunity signals through re-proving and permission-seeking cycles.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "WMCA Logistics"
+      },
+      {
+        "hypothesis": "If ecosystem reporting (e.g., WMCA economic impact reports, university commercialisation reports, or cluster organization publications) separated extraction metrics (acquisition proceeds destination, spin-off employment destinations, IP licensing revenue flows) from retention metrics (local capital reinvested, talent retained in region, IP commercialised locally), it might reduce the system's ability to absorb success signals via narrative by making the difference between value creation and value capture visible.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "WMCA HealthTech"
+      },
+      {
+        "hypothesis": "If one support programme (e.g., Innovation Birmingham, STEAMhouse) launched a cohort with pre-committed capital allocation (e.g., £500k committed before applications) rather than validating through coordination and permission cycles, it might reduce the system's ability to absorb opportunity signals through re-proving and waiting without adaptation.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "West Midlands Innovation Ecosystem"
+      }
+    ],
+    "_synthesis_slug": "west_midlands",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "west-of-england",
+    "name": "West of England Combined Authority",
+    "type": "supercluster",
+    "city": "Bristol",
+    "country": "GB",
+    "lat": 51.454,
+    "lng": -2.588,
+    "cluster_count": 9,
+    "evidence_count": 909,
+    "cluster_ids": [
+      "west-of-england-clean-tech",
+      "west-of-england-space",
+      "west-of-england-creative",
+      "west-of-england-fin-tech",
+      "west-of-england-aerospace",
+      "west-of-england-digital",
+      "west-of-england-innovation-ecosystem",
+      "west-of-england-quantum",
+      "west-of-england-life-sciences"
+    ],
+    "summary": "9 clusters diagnosed across West of England Combined Authority, drawing on 909 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 9 of 9 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "8 of 9 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — University of Bristol appears across 6 of 9 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 4,347 follow-on funding events tracked against 70 declared spin-offs."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 9
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 8
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "high",
+        "cluster_count": 9
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 9
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one university (e.g., University of Bristol per P001, or University of Bath per P002) launched a cleantech venture without prior WECA coordination, national funding application, or incubator programme enrollment — using only internal resources and direct industry partnership (as evidenced by P016 partnerships formed in 2024) — and publicly documented the decision pathway, it might reduce the system's ability to absorb opportunity through re-proving and coordination by demonstrating that validation can occur through action rather than process.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "West of England CleanTech"
+      },
+      {
+        "hypothesis": "If one intermediary or anchor (e.g., Watershed, Bristol Games Hub, or production company) launched a programme or partnership without prior WECA approval or multi-stakeholder coordination, validating by execution rather than consensus-building, it might demonstrate that validation-by-doing is possible, potentially reducing the system's ability to absorb opportunity through extended coordination and permission cycles.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "West of England Creative"
+      },
+      {
+        "hypothesis": "A probe could test whether separating extraction metrics (capital/talent destination) from success metrics (ecosystem value retained) in one public narrative document (e.g., WECA annual aerospace report) makes the extraction-narrative link visible to stakeholders.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "West of England Aerospace"
+      }
+    ],
+    "_synthesis_slug": "west_of_england",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "west-yorkshire",
+    "name": "West Yorkshire Combined Authority",
+    "type": "supercluster",
+    "city": "Leeds",
+    "country": "GB",
+    "lat": 53.8,
+    "lng": -1.549,
+    "cluster_count": 6,
+    "evidence_count": 557,
+    "cluster_ids": [
+      "west-yorkshire-creative-industries",
+      "west-yorkshire-advanced-manufacturing",
+      "west-yorkshire-digital-technology",
+      "west-yorkshire-green-economy",
+      "west-yorkshire-health-life-sciences",
+      "west-yorkshire-financial-professional-services"
+    ],
+    "summary": "6 clusters diagnosed across West Yorkshire Combined Authority, drawing on 557 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 5 of 6 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "5 of 6 clusters register all three reinforcing backbone configurations at confident levels.",
+      "Anchor concentration — University of Leeds appears across 4 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 32 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 5
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "medium",
+        "cluster_count": 5
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 6
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If one successful direct university-industry coupling (e.g., P018 Huddersfield-Siemens 2025, or undocumented cases) were documented and published as a case study showing pathway, timeline, and outcomes without intermediary involvement, it might shift the burden of proof by demonstrating that direct coupling is possible and exposing what intermediation adds vs. what it substitutes for.",
+        "target_stack": "Intermediary-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-27",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "West Yorkshire Advanced Manufacturing"
+      },
+      {
+        "hypothesis": "If UKRI spin-off reporting (P023) were required to separate extraction metrics (e.g., % of spin-off equity held externally, % of spin-off employment located outside West Yorkshire) from success metrics (e.g., number of spin-offs created), it might reduce the system's ability to absorb uncertainty signals without adaptation by making the difference between ecosystem contribution and value extraction visible.",
+        "target_stack": "Extraction-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-24",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "West Yorkshire Health Life Sciences"
+      },
+      {
+        "hypothesis": "If one university programme (e.g., Northern Film School) were to launch a new industry partnership without Combined Authority or Enterprise Partnership coordination approval, it might test whether the validation-permission loop is necessary for all programme types or only for those requiring public funding allocation.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "low",
+        "_testability": "high",
+        "_cluster_name": "West Yorkshire Creative Industries"
+      }
+    ],
+    "_synthesis_slug": "west_yorkshire",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  },
+  {
+    "id": "york-north-yorkshire",
+    "name": "York and North Yorkshire Combined Authority",
+    "type": "supercluster",
+    "city": "York",
+    "country": "GB",
+    "lat": 53.96,
+    "lng": -1.08,
+    "cluster_count": 6,
+    "evidence_count": 407,
+    "cluster_ids": [
+      "york-north-yorkshire-food-farming",
+      "york-north-yorkshire-rail-innovation",
+      "york-north-yorkshire-defence-security",
+      "york-north-yorkshire-creative-industries",
+      "york-north-yorkshire-engineering-biology-life-sciences",
+      "york-north-yorkshire-clean-energy"
+    ],
+    "summary": "6 clusters diagnosed across York and North Yorkshire Combined Authority, drawing on 407 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "regime": "Coordination-Intermediary-Activity",
+    "regional_patterns": [
+      "All 6 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of York appears across 6 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 44 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+    ],
+    "dominant_stacks": [
+      {
+        "name": "Coordination-Intermediary-Activity",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Extraction-Intermediary",
+        "confidence": "high",
+        "cluster_count": 6
+      },
+      {
+        "name": "Governance Capture",
+        "confidence": "medium",
+        "cluster_count": 6
+      },
+      {
+        "name": "Volume-Tolerance",
+        "confidence": "medium",
+        "cluster_count": 6
+      }
+    ],
+    "leverage_hypotheses": [
+      {
+        "hypothesis": "If RAF Linton-on-Ouse Defence Innovation Hub were to launch one pilot programme (e.g., SME co-location trial, direct procurement challenge) before completing coordination with all stakeholders or securing full national funding approval, using existing £12M MoD infrastructure investment (P004), it might reduce the system's ability to absorb opportunity through re-proving-coordination-permission cycles by demonstrating that validation can occur through doing rather than coordinating.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "York and North Yorkshire Defence Security"
+      },
+      {
+        "hypothesis": "If one Creative Catalyst cohort participant were to launch a testable initiative without seeking Combined Authority endorsement or coordinating with existing intermediaries (P011: York Creative Industries Network, LEP Business Growth Hub, Creative England), it might expose whether validation-by-doing reduces the perceived need for coordination and permission cycles.",
+        "target_stack": "Permission-Validation",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-16",
+        "_confidence": "medium",
+        "_testability": "high",
+        "_cluster_name": "York and North Yorkshire Creative Industries"
+      },
+      {
+        "hypothesis": "If one documented case of direct bilateral partnership between a research institution and food manufacturer (e.g., University of York and McCain Foods joint R&D project) that operated without intermediary facilitation were published with process and outcome data, it might reduce the system's ability to absorb uncertainty signals about whether direct coupling is viable.",
+        "target_stack": "Intermediary-Narrative",
+        "timeline": "6-12 months",
+        "_target_stack_id": "STK-27",
+        "_confidence": "low",
+        "_testability": "high",
+        "_cluster_name": "York and North Yorkshire Food Farming"
+      }
+    ],
+    "_synthesis_slug": "york_and_north_yorkshire",
+    "_country": "England",
+    "_type_label": "innovation_cluster"
+  }
+]

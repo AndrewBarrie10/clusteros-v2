@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orlando Innovation Ecosystem — ClusterOS Regional Diagnostic</title>
+<meta name="description" content="Ten clusters diagnosed across the Orlando metropolitan region, spanning simulation and training, photonics, aerospace, cybersecurity, medtech, agtech, advanced ">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Orlando Innovation Ecosystem — ClusterOS Regional Diagnostic","description":"Ten clusters diagnosed across the Orlando metropolitan region, spanning simulation and training, photonics, aerospace, cybersecurity, medtech, agtech, advanced manufacturing, digital media, space technology, and tourism technology.","url":"https://www.clusteros.io/superclusters/orlando-innovation-ecosystem","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Orlando","addressCountry":"US"},"hasPart":[{"@type":"Dataset","name":"Orlando Advanced Manufacturing","url":"https://www.clusteros.io/clusters/orlando-advanced-manufacturing.html"},{"@type":"Dataset","name":"Orlando Cybersecurity","url":"https://www.clusteros.io/clusters/orlando-cybersecurity.html"},{"@type":"Dataset","name":"Orlando Photonics & Optics","url":"https://www.clusteros.io/clusters/orlando-photonics-optics.html"},{"@type":"Dataset","name":"Orlando AgTech","url":"https://www.clusteros.io/clusters/orlando-agtech.html"},{"@type":"Dataset","name":"Orlando Aviation & Aerospace","url":"https://www.clusteros.io/clusters/orlando-aviation-aerospace.html"},{"@type":"Dataset","name":"Orlando Tourism Technology","url":"https://www.clusteros.io/clusters/orlando-tourism-technology.html"},{"@type":"Dataset","name":"Orlando MedTech","url":"https://www.clusteros.io/clusters/orlando-medtech.html"},{"@type":"Dataset","name":"Orlando Digital Media","url":"https://www.clusteros.io/clusters/orlando-digital-media.html"},{"@type":"Dataset","name":"Orlando Simulation & Training","url":"https://www.clusteros.io/clusters/orlando-simulation-training.html"},{"@type":"Dataset","name":"Orlando SpaceTech","url":"https://www.clusteros.io/clusters/orlando-spacetech.html"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1a1a;--ink-dim:#5a5650;--ink-muted:#8c8780;
+  --page:#f7f4ef;--surface:#f0ece4;--border:#ddd8cf;--border-2:#c8c2b7;
+  --green:#2a7a4f;--green-dim:#1d5c3a;--signal:#c8f0d0;
+  --font-serif:'Instrument Serif',Georgia,serif;
+  --font-sans:'Geist',system-ui,sans-serif;
+  --font-mono:'Geist Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);padding-bottom:56px;background:var(--page);color:var(--ink);font-weight:300;line-height:1.6;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;background:rgba(247,244,239,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--green);letter-spacing:0.12em;text-decoration:none;text-transform:uppercase;}
+.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.1em;}
+.nav-back::before{content:'← ';color:var(--ink-muted);}
+.page-wrap{max-width:920px;margin:0 auto;padding:3rem 2rem 5rem;}
+.breadcrumb{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:2rem;}
+.breadcrumb a{color:var(--ink-muted);text-decoration:none;}
+.breadcrumb a:hover{color:var(--green);}
+.breadcrumb span{margin:0 6px;}
+.sc-eyebrow{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1rem;}
+h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:400;line-height:1.15;margin-bottom:1rem;}
+.sc-meta{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:1.2rem;}
+.meta-tag{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:2px;background:var(--surface);color:var(--ink-dim);border:1px solid var(--border);}
+.sc-summary{font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:2.5rem;}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);margin-bottom:2.5rem;}
+.stat-cell{padding:1rem 1.2rem;border-right:1px solid var(--border);}
+.stat-cell:last-child{border-right:none;}
+.stat-num{font-family:var(--font-serif);font-size:2rem;color:var(--green);line-height:1;margin-bottom:0.2rem;}
+.stat-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
+.section{margin-bottom:2.5rem;}
+.section-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
+.ct{width:100%;border-collapse:collapse;font-size:13px;}
+.ct th{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-muted);text-align:left;padding:0.6rem 0.8rem;border-bottom:1px solid var(--border-2);font-weight:600;}
+.ct td{padding:0.7rem 0.8rem;border-bottom:1px solid var(--border);color:var(--ink-dim);}
+.ct td a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);}
+.ct td a:hover{color:var(--green);border-bottom-color:var(--green);}
+.agg-row{display:grid;grid-template-columns:32px 1fr 60px 90px;gap:0.8rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
+.agg-row:last-child{border-bottom:none;}
+.agg-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;}
+.agg-bar-wrap{background:var(--surface);height:6px;border-radius:2px;overflow:hidden;}
+.agg-bar{height:100%;background:var(--green);}
+.agg-pct{font-family:var(--font-mono);font-size:11px;color:var(--ink);}
+.agg-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);}
+.stacks-box{border:1px solid var(--border);}
+.stack-item{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);}
+.stack-item:last-child{border-bottom:none;}
+.stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;flex-wrap:wrap;}
+.stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
+.stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
+.stack-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-left:auto;}
+.stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.leverage-block{border-left:3px solid var(--signal);padding:1rem 1.2rem;background:rgba(200,240,208,0.12);margin-bottom:0.8rem;}
+.leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:0.6rem;}
+.leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.lm-tag{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
+.lm-tag a{color:inherit;text-decoration:none;}
+.empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
+.empty code{font-family:var(--font-mono);font-size:12px;color:var(--ink);background:var(--surface);padding:1px 5px;border-radius:2px;}
+footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+footer a{color:var(--ink-muted);text-decoration:none;}
+footer a:hover{color:var(--green);}
+@media(max-width:680px){.stats-row{grid-template-columns:1fr 1fr;}.stat-cell:last-child{border-top:1px solid var(--border);grid-column:span 2;}.agg-row{grid-template-columns:28px 1fr 50px;}.agg-count{display:none;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">ClusterOS</a>
+  <a class="nav-back" href="/national-diagnostic">National Diagnostic</a>
+</nav>
+<main class="page-wrap">
+  <div class="breadcrumb">
+    <a href="/">ClusterOS</a><span>›</span>
+    <a href="/national-diagnostic">National Diagnostic</a><span>›</span>
+    Orlando Innovation Ecosystem
+  </div>
+  <p class="sc-eyebrow">ClusterOS Regional Diagnostic</p>
+  <h1>Orlando Innovation Ecosystem</h1>
+  <div class="sc-meta">
+    <span class="meta-tag">Orlando, United States</span>
+    <span class="meta-tag">Supercluster</span>
+    <span class="meta-tag">10 clusters</span>
+  </div>
+  <p class="sc-summary">Ten clusters diagnosed across the Orlando metropolitan region, spanning simulation and training, photonics, aerospace, cybersecurity, medtech, agtech, advanced manufacturing, digital media, space technology, and tourism technology.</p>
+  <div class="stats-row">
+    <div class="stat-cell">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Clusters diagnosed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">582</div>
+      <div class="stat-label">Evidence items</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">27</div>
+      <div class="stat-label">Distinct stacks</div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Constituent clusters</div>
+    <table class="ct">
+    <thead><tr>
+      <th>Cluster</th><th>Regime</th><th>Dominant stalls</th><th>Evidence</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><a href="/clusters/orlando-advanced-manufacturing.html">Orlando Advanced Manufacturing</a></td>
+        <td>mature</td>
+        <td>Mediating instead of coupling</td>
+        <td>58</td>
+      </tr><tr>
+        <td><a href="/clusters/orlando-cybersecurity.html">Orlando Cybersecurity</a></td>
+        <td>emerging</td>
+        <td>Mediating instead of coupling, Stabilizing around incumbents</td>
+        <td>56</td>
+      </tr><tr>
+        <td><a href="/clusters/orlando-photonics-optics.html">Orlando Photonics & Optics</a></td>
+        <td>emerging</td>
+        <td>Extracting without reinvesting, Stabilizing around incumbents</td>
+        <td>58</td>
+      </tr><tr>
+        <td><a href="/clusters/orlando-agtech.html">Orlando AgTech</a></td>
+        <td>emerging</td>
+        <td>Mediating instead of coupling</td>
+        <td>54</td>
+      </tr><tr>
+        <td><a href="/clusters/orlando-aviation-aerospace.html">Orlando Aviation & Aerospace</a></td>
+        <td>mature</td>
+        <td>Stabilizing around incumbents</td>
+        <td>55</td>
+      </tr><tr>
+        <td><a href="/clusters/orlando-tourism-technology.html">Orlando Tourism Technology</a></td>
+        <td>mature</td>
+        <td>Coordinating instead of deciding, Scaling activity instead of throughput</td>
+        <td>68</td>
+      </tr><tr>
+        <td><a href="/clusters/orlando-medtech.html">Orlando MedTech</a></td>
+        <td>emerging</td>
+        <td>Mediating instead of coupling, Stabilizing around incumbents</td>
+        <td>57</td>
+      </tr><tr>
+        <td><a href="/clusters/orlando-digital-media.html">Orlando Digital Media</a></td>
+        <td>mature</td>
+        <td>Coordinating instead of deciding, Extracting without reinvesting, Mediating instead of coupling</td>
+        <td>58</td>
+      </tr><tr>
+        <td><a href="/clusters/orlando-simulation-training.html">Orlando Simulation & Training</a></td>
+        <td>mature</td>
+        <td>Extracting without reinvesting, Stabilizing around incumbents</td>
+        <td>61</td>
+      </tr><tr>
+        <td><a href="/clusters/orlando-spacetech.html">Orlando SpaceTech</a></td>
+        <td>mature</td>
+        <td>Mediating instead of coupling</td>
+        <td>57</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="section">
+    <div class="section-label">Aggregate stall pattern · Average intensity across clusters</div>
+    <div class="agg-row">
+      <span class="agg-id">S4</span>
+      <div class="agg-bar-wrap"><div class="agg-bar" style="width:50%"></div></div>
+      <span class="agg-pct">50%</span>
+      <span class="agg-count">3 clusters</span>
+    </div><div class="agg-row">
+      <span class="agg-id">S5</span>
+      <div class="agg-bar-wrap"><div class="agg-bar" style="width:42%"></div></div>
+      <span class="agg-pct">42%</span>
+      <span class="agg-count">10 clusters</span>
+    </div><div class="agg-row">
+      <span class="agg-id">S6</span>
+      <div class="agg-bar-wrap"><div class="agg-bar" style="width:40%"></div></div>
+      <span class="agg-pct">40%</span>
+      <span class="agg-count">10 clusters</span>
+    </div><div class="agg-row">
+      <span class="agg-id">S2</span>
+      <div class="agg-bar-wrap"><div class="agg-bar" style="width:34%"></div></div>
+      <span class="agg-pct">34%</span>
+      <span class="agg-count">10 clusters</span>
+    </div><div class="agg-row">
+      <span class="agg-id">S8</span>
+      <div class="agg-bar-wrap"><div class="agg-bar" style="width:34%"></div></div>
+      <span class="agg-pct">34%</span>
+      <span class="agg-count">10 clusters</span>
+    </div><div class="agg-row">
+      <span class="agg-id">S7</span>
+      <div class="agg-bar-wrap"><div class="agg-bar" style="width:30%"></div></div>
+      <span class="agg-pct">30%</span>
+      <span class="agg-count">9 clusters</span>
+    </div><div class="agg-row">
+      <span class="agg-id">S9</span>
+      <div class="agg-bar-wrap"><div class="agg-bar" style="width:30%"></div></div>
+      <span class="agg-pct">30%</span>
+      <span class="agg-count">4 clusters</span>
+    </div><div class="agg-row">
+      <span class="agg-id">S1</span>
+      <div class="agg-bar-wrap"><div class="agg-bar" style="width:30%"></div></div>
+      <span class="agg-pct">30%</span>
+      <span class="agg-count">10 clusters</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div>
+    <div class="stacks-box">
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STK-02 · Network-Intermediary Stabilisation</span>
+        <span class="stack-stalls">S2 · S5</span>
+        <span class="stack-count">5 clusters</span>
+      </div>
+      <p class="stack-desc">Coordination through intermediaries (STALL_02) creates structured channels that become the default interaction mode, reducing pressure to establish direct coupling (STALL_05). Intermediary infrastructure (STALL_05) provides venues for coordination activity (STALL_02), creating mutual reinforcement where coordination sustains intermediation and intermediation enables coordination without requiring</p>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STK-26 · Activity-Mediation Stabilisation</span>
+        <span class="stack-stalls">S5 · S8</span>
+        <span class="stack-count">4 clusters</span>
+      </div>
+      <p class="stack-desc">Extension mediation (STALL_05) enables activity scaling (STALL_08) without requiring throughput measurement; activity scaling justifies continued mediation role. Both stalls operate in educational/community engagement domain with overlapping time windows (2024).</p>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STK-09 · Intermediation–Incumbent Stabilisation</span>
+        <span class="stack-stalls">S5 · S6</span>
+        <span class="stack-count">3 clusters</span>
+      </div>
+      <p class="stack-desc">Mediation structures (Team Orlando, NCS cross-service partnerships, conference hosting) provide platforms that amplify incumbent visibility and access; incumbent institutional presence (UCF multi-unit structure since 2023, NCS hybrid structure since 1998, NAVAIR dual operations, four major defense contractors) creates demand for intermediation to manage complexity. Both operate through established</p>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STK-20 · Incumbent-Coordination Stabilisation</span>
+        <span class="stack-stalls">S2 · S6</span>
+        <span class="stack-count">2 clusters</span>
+      </div>
+      <p class="stack-desc">Coordination mechanisms (STALL_02) preserve relationships among established incumbents (STALL_06) by distributing attention across multiple actors without forcing competitive selection. Incumbent continuity (STALL_06) provides stable actor set that makes coordination tractable and reduces disruption risk that might accompany new entrant integration.</p>
+    </div>
+    <div class="stack-item">
+      <div class="stack-header">
+        <span class="stack-num">STK-32 · Expansion-Activity Stabilisation</span>
+        <span class="stack-stalls">S1 · S8</span>
+        <span class="stack-count">2 clusters</span>
+      </div>
+      <p class="stack-desc">Network expansion (STALL_01) generates new activity venues and partnership structures that enable activity scaling (STALL_08) without requiring commitment to specific pathways. Activity scaling (STALL_08) through multiple service types and programs justifies continued network expansion (STALL_01) as response to demonstrated demand, creating cycle where expansion enables activity and activity justi</p>
+    </div></div>
+  </div>
+  <div class="section">
+    <div class="section-label">Top leverage hypotheses</div>
+    
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If outcome differences between direct collaborative relationships and intermediated coordination were made observable through structured comparison, it might reduce the system's ability to absorb uncertainty about direct relationship risks without testing direct coupling modes."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag"><a href="/clusters/orlando-advanced-manufacturing.html">Orlando Advanced Manufacturing</a></span>
+        <span class="lm-tag">6-12 months</span>
+      </div>
+    </div>
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If federal funders required public disclosure of domain-specific resource allocation decisions within grant reporting cycles, it might reduce the system's ability to absorb funding uncertainty through generalized validation activities without revealing strategic commitments."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag"><a href="/clusters/orlando-cybersecurity.html">Orlando Cybersecurity</a></span>
+        <span class="lm-tag">6-12 months</span>
+      </div>
+    </div>
+    <div class="leverage-block">
+      <p class="leverage-hyp">"If Florida Photonics Summit or quarterly networking events were to publish post-event outcome reports documenting specific commitments made or options foreclosed by participants, it might reduce the system's ability to absorb uncertainty about cluster value proposition without narrowing."</p>
+      <div class="leverage-meta">
+        <span class="lm-tag"><a href="/clusters/orlando-photonics-optics.html">Orlando Photonics & Optics</a></span>
+        <span class="lm-tag">6-12 months</span>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
+  <span>
+    <a href="/">Homepage</a> ·
+    <a href="/national-diagnostic">National Diagnostic</a> ·
+    <a href="/about.html">About</a>
+  </span>
+</footer>
+</body>
+</html>

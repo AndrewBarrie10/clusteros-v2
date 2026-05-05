@@ -1,9 +1,64 @@
 #!/usr/bin/env node
 // ClusterOS — Cluster page generator (rich version)
 // Reads clusters.json → writes clusters/{slug}.html for each cluster
+//
+// Usage:
+//   node generate-clusters.js
+//     Regenerate every cluster page (default; OVERWRITES existing files —
+//     do not use unless you want to wipe enrichment from live pages).
+//
+//   node generate-clusters.js --new-only
+//     Only generate pages for entries whose clusters/{id}.html does not
+//     already exist. Existing files are left untouched.
+//
+//   node generate-clusters.js --only id1,id2,id3
+//     Only generate the listed slugs (still overwrites those files).
+//
+//   node generate-clusters.js --only-file path/to/ids.txt
+//     One slug per line; blanks and `#` comments ignored.
+//
+//   Filters compose: `--new-only --only foo,bar` writes foo.html and
+//   bar.html only if they don't already exist.
 
 const fs = require('fs');
 const path = require('path');
+
+function parseArgs(argv) {
+  const opts = { newOnly: false, only: null, onlyFile: null };
+  for (let i = 2; i < argv.length; i++) {
+    const a = argv[i];
+    if (a === '--new-only') {
+      opts.newOnly = true;
+    } else if (a === '--only') {
+      opts.only = (argv[++i] || '').split(',').map(s => s.trim()).filter(Boolean);
+    } else if (a.startsWith('--only=')) {
+      opts.only = a.slice('--only='.length).split(',').map(s => s.trim()).filter(Boolean);
+    } else if (a === '--only-file') {
+      opts.onlyFile = argv[++i];
+    } else if (a.startsWith('--only-file=')) {
+      opts.onlyFile = a.slice('--only-file='.length);
+    } else if (a === '--help' || a === '-h') {
+      console.log('See file header for usage.'); process.exit(0);
+    } else {
+      console.error(`Unknown argument: ${a}`); process.exit(1);
+    }
+  }
+  return opts;
+}
+
+const argv = parseArgs(process.argv);
+const allowedIds = (() => {
+  if (!argv.only && !argv.onlyFile) return null;
+  const set = new Set();
+  if (argv.only) argv.only.forEach(id => set.add(id));
+  if (argv.onlyFile) {
+    fs.readFileSync(argv.onlyFile, 'utf8').split(/\r?\n/).forEach(line => {
+      const id = line.split('#')[0].trim();
+      if (id) set.add(id);
+    });
+  }
+  return set;
+})();
 
 const clusters = JSON.parse(fs.readFileSync('./clusters.json', 'utf8'));
 
@@ -320,6 +375,20 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 </style>
+<!-- Mixpanel tracking -->
+<script type="text/javascript">
+  (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+  for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===
+  e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=e.getElementsByTagName("script")[0];e.parentNode.insertBefore(k,e)}})(document,window.mixpanel||[])
+
+
+  mixpanel.init('a5cac1b920750b79ab02f9cbf02c8f89', {
+    autocapture: true,
+    record_sessions_percent: 100,
+    api_host: 'https://api-eu.mixpanel.com',
+  })
+
+<\/script>
 </head>
 <body>
 <nav>
@@ -451,11 +520,18 @@ new Chart(document.getElementById('radarChart').getContext('2d'),{
 
 // ── GENERATE ─────────────────────────────────────────────
 let count = 0;
+let skippedExisting = 0;
+let filteredOut = 0;
 for (const cluster of clusters) {
+  const slug = cluster.id||cluster.name.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  if (allowedIds && !allowedIds.has(slug)) { filteredOut++; continue; }
+  const outPath = path.join(outDir, `${slug}.html`);
+  if (argv.newOnly && fs.existsSync(outPath)) { skippedExisting++; continue; }
   const similar = findSimilar(cluster, clusters);
   const html = template(cluster, similar);
-  const slug = cluster.id||cluster.name.toLowerCase().replace(/[^a-z0-9]+/g,'-');
-  fs.writeFileSync(path.join(outDir, `${slug}.html`), html, 'utf8');
+  fs.writeFileSync(outPath, html, 'utf8');
   count++;
 }
 console.log(`Generated ${count} cluster pages → clusters/`);
+if (argv.newOnly) console.log(`Skipped (file already exists): ${skippedExisting}`);
+if (allowedIds) console.log(`Filtered out (outside --only / --only-file): ${filteredOut}`);

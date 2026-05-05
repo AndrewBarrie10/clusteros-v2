@@ -132,7 +132,25 @@ footer a:hover{color:var(--green);}
   nav{padding:0 1rem;}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
+
+.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
+.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
+.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
 </style>
+<!-- Mixpanel tracking -->
+<script type="text/javascript">
+  (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+  for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===
+  e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=e.getElementsByTagName("script")[0];e.parentNode.insertBefore(k,e)}})(document,window.mixpanel||[])
+
+  
+  mixpanel.init('a5cac1b920750b79ab02f9cbf02c8f89', {
+    autocapture: true,
+    record_sessions_percent: 100,
+    api_host: 'https://api-eu.mixpanel.com',
+  })
+
+</script>
 </head>
 <body>
 <nav>
@@ -251,27 +269,27 @@ footer a:hover{color:var(--green);}
         <span class="stack-num">Stack 01</span>
         <span class="stack-stalls">S1 · S5</span>
       </div>
-      <p class="stack-desc">Repeated establishment of new facilities and programs (S1: , , , , , ) co-occurs with establishment of intermediary platforms (S5: , , , , ) across overlapping time windows (2000-2024). Expansion creates coordination complexity; mediation infrastructure absorbs that complexity without requiring direct coupling or strategic narrowing. Each behavior makes the other more locally rational.</p>
+      <p class="stack-desc">Repeated establishment of new facilities and programs (Re-proving: , , , , , ) co-occurs with establishment of intermediary platforms (Mediating: , , , , ) across overlapping time windows (2000-2024). Expansion creates coordination complexity; mediation infrastructure absorbs that complexity without requiring direct coupling or strategic narrowing. Each behavior makes the other more locally rational.</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 02</span>
         <span class="stack-stalls">S2 · S6</span>
       </div>
-      <p class="stack-desc">Establishment of coordination structures (S2: , , spanning 2010-2023) co-occurs with continuity of incumbent presence (S6: , , , ). Coordination platforms may preferentially connect to established actors with existing infrastructure; incumbent continuity provides stable nodes for coordination to organize around. Neither requires exclusionary decisions or emergence of new actors.</p>
+      <p class="stack-desc">Establishment of coordination structures (Coordinating: , , spanning 2010-2023) co-occurs with continuity of incumbent presence (Stabilising: , , , ). Coordination platforms may preferentially connect to established actors with existing infrastructure; incumbent continuity provides stable nodes for coordination to organize around. Neither requires exclusionary decisions or emergence of new actors.</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 03</span>
         <span class="stack-stalls">S8 · S5</span>
       </div>
-      <p class="stack-desc">Scaling of program activity (S8: , , , spanning 2000-2024) co-occurs with establishment of intermediary platforms (S5: same time window). Increased program volume creates demand for coordination infrastructure; mediation platforms enable activity scaling without requiring demonstration of throughput or direct coupling between program participants and outcomes.</p>
+      <p class="stack-desc">Scaling of program activity (Scaling activity: , , , spanning 2000-2024) co-occurs with establishment of intermediary platforms (Mediating: same time window). Increased program volume creates demand for coordination infrastructure; mediation platforms enable activity scaling without requiring demonstration of throughput or direct coupling between program participants and outcomes.</p>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If a subset of actors formed direct bilateral partnerships without using established intermediary platforms (, ), it might reduce the system's ability to absorb coordination complexity through mediation, potentially exposing whether direct coupling can occur without intermediation infrastructure."</p>
+    <p class="leverage-hyp">"If a subset of actors formed direct bilateral partnerships without using established intermediary platforms, it might reduce the system's ability to absorb coordination complexity through mediation, potentially exposing whether direct coupling can occur without intermediation...</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -280,23 +298,28 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/taipei-ai-software.html">
-      <div class="sc-name">Taipei AI & Software</div>
-      <div class="sc-meta">Taipei · Taiwan</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a><a class="similar-card" href="/clusters/almaty-fintech-tech.html">
-      <div class="sc-name">Almaty FinTech & Tech</div>
-      <div class="sc-meta">Almaty · KZ</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a><a class="similar-card" href="/clusters/karachi-fintech.html">
-      <div class="sc-name">Karachi FinTech</div>
-      <div class="sc-meta">Karachi · PK</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a></div>
-  </div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/riyadh-ai-tech.html">
+      <div class="sc-name">Riyadh AI &amp; Tech</div>
+      <div class="sc-meta">Riyadh · SA</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">2 shared stacks · 68 evidence · P1</div>
+      <div class="sc-mechanism">Validation–Intermediation Stabilisation: Repeated bilateral partnership formation (Re-proving X-side) plausibly sustains institutional intermediation layer (Mediating X-side): each new partnership validates intermediary role while routing co...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty (technology frontier legitimacy), Pressure (international credibility requirements), Complexity (multi-stakeholder coordination)</div>
+    </a><a class="similar-card" href="/clusters/miami-life-sciences.html">
+      <div class="sc-name">Miami Life Sciences</div>
+      <div class="sc-meta">Miami · US</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">2 shared stacks · 74 evidence · P2</div>
+      <div class="sc-mechanism">Validation–Intermediation Stabilisation: Re-proving activities (Re-proving: partnerships, programs, convenings) generate demand for intermediation structures (Mediating: networks, accelerators); intermediation structures create venues for va...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty (about partner selection, program efficacy), Complexity (multi-institutional coordination)</div>
+    </a><a class="similar-card" href="/clusters/seattle-cleantech.html">
+      <div class="sc-name">Seattle CleanTech</div>
+      <div class="sc-meta">Seattle · US</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">2 shared stacks · 58 evidence · P3</div>
+      <div class="sc-mechanism">Validation–Intermediation Cycle: Re-proving (repeated commitment events, investment rounds 2019-2024) plausibly sustains demand for Mediating (network entities, accelerator programs, investment intermediaries); Mediating plausibly cr...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty (intermediaries provide validation infrastructure), Pressure (repeated demonstrations distribute risk), Opportunity (networks create access points for new validation rounds)</div>
+    </a></div></div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
@@ -308,14 +331,14 @@ footer a:hover{color:var(--green);}
   <span>
     <a href="/">Homepage</a> ·
     <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/data.html">Cluster Data</a> ·
     <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <div class="cluster-sticky-bar">
   <span class="csb-name">New York City AI & Deep Tech</span>
   <div class="csb-actions">
-    <a class="csb-btn csb-amber" href="/cas-explainer.html">Free Pulse Check →</a>
-    <a class="csb-btn csb-green" href="/request.html">Request a Diagnostic →</a>
+    <a class="csb-btn csb-amber" href="/diagnostic-journey">Diagnose your ecosystem →</a>
   </div>
 </div>
 <script>

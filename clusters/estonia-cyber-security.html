@@ -132,7 +132,25 @@ footer a:hover{color:var(--green);}
   nav{padding:0 1rem;}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
+
+.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
+.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
+.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
 </style>
+<!-- Mixpanel tracking -->
+<script type="text/javascript">
+  (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+  for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===
+  e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=e.getElementsByTagName("script")[0];e.parentNode.insertBefore(k,e)}})(document,window.mixpanel||[])
+
+  
+  mixpanel.init('a5cac1b920750b79ab02f9cbf02c8f89', {
+    autocapture: true,
+    record_sessions_percent: 100,
+    api_host: 'https://api-eu.mixpanel.com',
+  })
+
+</script>
 </head>
 <body>
 <nav>
@@ -260,34 +278,34 @@ footer a:hover{color:var(--green);}
         <span class="stack-num">Stack 01</span>
         <span class="stack-stalls">S1 · S6 · S7</span>
       </div>
-      <p class="stack-desc">Re-proving activities (STALL_01: knowledge production, exercise scaling, iterative publication) occur through incumbent institutions (STALL_06: NATO CCDCOE, RIA, TalTech sustained presence 2006-2024). Narrative construction (STALL_07: legal manuals, policy revision, identity elements) provides interpretive frame for validation activities. Each stall's X-side sustains the others: incumbents host va</p>
+      <p class="stack-desc">Re-proving activities (knowledge production, exercise scaling, iterative publication) occur through incumbent institutions (NATO CCDCOE, RIA, TalTech sustained presence 2006-2024). Narrative construction (legal manuals, policy revision, identity elements) provides interpretive frame for validation activities. Each stall's X-side sustains the others: incumbents host...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 02</span>
         <span class="stack-stalls">S2 · S5</span>
       </div>
-      <p class="stack-desc">Coordinating activities (STALL_02: partnership agreements, cooperation modalities, geographic distribution) occur through mediating institutions (STALL_05: NATO CCDCOE and RIA cross-domain intermediation). Coordination generates demand for mediation; mediation enables broader coordination without direct coupling. X-sides mutually sustain: partnership expansion increases intermediary value; interme</p>
+      <p class="stack-desc">Coordinating activities (partnership agreements, cooperation modalities, geographic distribution) occur through mediating institutions (NATO CCDCOE and RIA cross-domain intermediation). Coordination generates demand for mediation; mediation enables broader coordination without direct coupling. X-sides mutually sustain: partnership expansion increases intermediary value;...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 03</span>
         <span class="stack-stalls">S1 · S7 · S8</span>
       </div>
-      <p class="stack-desc">Re-proving activities (STALL_01) and activity scaling (STALL_08: membership expansion, exercise participation growth, e-residency numbers) generate material for narrative construction (STALL_07). Narrative frames activity metrics as strategic success; success narrative justifies continued validation and scaling. X-sides mutually sustain: scaling provides quantitative proof; proof justifies narrati</p>
+      <p class="stack-desc">Re-proving activities (Re-proving) and activity scaling (membership expansion, exercise participation growth, e-residency numbers) generate material for narrative construction (Narrating). Narrative frames activity metrics as strategic success; success narrative justifies continued validation and scaling. X-sides mutually sustain: scaling provides quantitative proof; proof justifies...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 04</span>
         <span class="stack-stalls">S5 · S6</span>
       </div>
-      <p class="stack-desc">Stabilisation around incumbents (STALL_06: NATO CCDCOE, RIA, TalTech sustained cross-domain presence) and mediating instead of coupling (STALL_05: same institutions as cross-domain intermediaries) describe overlapping institutional configurations. Incumbent status enables mediation role; mediation role reinforces incumbent position. X-sides mutually sustain: continuity builds intermediary credibil</p>
+      <p class="stack-desc">Stabilisation around incumbents (NATO CCDCOE, RIA, TalTech sustained cross-domain presence) and mediating instead of coupling (same institutions as cross-domain intermediaries) describe overlapping institutional configurations. Incumbent status enables mediation role; mediation role reinforces incumbent position. X-sides mutually sustain: continuity builds intermediary...</p>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If publication of legal manual iterations were delayed or made contingent on documented strategic commitment from participating states, it might reduce the system's ability to absorb uncertainty through continuous validation without narrowing options."</p>
+    <p class="leverage-hyp">"If publication of legal manual iterations were delayed or made contingent on documented strategic commitment from participating states, it might reduce the system's ability to absorb uncertainty through continuous validation without narrowing...</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -296,23 +314,28 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/vancouver-life-sciences-biotech.html">
-      <div class="sc-name">Vancouver Life Sciences & BioTech</div>
-      <div class="sc-meta">Vancouver · Canada</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/tsukuba-space-technology.html">
-      <div class="sc-name">Tsukuba Space Technology</div>
-      <div class="sc-meta">Tsukuba · Japan</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Narrating instead of testing</div>
-    </a><a class="similar-card" href="/clusters/beijing-ai-deep-tech.html">
-      <div class="sc-name">Beijing AI & Deep Tech</div>
-      <div class="sc-meta">Beijing · CN</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Narrating instead of testing</div>
-    </a></div>
-  </div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/lisbon-digital-web3.html">
+      <div class="sc-name">Lisbon Digital &amp; Web3</div>
+      <div class="sc-meta">Lisbon · PT</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">3 shared stacks · 81 evidence · P3</div>
+      <div class="sc-mechanism">Infrastructure Multiplication–Narrative Stabilisation: Re-proving (repeated establishment of support structures 2010-2024) co-occurs with Scaling activity (scaling of programs, events, training) and Narrating (conferences, aggregate metrics, attendance re...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty, complexity, pressure</div>
+    </a><a class="similar-card" href="/clusters/austin-life-sciences-medtech.html">
+      <div class="sc-name">Austin Life Sciences &amp; MedTech</div>
+      <div class="sc-meta">Austin TX · US</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">3 shared stacks · 56 evidence · P1</div>
+      <div class="sc-mechanism">Intermediation–Incumbent Stabilisation: Intermediary structures (accelerators, associations, investment entities) may reduce pressure for direct coupling between new ventures and established institutions; established institutional presence ...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty (ventures navigating institutional access), Complexity (multi-stakeholder coordination), Pressure (need for rapid connection-making)</div>
+    </a><a class="similar-card" href="/clusters/almaty-fintech-tech.html">
+      <div class="sc-name">Almaty FinTech &amp; Tech</div>
+      <div class="sc-meta">Almaty · KZ</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">3 shared stacks · 53 evidence · P3</div>
+      <div class="sc-mechanism">Intermediation-Incumbent Stabilisation: Mediating through specialized intermediary units (Mediating) plausibly sustains stabilisation around incumbents (Stabilising) by channeling startup activity through structures that may feed incumbent ...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty (intermediaries reduce transaction costs), Pressure (incumbents provide proven infrastructure), Disruption (startup activity absorbed through mediation rather than direct competition)</div>
+    </a></div></div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
@@ -324,14 +347,14 @@ footer a:hover{color:var(--green);}
   <span>
     <a href="/">Homepage</a> ·
     <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/data.html">Cluster Data</a> ·
     <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <div class="cluster-sticky-bar">
   <span class="csb-name">Estonia Cyber Security</span>
   <div class="csb-actions">
-    <a class="csb-btn csb-amber" href="/cas-explainer.html">Free Pulse Check →</a>
-    <a class="csb-btn csb-green" href="/request.html">Request a Diagnostic →</a>
+    <a class="csb-btn csb-amber" href="/diagnostic-journey">Diagnose your ecosystem →</a>
   </div>
 </div>
 <script>

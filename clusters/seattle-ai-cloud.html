@@ -132,7 +132,25 @@ footer a:hover{color:var(--green);}
   nav{padding:0 1rem;}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
+
+.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
+.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
+.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
 </style>
+<!-- Mixpanel tracking -->
+<script type="text/javascript">
+  (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+  for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===
+  e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=e.getElementsByTagName("script")[0];e.parentNode.insertBefore(k,e)}})(document,window.mixpanel||[])
+
+  
+  mixpanel.init('a5cac1b920750b79ab02f9cbf02c8f89', {
+    autocapture: true,
+    record_sessions_percent: 100,
+    api_host: 'https://api-eu.mixpanel.com',
+  })
+
+</script>
 </head>
 <body>
 <nav>
@@ -260,34 +278,34 @@ footer a:hover{color:var(--green);}
         <span class="stack-num">Stack 01</span>
         <span class="stack-stalls">S1 · S5 · S8</span>
       </div>
-      <p class="stack-desc">S1 (re-proving via program launches) creates demand for S5 (intermediary coordination structures); S5 intermediaries operate S8 (scaled participation mechanisms); S8 activity volumes justify continued S1 (new program launches). Each stall's X-side provides input conditions for others: program proliferation requires coordination infrastructure, intermediaries scale through participation metrics, pa</p>
+      <p class="stack-desc">Re-proving (re-proving via program launches) creates demand for Mediating (intermediary coordination structures); Mediating intermediaries operate Scaling activity (scaled participation mechanisms); Scaling activity activity volumes justify continued Re-proving (new program launches). Each stall's X-side provides input conditions for others: program proliferation requires coordination infrastructure, intermediaries scale through participation metrics,...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 02</span>
         <span class="stack-stalls">S2 · S6</span>
       </div>
-      <p class="stack-desc">S2 (partnership formation) integrates with S6 (incumbent-centered structures); partnerships provide non-threatening mechanism for startups/institutions to access incumbent resources without displacing incumbent positions; incumbent participation in partnerships reinforces their centrality. S2 X-side (partnership announcements) maintains S6 X-side (incumbent resource concentration) by channeling ac</p>
+      <p class="stack-desc">Coordinating (partnership formation) integrates with Stabilising (incumbent-centered structures); partnerships provide non-threatening mechanism for startups/institutions to access incumbent resources without displacing incumbent positions; incumbent participation in partnerships reinforces their centrality. Coordinating X-side (partnership announcements) maintains Stabilising X-side (incumbent resource concentration) by channeling...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 03</span>
         <span class="stack-stalls">S7 · S8</span>
       </div>
-      <p class="stack-desc">S7 (governance narratives, publication volumes) provides legitimacy framing for S8 (scaled participation); S8 activity volumes provide empirical substrate for S7 narratives (e.g., "vibrant ecosystem" claims supported by membership counts, program counts). Governance programs and publication outputs create identity claims that justify continued activity scaling; activity scaling generates metrics t</p>
+      <p class="stack-desc">Narrating (governance narratives, publication volumes) provides legitimacy framing for Scaling activity (scaled participation); Scaling activity activity volumes provide empirical substrate for Narrating narratives (e.g., "vibrant ecosystem" claims supported by membership counts, program counts). Governance programs and publication outputs create identity claims that justify continued activity scaling; activity scaling generates metrics...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 04</span>
         <span class="stack-stalls">S4 · S6</span>
       </div>
-      <p class="stack-desc">S4 (infrastructure expansion outside region) co-occurs with S6 (incumbent stabilization within region); incumbents expand capital deployment to demand geographies while maintaining Seattle as talent/research hub. S6 incumbent concentration provides conditions for S4 extraction (concentrated actors can optimize capital allocation globally); S4 expansion outside region may reduce pressure for S6 dis</p>
+      <p class="stack-desc">Extracting (infrastructure expansion outside region) co-occurs with Stabilising (incumbent stabilization within region); incumbents expand capital deployment to demand geographies while maintaining Seattle as talent/research hub. Stabilising incumbent concentration provides conditions for Extracting extraction (concentrated actors can optimize capital allocation globally); Extracting expansion outside region may reduce pressure for Stabilising...</p>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If intermediary organizations (, , ) were required to publish conversion metrics (program participants → sustained outcomes) rather than activity metrics (participant counts, event volumes), it might reduce the system's ability to absorb uncertainty about strategic commitment without exposing program efficacy gaps."</p>
+    <p class="leverage-hyp">"If intermediary organizations were required to publish conversion metrics (program participants → sustained outcomes) rather than activity metrics (participant counts, event volumes), it might reduce the system's ability to absorb uncertainty about strategic commitment without exposing program efficacy...</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -296,23 +314,28 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/guadalajara-it-services-software.html">
-      <div class="sc-name">Guadalajara IT Services & Software</div>
-      <div class="sc-meta">Guadalajara · MX</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/minneapolis-medtech-life-sciences.html">
+      <div class="sc-name">Minneapolis MedTech &amp; Life Sciences</div>
+      <div class="sc-meta">Minneapolis · US</div>
       <div class="sc-regime">Mature</div>
-      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
-    </a><a class="similar-card" href="/clusters/osaka-life-sciences-robotics.html">
-      <div class="sc-name">Osaka Life Sciences & Robotics</div>
-      <div class="sc-meta">Osaka · Japan</div>
+      <div class="sc-match">3 shared stacks · 84 evidence · P2</div>
+      <div class="sc-mechanism">Incumbent-Extraction Stabilisation: Extracting without reinvesting (Extracting: facility expansions, private investments without systematic reinvestment obligations) plausibly sustains stabilizing around incumbents (Stabilising: system ...</div>
+      <div class="sc-absorbed">Absorbs: Pressure (incumbent activity demonstrates ecosystem vitality), Opportunity (established actors can deploy capital), Disruption (incumbent expansions absorb competitive pressure)</div>
+    </a><a class="similar-card" href="/clusters/san-diego-life-sciences-biotech.html">
+      <div class="sc-name">San Diego Life Sciences &amp; BioTech</div>
+      <div class="sc-meta">San Diego · US</div>
       <div class="sc-regime">Mature</div>
-      <div class="sc-stall">Primary: Scaling activity instead of throughput</div>
-    </a><a class="similar-card" href="/clusters/taipei-semiconductor-hardware.html">
-      <div class="sc-name">Taipei Semiconductor & Hardware</div>
-      <div class="sc-meta">Taipei · Taiwan</div>
-      <div class="sc-regime">Mature</div>
-      <div class="sc-stall">Primary: Stabilizing around incumbents</div>
-    </a></div>
-  </div>
+      <div class="sc-match">3 shared stacks · 72 evidence · P2</div>
+      <div class="sc-mechanism">Incumbent-Resource Circulation: Stabilization around incumbents (Stabilising: institutional concentration) channels extraction opportunities (Extracting: knowledge outputs, VC inflows) toward established actors; extraction by incumb...</div>
+      <div class="sc-absorbed">Absorbs: Opportunity (capital seeking established players), Pressure (to demonstrate outputs), Uncertainty (about new actor viability)</div>
+    </a><a class="similar-card" href="/clusters/busan-innovation-ecosystem.html">
+      <div class="sc-name">Busan Innovation Ecosystem</div>
+      <div class="sc-meta">Busan · KR</div>
+      <div class="sc-regime">Emerging</div>
+      <div class="sc-match">3 shared stacks · 54 evidence · P2</div>
+      <div class="sc-mechanism">Narrative–Activity Stabilisation: Narrating (strategic planning/cultural documentation) plausibly provides legitimacy framework for Scaling activity (program/activity proliferation); Scaling activity (multiple programs operating) plau...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty, pressure, complexity</div>
+    </a></div></div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
@@ -324,14 +347,14 @@ footer a:hover{color:var(--green);}
   <span>
     <a href="/">Homepage</a> ·
     <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/data.html">Cluster Data</a> ·
     <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <div class="cluster-sticky-bar">
   <span class="csb-name">Seattle AI & Cloud</span>
   <div class="csb-actions">
-    <a class="csb-btn csb-amber" href="/cas-explainer.html">Free Pulse Check →</a>
-    <a class="csb-btn csb-green" href="/request.html">Request a Diagnostic →</a>
+    <a class="csb-btn csb-amber" href="/diagnostic-journey">Diagnose your ecosystem →</a>
   </div>
 </div>
 <script>

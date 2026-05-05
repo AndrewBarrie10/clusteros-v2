@@ -132,7 +132,25 @@ footer a:hover{color:var(--green);}
   nav{padding:0 1rem;}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
+
+.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
+.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
+.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
 </style>
+<!-- Mixpanel tracking -->
+<script type="text/javascript">
+  (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+  for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===
+  e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=e.getElementsByTagName("script")[0];e.parentNode.insertBefore(k,e)}})(document,window.mixpanel||[])
+
+  
+  mixpanel.init('a5cac1b920750b79ab02f9cbf02c8f89', {
+    autocapture: true,
+    record_sessions_percent: 100,
+    api_host: 'https://api-eu.mixpanel.com',
+  })
+
+</script>
 </head>
 <body>
 <nav>
@@ -260,41 +278,41 @@ footer a:hover{color:var(--green);}
         <span class="stack-num">Stack 01</span>
         <span class="stack-stalls">S1 · S5 · S8</span>
       </div>
-      <p class="stack-desc">Re-proving through multiple programs (S1: 8 accelerators 2009-2019) co-occurs with mediation infrastructure (S5: accelerators + associations 2009-2021) and activity scaling (S8: program launches + resource commitments 2020-2024). X-sides plausibly reinforce: each new program validates intermediary role; intermediary infrastructure provides legitimate venue for re-proving; activity scaling absorbs </p>
+      <p class="stack-desc">Re-proving through multiple programs (Re-proving: 8 accelerators 2009-2019) co-occurs with mediation infrastructure (Mediating: accelerators + associations 2009-2021) and activity scaling (Scaling activity: program launches + resource commitments 2020-2024). X-sides plausibly reinforce: each new program validates intermediary role; intermediary infrastructure provides legitimate venue for re-proving; activity scaling absorbs...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 02</span>
         <span class="stack-stalls">S2 · S9</span>
       </div>
-      <p class="stack-desc">Coordinating through inter-regulatory mechanisms (S2: 2020 coordination, 2018-2021 associations) co-occurs with regulatory infrastructure establishment preceding institutional initiatives (S9: 2015-2020 legislative framework, 2018-2019 Sandbox/unit, 2018-2019 banking digital launches). X-sides plausibly reinforce: coordination distributes decision legitimacy; regulatory infrastructure provides coo</p>
+      <p class="stack-desc">Coordinating through inter-regulatory mechanisms (Coordinating: 2020 coordination, 2018-2021 associations) co-occurs with regulatory infrastructure establishment preceding institutional initiatives (Waiting: 2015-2020 legislative framework, 2018-2019 Sandbox/unit, 2018-2019 banking digital launches). X-sides plausibly reinforce: coordination distributes decision legitimacy; regulatory infrastructure provides...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 03</span>
         <span class="stack-stalls">S5 · S6</span>
       </div>
-      <p class="stack-desc">Mediating through intermediary infrastructure (S5: 8 accelerators, 2 associations 2009-2021) co-occurs with incumbent-centered digital transformation (S6: established institutions create digital units 2018-2024, MAD 1B+ commitments, 7 legacy entities operating FinTech programs). X-sides plausibly reinforce: intermediaries provide safe integration pathway for incumbents; incumbent participation leg</p>
+      <p class="stack-desc">Mediating through intermediary infrastructure (Mediating: 8 accelerators, 2 associations 2009-2021) co-occurs with incumbent-centered digital transformation (Stabilising: established institutions create digital units 2018-2024, MAD 1B+ commitments, 7 legacy entities operating FinTech programs). X-sides plausibly reinforce: intermediaries provide safe integration pathway for incumbents; incumbent participation...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 04</span>
         <span class="stack-stalls">S1 · S7</span>
       </div>
-      <p class="stack-desc">Re-proving through program proliferation (S1: 8 accelerators 2009-2019, banking initiatives 2018-2019) co-occurs with international positioning activity (S7: recurring conference 2019-ongoing, 5 international partnerships 2019-2024, concentrated regulatory activity 2018-2020). X-sides plausibly reinforce: each new program provides narrative content; international engagement validates program launc</p>
+      <p class="stack-desc">Re-proving through program proliferation (Re-proving: 8 accelerators 2009-2019, banking initiatives 2018-2019) co-occurs with international positioning activity (Narrating: recurring conference 2019-ongoing, 5 international partnerships 2019-2024, concentrated regulatory activity 2018-2020). X-sides plausibly reinforce: each new program provides narrative content; international engagement validates program...</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 05</span>
         <span class="stack-stalls">S2 · S8</span>
       </div>
-      <p class="stack-desc">Coordinating through formal mechanisms (S2: inter-regulatory 2020, associations 2018-2021) co-occurs with activity scaling (S8: 8 programs 2009-2019, 5 resource commitments 2020-2024). X-sides plausibly reinforce: coordination infrastructure provides venue for activity proliferation; activity scaling creates coordination demand; both absorb complexity without requiring exclusionary decisions or th</p>
+      <p class="stack-desc">Coordinating through formal mechanisms (Coordinating: inter-regulatory 2020, associations 2018-2021) co-occurs with activity scaling (Scaling activity: 8 programs 2009-2019, 5 resource commitments 2020-2024). X-sides plausibly reinforce: coordination infrastructure provides venue for activity proliferation; activity scaling creates coordination demand; both absorb complexity without requiring exclusionary decisions or...</p>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If accelerator programs (: 8 programs 2009-2019) were required to publish standardized outcome metrics (startup survival, funding progression, market entry), it might reduce the system's ability to absorb uncertainty through program proliferation without performance differentiation."</p>
+    <p class="leverage-hyp">"If accelerator programs (: 8 programs 2009-2019) were required to publish standardized outcome metrics (startup survival, funding progression, market entry), it might reduce the system's ability to absorb uncertainty through program proliferation without performance...</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -303,23 +321,28 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/taipei-ai-software.html">
-      <div class="sc-name">Taipei AI & Software</div>
-      <div class="sc-meta">Taipei · Taiwan</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a><a class="similar-card" href="/clusters/almaty-fintech-tech.html">
-      <div class="sc-name">Almaty FinTech & Tech</div>
-      <div class="sc-meta">Almaty · KZ</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a><a class="similar-card" href="/clusters/karachi-fintech.html">
-      <div class="sc-name">Karachi FinTech</div>
-      <div class="sc-meta">Karachi · PK</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a></div>
-  </div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/new-york-city-life-sciences-biotech.html">
+      <div class="sc-name">New York City Life Sciences &amp; BioTech</div>
+      <div class="sc-meta">New York City · US</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">4 shared stacks · 87 evidence · P2</div>
+      <div class="sc-mechanism">Coordination-Permission Stabilisation: Multi-institutional coordination structures (Coordinating) distribute risk and defer exclusionary decisions; temporal clustering of government funding (Waiting) provides legitimacy signals that enable...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty (strategic direction), Pressure (institutional risk), Opportunity (government funding)</div>
+    </a><a class="similar-card" href="/clusters/paris-ai-enterprise-tech.html">
+      <div class="sc-name">Paris AI &amp; Enterprise Tech</div>
+      <div class="sc-meta">Paris · FR</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">3 shared stacks · 83 evidence · P2</div>
+      <div class="sc-mechanism">Incumbent-Intermediation Stabilisation: Stabilising around established corporate actors (X₆) increases value of intermediation infrastructure (X₅) as bridge to incumbents; intermediation structures reduce risk for incumbents to engage ecosy...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty (about new entrant viability), Pressure (to secure resources), Complexity (of direct market access)</div>
+    </a><a class="similar-card" href="/clusters/sydney-fintech.html">
+      <div class="sc-name">Sydney FinTech</div>
+      <div class="sc-meta">Sydney · AU</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">3 shared stacks · 62 evidence · P2</div>
+      <div class="sc-mechanism">Incumbent-Mediation Stabilisation: Stabilisation around incumbents (Stabilising: institutional concentration, incumbent innovation infrastructure, partnership activity) plausibly sustains mediation infrastructure (Mediating: intermedia...</div>
+      <div class="sc-absorbed">Absorbs: Pressure (regulatory/reputational risk), Uncertainty (capability/trust gaps), Disruption (potential displacement threats)</div>
+    </a></div></div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
@@ -331,14 +354,14 @@ footer a:hover{color:var(--green);}
   <span>
     <a href="/">Homepage</a> ·
     <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/data.html">Cluster Data</a> ·
     <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <div class="cluster-sticky-bar">
   <span class="csb-name">Casablanca FinTech & Digital</span>
   <div class="csb-actions">
-    <a class="csb-btn csb-amber" href="/cas-explainer.html">Free Pulse Check →</a>
-    <a class="csb-btn csb-green" href="/request.html">Request a Diagnostic →</a>
+    <a class="csb-btn csb-amber" href="/diagnostic-journey">Diagnose your ecosystem →</a>
   </div>
 </div>
 <script>

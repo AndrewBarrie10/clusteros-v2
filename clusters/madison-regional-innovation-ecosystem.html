@@ -132,7 +132,25 @@ footer a:hover{color:var(--green);}
   nav{padding:0 1rem;}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
+
+.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
+.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
+.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
 </style>
+<!-- Mixpanel tracking -->
+<script type="text/javascript">
+  (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+  for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===
+  e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=e.getElementsByTagName("script")[0];e.parentNode.insertBefore(k,e)}})(document,window.mixpanel||[])
+
+  
+  mixpanel.init('a5cac1b920750b79ab02f9cbf02c8f89', {
+    autocapture: true,
+    record_sessions_percent: 100,
+    api_host: 'https://api-eu.mixpanel.com',
+  })
+
+</script>
 </head>
 <body>
 <nav>
@@ -269,41 +287,41 @@ footer a:hover{color:var(--green);}
         <span class="stack-num">Stack 01</span>
         <span class="stack-stalls">S1 · S8</span>
       </div>
-      <p class="stack-desc">Repeated establishment of entrepreneurship infrastructure (STALL_01 X-side) creates venues for activity scaling (STALL_08 X-side); activity scaling justifies continued infrastructure investment. Both operate through visible program expansion without requiring throughput measurement or strategic narrowing.</p>
+      <p class="stack-desc">Repeated establishment of entrepreneurship infrastructure (Re-proving X-side) creates venues for activity scaling (Scaling activity X-side); activity scaling justifies continued infrastructure investment. Both operate through visible program expansion without requiring throughput measurement or strategic narrowing.</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 02</span>
         <span class="stack-stalls">S6 · S2</span>
       </div>
-      <p class="stack-desc">Long-duration institutional presence and incumbent integration (STALL_06 X-side) creates stable actor set for partnership formation (STALL_02 X-side); partnership coordination reinforces incumbent centrality by channeling collaboration through established entities rather than enabling displacement.</p>
+      <p class="stack-desc">Long-duration institutional presence and incumbent integration (Stabilising X-side) creates stable actor set for partnership formation (Coordinating X-side); partnership coordination reinforces incumbent centrality by channeling collaboration through established entities rather than enabling displacement.</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 03</span>
         <span class="stack-stalls">S7 · S9</span>
       </div>
-      <p class="stack-desc">Aggregate prestige indicators and rankings (STALL_07 X-side) strengthen case for federal funding receipt (STALL_09 X-side); federal awards reinforce prestige narrative by providing external validation. Both substitute external legitimacy for behavioral proof or autonomous action.</p>
+      <p class="stack-desc">Aggregate prestige indicators and rankings (Narrating X-side) strengthen case for federal funding receipt (Waiting X-side); federal awards reinforce prestige narrative by providing external validation. Both substitute external legitimacy for behavioral proof or autonomous action.</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 04</span>
         <span class="stack-stalls">S5 · S1</span>
       </div>
-      <p class="stack-desc">High intermediary density (STALL_05 X-side) creates organizational demand for entrepreneurship infrastructure (STALL_01 X-side); infrastructure establishment creates roles and venues for intermediary activity. Both expand organizational presence without requiring direct coupling or strategic commitment.</p>
+      <p class="stack-desc">High intermediary density (Mediating X-side) creates organizational demand for entrepreneurship infrastructure (Re-proving X-side); infrastructure establishment creates roles and venues for intermediary activity. Both expand organizational presence without requiring direct coupling or strategic commitment.</p>
     </div>
     <div class="stack-item">
       <div class="stack-header">
         <span class="stack-num">Stack 05</span>
         <span class="stack-stalls">S4 · S6</span>
       </div>
-      <p class="stack-desc">Large-scale financial extraction from commercialization (STALL_04 X-side) flows to established institutional actors (STALL_06 X-side: WARF since 1925); incumbent stability enables continued extraction without requiring reinvestment discipline or enabling new organizational forms.</p>
+      <p class="stack-desc">Large-scale financial extraction from commercialization (Extracting X-side) flows to established institutional actors (Stabilising X-side: WARF since 1925); incumbent stability enables continued extraction without requiring reinvestment discipline or enabling new organizational forms.</p>
     </div></div>
   </div>
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If infrastructure funding were conditioned on observable throughput metrics (ventures progressed, capital deployed, exits achieved), it might reduce the system's ability to absorb uncertainty about effectiveness without requiring strategic narrowing."</p>
+    <p class="leverage-hyp">"If infrastructure funding were conditioned on observable throughput metrics (ventures progressed, capital deployed, exits achieved), it might reduce the system's ability to absorb uncertainty about effectiveness without requiring strategic...</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -312,23 +330,28 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/taipei-ai-software.html">
-      <div class="sc-name">Taipei AI & Software</div>
-      <div class="sc-meta">Taipei · Taiwan</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a><a class="similar-card" href="/clusters/karachi-fintech.html">
-      <div class="sc-name">Karachi FinTech</div>
-      <div class="sc-meta">Karachi · PK</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a><a class="similar-card" href="/clusters/hanoi-manufacturing-tech.html">
-      <div class="sc-name">Hanoi Manufacturing Tech</div>
-      <div class="sc-meta">Hanoi · VN</div>
-      <div class="sc-regime">growing</div>
-      <div class="sc-stall">Primary: Waiting for permission</div>
-    </a></div>
-  </div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/cairo-fintech-digital-tech.html">
+      <div class="sc-name">Cairo FinTech &amp; Digital Tech</div>
+      <div class="sc-meta">Cairo · EG</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">3 shared stacks · 67 evidence · P2</div>
+      <div class="sc-mechanism">Infrastructure-Activity Expansion: Re-proving through parallel initiatives (Re-proving) generates activity across multiple programs; activity scaling (Scaling activity) creates demand for additional validation of similar initiatives; b...</div>
+      <div class="sc-absorbed">Absorbs: Pressure (demonstration requirements), Opportunity (funding availability), Complexity (ecosystem breadth)</div>
+    </a><a class="similar-card" href="/clusters/bangkok-digital-e-commerce.html">
+      <div class="sc-name">Bangkok Digital &amp; E-commerce</div>
+      <div class="sc-meta">Bangkok · TH</div>
+      <div class="sc-regime">Growing</div>
+      <div class="sc-match">3 shared stacks · 70 evidence · P2</div>
+      <div class="sc-mechanism">Narrative–Governance Stabilisation: Policy framework establishment (2016-2018) and service tier announcements (2024) co-occur with temporal sequence where governance precedes knowledge infrastructure (2016-2020). Narrating (narrating th...</div>
+      <div class="sc-absorbed">Absorbs: Uncertainty (regulatory environment), Pressure (legitimacy), Complexity (policy coordination)</div>
+    </a><a class="similar-card" href="/clusters/munich-life-sciences-biotech.html">
+      <div class="sc-name">Munich Life Sciences &amp; Biotech</div>
+      <div class="sc-meta">Munich · DE</div>
+      <div class="sc-regime">Mature</div>
+      <div class="sc-match">3 shared stacks · 78 evidence · P1</div>
+      <div class="sc-mechanism">Incumbent–Coordination Stabilisation: Coordination activity (Coordinating) accommodates established institutional actors (Stabilising) through multi-stakeholder governance structures. Incumbent stability (Stabilising) increases coordinati...</div>
+      <div class="sc-absorbed">Absorbs: Complexity (institutional density), Pressure (to maintain stakeholder inclusion), Disruption (potential from new organizational forms)</div>
+    </a></div></div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>
@@ -340,14 +363,14 @@ footer a:hover{color:var(--green);}
   <span>
     <a href="/">Homepage</a> ·
     <a href="https://clusteros.io/findings.html">Findings</a> ·
+    <a href="https://clusteros.io/data.html">Cluster Data</a> ·
     <a href="https://clusteros.io/about.html">About</a>
   </span>
 </footer>
 <div class="cluster-sticky-bar">
   <span class="csb-name">Madison Regional Innovation Ecosystem</span>
   <div class="csb-actions">
-    <a class="csb-btn csb-amber" href="/cas-explainer.html">Free Pulse Check →</a>
-    <a class="csb-btn csb-green" href="/request.html">Request a Diagnostic →</a>
+    <a class="csb-btn csb-amber" href="/diagnostic-journey">Diagnose your ecosystem →</a>
   </div>
 </div>
 <script>

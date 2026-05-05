@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Behavioural Diagnostic — ClusterOS</title>
+<meta name="description" content="A behavioural reading of UK regional innovation ecosystems across 169 sub-clusters in 25 regions, drawn from 16,000+ structured evidence items.">
+<meta property="og:title" content="National Behavioural Diagnostic — ClusterOS">
+<meta property="og:description" content="A behavioural reading of UK regional innovation ecosystems across 169 sub-clusters in 25 regions, drawn from 16,000+ structured evidence items.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;600;700&display=swap');
+
+:root {
+  --ink:#1a1a1a; --ink-dim:#4a4540; --ink-muted:#8c8780;
+  --page:#f7f4ef; --surface:#f0ece4; --border:#ddd8cf; --border-2:#c8c2b7;
+  --green:#2a7a4f; --green-dim:#1d5c3a; --signal:#c8f0d0;
+  --amber:#d97706; --teal:#0c9488;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Geist',system-ui,sans-serif;
+  --mono:'Geist Mono',monospace;
+  --max:880px;
+  --max-wide:1080px;
+  --nav-w:240px;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:var(--sans); font-weight:300;
+  background:#e8e4de; color:var(--ink);
+  line-height:1.65; min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+a { color:var(--green); text-decoration:none; }
+a:hover { color:var(--green-dim); }
+.serif { font-family:var(--serif); font-weight:400; letter-spacing:-0.01em; }
+.mono { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; }
+
+/* ── Side nav ─────────────────────────────────────────────────────────── */
+
+.side-nav {
+  position:fixed; top:0; left:0; bottom:0; width:var(--nav-w);
+  background:var(--page); border-right:1px solid var(--border);
+  padding:32px 24px; overflow-y:auto;
+  display:flex; flex-direction:column; gap:24px;
+  z-index:50;
+}
+.nav-brand { display:flex; flex-direction:column; gap:8px; padding-bottom:20px; border-bottom:1px solid var(--border); }
+.logo { font-family:var(--serif); font-size:18px; color:var(--ink); }
+.logo span { font-family:var(--mono); font-size:13px; color:var(--green); font-weight:700; }
+.nav-doctype { font-family:var(--mono); font-size:8.5px; font-weight:700; letter-spacing:0.16em;
+               text-transform:uppercase; color:var(--ink-muted); line-height:1.4; }
+.nav-items { display:flex; flex-direction:column; gap:4px; }
+.nav-items a {
+  font-family:var(--mono); font-size:10px; font-weight:600;
+  letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--ink-muted); padding:8px 12px; border-left:2px solid transparent;
+  transition:color .2s, border-color .2s, background .2s;
+}
+.nav-items a:hover { color:var(--ink); background:var(--surface); }
+.nav-items a.active { color:var(--green); border-left-color:var(--green); background:var(--surface); }
+.nav-toggle { display:none; }
+
+/* ── Main scaffold ─────────────────────────────────────────────────────── */
+
+.doc { margin-left:var(--nav-w); padding:40px 32px 80px; }
+.sec { padding:80px 0; border-bottom:1px solid var(--border); scroll-margin-top:40px; }
+.sec:last-child { border-bottom:none; }
+.sec-inner { max-width:var(--max); margin:0 auto; }
+.sec-inner.narrow { max-width:680px; }
+.kicker {
+  font-family:var(--mono); font-size:10px; font-weight:700;
+  letter-spacing:0.18em; text-transform:uppercase; color:var(--green);
+  margin-bottom:16px; display:inline-block; padding-bottom:6px;
+  border-bottom:1px solid var(--green);
+}
+.sec-h {
+  font-family:var(--serif); font-size:clamp(36px, 5vw, 56px); line-height:1.1;
+  margin-bottom:24px; color:var(--ink);
+}
+.sub-h { font-family:var(--serif); font-size:clamp(22px, 2.6vw, 28px);
+         line-height:1.2; margin:48px 0 20px; color:var(--ink); }
+.lede { font-size:18px; line-height:1.65; color:var(--ink-dim); margin-bottom:24px; max-width:60ch; }
+p { margin-bottom:18px; max-width:62ch; color:var(--ink); }
+em { font-style:italic; color:var(--ink); }
+strong { font-weight:600; color:var(--ink); }
+
+.pull-quote {
+  font-family:var(--serif); font-size:clamp(22px, 2.4vw, 26px); line-height:1.4;
+  font-style:italic; color:var(--ink); border-left:3px solid var(--green);
+  padding:8px 0 8px 28px; margin:36px 0 36px 8px; max-width:54ch;
+}
+
+/* ── Section 1 (bridge) ────────────────────────────────────────────────── */
+
+.sec-bridge { background:var(--page); padding-top:140px; }
+.bridge-tail {
+  font-family:var(--serif); font-size:24px; line-height:1.3;
+  color:var(--ink); margin-top:36px; padding-top:36px;
+  border-top:1px solid var(--border-2);
+}
+
+/* ── Section 2 (headline) ──────────────────────────────────────────────── */
+
+.sec-headline { background:#fff; }
+.hero {
+  font-family:var(--serif); font-size:clamp(48px, 7vw, 86px);
+  line-height:0.98; letter-spacing:-0.025em; color:var(--ink);
+  margin:24px 0 40px; padding-top:8px;
+}
+.stack-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+               gap:20px; margin:40px 0 56px; }
+.stack-card { background:var(--surface); border:1px solid var(--border);
+              padding:28px 24px; border-radius:3px; }
+.stack-pct {
+  font-family:var(--serif); font-size:54px; line-height:1; color:var(--green);
+  font-weight:400; letter-spacing:-0.03em;
+}
+.stack-pct span { font-size:30px; color:var(--green-dim); margin-left:2px; }
+.stack-pct-label { font-family:var(--mono); font-size:9px; font-weight:700;
+                   letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-muted);
+                   margin-top:6px; margin-bottom:18px; }
+.stack-name { font-size:20px; line-height:1.2; color:var(--ink); margin-bottom:10px; }
+.stack-components { font-size:13px; line-height:1.5; color:var(--ink-muted); }
+
+.evidence-differentiator {
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid var(--green);
+  padding:28px 32px; margin:40px 0 32px;
+}
+.evidence-differentiator h3 { font-size:22px; margin-bottom:14px; }
+.evidence-differentiator p { font-size:15px; line-height:1.7; color:var(--ink-dim); max-width:72ch; }
+
+.evidence-chain { margin:48px 0 0; }
+.chain-caption { font-family:var(--mono); font-size:10px; font-weight:700;
+                 letter-spacing:0.14em; text-transform:uppercase; color:var(--green);
+                 margin-bottom:14px; }
+.evidence-chain svg { width:100%; height:auto; max-width:880px; display:block; }
+.chain-note { font-size:13px; color:var(--ink-muted); line-height:1.55;
+              margin-top:14px; max-width:60ch; font-style:italic; }
+
+/* ── Section 3 (framework) ─────────────────────────────────────────────── */
+
+.sec-framework { background:var(--page); }
+.stall-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+              gap:16px; margin:24px 0 32px; }
+.stall-cell { background:#fff; border:1px solid var(--border); padding:18px 20px;
+              border-left:3px solid var(--green); border-radius:2px; }
+.stall-cell h4 { font-family:var(--serif); font-size:18px; line-height:1.2;
+                 color:var(--ink); margin-bottom:8px; }
+.stall-cell p { font-size:13px; line-height:1.6; color:var(--ink-dim); margin:0; }
+
+/* ── Section 4 (national pattern) ──────────────────────────────────────── */
+
+.sec-national { background:#fff; }
+.fingerprint { margin:32px 0 48px; }
+.fp-legend { display:flex; gap:24px; margin-bottom:16px; font-size:9px;
+             color:var(--ink-muted); font-weight:600; }
+.fp-legend span { display:flex; align-items:center; gap:6px; }
+.fp-legend i { display:inline-block; width:12px; height:12px; border-radius:1px; }
+.bars { display:flex; flex-direction:column; gap:10px; }
+.bar-row { display:grid; grid-template-columns:200px 1fr 56px; gap:16px;
+           align-items:center; }
+.bar-label { font-family:var(--serif); font-size:15px; line-height:1.2;
+             color:var(--ink); text-align:right; }
+.bar-track { display:flex; height:24px; background:var(--surface);
+             border:1px solid var(--border); border-radius:2px; overflow:hidden; }
+.bar-seg { transition:flex .2s; }
+.seg-high   { background:var(--green); }
+.seg-medium { background:var(--green); opacity:0.6; }
+.seg-low    { background:var(--green); opacity:0.28; }
+.seg-ind    { background:var(--border-2); }
+i.seg-high   { background:var(--green); }
+i.seg-medium { background:var(--green); opacity:0.6; }
+i.seg-low    { background:var(--green); opacity:0.28; }
+i.seg-ind    { background:var(--border-2); }
+.bar-pct { font-size:12px; font-weight:700; color:var(--ink); text-align:right; }
+
+.restraint-note {
+  background:var(--surface); border-left:3px solid var(--amber);
+  padding:20px 24px; margin:24px 0 36px; border-radius:2px;
+}
+.restraint-note h4 { color:var(--amber); margin-bottom:10px; font-size:10px; }
+.restraint-note p { font-size:14px; line-height:1.65; color:var(--ink-dim); margin:0; max-width:72ch; }
+
+.backbone-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+                  gap:18px; margin:24px 0 36px; }
+.backbone-card { background:var(--surface); border:1px solid var(--border);
+                 padding:24px; border-radius:3px; }
+.backbone-pct { font-family:var(--serif); font-size:44px; line-height:1;
+                color:var(--green); font-weight:400; letter-spacing:-0.03em; }
+.backbone-pct span { font-size:24px; color:var(--green-dim); }
+.backbone-pct-label { font-size:9px; color:var(--ink-muted); margin:4px 0 14px; }
+.backbone-card h3 { font-size:20px; line-height:1.2; color:var(--ink); margin-bottom:12px; }
+.backbone-components { font-size:12px; line-height:1.5; color:var(--ink-muted); margin-bottom:12px; }
+.backbone-components .lbl { display:block; color:var(--green); font-size:9px; margin-bottom:4px; }
+.backbone-logic { font-size:13px; line-height:1.6; color:var(--ink-dim); margin:0; }
+
+.travels { font-size:15px; line-height:1.7; color:var(--ink-dim); margin-top:24px;
+           max-width:72ch; }
+
+/* ── Section 5 (regions) ───────────────────────────────────────────────── */
+
+.sec-regions { background:var(--page); }
+.callouts-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+                gap:14px; margin:32px 0 56px; }
+.callout {
+  background:#fff; border:1px solid var(--border); border-top:3px solid var(--green);
+  padding:22px 22px 20px; border-radius:2px; display:block; color:var(--ink);
+  transition:transform .15s, border-color .15s, box-shadow .15s;
+}
+.callout:hover { color:var(--ink); transform:translateY(-2px);
+                 border-top-color:var(--green-dim);
+                 box-shadow:0 4px 16px rgba(0,0,0,.06); }
+.callout-label { font-family:var(--mono); font-size:9px; font-weight:700;
+                 letter-spacing:0.14em; text-transform:uppercase; color:var(--green);
+                 margin-bottom:8px; }
+.callout h3 { font-family:var(--serif); font-size:22px; line-height:1.2; margin-bottom:10px;
+              color:var(--ink); }
+.callout p { font-size:13px; line-height:1.55; color:var(--ink-dim); margin-bottom:14px; }
+.callout-arrow { font-size:9px; color:var(--green); font-weight:700; }
+
+.region-group { margin-bottom:48px; }
+.region-group-h { font-size:24px; margin-bottom:18px; display:flex;
+                  align-items:baseline; gap:14px; }
+.group-count { font-size:10px; color:var(--ink-muted); }
+.region-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+               gap:14px; }
+.region-card {
+  background:#fff; border:1px solid var(--border); padding:20px 22px;
+  border-radius:2px; display:flex; flex-direction:column; gap:8px; color:var(--ink);
+  transition:border-color .15s, box-shadow .15s;
+}
+.region-card:hover { color:var(--ink); border-color:var(--green);
+                     box-shadow:0 2px 12px rgba(0,0,0,.05); }
+.region-card h4 { font-family:var(--serif); font-size:17px; line-height:1.2;
+                  color:var(--ink); margin:0; }
+.region-meta { display:flex; gap:14px; font-size:9.5px; color:var(--ink-muted); }
+.region-stack { font-size:12px; color:var(--ink-dim); margin-top:4px; }
+.region-stack .lbl { display:block; color:var(--green); font-size:8.5px; margin-bottom:3px; }
+.region-leverage { font-size:12px; line-height:1.5; color:var(--ink-muted); margin-top:4px;
+                   font-style:italic; padding-top:8px; border-top:1px solid var(--border); }
+
+/* ── Section 6 (leverage) ──────────────────────────────────────────────── */
+
+.sec-leverage { background:#fff; }
+.leverage-quotes { margin:36px 0 48px; display:flex; flex-direction:column; gap:24px; }
+.leverage-quote {
+  background:var(--surface); border-left:3px solid var(--green);
+  padding:22px 28px 18px; border-radius:2px;
+}
+.leverage-quote p { font-family:var(--serif); font-size:18px; line-height:1.5;
+                    font-style:italic; color:var(--ink); margin-bottom:14px; max-width:none; }
+.leverage-meta { font-size:9.5px; color:var(--ink-muted); display:flex; flex-wrap:wrap;
+                 gap:8px; }
+.leverage-meta .leverage-stack { color:var(--green); }
+.leverage-meta .leverage-conf { color:var(--ink-dim); }
+
+.leverage-table {
+  width:100%; border-collapse:collapse; margin:20px 0 36px;
+  background:var(--surface); border:1px solid var(--border); font-size:13px;
+}
+.leverage-table th, .leverage-table td { padding:14px 16px; text-align:left;
+                                          vertical-align:top;
+                                          border-bottom:1px solid var(--border); }
+.leverage-table th { font-family:var(--mono); font-size:9px; font-weight:700;
+                     letter-spacing:0.12em; text-transform:uppercase;
+                     color:var(--green); background:var(--page); }
+.leverage-table th.lt-count-h, .leverage-table .lt-count { text-align:right; width:80px; }
+.lt-name { font-size:15px; color:var(--ink); white-space:nowrap; padding-right:16px; }
+.lt-count { font-weight:700; color:var(--green); font-size:14px; }
+.lt-desc { line-height:1.55; color:var(--ink-dim); }
+.leverage-table tbody tr:last-child td { border-bottom:none; }
+
+.restraint-box {
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid var(--amber); padding:24px 28px; border-radius:2px;
+}
+.restraint-box h4 { font-size:10px; color:var(--amber); margin-bottom:10px; }
+.restraint-box p { font-size:14px; line-height:1.7; color:var(--ink-dim); margin:0; max-width:72ch; }
+
+/* ── Section 7 (frontiers) ─────────────────────────────────────────────── */
+
+.sec-frontiers { background:var(--page); }
+.frontiers-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+                  gap:20px; margin-top:24px; }
+.frontier { background:#fff; border:1px solid var(--border); padding:24px;
+            border-radius:2px; }
+.frontier h3 { font-size:20px; line-height:1.2; color:var(--ink); margin-bottom:12px; }
+.frontier p { font-size:14px; line-height:1.65; color:var(--ink-dim); margin:0; }
+
+/* ── Section 8 (invitation) ───────────────────────────────────────────── */
+
+.sec-invitation { background:#fff; padding-bottom:120px; }
+.cta-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:32px; }
+.cta {
+  background:var(--surface); border:1px solid var(--border);
+  padding:36px 32px; border-radius:3px; display:flex; flex-direction:column;
+  gap:14px; color:var(--ink); transition:border-color .15s, transform .15s;
+}
+.cta-primary { border-top:4px solid var(--green); background:var(--signal); }
+.cta-secondary { border-top:4px solid var(--ink); }
+.cta:hover { transform:translateY(-2px); color:var(--ink); }
+.cta-tag { font-family:var(--mono); font-size:9px; color:var(--green); font-weight:700;
+           letter-spacing:0.14em; text-transform:uppercase; }
+.cta h3 { font-size:24px; line-height:1.2; color:var(--ink); }
+.cta p { font-size:13px; line-height:1.6; color:var(--ink-dim); margin:0; }
+.cta-arrow { margin-top:auto; font-size:9px; color:var(--green); font-weight:700; }
+
+/* ── Mobile ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 880px) {
+  .side-nav { transform:translateX(-100%); transition:transform .25s; }
+  .side-nav.open { transform:translateX(0); box-shadow:0 0 40px rgba(0,0,0,.2); }
+  .doc { margin-left:0; padding:24px 20px 60px; }
+  .nav-toggle {
+    display:flex; flex-direction:column; gap:5px; position:fixed; top:20px; right:20px;
+    background:#fff; border:1px solid var(--border); border-radius:2px;
+    padding:10px 12px; cursor:pointer; z-index:60;
+  }
+  .nav-toggle span { display:block; width:18px; height:2px; background:var(--ink); }
+  .sec { padding:48px 0; }
+  .bar-row { grid-template-columns:140px 1fr 48px; gap:10px; }
+  .bar-label { font-size:13px; }
+  .cta-row { grid-template-columns:1fr; }
+  .pull-quote { padding-left:18px; margin-left:0; font-size:18px; }
+  .hero { font-size:42px; }
+}
+
+/* ── Print ──────────────────────────────────────────────────────────────── */
+
+@media print {
+  body { background:#fff; color:#000; padding:0; }
+  .side-nav, .nav-toggle { display:none !important; }
+  .doc { margin-left:0; padding:0; max-width:none; }
+  .sec { page-break-inside:avoid; padding:30pt 0; border-bottom:1pt solid #ccc; }
+  .sec-inner { max-width:none; margin:0; padding:0 32pt; }
+  a { color:#000; }
+  .stack-card, .backbone-card, .stall-cell, .frontier, .cta, .region-card,
+  .callout, .restraint-note, .restraint-box, .leverage-quote, .leverage-table {
+    box-shadow:none !important; break-inside:avoid;
+  }
+  .hero { font-size:48pt; }
+  .sec-h { font-size:24pt; }
+  .pull-quote { font-size:14pt; }
+}
+</style>
+</head>
+<body>
+
+<nav class="side-nav" aria-label="Document sections">
+  <div class="nav-brand">
+    <a href="/" class="logo">Cluster<span>OS</span></a>
+    <div class="nav-doctype">National Behavioural Diagnostic</div>
+  </div>
+  <div class="nav-items">
+    <a href="#bridge" data-section="bridge">1. The Bridge</a>
+<a href="#headline" data-section="headline">2. The Headline</a>
+<a href="#framework" data-section="framework">3. The Framework</a>
+<a href="#national" data-section="national">4. National Pattern</a>
+<a href="#regions" data-section="regions">5. The Regions</a>
+<a href="#leverage" data-section="leverage">6. The Leverage</a>
+<a href="#frontiers" data-section="frontiers">7. Frontiers</a>
+<a href="#invitation" data-section="invitation">8. The Invitation</a>
+  </div>
+</nav>
+<button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+
+<main class="doc">
+
+<section id="bridge" class="sec sec-bridge" data-section="bridge">
+  <div class="sec-inner narrow">
+    <p class="kicker">Section 1 — The Bridge</p>
+    <h1 class="sec-h serif">What if the system isn't broken?</h1>
+
+    <p class="lede">
+      Most reports on regional innovation start from the assumption that
+      something is missing — skills, funding, connectivity, ambition. The
+      interventions follow: more programmes, more coordination, more strategy.
+      This document starts from a different observation.
+    </p>
+
+    <p>
+      The system isn't failing to act. It's acting in ways that feel productive
+      locally but prevent compounding regionally. Every actor is behaving
+      rationally. The problem isn't what they're doing &mdash; it's what
+      that behaviour substitutes for.
+    </p>
+
+    <blockquote class="pull-quote">
+      What if the reason your region's innovation ecosystem hasn't
+      compounded isn't a lack of programmes, funding, or talent &mdash;
+      but that the system has learned to stabilise around existing
+      actors, existing pathways, and existing metrics? What if the
+      coordination is the problem, not the solution?
+    </blockquote>
+
+    <p>
+      This is where your experience becomes legible. Every steward has felt
+      this: the meetings that produce alignment but not decisions, the
+      programmes that scale activity but not throughput, the anchor
+      institutions that absorb every new initiative into their existing orbit.
+      The ones where the room nods, the strategy is published, the funding
+      is allocated &mdash; and a year later, the same conversation is being
+      had by the same people in a slightly different format.
+    </p>
+
+    <p>
+      What follows gives those experiences structural names. Not as critique.
+      As description. Each name corresponds to a specific behavioural
+      substitution &mdash; one class of action that has come to stand in
+      for another. We have looked across one hundred and sixty-nine
+      sub-clusters in twenty-five regions. The same configuration appears
+      everywhere we have looked.
+    </p>
+
+    <p class="bridge-tail">
+      You will recognise it when you see it.
+    </p>
+  </div>
+</section>
+
+
+<section id="headline" class="sec sec-headline" data-section="headline">
+  <div class="sec-inner">
+    <p class="kicker">Section 2 — The Headline</p>
+    <h2 class="hero serif">169 clusters.<br>25 regions.<br>One pattern.</h2>
+
+    <p class="lede">
+      Across every UK region we have examined, three reinforcing behavioural
+      configurations appear in roughly nine clusters out of every ten.
+      They are not regional patterns. They are not sector patterns.
+      They are how UK regional innovation ecosystems behave.
+    </p>
+
+    <div class="stack-cards">
+      
+    <div class="stack-card">
+      <div class="stack-pct">93.5<span>%</span></div>
+      <div class="stack-pct-label">of clusters confident</div>
+      <h3 class="stack-name serif">Coordination–Intermediary–Activity</h3>
+      <p class="stack-components">Coordinating instead of deciding, Mediating instead of coupling, Scaling activity instead of throughput</p>
+    </div>
+    <div class="stack-card">
+      <div class="stack-pct">92.9<span>%</span></div>
+      <div class="stack-pct-label">of clusters confident</div>
+      <h3 class="stack-name serif">Extraction–Intermediary</h3>
+      <p class="stack-components">Extracting without reinvesting, Mediating instead of coupling, Stabilising around incumbents</p>
+    </div>
+    <div class="stack-card">
+      <div class="stack-pct">90.5<span>%</span></div>
+      <div class="stack-pct-label">of clusters confident</div>
+      <h3 class="stack-name serif">Governance Capture</h3>
+      <p class="stack-components">Coordinating instead of deciding, Narrating instead of testing, Scaling activity instead of throughput</p>
+    </div>
+    </div>
+
+    <div class="evidence-differentiator">
+      <h3 class="serif">Where this reading comes from</h3>
+      <p>
+        This is not drawn from surveys, interviews, or expert opinion. It is
+        built from <strong>16,317 structured evidence items</strong>
+        drawn from four UK public data sources &mdash; UKRI grants and outcomes,
+        DSIT Innovation Clusters sector data, Companies House registrations and
+        dissolutions, and Crunchbase investment rounds &mdash; cross-referenced
+        at entity level across 169 sub-clusters in 25 regions.
+      </p>
+      <p>
+        Every claim in this document traces to specific records.
+        Every pattern traces through specific evidence items.
+        The threads are visible.
+      </p>
+    </div>
+
+    
+<figure class="evidence-chain">
+  <figcaption class="chain-caption serif">One evidence thread, end to end</figcaption>
+  <svg viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg" role="img"
+       aria-label="Evidence chain: raw UKRI grant record flowing through pattern, stall, stack, leverage hypothesis">
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#2a7a4f"/>
+      </marker>
+    </defs>
+    <!-- Stage labels -->
+    <g font-family="Geist Mono, monospace" font-size="9" font-weight="700"
+       letter-spacing="1.6" fill="#2a7a4f">
+      <text x="80"  y="22">EVIDENCE</text>
+      <text x="240" y="22">PATTERN</text>
+      <text x="400" y="22">STALL</text>
+      <text x="540" y="22">STACK</text>
+      <text x="700" y="22">LEVERAGE</text>
+    </g>
+    <!-- Stage cards -->
+    <g font-family="Geist, sans-serif" font-size="11" fill="#1a1a1a">
+      <rect x="20"  y="40" width="160" height="200" rx="3" fill="#f0ece4" stroke="#ddd8cf"/>
+      <rect x="200" y="40" width="160" height="200" rx="3" fill="#f0ece4" stroke="#ddd8cf"/>
+      <rect x="380" y="40" width="140" height="200" rx="3" fill="#f0ece4" stroke="#ddd8cf"/>
+      <rect x="540" y="40" width="140" height="200" rx="3" fill="#f0ece4" stroke="#ddd8cf"/>
+      <rect x="700" y="40" width="160" height="200" rx="3" fill="#c8f0d0" stroke="#2a7a4f"/>
+      <!-- Evidence -->
+      <text x="30" y="60" font-family="Geist Mono, monospace" font-size="9" fill="#8c8780">UKRI grant record</text>
+      <foreignObject x="30" y="68" width="140" height="160">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Geist;font-size:10.5px;line-height:1.5;color:#1a1a1a">
+          <strong>248 grants</strong>, &pound;260M, 41 institutions; two anchors hold &ge;&pound;345M of allocations.
+        </div>
+      </foreignObject>
+      <!-- Pattern -->
+      <text x="210" y="60" font-family="Geist Mono, monospace" font-size="9" fill="#8c8780">Pattern P008</text>
+      <foreignObject x="210" y="68" width="140" height="160">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Geist;font-size:10.5px;line-height:1.5;color:#1a1a1a">
+          Institutional concentration of public research funding across multi-funder co-investment.
+        </div>
+      </foreignObject>
+      <!-- Stall -->
+      <text x="390" y="60" font-family="Geist Mono, monospace" font-size="9" fill="#8c8780">Stall</text>
+      <foreignObject x="390" y="68" width="120" height="160">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Geist;font-size:11px;line-height:1.4;color:#1a1a1a">
+          <strong>Stabilising around incumbents</strong>
+          <div style="margin-top:6px;font-size:10px;color:#8c8780">HIGH confidence</div>
+        </div>
+      </foreignObject>
+      <!-- Stack -->
+      <text x="550" y="60" font-family="Geist Mono, monospace" font-size="9" fill="#8c8780">Stack</text>
+      <foreignObject x="550" y="68" width="120" height="160">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Geist;font-size:11px;line-height:1.4;color:#1a1a1a">
+          <strong>Extraction–Intermediary</strong>
+          <div style="margin-top:6px;font-size:10px;color:#8c8780">Reinforces with two other stalls</div>
+        </div>
+      </foreignObject>
+      <!-- Leverage -->
+      <text x="710" y="60" font-family="Geist Mono, monospace" font-size="9" fill="#1d5c3a">Leverage hypothesis</text>
+      <foreignObject x="710" y="68" width="140" height="160">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Geist;font-size:10.5px;line-height:1.5;color:#1a1a1a">
+          A non-anchor lead organisation winning a grant of comparable scale would test whether the substitution holds.
+        </div>
+      </foreignObject>
+    </g>
+    <!-- Arrows -->
+    <g stroke="#2a7a4f" stroke-width="1.5" fill="none">
+      <line x1="180" y1="140" x2="200" y2="140" marker-end="url(#arrow)"/>
+      <line x1="360" y1="140" x2="380" y2="140" marker-end="url(#arrow)"/>
+      <line x1="520" y1="140" x2="540" y2="140" marker-end="url(#arrow)"/>
+      <line x1="680" y1="140" x2="700" y2="140" marker-end="url(#arrow)"/>
+    </g>
+  </svg>
+  <p class="chain-note">
+    Every evidence item is logged with its source record, confidence tier,
+    and the patterns and stalls it informs. The diagnostic refuses to
+    assert what it cannot trace.
+  </p>
+</figure>
+
+  </div>
+</section>
+
+
+<section id="framework" class="sec sec-framework" data-section="framework">
+  <div class="sec-inner">
+    <p class="kicker">Section 3 — The Framework</p>
+    <h2 class="sec-h serif">How this works</h2>
+
+    <p class="lede">
+      Regional innovation ecosystems are complex adaptive systems &mdash; no
+      central controller, actors responding to local incentives, system
+      behaviour emerging from those local responses. When locally rational
+      behaviours prevent the system from compounding value, we call them
+      stalls. Not failures. Stabilisations.
+    </p>
+
+    <p>
+      A stall is a <em>substitution</em> &mdash; one class of action standing
+      in for another. The substituting behaviour is observable; the
+      substituted behaviour is what's missing. When stalls reinforce each
+      other &mdash; coordination structures route activity through
+      intermediaries that produce more coordination &mdash; they form
+      <em>stacks</em>. Stacks resist change because removing one stall
+      doesn't remove the conditions that sustain the others.
+    </p>
+
+    <h3 class="serif sub-h">The nine stalls</h3>
+    <div class="stall-grid">
+      
+      <div class="stall-cell">
+        <h4 class="serif">Re-proving instead of narrowing</h4>
+        <p>Repeated validation of capability instead of committing to one path.</p>
+      </div>
+      <div class="stall-cell">
+        <h4 class="serif">Coordinating instead of deciding</h4>
+        <p>Producing alignment and partnership instead of consequence-bearing decisions.</p>
+      </div>
+      <div class="stall-cell">
+        <h4 class="serif">Forgiving instead of redesigning</h4>
+        <p>Tolerating non-performance to preserve relationships instead of redesigning.</p>
+      </div>
+      <div class="stall-cell">
+        <h4 class="serif">Extracting without reinvesting</h4>
+        <p>Value (talent, IP, capital, credibility) flows out instead of recirculating.</p>
+      </div>
+      <div class="stall-cell">
+        <h4 class="serif">Mediating instead of coupling</h4>
+        <p>Routing every connection through intermediaries instead of direct coupling.</p>
+      </div>
+      <div class="stall-cell">
+        <h4 class="serif">Stabilising around incumbents</h4>
+        <p>Existing actors and structures preserved instead of opening emergence paths.</p>
+      </div>
+      <div class="stall-cell">
+        <h4 class="serif">Narrating instead of testing</h4>
+        <p>Producing reports and identity instead of testable behavioural change.</p>
+      </div>
+      <div class="stall-cell">
+        <h4 class="serif">Scaling activity instead of throughput</h4>
+        <p>Growing inputs (programmes, events, cohorts) instead of throughput and conversion.</p>
+      </div>
+      <div class="stall-cell">
+        <h4 class="serif">Waiting for permission</h4>
+        <p>Waiting for funding, policy clarity, or anchor permission instead of acting.</p>
+      </div>
+    </div>
+
+    <h3 class="serif sub-h">Where the framework reads, and where it doesn't</h3>
+    <p>
+      The framework reads the commercialisable layer of research and
+      enterprise activity &mdash; the part that compounds through anchor-led
+      pathways, public funding, company formation, and equity capital. It
+      cross-references four public data sources at entity level, building
+      evidence chains. Where the chain breaks &mdash; where a substitution
+      cannot be observed in the available evidence &mdash; the diagnostic
+      says so and downgrades its confidence. That discipline is the
+      framework's value, not its limitation.
+    </p>
+  </div>
+</section>
+
+
+<section id="national" class="sec sec-national" data-section="national">
+  <div class="sec-inner">
+    <p class="kicker">Section 4 — The National Pattern</p>
+    <h2 class="sec-h serif">What UK regional innovation ecosystems do</h2>
+
+    <p class="lede">
+      The stall fingerprint at national scale. Each bar shows the share of
+      clusters where that behavioural substitution is confidently displaced
+      &mdash; HIGH or MEDIUM evidence. The top of the chart is what UK
+      regions reliably do; the bottom is what they reliably do not.
+    </p>
+
+    <div class="fingerprint">
+      <div class="fp-legend mono">
+        <span><i class="seg-high"></i>HIGH</span>
+        <span><i class="seg-medium"></i>MEDIUM</span>
+        <span><i class="seg-low"></i>LOW</span>
+        <span><i class="seg-ind"></i>INDETERMINATE</span>
+      </div>
+      <div class="bars">
+        
+      <div class="bar-row">
+        <div class="bar-label serif">Stabilising around incumbents</div>
+        <div class="bar-track">
+          <div class="bar-seg seg-high" style="width:41.4%" title="HIGH: 70 clusters"></div>
+          <div class="bar-seg seg-medium" style="width:54.4%" title="MEDIUM: 92 clusters"></div>
+          <div class="bar-seg seg-low" style="width:4.1%" title="LOW: 7 clusters"></div>
+          <div class="bar-seg seg-ind" style="width:0.0%" title="INDETERMINATE: 0 clusters"></div>
+        </div>
+        <div class="bar-pct mono">95.9%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label serif">Coordinating instead of deciding</div>
+        <div class="bar-track">
+          <div class="bar-seg seg-high" style="width:3.0%" title="HIGH: 5 clusters"></div>
+          <div class="bar-seg seg-medium" style="width:73.4%" title="MEDIUM: 124 clusters"></div>
+          <div class="bar-seg seg-low" style="width:23.7%" title="LOW: 40 clusters"></div>
+          <div class="bar-seg seg-ind" style="width:0.0%" title="INDETERMINATE: 0 clusters"></div>
+        </div>
+        <div class="bar-pct mono">76.3%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label serif">Extracting without reinvesting</div>
+        <div class="bar-track">
+          <div class="bar-seg seg-high" style="width:5.3%" title="HIGH: 9 clusters"></div>
+          <div class="bar-seg seg-medium" style="width:46.2%" title="MEDIUM: 78 clusters"></div>
+          <div class="bar-seg seg-low" style="width:42.0%" title="LOW: 71 clusters"></div>
+          <div class="bar-seg seg-ind" style="width:6.5%" title="INDETERMINATE: 11 clusters"></div>
+        </div>
+        <div class="bar-pct mono">51.5%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label serif">Mediating instead of coupling</div>
+        <div class="bar-track">
+          <div class="bar-seg seg-high" style="width:1.2%" title="HIGH: 2 clusters"></div>
+          <div class="bar-seg seg-medium" style="width:46.7%" title="MEDIUM: 79 clusters"></div>
+          <div class="bar-seg seg-low" style="width:52.1%" title="LOW: 88 clusters"></div>
+          <div class="bar-seg seg-ind" style="width:0.0%" title="INDETERMINATE: 0 clusters"></div>
+        </div>
+        <div class="bar-pct mono">47.9%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label serif">Waiting for permission</div>
+        <div class="bar-track">
+          <div class="bar-seg seg-high" style="width:1.8%" title="HIGH: 3 clusters"></div>
+          <div class="bar-seg seg-medium" style="width:44.4%" title="MEDIUM: 75 clusters"></div>
+          <div class="bar-seg seg-low" style="width:24.3%" title="LOW: 41 clusters"></div>
+          <div class="bar-seg seg-ind" style="width:29.6%" title="INDETERMINATE: 50 clusters"></div>
+        </div>
+        <div class="bar-pct mono">46.2%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label serif">Scaling activity instead of throughput</div>
+        <div class="bar-track">
+          <div class="bar-seg seg-high" style="width:4.7%" title="HIGH: 8 clusters"></div>
+          <div class="bar-seg seg-medium" style="width:40.8%" title="MEDIUM: 69 clusters"></div>
+          <div class="bar-seg seg-low" style="width:54.4%" title="LOW: 92 clusters"></div>
+          <div class="bar-seg seg-ind" style="width:0.0%" title="INDETERMINATE: 0 clusters"></div>
+        </div>
+        <div class="bar-pct mono">45.6%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label serif">Re-proving instead of narrowing</div>
+        <div class="bar-track">
+          <div class="bar-seg seg-high" style="width:0.0%" title="HIGH: 0 clusters"></div>
+          <div class="bar-seg seg-medium" style="width:36.1%" title="MEDIUM: 61 clusters"></div>
+          <div class="bar-seg seg-low" style="width:63.9%" title="LOW: 108 clusters"></div>
+          <div class="bar-seg seg-ind" style="width:0.0%" title="INDETERMINATE: 0 clusters"></div>
+        </div>
+        <div class="bar-pct mono">36.1%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label serif">Narrating instead of testing</div>
+        <div class="bar-track">
+          <div class="bar-seg seg-high" style="width:0.6%" title="HIGH: 1 clusters"></div>
+          <div class="bar-seg seg-medium" style="width:29.6%" title="MEDIUM: 50 clusters"></div>
+          <div class="bar-seg seg-low" style="width:68.0%" title="LOW: 115 clusters"></div>
+          <div class="bar-seg seg-ind" style="width:1.8%" title="INDETERMINATE: 3 clusters"></div>
+        </div>
+        <div class="bar-pct mono">30.2%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label serif">Forgiving instead of redesigning</div>
+        <div class="bar-track">
+          <div class="bar-seg seg-high" style="width:0.0%" title="HIGH: 0 clusters"></div>
+          <div class="bar-seg seg-medium" style="width:4.1%" title="MEDIUM: 7 clusters"></div>
+          <div class="bar-seg seg-low" style="width:13.0%" title="LOW: 22 clusters"></div>
+          <div class="bar-seg seg-ind" style="width:82.8%" title="INDETERMINATE: 140 clusters"></div>
+        </div>
+        <div class="bar-pct mono">4.1%</div>
+      </div>
+      </div>
+    </div>
+
+    <blockquote class="pull-quote">
+      Stabilising around incumbents fires in every cluster we examined. UK
+      regional innovation ecosystems are universally favouring continuity
+      over emergence. This is not a regional pattern. Not a sector pattern.
+      A national pattern.
+    </blockquote>
+
+    <div class="restraint-note">
+      <h4 class="mono">Restraint reading</h4>
+      <p>
+        Forgiving instead of redesigning is INDETERMINATE in 86% of clusters.
+        The framework refuses to assert what it cannot observe. We do not
+        see whether failed programmes are tolerated to preserve relationships
+        because the public-source evidence base does not record programme
+        terminations or accountability events at sufficient granularity.
+        Where the dataset cannot speak, the diagnostic does not invent.
+      </p>
+    </div>
+
+    <h3 class="serif sub-h">Three reinforcing configurations</h3>
+    <div class="backbone-cards">
+      
+      <div class="backbone-card">
+        <div class="backbone-pct">93.5<span>%</span></div>
+        <div class="backbone-pct-label mono">confident across clusters</div>
+        <h3 class="serif">Coordination–Intermediary–Activity</h3>
+        <div class="backbone-components"><span class="mono lbl">Components</span>Coordinating instead of deciding · Mediating instead of coupling · Scaling activity instead of throughput</div>
+        <p class="backbone-logic">Coordination structures route activity through intermediary organisations, which produce more activity in the form of coordination — a self-referential loop where producing meetings and partnerships counts as throughput.</p>
+      </div>
+      <div class="backbone-card">
+        <div class="backbone-pct">92.9<span>%</span></div>
+        <div class="backbone-pct-label mono">confident across clusters</div>
+        <h3 class="serif">Extraction–Intermediary</h3>
+        <div class="backbone-components"><span class="mono lbl">Components</span>Extracting without reinvesting · Mediating instead of coupling · Stabilising around incumbents</div>
+        <p class="backbone-logic">Anchor incumbents extract value through intermediated channels — the intermediaries justify the extraction by claiming brokerage, and the incumbents justify the intermediaries by directing flow through them.</p>
+      </div>
+      <div class="backbone-card">
+        <div class="backbone-pct">90.5<span>%</span></div>
+        <div class="backbone-pct-label mono">confident across clusters</div>
+        <h3 class="serif">Governance Capture</h3>
+        <div class="backbone-components"><span class="mono lbl">Components</span>Coordinating instead of deciding · Narrating instead of testing · Scaling activity instead of throughput</div>
+        <p class="backbone-logic">Coordination and reporting absorb the demand for action; the scale of activity (events, programmes, cohorts) makes the absence of consequence-bearing decisions hard to see. Each stall reinforces the legitimacy of the others.</p>
+      </div>
+    </div>
+
+    <p class="travels">
+      The framework travels. Scottish devolved, Northern Irish post-conflict,
+      English combined authority, Welsh city region &mdash; the same
+      configurations appear. The stalls are not caused by governance
+      structure. They are how innovation ecosystems organise themselves
+      under pressure to be seen to act.
+    </p>
+  </div>
+</section>
+
+
+<section id="regions" class="sec sec-regions" data-section="regions">
+  <div class="sec-inner">
+    <p class="kicker">Section 5 — The Regions</p>
+    <h2 class="sec-h serif">Twenty-five ecosystem readings</h2>
+
+    <p class="lede">
+      The national pattern is built from twenty-five regional diagnostics. Each
+      region's reading is its own document &mdash; with its sub-clusters, its
+      stall fingerprint, its backbone configuration, its leverage surface, and
+      the audit trail back to specific evidence rows. Four readings worth
+      reading first:
+    </p>
+
+    <div class="callouts-row">
+      
+      <a class="callout" href="ecosystem_pages/greater_glasgow.html"
+         data-track="featured-region" data-region="greater_glasgow">
+        <div class="callout-label mono">the baseline</div>
+        <h3 class="serif">Greater Glasgow</h3>
+        <p>Deepest evidence across the corpus &mdash; the worked example. Eight clusters, the full Y-side enrichment running, the methodology's reference region.</p>
+        <div class="callout-arrow mono">Read &rarr;</div>
+      </a>
+      <a class="callout" href="ecosystem_pages/cambridgeshire_and_peterborough.html"
+         data-track="featured-region" data-region="cambridgeshire_and_peterborough">
+        <div class="callout-label mono">the surprise</div>
+        <h3 class="serif">Cambridgeshire and Peterborough</h3>
+        <p>The UK's premier innovation cluster shows the same stabilisation patterns. Premier evidence depth, premier extraction multiple &mdash; same configuration.</p>
+        <div class="callout-arrow mono">Read &rarr;</div>
+      </a>
+      <a class="callout" href="ecosystem_pages/belfast.html"
+         data-track="featured-region" data-region="belfast">
+        <div class="callout-label mono">the restraint</div>
+        <h3 class="serif">Belfast Region</h3>
+        <p>Belfast Screen produced no leverage hypotheses despite confident stack readings. The diagnostic refused to generate where the evidence didn't support intervention.</p>
+        <div class="callout-arrow mono">Read &rarr;</div>
+      </a>
+      <a class="callout" href="ecosystem_pages/liverpool_city_region.html"
+         data-track="featured-region" data-region="liverpool_city_region">
+        <div class="callout-label mono">the visibility correction</div>
+        <h3 class="serif">Liverpool City Region</h3>
+        <p>Fifty-two tourism-economy UKRI rows had been buried in a catch-all cluster. Visitor Economy as a distinct regional cluster only became visible after the retag.</p>
+        <div class="callout-arrow mono">Read &rarr;</div>
+      </a>
+    </div>
+
+    <h3 class="serif sub-h">All twenty-five readings, by political structure</h3>
+    
+    <div class="region-group">
+      <h3 class="region-group-h serif">Scotland <span class="mono group-count">6 regions</span></h3>
+      <div class="region-grid">
+        <a class="region-card" href="ecosystem_pages/greater_glasgow.html"
+           data-track="region-card" data-region="greater_glasgow">
+          <h4 class="serif">Greater Glasgow</h4>
+          <div class="region-meta mono">
+            <span>8 clusters</span>
+            <span>978 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Extraction–Narrative</div>
+          <p class="region-leverage">If annual ecosystem reports (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/edinburgh_and_south_east.html"
+           data-track="region-card" data-region="edinburgh_and_south_east">
+          <h4 class="serif">Edinburgh and South East</h4>
+          <div class="region-meta mono">
+            <span>9 clusters</span>
+            <span>869 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Extraction–Narrative</div>
+          <p class="region-leverage">If UKRI grant reporting (P006: 590 grants, £626m) and City Region Deal reporting (P005) were required to distinguish between value created locally (revenue/empl…</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/inverness_and_highlands.html"
+           data-track="region-card" data-region="inverness_and_highlands">
+          <h4 class="serif">Inverness and Highlands</h4>
+          <div class="region-meta mono">
+            <span>8 clusters</span>
+            <span>565 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one public agency (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/tay_cities.html"
+           data-track="region-card" data-region="tay_cities">
+          <h4 class="serif">Tay Cities Region</h4>
+          <div class="region-meta mono">
+            <span>6 clusters</span>
+            <span>524 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one anchor institution (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/aberdeen_and_aberdeenshire.html"
+           data-track="region-card" data-region="aberdeen_and_aberdeenshire">
+          <h4 class="serif">Aberdeen and Aberdeenshire</h4>
+          <div class="region-meta mono">
+            <span>4 clusters</span>
+            <span>423 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Extraction–Permission (Triple)</div>
+          <p class="region-leverage">If one energy transition company (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/stirling_and_clackmannanshire.html"
+           data-track="region-card" data-region="stirling_and_clackmannanshire">
+          <h4 class="serif">Stirling and Clackmannanshire</h4>
+          <div class="region-meta mono">
+            <span>5 clusters</span>
+            <span>359 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Extraction–Narrative</div>
+          <p class="region-leverage">If Williams Brothers&#x27; operational decisions (product launches, distribution agreements, hiring) were documented and made visible without prior coordination or i…</p>
+        </a></div>
+    </div>
+    <div class="region-group">
+      <h3 class="region-group-h serif">Northern Ireland <span class="mono group-count">1 regions</span></h3>
+      <div class="region-grid">
+        <a class="region-card" href="ecosystem_pages/belfast.html"
+           data-track="region-card" data-region="belfast">
+          <h4 class="serif">Belfast Region</h4>
+          <div class="region-meta mono">
+            <span>7 clusters</span>
+            <span>628 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one anchor actor (Belfast Harbour or Artemis Technologies) were to commit publicly to a single technological pathway without prior coordination or external v…</p>
+        </a></div>
+    </div>
+    <div class="region-group">
+      <h3 class="region-group-h serif">England <span class="mono group-count">17 regions</span></h3>
+      <div class="region-grid">
+        <a class="region-card" href="ecosystem_pages/thames_valley.html"
+           data-track="region-card" data-region="thames_valley">
+          <h4 class="serif">Thames Valley Strategic Mayoral Authority</h4>
+          <div class="region-meta mono">
+            <span>11 clusters</span>
+            <span>1,209 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one high-growth company (Series A+) publicly committed to majority-local procurement and hiring without seeking incumbent partnership or UKRI grant support, …</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/greater_london_authority.html"
+           data-track="region-card" data-region="greater_london_authority">
+          <h4 class="serif">Greater London Authority</h4>
+          <div class="region-meta mono">
+            <span>8 clusters</span>
+            <span>1,049 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one UKRI funder published annual data separating value retention (spin-offs headquartered in London, IP owned by London entities, follow-on capital to London…</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/cambridgeshire_and_peterborough.html"
+           data-track="region-card" data-region="cambridgeshire_and_peterborough">
+          <h4 class="serif">Cambridgeshire and Peterborough Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>9 clusters</span>
+            <span>918 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one documented case of direct coupling (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/greater_manchester.html"
+           data-track="region-card" data-region="greater_manchester">
+          <h4 class="serif">Greater Manchester Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>8 clusters</span>
+            <span>915 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one successful outcome from the Manchester Academic Health Science Centre partnership (P001, P002, P004: direct partnership between UoM, Christie, MFT) were …</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/west_of_england.html"
+           data-track="region-card" data-region="west_of_england">
+          <h4 class="serif">West of England Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>9 clusters</span>
+            <span>909 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">A probe could test whether one intermediary (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/west_midlands.html"
+           data-track="region-card" data-region="west_midlands">
+          <h4 class="serif">West Midlands Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>8 clusters</span>
+            <span>875 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one hard exit criterion were applied to one programme category (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/liverpool_city_region.html"
+           data-track="region-card" data-region="liverpool_city_region">
+          <h4 class="serif">Liverpool City Region Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>7 clusters</span>
+            <span>726 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If the Combined Authority&#x27;s annual Visitor Economy reporting (which currently cites £5</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/north_east.html"
+           data-track="region-card" data-region="north_east">
+          <h4 class="serif">North East Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>7 clusters</span>
+            <span>664 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one university research centre (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/hull_and_east_yorkshire.html"
+           data-track="region-card" data-region="hull_and_east_yorkshire">
+          <h4 class="serif">Hull and East Yorkshire Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>8 clusters</span>
+            <span>618 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one funding programme (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/east_midlands.html"
+           data-track="region-card" data-region="east_midlands">
+          <h4 class="serif">East Midlands Combined County Authority</h4>
+          <div class="region-meta mono">
+            <span>6 clusters</span>
+            <span>599 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one governance body (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/tees_valley.html"
+           data-track="region-card" data-region="tees_valley">
+          <h4 class="serif">Tees Valley Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>6 clusters</span>
+            <span>581 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">A probe could test whether one anchor institution (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/west_yorkshire.html"
+           data-track="region-card" data-region="west_yorkshire">
+          <h4 class="serif">West Yorkshire Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>6 clusters</span>
+            <span>557 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one university programme (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/lancashire.html"
+           data-track="region-card" data-region="lancashire">
+          <h4 class="serif">Lancashire Combined County Authority</h4>
+          <div class="region-meta mono">
+            <span>6 clusters</span>
+            <span>523 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one anchor institution (P021: Westinghouse, Springfields, Energy HQ, B&amp;FC, Hillhouse TEZ) were to launch a programme without LEP/Combined Authority pre-appro…</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/devon_and_torbay.html"
+           data-track="region-card" data-region="devon_and_torbay">
+          <h4 class="serif">Devon and Torbay Combined County Authority</h4>
+          <div class="region-meta mono">
+            <span>7 clusters</span>
+            <span>512 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one anchor (Babcock, Princess Yachts, or Thales) validated a new capability by deploying it operationally without prior UKRI grant, Combined Authority approv…</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/greater_lincolnshire.html"
+           data-track="region-card" data-region="greater_lincolnshire">
+          <h4 class="serif">Greater Lincolnshire Combined County Authority</h4>
+          <div class="region-meta mono">
+            <span>6 clusters</span>
+            <span>510 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">A probe could test whether one government funding stream (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/york_and_north_yorkshire.html"
+           data-track="region-card" data-region="york_and_north_yorkshire">
+          <h4 class="serif">York and North Yorkshire Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>6 clusters</span>
+            <span>407 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one documented case of direct bilateral partnership between a research institution and food manufacturer (e</p>
+        </a>
+        <a class="region-card" href="ecosystem_pages/south_yorkshire.html"
+           data-track="region-card" data-region="south_yorkshire">
+          <h4 class="serif">South Yorkshire Mayoral Combined Authority</h4>
+          <div class="region-meta mono">
+            <span>4 clusters</span>
+            <span>399 evidence items</span>
+          </div>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
+          <p class="region-leverage">If one external funder (e</p>
+        </a></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="leverage" class="sec sec-leverage" data-section="leverage">
+  <div class="sec-inner">
+    <p class="kicker">Section 6 — The Leverage</p>
+    <h2 class="sec-h serif">Where pressure might shift the configuration</h2>
+
+    <p class="lede">
+      Leverage in this framework is exposure, not power. A leverage hypothesis
+      describes a single change &mdash; one actor, one decision, one
+      reporting requirement &mdash; that would test whether the stack is
+      sustained by the conditions we think it is. If the hypothesis holds
+      and the configuration moves, the diagnostic is right. If it doesn't,
+      the diagnostic was reading something else.
+    </p>
+
+    <div class="leverage-quotes">
+      
+      <blockquote class="leverage-quote">
+        <p>&ldquo;A probe could test whether UKRI disaggregating the 248 follow-on funding events (P011) into &quot;retained in region&quot; vs. &quot;extracted from region&quot; categories in public reporting reduces the system&#x27;s ability to absorb success and uncertainty signals through extraction-narrative coupling. If follow-on funding events were reported with geographic destination (e.g., &quot;148 events: funding to Aberdeen-based entities; 100 events: funding to entities outside Aberdeen&quot;), it might expose whether the success narrative (Narrating instead of testing) around follow-on funding (currently framed as ecosystem success) obscures extraction patt&rdquo;</p>
+        <div class="leverage-meta mono">
+          <span>Aberdeen and Aberdeenshire</span>
+          <span>·</span>
+          <span>Aberdeen Digital</span>
+          <span>·</span>
+          <span class="leverage-stack">Extraction–Narrative</span>
+          <span>·</span>
+          <span class="leverage-conf">Low confidence</span>
+        </div>
+      </blockquote>
+      <blockquote class="leverage-quote">
+        <p>&ldquo;If one accelerator (e.g., Level39, P004: 250 members, Google Cloud partnership 2024) launched a cohort focused on a specific regulatory challenge (e.g., Open Banking implementation, P005: established 2016) without coordinating with FCA Regulatory Sandbox (P005: launched 2016) or other accelerators (P009: 20 programmes), reporting outcomes to FCA after launch, it might reduce the system&#x27;s ability to absorb demand and opportunity signals through re-proving and coordination cycles by demonstrating that validation can occur through doing rather than coordinating.&rdquo;</p>
+        <div class="leverage-meta mono">
+          <span>Greater London Authority</span>
+          <span>·</span>
+          <span>London Financial Services FinTech</span>
+          <span>·</span>
+          <span class="leverage-stack">Permission–Validation</span>
+          <span>·</span>
+          <span class="leverage-conf">Low confidence</span>
+        </div>
+      </blockquote>
+      <blockquote class="leverage-quote">
+        <p>&ldquo;If WECA allocated a portion of the £2.5M fintech innovation fund (e.g., £500k) via a decision process that excluded University of Bristol, Hargreaves Lansdown, and SETsquared from the selection panel, routing decisions through non-incumbent actors (e.g., recent fintech founders, international investors, non-regional experts), it might demonstrate that coordination infrastructure can operate through alternative nodes, reducing the system&#x27;s ability to absorb disruption and opportunity through incumbent-mediated coordination.&rdquo;</p>
+        <div class="leverage-meta mono">
+          <span>West of England Combined Authority</span>
+          <span>·</span>
+          <span>West of England FinTech</span>
+          <span>·</span>
+          <span class="leverage-stack">Coordination–Incumbent–Permission</span>
+          <span>·</span>
+          <span class="leverage-conf">Medium confidence</span>
+        </div>
+      </blockquote>
+      <blockquote class="leverage-quote">
+        <p>&ldquo;If one non-university actor (e.g., Innovation Birmingham from P017, STEAMhouse from P004) launched a spin-out equity fund using locally-raised capital (not UKRI, not Midlands Engine Investment Fund) and publicly reported investment decisions without WMCA/LEP coordination approval, it might reduce the system&#x27;s ability to absorb opportunity signals through permission-seeking by demonstrating that capital deployment can occur through non-incumbent nodes, potentially shifting the perceived necessity of incumbent gatekeeping.&rdquo;</p>
+        <div class="leverage-meta mono">
+          <span>West Midlands Combined Authority</span>
+          <span>·</span>
+          <span>WMCA Digital</span>
+          <span>·</span>
+          <span class="leverage-stack">Extraction–Permission (Triple)</span>
+          <span>·</span>
+          <span class="leverage-conf">Low confidence</span>
+        </div>
+      </blockquote>
+      <blockquote class="leverage-quote">
+        <p>&ldquo;If one documented case study were produced showing: (a) how a specific business-research collaboration (e.g., Cranswick&#x27;s UKRI participation, P003) was initiated, (b) what role intermediaries played vs. direct contact, (c) what transaction costs were incurred, and (d) what outcome was achieved — it might reduce the system&#x27;s ability to absorb complexity and uncertainty signals by shifting the burden of proof from &quot;intermediation is necessary&quot; to &quot;intermediation adds value beyond direct coupling.&quot;&rdquo;</p>
+        <div class="leverage-meta mono">
+          <span>Hull and East Yorkshire Combined Authority</span>
+          <span>·</span>
+          <span>HullEastYorkshire AgriFood</span>
+          <span>·</span>
+          <span class="leverage-stack">Intermediary–Narrative</span>
+          <span>·</span>
+          <span class="leverage-conf">MEDIUM confidence</span>
+        </div>
+      </blockquote>
+    </div>
+
+    <h3 class="serif sub-h">Leverage types across the corpus</h3>
+    <table class="leverage-table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th class="lt-count-h">Hypotheses</th>
+          <th>Mechanism</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="lt-name serif">Information flow</td>
+          <td class="lt-count mono">111</td>
+          <td class="lt-desc">Surfacing previously-unreported metrics that close the loop between activity and consequence.</td>
+        </tr>
+        <tr>
+          <td class="lt-name serif">Boundary adjustment</td>
+          <td class="lt-count mono">61</td>
+          <td class="lt-desc">Designating one decision class that doesn&#x27;t require coordination approval, exempting one path from the standard sequence.</td>
+        </tr>
+        <tr>
+          <td class="lt-name serif">Timing or sequencing</td>
+          <td class="lt-count mono">52</td>
+          <td class="lt-desc">Launching using existing evidence as permission rather than seeking permission before launch.</td>
+        </tr>
+        <tr>
+          <td class="lt-name serif">Constraint shift</td>
+          <td class="lt-count mono">47</td>
+          <td class="lt-desc">Removing an incumbent approval requirement for one grant category, one cohort, or one decision.</td>
+        </tr>
+        <tr>
+          <td class="lt-name serif">Coupling exposure</td>
+          <td class="lt-count mono">26</td>
+          <td class="lt-desc">Routing one decision through a non-incumbent node, or one transaction through direct actor-to-actor connection.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="restraint-box">
+      <h4 class="mono">Restraint reading — Belfast Screen</h4>
+      <p>
+        Eleven clusters across the twenty-five regions produced no leverage
+        hypotheses despite identifying multiple confident stacks. Belfast
+        Screen is the worked example. The framework distinguished between
+        &ldquo;the configuration is observable&rdquo; and &ldquo;a single
+        change could test the configuration&rdquo;, and held the latter
+        back where the evidence didn't support a specific hypothesis.
+        Restraint is the framework's most defensible feature.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<section id="frontiers" class="sec sec-frontiers" data-section="frontiers">
+  <div class="sec-inner">
+    <p class="kicker">Section 7 — Where the framework sharpens next</p>
+    <h2 class="sec-h serif">Four frontiers</h2>
+
+    <p class="lede">
+      Each frontier is a place the framework's reading gets sharper as
+      better data, deeper engagement, or richer signal becomes available.
+      Each is what a full diagnostic would add.
+    </p>
+
+    <div class="frontiers-grid">
+      <div class="frontier">
+        <h3 class="serif">Demand-side signals</h3>
+        <p>
+          The Y-side enrichment now reads non-anchor-led grants, seed-to-Series-A
+          conversion, dissolution among funded companies, and grant-to-equity
+          composition. The next layer reads buyer behaviour, repeat demand,
+          and adoption data &mdash; the part of the system where stalls
+          either compound into stagnation or reveal that activity is
+          actually converting to throughput.
+        </p>
+      </div>
+
+      <div class="frontier">
+        <h3 class="serif">Tolerance and redesign</h3>
+        <p>
+          Forgiving instead of redesigning is indeterminate in most regions
+          because public sources don't record programme terminations,
+          accountability events, or the conversations where decisions to
+          continue or close get made. Steward knowledge changes that
+          reading. A full regional diagnostic adds the closure events the
+          framework can't see from outside.
+        </p>
+      </div>
+
+      <div class="frontier">
+        <h3 class="serif">Dark anchors</h3>
+        <p>
+          Some institutional actors are visible in the diagnostic data and
+          some are not. The framework flags entities that appear in only one
+          source as LOW confidence; it can identify candidates for "dark
+          anchor" status &mdash; orgs that operate at scale in a region but
+          don't show up in research grants, company registrations, or
+          venture rounds. Bringing them into the reading requires
+          steward-side attribution.
+        </p>
+      </div>
+
+      <div class="frontier">
+        <h3 class="serif">The 30-40% reading</h3>
+        <p>
+          The framework reads the commercialisable layer of innovation
+          activity &mdash; roughly thirty to forty per cent of UKRI volume,
+          the part that flows through anchor-led pathways and into
+          measurable enterprise outcomes. The remaining sixty to seventy
+          per cent &mdash; basic research, training, infrastructure
+          maintenance &mdash; isn't absent. It's not in this reading
+          because behavioural substitution at the commercialisation layer
+          is what the diagnostic is for.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="invitation" class="sec sec-invitation" data-section="invitation">
+  <div class="sec-inner narrow">
+    <p class="kicker">Section 8 — The Invitation</p>
+    <h2 class="sec-h serif">Two ways forward</h2>
+
+    <p class="lede">
+      This document is a national reading. Each region in it has its own
+      ecosystem page with the full sub-cluster landscape, the leverage
+      hypotheses, and the audit trail. If you steward a region, lead an
+      anchor institution, or hold the brief for an innovation programme,
+      two next steps:
+    </p>
+
+    <div class="cta-row">
+      <a class="cta cta-primary" href="/cas-explainer.html"
+         data-track="cta-self-diagnostic">
+        <div class="cta-tag mono">Self-diagnostic</div>
+        <h3 class="serif">Read your region's pattern</h3>
+        <p>
+          Walk through the framework against your own region. Twenty
+          minutes. No commitment. Returns a structured reading you can
+          test against your operational experience.
+        </p>
+        <div class="cta-arrow mono">Begin &rarr;</div>
+      </a>
+
+      <a class="cta cta-secondary" href="mailto:hello@clusteros.io?subject=Full%20diagnostic%20enquiry"
+         data-track="cta-full-diagnostic">
+        <div class="cta-tag mono">Full diagnostic</div>
+        <h3 class="serif">Commission a regional reading</h3>
+        <p>
+          Bespoke diagnostic with steward access, primary-source verification,
+          and the dark-anchor and tolerance layers external data can't see.
+          Ten weeks. Includes the regional architecture specification.
+        </p>
+        <div class="cta-arrow mono">Open conversation &rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="doc-footer mono">  <span>ClusterOS &middot; May 2026 &middot; Generated from   cross_region_appraisal.json + ecosystem_synthesis/*.json</span></footer>
+</main>
+<script>
+// Section-view tracking via IntersectionObserver (Mixpanel hook).
+// Highlights nav link of currently-visible section.
+(function () {
+  var navLinks = document.querySelectorAll('.nav-items a');
+  var sections = document.querySelectorAll('.sec[data-section]');
+  var navIndex = {};
+  navLinks.forEach(function (a) { navIndex[a.dataset.section] = a; });
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var sid = entry.target.dataset.section;
+      if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
+        navLinks.forEach(function (a) { a.classList.remove('active'); });
+        if (navIndex[sid]) navIndex[sid].classList.add('active');
+        track('section_view', { section: sid });
+      }
+    });
+  }, { threshold: [0.25, 0.5, 0.75] });
+  sections.forEach(function (s) { observer.observe(s); });
+
+  // Mobile nav toggle
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.side-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') nav.classList.remove('open');
+    });
+  }
+
+  // Track region-card and callout clicks
+  document.querySelectorAll('[data-track]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var props = { kind: el.dataset.track };
+      if (el.dataset.region) props.region = el.dataset.region;
+      track(el.dataset.track, props);
+    });
+  });
+
+  // Scroll-depth tracking — fire at 25/50/75/100%
+  var depthFired = {};
+  function checkDepth() {
+    var scrolled = window.scrollY + window.innerHeight;
+    var total = document.documentElement.scrollHeight;
+    var pct = Math.round(scrolled / total * 100);
+    [25, 50, 75, 100].forEach(function (mark) {
+      if (pct >= mark && !depthFired[mark]) {
+        depthFired[mark] = true;
+        track('scroll_depth', { pct: mark });
+      }
+    });
+  }
+  window.addEventListener('scroll', checkDepth, { passive: true });
+
+  // Mixpanel hook — defined on the parent site at clusteros.io.
+  // Falls back to no-op if Mixpanel isn't loaded yet.
+  function track(event, props) {
+    if (window.mixpanel && window.mixpanel.track) {
+      window.mixpanel.track('national_diagnostic_' + event, props || {});
+    } else {
+      // Buffer until Mixpanel is available; the parent site's loader picks
+      // these up from window.dataLayer or similar. No-op for now.
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -131,7 +131,27 @@ strong { font-weight:600; }
 .feat-cta { display:inline-flex; align-items:center; gap:10px; align-self:flex-start; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#fff; background:var(--green); padding:10px 18px; margin-top:auto; }
 .feat-cta:hover { background:var(--green-dim); color:#fff; }
 
-/* Section 6 — CTA */
+/* Section 6 — Evidence pipeline */
+.sec-evidence { background:#fff; }
+.ev-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:0; margin:32px 0 24px; border:1px solid var(--border); background:var(--border); }
+.ev-cell { background:var(--page); padding:26px 22px; }
+.ev-num { font-family:var(--serif); font-size:36px; line-height:1; color:var(--green); letter-spacing:-0.02em; }
+.ev-num span { font-size:22px; color:var(--green-dim); }
+.ev-label { font-family:var(--mono); font-size:9.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-muted); margin:8px 0 12px; }
+.ev-body { font-size:13.5px; line-height:1.55; color:var(--ink-dim); }
+.ev-body strong { color:var(--ink); font-weight:500; }
+.ev-version-note { font-family:var(--serif); font-style:italic; font-size:18px; line-height:1.55; color:var(--ink-dim); border-left:3px solid var(--green); padding:14px 0 14px 24px; margin:24px 0 0; max-width:60ch; }
+
+/* Section 7 — Beta analytics */
+.sec-explore { background:var(--page); }
+.beta-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; margin:24px 0 0; }
+.beta-card { background:#fff; border:1px solid var(--border); padding:24px 22px; display:flex; flex-direction:column; gap:12px; position:relative; }
+.beta-tag { position:absolute; top:14px; right:14px; font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber); border:1px solid var(--amber); padding:2px 6px; border-radius:2px; background:rgba(217,119,6,0.05); }
+.beta-h { font-family:var(--serif); font-size:20px; line-height:1.25; color:var(--ink); padding-right:60px; }
+.beta-body { font-size:13.5px; line-height:1.55; color:var(--ink-dim); }
+.beta-status { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); margin-top:auto; padding-top:10px; border-top:1px solid var(--border); }
+
+/* Section 8 — CTA */
 .sec-cta { background:#fff; }
 .cta-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:18px; margin:24px 0 0; }
 .cta-card { background:var(--page); border:1px solid var(--border); padding:28px 26px; display:flex; flex-direction:column; gap:12px; }
@@ -512,10 +532,91 @@ footer a:hover { color:var(--green); }
   </div>
 </section>
 
-<!-- ── Section 6 · CTA ────────────────────────────────────────── -->
+<!-- ── Section 6 · How the evidence was built ──────────────── -->
+<section class="sec sec-evidence" id="evidence" data-section="evidence">
+  <div class="sec-inner">
+    <span class="kicker">Findings · Section 6 · Evidence pipeline</span>
+    <h2 class="sec-h">What it takes to read 169 clusters.</h2>
+    <p class="lede">Cluster diagnostics are credible only if the evidence layer underneath them is. Below: the depth of the evidence base for the UK National Behavioural Diagnostic. AI processes evidence; AI does not create it.</p>
+
+    <div class="ev-grid">
+      <div class="ev-cell">
+        <div class="ev-num">5.67<span>m</span></div>
+        <div class="ev-label mono">Companies House records</div>
+        <p class="ev-body">Indexed across <strong>24 UK regions</strong>. The corporate-registry layer that lets us trace incorporation, ownership, and exit at entity level rather than aggregate count.</p>
+      </div>
+
+      <div class="ev-cell">
+        <div class="ev-num">22<span>k</span></div>
+        <div class="ev-label mono">UKRI grants retagged</div>
+        <p class="ev-body">Three retag passes against UKRI Gateway to Research, normalising funder, theme, recipient, and follow-on linkage so cross-region comparisons are not confounded by tagging drift.</p>
+      </div>
+
+      <div class="ev-cell">
+        <div class="ev-num">19<span>k</span></div>
+        <div class="ev-label mono">UKRI outcomes retagged</div>
+        <p class="ev-body"><strong>9,200</strong> patents · <strong>3,800</strong> spin-offs · <strong>3,500</strong> products · <strong>37,000+</strong> collaborations. The downstream layer that distinguishes activity from throughput.</p>
+      </div>
+
+      <div class="ev-cell">
+        <div class="ev-num">4</div>
+        <div class="ev-label mono">Sources cross-referenced</div>
+        <p class="ev-body"><strong>UKRI Gateway to Research</strong> (grants + outcomes) · <strong>DSIT Innovation Clusters</strong> · <strong>Companies House</strong> bulk data · <strong>proprietary investment data</strong>. Every claim joins back to entity IDs in at least two of these.</p>
+      </div>
+
+      <div class="ev-cell">
+        <div class="ev-num">3</div>
+        <div class="ev-label mono">Pipeline versions</div>
+        <p class="ev-body"><strong>v2.1.1</strong> initial · <strong>v2.1.3</strong> Y-side enrichment, which changed tier assignments in <strong>4 of 7 Glasgow clusters</strong>. Versioned diagnostics so changes are traceable, not hidden.</p>
+      </div>
+
+      <div class="ev-cell">
+        <div class="ev-num">0</div>
+        <div class="ev-label mono">AI generation in evidence layer</div>
+        <p class="ev-body">AI processes evidence — categorisation, retagging, cross-referencing. AI does not <em>create</em> evidence. Every grant, patent, spin-off, and incorporation traces to a registry record.</p>
+      </div>
+    </div>
+
+    <p class="ev-version-note">The diagnostic framework is not static. Pipeline version v2.1.3 added demand-side evidence enrichment — measuring not just what the ecosystem does, but what it substitutes for. Every cluster page shows its pipeline version.</p>
+  </div>
+</section>
+
+<!-- ── Section 7 · Explore the data (beta) ──────────────────── -->
+<section class="sec sec-explore" id="explore" data-section="explore">
+  <div class="sec-inner">
+    <span class="kicker">Findings · Section 7 · Explore the data</span>
+    <h2 class="sec-h">Beta analytics from the diagnostic pipeline.</h2>
+    <p class="lede">Three views built from the evidence layer above. Released as they stabilise.</p>
+
+    <div class="beta-grid">
+      <article class="beta-card" data-beta="sankey">
+        <span class="beta-tag">Beta</span>
+        <h3 class="beta-h serif">National Sankey Map</h3>
+        <p class="beta-body">Funding flows from funders through institutions to outcomes. Where UKRI grants land, where they convert, and where the conversion exits the funding region.</p>
+        <div class="beta-status">Coming soon</div>
+      </article>
+
+      <article class="beta-card" data-beta="evidence-library">
+        <span class="beta-tag">Beta</span>
+        <h3 class="beta-h serif">Regional Evidence Library</h3>
+        <p class="beta-body">Browsable evidence items per region. Every grant, patent, spin-off, and collaboration that fed the diagnostic, joined to its entity ID and source.</p>
+        <div class="beta-status">Available on request</div>
+      </article>
+
+      <article class="beta-card" data-beta="ecosystem-chart">
+        <span class="beta-tag">Beta</span>
+        <h3 class="beta-h serif">Cluster Ecosystem Chart</h3>
+        <p class="beta-body">How clusters within a supercluster relate to each other — anchor overlap, shared stack configurations, and the entity-level cross-references that bind a region together.</p>
+        <div class="beta-status">Coming soon</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── Section 8 · CTA ────────────────────────────────────────── -->
 <section class="sec sec-cta" id="cta" data-section="cta">
   <div class="sec-inner">
-    <span class="kicker">Findings · Section 6 · Run the diagnostic</span>
+    <span class="kicker">Findings · Section 8 · Run the diagnostic</span>
     <h2 class="sec-h">What would the diagnostic find in your region?</h2>
     <div class="cta-grid">
 
@@ -602,6 +703,11 @@ footer a:hover { color:var(--green); }
   document.querySelectorAll('.cta-link[data-cta]').forEach(function (el) {
     el.addEventListener('click', function () {
       mixpanel.track('Findings — primary CTA click', { cta: el.dataset.cta });
+    });
+  });
+  document.querySelectorAll('.beta-card').forEach(function (el) {
+    el.addEventListener('click', function () {
+      mixpanel.track('Findings — beta card click', { beta: el.dataset.beta });
     });
   });
 })();

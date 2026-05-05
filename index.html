@@ -229,6 +229,10 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   .cluster-pin.regime-emerging     { background: #3b82f6; box-shadow: 0 1px 5px rgba(59,130,246,0.5); }
   .cluster-pin.regime-stalling     { background: #c0392b; box-shadow: 0 1px 5px rgba(192,57,43,0.5); }
   .cluster-pin.regime-unknown      { background: #8c8780; box-shadow: 0 1px 5px rgba(140,135,128,0.4); }
+  .cluster-pin.regime-supercluster { width: 16px; height: 16px; background: #2a7a4f; border: 2px solid #fff; box-shadow: 0 0 0 2px rgba(42,122,79,0.35), 0 1px 6px rgba(42,122,79,0.55); }
+  .cluster-pin.regime-supercluster:hover { transform: scale(1.4); }
+  #sc-back-btn { position: absolute; top: 12px; right: 12px; z-index: 1000; font-family: var(--font-mono); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 12px; background: var(--page); color: var(--ink); border: 1px solid var(--border); border-radius: 2px; cursor: pointer; display: none; }
+  #sc-back-btn:hover { background: var(--surface); }
 
   .map-legend { display: flex; gap: 12px; flex-wrap: wrap; padding: 4px 12px 6px; font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); align-items: center; }
   .legend-item { display: flex; align-items: center; gap: 5px; }
@@ -4065,6 +4069,7 @@ pre, code { white-space: pre-wrap; word-break: break-all; }
 <script src="/journey.js"></script>
 <script src="/behaviour.js"></script>
 <script src="/map.js"></script>
+<script src="/map-superclusters.js"></script>
 <script src="/dashboard.js"></script>
 
 

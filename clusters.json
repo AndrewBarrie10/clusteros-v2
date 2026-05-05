@@ -23080,7 +23080,8 @@
     "_evidence_tier": "P2",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "mature",
-    "_anchor_type": "corporate"
+    "_anchor_type": "corporate",
+    "parent": "orlando-innovation-ecosystem"
   },
   {
     "id": "orlando-cybersecurity",
@@ -23195,7 +23196,8 @@
     "_evidence_tier": "P3",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "emerging",
-    "_anchor_type": "military"
+    "_anchor_type": "military",
+    "parent": "orlando-innovation-ecosystem"
   },
   {
     "id": "orlando-photonics-optics",
@@ -23300,7 +23302,8 @@
     "_evidence_tier": "P1",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "emerging",
-    "_anchor_type": "university"
+    "_anchor_type": "university",
+    "parent": "orlando-innovation-ecosystem"
   },
   {
     "id": "orlando-agtech",
@@ -23406,7 +23409,8 @@
     "_evidence_tier": "P2",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "emerging",
-    "_anchor_type": "university"
+    "_anchor_type": "university",
+    "parent": "orlando-innovation-ecosystem"
   },
   {
     "id": "orlando-aviation-aerospace",
@@ -23505,7 +23509,8 @@
     "_evidence_tier": "P2",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "mature",
-    "_anchor_type": "corporate"
+    "_anchor_type": "corporate",
+    "parent": "orlando-innovation-ecosystem"
   },
   {
     "id": "orlando-tourism-technology",
@@ -23593,7 +23598,8 @@
     "_evidence_tier": "P3",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "mature",
-    "_anchor_type": "corporate"
+    "_anchor_type": "corporate",
+    "parent": "orlando-innovation-ecosystem"
   },
   {
     "id": "orlando-medtech",
@@ -23682,7 +23688,8 @@
     "_evidence_tier": "P3",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "emerging",
-    "_anchor_type": "university"
+    "_anchor_type": "university",
+    "parent": "orlando-innovation-ecosystem"
   },
   {
     "id": "orlando-digital-media",
@@ -23803,7 +23810,8 @@
     "_evidence_tier": "P1",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "mature",
-    "_anchor_type": "corporate"
+    "_anchor_type": "corporate",
+    "parent": "orlando-innovation-ecosystem"
   },
   {
     "id": "orlando-simulation-training",
@@ -23918,7 +23926,8 @@
     "_evidence_tier": "P2",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "mature",
-    "_anchor_type": "military"
+    "_anchor_type": "military",
+    "parent": "orlando-innovation-ecosystem"
   },
   {
     "id": "orlando-spacetech",
@@ -24018,6 +24027,7 @@
     "_evidence_tier": "P3",
     "_pipeline_version": "v2.1",
     "_lifecycle_stage": "mature",
-    "_anchor_type": "government"
+    "_anchor_type": "government",
+    "parent": "orlando-innovation-ecosystem"
   }
 ]

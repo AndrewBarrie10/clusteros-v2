@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Findings — ClusterOS</title>
-<meta name="description" content="What the ClusterOS diagnostic finds across 377 innovation clusters in 57 countries: structural patterns that travel, ecosystems that organise around the same configurations, and the three backbone stacks that fire regardless of geography or sector.">
+<meta name="description" content="What the ClusterOS diagnostic finds across 377 innovation clusters in 57 countries: structural patterns that travel, superclusters that organise around the same configurations, and the three backbone stacks that fire regardless of geography or sector.">
 <link rel="canonical" href="https://www.clusteros.io/findings.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"ClusterOS Findings — Cross-corpus diagnostic patterns","description":"Cross-corpus findings across 377 innovation clusters and 26 ecosystems. Stall prevalence, backbone stacks, structural twins, and ecosystem-level patterns.","url":"https://www.clusteros.io/findings.html","creator":{"@type":"Organization","name":"ClusterOS","url":"https://www.clusteros.io"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"ClusterOS Findings — Cross-corpus diagnostic patterns","description":"Cross-corpus findings across 377 innovation clusters and 26 superclusters. Cross-continental structural twins, anatomy of a single cluster reading, and the evidence pipeline behind the diagnostic.","url":"https://www.clusteros.io/findings.html","creator":{"@type":"Organization","name":"ClusterOS","url":"https://www.clusteros.io"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -63,46 +63,53 @@ strong { font-weight:600; }
 .coverage-strip { font-family:var(--mono); font-size:10.5px; color:var(--ink-muted); padding:18px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); margin:32px 0; letter-spacing:0.04em; }
 .coverage-strip strong { color:var(--ink); }
 
-/* Section 2 — stall chart */
-.stall-chart { background:var(--surface); border:1px solid var(--border); padding:28px 24px; margin:24px 0 36px; }
-.stall-chart-head { display:grid; grid-template-columns:200px 1fr 130px; gap:16px; padding-bottom:12px; margin-bottom:14px; border-bottom:1px solid var(--border-2); }
-.sch-col { font-family:var(--mono); font-size:9.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-muted); }
-.sch-readout-key { display:flex; gap:8px; align-items:center; font-size:9px; }
-.sch-readout-key span { display:inline-block; }
-.stall-row { display:grid; grid-template-columns:200px 1fr 130px; gap:16px; align-items:center; padding:6px 0; }
-.stall-row + .stall-row { border-top:1px solid var(--border); }
-.stall-name { font-size:14px; color:var(--ink); }
-.stall-bar { display:flex; height:18px; background:#fff; border:1px solid var(--border); overflow:hidden; }
-.seg { height:100%; }
-.seg-high { background:var(--red); }
-.seg-med { background:var(--amber); }
-.seg-low { background:var(--teal); opacity:0.6; }
-.seg-indet { background:var(--ink-muted); opacity:0.45; }
-.seg-absent { background:repeating-linear-gradient(45deg, var(--surface), var(--surface) 4px, var(--border) 4px, var(--border) 6px); }
-.stall-readout { font-family:var(--mono); font-size:11px; color:var(--ink-dim); display:flex; align-items:center; gap:4px; justify-content:flex-end; }
-.stall-readout .r-high { color:var(--red); font-weight:700; }
-.stall-readout .r-med { color:var(--amber); font-weight:700; }
-.stall-readout .r-low { color:var(--teal); }
-.stall-readout .r-indet { color:var(--ink-muted); }
-.stall-readout .r-sep { color:var(--ink-muted); }
-.chart-legend { display:flex; gap:16px; flex-wrap:wrap; padding-top:14px; border-top:1px solid var(--border-2); margin-top:8px; font-family:var(--mono); font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); }
-.cl-swatch { display:inline-block; width:12px; height:12px; vertical-align:middle; margin-right:6px; border:1px solid var(--border); }
-.stack-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin:32px 0 12px; }
-.stack-card { background:var(--page); border:1px solid var(--border); padding:28px 24px; border-radius:3px; }
-.stack-pct { font-family:var(--serif); font-size:54px; line-height:1; color:var(--green); letter-spacing:-0.03em; }
-.stack-pct span { font-size:30px; color:var(--green-dim); }
-.stack-pct-label { font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-muted); margin:6px 0 18px; }
-.stack-name { font-size:20px; line-height:1.2; color:var(--ink); margin-bottom:10px; }
-.stack-components { font-size:13.5px; line-height:1.55; color:var(--ink-muted); }
-.scope-note { font-family:var(--mono); font-size:10px; color:var(--ink-muted); letter-spacing:0.06em; margin-top:8px; max-width:60ch; }
+/* Section 2 — Two ways into the corpus */
+.sec-ways-in { background:#fff; }
+.ways-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:20px; margin:32px 0 0; }
+.way-card { background:#f0ebe0; border:1px solid #e0dccf; padding:32px 30px; display:flex; flex-direction:column; gap:14px; border-radius:3px; }
+.way-kicker { color:var(--green); font-size:9.5px; }
+.way-h { font-size:28px; line-height:1.2; color:var(--ink); }
+.way-body { font-size:15px; line-height:1.55; color:var(--ink); margin:0; }
+.way-sub { font-size:13.5px; line-height:1.55; color:var(--ink-muted); margin:0 0 4px; }
+.way-cta { display:inline-flex; align-self:flex-start; align-items:center; gap:8px; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:11px 22px; margin-top:auto; border-radius:2px; transition:background .15s, border-color .15s, color .15s; }
+.way-cta-primary { background:var(--green); color:#fff; }
+.way-cta-primary:hover { background:var(--green-dim); color:#fff; }
+.way-cta-secondary { background:transparent; color:var(--green); border:1.5px solid var(--green); }
+.way-cta-secondary:hover { background:var(--green); color:#fff; }
 
-/* Section 3 — ecosystem patterns */
-.sec-ecosystems { background:var(--page); }
-.eco-pattern { padding:28px 0 24px; border-bottom:1px solid var(--border); }
-.eco-pattern:last-child { border-bottom:none; }
-.eco-pattern-num { font-family:var(--serif); font-size:18px; color:var(--green); margin-bottom:6px; }
-.eco-pattern-h { font-family:var(--serif); font-size:24px; line-height:1.25; color:var(--ink); margin-bottom:14px; }
-.distinction { background:var(--surface); border-left:3px solid var(--green); padding:18px 24px; margin-top:36px; font-style:italic; color:var(--ink-dim); font-family:var(--serif); font-size:18px; max-width:60ch; }
+/* Section 4 — Anatomy of a reading */
+.sec-anatomy { background:var(--page); }
+.an-grid { list-style:none; padding:0; margin:32px 0 8px; display:grid; grid-template-columns:1fr 28px 1fr 28px 1fr 28px 1fr; gap:0; align-items:stretch; }
+.an-panel { background:#fff; border:1px solid var(--border); padding:24px 22px; display:flex; flex-direction:column; gap:10px; min-height:100%; }
+.an-arrow { display:flex; align-items:center; justify-content:center; color:var(--green); font-family:var(--serif); font-size:28px; }
+.an-arrow .an-arrow-v { display:none; }
+.an-kicker { color:var(--green); margin-bottom:4px; font-size:9.5px; }
+.an-num { font-size:42px; line-height:1; color:var(--green); letter-spacing:-0.02em; }
+.an-fig { display:flex; flex-direction:column; gap:2px; }
+.an-fig-counter { padding-top:10px; border-top:1px solid var(--border); margin-top:4px; }
+.an-fig-counter .an-num { color:var(--ink-muted); }
+.an-fig-sub { font-size:13px; line-height:1.45; color:var(--ink-dim); }
+.an-note { font-size:13px; line-height:1.55; color:var(--ink-dim); margin-top:auto; padding-top:12px; border-top:1px solid var(--border); }
+.an-note em { font-style:italic; }
+.an-source { font-size:9px; color:var(--ink-muted); letter-spacing:0.1em; padding-top:8px; }
+.an-stalls { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
+.an-stalls li { display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--ink); line-height:1.4; }
+.an-stalls li.an-stall-component strong { color:var(--ink); font-weight:600; }
+.an-dot { display:inline-block; width:10px; height:10px; flex-shrink:0; border-radius:50%; }
+.an-dot-high { background:var(--green); }
+.an-dot-medium { background:transparent; border:1.5px solid var(--green); }
+.an-dot-indeterminate { background:linear-gradient(90deg, var(--green) 50%, transparent 50%); border:1.5px solid var(--green); }
+.an-dot-low { width:5px; height:5px; background:var(--ink-muted); margin:0 2.5px; }
+.an-stall-key { display:flex; flex-wrap:wrap; gap:14px; padding-top:10px; border-top:1px solid var(--border); margin-top:auto; font-size:9px; color:var(--ink-muted); align-items:center; }
+.an-stall-key span { display:inline-flex; align-items:center; gap:5px; }
+.an-stall-bold-note { font-size:9px; color:var(--ink-muted); padding-top:6px; }
+.an-stack-name { font-size:24px; line-height:1.2; color:var(--ink); }
+.an-conf-pill { display:inline-block; font-size:9px; font-weight:700; letter-spacing:0.1em; padding:3px 10px; border-radius:2px; background:rgba(42,122,79,0.12); color:var(--green-dim); align-self:flex-start; }
+.an-stack-logic { font-size:13.5px; line-height:1.6; color:var(--ink-dim); }
+.an-hypothesis { font-family:var(--serif); font-style:italic; font-size:15px; line-height:1.55; color:var(--ink); border-left:2px solid var(--green); padding:4px 0 4px 14px; margin:0; }
+.an-cluster-link { text-align:center; margin-top:24px; }
+.an-cluster-link a { font-size:13px; color:var(--ink-muted); text-decoration:none; border-bottom:1px solid transparent; transition:color .15s, border-color .15s; }
+.an-cluster-link a:hover { color:var(--green); border-bottom-color:var(--green); }
 
 /* Section 4 — resemblance pairs */
 .sec-twins { background:#fff; }
@@ -171,12 +178,15 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
 footer a { color:var(--ink-muted); }
 footer a:hover { color:var(--green); }
 
+@media (max-width:900px) {
+  .an-grid { grid-template-columns:1fr; gap:0; }
+  .an-arrow { padding:6px 0; }
+  .an-arrow .an-arrow-h { display:none; }
+  .an-arrow .an-arrow-v { display:inline; }
+}
 @media (max-width:760px) {
   .sec { padding:56px 20px; }
   .stat-num { font-size:42px; }
-  .stack-pct { font-size:42px; }
-  .stall-chart-head, .stall-row { grid-template-columns:120px 1fr 100px; gap:10px; }
-  .stall-name { font-size:13px; }
   .nav-links { gap:18px; }
 }
 </style>
@@ -213,7 +223,7 @@ footer a:hover { color:var(--green); }
     <h1 class="sec-h">The same patterns. Different justifications.<br>Identical structure.</h1>
     <div class="stat-grid">
       <div class="stat-cell"><div class="stat-num">377</div><div class="stat-label">Clusters diagnosed</div></div>
-      <div class="stat-cell"><div class="stat-num">26</div><div class="stat-label">Ecosystems</div></div>
+      <div class="stat-cell"><div class="stat-num">26</div><div class="stat-label">Superclusters</div></div>
       <div class="stat-cell"><div class="stat-num">57</div><div class="stat-label">Countries</div></div>
       <div class="stat-cell"><div class="stat-num">30<span>k+</span></div><div class="stat-label">Evidence items</div></div>
       <div class="stat-cell"><div class="stat-num">9</div><div class="stat-label">Structural patterns</div></div>
@@ -221,205 +231,43 @@ footer a:hover { color:var(--green); }
     <div class="coverage-strip mono">
       <strong>Coverage</strong> · 57 countries · 6 continents · public-policy, university, corporate, federal anchor types
     </div>
-    <p class="lede">ClusterOS has diagnosed 377 innovation clusters across 26 ecosystems in 57 countries. The finding that surprised us most is not what each ecosystem does differently. It is how consistently they do the same things.</p>
+    <p class="lede">ClusterOS has diagnosed 377 innovation clusters across 26 superclusters in 57 countries. The finding that surprised us most is not what each supercluster does differently. It is how consistently they do the same things.</p>
   </div>
 </section>
 
-<!-- ── Section 2 · Cluster-level findings ─────────────────────── -->
-<section class="sec sec-clusters" id="clusters" data-section="clusters">
+<!-- ── Section 2 · Two ways into the corpus ──────────────────── -->
+<section class="sec sec-ways-in" id="ways-in" data-section="ways-in">
   <div class="sec-inner">
-    <span class="kicker">Findings · Section 2 · Cluster-level data</span>
-    <h2 class="sec-h">Every ecosystem stalls. The question is where.</h2>
-    <p class="lede">The diagnostic tracks 9 stalls — behavioural substitutions an ecosystem makes when it cannot decide. Aggregated across 377 clusters, every stall is observable; the distribution is not uniform.</p>
+    <span class="kicker">Findings · Section 2 · Two ways in</span>
+    <h2 class="sec-h">Read deep. Or browse the corpus.</h2>
+    <p class="lede">There are two doors into this material. The first goes deep into one national reading. The second opens onto every cluster in the corpus — diagnosed, on the map, one click from full text.</p>
 
-    <div class="stall-chart" aria-label="Stall prevalence across 377 clusters, sorted by combined HIGH and MEDIUM confidence">
-      <div class="stall-chart-head">
-        <span class="sch-col">Stall</span>
-        <span class="sch-col">Distribution across 377 clusters</span>
-        <span class="sch-col" style="text-align:right">% H · M · L · I/A</span>
-      </div>
-      
-        <div class="stall-row" data-stall="S6">
-          <div class="stall-label">
-            <span class="stall-name">Stabilising around incumbents</span>
-          </div>
-          <div class="stall-bar">
-            <div class="seg seg-high" style="width:20.2%" title="HIGH 20.2%"></div><div class="seg seg-med" style="width:62.6%" title="MEDIUM 62.6%"></div><div class="seg seg-low" style="width:17.2%" title="LOW 17.2%"></div><div class="seg seg-indet" style="width:0.0%" title="INDETERMINATE 0.0%"></div><div class="seg seg-absent" style="width:0.0%" title="ABSENT 0.0%"></div>
-          </div>
-          <div class="stall-readout">
-            <span class="r-high">20</span><span class="r-sep">·</span><span class="r-med">63</span><span class="r-sep">·</span><span class="r-low">17</span><span class="r-sep">·</span><span class="r-indet">0</span>
-          </div>
-        </div>
-
-        <div class="stall-row" data-stall="S2">
-          <div class="stall-label">
-            <span class="stall-name">Coordinating instead of deciding</span>
-          </div>
-          <div class="stall-bar">
-            <div class="seg seg-high" style="width:1.3%" title="HIGH 1.3%"></div><div class="seg seg-med" style="width:55.7%" title="MEDIUM 55.7%"></div><div class="seg seg-low" style="width:43.0%" title="LOW 43.0%"></div><div class="seg seg-indet" style="width:0.0%" title="INDETERMINATE 0.0%"></div><div class="seg seg-absent" style="width:0.0%" title="ABSENT 0.0%"></div>
-          </div>
-          <div class="stall-readout">
-            <span class="r-high">1</span><span class="r-sep">·</span><span class="r-med">56</span><span class="r-sep">·</span><span class="r-low">43</span><span class="r-sep">·</span><span class="r-indet">0</span>
-          </div>
-        </div>
-
-        <div class="stall-row" data-stall="S4">
-          <div class="stall-label">
-            <span class="stall-name">Extracting without reinvesting</span>
-          </div>
-          <div class="stall-bar">
-            <div class="seg seg-high" style="width:2.7%" title="HIGH 2.7%"></div><div class="seg seg-med" style="width:41.6%" title="MEDIUM 41.6%"></div><div class="seg seg-low" style="width:28.4%" title="LOW 28.4%"></div><div class="seg seg-indet" style="width:2.9%" title="INDETERMINATE 2.9%"></div><div class="seg seg-absent" style="width:24.4%" title="ABSENT 24.4%"></div>
-          </div>
-          <div class="stall-readout">
-            <span class="r-high">3</span><span class="r-sep">·</span><span class="r-med">42</span><span class="r-sep">·</span><span class="r-low">28</span><span class="r-sep">·</span><span class="r-indet">27</span>
-          </div>
-        </div>
-
-        <div class="stall-row" data-stall="S5">
-          <div class="stall-label">
-            <span class="stall-name">Mediating instead of coupling</span>
-          </div>
-          <div class="stall-bar">
-            <div class="seg seg-high" style="width:0.5%" title="HIGH 0.5%"></div><div class="seg seg-med" style="width:42.2%" title="MEDIUM 42.2%"></div><div class="seg seg-low" style="width:57.3%" title="LOW 57.3%"></div><div class="seg seg-indet" style="width:0.0%" title="INDETERMINATE 0.0%"></div><div class="seg seg-absent" style="width:0.0%" title="ABSENT 0.0%"></div>
-          </div>
-          <div class="stall-readout">
-            <span class="r-high">1</span><span class="r-sep">·</span><span class="r-med">42</span><span class="r-sep">·</span><span class="r-low">57</span><span class="r-sep">·</span><span class="r-indet">0</span>
-          </div>
-        </div>
-
-        <div class="stall-row" data-stall="S9">
-          <div class="stall-label">
-            <span class="stall-name">Waiting for permission</span>
-          </div>
-          <div class="stall-bar">
-            <div class="seg seg-high" style="width:1.1%" title="HIGH 1.1%"></div><div class="seg seg-med" style="width:36.6%" title="MEDIUM 36.6%"></div><div class="seg seg-low" style="width:32.4%" title="LOW 32.4%"></div><div class="seg seg-indet" style="width:13.8%" title="INDETERMINATE 13.8%"></div><div class="seg seg-absent" style="width:16.2%" title="ABSENT 16.2%"></div>
-          </div>
-          <div class="stall-readout">
-            <span class="r-high">1</span><span class="r-sep">·</span><span class="r-med">37</span><span class="r-sep">·</span><span class="r-low">32</span><span class="r-sep">·</span><span class="r-indet">30</span>
-          </div>
-        </div>
-
-        <div class="stall-row" data-stall="S8">
-          <div class="stall-label">
-            <span class="stall-name">Scaling activity instead of throughput</span>
-          </div>
-          <div class="stall-bar">
-            <div class="seg seg-high" style="width:2.1%" title="HIGH 2.1%"></div><div class="seg seg-med" style="width:24.1%" title="MEDIUM 24.1%"></div><div class="seg seg-low" style="width:73.7%" title="LOW 73.7%"></div><div class="seg seg-indet" style="width:0.0%" title="INDETERMINATE 0.0%"></div><div class="seg seg-absent" style="width:0.0%" title="ABSENT 0.0%"></div>
-          </div>
-          <div class="stall-readout">
-            <span class="r-high">2</span><span class="r-sep">·</span><span class="r-med">24</span><span class="r-sep">·</span><span class="r-low">74</span><span class="r-sep">·</span><span class="r-indet">0</span>
-          </div>
-        </div>
-
-        <div class="stall-row" data-stall="S7">
-          <div class="stall-label">
-            <span class="stall-name">Narrating instead of testing</span>
-          </div>
-          <div class="stall-bar">
-            <div class="seg seg-high" style="width:0.3%" title="HIGH 0.3%"></div><div class="seg seg-med" style="width:17.5%" title="MEDIUM 17.5%"></div><div class="seg seg-low" style="width:76.1%" title="LOW 76.1%"></div><div class="seg seg-indet" style="width:1.1%" title="INDETERMINATE 1.1%"></div><div class="seg seg-absent" style="width:5.0%" title="ABSENT 5.0%"></div>
-          </div>
-          <div class="stall-readout">
-            <span class="r-high">0</span><span class="r-sep">·</span><span class="r-med">18</span><span class="r-sep">·</span><span class="r-low">76</span><span class="r-sep">·</span><span class="r-indet">6</span>
-          </div>
-        </div>
-
-        <div class="stall-row" data-stall="S1">
-          <div class="stall-label">
-            <span class="stall-name">Re-proving instead of narrowing</span>
-          </div>
-          <div class="stall-bar">
-            <div class="seg seg-high" style="width:0.0%" title="HIGH 0.0%"></div><div class="seg seg-med" style="width:17.0%" title="MEDIUM 17.0%"></div><div class="seg seg-low" style="width:83.0%" title="LOW 83.0%"></div><div class="seg seg-indet" style="width:0.0%" title="INDETERMINATE 0.0%"></div><div class="seg seg-absent" style="width:0.0%" title="ABSENT 0.0%"></div>
-          </div>
-          <div class="stall-readout">
-            <span class="r-high">0</span><span class="r-sep">·</span><span class="r-med">17</span><span class="r-sep">·</span><span class="r-low">83</span><span class="r-sep">·</span><span class="r-indet">0</span>
-          </div>
-        </div>
-
-        <div class="stall-row" data-stall="S3">
-          <div class="stall-label">
-            <span class="stall-name">Forgiving instead of redesigning</span>
-          </div>
-          <div class="stall-bar">
-            <div class="seg seg-high" style="width:0.0%" title="HIGH 0.0%"></div><div class="seg seg-med" style="width:2.4%" title="MEDIUM 2.4%"></div><div class="seg seg-low" style="width:7.7%" title="LOW 7.7%"></div><div class="seg seg-indet" style="width:38.2%" title="INDETERMINATE 38.2%"></div><div class="seg seg-absent" style="width:51.7%" title="ABSENT 51.7%"></div>
-          </div>
-          <div class="stall-readout">
-            <span class="r-high">0</span><span class="r-sep">·</span><span class="r-med">2</span><span class="r-sep">·</span><span class="r-low">8</span><span class="r-sep">·</span><span class="r-indet">90</span>
-          </div>
-        </div>
-      <div class="chart-legend">
-        <span><span class="cl-swatch" style="background:var(--red)"></span>High</span>
-        <span><span class="cl-swatch" style="background:var(--amber)"></span>Medium</span>
-        <span><span class="cl-swatch" style="background:var(--teal);opacity:0.6"></span>Low</span>
-        <span><span class="cl-swatch" style="background:var(--ink-muted);opacity:0.45"></span>Indeterminate</span>
-        <span><span class="cl-swatch" style="background:repeating-linear-gradient(45deg,var(--surface),var(--surface) 3px,var(--border) 3px,var(--border) 5px)"></span>Absent</span>
-      </div>
-    </div>
-
-    <blockquote class="pull-quote">Stabilising Around Incumbents fires in every cluster we have examined. It is not a regional pattern. It is not a sector pattern. It is a structural property of how innovation ecosystems mature.</blockquote>
-
-    <blockquote class="pull-quote">Forgiving Instead of Redesigning is indeterminate in 86% of clusters. The framework refuses to assert what it cannot observe.</blockquote>
-
-    <h3 class="sub-h">Three backbone stacks</h3>
-    <p>The same three configurations dominate the UK National Behavioural Diagnostic. They are presented here as the canonical three — the patterns that differentiate cluster diagnostics from sector or regional analysis.</p>
-    <div class="stack-cards">
-      <article class="stack-card">
-        <div class="stack-pct">93<span>.5%</span></div>
-        <div class="stack-pct-label mono">UK ecosystems</div>
-        <h3 class="stack-name serif">Coordination–Intermediary–Activity</h3>
-        <p class="stack-components">Coordinating, Mediating, and Scaling activity reinforce one another. Partnership infrastructure produces activity; activity feeds partnership renewal; throughput remains unmeasured.</p>
+    <div class="ways-grid">
+      <article class="way-card" data-way="nbd">
+        <div class="way-kicker mono">Section 2 · Read deep</div>
+        <h3 class="way-h serif">The deepest national reading</h3>
+        <p class="way-body">The UK National Behavioural Diagnostic. 169 clusters. 25 regional superclusters. One pattern.</p>
+        <p class="way-sub">Our most complete reading of a national innovation system to date.</p>
+        <a class="way-cta way-cta-primary mono" href="/national-diagnostic" data-cta="nbd">Read the NBD →</a>
       </article>
-      <article class="stack-card">
-        <div class="stack-pct">92<span>.9%</span></div>
-        <div class="stack-pct-label mono">UK ecosystems</div>
-        <h3 class="stack-name serif">Extraction–Intermediary</h3>
-        <p class="stack-components">Value flows out through intermediary structures while incumbents remain central. The exit channel and the gatekeeping channel are the same channel.</p>
-      </article>
-      <article class="stack-card">
-        <div class="stack-pct">90<span>.5%</span></div>
-        <div class="stack-pct-label mono">UK ecosystems</div>
-        <h3 class="stack-name serif">Governance Capture</h3>
-        <p class="stack-components">Coordinating and Stabilising co-occur. Governance structures form around incumbent priorities; decision authority concentrates where institutional weight already exists.</p>
+
+      <article class="way-card" data-way="map">
+        <div class="way-kicker mono">Section 2 · Browse the corpus</div>
+        <h3 class="way-h serif">The cluster library</h3>
+        <p class="way-body">377 cluster diagnostics across 57 countries, on the map. Click any pin to read the diagnostic.</p>
+        <p class="way-sub">Every cluster in the corpus is browsable directly.</p>
+        <a class="way-cta way-cta-secondary mono" href="/data.html" data-cta="map">Browse the cluster library →</a>
       </article>
     </div>
-    <p class="scope-note mono">Prevalence figures from the UK National Behavioural Diagnostic (176 clusters · 25 ecosystems). Cross-corpus stall distribution above; pattern-level prevalence on the global corpus varies by threshold and is published per-cluster on individual profile pages.</p>
   </div>
 </section>
 
-<!-- ── Section 3 · Ecosystem-level findings ───────────────────── -->
-<section class="sec sec-ecosystems" id="ecosystems" data-section="ecosystems">
-  <div class="sec-inner narrow">
-    <span class="kicker">Findings · Section 3 · Ecosystem-level data</span>
-    <h2 class="sec-h">Three patterns that cut across everything.</h2>
-    <p class="lede">Ecosystem-level findings are properties of how regions organise — distinct from the cluster-level distribution above. They emerge only when constituent clusters are read together.</p>
-
-    <div class="eco-pattern" data-pattern="coordination">
-      <div class="eco-pattern-num serif">01</div>
-      <h3 class="eco-pattern-h">Coordination substitutes for decision.</h3>
-      <p>In every ecosystem diagnosed, coordination infrastructure — partnership frameworks, steering committees, memoranda of understanding — grows faster than the commercial throughput it was designed to support. The more coordination, the less pressure to make exclusionary choices. Observable in Orlando (Team Orlando's 150-organisation MOU), Glasgow (Strathclyde spanning 6 of 8 clusters), and Cambridge (validation-by-committee across the research base).</p>
-    </div>
-
-    <div class="eco-pattern" data-pattern="extraction">
-      <div class="eco-pattern-num serif">02</div>
-      <h3 class="eco-pattern-h">Value exits through the coordination channels.</h3>
-      <p>UKRI-funded spin-offs registering outside their funding region. Series A companies relocating to cities with better visibility. Graduates flowing to anchor employers rather than generating ecosystem-wide opportunity. The extraction signal is present in every ecosystem we have diagnosed — the question is magnitude, not existence. Glasgow's 25× extraction multiple is the UK headline; Orlando's Scale-Up Capital Gap is the US equivalent.</p>
-    </div>
-
-    <div class="eco-pattern" data-pattern="anchors">
-      <div class="eco-pattern-num serif">03</div>
-      <h3 class="eco-pattern-h">Incumbent anchors shape all pathways.</h3>
-      <p>Federal agencies in Orlando. Universities in Glasgow. Theme park operators in Tourism Technology. Defence primes in Advanced Manufacturing. In each case, the anchor creates capability and demand but also concentrates innovation pathways around the anchor's own requirements. Activity outside the anchor's orbit is weakly developed.</p>
-    </div>
-
-    <div class="distinction">These are properties of how ecosystems organise, not features of individual clusters. A single cluster may not exhibit all three patterns. The ecosystem always does.</div>
-  </div>
-</section>
-
-<!-- ── Section 4 · Cross-continental ──────────────────────────── -->
+<!-- ── Section 3 · The framework travels ──────────────────────── -->
 <section class="sec sec-twins" id="twins" data-section="twins">
   <div class="sec-inner">
-    <span class="kicker">Findings · Section 4 · The framework travels</span>
-    <h2 class="sec-h">Ecosystems on different continents show identical structures.</h2>
-    <p class="lede">Five cross-continental resemblance pairs from the corpus. Each shares a stall configuration or a canonical stack — measured at medium-or-higher confidence on both sides.</p>
+    <span class="kicker">Findings · Section 3 · The framework travels</span>
+    <h2 class="sec-h">The framework travels.</h2>
+    <p class="lede">The diagnostic produces a stall and stack profile for every cluster in the corpus. When we compare profiles across all 377, structurally similar clusters surface — often in different countries, on different continents, under different political and economic systems. These resemblances are not curated. They are the output of an automated similarity calculation across all profiles in the corpus.</p>
     <div class="rp-grid">
       <a class="rp-card" href="/clusters/greater-glasgow-life-sciences.html" data-pair="greater-glasgow-life-sciences↔philadelphia-life-sciences-biotech">
         <div class="rp-pair">
@@ -498,10 +346,82 @@ footer a:hover { color:var(--green); }
           </div>
         </div>
         <div class="rp-shared"><span class="rp-tag rp-tag-stall">Mediating instead of coupling</span></div>
-        <div class="rp-note">Both register Mediating instead of coupling at medium-or-higher confidence — fintech ecosystems where intermediary structures (regulators, sandboxes, networks) substitute for direct actor-to-actor coupling.</div>
+        <div class="rp-note">Both register Mediating instead of coupling at medium-or-higher confidence — fintech clusters where intermediary structures (regulators, sandboxes, networks) substitute for direct actor-to-actor coupling.</div>
       </a>
     </div>
-    <blockquote class="pull-quote">The same configurations appear on different continents, in different political economies, with different cultural contexts. That tells us something important: the stalls are not caused by local policy or governance failure. They are structural properties of how regional innovation ecosystems mature under pressure.</blockquote>
+    <blockquote class="pull-quote">The same configurations appear on different continents, in different political economies, under different policy or governance regimes. They are structural properties of how regional innovation systems mature under pressure.</blockquote>
+  </div>
+</section>
+
+<!-- ── Section 4 · Anatomy of a reading ─────────────────────── -->
+<section class="sec sec-anatomy" id="anatomy" data-section="anatomy">
+  <div class="sec-inner">
+    <span class="kicker">Findings · Section 4 · Anatomy of a reading</span>
+    <h2 class="sec-h">How the diagnostic reads a cluster.</h2>
+    <p class="lede">Every cluster in the corpus is read the same way: from evidence, to behavioural stalls, to the configuration they form, to one testable leverage hypothesis. This is what the output looks like for one cluster — Greater Glasgow Life Sciences. The same shape exists for all 377.</p>
+
+    <ol class="an-grid" aria-label="Anatomy of a single cluster reading, four sequential panels">
+      <li class="an-panel an-panel-1">
+        <div class="an-kicker mono">One evidence item</div>
+        <div class="an-fig">
+          <div class="an-num serif">£95m</div>
+          <div class="an-fig-sub">to spin-offs that registered outside the region</div>
+        </div>
+        <div class="an-fig an-fig-counter">
+          <div class="an-num serif">£4m</div>
+          <div class="an-fig-sub">stayed local</div>
+        </div>
+        <p class="an-note"><em>A 25× extraction multiple. UKRI funded research that produced spin-offs which then registered their companies elsewhere.</em></p>
+        <div class="an-source mono">Source: UKRI Gateway to Research outcomes + Companies House</div>
+      </li>
+
+      <li class="an-arrow" aria-hidden="true"><span class="an-arrow-h">→</span><span class="an-arrow-v">↓</span></li>
+
+      <li class="an-panel an-panel-2">
+        <div class="an-kicker mono">Nine behavioural stalls</div>
+        <ul class="an-stalls">
+          <li><span class="an-dot an-dot-medium" aria-label="Medium confidence"></span>Re-proving instead of narrowing</li>
+          <li><span class="an-dot an-dot-medium" aria-label="Medium confidence"></span>Coordinating instead of deciding</li>
+          <li><span class="an-dot an-dot-indeterminate" aria-label="Indeterminate confidence"></span>Forgiving instead of redesigning</li>
+          <li class="an-stall-component"><span class="an-dot an-dot-medium" aria-label="Medium confidence"></span><strong>Extracting without reinvesting</strong></li>
+          <li><span class="an-dot an-dot-low" aria-label="Low confidence"></span>Mediating instead of coupling</li>
+          <li><span class="an-dot an-dot-medium" aria-label="Medium confidence"></span>Stabilising around incumbents</li>
+          <li class="an-stall-component"><span class="an-dot an-dot-medium" aria-label="Medium confidence"></span><strong>Narrating instead of testing</strong></li>
+          <li><span class="an-dot an-dot-medium" aria-label="Medium confidence"></span>Scaling activity instead of throughput</li>
+          <li><span class="an-dot an-dot-indeterminate" aria-label="Indeterminate confidence"></span>Waiting for permission</li>
+        </ul>
+        <div class="an-stall-key mono">
+          <span><span class="an-dot an-dot-high"></span>High</span>
+          <span><span class="an-dot an-dot-medium"></span>Medium</span>
+          <span><span class="an-dot an-dot-indeterminate"></span>Indeterminate</span>
+          <span><span class="an-dot an-dot-low"></span>Low</span>
+        </div>
+        <div class="an-stall-bold-note mono">Bold: components of the dominant configuration →</div>
+      </li>
+
+      <li class="an-arrow" aria-hidden="true"><span class="an-arrow-h">→</span><span class="an-arrow-v">↓</span></li>
+
+      <li class="an-panel an-panel-3">
+        <div class="an-kicker mono">Dominant configuration</div>
+        <div class="an-stack-name serif">Extraction–Narrative</div>
+        <div class="an-conf-pill mono">High confidence</div>
+        <!-- verbatim from diagnostic JSON; do not edit -->
+        <p class="an-stack-logic" data-source="diagnostic-verbatim">Value extraction events generate narrative about ecosystem success; narrative legitimises continued extraction by framing it as ecosystem contribution; uncertainty about whether extraction is harmful absorbed by the success narrative.</p>
+      </li>
+
+      <li class="an-arrow" aria-hidden="true"><span class="an-arrow-h">→</span><span class="an-arrow-v">↓</span></li>
+
+      <li class="an-panel an-panel-4">
+        <div class="an-kicker mono">One leverage hypothesis</div>
+        <!-- verbatim from diagnostic JSON; do not edit -->
+        <blockquote class="an-hypothesis" data-source="diagnostic-verbatim">If ecosystem reports (e.g., from Scottish Enterprise, Life Sciences Scotland, or GCID) separated "value created" metrics (spin-offs formed, equity raised, patents filed) from "value retained" metrics (companies headquartered in cluster, employment in cluster, procurement from cluster suppliers), it might reduce the system's ability to absorb success and uncertainty signals through aggregated success narratives without making the distinction between extraction and retention visible and testable.</blockquote>
+        <div class="an-source mono">Greater Glasgow Life Sciences · Stage 5 · v2.1</div>
+      </li>
+    </ol>
+
+    <div class="an-cluster-link">
+      <a href="/clusters/greater-glasgow-life-sciences.html" data-anatomy-cluster="greater-glasgow-life-sciences">→ Read the full Greater Glasgow Life Sciences diagnostic</a>
+    </div>
   </div>
 </section>
 
@@ -509,7 +429,7 @@ footer a:hover { color:var(--green); }
 <section class="sec sec-featured" id="featured" data-section="featured">
   <div class="sec-inner">
     <span class="kicker">Findings · Section 5 · Featured deep-dives</span>
-    <h2 class="sec-h">Two ecosystem readings in full.</h2>
+    <h2 class="sec-h">Two supercluster readings in full.</h2>
     <div class="feat-grid">
 
       <article class="feat-card">
@@ -524,7 +444,7 @@ footer a:hover { color:var(--green); }
         <div class="feat-eyebrow">Orlando Innovation Ecosystem</div>
         <h3 class="feat-h serif">Ten clusters. One Florida region.</h3>
         <div class="feat-meta">10 clusters · 582 evidence items</div>
-        <p class="feat-body">Our first international ecosystem diagnostic. Space, tourism, defence, MedTech — ten clusters diagnosed with steward-held data from the Orlando Economic Partnership.</p>
+        <p class="feat-body">Our first international supercluster diagnostic. Space, tourism, defence, MedTech — ten clusters diagnosed with steward-held data from the Orlando Economic Partnership.</p>
         <a class="feat-cta" href="/superclusters/orlando-innovation-ecosystem" data-feat="orlando">Read the Orlando diagnostic →</a>
       </article>
 
@@ -577,7 +497,7 @@ footer a:hover { color:var(--green); }
       </div>
     </div>
 
-    <p class="ev-version-note">The diagnostic framework is not static. Pipeline version v2.1.3 added demand-side evidence enrichment — measuring not just what the ecosystem does, but what it substitutes for. Every cluster page shows its pipeline version.</p>
+    <p class="ev-version-note">The diagnostic framework is not static. Pipeline version v2.1.3 added demand-side evidence enrichment — measuring not just what the supercluster does, but what it substitutes for. Every cluster page shows its pipeline version.</p>
   </div>
 </section>
 
@@ -605,7 +525,7 @@ footer a:hover { color:var(--green); }
 
       <article class="beta-card" data-beta="ecosystem-chart">
         <span class="beta-tag">Beta</span>
-        <h3 class="beta-h serif">Cluster Ecosystem Chart</h3>
+        <h3 class="beta-h serif">Cluster Network Chart</h3>
         <p class="beta-body">How clusters within a supercluster relate to each other — anchor overlap, shared stack configurations, and the entity-level cross-references that bind a region together.</p>
         <div class="beta-status">Coming soon</div>
       </article>
@@ -622,7 +542,7 @@ footer a:hover { color:var(--green); }
 
       <div class="cta-card">
         <div class="cta-eyebrow">Self-diagnostic · Free</div>
-        <h3 class="cta-h serif">Run the framework on your own ecosystem.</h3>
+        <h3 class="cta-h serif">Run the framework on your own supercluster.</h3>
         <p class="cta-body">15 minutes. No data required. Identify stall patterns, see the stacks they form, and read the leverage entry points the framework would surface.</p>
         <a class="cta-link secondary" href="/cas-explainer.html" data-cta="self">Start the self-diagnostic →</a>
       </div>
@@ -630,7 +550,7 @@ footer a:hover { color:var(--green); }
       <div class="cta-card primary">
         <div class="cta-eyebrow">Full diagnostic</div>
         <h3 class="cta-h serif">Commission a regional reading.</h3>
-        <p class="cta-body">Your evidence, your actors, your clusters. Cross-referenced at entity level. Output: ecosystem-level diagnostic with leverage hypotheses calibrated to your context.</p>
+        <p class="cta-body">Your evidence, your actors, your clusters. Cross-referenced at entity level. Output: supercluster-level diagnostic with leverage hypotheses calibrated to your context.</p>
         <a class="cta-link primary" href="/request.html" data-cta="full">Request a diagnostic →</a>
       </div>
 
@@ -708,6 +628,24 @@ footer a:hover { color:var(--green); }
   document.querySelectorAll('.beta-card').forEach(function (el) {
     el.addEventListener('click', function () {
       mixpanel.track('Findings — beta card click', { beta: el.dataset.beta });
+    });
+  });
+
+  // Section 2 — Two ways into the corpus (NEW events)
+  document.querySelectorAll('.way-cta[data-cta]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var which = el.dataset.cta;
+      var event = which === 'nbd' ? 'Findings — NBD CTA click'
+                : which === 'map' ? 'Findings — map CTA click'
+                : null;
+      if (event) mixpanel.track(event, { cta: which });
+    });
+  });
+
+  // Section 4 — Anatomy of a reading: closing cluster link
+  document.querySelectorAll('[data-anatomy-cluster]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      mixpanel.track('Findings — anatomy cluster click', { cluster: el.dataset.anatomyCluster });
     });
   });
 })();

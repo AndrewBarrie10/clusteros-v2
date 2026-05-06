@@ -240,6 +240,29 @@ def pick_dominant_configuration(stacks):
     return name
 
 
+INLINE_BLOCK_RE = re.compile(
+    r'(<script type="application/json" id="cluster-library-data">)(.*?)(</script>)',
+    re.DOTALL,
+)
+
+
+def inline_into_html(html_path, json_text):
+    """Splice json_text into the <script type="application/json" id="cluster-library-data">
+    block in cluster-library.html. Escapes any literal </script> sequence inside the
+    JSON to keep the surrounding script tag intact.
+    """
+    html = html_path.read_text()
+    safe = json_text.replace("</script", "<\\/script")
+    new_html, n = INLINE_BLOCK_RE.subn(r"\1" + safe + r"\3", html, count=1)
+    if n != 1:
+        raise SystemExit(
+            f"could not find inline data block in {html_path.name} — "
+            "expected exactly one <script type=\"application/json\" "
+            "id=\"cluster-library-data\">…</script>"
+        )
+    html_path.write_text(new_html)
+
+
 def main():
     src = json.load(open(ROOT / "clusters.json"))
     out = []
@@ -270,9 +293,17 @@ def main():
     out.sort(key=lambda e: e["name"].casefold())
 
     target = ROOT / "cluster-library-data.json"
-    target.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
-
+    payload = json.dumps(out, indent=2, ensure_ascii=False)
+    target.write_text(payload + "\n")
     print(f"Wrote {len(out)} entries to {target.relative_to(ROOT)}")
+
+    html_target = ROOT / "cluster-library.html"
+    if html_target.exists():
+        # Inline as compact JSON to keep page weight reasonable
+        compact = json.dumps(out, ensure_ascii=False, separators=(",", ":"))
+        inline_into_html(html_target, compact)
+        print(f"Inlined {len(out)} entries into {html_target.relative_to(ROOT)}")
+
     print(f"Sector misses: {len(sector_misses)}")
     if sector_misses:
         for sid, sname in sector_misses[:30]:

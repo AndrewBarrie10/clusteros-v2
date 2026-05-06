@@ -279,7 +279,7 @@ footer a:hover { color:var(--green); }
   resultsEl.addEventListener('click', onResultClick);
 
   // Initial fetch
-  fetch('/cluster-library.json', { credentials: 'omit' })
+  fetch('/cluster-library-data.json', { credentials: 'omit', headers: { 'Accept': 'application/json' } })
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function (json) {
       data = json.map(function (c) {

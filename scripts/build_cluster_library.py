@@ -269,7 +269,7 @@ def main():
     # sort alphabetically by name for deterministic order
     out.sort(key=lambda e: e["name"].casefold())
 
-    target = ROOT / "cluster-library.json"
+    target = ROOT / "cluster-library-data.json"
     target.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
 
     print(f"Wrote {len(out)} entries to {target.relative_to(ROOT)}")

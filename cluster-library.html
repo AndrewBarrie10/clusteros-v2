@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cluster Library — ClusterOS</title>
+<meta name="description" content="All 377 cluster diagnostics in the ClusterOS corpus, searchable by name, region, country, sector, or configuration.">
+<link rel="canonical" href="https://www.clusteros.io/cluster-library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a1a1a; --ink-dim:#4a4540; --ink-muted:#8c8780;
+  --page:#f7f4ef; --surface:#f0ece4; --border:#ddd8cf; --border-2:#c8c2b7;
+  --green:#2a7a4f; --green-dim:#1d5c3a;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Geist',system-ui,sans-serif;
+  --mono:'Geist Mono',monospace;
+  --max-wide:1180px;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); font-weight:300; background:var(--page); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; }
+a { color:var(--green); text-decoration:none; } a:hover { color:var(--green-dim); }
+.serif { font-family:var(--serif); font-weight:400; letter-spacing:-0.01em; }
+.mono { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; }
+
+nav.site-nav { display:flex; align-items:center; justify-content:space-between; padding:0 32px; height:56px; background:rgba(247,244,239,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+.nav-logo { font-family:var(--serif); font-size:18px; color:var(--ink); }
+.nav-logo span { font-family:var(--mono); font-size:14px; color:var(--green); font-weight:600; }
+.nav-links { display:flex; gap:32px; list-style:none; }
+.nav-links a { font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-dim); }
+.nav-links a:hover, .nav-links a.active { color:var(--green); }
+.nav-cta { font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:var(--green); padding:8px 18px; border-radius:3px; }
+.nav-cta:hover { background:var(--green-dim); color:#fff; }
+
+.breadcrumb { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-muted); padding:18px 32px 0; max-width:var(--max-wide); margin:0 auto; }
+.breadcrumb a { color:var(--ink-muted); }
+.breadcrumb a:hover { color:var(--green); }
+
+main { padding:0; }
+.lib-head { padding:48px 32px 28px; max-width:var(--max-wide); margin:0 auto; }
+.lib-h { font-family:var(--serif); font-size:clamp(40px,5vw,56px); line-height:1.1; color:var(--ink); margin-bottom:14px; letter-spacing:-0.01em; }
+.lib-lede { font-size:17px; line-height:1.6; color:var(--ink-dim); max-width:64ch; }
+
+.lib-search { padding:6px 32px 18px; max-width:var(--max-wide); margin:0 auto; }
+.search-row { display:flex; align-items:flex-end; gap:24px; padding:14px 0 8px; border-bottom:1px solid var(--border-2); }
+.search-input-wrap { flex:1; display:flex; align-items:center; gap:10px; }
+.search-icon { font-family:var(--mono); font-size:14px; color:var(--ink-muted); flex:0 0 auto; }
+input.search { flex:1; font-family:var(--serif); font-size:clamp(20px,2.4vw,26px); background:transparent; border:none; outline:none; padding:10px 0; color:var(--ink); letter-spacing:-0.01em; }
+input.search::placeholder { color:var(--ink-muted); font-style:italic; }
+.search-count { font-family:var(--mono); font-size:11px; letter-spacing:0.06em; color:var(--ink-muted); white-space:nowrap; padding-bottom:14px; text-transform:lowercase; }
+.search-count strong { color:var(--green-dim); font-weight:600; }
+.search-clear { font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); cursor:pointer; padding:6px 10px; border:1px solid transparent; background:transparent; }
+.search-clear:hover { color:var(--green); border-color:var(--border-2); }
+
+.lib-results { padding:14px 32px 64px; max-width:var(--max-wide); margin:0 auto; }
+.results-head { display:grid; grid-template-columns:1.6fr 1.2fr 1fr 1fr 1.4fr; gap:14px; padding:10px 4px; border-bottom:1px solid var(--border-2); }
+.results-head span { font-family:var(--mono); font-size:9.5px; font-weight:700; letter-spacing:0.14em; text-transform:lowercase; color:var(--ink-muted); }
+#results { display:flex; flex-direction:column; }
+.row { display:grid; grid-template-columns:1.6fr 1.2fr 1fr 1fr 1.4fr; gap:14px; padding:14px 4px; border-bottom:1px solid var(--border); align-items:center; color:inherit; transition:background-color .12s; }
+.row:hover { background:rgba(42,122,79,0.04); }
+.row .col-name { font-family:var(--serif); font-size:18px; line-height:1.25; color:var(--ink); }
+.row:hover .col-name { color:var(--green); }
+.row .col { font-size:13.5px; line-height:1.4; color:var(--ink-dim); }
+.row .col-mono { font-family:var(--mono); font-size:10.5px; letter-spacing:0.04em; color:var(--ink-muted); text-transform:lowercase; }
+.row .pill { display:inline-block; font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:0.06em; text-transform:lowercase; padding:3px 8px; background:rgba(42,122,79,0.08); color:var(--green-dim); border:1px solid rgba(42,122,79,0.18); }
+.row .pill.muted { background:var(--surface); color:var(--ink-muted); border-color:var(--border); }
+.results-row-secondary { display:none; }
+
+.empty-state { padding:48px 4px; text-align:center; font-family:var(--serif); font-size:22px; color:var(--ink-muted); font-style:italic; }
+.empty-state span { display:block; font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); margin-top:10px; font-style:normal; }
+
+.loading-state { padding:48px 4px; text-align:center; font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); }
+
+footer { background:var(--surface); border-top:1px solid var(--border); padding:38px 32px 28px; font-family:var(--mono); font-size:11px; color:var(--ink-muted); margin-top:24px; }
+.footer-inner { max-width:var(--max-wide); margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+footer a { color:var(--ink-muted); }
+footer a:hover { color:var(--green); }
+
+@media (max-width:760px) {
+  .lib-head { padding:36px 20px 20px; }
+  .lib-search { padding:6px 20px 14px; }
+  .lib-results { padding:10px 20px 48px; }
+  .breadcrumb { padding:14px 20px 0; }
+  .nav-links { gap:18px; }
+  .search-row { flex-direction:column; align-items:stretch; gap:8px; }
+  .search-count { padding-bottom:6px; padding-top:4px; }
+  .results-head { display:none; }
+  .row { grid-template-columns:1fr; gap:6px; padding:14px 4px; }
+  .row .col-name { font-size:17px; }
+  .row .col-region { font-family:var(--sans); font-size:13px; color:var(--ink-dim); margin-top:-2px; }
+  .row .col-country, .row .col-sector, .row .col-config { display:none; }
+  .row .results-row-secondary { display:block; font-family:var(--mono); font-size:10px; letter-spacing:0.04em; color:var(--ink-muted); text-transform:lowercase; margin-top:4px; }
+}
+</style>
+<!-- Mixpanel tracking -->
+<script type="text/javascript">
+  (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+  for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===
+  e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=e.getElementsByTagName("script")[0];e.parentNode.insertBefore(k,e)}})(document,window.mixpanel||[])
+  mixpanel.init('a5cac1b920750b79ab02f9cbf02c8f89', {
+    autocapture: true,
+    record_sessions_percent: 100,
+    api_host: 'https://api-eu.mixpanel.com',
+  })
+</script>
+</head>
+<body>
+<nav class="site-nav">
+  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="nav-links">
+    <li><a href="/diagnostic.html">Product</a></li>
+    <li><a href="/findings.html">Findings</a></li>
+    <li><a href="/notes.html">Lab Notes</a></li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+  <a class="nav-cta" href="/get-started.html">Get Started →</a>
+</nav>
+<div class="breadcrumb"><a href="/">ClusterOS</a> · <a href="/findings.html">Findings</a> · Cluster Library</div>
+
+<main>
+  <header class="lib-head">
+    <h1 class="lib-h">Cluster Library</h1>
+    <p class="lib-lede">All 377 cluster diagnostics in the corpus, searchable by name, region, country, sector, or configuration.</p>
+  </header>
+
+  <section class="lib-search">
+    <div class="search-row">
+      <div class="search-input-wrap">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input class="search" id="search" type="search" autocomplete="off" spellcheck="false" placeholder="Search clusters — name, region, country, sector, configuration…" aria-label="Search clusters">
+        <button class="search-clear" id="search-clear" type="button" hidden>clear</button>
+      </div>
+      <div class="search-count" id="search-count">loading…</div>
+    </div>
+  </section>
+
+  <section class="lib-results" aria-live="polite">
+    <div class="results-head" role="row">
+      <span>cluster</span>
+      <span>region</span>
+      <span>country</span>
+      <span>sector</span>
+      <span>configuration</span>
+    </div>
+    <div id="results">
+      <div class="loading-state">loading cluster library…</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
+    <span>
+      <a href="/">Homepage</a> ·
+      <a href="/findings.html">Findings</a> ·
+      <a href="/national-diagnostic">National Diagnostic</a> ·
+      <a href="/about.html">About</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var resultsEl = document.getElementById('results');
+  var countEl = document.getElementById('search-count');
+  var inputEl = document.getElementById('search');
+  var clearEl = document.getElementById('search-clear');
+  var data = [];
+  var DEBOUNCE_MS = 100;
+  var SETTLE_MS = 700;
+
+  function safeMixpanelTrack(event, props) {
+    try { if (window.mixpanel && mixpanel.track) mixpanel.track(event, props || {}); } catch (e) {}
+  }
+
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function buildHaystack(c) {
+    return [c.name, c.region, c.country, c.continent, c.sector, c.dominant_configuration]
+      .filter(Boolean).join(' · ').toLowerCase();
+  }
+
+  function filterClusters(q) {
+    var query = (q || '').trim().toLowerCase();
+    if (!query) return data;
+    var tokens = query.split(/\s+/).filter(Boolean);
+    return data.filter(function (c) {
+      var hay = c._haystack;
+      for (var i = 0; i < tokens.length; i++) if (hay.indexOf(tokens[i]) === -1) return false;
+      return true;
+    });
+  }
+
+  function renderResults(rows) {
+    if (!rows.length) {
+      resultsEl.innerHTML =
+        '<div class="empty-state">No clusters match that search.<span>try a region, sector, or configuration name</span></div>';
+      return;
+    }
+    var html = [];
+    for (var i = 0; i < rows.length; i++) {
+      var c = rows[i];
+      var sectorLabel = c.sector ? escapeHtml(c.sector) : '<span class="pill muted">unclassified</span>';
+      var configLabel = c.dominant_configuration
+        ? '<span class="pill">' + escapeHtml(c.dominant_configuration) + '</span>'
+        : '<span class="pill muted">indeterminate</span>';
+      var secondary = [c.country, c.sector, c.dominant_configuration].filter(Boolean).join(' · ');
+      html.push(
+        '<a class="row" href="' + escapeHtml(c.url) + '" data-slug="' + escapeHtml(c.slug) + '">' +
+          '<span class="col col-name">' + escapeHtml(c.name) + '</span>' +
+          '<span class="col col-region">' + escapeHtml(c.region) + '</span>' +
+          '<span class="col col-country col-mono">' + escapeHtml(c.country || '') + '</span>' +
+          '<span class="col col-sector">' + sectorLabel + '</span>' +
+          '<span class="col col-config">' + configLabel + '</span>' +
+          (secondary ? '<span class="results-row-secondary">' + escapeHtml(secondary) + '</span>' : '') +
+        '</a>'
+      );
+    }
+    resultsEl.innerHTML = html.join('');
+  }
+
+  function updateCount(rows) {
+    var n = rows.length;
+    var total = data.length;
+    if (n === total) countEl.innerHTML = 'showing all <strong>' + total + '</strong> clusters';
+    else countEl.innerHTML = 'showing <strong>' + n + '</strong> of ' + total + ' clusters';
+  }
+
+  var debounceTimer = null;
+  var settleTimer = null;
+  function onInput() {
+    var q = inputEl.value;
+    clearEl.hidden = !q;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function () {
+      var rows = filterClusters(q);
+      renderResults(rows);
+      updateCount(rows);
+    }, DEBOUNCE_MS);
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(function () {
+      if (q && q.trim()) {
+        safeMixpanelTrack('Cluster Library — search', {
+          query: q.trim().slice(0, 80),
+          query_length: q.trim().length,
+          result_count: filterClusters(q).length
+        });
+      }
+    }, SETTLE_MS);
+  }
+
+  function onClear() {
+    inputEl.value = '';
+    clearEl.hidden = true;
+    var rows = filterClusters('');
+    renderResults(rows);
+    updateCount(rows);
+    inputEl.focus();
+  }
+
+  function onResultClick(e) {
+    var row = e.target.closest('.row');
+    if (!row) return;
+    var slug = row.dataset.slug;
+    safeMixpanelTrack('Cluster Library — result click', { slug: slug });
+  }
+
+  inputEl.addEventListener('input', onInput);
+  clearEl.addEventListener('click', onClear);
+  resultsEl.addEventListener('click', onResultClick);
+
+  // Initial fetch
+  fetch('/cluster-library.json', { credentials: 'omit' })
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (json) {
+      data = json.map(function (c) {
+        c._haystack = buildHaystack(c);
+        return c;
+      });
+      data.sort(function (a, b) {
+        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+      });
+      renderResults(data);
+      updateCount(data);
+      safeMixpanelTrack('Cluster Library — page view', { total_clusters: data.length });
+    })
+    .catch(function (err) {
+      resultsEl.innerHTML = '<div class="empty-state">Could not load the cluster library.<span>refresh the page or try again later</span></div>';
+      countEl.textContent = 'error loading';
+      console.error('cluster-library load failed', err);
+    });
+})();
+</script>
+</body>
+</html>

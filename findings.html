@@ -116,7 +116,8 @@ strong { font-weight:600; }
 .heat-cell:last-child { border-right:none; }
 .heat-row:last-child .heat-cell { border-bottom:none; }
 .heat-axis-row { background:#fff; }
-.heat-axis-row .heat-cell { font-family:var(--mono); font-size:9.5px; font-weight:600; color:var(--ink-muted); text-transform:lowercase; letter-spacing:0.04em; text-align:center; line-height:1.25; padding:14px 6px; }
+.heat-axis-row .heat-cell { font-family:var(--mono); font-size:9.5px; font-weight:600; color:var(--ink-muted); text-transform:lowercase; letter-spacing:0.04em; text-align:center; line-height:1.25; padding:14px 6px; flex-direction:column; }
+.heat-axis-row .heat-cell .axis-meta { display:block; font-size:8.5px; font-weight:500; color:var(--green-dim); letter-spacing:0.02em; margin-top:4px; }
 .heat-row-label { font-family:var(--sans); font-size:13px; color:var(--ink); justify-content:flex-start !important; padding:14px 14px !important; background:#fff; border-right:1px solid var(--border-2) !important; }
 .heat-row-label .scode { font-family:var(--mono); font-size:10px; color:var(--green-dim); display:block; margin-bottom:3px; }
 .heat-cell.r0 { background:var(--ramp-1); }
@@ -130,11 +131,14 @@ strong { font-weight:600; }
 .heat-legend { display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:14px 0 0; font-family:var(--mono); font-size:9.5px; letter-spacing:0.06em; color:var(--ink-muted); text-transform:lowercase; }
 .heat-legend .swatch { display:inline-flex; align-items:center; gap:6px; }
 .heat-legend .sw { width:18px; height:14px; border:1px solid var(--border-2); display:inline-block; }
-.pattern-stack { display:grid; gap:18px; margin:32px 0 20px; }
-.pattern { background:#fff; border:1px solid var(--border); padding:22px 24px; }
-.pattern-num { font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--green); }
-.pattern-h { font-family:var(--serif); font-size:22px; line-height:1.25; color:var(--ink); margin:6px 0 10px; }
-.pattern p { font-size:15px; line-height:1.6; color:var(--ink-dim); margin:0; max-width:62ch; }
+.pattern-stack { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:36px 0 22px; }
+.pattern { background:#fff; border:1px solid var(--border); border-top:3px solid var(--green); padding:26px 24px 24px; display:flex; flex-direction:column; }
+.pattern-mark { display:flex; align-items:baseline; gap:12px; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+.pattern-num { font-family:var(--serif); font-size:38px; line-height:1; color:var(--green); letter-spacing:-0.02em; }
+.pattern-role { font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-muted); }
+.pattern-h { font-family:var(--serif); font-size:21px; line-height:1.25; color:var(--ink); margin:0 0 14px; }
+.pattern p { font-size:14px; line-height:1.6; color:var(--ink-dim); margin:0; max-width:none; }
+@media (max-width:900px) { .pattern-stack { grid-template-columns:1fr; } }
 
 /* Resemblance pairs */
 .rp-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:16px; margin:28px 0 12px; }
@@ -349,10 +353,53 @@ footer a:hover { color:var(--green); }
   </div>
 </section>
 
-<!-- ── Section 3 · Stack distribution ────────────────────── -->
+<!-- ── Section 3 · Featured deep-dives ─────────────────────── -->
+<section class="sec sec-featured" id="featured" data-section="featured">
+  <div class="sec-inner">
+    <span class="kicker">Findings · Section 3 · Featured deep-dives</span>
+    <h2 class="sec-h">Read the diagnostic at four scales.</h2>
+    <div class="feat-grid">
+
+      <article class="feat-card">
+        <div class="feat-eyebrow">ClusterOS National Diagnostic</div>
+        <h3 class="feat-h serif">Britain, read as one system.</h3>
+        <div class="feat-meta">169 clusters · 24 regions · 16,893 evidence items</div>
+        <p class="feat-body">The most comprehensive diagnostic reading we have produced. Every UK Combined Authority, devolved nation, and city region — diagnosed through the same framework, cross-referenced at entity level.</p>
+        <a class="feat-cta" href="/national-diagnostic" data-feat="nbd">Read the UK diagnostic →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-eyebrow">ClusterOS Supercluster</div>
+        <h3 class="feat-h serif">Greater Glasgow.</h3>
+        <div class="feat-meta">8 clusters · 978 evidence items</div>
+        <p class="feat-body">Eight clusters in one Scottish supercluster — Advanced Manufacturing, Critical Technologies, Digital Creative, FinTech, Innovation Ecosystem, Life Sciences, Net Zero, Space — read together to surface ecosystem-level dynamics.</p>
+        <a class="feat-cta" href="/superclusters/greater-glasgow" data-feat="glasgow">Read the Glasgow diagnostic →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-eyebrow">ClusterOS Supercluster</div>
+        <h3 class="feat-h serif">Orlando Innovation Ecosystem.</h3>
+        <div class="feat-meta">10 clusters · 582 evidence items</div>
+        <p class="feat-body">Our first international supercluster diagnostic. Space, tourism, defence, MedTech — ten clusters diagnosed with steward-held data from the Orlando Economic Partnership.</p>
+        <a class="feat-cta" href="/superclusters/orlando-innovation-ecosystem" data-feat="orlando">Read the Orlando diagnostic →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-eyebrow">ClusterOS Cluster Library</div>
+        <h3 class="feat-h serif">377 clusters. 57 countries.</h3>
+        <div class="feat-meta">377 clusters · 57 countries · 6 continents</div>
+        <p class="feat-body">Every cluster the diagnostic has read, browsable. Each profile carries its own stall map, configuration breakdown, and leverage hypotheses, cross-referenced to the corpus-wide patterns above.</p>
+        <a class="feat-cta" href="/data.html" data-feat="library">Browse the cluster library →</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Section 4 · Stack distribution ────────────────────── -->
 <section class="sec sec-stacks" id="stacks" data-section="stacks">
   <div class="sec-inner">
-    <span class="kicker">Findings · Section 3 · What the framework finds across ecosystems</span>
+    <span class="kicker">Findings · Section 4 · What the framework finds across ecosystems</span>
     <h2 class="sec-h">Six configurations carry most of the corpus.</h2>
     <p class="lede">Where stalls describe individual behavioural substitutions, configurations describe how those substitutions stack — the structural shapes a cluster falls into when several stalls fire together. Six configurations dominate the canonical-schema pool.</p>
 
@@ -403,10 +450,10 @@ footer a:hover { color:var(--green); }
   </div>
 </section>
 
-<!-- ── Section 4 · Patterns by sector and geography ──────── -->
+<!-- ── Section 5 · Patterns by sector and geography ──────── -->
 <section class="sec sec-patterns" id="patterns" data-section="patterns">
   <div class="sec-inner">
-    <span class="kicker">Findings · Section 4 · Patterns by sector and geography</span>
+    <span class="kicker">Findings · Section 5 · Patterns by sector and geography</span>
     <h2 class="sec-h">The framework reads structure where structure exists, dispersion where it does not.</h2>
     <p class="lede">Cross-cut the canonical pool by sector and configuration and three readings sharpen: capital-intensive sectors converge on a three-stack backbone, capital-light sectors do not, and the smallest, most-anchored sector reads with zero variance across its members.</p>
 
@@ -422,7 +469,7 @@ footer a:hover { color:var(--green); }
           <div class="heat-cell">digital and<br>creative</div>
           <div class="heat-cell">cyber</div>
           <div class="heat-cell">space</div>
-          <div class="heat-cell">quantum and<br>photonics</div>
+          <div class="heat-cell">quantum and<br>photonics<span class="axis-meta">n=5 · 100% on 5 of 6</span></div>
         </div>
 
         <div class="heat-row" role="row" style="display:contents;">
@@ -516,21 +563,21 @@ footer a:hover { color:var(--green); }
 
     <div class="pattern-stack">
       <article class="pattern" data-pattern="A">
-        <div class="pattern-num">Pattern 01 · Headline</div>
+        <div class="pattern-mark"><span class="pattern-num serif">01</span><span class="pattern-role">Headline</span></div>
         <h3 class="pattern-h">A three-stack backbone fires together in capital-intensive, anchor-dependent sectors.</h3>
         <p>Coordination–Intermediary–Activity, Extraction–Intermediary, and Governance Capture all clear 75% confident in Energy and Net Zero, Advanced Manufacturing, and Quantum and Photonics. Where the underlying work needs capital, physical anchors, and long timelines, the corpus shows the same three-stack signature regardless of geography.</p>
       </article>
 
       <article class="pattern" data-pattern="C">
-        <div class="pattern-num">Pattern 02 · Counterpoint</div>
+        <div class="pattern-mark"><span class="pattern-num serif">02</span><span class="pattern-role">Counterpoint</span></div>
         <h3 class="pattern-h">FinTech is the corpus's most configuration-dispersed sector.</h3>
-        <p>FinTech sits below the cross-sector mean on every backbone configuration: Coordination–Intermediary–Activity 48.3 vs 72.8, Extraction–Intermediary 51.7 vs 72.8, Governance Capture 44.8 vs 70.7, Permission–Validation 41.4 vs 54.5. No single configuration dominates and the highest reading is 51.7%. Capital-light sectors do not converge to a backbone — the configuration profile is flatter, not tighter.</p>
+        <p>FinTech sits below the cross-sector mean on every backbone configuration: Coordination–Intermediary–Activity 48.3 vs 72.8, Extraction–Intermediary 51.7 vs 72.8, Governance Capture 44.8 vs 70.7, Permission–Validation 41.4 vs 54.5. The highest reading is 51.7%. Capital-light sectors do not converge to a backbone — the configuration profile is flatter, not tighter.</p>
       </article>
 
       <article class="pattern" data-pattern="B">
-        <div class="pattern-num">Pattern 03 · Confirmation</div>
+        <div class="pattern-mark"><span class="pattern-num serif">03</span><span class="pattern-role">Confirmation</span></div>
         <h3 class="pattern-h">Quantum and Photonics is the most-homogeneous sector in the corpus.</h3>
-        <p>All five Quantum and Photonics clusters fire on five of the six configurations at 100% confident; only Volume–Tolerance misses. Zero variance across five clusters in five configurations means the diagnostic is reading sector-level structure rather than cluster-level variation — the most extreme expression of the backbone effect, in the smallest and most tightly-anchored sector.</p>
+        <p>All five Quantum and Photonics clusters fire on five of six configurations at 100% confident; only Volume–Tolerance misses. Zero variance across five clusters in five configurations means the diagnostic is reading sector-level structure rather than cluster-level variation — the most extreme expression of the backbone effect.</p>
       </article>
     </div>
 
@@ -624,10 +671,10 @@ footer a:hover { color:var(--green); }
   </div>
 </section>
 
-<!-- ── Section 5 · The shape of leverage ──────────────────── -->
+<!-- ── Section 6 · The shape of leverage ──────────────────── -->
 <section class="sec sec-leverage" id="leverage" data-section="leverage">
   <div class="sec-inner">
-    <span class="kicker">Findings · Section 5 · The shape of leverage</span>
+    <span class="kicker">Findings · Section 6 · The shape of leverage</span>
     <h2 class="sec-h">Where the diagnostic finds room to act.</h2>
     <p class="lede">Diagnostic reports surface leverage hypotheses — small, reversible interventions that change the structure registering in the diagnostic. Across the 170 UK NBD clusters with typed leverage hypotheses, the corpus generates 2,177 hypotheses that classify cleanly into five categories.</p>
 
@@ -664,49 +711,6 @@ footer a:hover { color:var(--green); }
         <p>Information flow leads — close to half of the typed hypotheses surface a previously-unreported metric, a feedback loop that does not return, or a flow that is invisible to the actors who would respond to it. Boundary adjustment and timing or sequencing follow at similar weight; both change who or when, not what. Constraint shift and coupling exposure carry the smaller share — leverage that changes a binding rule, or that routes a transaction directly between two actors who currently use an intermediary.</p>
         <p>The skew toward information flow is consistent with what the diagnostic finds elsewhere in this page — Coordinating Instead of Deciding fires in 69% of canonical-pool clusters, Stabilising Around Incumbents in 90%, and the Coordination–Intermediary–Activity Configuration in 71%. Where coordination substitutes for decision and intermediation substitutes for connection, the most-available leverage is restoring the metric that lets actors see what the coordination is doing.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Section 6 · Featured deep-dives ─────────────────────── -->
-<section class="sec sec-featured" id="featured" data-section="featured">
-  <div class="sec-inner">
-    <span class="kicker">Findings · Section 6 · Featured deep-dives</span>
-    <h2 class="sec-h">Read the diagnostic at four scales.</h2>
-    <div class="feat-grid">
-
-      <article class="feat-card">
-        <div class="feat-eyebrow">ClusterOS National Diagnostic</div>
-        <h3 class="feat-h serif">Britain, read as one system.</h3>
-        <div class="feat-meta">169 clusters · 24 regions · 16,893 evidence items</div>
-        <p class="feat-body">The most comprehensive diagnostic reading we have produced. Every UK Combined Authority, devolved nation, and city region — diagnosed through the same framework, cross-referenced at entity level.</p>
-        <a class="feat-cta" href="/national-diagnostic" data-feat="nbd">Read the UK diagnostic →</a>
-      </article>
-
-      <article class="feat-card">
-        <div class="feat-eyebrow">ClusterOS Supercluster</div>
-        <h3 class="feat-h serif">Greater Glasgow.</h3>
-        <div class="feat-meta">8 clusters · 978 evidence items</div>
-        <p class="feat-body">Eight clusters in one Scottish supercluster — Advanced Manufacturing, Critical Technologies, Digital Creative, FinTech, Innovation Ecosystem, Life Sciences, Net Zero, Space — read together to surface ecosystem-level dynamics.</p>
-        <a class="feat-cta" href="/superclusters/greater-glasgow" data-feat="glasgow">Read the Glasgow diagnostic →</a>
-      </article>
-
-      <article class="feat-card">
-        <div class="feat-eyebrow">ClusterOS Supercluster</div>
-        <h3 class="feat-h serif">Orlando Innovation Ecosystem.</h3>
-        <div class="feat-meta">10 clusters · 582 evidence items</div>
-        <p class="feat-body">Our first international supercluster diagnostic. Space, tourism, defence, MedTech — ten clusters diagnosed with steward-held data from the Orlando Economic Partnership.</p>
-        <a class="feat-cta" href="/superclusters/orlando-innovation-ecosystem" data-feat="orlando">Read the Orlando diagnostic →</a>
-      </article>
-
-      <article class="feat-card">
-        <div class="feat-eyebrow">ClusterOS Cluster Library</div>
-        <h3 class="feat-h serif">377 clusters. 57 countries.</h3>
-        <div class="feat-meta">377 clusters · 57 countries · 6 continents</div>
-        <p class="feat-body">Every cluster the diagnostic has read, browsable. Each profile carries its own stall map, configuration breakdown, and leverage hypotheses, cross-referenced to the corpus-wide patterns above.</p>
-        <a class="feat-cta" href="/data.html" data-feat="library">Browse the cluster library →</a>
-      </article>
-
     </div>
   </div>
 </section>

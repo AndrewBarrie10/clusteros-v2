@@ -1,0 +1,27 @@
+/* Canonical site navigation. Class prefix "cnav" keeps it isolated from
+   page-specific nav-* classes that already exist on cluster, supercluster,
+   and home-style pages. */
+.cnav { position:sticky; top:0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:0 32px; height:56px; background:rgba(247,244,239,0.95); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border-bottom:1px solid #ddd8cf; box-sizing:border-box; }
+.cnav *, .cnav *::before, .cnav *::after { box-sizing:border-box; }
+.cnav-logo { font-family:'Instrument Serif', Georgia, serif; font-size:18px; text-decoration:none; color:#1a1a1a; letter-spacing:-0.01em; flex-shrink:0; line-height:1; }
+.cnav-logo span { font-family:'Geist Mono', monospace; font-weight:600; font-size:14px; color:#2a7a4f; }
+.cnav-links { display:flex; align-items:center; gap:6px; list-style:none; margin:0; padding:0; }
+.cnav-links a { font-family:'Geist Mono', monospace; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:#4a4540; padding:6px 12px; border-radius:4px; transition:color 0.15s, background 0.15s; white-space:nowrap; line-height:1.2; }
+.cnav-links a:hover { color:#1a1a1a; background:rgba(0,0,0,0.05); }
+.cnav-links a.active { color:#2a7a4f; }
+.cnav-burger { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; flex-shrink:0; }
+.cnav-burger span { display:block; width:22px; height:2px; background:#4a4540; border-radius:2px; transition:transform 0.25s, opacity 0.25s; }
+.cnav-burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.cnav-burger.open span:nth-child(2) { opacity:0; }
+.cnav-burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.cnav-mobile { display:none; position:fixed; top:56px; left:0; right:0; z-index:999; background:rgba(247,244,239,0.98); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border-bottom:1px solid #ddd8cf; padding:14px 24px 22px; flex-direction:column; gap:0; }
+.cnav-mobile:not([hidden]) { display:flex; }
+.cnav-mobile a { font-family:'Geist Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:#4a4540; padding:14px 0; border-bottom:1px solid #ddd8cf; }
+.cnav-mobile a:last-child { border-bottom:none; }
+.cnav-mobile a:hover { color:#1a1a1a; }
+.cnav-mobile a.active { color:#2a7a4f; }
+@media (max-width: 900px) {
+  .cnav-burger { display:flex; }
+  .cnav-links { display:none; }
+}
+@media (max-width: 480px) { .cnav { padding:0 16px; } .cnav-logo { font-size:16px; } }

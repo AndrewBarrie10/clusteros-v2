@@ -104,6 +104,8 @@ a.comparator-pill:hover { background: #2a3f55 !important; }
   })
 
 </script>
+  <link rel="stylesheet" href="/cnav.css">
+  <script src="/cnav.js" defer></script>
 </head>
 <body>
 <div id="root"></div>
@@ -5266,29 +5268,27 @@ Return JSON only: {"sovereignDatabase":{"inside":"...","outside":"..."},"governa
 
         {/* ── Navigation bar (hidden on transition cards, ecosystem description, and digital OS which have their own nav) ── */}
         {phase !== 1 && phase !== 3 && phase !== 4 && phase !== 6 && phase !== 7 && (
-          <nav className="nav-bar-journey" style={styles.navBar}>
-            <div style={styles.navLeft}>
-              {!isFirst && (
-                <button style={styles.btnGhost} onClick={goBack}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginRight: '6px' }}>
-                    <path d="M8.5 3L4.5 7L8.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  Back
-                </button>
-              )}
-            </div>
-            <div style={styles.navRight}>
-              {phase !== 2 && !isLast && (
-                <button style={styles.btnSignal} onClick={goNext}>
-                  Continue
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: '6px' }}>
-                    <path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </button>
-              )}
-            </div>
-          </nav>
-        )}
+          <header class="cnav" role="navigation" aria-label="Primary">
+  <a class="cnav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="cnav-links">
+    <li><a href="/diagnostic.html" data-cnav="product">Product</a></li>
+    <li><a href="/findings.html" data-cnav="findings">Findings</a></li>
+    <li><a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a></li>
+    <li><a href="/notes.html" data-cnav="notes">Lab Notes</a></li>
+    <li><a href="/about.html" data-cnav="about">About</a></li>
+  </ul>
+  <button class="cnav-burger" id="cnav-burger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="cnav-mobile">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="cnav-mobile" id="cnav-mobile" hidden>
+  <a href="/diagnostic.html" data-cnav="product">Product</a>
+  <a href="/findings.html" data-cnav="findings">Findings</a>
+  <a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a>
+  <a href="/notes.html" data-cnav="notes">Lab Notes</a>
+  <a href="/about.html" data-cnav="about">About</a>
+</div>
+)}
 
         {/* ── Sticky bar ── */}
         <StickyBar phase={phase} journeyState={journeyState} onContinue={goNext} />

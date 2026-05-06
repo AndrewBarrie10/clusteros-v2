@@ -222,18 +222,30 @@ footer a:hover { color:var(--green); }
     api_host: 'https://api-eu.mixpanel.com',
   })
 </script>
+  <link rel="stylesheet" href="/cnav.css">
+  <script src="/cnav.js" defer></script>
 </head>
 <body>
-<nav class="site-nav">
-  <a class="nav-logo" href="/">Cluster<span>OS</span></a>
-  <ul class="nav-links">
-    <li><a href="/diagnostic.html">Product</a></li>
-    <li><a href="/findings.html" class="active">Findings</a></li>
-    <li><a href="/notes.html">Lab Notes</a></li>
-    <li><a href="/about.html">About</a></li>
+<header class="cnav" role="navigation" aria-label="Primary">
+  <a class="cnav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="cnav-links">
+    <li><a href="/diagnostic.html" data-cnav="product">Product</a></li>
+    <li><a href="/findings.html" data-cnav="findings">Findings</a></li>
+    <li><a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a></li>
+    <li><a href="/notes.html" data-cnav="notes">Lab Notes</a></li>
+    <li><a href="/about.html" data-cnav="about">About</a></li>
   </ul>
-  <a class="nav-cta" href="/get-started.html">Get Started →</a>
-</nav>
+  <button class="cnav-burger" id="cnav-burger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="cnav-mobile">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="cnav-mobile" id="cnav-mobile" hidden>
+  <a href="/diagnostic.html" data-cnav="product">Product</a>
+  <a href="/findings.html" data-cnav="findings">Findings</a>
+  <a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a>
+  <a href="/notes.html" data-cnav="notes">Lab Notes</a>
+  <a href="/about.html" data-cnav="about">About</a>
+</div>
 <div class="breadcrumb"><a href="/">ClusterOS</a> · Findings</div>
 
 <main>

@@ -151,19 +151,42 @@ footer a:hover{color:var(--green);}
   })
 
 </script>
+  <link rel="stylesheet" href="/cnav.css">
+  <script src="/cnav.js" defer></script>
 </head>
 <body>
+<header class="cnav" role="navigation" aria-label="Primary">
+  <a class="cnav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="cnav-links">
+    <li><a href="/diagnostic.html" data-cnav="product">Product</a></li>
+    <li><a href="/findings.html" data-cnav="findings">Findings</a></li>
+    <li><a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a></li>
+    <li><a href="/notes.html" data-cnav="notes">Lab Notes</a></li>
+    <li><a href="/about.html" data-cnav="about">About</a></li>
+  </ul>
+  <button class="cnav-burger" id="cnav-burger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="cnav-mobile">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="cnav-mobile" id="cnav-mobile" hidden>
+  <a href="/diagnostic.html" data-cnav="product">Product</a>
+  <a href="/findings.html" data-cnav="findings">Findings</a>
+  <a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a>
+  <a href="/notes.html" data-cnav="notes">Lab Notes</a>
+  <a href="/about.html" data-cnav="about">About</a>
+</div>
+
 <nav>
   <div class="nav-left">
     <a class="nav-logo" href="/">ClusterOS</a>
     <span class="nav-sep">/</span>
-    <a class="nav-back" href="/">All clusters</a>
+    <a class="nav-back" href="/cluster-library">All clusters</a>
   </div>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
     <a href="/">ClusterOS</a><span>›</span>
-    <a href="/">Clusters</a><span>›</span>
+    <a href="/cluster-library">Clusters</a><span>›</span>
     Greater Glasgow Critical Technologies
   </div>
   <header class="cluster-header">

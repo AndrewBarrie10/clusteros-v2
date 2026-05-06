@@ -1,0 +1,81 @@
+<!--
+Canonical top-nav partial. Source of truth for the cnav HTML/CSS/JS injected
+into every page. Editing here is informational; the nav must stay in sync
+across page templates. The class prefix "cnav" is intentionally distinct from
+existing "nav-*" class names so per-page legacy nav styles cannot collide.
+-->
+
+<style id="cnav-style">
+.cnav { position:sticky; top:0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:0 32px; height:56px; background:rgba(247,244,239,0.95); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border-bottom:1px solid #ddd8cf; box-sizing:border-box; }
+.cnav *, .cnav *::before, .cnav *::after { box-sizing:border-box; }
+.cnav-logo { font-family:'Instrument Serif', Georgia, serif; font-size:18px; text-decoration:none; color:#1a1a1a; letter-spacing:-0.01em; flex-shrink:0; line-height:1; }
+.cnav-logo span { font-family:'Geist Mono', monospace; font-weight:600; font-size:14px; color:#2a7a4f; }
+.cnav-links { display:flex; align-items:center; gap:6px; list-style:none; margin:0; padding:0; }
+.cnav-links a { font-family:'Geist Mono', monospace; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:#4a4540; padding:6px 12px; border-radius:4px; transition:color 0.15s, background 0.15s; white-space:nowrap; line-height:1.2; }
+.cnav-links a:hover { color:#1a1a1a; background:rgba(0,0,0,0.05); }
+.cnav-links a.active { color:#2a7a4f; }
+.cnav-burger { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; flex-shrink:0; }
+.cnav-burger span { display:block; width:22px; height:2px; background:#4a4540; border-radius:2px; transition:transform 0.25s, opacity 0.25s; }
+.cnav-burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.cnav-burger.open span:nth-child(2) { opacity:0; }
+.cnav-burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.cnav-mobile { display:none; position:fixed; top:56px; left:0; right:0; z-index:999; background:rgba(247,244,239,0.98); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border-bottom:1px solid #ddd8cf; padding:14px 24px 22px; flex-direction:column; gap:0; }
+.cnav-mobile:not([hidden]) { display:flex; }
+.cnav-mobile a { font-family:'Geist Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:#4a4540; padding:14px 0; border-bottom:1px solid #ddd8cf; }
+.cnav-mobile a:last-child { border-bottom:none; }
+.cnav-mobile a:hover { color:#1a1a1a; }
+.cnav-mobile a.active { color:#2a7a4f; }
+@media (max-width: 900px) {
+  .cnav-burger { display:flex; }
+  .cnav-links { display:none; }
+}
+@media (max-width: 480px) { .cnav { padding:0 16px; } .cnav-logo { font-size:16px; } }
+</style>
+
+<header class="cnav" role="navigation" aria-label="Primary">
+  <a class="cnav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="cnav-links">
+    <li><a href="/diagnostic.html" data-cnav="product">Product</a></li>
+    <li><a href="/findings.html" data-cnav="findings">Findings</a></li>
+    <li><a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a></li>
+    <li><a href="/notes.html" data-cnav="notes">Lab Notes</a></li>
+    <li><a href="/about.html" data-cnav="about">About</a></li>
+  </ul>
+  <button class="cnav-burger" id="cnav-burger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="cnav-mobile">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="cnav-mobile" id="cnav-mobile" hidden>
+  <a href="/diagnostic.html" data-cnav="product">Product</a>
+  <a href="/findings.html" data-cnav="findings">Findings</a>
+  <a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a>
+  <a href="/notes.html" data-cnav="notes">Lab Notes</a>
+  <a href="/about.html" data-cnav="about">About</a>
+</div>
+<script id="cnav-script">
+(function(){
+  var btn = document.getElementById('cnav-burger');
+  var menu = document.getElementById('cnav-mobile');
+  if (btn && menu) {
+    btn.addEventListener('click', function(){
+      var isOpen = !menu.hasAttribute('hidden');
+      if (isOpen) { menu.setAttribute('hidden',''); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+      else { menu.removeAttribute('hidden'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  }
+  // Mark active item by URL key.
+  var path = (location.pathname || '/').replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+  var key;
+  if (path === '/' || path === '') key = null;
+  else if (path === '/diagnostic' || path === '/digital-infrastructure' || path === '/signals-systems' || path === '/leverage' || path === '/get-started') key = 'product';
+  else if (path === '/findings') key = 'findings';
+  else if (path === '/cluster-library' || path.indexOf('/clusters/') === 0 || path === '/data') key = 'cluster-library';
+  else if (path === '/notes' || path.indexOf('/ln-') === 0) key = 'notes';
+  else if (path === '/about') key = 'about';
+  if (key) {
+    document.querySelectorAll('.cnav-links a, .cnav-mobile a').forEach(function(a){
+      if (a.getAttribute('data-cnav') === key) a.classList.add('active');
+    });
+  }
+})();
+</script>

@@ -490,53 +490,31 @@ p + p { margin-top: 16px; }
   })
 
 </script>
+  <link rel="stylesheet" href="/cnav.css">
+  <script src="/cnav.js" defer></script>
 </head>
 <body>
-<nav>
-  <a href="/" class="nav-logo">Cluster<span>OS</span></a>
-  <ul class="nav-links">
-    <li class="nav-dropdown">
-      <span class="nav-dropdown-toggle">Product ▾</span>
-      <ul class="nav-dropdown-menu">
-        <li><a href="/diagnostic-journey.html">Ecosystem Diagnostic</a></li>
-        
-        <li><a href="/digital-infrastructure.html">Digital Infrastructure</a></li>
-        <li><a href="/signals-systems.html">Signals &amp; Systems</a></li>
-        <li><a href="/diagnostic.html">The Diagnostic</a></li>
-        <li><a href="/leverage.html">Leverage</a></li>
-        <li><a href="/findings.html">Findings</a></li>
-        <li><a href="/data.html">Cluster Data</a></li>
-        <li><a href="/get-started.html">Get Started</a></li>
-      </ul>
-    </li>
-    <li class="nav-dropdown">
-      <span class="nav-dropdown-toggle">Lab Notes ▾</span>
-      <ul class="nav-dropdown-menu">
-        <li><a href="/notes.html">All Notes</a></li>
-        <li class="nav-dropdown-divider"></li>
-        <li><a href="/ln-01-coordinating.html">S2 · Coordinating</a></li>
-        <li><a href="/ln-02-narrating.html">S7 · Narrating</a></li>
-        <li><a href="/ln-10-narrative-activity-stack.html">Narrative × Activity</a></li>
-        <li><a href="/ln-12-leverage.html">What Leverage Looks Like</a></li>
-        <li><a href="/ln-13-diagnosis.html">Why Diagnosis Fails</a></li>
-      </ul>
-    </li>
-    <li><a href="/about.html">About</a></li>
+<header class="cnav" role="navigation" aria-label="Primary">
+  <a class="cnav-logo" href="/">Cluster<span>OS</span></a>
+  <ul class="cnav-links">
+    <li><a href="/diagnostic.html" data-cnav="product">Product</a></li>
+    <li><a href="/findings.html" data-cnav="findings">Findings</a></li>
+    <li><a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a></li>
+    <li><a href="/notes.html" data-cnav="notes">Lab Notes</a></li>
+    <li><a href="/about.html" data-cnav="about">About</a></li>
   </ul>
-  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+  <button class="cnav-burger" id="cnav-burger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="cnav-mobile">
     <span></span><span></span><span></span>
   </button>
-</nav>
-<div class="nav-mobile-menu" id="nav-mobile-menu">
-  <a href="/digital-infrastructure.html">Digital Infrastructure</a>
-  <a href="/signals-systems.html">Signals &amp; Systems</a>
-  <a href="/diagnostic.html">The Diagnostic</a>
-  <a href="/leverage.html">Leverage</a>
-  <a href="/findings.html">Findings</a>
-  <a href="/data.html">Cluster Data</a>
-  <a href="/get-started.html">Get Started</a>
-  <div class="nav-mobile-divider"></div>
-  <a href="/notes.html">Lab Notes</a>
+</header>
+<div class="cnav-mobile" id="cnav-mobile" hidden>
+  <a href="/diagnostic.html" data-cnav="product">Product</a>
+  <a href="/findings.html" data-cnav="findings">Findings</a>
+  <a href="/cluster-library" data-cnav="cluster-library">Cluster Library</a>
+  <a href="/notes.html" data-cnav="notes">Lab Notes</a>
+  <a href="/about.html" data-cnav="about">About</a>
+</div>
+<a href="/notes.html">Lab Notes</a>
   <a href="/about.html">About</a>
   <a href="/request.html">Request a Diagnostic</a>
 </div>

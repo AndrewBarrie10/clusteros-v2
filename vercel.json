@@ -1,3 +1,7 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/data.html", "destination": "/cluster-library", "permanent": true },
+    { "source": "/data", "destination": "/cluster-library", "permanent": true }
+  ]
 }

@@ -1,0 +1,43 @@
+{
+  "draft_claims": {
+    "clusters_diagnosed": 377,
+    "ecosystems": 26,
+    "countries": 57,
+    "continents": 6,
+    "evidence_items": "30,000+"
+  },
+  "v3_clusters_json": {
+    "n": 221,
+    "n_countries": 57,
+    "n_continents": 6,
+    "evidence_count_sum": 14814,
+    "note": "v3 canonical pool. The website (v2) clusters.json may carry a larger or differently-versioned pool."
+  },
+  "diagnostic_library_full": {
+    "n_runs": 391,
+    "n_ecosystems": 162,
+    "n_countries_iso_or_label": 58,
+    "evidence_count_sum": 31350,
+    "canon_version_breakdown": {
+      "current": 175,
+      "legacy": 216
+    }
+  },
+  "canonical_pool": {
+    "definition": "Diagnostic runs where the stacks stage produced canonical STK-XX outputs and 9-stall confidence",
+    "n_runs": 232,
+    "n_ecosystems": 78,
+    "n_countries_label": 30,
+    "evidence_count_sum": 20619,
+    "canon_version_breakdown": {
+      "current": 173,
+      "legacy": 59
+    }
+  },
+  "current_canon_subset_uk_nbd": {
+    "n_runs": 175,
+    "n_ecosystems": 26,
+    "n_countries": 5,
+    "evidence_count_sum": 16893
+  }
+}

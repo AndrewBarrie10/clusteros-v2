@@ -1,0 +1,347 @@
+{
+  "source": "diagnostic library, canonical pool (canonical-schema runs only)",
+  "sectors": [
+    "Life Sciences",
+    "Advanced Manufacturing",
+    "FinTech",
+    "Energy and Net Zero",
+    "Innovation Ecosystem",
+    "Digital and Creative",
+    "Cyber",
+    "Space",
+    "Quantum and Photonics"
+  ],
+  "n_unclassified": 20,
+  "unclassified_examples": [
+    "Cambridgeshire Peterborough EngBio",
+    "DevonTorbay AgriFood",
+    "DevonTorbay Marine",
+    "East Midlands Logistics",
+    "Greater Lincolnshire Ports",
+    "London Transport Logistics Mobility",
+    "HullEastYorkshire Logistics",
+    "Highlands and Islands Aquaculture",
+    "Highlands and Islands FoodDrink",
+    "Highlands and Islands Forestry",
+    "Highlands and Islands Tourism",
+    "Johannesburg Mining Tech",
+    "Orlando Tourism Technology",
+    "Scotland Tourism and Hospitality Tech",
+    "Stirling Clackmannanshire Aquaculture",
+    "Stirling Clackmannanshire FoodDrink",
+    "Tees Valley Logistics",
+    "WMCA BPFS",
+    "WMCA Logistics",
+    "York and North Yorkshire Food Farming"
+  ],
+  "below_threshold": {},
+  "grid": {
+    "FinTech": {
+      "n_clusters": 29,
+      "STK-16": {
+        "n_confident": 12,
+        "pct_confident": 41.4
+      },
+      "STK-30": {
+        "n_confident": 14,
+        "pct_confident": 48.3
+      },
+      "STK-17": {
+        "n_confident": 15,
+        "pct_confident": 51.7
+      },
+      "STK-15": {
+        "n_confident": 13,
+        "pct_confident": 44.8
+      },
+      "STK-19": {
+        "n_confident": 3,
+        "pct_confident": 10.3
+      },
+      "STK-24": {
+        "n_confident": 7,
+        "pct_confident": 24.1
+      }
+    },
+    "Energy and Net Zero": {
+      "n_clusters": 26,
+      "STK-16": {
+        "n_confident": 19,
+        "pct_confident": 73.1
+      },
+      "STK-30": {
+        "n_confident": 23,
+        "pct_confident": 88.5
+      },
+      "STK-17": {
+        "n_confident": 22,
+        "pct_confident": 84.6
+      },
+      "STK-15": {
+        "n_confident": 23,
+        "pct_confident": 88.5
+      },
+      "STK-19": {
+        "n_confident": 2,
+        "pct_confident": 7.7
+      },
+      "STK-24": {
+        "n_confident": 15,
+        "pct_confident": 57.7
+      }
+    },
+    "Life Sciences": {
+      "n_clusters": 40,
+      "STK-16": {
+        "n_confident": 14,
+        "pct_confident": 35.0
+      },
+      "STK-30": {
+        "n_confident": 25,
+        "pct_confident": 62.5
+      },
+      "STK-17": {
+        "n_confident": 25,
+        "pct_confident": 62.5
+      },
+      "STK-15": {
+        "n_confident": 24,
+        "pct_confident": 60.0
+      },
+      "STK-19": {
+        "n_confident": 1,
+        "pct_confident": 2.5
+      },
+      "STK-24": {
+        "n_confident": 17,
+        "pct_confident": 42.5
+      }
+    },
+    "Innovation Ecosystem": {
+      "n_clusters": 25,
+      "STK-16": {
+        "n_confident": 18,
+        "pct_confident": 72.0
+      },
+      "STK-30": {
+        "n_confident": 21,
+        "pct_confident": 84.0
+      },
+      "STK-17": {
+        "n_confident": 18,
+        "pct_confident": 72.0
+      },
+      "STK-15": {
+        "n_confident": 21,
+        "pct_confident": 84.0
+      },
+      "STK-19": {
+        "n_confident": 9,
+        "pct_confident": 36.0
+      },
+      "STK-24": {
+        "n_confident": 11,
+        "pct_confident": 44.0
+      }
+    },
+    "Cyber": {
+      "n_clusters": 20,
+      "STK-16": {
+        "n_confident": 8,
+        "pct_confident": 40.0
+      },
+      "STK-30": {
+        "n_confident": 12,
+        "pct_confident": 60.0
+      },
+      "STK-17": {
+        "n_confident": 15,
+        "pct_confident": 75.0
+      },
+      "STK-15": {
+        "n_confident": 12,
+        "pct_confident": 60.0
+      },
+      "STK-19": {
+        "n_confident": 1,
+        "pct_confident": 5.0
+      },
+      "STK-24": {
+        "n_confident": 12,
+        "pct_confident": 60.0
+      }
+    },
+    "Space": {
+      "n_clusters": 10,
+      "STK-16": {
+        "n_confident": 5,
+        "pct_confident": 50.0
+      },
+      "STK-30": {
+        "n_confident": 6,
+        "pct_confident": 60.0
+      },
+      "STK-17": {
+        "n_confident": 6,
+        "pct_confident": 60.0
+      },
+      "STK-15": {
+        "n_confident": 6,
+        "pct_confident": 60.0
+      },
+      "STK-19": {
+        "n_confident": 1,
+        "pct_confident": 10.0
+      },
+      "STK-24": {
+        "n_confident": 3,
+        "pct_confident": 30.0
+      }
+    },
+    "Digital and Creative": {
+      "n_clusters": 25,
+      "STK-16": {
+        "n_confident": 13,
+        "pct_confident": 52.0
+      },
+      "STK-30": {
+        "n_confident": 16,
+        "pct_confident": 64.0
+      },
+      "STK-17": {
+        "n_confident": 17,
+        "pct_confident": 68.0
+      },
+      "STK-15": {
+        "n_confident": 16,
+        "pct_confident": 64.0
+      },
+      "STK-19": {
+        "n_confident": 2,
+        "pct_confident": 8.0
+      },
+      "STK-24": {
+        "n_confident": 11,
+        "pct_confident": 44.0
+      }
+    },
+    "Advanced Manufacturing": {
+      "n_clusters": 32,
+      "STK-16": {
+        "n_confident": 15,
+        "pct_confident": 46.9
+      },
+      "STK-30": {
+        "n_confident": 28,
+        "pct_confident": 87.5
+      },
+      "STK-17": {
+        "n_confident": 26,
+        "pct_confident": 81.2
+      },
+      "STK-15": {
+        "n_confident": 24,
+        "pct_confident": 75.0
+      },
+      "STK-19": {
+        "n_confident": 1,
+        "pct_confident": 3.1
+      },
+      "STK-24": {
+        "n_confident": 14,
+        "pct_confident": 43.8
+      }
+    },
+    "Quantum and Photonics": {
+      "n_clusters": 5,
+      "STK-16": {
+        "n_confident": 4,
+        "pct_confident": 80.0
+      },
+      "STK-30": {
+        "n_confident": 5,
+        "pct_confident": 100.0
+      },
+      "STK-17": {
+        "n_confident": 5,
+        "pct_confident": 100.0
+      },
+      "STK-15": {
+        "n_confident": 5,
+        "pct_confident": 100.0
+      },
+      "STK-19": {
+        "n_confident": 1,
+        "pct_confident": 20.0
+      },
+      "STK-24": {
+        "n_confident": 5,
+        "pct_confident": 100.0
+      }
+    }
+  },
+  "homogeneity_rank_high_to_low": [
+    "Quantum and Photonics",
+    "Energy and Net Zero",
+    "Advanced Manufacturing",
+    "Innovation Ecosystem",
+    "Cyber",
+    "Digital and Creative",
+    "Life Sciences",
+    "Space",
+    "FinTech"
+  ],
+  "heterogeneity_rank_low_variance_to_high": [
+    "FinTech",
+    "Innovation Ecosystem",
+    "Space",
+    "Digital and Creative",
+    "Life Sciences",
+    "Cyber",
+    "Energy and Net Zero",
+    "Advanced Manufacturing",
+    "Quantum and Photonics"
+  ],
+  "claim_check": {
+    "quantum_most_homogeneous": {
+      "claimed_sector": "Quantum and Photonics",
+      "actual_top_homogeneous_sector": "Quantum and Photonics",
+      "supports_claim": true
+    },
+    "innovation_most_heterogeneous": {
+      "claimed_sector": "Innovation Ecosystem",
+      "actual_top_heterogeneous_sector": "Quantum and Photonics",
+      "supports_claim": false
+    },
+    "extraction_intermediary_correlates_ls_fintech": {
+      "STK-17_pct_by_sector": {
+        "Life Sciences": 62.5,
+        "Advanced Manufacturing": 81.2,
+        "FinTech": 51.7,
+        "Energy and Net Zero": 84.6,
+        "Innovation Ecosystem": 72.0,
+        "Digital and Creative": 68.0,
+        "Cyber": 75.0,
+        "Space": 60.0,
+        "Quantum and Photonics": 100.0
+      },
+      "average_across_sectors": 72.8,
+      "ls_pct": 62.5,
+      "fintech_pct": 51.7
+    },
+    "permission_validation_university_anchored": {
+      "STK-16_pct_by_sector": {
+        "Life Sciences": 35.0,
+        "Advanced Manufacturing": 46.9,
+        "FinTech": 41.4,
+        "Energy and Net Zero": 73.1,
+        "Innovation Ecosystem": 72.0,
+        "Digital and Creative": 52.0,
+        "Cyber": 40.0,
+        "Space": 50.0,
+        "Quantum and Photonics": 80.0
+      },
+      "note": "University-anchor classification needs anchor_type cross-reference; reported as raw pct here."
+    }
+  }
+}

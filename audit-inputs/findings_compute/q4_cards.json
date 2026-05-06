@@ -1,0 +1,75 @@
+{
+  "uk_nbd": {
+    "draft_claims": {
+      "clusters": 169,
+      "regions": 25,
+      "evidence": 16317
+    },
+    "appraisal_json": {
+      "n_clusters": 169,
+      "n_regions": 24
+    },
+    "current_canon_runs": {
+      "n_runs": 175,
+      "n_ecosystems": 26,
+      "evidence_sum": 16893
+    },
+    "regions_inconsistency_note": "appraisal n_regions=24 vs structural_twins.json has 25 keys vs draft says 25."
+  },
+  "greater_glasgow": {
+    "draft_claims": {
+      "clusters": 8,
+      "evidence": 978
+    },
+    "computed": {
+      "n_runs": 8,
+      "evidence_sum": 978,
+      "cluster_names": [
+        "Greater Glasgow Advanced Manufacturing",
+        "Greater Glasgow Critical Technologies",
+        "Greater Glasgow Digital Creative",
+        "Greater Glasgow Fintech",
+        "Greater Glasgow Innovation Ecosystem",
+        "Greater Glasgow Life Sciences",
+        "Greater Glasgow Net Zero",
+        "Greater Glasgow Space"
+      ]
+    }
+  },
+  "orlando": {
+    "draft_claims": {
+      "clusters": 10,
+      "evidence": 582
+    },
+    "computed": {
+      "n_runs": 10,
+      "evidence_sum": 582,
+      "cluster_names": [
+        "Orlando Advanced Manufacturing",
+        "Orlando AgTech",
+        "Orlando Aviation & Aerospace",
+        "Orlando Cybersecurity",
+        "Orlando Digital Media",
+        "Orlando MedTech",
+        "Orlando Photonics & Optics",
+        "Orlando Simulation & Training",
+        "Orlando SpaceTech",
+        "Orlando Tourism Technology"
+      ]
+    }
+  },
+  "cluster_library": {
+    "draft_claims": {
+      "clusters": 377,
+      "countries": 57
+    },
+    "v3_clusters_json": {
+      "n_clusters": 221,
+      "n_countries": 57
+    },
+    "v3_canonical_pool": {
+      "n_runs": 232,
+      "n_countries_label": 30
+    }
+  }
+}

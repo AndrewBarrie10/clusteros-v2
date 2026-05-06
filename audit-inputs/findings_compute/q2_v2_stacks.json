@@ -1,0 +1,95 @@
+{
+  "pool": "canonical_pool (canonical-schema runs only)",
+  "n": 232,
+  "definition": "Share of clusters where stack fires at high or medium confidence",
+  "draft_pv_pct": 41.2,
+  "rows": [
+    {
+      "stack_id": "STK-16",
+      "stack_name": "Permission\u2013Validation Configuration",
+      "n": 232,
+      "high": 91,
+      "medium": 28,
+      "low": 3,
+      "indeterminate": 110,
+      "confident_pct": 51.3,
+      "any_conf_pct": 74.6
+    },
+    {
+      "stack_id": "STK-30",
+      "stack_name": "Coordination\u2013Intermediary\u2013Activity Configuration",
+      "n": 232,
+      "high": 98,
+      "medium": 67,
+      "low": 8,
+      "indeterminate": 59,
+      "confident_pct": 71.1,
+      "any_conf_pct": 74.6
+    },
+    {
+      "stack_id": "STK-17",
+      "stack_name": "Extraction\u2013Intermediary Configuration",
+      "n": 232,
+      "high": 128,
+      "medium": 36,
+      "low": 0,
+      "indeterminate": 68,
+      "confident_pct": 70.7,
+      "any_conf_pct": 74.6
+    },
+    {
+      "stack_id": "STK-15",
+      "stack_name": "Governance Capture Configuration",
+      "n": 232,
+      "high": 79,
+      "medium": 80,
+      "low": 10,
+      "indeterminate": 63,
+      "confident_pct": 68.5,
+      "any_conf_pct": 74.6
+    },
+    {
+      "stack_id": "STK-19",
+      "stack_name": "Volume\u2013Tolerance Configuration",
+      "n": 232,
+      "high": 15,
+      "medium": 8,
+      "low": 9,
+      "indeterminate": 200,
+      "confident_pct": 9.9,
+      "any_conf_pct": 74.6
+    },
+    {
+      "stack_id": "STK-24",
+      "stack_name": "Extraction\u2013Narrative Configuration",
+      "n": 232,
+      "high": 37,
+      "medium": 63,
+      "low": 60,
+      "indeterminate": 72,
+      "confident_pct": 43.1,
+      "any_conf_pct": 74.6
+    }
+  ],
+  "all_stack_ids_observed": {
+    "STK-17": 173,
+    "STK-15": 173,
+    "STK-30": 173,
+    "STK-16": 173,
+    "STK-18": 173,
+    "STK-19": 173,
+    "STK-22": 173,
+    "STK-23": 173,
+    "STK-25": 173,
+    "STK-29": 173,
+    "STK-24": 173,
+    "STK-27": 173,
+    "STK-28": 173,
+    "STK-01": 59,
+    "STK-03": 58,
+    "STK-02": 57,
+    "STK-04": 44,
+    "STK-05": 29,
+    "STK-06": 7
+  }
+}

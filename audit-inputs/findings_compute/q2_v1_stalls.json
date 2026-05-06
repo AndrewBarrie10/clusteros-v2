@@ -1,0 +1,515 @@
+{
+  "primary_pool": "canonical_pool (canonical-schema runs only)",
+  "draft_claim_top_stall": "S6 Stabilising Around Incumbents (high+medium combined dominant)",
+  "draft_claim_indeterminate_dominant": "S3 Forgiving Instead of Redesigning",
+  "canonical_pool": {
+    "label": "canonical_pool",
+    "n": 232,
+    "table": [
+      {
+        "stall_id": "S1",
+        "stall_name": "Re-proving Instead of Narrowing",
+        "n": 232,
+        "high": 0,
+        "high_pct": 0.0,
+        "medium": 64,
+        "medium_pct": 27.6,
+        "low": 168,
+        "low_pct": 72.4,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 27.6
+      },
+      {
+        "stall_id": "S2",
+        "stall_name": "Coordinating Instead of Deciding",
+        "n": 232,
+        "high": 5,
+        "high_pct": 2.2,
+        "medium": 156,
+        "medium_pct": 67.2,
+        "low": 71,
+        "low_pct": 30.6,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 69.4
+      },
+      {
+        "stall_id": "S3",
+        "stall_name": "Forgiving Instead of Redesigning",
+        "n": 232,
+        "high": 0,
+        "high_pct": 0.0,
+        "medium": 7,
+        "medium_pct": 3.0,
+        "low": 25,
+        "low_pct": 10.8,
+        "indeterminate": 200,
+        "indeterminate_pct": 86.2,
+        "high_plus_medium_pct": 3.0
+      },
+      {
+        "stall_id": "S4",
+        "stall_name": "Extracting Instead of Investing",
+        "n": 232,
+        "high": 9,
+        "high_pct": 3.9,
+        "medium": 101,
+        "medium_pct": 43.5,
+        "low": 82,
+        "low_pct": 35.3,
+        "indeterminate": 40,
+        "indeterminate_pct": 17.2,
+        "high_plus_medium_pct": 47.4
+      },
+      {
+        "stall_id": "S5",
+        "stall_name": "Intermediating Instead of Connecting",
+        "n": 232,
+        "high": 2,
+        "high_pct": 0.9,
+        "medium": 105,
+        "medium_pct": 45.3,
+        "low": 125,
+        "low_pct": 53.9,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 46.1
+      },
+      {
+        "stall_id": "S6",
+        "stall_name": "Stabilising Around Incumbents",
+        "n": 232,
+        "high": 74,
+        "high_pct": 31.9,
+        "medium": 135,
+        "medium_pct": 58.2,
+        "low": 22,
+        "low_pct": 9.5,
+        "indeterminate": 1,
+        "indeterminate_pct": 0.4,
+        "high_plus_medium_pct": 90.1
+      },
+      {
+        "stall_id": "S7",
+        "stall_name": "Narrating Instead of Testing",
+        "n": 232,
+        "high": 1,
+        "high_pct": 0.4,
+        "medium": 58,
+        "medium_pct": 25.0,
+        "low": 164,
+        "low_pct": 70.7,
+        "indeterminate": 9,
+        "indeterminate_pct": 3.9,
+        "high_plus_medium_pct": 25.4
+      },
+      {
+        "stall_id": "S8",
+        "stall_name": "Expanding Instead of Concentrating",
+        "n": 232,
+        "high": 8,
+        "high_pct": 3.4,
+        "medium": 81,
+        "medium_pct": 34.9,
+        "low": 143,
+        "low_pct": 61.6,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 38.4
+      },
+      {
+        "stall_id": "S9",
+        "stall_name": "Permission-Seeking Instead of Acting",
+        "n": 232,
+        "high": 4,
+        "high_pct": 1.7,
+        "medium": 97,
+        "medium_pct": 41.8,
+        "low": 62,
+        "low_pct": 26.7,
+        "indeterminate": 69,
+        "indeterminate_pct": 29.7,
+        "high_plus_medium_pct": 43.5
+      }
+    ],
+    "ranked_by_high_plus_medium": [
+      [
+        "S6",
+        90.1
+      ],
+      [
+        "S2",
+        69.4
+      ],
+      [
+        "S4",
+        47.4
+      ],
+      [
+        "S5",
+        46.1
+      ],
+      [
+        "S9",
+        43.5
+      ],
+      [
+        "S8",
+        38.4
+      ],
+      [
+        "S1",
+        27.6
+      ],
+      [
+        "S7",
+        25.4
+      ],
+      [
+        "S3",
+        3.0
+      ]
+    ]
+  },
+  "uk_nbd": {
+    "label": "uk_nbd_current_canon",
+    "n": 175,
+    "table": [
+      {
+        "stall_id": "S1",
+        "stall_name": "Re-proving Instead of Narrowing",
+        "n": 175,
+        "high": 0,
+        "high_pct": 0.0,
+        "medium": 64,
+        "medium_pct": 36.6,
+        "low": 111,
+        "low_pct": 63.4,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 36.6
+      },
+      {
+        "stall_id": "S2",
+        "stall_name": "Coordinating Instead of Deciding",
+        "n": 175,
+        "high": 5,
+        "high_pct": 2.9,
+        "medium": 130,
+        "medium_pct": 74.3,
+        "low": 40,
+        "low_pct": 22.9,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 77.1
+      },
+      {
+        "stall_id": "S3",
+        "stall_name": "Forgiving Instead of Redesigning",
+        "n": 175,
+        "high": 0,
+        "high_pct": 0.0,
+        "medium": 7,
+        "medium_pct": 4.0,
+        "low": 25,
+        "low_pct": 14.3,
+        "indeterminate": 143,
+        "indeterminate_pct": 81.7,
+        "high_plus_medium_pct": 4.0
+      },
+      {
+        "stall_id": "S4",
+        "stall_name": "Extracting Instead of Investing",
+        "n": 175,
+        "high": 9,
+        "high_pct": 5.1,
+        "medium": 82,
+        "medium_pct": 46.9,
+        "low": 74,
+        "low_pct": 42.3,
+        "indeterminate": 10,
+        "indeterminate_pct": 5.7,
+        "high_plus_medium_pct": 52.0
+      },
+      {
+        "stall_id": "S5",
+        "stall_name": "Intermediating Instead of Connecting",
+        "n": 175,
+        "high": 2,
+        "high_pct": 1.1,
+        "medium": 82,
+        "medium_pct": 46.9,
+        "low": 91,
+        "low_pct": 52.0,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 48.0
+      },
+      {
+        "stall_id": "S6",
+        "stall_name": "Stabilising Around Incumbents",
+        "n": 175,
+        "high": 74,
+        "high_pct": 42.3,
+        "medium": 96,
+        "medium_pct": 54.9,
+        "low": 5,
+        "low_pct": 2.9,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 97.1
+      },
+      {
+        "stall_id": "S7",
+        "stall_name": "Narrating Instead of Testing",
+        "n": 175,
+        "high": 1,
+        "high_pct": 0.6,
+        "medium": 53,
+        "medium_pct": 30.3,
+        "low": 117,
+        "low_pct": 66.9,
+        "indeterminate": 4,
+        "indeterminate_pct": 2.3,
+        "high_plus_medium_pct": 30.9
+      },
+      {
+        "stall_id": "S8",
+        "stall_name": "Expanding Instead of Concentrating",
+        "n": 175,
+        "high": 8,
+        "high_pct": 4.6,
+        "medium": 75,
+        "medium_pct": 42.9,
+        "low": 92,
+        "low_pct": 52.6,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 47.4
+      },
+      {
+        "stall_id": "S9",
+        "stall_name": "Permission-Seeking Instead of Acting",
+        "n": 175,
+        "high": 3,
+        "high_pct": 1.7,
+        "medium": 79,
+        "medium_pct": 45.1,
+        "low": 42,
+        "low_pct": 24.0,
+        "indeterminate": 51,
+        "indeterminate_pct": 29.1,
+        "high_plus_medium_pct": 46.9
+      }
+    ],
+    "ranked_by_high_plus_medium": [
+      [
+        "S6",
+        97.1
+      ],
+      [
+        "S2",
+        77.1
+      ],
+      [
+        "S4",
+        52.0
+      ],
+      [
+        "S5",
+        48.0
+      ],
+      [
+        "S8",
+        47.4
+      ],
+      [
+        "S9",
+        46.9
+      ],
+      [
+        "S1",
+        36.6
+      ],
+      [
+        "S7",
+        30.9
+      ],
+      [
+        "S3",
+        4.0
+      ]
+    ]
+  },
+  "full_library": {
+    "label": "full_diagnostic_library",
+    "n": 391,
+    "table": [
+      {
+        "stall_id": "S1",
+        "stall_name": "Re-proving Instead of Narrowing",
+        "n": 391,
+        "high": 0,
+        "high_pct": 0.0,
+        "medium": 64,
+        "medium_pct": 16.4,
+        "low": 327,
+        "low_pct": 83.6,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 16.4
+      },
+      {
+        "stall_id": "S2",
+        "stall_name": "Coordinating Instead of Deciding",
+        "n": 391,
+        "high": 5,
+        "high_pct": 1.3,
+        "medium": 216,
+        "medium_pct": 55.2,
+        "low": 170,
+        "low_pct": 43.5,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 56.5
+      },
+      {
+        "stall_id": "S3",
+        "stall_name": "Forgiving Instead of Redesigning",
+        "n": 391,
+        "high": 0,
+        "high_pct": 0.0,
+        "medium": 9,
+        "medium_pct": 2.3,
+        "low": 29,
+        "low_pct": 7.4,
+        "indeterminate": 353,
+        "indeterminate_pct": 90.3,
+        "high_plus_medium_pct": 2.3
+      },
+      {
+        "stall_id": "S4",
+        "stall_name": "Extracting Instead of Investing",
+        "n": 391,
+        "high": 10,
+        "high_pct": 2.6,
+        "medium": 159,
+        "medium_pct": 40.7,
+        "low": 107,
+        "low_pct": 27.4,
+        "indeterminate": 115,
+        "indeterminate_pct": 29.4,
+        "high_plus_medium_pct": 43.2
+      },
+      {
+        "stall_id": "S5",
+        "stall_name": "Intermediating Instead of Connecting",
+        "n": 391,
+        "high": 2,
+        "high_pct": 0.5,
+        "medium": 165,
+        "medium_pct": 42.2,
+        "low": 224,
+        "low_pct": 57.3,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 42.7
+      },
+      {
+        "stall_id": "S6",
+        "stall_name": "Stabilising Around Incumbents",
+        "n": 391,
+        "high": 76,
+        "high_pct": 19.4,
+        "medium": 242,
+        "medium_pct": 61.9,
+        "low": 72,
+        "low_pct": 18.4,
+        "indeterminate": 1,
+        "indeterminate_pct": 0.3,
+        "high_plus_medium_pct": 81.3
+      },
+      {
+        "stall_id": "S7",
+        "stall_name": "Narrating Instead of Testing",
+        "n": 391,
+        "high": 1,
+        "high_pct": 0.3,
+        "medium": 68,
+        "medium_pct": 17.4,
+        "low": 297,
+        "low_pct": 76.0,
+        "indeterminate": 25,
+        "indeterminate_pct": 6.4,
+        "high_plus_medium_pct": 17.6
+      },
+      {
+        "stall_id": "S8",
+        "stall_name": "Expanding Instead of Concentrating",
+        "n": 391,
+        "high": 8,
+        "high_pct": 2.0,
+        "medium": 94,
+        "medium_pct": 24.0,
+        "low": 289,
+        "low_pct": 73.9,
+        "indeterminate": 0,
+        "indeterminate_pct": 0.0,
+        "high_plus_medium_pct": 26.1
+      },
+      {
+        "stall_id": "S9",
+        "stall_name": "Permission-Seeking Instead of Acting",
+        "n": 391,
+        "high": 4,
+        "high_pct": 1.0,
+        "medium": 141,
+        "medium_pct": 36.1,
+        "low": 125,
+        "low_pct": 32.0,
+        "indeterminate": 121,
+        "indeterminate_pct": 30.9,
+        "high_plus_medium_pct": 37.1
+      }
+    ],
+    "ranked_by_high_plus_medium": [
+      [
+        "S6",
+        81.3
+      ],
+      [
+        "S2",
+        56.5
+      ],
+      [
+        "S4",
+        43.2
+      ],
+      [
+        "S5",
+        42.7
+      ],
+      [
+        "S9",
+        37.1
+      ],
+      [
+        "S8",
+        26.1
+      ],
+      [
+        "S7",
+        17.6
+      ],
+      [
+        "S1",
+        16.4
+      ],
+      [
+        "S3",
+        2.3
+      ]
+    ]
+  }
+}

@@ -1,0 +1,4111 @@
+{
+  "source": "diagnostic library full pool (n=391, runs with parsed 9-stall fingerprint) \u2014 pairwise cosine on stacks+stalls signature",
+  "threshold": 0.97,
+  "n_pool": 391,
+  "n_pairwise_edges": 1526,
+  "n_groups_size_ge2": 47,
+  "n_groups_size_ge2_multi_country": 32,
+  "n_groups_size_ge3": 26,
+  "n_groups_size_ge3_multi_country": 21,
+  "n_groups_size_ge3_multi_continent": 21,
+  "draft_framing": "27 groups, 21 multi-country",
+  "groups_size_ge3": [
+    {
+      "size": 33,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Aberdeen Digital",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast Innovation Ecosystem",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast LifeSciences",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Advanced Manufacturing Aerospace and Industrial Engineering",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR Compound Semiconductors",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Advanced Manufacturing",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Agritech",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES FinTech",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Life Sciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Advanced Manufacturing",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Critical Technologies",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Digital Creative",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Life Sciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Agri-food",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Climate Tech Net Zero",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Life Sciences Health",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Advanced Materials",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Health",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Digital Creative",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Visitor Economy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Stirling and Clackmannanshire Innovation Ecosystem",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Stirling Clackmannanshire Aquaculture",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Stirling Clackmannanshire Digital",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Creative Tech",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA HealthTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Aerospace",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Digital Technology",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Health Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Food Farming",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 111,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Aberdeen Energy",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast AdvancedManufacturing",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast Cyber",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast FinTech",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast MaritimeNetZero",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast Screen",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridge Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough AgriTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough ClimateTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough EngBio",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Quantum",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Semiconductors",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR Creative",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR Cyber",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR FinTech",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR MedTech",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cardiff Capital Region Innovation Ecosystem",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay AdvancedManufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay CleanEnergy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay HealthInnovation",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay Marine",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay Photonics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Clean Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Transport",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Data AI",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Space",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Space",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Defence",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Ports",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London AI Data Software",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Built Environment Property",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Financial Services FinTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Creative Media",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Financial Services",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Low Carbon",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Hull and East Yorkshire Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire AdvancedManufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire CleanEnergy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire HealthTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Aquaculture",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Creative",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Energy",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands LifeSciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Space",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Tourism",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Clean Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Digital Cyber",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Space",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Clean Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Health Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Maritime Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East LifeSciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Space",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "South Yorkshire Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "South Yorkshire Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "South Yorkshire Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Stirling Clackmannanshire FoodDrink",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Agri Food",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Clean Growth",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Engineering",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Innovation Ecosystem",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Life Sciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Net Zero",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Strategic Mayoral Authority Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Business Services",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Defence Tech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Engineering",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Environmental Intelligence",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Quantum",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Midlands Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Clean Growth",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Creative",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England CleanTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Creative",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England FinTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England LifeSciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Quantum",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Space",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Creative Industries",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Clean Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Creative Industries",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Defence Security",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Engineering Biology Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Rail Innovation",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 5,
+      "n_countries": 2,
+      "countries": [
+        "GB",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Scotland Energy Transition",
+          "country_label": "UK",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Minneapolis MedTech & Life Sciences",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando Photonics & Optics",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando Simulation & Training",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "San Diego Life Sciences & BioTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 9,
+      "n_countries": 6,
+      "countries": [
+        "AE",
+        "DK",
+        "GB",
+        "MY",
+        "SA",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Abu Dhabi HELM Life Sciences",
+          "country_label": "",
+          "country_iso": "AE"
+        },
+        {
+          "name": "Cheltenham Cyber Security",
+          "country_label": "",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Copenhagen-Medicon Valley Life Sciences",
+          "country_label": "",
+          "country_iso": "DK"
+        },
+        {
+          "name": "Denver & Boulder Life Sciences",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Kuala Lumpur FinTech",
+          "country_label": "Malaysia",
+          "country_iso": "MY"
+        },
+        {
+          "name": "New York City AI & Deep Tech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando Advanced Manufacturing",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando SpaceTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Riyadh AI & Tech",
+          "country_label": "Saudi Arabia",
+          "country_iso": "SA"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "CL",
+        "FR",
+        "KZ",
+        "US"
+      ],
+      "n_continents": 4,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Almaty FinTech & Tech",
+          "country_label": "Kazakhstan",
+          "country_iso": "KZ"
+        },
+        {
+          "name": "Detroit & Michigan Mobility & Auto Tech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Paris AI & Enterprise Tech",
+          "country_label": "France",
+          "country_iso": "FR"
+        },
+        {
+          "name": "Santiago FinTech",
+          "country_label": "Chile",
+          "country_iso": "CL"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 4,
+      "countries": [
+        "FR",
+        "IL",
+        "NL",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Amsterdam FinTech & Creative Tech",
+          "country_label": "Netherlands",
+          "country_iso": "NL"
+        },
+        {
+          "name": "Birmingham Alabama Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Grenoble Deep Tech & Semiconductors",
+          "country_label": "France",
+          "country_iso": "FR"
+        },
+        {
+          "name": "San Francisco Bay Area Cyber Security",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Seattle Life Sciences & BioTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Tel Aviv Life Sciences & BioTech",
+          "country_label": "",
+          "country_iso": "IL"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 3,
+      "countries": [
+        "BD",
+        "GB",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Atlanta Cyber Security",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Dhaka Garment Tech & FinTech",
+          "country_label": "Bangladesh",
+          "country_iso": "BD"
+        },
+        {
+          "name": "Scotland Cyber Security",
+          "country_label": "",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 15,
+      "n_countries": 12,
+      "countries": [
+        "BR",
+        "CA",
+        "CO",
+        "CR",
+        "FI",
+        "GB",
+        "KR",
+        "MX",
+        "NG",
+        "PH",
+        "TW",
+        "US"
+      ],
+      "n_continents": 5,
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Atlanta FinTech & Payments",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Bogot\u00e1 FinTech",
+          "country_label": "Colombia",
+          "country_iso": "CO"
+        },
+        {
+          "name": "Calgary CleanTech & Energy Transition",
+          "country_label": "Canada",
+          "country_iso": "CA"
+        },
+        {
+          "name": "Guadalajara IT Services & Software",
+          "country_label": "Mexico",
+          "country_iso": "MX"
+        },
+        {
+          "name": "Harwell Space Technology",
+          "country_label": "",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Helsinki Gaming Digital & AI",
+          "country_label": "Finland",
+          "country_iso": "FI"
+        },
+        {
+          "name": "Lagos FinTech",
+          "country_label": "Nigeria",
+          "country_iso": "NG"
+        },
+        {
+          "name": "Manila FinTech",
+          "country_label": "Philippines",
+          "country_iso": "PH"
+        },
+        {
+          "name": "San Jos\u00e9 Costa Rica CleanTech & Digital",
+          "country_label": "Costa Rica",
+          "country_iso": "CR"
+        },
+        {
+          "name": "S\u00e3o Paulo AgTech",
+          "country_label": "Brazil",
+          "country_iso": "BR"
+        },
+        {
+          "name": "Seoul Life Sciences & BioTech",
+          "country_label": "South Korea",
+          "country_iso": "KR"
+        },
+        {
+          "name": "Taipei Semiconductor & Hardware",
+          "country_label": "Taiwan",
+          "country_iso": "TW"
+        },
+        {
+          "name": "Toronto AI & Deep Tech",
+          "country_label": "Canada",
+          "country_iso": "CA"
+        },
+        {
+          "name": "Vancouver AI & Deep Tech",
+          "country_label": "Canada",
+          "country_iso": "CA"
+        },
+        {
+          "name": "Wichita Regional Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": null
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 1,
+      "countries": [
+        "US"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Atlanta Life Sciences & MedTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Colorado Springs Space Technology",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Philadelphia Life Sciences & BioTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 4,
+      "countries": [
+        "AE",
+        "CA",
+        "MX",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Austin CleanTech & Energy",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Chicago Advanced Manufacturing",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Denver & Boulder AI & Deep Tech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Dubai Logistics Tech",
+          "country_label": "UAE",
+          "country_iso": "AE"
+        },
+        {
+          "name": "Monterrey Advanced Manufacturing",
+          "country_label": "Mexico",
+          "country_iso": "MX"
+        },
+        {
+          "name": "Quebec City Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "CA"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "GB",
+        "IN",
+        "MX",
+        "PE"
+      ],
+      "n_continents": 4,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Bangalore FinTech",
+          "country_label": "India",
+          "country_iso": "IN"
+        },
+        {
+          "name": "Lima FinTech",
+          "country_label": "Peru",
+          "country_iso": "PE"
+        },
+        {
+          "name": "Liverpool",
+          "country_label": "",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Mexico City FinTech",
+          "country_label": "Mexico",
+          "country_iso": "MX"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 6,
+      "countries": [
+        "AU",
+        "CZ",
+        "LK",
+        "TH",
+        "US",
+        "ZA"
+      ],
+      "n_continents": 5,
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America",
+        "Oceania"
+      ],
+      "members": [
+        {
+          "name": "Bangkok Digital & E-commerce",
+          "country_label": "Thailand",
+          "country_iso": "TH"
+        },
+        {
+          "name": "Buffalo Niagara Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Colombo IT Services & Digital",
+          "country_label": "Sri Lanka",
+          "country_iso": "LK"
+        },
+        {
+          "name": "Johannesburg FinTech",
+          "country_label": "South Africa",
+          "country_iso": "ZA"
+        },
+        {
+          "name": "Prague Enterprise Tech & Mobility",
+          "country_label": "Czech Republic",
+          "country_iso": "CZ"
+        },
+        {
+          "name": "Sydney AI & Deep Tech",
+          "country_label": "Australia",
+          "country_iso": "AU"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 2,
+      "countries": [
+        "ES",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Barcelona BioMed & Digital Health",
+          "country_label": "Spain",
+          "country_iso": "ES"
+        },
+        {
+          "name": "Los Angeles Space Technology",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando Aviation & Aerospace",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "AU",
+        "DE",
+        "NL",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "Oceania"
+      ],
+      "members": [
+        {
+          "name": "Berlin AI & Deep Tech",
+          "country_label": "Germany",
+          "country_iso": "DE"
+        },
+        {
+          "name": "Eindhoven Brainport Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "NL"
+        },
+        {
+          "name": "Orlando Cybersecurity",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Sydney FinTech",
+          "country_label": "Australia",
+          "country_iso": "AU"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 3,
+      "countries": [
+        "ES",
+        "PT",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Basque Country Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "ES"
+        },
+        {
+          "name": "Orlando AgTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Porto Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "PT"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 2,
+      "countries": [
+        "IN",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Bordeaux Metropolitan Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": null
+        },
+        {
+          "name": "Boston FinTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Mumbai FinTech",
+          "country_label": "India",
+          "country_iso": "IN"
+        },
+        {
+          "name": "Salt Lake City Life Sciences",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 4,
+      "countries": [
+        "NO",
+        "SE",
+        "US",
+        "UY"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Boston Robotics & AI",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Cape Canaveral Space Coast",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Gothenburg Automotive & Sustainability Tech",
+          "country_label": "Sweden",
+          "country_iso": "SE"
+        },
+        {
+          "name": "Montevideo Tech & Innovation Ecosystem",
+          "country_label": "Uruguay",
+          "country_iso": "UY"
+        },
+        {
+          "name": "Oslo CleanTech & Maritime Innovation",
+          "country_label": "Norway",
+          "country_iso": "NO"
+        },
+        {
+          "name": "San Francisco Bay Area Life Sciences",
+          "country_label": "",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "BR",
+        "GB",
+        "PA",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Brasilia GovTech & Digital Infrastructure",
+          "country_label": "Brazil",
+          "country_iso": "BR"
+        },
+        {
+          "name": "Scotland Life Sciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Panama City FinTech & Logistics Tech",
+          "country_label": "Panama",
+          "country_iso": "PA"
+        },
+        {
+          "name": "Philadelphia MedTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 8,
+      "n_countries": 8,
+      "countries": [
+        "GB",
+        "IN",
+        "JP",
+        "KE",
+        "KR",
+        "PH",
+        "US",
+        "ZA"
+      ],
+      "n_continents": 4,
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Cape Town CleanTech",
+          "country_label": "South Africa",
+          "country_iso": "ZA"
+        },
+        {
+          "name": "Hyderabad Genome Valley Life Sciences",
+          "country_label": "",
+          "country_iso": "IN"
+        },
+        {
+          "name": "Madison Regional Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Manila BPO & IT Services",
+          "country_label": "Philippines",
+          "country_iso": "PH"
+        },
+        {
+          "name": "Nairobi FinTech",
+          "country_label": "Kenya",
+          "country_iso": "KE"
+        },
+        {
+          "name": "Scotland Food and Drink",
+          "country_label": "UK",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Seoul Semiconductor & Display Tech",
+          "country_label": "South Korea",
+          "country_iso": "KR"
+        },
+        {
+          "name": "Tokyo AI & Robotics",
+          "country_label": "Japan",
+          "country_iso": "JP"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 3,
+      "countries": [
+        "GB",
+        "NL",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Chicago AgTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Scotland Data and AI",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "The Hague Cyber Security",
+          "country_label": "",
+          "country_iso": "NL"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 3,
+      "countries": [
+        "BR",
+        "ES",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Chicago FinTech & Payments",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Madrid FinTech & Mobility",
+          "country_label": "Spain",
+          "country_iso": "ES"
+        },
+        {
+          "name": "S\u00e3o Paulo FinTech",
+          "country_label": "Brazil",
+          "country_iso": "BR"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 3,
+      "countries": [
+        "CO",
+        "GB",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Scotland FinTech",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Medellin Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "CO"
+        },
+        {
+          "name": "Pittsburgh Regional Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Research Triangle Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Greater Glasgow Net Zero",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA BPFS",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 5,
+      "n_countries": 5,
+      "countries": [
+        "CA",
+        "KE",
+        "MN",
+        "PL",
+        "VN"
+      ],
+      "n_continents": 4,
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Ho Chi Minh City Manufacturing Tech",
+          "country_label": "Vietnam",
+          "country_iso": "VN"
+        },
+        {
+          "name": "Krakow Cyber Security & IT Services",
+          "country_label": "Poland",
+          "country_iso": "PL"
+        },
+        {
+          "name": "Nairobi AgTech",
+          "country_label": "",
+          "country_iso": "KE"
+        },
+        {
+          "name": "Toronto FinTech",
+          "country_label": "Canada",
+          "country_iso": "CA"
+        },
+        {
+          "name": "Ulaanbaatar Mining Tech",
+          "country_label": "Mongolia",
+          "country_iso": "MN"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Highlands and Islands FoodDrink",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Creative",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "South Yorkshire Healthtech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Space",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Green Economy",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "CH",
+        "MX",
+        "MY",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Kuala Lumpur AI & Digital Tech",
+          "country_label": "Malaysia",
+          "country_iso": "MY"
+        },
+        {
+          "name": "Mexico City AI & Digital Tech",
+          "country_label": "Mexico",
+          "country_iso": "MX"
+        },
+        {
+          "name": "Orlando MedTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Zurich-Zug MedTech",
+          "country_label": "",
+          "country_iso": "CH"
+        }
+      ]
+    }
+  ],
+  "groups_size_ge2": [
+    {
+      "size": 33,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Aberdeen Digital",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast Innovation Ecosystem",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast LifeSciences",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Advanced Manufacturing Aerospace and Industrial Engineering",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR Compound Semiconductors",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Advanced Manufacturing",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Agritech",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES FinTech",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Life Sciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Advanced Manufacturing",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Critical Technologies",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Digital Creative",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Life Sciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Agri-food",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Climate Tech Net Zero",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Life Sciences Health",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Advanced Materials",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Health",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Digital Creative",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Visitor Economy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Stirling and Clackmannanshire Innovation Ecosystem",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Stirling Clackmannanshire Aquaculture",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Stirling Clackmannanshire Digital",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Creative Tech",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA HealthTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Aerospace",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Digital Technology",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Health Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Food Farming",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 111,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Aberdeen Energy",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast AdvancedManufacturing",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast Cyber",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast FinTech",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast MaritimeNetZero",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Belfast Screen",
+          "country_label": "Northern Ireland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridge Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough AgriTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough ClimateTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough EngBio",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Quantum",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cambridgeshire Peterborough Semiconductors",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR Creative",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR Cyber",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR FinTech",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "CCR MedTech",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Cardiff Capital Region Innovation Ecosystem",
+          "country_label": "Wales",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay AdvancedManufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay CleanEnergy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay HealthInnovation",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay Marine",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay Photonics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Clean Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "East Midlands Transport",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Data AI",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "ESES Space",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Glasgow Space",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Defence",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Lincolnshire Ports",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London AI Data Software",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Built Environment Property",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Financial Services FinTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "London Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Creative Media",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Financial Services",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Greater Manchester Low Carbon",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Hull and East Yorkshire Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire AdvancedManufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire CleanEnergy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire HealthTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "HullEastYorkshire Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Aquaculture",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Creative",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Energy",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands LifeSciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Space",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Highlands and Islands Tourism",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Clean Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Digital Cyber",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Lancashire Space",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Clean Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Health Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Liverpool City Region Maritime Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East LifeSciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Space",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "South Yorkshire Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "South Yorkshire Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "South Yorkshire Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Stirling Clackmannanshire FoodDrink",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Agri Food",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Clean Growth",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Engineering",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Innovation Ecosystem",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tay Cities Life Sciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Net Zero",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Strategic Mayoral Authority Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Business Services",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Defence Tech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Engineering",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Environmental Intelligence",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Quantum",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Midlands Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Advanced Manufacturing",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Clean Growth",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Creative",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England CleanTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Creative",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England FinTech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England LifeSciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Quantum",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Space",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Creative Industries",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Clean Energy",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Creative Industries",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Defence Security",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Engineering Biology Life Sciences",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "York and North Yorkshire Rail Innovation",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Aberdeen and Aberdeenshire Innovation Ecosystem",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "DevonTorbay AgriFood",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 5,
+      "n_countries": 2,
+      "countries": [
+        "GB",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Scotland Energy Transition",
+          "country_label": "UK",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Minneapolis MedTech & Life Sciences",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando Photonics & Optics",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando Simulation & Training",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "San Diego Life Sciences & BioTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 9,
+      "n_countries": 6,
+      "countries": [
+        "AE",
+        "DK",
+        "GB",
+        "MY",
+        "SA",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Abu Dhabi HELM Life Sciences",
+          "country_label": "",
+          "country_iso": "AE"
+        },
+        {
+          "name": "Cheltenham Cyber Security",
+          "country_label": "",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Copenhagen-Medicon Valley Life Sciences",
+          "country_label": "",
+          "country_iso": "DK"
+        },
+        {
+          "name": "Denver & Boulder Life Sciences",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Kuala Lumpur FinTech",
+          "country_label": "Malaysia",
+          "country_iso": "MY"
+        },
+        {
+          "name": "New York City AI & Deep Tech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando Advanced Manufacturing",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando SpaceTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Riyadh AI & Tech",
+          "country_label": "Saudi Arabia",
+          "country_iso": "SA"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "AE",
+        "CA"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "UAE Cyber Security",
+          "country_label": "",
+          "country_iso": "AE"
+        },
+        {
+          "name": "Montreal Life Sciences",
+          "country_label": "Canada",
+          "country_iso": "CA"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 1,
+      "countries": [
+        "GH"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Africa"
+      ],
+      "members": [
+        {
+          "name": "Accra FinTech",
+          "country_label": "Ghana",
+          "country_iso": "GH"
+        },
+        {
+          "name": "Bengaluru Space Technology",
+          "country_label": "",
+          "country_iso": null
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "CL",
+        "FR",
+        "KZ",
+        "US"
+      ],
+      "n_continents": 4,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Almaty FinTech & Tech",
+          "country_label": "Kazakhstan",
+          "country_iso": "KZ"
+        },
+        {
+          "name": "Detroit & Michigan Mobility & Auto Tech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Paris AI & Enterprise Tech",
+          "country_label": "France",
+          "country_iso": "FR"
+        },
+        {
+          "name": "Santiago FinTech",
+          "country_label": "Chile",
+          "country_iso": "CL"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 4,
+      "countries": [
+        "FR",
+        "IL",
+        "NL",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Amsterdam FinTech & Creative Tech",
+          "country_label": "Netherlands",
+          "country_iso": "NL"
+        },
+        {
+          "name": "Birmingham Alabama Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Grenoble Deep Tech & Semiconductors",
+          "country_label": "France",
+          "country_iso": "FR"
+        },
+        {
+          "name": "San Francisco Bay Area Cyber Security",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Seattle Life Sciences & BioTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Tel Aviv Life Sciences & BioTech",
+          "country_label": "",
+          "country_iso": "IL"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 3,
+      "countries": [
+        "BD",
+        "GB",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Atlanta Cyber Security",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Dhaka Garment Tech & FinTech",
+          "country_label": "Bangladesh",
+          "country_iso": "BD"
+        },
+        {
+          "name": "Scotland Cyber Security",
+          "country_label": "",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 15,
+      "n_countries": 12,
+      "countries": [
+        "BR",
+        "CA",
+        "CO",
+        "CR",
+        "FI",
+        "GB",
+        "KR",
+        "MX",
+        "NG",
+        "PH",
+        "TW",
+        "US"
+      ],
+      "n_continents": 5,
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Atlanta FinTech & Payments",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Bogot\u00e1 FinTech",
+          "country_label": "Colombia",
+          "country_iso": "CO"
+        },
+        {
+          "name": "Calgary CleanTech & Energy Transition",
+          "country_label": "Canada",
+          "country_iso": "CA"
+        },
+        {
+          "name": "Guadalajara IT Services & Software",
+          "country_label": "Mexico",
+          "country_iso": "MX"
+        },
+        {
+          "name": "Harwell Space Technology",
+          "country_label": "",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Helsinki Gaming Digital & AI",
+          "country_label": "Finland",
+          "country_iso": "FI"
+        },
+        {
+          "name": "Lagos FinTech",
+          "country_label": "Nigeria",
+          "country_iso": "NG"
+        },
+        {
+          "name": "Manila FinTech",
+          "country_label": "Philippines",
+          "country_iso": "PH"
+        },
+        {
+          "name": "San Jos\u00e9 Costa Rica CleanTech & Digital",
+          "country_label": "Costa Rica",
+          "country_iso": "CR"
+        },
+        {
+          "name": "S\u00e3o Paulo AgTech",
+          "country_label": "Brazil",
+          "country_iso": "BR"
+        },
+        {
+          "name": "Seoul Life Sciences & BioTech",
+          "country_label": "South Korea",
+          "country_iso": "KR"
+        },
+        {
+          "name": "Taipei Semiconductor & Hardware",
+          "country_label": "Taiwan",
+          "country_iso": "TW"
+        },
+        {
+          "name": "Toronto AI & Deep Tech",
+          "country_label": "Canada",
+          "country_iso": "CA"
+        },
+        {
+          "name": "Vancouver AI & Deep Tech",
+          "country_label": "Canada",
+          "country_iso": "CA"
+        },
+        {
+          "name": "Wichita Regional Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": null
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 1,
+      "countries": [
+        "US"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Atlanta Life Sciences & MedTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Colorado Springs Space Technology",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Philadelphia Life Sciences & BioTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "NG",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Africa",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Austin AI & Deep Tech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Lagos Digital & Creative Tech",
+          "country_label": "Nigeria",
+          "country_iso": "NG"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 4,
+      "countries": [
+        "AE",
+        "CA",
+        "MX",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Austin CleanTech & Energy",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Chicago Advanced Manufacturing",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Denver & Boulder AI & Deep Tech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Dubai Logistics Tech",
+          "country_label": "UAE",
+          "country_iso": "AE"
+        },
+        {
+          "name": "Monterrey Advanced Manufacturing",
+          "country_label": "Mexico",
+          "country_iso": "MX"
+        },
+        {
+          "name": "Quebec City Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "CA"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "US",
+        "VN"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Austin FinTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Hanoi Manufacturing Tech",
+          "country_label": "Vietnam",
+          "country_iso": "VN"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "GB",
+        "IN",
+        "MX",
+        "PE"
+      ],
+      "n_continents": 4,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Bangalore FinTech",
+          "country_label": "India",
+          "country_iso": "IN"
+        },
+        {
+          "name": "Lima FinTech",
+          "country_label": "Peru",
+          "country_iso": "PE"
+        },
+        {
+          "name": "Liverpool",
+          "country_label": "",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Mexico City FinTech",
+          "country_label": "Mexico",
+          "country_iso": "MX"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "BE",
+        "IN"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Bangalore Quantum & Deep Science",
+          "country_label": "India",
+          "country_iso": "IN"
+        },
+        {
+          "name": "Leuven Nanoelectronics & AI Hardware",
+          "country_label": "Belgium",
+          "country_iso": "BE"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 6,
+      "countries": [
+        "AU",
+        "CZ",
+        "LK",
+        "TH",
+        "US",
+        "ZA"
+      ],
+      "n_continents": 5,
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America",
+        "Oceania"
+      ],
+      "members": [
+        {
+          "name": "Bangkok Digital & E-commerce",
+          "country_label": "Thailand",
+          "country_iso": "TH"
+        },
+        {
+          "name": "Buffalo Niagara Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Colombo IT Services & Digital",
+          "country_label": "Sri Lanka",
+          "country_iso": "LK"
+        },
+        {
+          "name": "Johannesburg FinTech",
+          "country_label": "South Africa",
+          "country_iso": "ZA"
+        },
+        {
+          "name": "Prague Enterprise Tech & Mobility",
+          "country_label": "Czech Republic",
+          "country_iso": "CZ"
+        },
+        {
+          "name": "Sydney AI & Deep Tech",
+          "country_label": "Australia",
+          "country_iso": "AU"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 1,
+      "countries": [
+        "TH"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Asia"
+      ],
+      "members": [
+        {
+          "name": "Bangkok FinTech",
+          "country_label": "Thailand",
+          "country_iso": "TH"
+        },
+        {
+          "name": "Toulouse Space Technology",
+          "country_label": "",
+          "country_iso": null
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 2,
+      "countries": [
+        "ES",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Barcelona BioMed & Digital Health",
+          "country_label": "Spain",
+          "country_iso": "ES"
+        },
+        {
+          "name": "Los Angeles Space Technology",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Orlando Aviation & Aerospace",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "AU",
+        "DE",
+        "NL",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "Oceania"
+      ],
+      "members": [
+        {
+          "name": "Berlin AI & Deep Tech",
+          "country_label": "Germany",
+          "country_iso": "DE"
+        },
+        {
+          "name": "Eindhoven Brainport Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "NL"
+        },
+        {
+          "name": "Orlando Cybersecurity",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Sydney FinTech",
+          "country_label": "Australia",
+          "country_iso": "AU"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 3,
+      "countries": [
+        "ES",
+        "PT",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Basque Country Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "ES"
+        },
+        {
+          "name": "Orlando AgTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Porto Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "PT"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "CO",
+        "JP"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Bogot\u00e1 Creative Tech",
+          "country_label": "Colombia",
+          "country_iso": "CO"
+        },
+        {
+          "name": "Tokyo Life Sciences & BioTech",
+          "country_label": "Japan",
+          "country_iso": "JP"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 2,
+      "countries": [
+        "IN",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Bordeaux Metropolitan Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": null
+        },
+        {
+          "name": "Boston FinTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Mumbai FinTech",
+          "country_label": "India",
+          "country_iso": "IN"
+        },
+        {
+          "name": "Salt Lake City Life Sciences",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 1,
+      "countries": [
+        "US"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Boston-Cambridge Life Sciences",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Cambridge UK Life Sciences",
+          "country_label": "",
+          "country_iso": null
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 4,
+      "countries": [
+        "NO",
+        "SE",
+        "US",
+        "UY"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Boston Robotics & AI",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Cape Canaveral Space Coast",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Gothenburg Automotive & Sustainability Tech",
+          "country_label": "Sweden",
+          "country_iso": "SE"
+        },
+        {
+          "name": "Montevideo Tech & Innovation Ecosystem",
+          "country_label": "Uruguay",
+          "country_iso": "UY"
+        },
+        {
+          "name": "Oslo CleanTech & Maritime Innovation",
+          "country_label": "Norway",
+          "country_iso": "NO"
+        },
+        {
+          "name": "San Francisco Bay Area Life Sciences",
+          "country_label": "",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "BR",
+        "GB",
+        "PA",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Brasilia GovTech & Digital Infrastructure",
+          "country_label": "Brazil",
+          "country_iso": "BR"
+        },
+        {
+          "name": "Scotland Life Sciences",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Panama City FinTech & Logistics Tech",
+          "country_label": "Panama",
+          "country_iso": "PA"
+        },
+        {
+          "name": "Philadelphia MedTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 0,
+      "countries": [],
+      "n_continents": 0,
+      "continents": [],
+      "members": [
+        {
+          "name": "Australia Canberra Cyber Security",
+          "country_label": "",
+          "country_iso": null
+        },
+        {
+          "name": "Melbourne Life Sciences",
+          "country_label": "",
+          "country_iso": null
+        }
+      ]
+    },
+    {
+      "size": 8,
+      "n_countries": 8,
+      "countries": [
+        "GB",
+        "IN",
+        "JP",
+        "KE",
+        "KR",
+        "PH",
+        "US",
+        "ZA"
+      ],
+      "n_continents": 4,
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Cape Town CleanTech",
+          "country_label": "South Africa",
+          "country_iso": "ZA"
+        },
+        {
+          "name": "Hyderabad Genome Valley Life Sciences",
+          "country_label": "",
+          "country_iso": "IN"
+        },
+        {
+          "name": "Madison Regional Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Manila BPO & IT Services",
+          "country_label": "Philippines",
+          "country_iso": "PH"
+        },
+        {
+          "name": "Nairobi FinTech",
+          "country_label": "Kenya",
+          "country_iso": "KE"
+        },
+        {
+          "name": "Scotland Food and Drink",
+          "country_label": "UK",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Seoul Semiconductor & Display Tech",
+          "country_label": "South Korea",
+          "country_iso": "KR"
+        },
+        {
+          "name": "Tokyo AI & Robotics",
+          "country_label": "Japan",
+          "country_iso": "JP"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 1,
+      "countries": [
+        "KH"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Asia"
+      ],
+      "members": [
+        {
+          "name": "Chattanooga Regional Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": null
+        },
+        {
+          "name": "Phnom Penh FinTech",
+          "country_label": "Cambodia",
+          "country_iso": "KH"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 3,
+      "countries": [
+        "GB",
+        "NL",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Chicago AgTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Scotland Data and AI",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "The Hague Cyber Security",
+          "country_label": "",
+          "country_iso": "NL"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 3,
+      "countries": [
+        "BR",
+        "ES",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Chicago FinTech & Payments",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Madrid FinTech & Mobility",
+          "country_label": "Spain",
+          "country_iso": "ES"
+        },
+        {
+          "name": "S\u00e3o Paulo FinTech",
+          "country_label": "Brazil",
+          "country_iso": "BR"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 1,
+      "countries": [
+        "US"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Detroit & Michigan Advanced Manufacturing",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Tsukuba Space Technology",
+          "country_label": "",
+          "country_iso": null
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "AE",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Dubai AI & Smart City",
+          "country_label": "UAE",
+          "country_iso": "AE"
+        },
+        {
+          "name": "Research Triangle Life Sciences",
+          "country_label": "",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 3,
+      "countries": [
+        "CO",
+        "GB",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Europe",
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Scotland FinTech",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Medellin Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "CO"
+        },
+        {
+          "name": "Pittsburgh Regional Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        },
+        {
+          "name": "Research Triangle Innovation Ecosystem",
+          "country_label": "",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Edinburgh and South East Scotland Innovation Ecosystem",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West of England Innovation Ecosystem",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Greater Glasgow Net Zero",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Digital",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "WMCA BPFS",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "London Transport Logistics Mobility",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Creative",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 5,
+      "n_countries": 5,
+      "countries": [
+        "CA",
+        "KE",
+        "MN",
+        "PL",
+        "VN"
+      ],
+      "n_continents": 4,
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Ho Chi Minh City Manufacturing Tech",
+          "country_label": "Vietnam",
+          "country_iso": "VN"
+        },
+        {
+          "name": "Krakow Cyber Security & IT Services",
+          "country_label": "Poland",
+          "country_iso": "PL"
+        },
+        {
+          "name": "Nairobi AgTech",
+          "country_label": "",
+          "country_iso": "KE"
+        },
+        {
+          "name": "Toronto FinTech",
+          "country_label": "Canada",
+          "country_iso": "CA"
+        },
+        {
+          "name": "Ulaanbaatar Mining Tech",
+          "country_label": "Mongolia",
+          "country_iso": "MN"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "n_countries": 1,
+      "countries": [
+        "GB"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Highlands and Islands FoodDrink",
+          "country_label": "Scotland",
+          "country_iso": "GB"
+        },
+        {
+          "name": "North East Creative",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "South Yorkshire Healthtech",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Tees Valley Logistics",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "Thames Valley Space",
+          "country_label": "England",
+          "country_iso": "GB"
+        },
+        {
+          "name": "West Yorkshire Green Economy",
+          "country_label": "England",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "BR",
+        "RW"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Africa",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "Kigali Tech & Innovation Ecosystem",
+          "country_label": "Rwanda",
+          "country_iso": "RW"
+        },
+        {
+          "name": "S\u00e3o Paulo AI & Deep Tech",
+          "country_label": "Brazil",
+          "country_iso": "BR"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "n_countries": 4,
+      "countries": [
+        "CH",
+        "MX",
+        "MY",
+        "US"
+      ],
+      "n_continents": 3,
+      "continents": [
+        "Asia",
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Kuala Lumpur AI & Digital Tech",
+          "country_label": "Malaysia",
+          "country_iso": "MY"
+        },
+        {
+          "name": "Mexico City AI & Digital Tech",
+          "country_label": "Mexico",
+          "country_iso": "MX"
+        },
+        {
+          "name": "Orlando MedTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Zurich-Zug MedTech",
+          "country_label": "",
+          "country_iso": "CH"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "IT",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Milan FinTech & Design Tech",
+          "country_label": "Italy",
+          "country_iso": "IT"
+        },
+        {
+          "name": "San Diego Defense Tech",
+          "country_label": "USA",
+          "country_iso": "US"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "SE",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Europe",
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "New York City FinTech",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Stockholm FinTech & Payments",
+          "country_label": "Sweden",
+          "country_iso": "SE"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "GB",
+        "SA"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "Asia",
+        "Europe"
+      ],
+      "members": [
+        {
+          "name": "Riyadh Energy Transition Tech",
+          "country_label": "Saudi Arabia",
+          "country_iso": "SA"
+        },
+        {
+          "name": "Scotland Tourism and Hospitality Tech",
+          "country_label": "UK",
+          "country_iso": "GB"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 2,
+      "countries": [
+        "BR",
+        "US"
+      ],
+      "n_continents": 2,
+      "continents": [
+        "North America",
+        "South America"
+      ],
+      "members": [
+        {
+          "name": "San Diego Cyber Security",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "S\u00e3o Paulo Life Sciences & BioTech",
+          "country_label": "Brazil",
+          "country_iso": "BR"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "n_countries": 1,
+      "countries": [
+        "US"
+      ],
+      "n_continents": 1,
+      "continents": [
+        "North America"
+      ],
+      "members": [
+        {
+          "name": "Seattle AI & Cloud",
+          "country_label": "USA",
+          "country_iso": "US"
+        },
+        {
+          "name": "Estonia Cyber Security",
+          "country_label": "",
+          "country_iso": null
+        }
+      ]
+    }
+  ],
+  "named_pair_check": [
+    {
+      "a": "Greater Glasgow Life Sciences",
+      "b": "Philadelphia Life Sciences & BioTech",
+      "a_resolved": "Greater Glasgow Life Sciences",
+      "b_resolved": "Philadelphia Life Sciences & BioTech",
+      "similarity": 0.582,
+      "shared_confident_stacks": []
+    },
+    {
+      "a": "Orlando Tourism Technology",
+      "b": "Bordeaux Metropolitan Innovation Ecosystem",
+      "a_resolved": "Orlando Tourism Technology",
+      "b_resolved": "Bordeaux Metropolitan Innovation Ecosystem",
+      "similarity": 0.531,
+      "shared_confident_stacks": []
+    },
+    {
+      "a": "Belfast Cyber",
+      "b": "Singapore Cyber Security",
+      "a_resolved": "Belfast Cyber",
+      "b_resolved": "Singapore Cyber Security",
+      "similarity": 0.411,
+      "shared_confident_stacks": []
+    },
+    {
+      "a": "Orlando SpaceTech",
+      "b": "Adelaide Space Technology",
+      "a_resolved": "Orlando SpaceTech",
+      "b_resolved": "Adelaide Space Technology",
+      "similarity": 0.705,
+      "shared_confident_stacks": []
+    },
+    {
+      "a": "Singapore FinTech & Digital Assets",
+      "b": "Greater Glasgow Fintech",
+      "a_resolved": "Singapore FinTech & Digital Assets",
+      "b_resolved": "Greater Glasgow Fintech",
+      "similarity": 0.517,
+      "shared_confident_stacks": []
+    }
+  ]
+}

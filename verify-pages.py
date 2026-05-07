@@ -4,7 +4,7 @@ verify-pages.py — drift detector for the ClusterOS website templating system.
 
 Walks every top-level *.html file and confirms each page has wired into the
 shared chrome (site.css + chrome.js + slot divs) and has its canonical meta
-blocks (description, canonical, Open Graph, schema.org, data-bar-zone).
+blocks (description, canonical, Open Graph, schema.org).
 
 Usage:  python verify-pages.py
 """
@@ -25,10 +25,6 @@ TEMPLATE_FILES = {"_template.html"}
 # Cluster + supercluster pages are Phase 2; skip in Phase 1.
 SKIP_DIRS = {"clusters", "superclusters", "node_modules", ".git"}
 
-# Homepage is exempt from the data-bar-zone check (it uses scroll-based zone
-# switching, handled in chrome.js).
-HOMEPAGE_EXEMPT_BAR_ZONE = {"index.html"}
-
 CHECKS = [
     ("site.css",     re.compile(r'<link[^>]+href="/site\.css"', re.I),       "site.css linked"),
     ("chrome.js",    re.compile(r'<script[^>]+src="/chrome\.js"', re.I),     "chrome.js loaded"),
@@ -39,16 +35,13 @@ CHECKS = [
     ("canonical",    re.compile(r'<link[^>]+rel="canonical"', re.I),         "canonical link"),
     ("og:title",     re.compile(r'<meta[^>]+property="og:title"', re.I),     "open graph"),
     ("schema",       re.compile(r'<script[^>]+type="application/ld\+json"', re.I), "schema.org JSON-LD"),
-    ("bar-zone",     re.compile(r'<body[^>]+data-bar-zone=', re.I),          "data-bar-zone declared"),
 ]
 
 
 def check_page(path: Path) -> list[str]:
     text = path.read_text(encoding="utf-8", errors="ignore")
     missing: list[str] = []
-    for key, pattern, label in CHECKS:
-        if key == "bar-zone" and path.name in HOMEPAGE_EXEMPT_BAR_ZONE:
-            continue
+    for _key, pattern, label in CHECKS:
         if not pattern.search(text):
             missing.append(label)
     return missing

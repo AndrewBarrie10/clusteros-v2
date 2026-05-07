@@ -5,10 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>National Behavioural Diagnostic — ClusterOS</title>
 <meta name="description" content="A behavioural reading of UK regional innovation ecosystems across 169 sub-clusters in 25 regions, drawn from 16,000+ structured evidence items.">
+<link rel="canonical" href="https://www.clusteros.io/national-diagnostic.html">
+
+<!-- Open Graph / social preview -->
 <meta property="og:title" content="National Behavioural Diagnostic — ClusterOS">
 <meta property="og:description" content="A behavioural reading of UK regional innovation ecosystems across 169 sub-clusters in 25 regions, drawn from 16,000+ structured evidence items.">
+<meta property="og:url" content="https://www.clusteros.io/national-diagnostic.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.clusteros.io/og-default.png">
+
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "Report", "name": "UK National Behavioural Diagnostic", "url": "https://www.clusteros.io/national-diagnostic.html", "description": "A behavioural reading of UK regional innovation ecosystems across 169 sub-clusters in 25 regions, drawn from 16,000+ structured evidence items.", "creator": { "@type": "Organization", "name": "ClusterOS", "url": "https://www.clusteros.io" } }
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;600;700&display=swap');
 
 :root {
   --ink:#1a1a1a; --ink-dim:#4a4540; --ink-muted:#8c8780;
@@ -37,13 +51,15 @@ a:hover { color:var(--green-dim); }
 
 /* ── Side nav ─────────────────────────────────────────────────────────── */
 
+/* offset by 56px to clear the site-nav injected by chrome.js */
 .side-nav {
-  position:fixed; top:0; left:0; bottom:0; width:var(--nav-w);
+  position:fixed; top:56px; left:0; bottom:0; width:var(--nav-w);
   background:var(--page); border-right:1px solid var(--border);
   padding:32px 24px; overflow-y:auto;
   display:flex; flex-direction:column; gap:24px;
   z-index:50;
 }
+body { padding-top:56px; }
 .nav-brand { display:flex; flex-direction:column; gap:8px; padding-bottom:20px; border-bottom:1px solid var(--border); }
 .logo { font-family:var(--serif); font-size:18px; color:var(--ink); }
 .logo span { font-family:var(--mono); font-size:13px; color:var(--green); font-weight:700; }
@@ -345,7 +361,9 @@ i.seg-ind    { background:var(--border-2); }
 }
 </style>
 </head>
-<body>
+<body data-bar-zone="platform">
+
+<div id="site-nav"></div>
 
 <nav class="side-nav" aria-label="Document sections">
   <div class="nav-brand">
@@ -1352,6 +1370,11 @@ i.seg-ind    { background:var(--border-2); }
 
 <footer class="doc-footer mono">  <span>ClusterOS &middot; May 2026 &middot; Generated from   cross_region_appraisal.json + ecosystem_synthesis/*.json</span></footer>
 </main>
+
+<div id="site-intel-bar"></div>
+<div id="site-footer"></div>
+
+<script src="/chrome.js"></script>
 <script>
 // Section-view tracking via IntersectionObserver (Mixpanel hook).
 // Highlights nav link of currently-visible section.

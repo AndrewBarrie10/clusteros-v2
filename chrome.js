@@ -102,7 +102,9 @@
     +   '</div>'
     + '</footer>';
 
-  // ── Canonical intel-bar (lifted from index.html) ───────────────────
+  // ── Canonical intel-bar ────────────────────────────────────────────
+  // One CTA pair, identical on every non-excluded page. Default ↔ journey
+  // state is still controlled by localStorage.clusteros_journey_active.
   var BAR_HTML = ''
     + '<div id="intel-bar">'
     +   '<div id="bar-default-state">'
@@ -120,15 +122,9 @@
     +     '<div class="bar-journey-steps" id="bar-journey-steps"></div>'
     +     '<button id="briefing-btn" onclick="window.briefing && window.briefing.generate()">↓ Briefing</button>'
     +   '</div>'
-    +   '<div class="bar-actions" id="bar-actions-diagnostic">'
+    +   '<div class="bar-actions">'
     +     '<a class="bar-action bar-action-amber" href="/diagnostic-journey.html">Diagnose your ecosystem →</a>'
-    +     '<a class="bar-action bar-action-case bar-case-hide" href="/clusters/glasgow-fintech.html">See a diagnostic →</a>'
-    +     '<a class="bar-action bar-action-primary" href="/request.html">Request a Diagnostic →</a>'
-    +   '</div>'
-    +   '<div class="bar-actions" id="bar-actions-platform" style="display:none">'
-    +     '<a class="bar-action bar-action-amber" href="/diagnostic-journey.html">Diagnose your ecosystem →</a>'
-    +     '<a class="bar-action bar-action-case bar-case-hide" href="/signals-systems.html">See how it works →</a>'
-    +     '<a class="bar-action bar-action-primary bar-action-platform" href="/request.html?subject=Platform+conversation">Map your OS →</a>'
+    +     '<a class="bar-action bar-action-primary" href="/request">Talk to us →</a>'
     +   '</div>'
     + '</div>';
 
@@ -212,39 +208,6 @@
     }).join('<span style="color:var(--border-2);margin:0 2px">›</span>');
   };
 
-  // ── Intel-bar zone (diagnostic ↔ platform CTAs) ────────────────────
-  function isHomepage() {
-    return path === '/' || path === '/index.html' || path.endsWith('/index.html');
-  }
-
-  function applyZone(zone) {
-    var diag = document.getElementById('bar-actions-diagnostic');
-    var plat = document.getElementById('bar-actions-platform');
-    if (!diag || !plat) return;
-    var platformOn = zone === 'platform';
-    diag.style.display = platformOn ? 'none' : 'flex';
-    plat.style.display = platformOn ? 'flex' : 'none';
-  }
-
-  function wireHomepageZoneScroll() {
-    var bridge = document.getElementById('platform-bridge');
-    var diag = document.getElementById('bar-actions-diagnostic');
-    var plat = document.getElementById('bar-actions-platform');
-    if (!bridge || !diag || !plat) return;
-    var inPlatformZone = false;
-    function checkZone() {
-      var rect = bridge.getBoundingClientRect();
-      var nowPlatform = rect.top <= window.innerHeight * 0.6;
-      if (nowPlatform !== inPlatformZone) {
-        inPlatformZone = nowPlatform;
-        diag.style.display = nowPlatform ? 'none' : 'flex';
-        plat.style.display = nowPlatform ? 'flex' : 'none';
-      }
-    }
-    window.addEventListener('scroll', checkZone, { passive: true });
-    checkZone();
-  }
-
   // ── Boot ───────────────────────────────────────────────────────────
   function inject(id, html) {
     var slot = document.getElementById(id);
@@ -261,13 +224,6 @@
     var journeyActive = false;
     try { journeyActive = localStorage.getItem('clusteros_journey_active') === 'true'; } catch (e) {}
     applyBarMode(journeyActive ? 'journey' : 'default');
-
-    if (isHomepage()) {
-      wireHomepageZoneScroll();
-    } else {
-      var zone = document.body.getAttribute('data-bar-zone') || 'diagnostic';
-      applyZone(zone);
-    }
 
     initMixpanel();
   }

@@ -27,35 +27,31 @@ it's easier to override a shared style than to deduplicate later.
    - Open Graph: title, description, url, type, image
    - schema.org JSON-LD (`@type` per page — `WebPage`, `Article`, `AboutPage`,
      `ContactPage`, `Dataset`, `Report`, etc.)
-3. Set `<body data-bar-zone="diagnostic">` or `<body data-bar-zone="platform">`
-   — see the rule below.
-4. Write your content inside `<main>`.
-5. Add page-specific styles inside the per-page `<style>` block. Add
+3. Write your content inside `<main>`.
+4. Add page-specific styles inside the per-page `<style>` block. Add
    page-specific JS as a `<script>` block before `</body>`, AFTER `chrome.js`.
-6. Run `python verify-pages.py` and confirm it shows your page as PASS.
+5. Run `python verify-pages.py` and confirm it shows your page as PASS.
 
 Do not re-inline the nav, footer, intel-bar, or Mixpanel snippet. The slot
 divs (`#site-nav`, `#site-intel-bar`, `#site-footer`) are filled by
 `chrome.js`.
 
-## `data-bar-zone` — diagnostic vs platform
+## Intel-bar behaviour
 
-The intel-bar swaps its right-hand CTAs based on which conversion we're
-nudging towards.
+The intel-bar shows the same two CTAs on every non-excluded page in default
+mode:
 
-- `diagnostic` — entry-level conversion ask: "Diagnose / See a diagnostic /
-  Request a Diagnostic." Use on entry pages, lab notes, findings, contact —
-  anywhere a visitor is being introduced to ClusterOS.
-- `platform` — operator-level ask: "Diagnose / See how it works / Map your
-  OS." Use on platform-product pages — Digital Infrastructure, Signals &
-  Systems, Cluster Data, Leverage.
+- "Diagnose your ecosystem →" (amber, links to `/diagnostic-journey.html`)
+- "Talk to us →" (green, links to `/request`)
 
-The homepage is special-cased: no `data-bar-zone` attribute, because
-`chrome.js` swaps the bar's CTAs based on scroll position past
-`#platform-bridge`.
+There is no zone switching. The previous diagnostic ↔ platform CTA swap and
+the homepage scroll-based bar zone have both been retired. Pages no longer
+need a `data-bar-zone` attribute on `<body>`.
 
-When the attribute is missing on a non-homepage page, `chrome.js` defaults to
-`diagnostic` — that's the safer fallback.
+The bar still has a journey state, controlled by
+`localStorage['clusteros_journey_active']`. When that key is `'true'`, the
+default CTAs are hidden and the bar shows the pathway indicator + Briefing
+button instead. See "Journey state on the intel-bar" below.
 
 ## Excluded pages
 
@@ -98,7 +94,6 @@ Checks every top-level `*.html` (except excluded and the template) for:
 - `<div id="site-nav">`, `<div id="site-intel-bar">`, `<div id="site-footer">`
 - `<meta name="description">`, `<link rel="canonical">`,
   `<meta property="og:title">`, `<script type="application/ld+json">`
-- `<body data-bar-zone="…">` (homepage exempt)
 
 Prints per-page pass/fail. Cluster and supercluster pages under `clusters/`
 and `superclusters/` are not checked here — they're Phase 2 (their generator

@@ -36,6 +36,43 @@ Do not re-inline the nav, footer, intel-bar, or Mixpanel snippet. The slot
 divs (`#site-nav`, `#site-intel-bar`, `#site-footer`) are filled by
 `chrome.js`.
 
+## Container widths
+
+Two canonical container classes in `site.css`. Use them to wrap top-level
+page sections; they handle horizontal centering and the standard 24px gutter.
+
+- `.container-prose` — max-width 720px. Use for prose-tier content: article
+  copy, hero text, single-column callouts, narrow form layouts.
+- `.container-content` — max-width 1200px. Use for layout-tier content:
+  multi-column grids, dashboard rows, table-style listings.
+
+Don't introduce new max-width values at these tiers in inline styles. If a
+page genuinely needs a deliberately tighter width (e.g. a 480px narrow
+callout, or a 900px form-friendly tier between the two), keep that inline
+and explain why with a comment.
+
+## Pill vocabulary
+
+`.pill` is the canonical low-saturation, mono-uppercase chip used for
+metadata tags and category labels — NOT for section eyebrows. Section
+eyebrows ("STAGE 3 · STALL DETECTION") stay as plain mono-uppercase
+labels; pills are for inline categorical metadata ("Free", "10–15 minutes",
+"Hosted report", region/sector tags on a card).
+
+Variants:
+
+- `.pill` — base (cream background, neutral border, ink-dim text).
+- `.pill--green` — for status / success / "go" indicators.
+- `.pill--amber` — for callouts / warnings.
+- `.pill--ink` — for high-contrast on muted backgrounds.
+
+Use the base style by default. Reach for a colour variant only when the
+pill is carrying semantic colour. Most pills should be `.pill` alone.
+
+The legacy `.sa-badge` class on `get-started.html` is the same idea but
+visually slightly different (square corners, 9px / 700-weight). It stays
+in place; new pills use `.pill`. Phase 2.x can unify if desired.
+
 ## Intel-bar behaviour
 
 The intel-bar shows the same two CTAs on every non-excluded page in default

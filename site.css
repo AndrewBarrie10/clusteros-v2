@@ -76,6 +76,44 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
   /* ── RESET ───────────────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth;  overflow-x: hidden; }
+
+  /* ── canonical container widths ─────────────────────── */
+  .container-prose   { width: 100%; max-width: 720px;  margin: 0 auto; padding: 0 24px; }
+  .container-content { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── canonical pill (low-saturation, mono-uppercase) ── */
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .pill--green { color: var(--green); border-color: rgba(42,122,79,0.25); background: rgba(42,122,79,0.06); }
+  .pill--amber { color: var(--amber, #d97706); border-color: rgba(217,119,6,0.25); background: rgba(217,119,6,0.06); }
+  .pill--ink   { color: var(--ink);   background: var(--page); }
+
+  /* ── text-CTA (demoted button, underlined-arrow) ────── */
+  .text-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+  }
+  .text-cta:hover { color: var(--green-dim); }
   body {
     font-family: var(--font-sans);
     background: var(--page);

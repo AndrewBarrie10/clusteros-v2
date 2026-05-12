@@ -21,6 +21,76 @@ const clusters = JSON.parse(fs.readFileSync('./clusters.json', 'utf8'));
 const outDir = path.join(__dirname, 'superclusters');
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
 
+const diagnosticsRegistryPath = path.join(__dirname, 'diagnostics.json');
+const diagnostics = fs.existsSync(diagnosticsRegistryPath)
+  ? JSON.parse(fs.readFileSync(diagnosticsRegistryPath, 'utf8'))
+  : { clusters: {}, superclusters: {}, cta: null, source_line: '' };
+
+function loadHeadlines(headlinesPath) {
+  if (!headlinesPath) return null;
+  const rel = headlinesPath.replace(/^\//, '');
+  const abs = path.join(__dirname, rel);
+  if (!fs.existsSync(abs)) return null;
+  try { return JSON.parse(fs.readFileSync(abs, 'utf8')); }
+  catch (e) { return null; }
+}
+
+const DIAGNOSTIC_COMPOSITE_CSS = `
+.diagnostic-composite{margin:2.5rem 0 3rem;position:relative;left:50%;transform:translateX(-50%);width:min(1000px,calc(100vw - 32px));}
+.diagnostic-headlines{list-style:none;padding:0;margin:0 0 1.5rem;font-family:var(--font-mono);font-size:13.5px;line-height:1.6;color:var(--ink);}
+.diagnostic-headlines li{padding:4px 0;}
+.diagnostic-headlines b{font-weight:600;color:var(--ink);}
+.diagnostic-figure{margin:0;text-align:center;}
+.diagnostic-image{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-caption{font-family:var(--font-serif);font-size:19px;font-style:normal;color:var(--ink);line-height:1.4;margin:1.25rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;transition:border-bottom-color 0.15s;}
+.diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+@media(max-width:640px){
+  .diagnostic-composite{margin:1.75rem 0 2rem;width:calc(100vw - 32px);}
+  .diagnostic-headlines{font-size:13px;text-align:left;}
+  .diagnostic-caption{font-size:17px;text-align:left;margin-top:1rem;}
+  .diagnostic-cta,.diagnostic-source{text-align:left;}
+}`;
+
+function hasDiagnosticEntry(slug, kind) {
+  const bucket = kind === 'supercluster' ? diagnostics.superclusters : diagnostics.clusters;
+  return !!(bucket && bucket[slug]);
+}
+
+function diagnosticStyles(slug, kind) {
+  return hasDiagnosticEntry(slug, kind) ? `\n<style>${DIAGNOSTIC_COMPOSITE_CSS}</style>` : '';
+}
+
+function renderDiagnosticComposite(slug, kind) {
+  const bucket = kind === 'supercluster' ? diagnostics.superclusters : diagnostics.clusters;
+  const entry = bucket && bucket[slug];
+  if (!entry) return '';
+  const headlines = loadHeadlines(entry.headlines);
+  const bullets = (headlines && headlines.bullets) || [];
+  const bulletsHtml = bullets.map(b => `      <li>${b.html}</li>`).join('\n');
+  const cta = diagnostics.cta || { framing: '', link_text: '', link_href: '#' };
+  const source = diagnostics.source_line || '';
+  return `
+  <section class="diagnostic-composite">
+    <ul class="diagnostic-headlines">
+${bulletsHtml}
+    </ul>
+    <figure class="diagnostic-figure">
+      <img src="${entry.image}" alt="${entry.alt || ''}" class="diagnostic-image" loading="lazy" />
+      <figcaption class="diagnostic-caption">${entry.caption || ''}</figcaption>
+    </figure>
+    <div class="diagnostic-cta">
+      <p class="diagnostic-cta-framing">${cta.framing}</p>
+      <p class="diagnostic-cta-link"><a href="${cta.link_href}">${cta.link_text}</a></p>
+    </div>
+    <p class="diagnostic-source">${source}</p>
+  </section>`;
+}
+
 const COUNTRIES = {
   AE:'UAE', AU:'Australia', CA:'Canada', CH:'Switzerland', DE:'Germany',
   ES:'Spain', FR:'France', GB:'United Kingdom', IE:'Ireland', IL:'Israel',
@@ -361,7 +431,7 @@ footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 
 footer a{color:var(--ink-muted);text-decoration:none;}
 footer a:hover{color:var(--green);}
 @media(max-width:680px){.stats-row{grid-template-columns:1fr 1fr;}.stat-cell:last-child{border-top:1px solid var(--border);grid-column:span 2;}.agg-row{grid-template-columns:28px 1fr 50px;}.agg-count{display:none;}}
-</style>
+</style>${diagnosticStyles(sc.id, 'supercluster')}
 </head>
 <body>
 <nav>
@@ -381,7 +451,7 @@ footer a:hover{color:var(--green);}
     <span class="meta-tag">Supercluster</span>
     <span class="meta-tag">${children.length} cluster${children.length === 1 ? '' : 's'}</span>
   </div>
-  <p class="sc-summary">${sc.summary || ''}</p>
+  <p class="sc-summary">${sc.summary || ''}</p>${renderDiagnosticComposite(sc.id, 'supercluster')}
   <div class="stats-row">
     <div class="stat-cell">
       <div class="stat-num">${children.length}</div>

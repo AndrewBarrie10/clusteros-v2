@@ -77,6 +77,26 @@ footer a{color:var(--ink-muted);text-decoration:none;}
 footer a:hover{color:var(--green);}
 @media(max-width:680px){.stats-row{grid-template-columns:1fr 1fr;}.stat-cell:last-child{border-top:1px solid var(--border);grid-column:span 2;}.agg-row{grid-template-columns:28px 1fr 50px;}.agg-count{display:none;}}
 </style>
+<style>
+.diagnostic-composite{margin:2.5rem 0 3rem;position:relative;left:50%;transform:translateX(-50%);width:min(1000px,calc(100vw - 32px));}
+.diagnostic-headlines{list-style:none;padding:0;margin:0 0 1.5rem;font-family:var(--font-mono);font-size:13.5px;line-height:1.6;color:var(--ink);}
+.diagnostic-headlines li{padding:4px 0;}
+.diagnostic-headlines b{font-weight:600;color:var(--ink);}
+.diagnostic-figure{margin:0;text-align:center;}
+.diagnostic-image{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-caption{font-family:var(--font-serif);font-size:19px;font-style:normal;color:var(--ink);line-height:1.4;margin:1.25rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;transition:border-bottom-color 0.15s;}
+.diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+@media(max-width:640px){
+  .diagnostic-composite{margin:1.75rem 0 2rem;width:calc(100vw - 32px);}
+  .diagnostic-headlines{font-size:13px;text-align:left;}
+  .diagnostic-caption{font-size:17px;text-align:left;margin-top:1rem;}
+  .diagnostic-cta,.diagnostic-source{text-align:left;}
+}</style>
 </head>
 <body>
 <nav>
@@ -97,6 +117,23 @@ footer a:hover{color:var(--green);}
     <span class="meta-tag">8 clusters</span>
   </div>
   <p class="sc-summary">8 clusters diagnosed across Greater Glasgow, drawing on 978 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.</p>
+  <section class="diagnostic-composite">
+    <ul class="diagnostic-headlines">
+      <li><b>£4.56bn</b> UKRI lead-led across <b>5,718</b> grants spanning <b>6</b> active clusters</li>
+      <li>Largest cluster: <b>Greater Glasgow Digital Creative</b> at <b>24%</b> of regional £ (<b>£1.12bn</b>)</li>
+      <li>Region-wide lead: <b>UNIVERSITY OF GLASGOW</b> — <b>£1.36bn</b> across all clusters (<b>30%</b> of regional £)</li>
+      <li><b>55</b> Companies House-traced spin-outs region-wide → <b>£83m</b> UKRI per spin-out</li>
+    </ul>
+    <figure class="diagnostic-figure">
+      <img src="/diagnostics/glasgow-supercluster-diagnostic.png" alt="Diagnostic flow for the Greater Glasgow innovation ecosystem: UKRI funders, anchor institutions, six clusters, and outcome distribution." class="diagnostic-image" loading="lazy" />
+      <figcaption class="diagnostic-caption">Two anchor universities — Glasgow and Strathclyde — six interlocking research clusters, and a dense Clyde-corridor network of NHS hospitals, innovation centres and advanced supply-chain firms together account for £4.56bn of UKRI funding across 5,718 grants.</figcaption>
+    </figure>
+    <div class="diagnostic-cta">
+      <p class="diagnostic-cta-framing">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
+      <p class="diagnostic-cta-link"><a href="https://www.clusteros.io/request">Request access →</a></p>
+    </div>
+    <p class="diagnostic-source">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); Crunchbase (disclosed capital). Snapshot May 2026.</p>
+  </section>
   <div class="stats-row">
     <div class="stat-cell">
       <div class="stat-num">8</div>

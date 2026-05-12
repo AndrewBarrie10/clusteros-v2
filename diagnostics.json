@@ -1,0 +1,54 @@
+{
+  "clusters": {
+    "greater-glasgow-life-sciences": {
+      "image": "/diagnostics/glasgow-life-sciences-diagnostic.png",
+      "alt": "Diagnostic flow for Greater Glasgow Life Sciences: UKRI funders, anchor institutions, four subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/glasgow-life-sciences.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "greater-glasgow-space": {
+      "image": "/diagnostics/glasgow-space-diagnostic.png",
+      "alt": "Diagnostic flow for Greater Glasgow Space: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/glasgow-space.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "greater-glasgow-net-zero": {
+      "image": "/diagnostics/glasgow-net-zero-diagnostic.png",
+      "alt": "Diagnostic flow for Greater Glasgow Net Zero: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/glasgow-net-zero.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "greater-glasgow-digital-creative": {
+      "image": "/diagnostics/glasgow-digital-creative-diagnostic.png",
+      "alt": "Diagnostic flow for Greater Glasgow Digital Creative: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/glasgow-digital-creative.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "greater-glasgow-advanced-manufacturing": {
+      "image": "/diagnostics/glasgow-advanced-manufacturing-diagnostic.png",
+      "alt": "Diagnostic flow for Greater Glasgow Advanced Manufacturing: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/glasgow-advanced-manufacturing.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "greater-glasgow-fintech": {
+      "image": "/diagnostics/glasgow-fintech-diagnostic.png",
+      "alt": "Diagnostic flow for Greater Glasgow Fintech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/glasgow-fintech.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    }
+  },
+  "superclusters": {
+    "greater-glasgow": {
+      "image": "/diagnostics/glasgow-supercluster-diagnostic.png",
+      "alt": "Diagnostic flow for the Greater Glasgow innovation ecosystem: UKRI funders, anchor institutions, six clusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/glasgow-supercluster.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    }
+  },
+  "cta": {
+    "framing": "Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.",
+    "link_text": "Request access →",
+    "link_href": "[CTA HREF PLACEHOLDER]"
+  },
+  "source_line": "Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); Crunchbase (disclosed capital). Snapshot May 2026."
+}

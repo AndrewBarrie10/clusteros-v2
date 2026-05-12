@@ -35,6 +35,72 @@
       "alt": "Diagnostic flow for Greater Glasgow Fintech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-fintech.json",
       "caption": "While branded as fintech, the cluster is primarily research-led: the Universities of Glasgow (48%) and Strathclyde (36%) account for most UKRI funding, centred on data science, financial modelling, cyber security and risk analytics."
+    },
+    "west-of-england-aerospace": {
+      "image": "/diagnostics/west-of-england-aerospace-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Aerospace: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-aerospace.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "west-of-england-clean-tech": {
+      "image": "/diagnostics/west-of-england-clean-tech-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Clean Tech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-clean-tech.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "west-of-england-creative": {
+      "image": "/diagnostics/west-of-england-creative-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Creative: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-creative.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "west-of-england-digital": {
+      "image": "/diagnostics/west-of-england-digital-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Digital: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-digital.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "west-of-england-fin-tech": {
+      "image": "/diagnostics/west-of-england-fin-tech-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Fintech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-fin-tech.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "west-of-england-life-sciences": {
+      "image": "/diagnostics/west-of-england-life-sciences-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Life Sciences: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-life-sciences.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "west-of-england-space": {
+      "image": "/diagnostics/west-of-england-space-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Space: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-space.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "hull-east-yorkshire-advanced-manufacturing": {
+      "image": "/diagnostics/hull-east-yorkshire-advanced-manufacturing-diagnostic.png",
+      "alt": "Diagnostic flow for Hull & East Yorkshire Advanced Manufacturing: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-advanced-manufacturing.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "hull-east-yorkshire-clean-energy": {
+      "image": "/diagnostics/hull-east-yorkshire-clean-energy-diagnostic.png",
+      "alt": "Diagnostic flow for Hull & East Yorkshire Clean Energy: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-clean-energy.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "hull-east-yorkshire-digital": {
+      "image": "/diagnostics/hull-east-yorkshire-digital-diagnostic.png",
+      "alt": "Diagnostic flow for Hull & East Yorkshire Digital: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-digital.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "hull-east-yorkshire-health-tech": {
+      "image": "/diagnostics/hull-east-yorkshire-health-tech-diagnostic.png",
+      "alt": "Diagnostic flow for Hull & East Yorkshire Health Tech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-health-tech.json",
+      "caption": "[CAPTION PLACEHOLDER]"
     }
   },
   "superclusters": {
@@ -43,6 +109,18 @@
       "alt": "Diagnostic flow for the Greater Glasgow innovation ecosystem: UKRI funders, anchor institutions, six clusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-supercluster.json",
       "caption": "Two anchor universities — Glasgow and Strathclyde — six interlocking research clusters, and a dense Clyde-corridor network of NHS hospitals, innovation centres and advanced supply-chain firms together account for £4.56bn of UKRI funding across 5,718 grants."
+    },
+    "west-of-england": {
+      "image": "/diagnostics/west-of-england-diagnostic.png",
+      "alt": "Diagnostic flow for the West of England innovation ecosystem: UKRI funders, anchor institutions, clusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-supercluster.json",
+      "caption": "[CAPTION PLACEHOLDER]"
+    },
+    "hull-east-yorkshire": {
+      "image": "/diagnostics/hull-east-yorkshire-diagnostic.png",
+      "alt": "Diagnostic flow for the Hull & East Yorkshire innovation ecosystem: UKRI funders, anchor institutions, clusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-supercluster.json",
+      "caption": "[CAPTION PLACEHOLDER]"
     }
   },
   "cta": {

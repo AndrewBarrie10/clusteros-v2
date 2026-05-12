@@ -7,14 +7,28 @@
   "strap": "What this region's UKRI footprint actually looks like",
   "bullets": [
     {
-      "html": "<b>£2.02bn</b> UKRI lead-led across <b>2,105</b> grants spanning <b>6</b> active clusters"
+      "html": "<b>£1.98bn</b> UKRI lead-led across <b>2,046</b> grants spanning <b>4</b> active clusters"
     },
     {
-      "html": "Largest cluster: <b>HullEastYorkshire AdvancedManufacturing</b> at <b>32%</b> of regional £ (<b>£652m</b>)"
+      "html": "Largest cluster: <b>Hull and East Yorkshire Advanced Manufacturing</b> at <b>33%</b> of regional £ (<b>£652m</b>)"
     },
     {
-      "html": "Region-wide lead: <b>UNIVERSITY OF YORK</b> — <b>£912m</b> across all clusters (<b>45%</b> of regional £)"
+      "html": "Region-wide lead: <b>UNIVERSITY OF YORK</b> — <b>£884m</b> across all clusters (<b>45%</b> of regional £)"
     }
   ],
+  "metrics": {
+    "active_clusters": 4,
+    "total_gbp": 1984800856.0,
+    "total_grants": 2046,
+    "top_cluster_slug": "hull_east_yorkshire_advanced_manufacturing",
+    "top_cluster_name": "Hull and East Yorkshire Advanced Manufacturing",
+    "top_cluster_gbp": 652162808.8333334,
+    "top_cluster_share": 0.32857846008170677,
+    "lead_name": "UNIVERSITY OF YORK",
+    "lead_gbp": 884102313.0,
+    "lead_share": 0.44543628159338117,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  },
   "snapshot_date": "2026-05-12"
 }

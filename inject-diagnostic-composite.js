@@ -17,7 +17,7 @@ const path = require('path');
 const REGISTRY = JSON.parse(fs.readFileSync(path.join(__dirname, 'diagnostics.json'), 'utf8'));
 
 const DIAGNOSTIC_COMPOSITE_CSS = `
-.diagnostic-composite{margin:2.5rem 0 3rem;}
+.diagnostic-composite{margin:2.5rem 0 3rem;position:relative;left:50%;transform:translateX(-50%);width:min(1000px,calc(100vw - 32px));}
 .diagnostic-headlines{list-style:none;padding:0;margin:0 0 1.5rem;font-family:var(--font-mono);font-size:13.5px;line-height:1.6;color:var(--ink);}
 .diagnostic-headlines li{padding:4px 0;}
 .diagnostic-headlines b{font-weight:600;color:var(--ink);}
@@ -31,7 +31,7 @@ const DIAGNOSTIC_COMPOSITE_CSS = `
 .diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
 .diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
 @media(max-width:640px){
-  .diagnostic-composite{margin:1.75rem 0 2rem;}
+  .diagnostic-composite{margin:1.75rem 0 2rem;width:calc(100vw - 32px);}
   .diagnostic-headlines{font-size:13px;text-align:left;}
   .diagnostic-caption{font-size:17px;text-align:left;margin-top:1rem;}
   .diagnostic-cta,.diagnostic-source{text-align:left;}

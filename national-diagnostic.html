@@ -51,9 +51,14 @@ a:hover { color:var(--green-dim); }
 
 /* ── Side nav ─────────────────────────────────────────────────────────── */
 
-/* offset by 56px to clear the site-nav injected by chrome.js */
+/* offset by 56px to clear the site-nav injected by chrome.js.
+   Use an explicit height instead of `bottom:0` — the parent
+   Squarespace template wraps page content in a transformed/contained
+   ancestor that breaks position:fixed bottom resolution, collapsing
+   the nav box to ~80px and hiding the section links. */
 .side-nav {
-  position:fixed; top:56px; left:0; bottom:0; width:var(--nav-w);
+  position:fixed; top:56px; left:0; width:var(--nav-w);
+  height:calc(100vh - 56px);
   background:var(--page); border-right:1px solid var(--border);
   padding:32px 24px; overflow-y:auto;
   display:flex; flex-direction:column; gap:24px;
@@ -198,42 +203,9 @@ i.seg-ind    { background:var(--border-2); }
 .restraint-note h4 { color:var(--amber); margin-bottom:10px; font-size:10px; }
 .restraint-note p { font-size:14px; line-height:1.65; color:var(--ink-dim); margin:0; max-width:72ch; }
 
-.backbone-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-                  gap:18px; margin:24px 0 36px; }
-.backbone-card { background:var(--surface); border:1px solid var(--border);
-                 padding:24px; border-radius:3px; }
-.backbone-pct { font-family:var(--serif); font-size:44px; line-height:1;
-                color:var(--green); font-weight:400; letter-spacing:-0.03em; }
-.backbone-pct span { font-size:24px; color:var(--green-dim); }
-.backbone-pct-label { font-size:9px; color:var(--ink-muted); margin:4px 0 14px; }
-.backbone-card h3 { font-size:20px; line-height:1.2; color:var(--ink); margin-bottom:12px; }
-.backbone-components { font-size:12px; line-height:1.5; color:var(--ink-muted); margin-bottom:12px; }
-.backbone-components .lbl { display:block; color:var(--green); font-size:9px; margin-bottom:4px; }
-.backbone-logic { font-size:13px; line-height:1.6; color:var(--ink-dim); margin:0; }
-
-.travels { font-size:15px; line-height:1.7; color:var(--ink-dim); margin-top:24px;
-           max-width:72ch; }
-
 /* ── Section 5 (regions) ───────────────────────────────────────────────── */
 
 .sec-regions { background:var(--page); }
-.callouts-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-                gap:14px; margin:32px 0 56px; }
-.callout {
-  background:#fff; border:1px solid var(--border); border-top:3px solid var(--green);
-  padding:22px 22px 20px; border-radius:2px; display:block; color:var(--ink);
-  transition:transform .15s, border-color .15s, box-shadow .15s;
-}
-.callout:hover { color:var(--ink); transform:translateY(-2px);
-                 border-top-color:var(--green-dim);
-                 box-shadow:0 4px 16px rgba(0,0,0,.06); }
-.callout-label { font-family:var(--mono); font-size:9px; font-weight:700;
-                 letter-spacing:0.14em; text-transform:uppercase; color:var(--green);
-                 margin-bottom:8px; }
-.callout h3 { font-family:var(--serif); font-size:22px; line-height:1.2; margin-bottom:10px;
-              color:var(--ink); }
-.callout p { font-size:13px; line-height:1.55; color:var(--ink-dim); margin-bottom:14px; }
-.callout-arrow { font-size:9px; color:var(--green); font-weight:700; }
 
 .region-group { margin-bottom:48px; }
 .region-group-h { font-size:24px; margin-bottom:18px; display:flex;
@@ -253,8 +225,8 @@ i.seg-ind    { background:var(--border-2); }
 .region-meta { display:flex; gap:14px; font-size:9.5px; color:var(--ink-muted); }
 .region-stack { font-size:12px; color:var(--ink-dim); margin-top:4px; }
 .region-stack .lbl { display:block; color:var(--green); font-size:8.5px; margin-bottom:3px; }
-.region-leverage { font-size:12px; line-height:1.5; color:var(--ink-muted); margin-top:4px;
-                   font-style:italic; padding-top:8px; border-top:1px solid var(--border); }
+.region-intro { font-size:12.5px; line-height:1.55; color:var(--ink-dim); margin-top:6px;
+                font-weight:300; }
 
 /* ── Section 6 (leverage) ──────────────────────────────────────────────── */
 
@@ -787,39 +759,6 @@ i.seg-ind    { background:var(--border-2); }
       </p>
     </div>
 
-    <h3 class="serif sub-h">Three reinforcing configurations</h3>
-    <div class="backbone-cards">
-      
-      <div class="backbone-card">
-        <div class="backbone-pct">93.5<span>%</span></div>
-        <div class="backbone-pct-label mono">confident across clusters</div>
-        <h3 class="serif">Coordination–Intermediary–Activity</h3>
-        <div class="backbone-components"><span class="mono lbl">Components</span>Coordinating instead of deciding · Mediating instead of coupling · Scaling activity instead of throughput</div>
-        <p class="backbone-logic">Coordination structures route activity through intermediary organisations, which produce more activity in the form of coordination — a self-referential loop where producing meetings and partnerships counts as throughput.</p>
-      </div>
-      <div class="backbone-card">
-        <div class="backbone-pct">92.9<span>%</span></div>
-        <div class="backbone-pct-label mono">confident across clusters</div>
-        <h3 class="serif">Extraction–Intermediary</h3>
-        <div class="backbone-components"><span class="mono lbl">Components</span>Extracting without reinvesting · Mediating instead of coupling · Stabilising around incumbents</div>
-        <p class="backbone-logic">Anchor incumbents extract value through intermediated channels — the intermediaries justify the extraction by claiming brokerage, and the incumbents justify the intermediaries by directing flow through them.</p>
-      </div>
-      <div class="backbone-card">
-        <div class="backbone-pct">90.5<span>%</span></div>
-        <div class="backbone-pct-label mono">confident across clusters</div>
-        <h3 class="serif">Governance Capture</h3>
-        <div class="backbone-components"><span class="mono lbl">Components</span>Coordinating instead of deciding · Narrating instead of testing · Scaling activity instead of throughput</div>
-        <p class="backbone-logic">Coordination and reporting absorb the demand for action; the scale of activity (events, programmes, cohorts) makes the absence of consequence-bearing decisions hard to see. Each stall reinforces the legitimacy of the others.</p>
-      </div>
-    </div>
-
-    <p class="travels">
-      The framework travels. Scottish devolved, Northern Irish post-conflict,
-      English combined authority, Welsh city region &mdash; the same
-      configurations appear. The stalls are not caused by governance
-      structure. They are how innovation ecosystems organise themselves
-      under pressure to be seen to act.
-    </p>
   </div>
 </section>
 
@@ -833,41 +772,8 @@ i.seg-ind    { background:var(--border-2); }
       The national pattern is built from twenty-five regional diagnostics. Each
       region's reading is its own document &mdash; with its sub-clusters, its
       stall fingerprint, its backbone configuration, its leverage surface, and
-      the audit trail back to specific evidence rows. Four readings worth
-      reading first:
+      the audit trail back to specific evidence rows.
     </p>
-
-    <div class="callouts-row">
-      
-      <a class="callout" href="/superclusters/greater-glasgow"
-         data-track="featured-region" data-region="greater_glasgow">
-        <div class="callout-label mono">the baseline</div>
-        <h3 class="serif">Greater Glasgow</h3>
-        <p>Deepest evidence across the corpus &mdash; the worked example. Eight clusters, the full Y-side enrichment running, the methodology's reference region.</p>
-        <div class="callout-arrow mono">Read &rarr;</div>
-      </a>
-      <a class="callout" href="/superclusters/cambridge"
-         data-track="featured-region" data-region="cambridgeshire_and_peterborough">
-        <div class="callout-label mono">the surprise</div>
-        <h3 class="serif">Cambridgeshire and Peterborough</h3>
-        <p>The UK's premier innovation cluster shows the same stabilisation patterns. Premier evidence depth, premier extraction multiple &mdash; same configuration.</p>
-        <div class="callout-arrow mono">Read &rarr;</div>
-      </a>
-      <a class="callout" href="/superclusters/belfast"
-         data-track="featured-region" data-region="belfast">
-        <div class="callout-label mono">the restraint</div>
-        <h3 class="serif">Belfast Region</h3>
-        <p>Belfast Screen produced no leverage hypotheses despite confident stack readings. The diagnostic refused to generate where the evidence didn't support intervention.</p>
-        <div class="callout-arrow mono">Read &rarr;</div>
-      </a>
-      <a class="callout" href="/superclusters/liverpool-city-region"
-         data-track="featured-region" data-region="liverpool_city_region">
-        <div class="callout-label mono">the visibility correction</div>
-        <h3 class="serif">Liverpool City Region</h3>
-        <p>Fifty-two tourism-economy UKRI rows had been buried in a catch-all cluster. Visitor Economy as a distinct regional cluster only became visible after the retag.</p>
-        <div class="callout-arrow mono">Read &rarr;</div>
-      </a>
-    </div>
 
     <h3 class="serif sub-h">All twenty-five readings, by political structure</h3>
     
@@ -877,62 +783,38 @@ i.seg-ind    { background:var(--border-2); }
         <a class="region-card" href="/superclusters/greater-glasgow"
            data-track="region-card" data-region="greater_glasgow">
           <h4 class="serif">Greater Glasgow</h4>
-          <div class="region-meta mono">
-            <span>8 clusters</span>
-            <span>978 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Extraction–Narrative</div>
-          <p class="region-leverage">If annual ecosystem reports (e</p>
+          <p class="region-intro">8 clusters diagnosed across Greater Glasgow, drawing on 978 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/edinburgh-south-east"
            data-track="region-card" data-region="edinburgh_and_south_east">
           <h4 class="serif">Edinburgh and South East</h4>
-          <div class="region-meta mono">
-            <span>9 clusters</span>
-            <span>869 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Extraction–Narrative</div>
-          <p class="region-leverage">If UKRI grant reporting (P006: 590 grants, £626m) and City Region Deal reporting (P005) were required to distinguish between value created locally (revenue/empl…</p>
+          <p class="region-intro">9 clusters diagnosed across Edinburgh and South East, drawing on 869 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 9 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/inverness-highlands"
            data-track="region-card" data-region="inverness_and_highlands">
           <h4 class="serif">Inverness and Highlands</h4>
-          <div class="region-meta mono">
-            <span>8 clusters</span>
-            <span>565 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one public agency (e</p>
+          <p class="region-intro">8 clusters diagnosed across Inverness and Highlands, drawing on 565 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 8 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/tay-cities"
            data-track="region-card" data-region="tay_cities">
           <h4 class="serif">Tay Cities Region</h4>
-          <div class="region-meta mono">
-            <span>6 clusters</span>
-            <span>524 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one anchor institution (e</p>
+          <p class="region-intro">6 clusters diagnosed across Tay Cities Region, drawing on 524 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/aberdeen-aberdeenshire"
            data-track="region-card" data-region="aberdeen_and_aberdeenshire">
           <h4 class="serif">Aberdeen and Aberdeenshire</h4>
-          <div class="region-meta mono">
-            <span>4 clusters</span>
-            <span>423 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Extraction–Permission (Triple)</div>
-          <p class="region-leverage">If one energy transition company (e</p>
+          <p class="region-intro">4 clusters diagnosed across Aberdeen and Aberdeenshire, drawing on 423 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 4 of 4 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/stirling-clackmannanshire"
            data-track="region-card" data-region="stirling_and_clackmannanshire">
           <h4 class="serif">Stirling and Clackmannanshire</h4>
-          <div class="region-meta mono">
-            <span>5 clusters</span>
-            <span>359 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Extraction–Narrative</div>
-          <p class="region-leverage">If Williams Brothers&#x27; operational decisions (product launches, distribution agreements, hiring) were documented and made visible without prior coordination or i…</p>
+          <p class="region-intro">5 clusters diagnosed across Stirling and Clackmannanshire, drawing on 359 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 5 of 5 clusters.</p>
         </a></div>
     </div>
     <div class="region-group">
@@ -941,12 +823,18 @@ i.seg-ind    { background:var(--border-2); }
         <a class="region-card" href="/superclusters/belfast"
            data-track="region-card" data-region="belfast">
           <h4 class="serif">Belfast Region</h4>
-          <div class="region-meta mono">
-            <span>7 clusters</span>
-            <span>628 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one anchor actor (Belfast Harbour or Artemis Technologies) were to commit publicly to a single technological pathway without prior coordination or external v…</p>
+          <p class="region-intro">7 clusters diagnosed across Belfast Region, drawing on 628 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 7 clusters.</p>
+        </a></div>
+    </div>
+    <div class="region-group">
+      <h3 class="region-group-h serif">Wales <span class="mono group-count">1 region</span></h3>
+      <div class="region-grid">
+        <a class="region-card" href="/superclusters/cardiff-capital"
+           data-track="region-card" data-region="cardiff_capital">
+          <h4 class="serif">Cardiff Capital Region</h4>
+          <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Coordination-Intermediary-Activity</div>
+          <p class="region-intro">7 clusters diagnosed across Cardiff Capital Region, drawing on 655 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.</p>
         </a></div>
     </div>
     <div class="region-group">
@@ -955,172 +843,104 @@ i.seg-ind    { background:var(--border-2); }
         <a class="region-card" href="/superclusters/thames-valley"
            data-track="region-card" data-region="thames_valley">
           <h4 class="serif">Thames Valley Strategic Mayoral Authority</h4>
-          <div class="region-meta mono">
-            <span>11 clusters</span>
-            <span>1,209 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one high-growth company (Series A+) publicly committed to majority-local procurement and hiring without seeking incumbent partnership or UKRI grant support, …</p>
+          <p class="region-intro">11 clusters diagnosed across Thames Valley Strategic Mayoral Authority, drawing on 1,209 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 11 of 11 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/london"
            data-track="region-card" data-region="greater_london_authority">
           <h4 class="serif">Greater London Authority</h4>
-          <div class="region-meta mono">
-            <span>8 clusters</span>
-            <span>1,049 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one UKRI funder published annual data separating value retention (spin-offs headquartered in London, IP owned by London entities, follow-on capital to London…</p>
+          <p class="region-intro">8 clusters diagnosed across Greater London Authority, drawing on 1,049 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/cambridge"
            data-track="region-card" data-region="cambridgeshire_and_peterborough">
           <h4 class="serif">Cambridgeshire and Peterborough Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>9 clusters</span>
-            <span>918 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one documented case of direct coupling (e</p>
+          <p class="region-intro">9 clusters diagnosed across Cambridgeshire and Peterborough Combined Authority, drawing on 918 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 9 of 9 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/greater-manchester"
            data-track="region-card" data-region="greater_manchester">
           <h4 class="serif">Greater Manchester Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>8 clusters</span>
-            <span>915 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one successful outcome from the Manchester Academic Health Science Centre partnership (P001, P002, P004: direct partnership between UoM, Christie, MFT) were …</p>
+          <p class="region-intro">8 clusters diagnosed across Greater Manchester Combined Authority, drawing on 915 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 8 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/west-of-england"
            data-track="region-card" data-region="west_of_england">
           <h4 class="serif">West of England Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>9 clusters</span>
-            <span>909 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">A probe could test whether one intermediary (e</p>
+          <p class="region-intro">9 clusters diagnosed across West of England Combined Authority, drawing on 909 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 9 of 9 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/west-midlands"
            data-track="region-card" data-region="west_midlands">
           <h4 class="serif">West Midlands Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>8 clusters</span>
-            <span>875 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one hard exit criterion were applied to one programme category (e</p>
+          <p class="region-intro">8 clusters diagnosed across West Midlands Combined Authority, drawing on 875 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/liverpool-city-region"
            data-track="region-card" data-region="liverpool_city_region">
           <h4 class="serif">Liverpool City Region Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>7 clusters</span>
-            <span>726 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If the Combined Authority&#x27;s annual Visitor Economy reporting (which currently cites £5</p>
+          <p class="region-intro">7 clusters diagnosed across Liverpool City Region Combined Authority, drawing on 726 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/north-east"
            data-track="region-card" data-region="north_east">
           <h4 class="serif">North East Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>7 clusters</span>
-            <span>664 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one university research centre (e</p>
+          <p class="region-intro">7 clusters diagnosed across North East Combined Authority, drawing on 664 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/hull-east-yorkshire"
            data-track="region-card" data-region="hull_and_east_yorkshire">
           <h4 class="serif">Hull and East Yorkshire Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>8 clusters</span>
-            <span>618 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one funding programme (e</p>
+          <p class="region-intro">8 clusters diagnosed across Hull and East Yorkshire Combined Authority, drawing on 618 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 8 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/east-midlands"
            data-track="region-card" data-region="east_midlands">
           <h4 class="serif">East Midlands Combined County Authority</h4>
-          <div class="region-meta mono">
-            <span>6 clusters</span>
-            <span>599 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one governance body (e</p>
+          <p class="region-intro">6 clusters diagnosed across East Midlands Combined County Authority, drawing on 599 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/tees-valley"
            data-track="region-card" data-region="tees_valley">
           <h4 class="serif">Tees Valley Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>6 clusters</span>
-            <span>581 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">A probe could test whether one anchor institution (e</p>
+          <p class="region-intro">6 clusters diagnosed across Tees Valley Combined Authority, drawing on 581 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/west-yorkshire"
            data-track="region-card" data-region="west_yorkshire">
           <h4 class="serif">West Yorkshire Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>6 clusters</span>
-            <span>557 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one university programme (e</p>
+          <p class="region-intro">6 clusters diagnosed across West Yorkshire Combined Authority, drawing on 557 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 5 of 6 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/lancashire"
            data-track="region-card" data-region="lancashire">
           <h4 class="serif">Lancashire Combined County Authority</h4>
-          <div class="region-meta mono">
-            <span>6 clusters</span>
-            <span>523 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one anchor institution (P021: Westinghouse, Springfields, Energy HQ, B&amp;FC, Hillhouse TEZ) were to launch a programme without LEP/Combined Authority pre-appro…</p>
+          <p class="region-intro">6 clusters diagnosed across Lancashire Combined County Authority, drawing on 523 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/devon-torbay"
            data-track="region-card" data-region="devon_and_torbay">
           <h4 class="serif">Devon and Torbay Combined County Authority</h4>
-          <div class="region-meta mono">
-            <span>7 clusters</span>
-            <span>512 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one anchor (Babcock, Princess Yachts, or Thales) validated a new capability by deploying it operationally without prior UKRI grant, Combined Authority approv…</p>
+          <p class="region-intro">7 clusters diagnosed across Devon and Torbay Combined County Authority, drawing on 512 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 7 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/greater-lincolnshire"
            data-track="region-card" data-region="greater_lincolnshire">
           <h4 class="serif">Greater Lincolnshire Combined County Authority</h4>
-          <div class="region-meta mono">
-            <span>6 clusters</span>
-            <span>510 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">A probe could test whether one government funding stream (e</p>
+          <p class="region-intro">6 clusters diagnosed across Greater Lincolnshire Combined County Authority, drawing on 510 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 5 of 6 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/york-north-yorkshire"
            data-track="region-card" data-region="york_and_north_yorkshire">
           <h4 class="serif">York and North Yorkshire Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>6 clusters</span>
-            <span>407 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one documented case of direct bilateral partnership between a research institution and food manufacturer (e</p>
+          <p class="region-intro">6 clusters diagnosed across York and North Yorkshire Combined Authority, drawing on 407 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.</p>
         </a>
         <a class="region-card" href="/superclusters/south-yorkshire"
            data-track="region-card" data-region="south_yorkshire">
           <h4 class="serif">South Yorkshire Mayoral Combined Authority</h4>
-          <div class="region-meta mono">
-            <span>4 clusters</span>
-            <span>399 evidence items</span>
-          </div>
           <div class="region-stack"><span class="lbl mono">Distinctive stack</span>Permission–Validation</div>
-          <p class="region-leverage">If one external funder (e</p>
+          <p class="region-intro">4 clusters diagnosed across South Yorkshire Mayoral Combined Authority, drawing on 399 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 4 of 4 clusters.</p>
         </a></div>
     </div>
   </div>
@@ -1353,14 +1173,13 @@ i.seg-ind    { background:var(--border-2); }
         <div class="cta-arrow mono">Begin &rarr;</div>
       </a>
 
-      <a class="cta cta-secondary" href="mailto:hello@clusteros.io?subject=Full%20diagnostic%20enquiry"
+      <a class="cta cta-secondary" href="https://www.clusteros.io/request"
          data-track="cta-full-diagnostic">
         <div class="cta-tag mono">Full diagnostic</div>
         <h3 class="serif">Commission a regional reading</h3>
         <p>
           Bespoke diagnostic with steward access, primary-source verification,
           and the dark-anchor and tolerance layers external data can't see.
-          Ten weeks. Includes the regional architecture specification.
         </p>
         <div class="cta-arrow mono">Open conversation &rarr;</div>
       </a>

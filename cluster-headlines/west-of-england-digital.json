@@ -1,0 +1,17 @@
+{
+  "v2_slug": "west-of-england-digital",
+  "v3_region": "west_of_england_combined_authority",
+  "v3_cluster": "west_of_england_digital",
+  "region_name": "West of England Combined Authority",
+  "cluster_name": "West of England Digital",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£704m</b> UKRI lead-led across <b>454</b> grants tagged to this cluster"
+    },
+    {
+      "html": "<b>34</b> UKRI-declared spin-offs but <b>0</b> traced via Companies House — attribution gap (UKRI knows the firm but the corporate trace isn't in CH yet)"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

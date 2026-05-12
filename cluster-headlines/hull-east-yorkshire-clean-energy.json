@@ -1,0 +1,20 @@
+{
+  "v2_slug": "hull-east-yorkshire-clean-energy",
+  "v3_region": "hull_and_east_yorkshire_combined_authority",
+  "v3_cluster": "hull_east_yorkshire_clean_energy",
+  "region_name": "Hull and East Yorkshire Combined Authority",
+  "cluster_name": "HullEastYorkshire CleanEnergy",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£486m</b> UKRI lead-led across <b>501</b> grants tagged to this cluster"
+    },
+    {
+      "html": "Top 5 institutions absorbed <b>72%</b> of the cluster £; <b>UNIVERSITY OF YORK</b> alone leads <b>40%</b>"
+    },
+    {
+      "html": "<b>10</b> UKRI-declared spin-offs but <b>0</b> traced via Companies House — attribution gap (UKRI knows the firm but the corporate trace isn't in CH yet)"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

@@ -35,6 +35,72 @@
       "alt": "Diagnostic flow for Greater Glasgow Fintech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-fintech.json",
       "caption": "While branded as fintech, the cluster is primarily research-led: the Universities of Glasgow (48%) and Strathclyde (36%) account for most UKRI funding, centred on data science, financial modelling, cyber security and risk analytics."
+    },
+    "west-of-england-aerospace": {
+      "image": "/diagnostics/west-of-england-aerospace-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Aerospace: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-aerospace.json",
+      "caption": "The region's largest UKRI cluster — £1.38bn across 952 grants — combines University of Bristol research strength (22%) with the Filton aerospace manufacturing base centred on Airbus, Renishaw and the National Composites Centre."
+    },
+    "west-of-england-clean-tech": {
+      "image": "/diagnostics/west-of-england-clean-tech-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Clean Tech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-clean-tech.json",
+      "caption": "University of Bristol (29%) and the Environment Agency (18%) lead a low-carbon innovation cluster that also includes Progressive Energy, ZeroAvia and Cavendish Nuclear, together representing £1.10bn across 749 UKRI grants."
+    },
+    "west-of-england-creative": {
+      "image": "/diagnostics/west-of-england-creative-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Creative: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-creative.json",
+      "caption": "A comparatively small £96m cluster combining Bristol (26%), Creative UK, UWE, TRL Technology, Vero UK and Rough Trade Records — representing the region's creative-industries layer alongside its larger engineering and aerospace strengths."
+    },
+    "west-of-england-digital": {
+      "image": "/diagnostics/west-of-england-digital-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Digital: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-digital.json",
+      "caption": "University of Bristol (33%) anchors a digital and cyber-oriented cluster shaped by Airbus, Renishaw and the wider cyber-security ecosystem linked to Cheltenham, totalling £704m across 454 UKRI grants."
+    },
+    "west-of-england-fin-tech": {
+      "image": "/diagnostics/west-of-england-fin-tech-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Fintech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-fin-tech.json",
+      "caption": "Bristol (39%) and FinTech West (19%) anchor a modest £67m cluster that is more research-and-network-led than driven by large-scale commercial fintech firms."
+    },
+    "west-of-england-life-sciences": {
+      "image": "/diagnostics/west-of-england-life-sciences-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Life Sciences: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-life-sciences.json",
+      "caption": "The University of Bristol leads 58% of the region's £970m life sciences cluster, with additional activity across Renishaw, Gloucestershire Hospitals NHS Foundation Trust and UWE — making this one of the most Bristol-centric clusters in the wider West of England ecosystem."
+    },
+    "west-of-england-space": {
+      "image": "/diagnostics/west-of-england-space-diagnostic.png",
+      "alt": "Diagnostic flow for West of England Space: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-space.json",
+      "caption": "A small but specialised £37m cluster dominated by KETS Quantum Security (60%) and the University of Bristol (27%), reflecting regional strengths in quantum security and positioning technologies."
+    },
+    "hull-east-yorkshire-advanced-manufacturing": {
+      "image": "/diagnostics/hull-east-yorkshire-advanced-manufacturing-diagnostic.png",
+      "alt": "Diagnostic flow for Hull & East Yorkshire Advanced Manufacturing: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-advanced-manufacturing.json",
+      "caption": "An unusually industry-heavy cluster: Croda Europe alone leads 35% (£231m), with York at 28% and contributions from Beta Technology, the Food Standards Agency and Reckitt Benckiser — making this the region's most industrially anchored UKRI cluster."
+    },
+    "hull-east-yorkshire-clean-energy": {
+      "image": "/diagnostics/hull-east-yorkshire-clean-energy-diagnostic.png",
+      "alt": "Diagnostic flow for Hull & East Yorkshire Clean Energy: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-clean-energy.json",
+      "caption": "York (40%) and Hull (12%) lead the academic base of a clean-energy cluster that also includes Drax Power and British Steel, representing £486m of UKRI funding linked to Humber decarbonisation."
+    },
+    "hull-east-yorkshire-digital": {
+      "image": "/diagnostics/hull-east-yorkshire-digital-diagnostic.png",
+      "alt": "Diagnostic flow for Hull & East Yorkshire Digital: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-digital.json",
+      "caption": "Strongly York-led at 60%, the cluster also includes the University of Hull, Endeavour Health Charitable Trust and Network Communication Systems, totalling £253m across 248 UKRI grants."
+    },
+    "hull-east-yorkshire-health-tech": {
+      "image": "/diagnostics/hull-east-yorkshire-health-tech-diagnostic.png",
+      "alt": "Diagnostic flow for Hull & East Yorkshire Health Tech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-health-tech.json",
+      "caption": "University of York dominates at 59%, with the University of Hull (8%) and a wider network of translational firms — including Neotherix, AgriFood X, mTuitive and Intelsius — contributing across 821 grants."
     }
   },
   "superclusters": {
@@ -43,6 +109,18 @@
       "alt": "Diagnostic flow for the Greater Glasgow innovation ecosystem: UKRI funders, anchor institutions, six clusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-supercluster.json",
       "caption": "Two anchor universities — Glasgow and Strathclyde — six interlocking research clusters, and a dense Clyde-corridor network of NHS hospitals, innovation centres and advanced supply-chain firms together account for £4.56bn of UKRI funding across 5,718 grants."
+    },
+    "west-of-england": {
+      "image": "/diagnostics/west-of-england-diagnostic.png",
+      "alt": "Diagnostic flow for the West of England innovation ecosystem: UKRI funders, anchor institutions, clusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/west-of-england-supercluster.json",
+      "caption": "University of Bristol accounts for £1.47bn — 34% of the £4.36bn drawn across the region's seven UKRI-active clusters — with Renishaw, Airbus, the National Composites Centre and the Filton clean-tech and aerospace corridor reinforcing the wider innovation ecosystem."
+    },
+    "hull-east-yorkshire": {
+      "image": "/diagnostics/hull-east-yorkshire-diagnostic.png",
+      "alt": "Diagnostic flow for the Hull & East Yorkshire innovation ecosystem: UKRI funders, anchor institutions, clusters, and outcome distribution.",
+      "headlines": "/cluster-headlines/hull-east-yorkshire-supercluster.json",
+      "caption": "University of York is the dominant anchor — £912m, or 45% of the £2.02bn drawn across the region's five active clusters — with Croda Europe, Drax and British Steel contributing much of the industrial base."
     }
   },
   "cta": {

@@ -1,0 +1,20 @@
+{
+  "v2_slug": "hull-east-yorkshire-innovation-ecosystem",
+  "v3_region": "hull_and_east_yorkshire_combined_authority",
+  "v3_cluster": null,
+  "region_name": "Hull and East Yorkshire Combined Authority",
+  "cluster_name": "Hull and East Yorkshire Combined Authority Innovation Ecosystem",
+  "strap": "What this region's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£2.02bn</b> UKRI lead-led across <b>2,105</b> grants spanning <b>6</b> active clusters"
+    },
+    {
+      "html": "Largest cluster: <b>HullEastYorkshire AdvancedManufacturing</b> at <b>32%</b> of regional £ (<b>£652m</b>)"
+    },
+    {
+      "html": "Region-wide lead: <b>UNIVERSITY OF YORK</b> — <b>£912m</b> across all clusters (<b>45%</b> of regional £)"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

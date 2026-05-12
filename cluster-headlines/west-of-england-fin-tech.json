@@ -1,0 +1,17 @@
+{
+  "v2_slug": "west-of-england-fin-tech",
+  "v3_region": "west_of_england_combined_authority",
+  "v3_cluster": "west_of_england_fin_tech",
+  "region_name": "West of England Combined Authority",
+  "cluster_name": "West of England FinTech",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£67m</b> UKRI lead-led across <b>62</b> grants tagged to this cluster"
+    },
+    {
+      "html": "Top 5 institutions absorbed <b>78%</b> of the cluster £; <b>UNIVERSITY OF BRISTOL</b> alone leads <b>39%</b>"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

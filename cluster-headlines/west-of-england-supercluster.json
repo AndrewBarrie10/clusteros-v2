@@ -1,0 +1,20 @@
+{
+  "v2_slug": "west-of-england-innovation-ecosystem",
+  "v3_region": "west_of_england_combined_authority",
+  "v3_cluster": null,
+  "region_name": "West of England Combined Authority",
+  "cluster_name": "West of England Combined Authority Innovation Ecosystem",
+  "strap": "What this region's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£4.36bn</b> UKRI lead-led across <b>3,016</b> grants spanning <b>7</b> active clusters"
+    },
+    {
+      "html": "Largest cluster: <b>West of England Aerospace</b> at <b>32%</b> of regional £ (<b>£1.38bn</b>)"
+    },
+    {
+      "html": "Region-wide lead: <b>UNIVERSITY OF BRISTOL</b> — <b>£1.47bn</b> across all clusters (<b>34%</b> of regional £)"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

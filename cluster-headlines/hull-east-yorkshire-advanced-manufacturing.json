@@ -1,0 +1,20 @@
+{
+  "v2_slug": "hull-east-yorkshire-advanced-manufacturing",
+  "v3_region": "hull_and_east_yorkshire_combined_authority",
+  "v3_cluster": "hull_east_yorkshire_advanced_manufacturing",
+  "region_name": "Hull and East Yorkshire Combined Authority",
+  "cluster_name": "HullEastYorkshire AdvancedManufacturing",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£652m</b> UKRI lead-led across <b>511</b> grants tagged to this cluster"
+    },
+    {
+      "html": "Top 5 institutions absorbed <b>78%</b> of the cluster £; <b>CRODA EUROPE</b> alone leads <b>35%</b>"
+    },
+    {
+      "html": "<b>18</b> UKRI-declared spin-offs but <b>0</b> traced via Companies House — attribution gap (UKRI knows the firm but the corporate trace isn't in CH yet)"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

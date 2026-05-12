@@ -1,0 +1,20 @@
+{
+  "v2_slug": "west-of-england-life-sciences",
+  "v3_region": "west_of_england_combined_authority",
+  "v3_cluster": "west_of_england_life_sciences",
+  "region_name": "West of England Combined Authority",
+  "cluster_name": "West of England LifeSciences",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£970m</b> UKRI lead-led across <b>803</b> grants tagged to this cluster"
+    },
+    {
+      "html": "Top 5 institutions absorbed <b>68%</b> of the cluster £; <b>UNIVERSITY OF BRISTOL</b> alone leads <b>58%</b>"
+    },
+    {
+      "html": "<b>25</b> UKRI-declared spin-offs but <b>0</b> traced via Companies House — attribution gap (UKRI knows the firm but the corporate trace isn't in CH yet)"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

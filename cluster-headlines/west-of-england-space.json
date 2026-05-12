@@ -1,0 +1,17 @@
+{
+  "v2_slug": "west-of-england-space",
+  "v3_region": "west_of_england_combined_authority",
+  "v3_cluster": "west_of_england_space",
+  "region_name": "West of England Combined Authority",
+  "cluster_name": "West of England Space",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£37m</b> UKRI lead-led across <b>20</b> grants tagged to this cluster"
+    },
+    {
+      "html": "Top 5 institutions absorbed <b>100%</b> of the cluster £; <b>KETS QUANTUM SECURITY</b> alone leads <b>60%</b>"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

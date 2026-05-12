@@ -217,23 +217,6 @@ i.seg-ind    { background:var(--border-2); }
 /* ── Section 5 (regions) ───────────────────────────────────────────────── */
 
 .sec-regions { background:var(--page); }
-.callouts-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-                gap:14px; margin:32px 0 56px; }
-.callout {
-  background:#fff; border:1px solid var(--border); border-top:3px solid var(--green);
-  padding:22px 22px 20px; border-radius:2px; display:block; color:var(--ink);
-  transition:transform .15s, border-color .15s, box-shadow .15s;
-}
-.callout:hover { color:var(--ink); transform:translateY(-2px);
-                 border-top-color:var(--green-dim);
-                 box-shadow:0 4px 16px rgba(0,0,0,.06); }
-.callout-label { font-family:var(--mono); font-size:9px; font-weight:700;
-                 letter-spacing:0.14em; text-transform:uppercase; color:var(--green);
-                 margin-bottom:8px; }
-.callout h3 { font-family:var(--serif); font-size:22px; line-height:1.2; margin-bottom:10px;
-              color:var(--ink); }
-.callout p { font-size:13px; line-height:1.55; color:var(--ink-dim); margin-bottom:14px; }
-.callout-arrow { font-size:9px; color:var(--green); font-weight:700; }
 
 .region-group { margin-bottom:48px; }
 .region-group-h { font-size:24px; margin-bottom:18px; display:flex;
@@ -833,41 +816,8 @@ i.seg-ind    { background:var(--border-2); }
       The national pattern is built from twenty-five regional diagnostics. Each
       region's reading is its own document &mdash; with its sub-clusters, its
       stall fingerprint, its backbone configuration, its leverage surface, and
-      the audit trail back to specific evidence rows. Four readings worth
-      reading first:
+      the audit trail back to specific evidence rows.
     </p>
-
-    <div class="callouts-row">
-      
-      <a class="callout" href="/superclusters/greater-glasgow"
-         data-track="featured-region" data-region="greater_glasgow">
-        <div class="callout-label mono">the baseline</div>
-        <h3 class="serif">Greater Glasgow</h3>
-        <p>Deepest evidence across the corpus &mdash; the worked example. Eight clusters, the full Y-side enrichment running, the methodology's reference region.</p>
-        <div class="callout-arrow mono">Read &rarr;</div>
-      </a>
-      <a class="callout" href="/superclusters/cambridge"
-         data-track="featured-region" data-region="cambridgeshire_and_peterborough">
-        <div class="callout-label mono">the surprise</div>
-        <h3 class="serif">Cambridgeshire and Peterborough</h3>
-        <p>The UK's premier innovation cluster shows the same stabilisation patterns. Premier evidence depth, premier extraction multiple &mdash; same configuration.</p>
-        <div class="callout-arrow mono">Read &rarr;</div>
-      </a>
-      <a class="callout" href="/superclusters/belfast"
-         data-track="featured-region" data-region="belfast">
-        <div class="callout-label mono">the restraint</div>
-        <h3 class="serif">Belfast Region</h3>
-        <p>Belfast Screen produced no leverage hypotheses despite confident stack readings. The diagnostic refused to generate where the evidence didn't support intervention.</p>
-        <div class="callout-arrow mono">Read &rarr;</div>
-      </a>
-      <a class="callout" href="/superclusters/liverpool-city-region"
-         data-track="featured-region" data-region="liverpool_city_region">
-        <div class="callout-label mono">the visibility correction</div>
-        <h3 class="serif">Liverpool City Region</h3>
-        <p>Fifty-two tourism-economy UKRI rows had been buried in a catch-all cluster. Visitor Economy as a distinct regional cluster only became visible after the retag.</p>
-        <div class="callout-arrow mono">Read &rarr;</div>
-      </a>
-    </div>
 
     <h3 class="serif sub-h">All twenty-five readings, by political structure</h3>
     

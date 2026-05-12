@@ -1,0 +1,20 @@
+{
+  "v2_slug": "glasgow-net-zero",
+  "v3_region": "greater_glasgow",
+  "v3_cluster": "greater_glasgow_net_zero",
+  "region_name": "Greater Glasgow",
+  "cluster_name": "Greater Glasgow Net Zero",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£1.07bn</b> UKRI lead-led across <b>4,211</b> grants tagged to this cluster"
+    },
+    {
+      "html": "Top 5 institutions absorbed <b>67%</b> of the cluster £; <b>UNIVERSITY OF GLASGOW</b> alone leads <b>29%</b>"
+    },
+    {
+      "html": "<b>23</b> Companies House-traced spin-outs → <b>£47m</b> UKRI per spin-out"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

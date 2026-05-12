@@ -1,0 +1,20 @@
+{
+  "v2_slug": "glasgow-fintech",
+  "v3_region": "greater_glasgow",
+  "v3_cluster": "greater_glasgow_fintech",
+  "region_name": "Greater Glasgow",
+  "cluster_name": "Greater Glasgow Fintech",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£614m</b> UKRI lead-led across <b>3,938</b> grants tagged to this cluster"
+    },
+    {
+      "html": "Top 5 institutions absorbed <b>95%</b> of the cluster £; <b>UNIVERSITY OF GLASGOW</b> alone leads <b>49%</b>"
+    },
+    {
+      "html": "<b>19</b> Companies House-traced spin-outs → <b>£32m</b> UKRI per spin-out — vs <b>Cambridgeshire and Peterborough</b>: <b>£17m</b> per spin-out"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

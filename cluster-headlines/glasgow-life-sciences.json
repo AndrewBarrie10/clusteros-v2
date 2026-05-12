@@ -1,0 +1,20 @@
+{
+  "v2_slug": "glasgow-life-sciences",
+  "v3_region": "greater_glasgow",
+  "v3_cluster": "greater_glasgow_life_sciences",
+  "region_name": "Greater Glasgow",
+  "cluster_name": "Greater Glasgow Life Sciences",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£1.07bn</b> UKRI lead-led across <b>4,329</b> grants tagged to this cluster"
+    },
+    {
+      "html": "Top 5 institutions absorbed <b>68%</b> of the cluster £; <b>UNIVERSITY OF GLASGOW</b> alone leads <b>31%</b>"
+    },
+    {
+      "html": "<b>29</b> Companies House-traced spin-outs → <b>£37m</b> UKRI per spin-out"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

@@ -1,0 +1,20 @@
+{
+  "v2_slug": "glasgow-space",
+  "v3_region": "greater_glasgow",
+  "v3_cluster": "greater_glasgow_space",
+  "region_name": "Greater Glasgow",
+  "cluster_name": "Greater Glasgow Space",
+  "strap": "What this cluster's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£229m</b> UKRI lead-led across <b>938</b> grants tagged to this cluster"
+    },
+    {
+      "html": "Top 5 institutions absorbed <b>98%</b> of the cluster £; <b>UNIVERSITY OF STRATHCLYDE</b> alone leads <b>86%</b>"
+    },
+    {
+      "html": "<b>3</b> Companies House-traced spin-outs → <b>£76m</b> UKRI per spin-out — vs <b>Greater Manchester</b>: <b>£17m</b> per spin-out"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

@@ -1,0 +1,23 @@
+{
+  "v2_slug": "glasgow-supercluster",
+  "v3_region": "greater_glasgow",
+  "v3_cluster": null,
+  "region_name": "Greater Glasgow",
+  "cluster_name": "Greater Glasgow Innovation Ecosystem",
+  "strap": "What this region's UKRI footprint actually looks like",
+  "bullets": [
+    {
+      "html": "<b>£4.56bn</b> UKRI lead-led across <b>5,718</b> grants spanning <b>6</b> active clusters"
+    },
+    {
+      "html": "Largest cluster: <b>Greater Glasgow Digital Creative</b> at <b>24%</b> of regional £ (<b>£1.12bn</b>)"
+    },
+    {
+      "html": "Region-wide lead: <b>UNIVERSITY OF GLASGOW</b> — <b>£1.36bn</b> across all clusters (<b>30%</b> of regional £)"
+    },
+    {
+      "html": "<b>55</b> Companies House-traced spin-outs region-wide → <b>£83m</b> UKRI per spin-out"
+    }
+  ],
+  "snapshot_date": "2026-05-12"
+}

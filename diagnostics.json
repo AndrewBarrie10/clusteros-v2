@@ -4,37 +4,37 @@
       "image": "/diagnostics/glasgow-life-sciences-diagnostic.png",
       "alt": "Diagnostic flow for Greater Glasgow Life Sciences: UKRI funders, anchor institutions, four subclusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-life-sciences.json",
-      "caption": "[CAPTION PLACEHOLDER]"
+      "caption": "Anchored by the University of Glasgow (31%) and Strathclyde (20%), and reinforced by Glasgow Caledonian University, NHS Greater Glasgow & Clyde and the IBioIC industrial-biotech innovation centre, the cluster attracts £1.07bn of UKRI funding across 4,329 grants."
     },
     "greater-glasgow-space": {
       "image": "/diagnostics/glasgow-space-diagnostic.png",
       "alt": "Diagnostic flow for Greater Glasgow Space: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-space.json",
-      "caption": "[CAPTION PLACEHOLDER]"
+      "caption": "Largely a University of Strathclyde story — 86% of the region's £229m in UKRI space funding — supported by Glasgow-built satellite firms including Clyde Space, Craft Prospect and Wideblue, within one of Europe's leading small-satellite manufacturing hubs."
     },
     "greater-glasgow-net-zero": {
       "image": "/diagnostics/glasgow-net-zero-diagnostic.png",
       "alt": "Diagnostic flow for Greater Glasgow Net Zero: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-net-zero.json",
-      "caption": "[CAPTION PLACEHOLDER]"
+      "caption": "Glasgow and Strathclyde lead the academic base of the cluster (29% and 20% respectively), with contributions from Nitech Solutions, ScottishPower and Loganair supporting £1.07bn of UKRI-funded work in decarbonisation, power systems and clean aviation."
     },
     "greater-glasgow-digital-creative": {
       "image": "/diagnostics/glasgow-digital-creative-diagnostic.png",
       "alt": "Diagnostic flow for Greater Glasgow Digital Creative: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-digital-creative.json",
-      "caption": "[CAPTION PLACEHOLDER]"
+      "caption": "The region's largest UKRI research cluster — £1.12bn across 4,344 grants — combines University of Glasgow (37%) and Strathclyde (27%) strengths in computing and AI with photonics and compound-semiconductor specialists including M Squared Lasers and CST Global."
     },
     "greater-glasgow-advanced-manufacturing": {
       "image": "/diagnostics/glasgow-advanced-manufacturing-diagnostic.png",
       "alt": "Diagnostic flow for Greater Glasgow Advanced Manufacturing: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-advanced-manufacturing.json",
-      "caption": "[CAPTION PLACEHOLDER]"
+      "caption": "Anchored by Strathclyde (38%) — with NMIS and AFRC underpinning much of that activity — the cluster connects Kelvin Nanotechnology, Weir Group, Nitech and Spirit AeroSystems into the Clyde's advanced manufacturing and aerostructures supply chain, representing £459m in UKRI funding."
     },
     "greater-glasgow-fintech": {
       "image": "/diagnostics/glasgow-fintech-diagnostic.png",
       "alt": "Diagnostic flow for Greater Glasgow Fintech: UKRI funders, anchor institutions, subclusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-fintech.json",
-      "caption": "[CAPTION PLACEHOLDER]"
+      "caption": "While branded as fintech, the cluster is primarily research-led: the Universities of Glasgow (48%) and Strathclyde (36%) account for most UKRI funding, centred on data science, financial modelling, cyber security and risk analytics."
     }
   },
   "superclusters": {
@@ -42,13 +42,13 @@
       "image": "/diagnostics/glasgow-supercluster-diagnostic.png",
       "alt": "Diagnostic flow for the Greater Glasgow innovation ecosystem: UKRI funders, anchor institutions, six clusters, and outcome distribution.",
       "headlines": "/cluster-headlines/glasgow-supercluster.json",
-      "caption": "[CAPTION PLACEHOLDER]"
+      "caption": "Two anchor universities — Glasgow and Strathclyde — six interlocking research clusters, and a dense Clyde-corridor network of NHS hospitals, innovation centres and advanced supply-chain firms together account for £4.56bn of UKRI funding across 5,718 grants."
     }
   },
   "cta": {
     "framing": "Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.",
     "link_text": "Request access →",
-    "link_href": "[CTA HREF PLACEHOLDER]"
+    "link_href": "https://www.clusteros.io/request"
   },
   "source_line": "Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); Crunchbase (disclosed capital). Snapshot May 2026."
 }

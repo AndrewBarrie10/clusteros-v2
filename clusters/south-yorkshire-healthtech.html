@@ -133,9 +133,19 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 
-.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
-.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
-.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
+.cluster-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:660px;margin:1.25rem 0 2rem;}
+.diagnostic-composite-v3{margin:0 0 3rem;}
+.diagnostic-figure-v3{margin:0;text-align:center;}
+.diagnostic-image-v3{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-cta-v3{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing-v3{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link-v3{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link-v3 a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
+.diagnostic-cta-link-v3 a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source-v3{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+@media(max-width:640px){
+  .diagnostic-cta-v3,.diagnostic-source-v3{text-align:left;}
+}
 </style>
 <!-- Mixpanel tracking -->
 <script type="text/javascript">
@@ -173,28 +183,22 @@ footer a:hover{color:var(--green);}
       <span class="meta-tag meta-plain">Sheffield, United Kingdom</span>
       <span class="meta-tag meta-Governance Capture">Governance Capture</span>
       
-      <span class="meta-tag meta-plain">79 evidence items</span>
+      
     </div>
-    <p class="cluster-summary">South Yorkshire Healthtech runs on 79 evidence items (South Yorkshire Healthtech UKRI grants: 326 grants, £348m total, 34 distinct). The diagnostic resolves a Governance Capture configuration at MEDIUM confidence.</p>
+    <p class="cluster-summary">South Yorkshire Healthtech draws £934m of UKRI lead-led funding across 1,131 grants, anchored by Sheffield (59%), Sheffield Hallam University (4%), with Croda Europe on the industrial side.</p>
+    <p class="cluster-behaviour">The cluster shows high-confidence "Re-proving instead of narrowing" and "Forgiving instead of redesigning" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.</p>
   </header>
-  <div class="stats-row">
-    <div class="stat-cell">
-      <div class="stat-num">9</div>
-      <div class="stat-label">Active stalls</div>
+  <section class="diagnostic-composite-v3">
+    <figure class="diagnostic-figure-v3">
+      <img src="https://preview.clusteros.io/static/diagnostics/south-yorkshire-healthtech-diagnostic-wide.png?v=2026-05-12" alt="South Yorkshire Healthtech diagnostic Sankey" class="diagnostic-image-v3" loading="lazy" />
+    </figure>
+    <div class="diagnostic-cta-v3">
+      <p class="diagnostic-cta-framing-v3">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
+      <p class="diagnostic-cta-link-v3"><a href="https://www.clusteros.io/request">Request access →</a></p>
     </div>
-    <div class="stat-cell">
-      <div class="stat-num">1</div>
-      <div class="stat-label">Stacks identified</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">79</div>
-      <div class="stat-label">Evidence items</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Leverage timeline (mo)</div>
-    </div>
-  </div>
+    <p class="diagnostic-source-v3">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
+  </section>
+  
   <div class="two-col">
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
@@ -302,7 +306,7 @@ footer a:hover{color:var(--green);}
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If South Yorkshire Mayoral Combined Authority (P004) required one funded programme to publish pre-registered success criteria and outcome data before renewal decisions, it might reduce the system's ability to absorb pressure through narrative reporting, potentially making the difference between activity and conversion...</p>
+    <p class="leverage-hyp">"If South Yorkshire Mayoral Combined Authority (P004) required one funded programme to publish pre-registered success criteria and outcome data before renewal decisions, it might reduce the system's ability to absorb pressure through narrative reporting, potentially making the difference between activity and conversion visible."</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -313,26 +317,21 @@ footer a:hover{color:var(--green);}
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
     <div class="similar-grid"><a class="similar-card" href="/clusters/inverness-highlands-food-drink.html">
       <div class="sc-name">Highlands and Islands FoodDrink</div>
-      <div class="sc-meta">Inverness · GB</div>
+      <div class="sc-meta">Inverness · United Kingdom</div>
       <div class="sc-regime">Governance Capture</div>
-      <div class="sc-match">1 shared stack · 69 evidence · Tier 1 - Robust</div>
-      <div class="sc-mechanism">Governance Capture: Coordination generates reports; reports justify programme activity; programme activity generates coordination requirements; all three signals absorbed simultaneously making the system self-referential...</div>
-      <div class="sc-absorbed">Absorbs: Friction, Uncertainty, Pressure</div>
-    </a><a class="similar-card" href="/clusters/seattle-life-sciences-biotech.html">
-      <div class="sc-name">Seattle Life Sciences &amp; BioTech</div>
-      <div class="sc-meta">Seattle · US</div>
-      <div class="sc-regime">Mature</div>
-      <div class="sc-match">1 shared stack · 84 evidence · P2</div>
-      <div class="sc-mechanism">Activity–Coordination–Narrative Stabilisation: Activity scaling (Scaling activity: employment, facilities, programs) increases coordination requirements across growing ecosystem; coordination mechanisms (Coordinating: partnerships, mergers 2022-20...</div>
-      <div class="sc-absorbed">Absorbs: Pressure (to demonstrate ecosystem growth), Complexity (of multi-institutional coordination), Uncertainty (about competitive positioning)</div>
-    </a><a class="similar-card" href="/clusters/medellin-innovation-ecosystem.html">
-      <div class="sc-name">Medellin Innovation Ecosystem</div>
-      <div class="sc-meta">Medellin · CO</div>
-      <div class="sc-regime">Growing</div>
-      <div class="sc-match">1 shared stack · 63 evidence · P2</div>
-      <div class="sc-mechanism">Governance–Narrative–Activity Configuration: Multi-stakeholder governance (Coordinating X-side), strategy documents/recognition (Narrating X-side), and program/event proliferation (Scaling activity X-side) co-occur 2011-2024. Governance structur...</div>
-      <div class="sc-absorbed">Absorbs: Uncertainty (about outcomes), Pressure (to demonstrate legitimacy), Complexity (of multi-actor decision-making), Opportunity (to engage diverse stakeholders)</div>
-    </a></div></div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a><a class="similar-card" href="/clusters/north-east-creative.html">
+      <div class="sc-name">North East Creative</div>
+      <div class="sc-meta">Newcastle · United Kingdom</div>
+      <div class="sc-regime">Governance Capture</div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a><a class="similar-card" href="/clusters/tees-valley-logistics.html">
+      <div class="sc-name">Tees Valley Logistics</div>
+      <div class="sc-meta">Middlesbrough · United Kingdom</div>
+      <div class="sc-regime">Governance Capture</div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a></div>
+  </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>

@@ -32,20 +32,19 @@
     "country": "GB",
     "lat": 57.15,
     "lng": -2.094,
-    "cluster_count": 4,
-    "evidence_count": 423,
+    "cluster_count": 3,
+    "evidence_count": 242,
     "cluster_ids": [
       "aberdeen-aberdeenshire-energy",
-      "aberdeen-aberdeenshire-life-sciences",
       "aberdeen-aberdeenshire-digital",
-      "aberdeen-aberdeenshire-innovation-ecosystem"
+      "aberdeen-aberdeenshire-life-sciences"
     ],
-    "summary": "4 clusters diagnosed across Aberdeen and Aberdeenshire, drawing on 423 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 4 of 4 clusters.",
+    "summary": "Aberdeen and Aberdeenshire's innovation footprint draws £1.16bn of UKRI lead-led funding across 1,788 grants spanning 3 active clusters, with Aberdeen Energy (56%) the largest single cluster and Aberdeen (45%) the dominant regional anchor by UKRI £. 9 Companies House-traced spin-outs region-wide translate to £129m UKRI per spin-out.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "2 of 4 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 University of Aberdeen appears across 3 of 4 sub-clusters as a configured ecosystem-level anchor.",
-      "Pathway scale \u2014 2,041 follow-on funding events tracked against 31 declared spin-offs."
+      "Anchor concentration — University of Aberdeen appears across 3 of 4 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 2,041 follow-on funding events tracked against 31 declared spin-offs."
     ],
     "dominant_stacks": [
       {
@@ -110,23 +109,22 @@
     "country": "GB",
     "lat": 54.597,
     "lng": -5.93,
-    "cluster_count": 7,
-    "evidence_count": 628,
+    "cluster_count": 6,
+    "evidence_count": 437,
     "cluster_ids": [
-      "belfast-screen",
-      "belfast-maritime-net-zero",
-      "belfast-life-sciences",
-      "belfast-innovation-ecosystem",
       "belfast-cyber",
       "belfast-fin-tech",
-      "belfast-advanced-manufacturing"
+      "belfast-life-sciences",
+      "belfast-advanced-manufacturing",
+      "belfast-screen",
+      "belfast-maritime-net-zero"
     ],
-    "summary": "7 clusters diagnosed across Belfast Region, drawing on 628 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 7 clusters.",
+    "summary": "Belfast Region's innovation footprint draws £2.26bn of UKRI lead-led funding across 2,833 grants spanning 6 active clusters, with Belfast Maritime Net Zero (24%) the largest single cluster and Queen'S University Belfast (48%) the dominant regional anchor by UKRI £. 32 Companies House-traced spin-outs region-wide translate to £71m UKRI per spin-out.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "6 of 7 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 Queen\u2019s University Belfast appears across 4 of 7 sub-clusters as a configured ecosystem-level anchor.",
-      "Pathway scale \u2014 3,013 follow-on funding events tracked against 26 declared spin-offs."
+      "Anchor concentration — Queen’s University Belfast appears across 4 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 3,013 follow-on funding events tracked against 26 declared spin-offs."
     ],
     "dominant_stacks": [
       {
@@ -191,25 +189,22 @@
     "country": "GB",
     "lat": 52.205,
     "lng": 0.121,
-    "cluster_count": 9,
-    "evidence_count": 918,
+    "cluster_count": 6,
+    "evidence_count": 557,
     "cluster_ids": [
       "cambridge-life-sciences",
-      "cambridge-digital",
-      "cambridge-climate-tech",
-      "cambridge-quantum",
       "cambridge-semiconductors",
+      "cambridge-digital",
       "cambridge-eng-bio",
       "cambridge-advanced-manufacturing-aerospace-and-industrial-engineering",
-      "cambridge-agri-tech",
-      "cambridge-innovation-ecosystem"
+      "cambridge-climate-tech"
     ],
-    "summary": "9 clusters diagnosed across Cambridgeshire and Peterborough Combined Authority, drawing on 918 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 9 of 9 clusters.",
+    "summary": "Cambridgeshire and Peterborough's innovation footprint draws £7.80bn of UKRI lead-led funding across 11,243 grants spanning 6 active clusters, with Cambridgeshire Peterborough Life Sciences (28%) the largest single cluster and Cambridge (31%) the dominant regional anchor by UKRI £. 122 Companies House-traced spin-outs region-wide translate to £64m UKRI per spin-out.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 9 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 University of Cambridge appears across 6 of 9 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 167 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "All 9 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Cambridge appears across 6 of 9 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 167 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -235,7 +230,7 @@
     ],
     "leverage_hypotheses": [
       {
-        "hypothesis": "If one anchor institution (ARM or University of Cambridge) committed \u00a35m to a named technology pathway (e.g., flexible electronics, compound semiconductors) without prior coordination or national permission, it might reduce the system's ability to absorb demand signals through re-proving cycles and permission-seeking.",
+        "hypothesis": "If one anchor institution (ARM or University of Cambridge) committed £5m to a named technology pathway (e.g., flexible electronics, compound semiconductors) without prior coordination or national permission, it might reduce the system's ability to absorb demand signals through re-proving cycles and permission-seeking.",
         "target_stack": "Permission-Validation",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-16",
@@ -274,23 +269,22 @@
     "country": "GB",
     "lat": 51.482,
     "lng": -3.179,
-    "cluster_count": 7,
-    "evidence_count": 655,
+    "cluster_count": 6,
+    "evidence_count": 464,
     "cluster_ids": [
+      "cardiff-capital-compound-semiconductors",
+      "cardiff-capital-fin-tech",
       "cardiff-capital-cyber",
       "cardiff-capital-creative",
-      "cardiff-capital-compound-semiconductors",
-      "cardiff-capital-innovation-ecosystem",
-      "cardiff-capital-advanced-manufacturing",
       "cardiff-capital-med-tech",
-      "cardiff-capital-fin-tech"
+      "cardiff-capital-advanced-manufacturing"
     ],
-    "summary": "7 clusters diagnosed across Cardiff Capital Region, drawing on 655 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.",
+    "summary": "Cardiff Capital Region's innovation footprint draws £2.38bn of UKRI lead-led funding across 1,708 grants spanning 6 active clusters, with Cardiff Capital Region Med Tech (39%) the largest single cluster and Cardiff University (37%) the dominant regional anchor by UKRI £. 32 Companies House-traced spin-outs region-wide translate to £74m UKRI per spin-out.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "6 of 7 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 Cardiff University appears across 5 of 7 sub-clusters as a configured ecosystem-level anchor.",
-      "Pathway scale \u2014 3,350 follow-on funding events tracked against 53 declared spin-offs."
+      "Anchor concentration — Cardiff University appears across 5 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 3,350 follow-on funding events tracked against 53 declared spin-offs."
     ],
     "dominant_stacks": [
       {
@@ -316,7 +310,7 @@
     ],
     "leverage_hypotheses": [
       {
-        "hypothesis": "If one research institution or anchor (e.g., Cardiff University, Thales) were to launch a defined cyber security product/service without City Deal approval, UKRI validation, or network coordination, it might expose whether the permission\u2013validation loop is structurally necessary or locally constructed.",
+        "hypothesis": "If one research institution or anchor (e.g., Cardiff University, Thales) were to launch a defined cyber security product/service without City Deal approval, UKRI validation, or network coordination, it might expose whether the permission–validation loop is structurally necessary or locally constructed.",
         "target_stack": "Permission-Validation",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-16",
@@ -355,23 +349,21 @@
     "country": "GB",
     "lat": 50.718,
     "lng": -3.534,
-    "cluster_count": 7,
-    "evidence_count": 512,
+    "cluster_count": 5,
+    "evidence_count": 371,
     "cluster_ids": [
       "devon-torbay-advanced-manufacturing",
-      "devon-torbay-agri-food",
       "devon-torbay-photonics",
-      "devon-torbay-clean-energy",
       "devon-torbay-digital",
-      "devon-torbay-marine",
-      "devon-torbay-health-innovation"
+      "devon-torbay-health-innovation",
+      "devon-torbay-clean-energy"
     ],
-    "summary": "7 clusters diagnosed across Devon and Torbay Combined County Authority, drawing on 512 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 7 clusters.",
+    "summary": "Devon and Torbay Combined County Authority's innovation footprint draws £2.24bn of UKRI lead-led funding across 2,680 grants spanning 5 active clusters, with Devon and Torbay Clean Energy (41%) the largest single cluster and Exeter (44%) the dominant regional anchor by UKRI £. 34 Companies House-traced spin-outs region-wide translate to £66m UKRI per spin-out.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "5 of 7 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 University of Exeter appears across 4 of 7 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 26 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "Anchor concentration — University of Exeter appears across 4 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 26 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -436,22 +428,20 @@
     "country": "GB",
     "lat": 52.951,
     "lng": -1.15,
-    "cluster_count": 6,
-    "evidence_count": 599,
+    "cluster_count": 4,
+    "evidence_count": 340,
     "cluster_ids": [
-      "east-midlands-innovation-ecosystem",
-      "east-midlands-life-sciences",
-      "east-midlands-clean-energy",
       "east-midlands-transport",
-      "east-midlands-logistics",
+      "east-midlands-clean-energy",
+      "east-midlands-life-sciences",
       "east-midlands-digital"
     ],
-    "summary": "6 clusters diagnosed across East Midlands Combined County Authority, drawing on 599 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "summary": "East Midlands Combined County Authority's innovation footprint draws £5.96bn of UKRI lead-led funding across 6,599 grants spanning 4 active clusters, with East Midlands Life Sciences (32%) the largest single cluster and Sheffield (22%) the dominant regional anchor by UKRI £. 102 Companies House-traced spin-outs region-wide translate to £58m UKRI per spin-out.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 6 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 University of Nottingham appears across 5 of 6 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 104 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "All 6 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Nottingham appears across 5 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 104 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -516,25 +506,21 @@
     "country": "GB",
     "lat": 55.953,
     "lng": -3.189,
-    "cluster_count": 9,
-    "evidence_count": 869,
+    "cluster_count": 5,
+    "evidence_count": 422,
     "cluster_ids": [
-      "edinburgh-south-east-agritech",
-      "edinburgh-south-east-life-sciences",
-      "edinburgh-south-east-innovation-ecosystem",
       "edinburgh-south-east-data-ai",
-      "edinburgh-south-east-advanced-manufacturing",
       "edinburgh-south-east-fin-tech",
+      "edinburgh-south-east-life-sciences",
       "edinburgh-south-east-space",
-      "edinburgh-south-east-scotland-life-sciences",
-      "edinburgh-south-east-scotland-health-tech"
+      "edinburgh-south-east-advanced-manufacturing"
     ],
-    "summary": "9 clusters diagnosed across Edinburgh and South East, drawing on 869 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 9 clusters.",
+    "summary": "Edinburgh and South East's innovation footprint draws £4.15bn of UKRI lead-led funding across 4,474 grants spanning 5 active clusters, with ESES Life Sciences (47%) the largest single cluster and Edinburgh (43%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "5 of 9 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 University of Edinburgh appears across 3 of 9 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 200 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "Anchor concentration — University of Edinburgh appears across 3 of 9 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 200 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -569,7 +555,7 @@
         "_cluster_name": "ESES Advanced Manufacturing"
       },
       {
-        "hypothesis": "If UKRI grant reporting (P006: 590 grants, \u00a3626m) and City Region Deal reporting (P005) were required to distinguish between value created locally (revenue/employment in ESES region) and value extracted externally (spin-off HQ relocation, founder emigration, IP licensing to non-local firms), it might reduce the system's ability to absorb uncertainty about extraction by making the distinction between ecosystem contribution and ecosystem retention visible.",
+        "hypothesis": "If UKRI grant reporting (P006: 590 grants, £626m) and City Region Deal reporting (P005) were required to distinguish between value created locally (revenue/employment in ESES region) and value extracted externally (spin-off HQ relocation, founder emigration, IP licensing to non-local firms), it might reduce the system's ability to absorb uncertainty about extraction by making the distinction between ecosystem contribution and ecosystem retention visible.",
         "target_stack": "Extraction-Narrative",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-24",
@@ -609,12 +595,12 @@
       "greater-glasgow-net-zero",
       "greater-glasgow-fintech"
     ],
-    "summary": "Greater Glasgow's innovation footprint draws £4.56bn of UKRI lead-led funding across 5,718 grants spanning 6 active clusters, with Glasgow (30%) the dominant regional anchor and Greater Glasgow Digital Creative (24%) the largest single cluster.",
+    "summary": "Greater Glasgow's innovation footprint draws £4.56bn of UKRI lead-led funding across 5,718 grants spanning 6 active clusters, with Greater Glasgow Digital Creative (24%) the largest single cluster and Glasgow (30%) the dominant regional anchor by UKRI £. 55 Companies House-traced spin-outs region-wide translate to £83m UKRI per spin-out.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "7 of 8 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 University of Strathclyde appears across 6 of 8 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 90 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "Anchor concentration — University of Strathclyde appears across 6 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 90 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -679,22 +665,18 @@
     "country": "GB",
     "lat": 53.23,
     "lng": -0.54,
-    "cluster_count": 6,
-    "evidence_count": 510,
+    "cluster_count": 2,
+    "evidence_count": 145,
     "cluster_ids": [
-      "greater-lincolnshire-ports",
-      "greater-lincolnshire-innovation-ecosystem",
-      "greater-lincolnshire-defence",
-      "greater-lincolnshire-manufacturing",
-      "greater-lincolnshire-agri-food",
-      "greater-lincolnshire-energy"
+      "greater-lincolnshire-energy",
+      "greater-lincolnshire-manufacturing"
     ],
-    "summary": "6 clusters diagnosed across Greater Lincolnshire Combined County Authority, drawing on 510 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 5 of 6 clusters.",
+    "summary": "Greater Lincolnshire Combined County Authority's innovation footprint draws £2.29bn of UKRI lead-led funding across 2,010 grants spanning 2 active clusters, with Greater Lincolnshire Energy (54%) the largest single cluster and Nottingham (31%) the dominant regional anchor by UKRI £. 33 Companies House-traced spin-outs region-wide translate to £69m UKRI per spin-out.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "4 of 6 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 University of Lincoln appears across 3 of 6 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 55 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "Anchor concentration — University of Lincoln appears across 3 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 55 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -720,7 +702,7 @@
     ],
     "leverage_hypotheses": [
       {
-        "hypothesis": "If one class of decision (e.g., sub-\u00a350k innovation grants, or peer-to-peer collaboration agreements) were explicitly exempted from requiring Combined County Authority or Humber Freeport Board approval, it might reduce the system's ability to absorb opportunity signals via coordination and permission-seeking.",
+        "hypothesis": "If one class of decision (e.g., sub-£50k innovation grants, or peer-to-peer collaboration agreements) were explicitly exempted from requiring Combined County Authority or Humber Freeport Board approval, it might reduce the system's ability to absorb opportunity signals via coordination and permission-seeking.",
         "target_stack": "Process-Permission",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-18",
@@ -738,7 +720,7 @@
         "_cluster_name": "Greater Lincolnshire Manufacturing"
       },
       {
-        "hypothesis": "If one annual sector report (e.g., by Lincolnshire Food Partnership, P005, or GLLEP, P002) published dual metrics for anchor firms (P018): (a) GVA generated in region, (b) capital reinvested in region (equipment, facilities, local suppliers), it might make visible the difference between value generation (P003: \u00a33.9bn GVA) and value retention, reducing the system's ability to absorb success signals via extraction narrative (S4) and success narrative (S7).",
+        "hypothesis": "If one annual sector report (e.g., by Lincolnshire Food Partnership, P005, or GLLEP, P002) published dual metrics for anchor firms (P018): (a) GVA generated in region, (b) capital reinvested in region (equipment, facilities, local suppliers), it might make visible the difference between value generation (P003: £3.9bn GVA) and value retention, reducing the system's ability to absorb success signals via extraction narrative (S4) and success narrative (S7).",
         "target_stack": "Extraction-Narrative",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-24",
@@ -759,24 +741,23 @@
     "country": "GB",
     "lat": 51.507,
     "lng": -0.128,
-    "cluster_count": 8,
-    "evidence_count": 1049,
+    "cluster_count": 7,
+    "evidence_count": 703,
     "cluster_ids": [
-      "london-climate-tech-net-zero",
-      "london-innovation-ecosystem",
-      "london-transport-logistics-mobility",
-      "london-built-environment-property",
       "london-ai-data-software",
       "london-creative-media-fashion",
       "london-life-sciences-health",
-      "london-financial-services-fin-tech"
+      "london-financial-services-fin-tech",
+      "london-transport-logistics-mobility",
+      "london-climate-tech-net-zero",
+      "london-commerce-retail-platforms"
     ],
-    "summary": "8 clusters diagnosed across Greater London Authority, drawing on 1,049 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.",
+    "summary": "Greater London's innovation footprint draws £18.77bn of UKRI lead-led funding across 29,338 grants spanning 7 active clusters, with London Life Sciences Health (29%) the largest single cluster and University College London (20%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 8 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 Imperial College London appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 305 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "All 8 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — Imperial College London appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 305 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -811,7 +792,7 @@
         "_cluster_name": "London Transport Logistics Mobility"
       },
       {
-        "hypothesis": "If UKRI launched a 2-year pilot programme (\u00a310m, 50 grants) restricted to non-anchor institutions (excluding the 18 configured anchors per P019), it might reduce the system's ability to absorb opportunity signals without adaptation by demonstrating that permission architecture can operate through alternative nodes.",
+        "hypothesis": "If UKRI launched a 2-year pilot programme (£10m, 50 grants) restricted to non-anchor institutions (excluding the 18 configured anchors per P019), it might reduce the system's ability to absorb opportunity signals without adaptation by demonstrating that permission architecture can operate through alternative nodes.",
         "target_stack": "Extraction-Permission (Triple)",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-22",
@@ -820,7 +801,7 @@
         "_cluster_name": "London AI Data Software"
       },
       {
-        "hypothesis": "A probe could test whether one accelerator (e.g., Fashion District Incubator, operational since 2019 per P009/P022) commits to a public, non-negotiable closure threshold (e.g., \"if <10% of cohort 2025\u20132027 achieves \u00a3100k revenue by year 3, programme closes in 2028\") makes the tolerance mechanism visible. This does not improve performance but tests whether the volume-tolerance loop (S1+S3+S8) can operate when forgiveness is pre-constrained.",
+        "hypothesis": "A probe could test whether one accelerator (e.g., Fashion District Incubator, operational since 2019 per P009/P022) commits to a public, non-negotiable closure threshold (e.g., \"if <10% of cohort 2025–2027 achieves £100k revenue by year 3, programme closes in 2028\") makes the tolerance mechanism visible. This does not improve performance but tests whether the volume-tolerance loop (S1+S3+S8) can operate when forgiveness is pre-constrained.",
         "target_stack": "Volume-Tolerance",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-19",
@@ -841,24 +822,22 @@
     "country": "GB",
     "lat": 53.483,
     "lng": -2.244,
-    "cluster_count": 8,
-    "evidence_count": 915,
+    "cluster_count": 6,
+    "evidence_count": 584,
     "cluster_ids": [
-      "greater-manchester-health",
-      "greater-manchester-low-carbon",
-      "greater-manchester-creative-media",
-      "greater-manchester-advanced-materials",
-      "greater-manchester-innovation-ecosystem",
       "greater-manchester-digital",
+      "greater-manchester-creative-media",
+      "greater-manchester-health",
+      "greater-manchester-advanced-materials",
       "greater-manchester-financial-services",
-      "greater-manchester-financial-professional-services-and-fintech"
+      "greater-manchester-low-carbon"
     ],
-    "summary": "8 clusters diagnosed across Greater Manchester Combined Authority, drawing on 915 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 8 clusters.",
+    "summary": "Greater Manchester's innovation footprint draws £6.84bn of UKRI lead-led funding across 9,221 grants spanning 6 active clusters, with Greater Manchester Advanced Materials (29%) the largest single cluster and Manchester (46%) the dominant regional anchor by UKRI £. 115 Companies House-traced spin-outs region-wide translate to £59m UKRI per spin-out.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "7 of 8 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 The University of Manchester appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 111 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "Anchor concentration — The University of Manchester appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 111 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -902,7 +881,7 @@
         "_cluster_name": "Greater Manchester Creative Media"
       },
       {
-        "hypothesis": "If GMCA explicitly designated one class of decision (e.g., university-industry research contracts below \u00a350k, or corporate-startup pilot projects below \u00a325k) as not requiring coordination or partnership facilitation, it might demonstrate that permission architecture is not necessary for all opportunity types, potentially reducing friction and opportunity absorption through coordination.",
+        "hypothesis": "If GMCA explicitly designated one class of decision (e.g., university-industry research contracts below £50k, or corporate-startup pilot projects below £25k) as not requiring coordination or partnership facilitation, it might demonstrate that permission architecture is not necessary for all opportunity types, potentially reducing friction and opportunity absorption through coordination.",
         "target_stack": "Process-Permission",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-18",
@@ -923,24 +902,20 @@
     "country": "GB",
     "lat": 53.744,
     "lng": -0.333,
-    "cluster_count": 8,
-    "evidence_count": 618,
+    "cluster_count": 4,
+    "evidence_count": 283,
     "cluster_ids": [
-      "hull-east-yorkshire-chemicals",
       "hull-east-yorkshire-advanced-manufacturing",
-      "hull-east-yorkshire-logistics",
       "hull-east-yorkshire-clean-energy",
       "hull-east-yorkshire-digital",
-      "hull-east-yorkshire-health-tech",
-      "hull-east-yorkshire-agri-food",
-      "hull-east-yorkshire-innovation-ecosystem"
+      "hull-east-yorkshire-health-tech"
     ],
-    "summary": "8 clusters diagnosed across Hull and East Yorkshire Combined Authority, drawing on 618 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 8 clusters.",
+    "summary": "Hull and East Yorkshire Combined Authority's innovation footprint draws £1.98bn of UKRI lead-led funding across 2,046 grants spanning 4 active clusters, with Hull and East Yorkshire Advanced Manufacturing (33%) the largest single cluster and York (45%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "6 of 8 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 CATCH appears across 2 of 8 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 27 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "Anchor concentration — CATCH appears across 2 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 27 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -975,7 +950,7 @@
         "_cluster_name": "HullEastYorkshire CleanEnergy"
       },
       {
-        "hypothesis": "If one documented case study were produced showing: (a) how a specific business-research collaboration (e.g., Cranswick's UKRI participation, P003) was initiated, (b) what role intermediaries played vs. direct contact, (c) what transaction costs were incurred, and (d) what outcome was achieved \u2014 it might reduce the system's ability to absorb complexity and uncertainty signals by shifting the burden of proof from \"intermediation is necessary\" to \"intermediation adds value beyond direct coupling.\"",
+        "hypothesis": "If one documented case study were produced showing: (a) how a specific business-research collaboration (e.g., Cranswick's UKRI participation, P003) was initiated, (b) what role intermediaries played vs. direct contact, (c) what transaction costs were incurred, and (d) what outcome was achieved — it might reduce the system's ability to absorb complexity and uncertainty signals by shifting the burden of proof from \"intermediation is necessary\" to \"intermediation adds value beyond direct coupling.\"",
         "target_stack": "Intermediary-Narrative",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-27",
@@ -984,7 +959,7 @@
         "_cluster_name": "HullEastYorkshire AgriFood"
       },
       {
-        "hypothesis": "If one funding programme (e.g., Clean Growth Innovation Programme or Humber Chemical Focus training) pre-committed to a single hard exit criterion (e.g., \"no cohort after 2026 if fewer than 3 spin-offs achieve \u00a3500k revenue by 2025\"), it might reduce the system's ability to absorb failure signals without triggering portfolio-level visibility of tolerance mechanisms.",
+        "hypothesis": "If one funding programme (e.g., Clean Growth Innovation Programme or Humber Chemical Focus training) pre-committed to a single hard exit criterion (e.g., \"no cohort after 2026 if fewer than 3 spin-offs achieve £500k revenue by 2025\"), it might reduce the system's ability to absorb failure signals without triggering portfolio-level visibility of tolerance mechanisms.",
         "target_stack": "Volume-Tolerance",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-19",
@@ -1005,24 +980,20 @@
     "country": "GB",
     "lat": 57.478,
     "lng": -4.224,
-    "cluster_count": 8,
-    "evidence_count": 565,
+    "cluster_count": 4,
+    "evidence_count": 280,
     "cluster_ids": [
-      "inverness-highlands-tourism",
-      "inverness-highlands-life-sciences",
-      "inverness-highlands-food-drink",
-      "inverness-highlands-space",
-      "inverness-highlands-aquaculture",
       "inverness-highlands-energy",
-      "inverness-highlands-creative",
-      "inverness-highlands-forestry"
+      "inverness-highlands-life-sciences",
+      "inverness-highlands-space",
+      "inverness-highlands-creative"
     ],
-    "summary": "8 clusters diagnosed across Inverness and Highlands, drawing on 565 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 8 clusters.",
+    "summary": "Inverness and Highlands's innovation footprint draws £537m of UKRI lead-led funding across 372 grants spanning 4 active clusters, with Highlands and Islands Energy (54%) the largest single cluster and Scottish And Southern Energy (25%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "6 of 8 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 Scottish Association for Marine Science appears across 2 of 8 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 2 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "Anchor concentration — Scottish Association for Marine Science appears across 2 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 2 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -1048,7 +1019,7 @@
     ],
     "leverage_hypotheses": [
       {
-        "hypothesis": "If one public agency (e.g., Highland Council, HIE, or VisitScotland) launched a single tourism infrastructure project without Regional Leadership Group coordination, without multi-year strategic validation, and without awaiting Scottish Government funding approval \u2014 using only existing delegated authority \u2014 it might expose whether the validation-permission loop is structurally necessary or locally adaptive.",
+        "hypothesis": "If one public agency (e.g., Highland Council, HIE, or VisitScotland) launched a single tourism infrastructure project without Regional Leadership Group coordination, without multi-year strategic validation, and without awaiting Scottish Government funding approval — using only existing delegated authority — it might expose whether the validation-permission loop is structurally necessary or locally adaptive.",
         "target_stack": "Permission-Validation",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-16",
@@ -1066,7 +1037,7 @@
         "_cluster_name": "Highlands and Islands FoodDrink"
       },
       {
-        "hypothesis": "A probe could test whether one capital allocation decision made without inter-agency coordination (e.g., HIE deploying <\u00a3500k to a single recipient without Scottish Enterprise partnership formation) might reduce the perceived necessity of coordination for subsequent similar-scale decisions.",
+        "hypothesis": "A probe could test whether one capital allocation decision made without inter-agency coordination (e.g., HIE deploying <£500k to a single recipient without Scottish Enterprise partnership formation) might reduce the perceived necessity of coordination for subsequent similar-scale decisions.",
         "target_stack": "Permission-Validation",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-16",
@@ -1087,22 +1058,21 @@
     "country": "GB",
     "lat": 53.763,
     "lng": -2.703,
-    "cluster_count": 6,
-    "evidence_count": 523,
+    "cluster_count": 5,
+    "evidence_count": 271,
     "cluster_ids": [
+      "lancashire-advanced-manufacturing",
       "lancashire-clean-energy",
-      "lancashire-innovation-ecosystem",
       "lancashire-digital-cyber",
-      "lancashire-food-agritech",
-      "lancashire-space",
-      "lancashire-advanced-manufacturing"
+      "lancashire-health-innovation",
+      "lancashire-space"
     ],
-    "summary": "6 clusters diagnosed across Lancashire Combined County Authority, drawing on 523 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "summary": "Lancashire Combined County Authority's innovation footprint draws £1.64bn of UKRI lead-led funding across 1,468 grants spanning 5 active clusters, with Lancashire Clean Energy (36%) the largest single cluster and Lancaster University (47%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "5 of 6 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 University of Lancashire appears across 5 of 6 sub-clusters as a configured ecosystem-level anchor.",
-      "Pathway scale \u2014 1,611 follow-on funding events tracked against 156 declared spin-offs."
+      "Anchor concentration — University of Lancashire appears across 5 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 1,611 follow-on funding events tracked against 156 declared spin-offs."
     ],
     "dominant_stacks": [
       {
@@ -1137,7 +1107,7 @@
         "_cluster_name": "Lancashire Food Agritech"
       },
       {
-        "hypothesis": "If one intermediary organisation (e.g., Boost Business Lancashire) were to launch a single pilot programme without prior Combined Authority approval, using existing evidence of demand (e.g., 70,381 company incorporations 2021\u20132025, P016) as post-hoc justification rather than pre-approval, it might reduce the system's ability to absorb opportunity signals through the permission-validation loop by demonstrating that validation can occur through action rather than coordination.",
+        "hypothesis": "If one intermediary organisation (e.g., Boost Business Lancashire) were to launch a single pilot programme without prior Combined Authority approval, using existing evidence of demand (e.g., 70,381 company incorporations 2021–2025, P016) as post-hoc justification rather than pre-approval, it might reduce the system's ability to absorb opportunity signals through the permission-validation loop by demonstrating that validation can occur through action rather than coordination.",
         "target_stack": "Permission-Validation",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-16",
@@ -1167,23 +1137,20 @@
     "country": "GB",
     "lat": 53.408,
     "lng": -2.991,
-    "cluster_count": 7,
-    "evidence_count": 726,
+    "cluster_count": 4,
+    "evidence_count": 364,
     "cluster_ids": [
-      "liverpool-city-region-innovation-ecosystem",
-      "liverpool-city-region-visitor-economy",
-      "liverpool-city-region-digital-creative",
-      "liverpool-city-region-maritime-logistics",
+      "liverpool-city-region-health-life-sciences",
       "liverpool-city-region-advanced-manufacturing",
-      "liverpool-city-region-clean-energy",
-      "liverpool-city-region-health-life-sciences"
+      "liverpool-city-region-digital-creative",
+      "liverpool-city-region-clean-energy"
     ],
-    "summary": "7 clusters diagnosed across Liverpool City Region Combined Authority, drawing on 726 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.",
+    "summary": "Liverpool City Region Combined Authority's innovation footprint draws £3.64bn of UKRI lead-led funding across 3,572 grants spanning 4 active clusters, with Liverpool City Region Health Life Sciences (32%) the largest single cluster and Liverpool (32%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 7 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 University of Liverpool appears across 4 of 7 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 50 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "All 7 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Liverpool appears across 4 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 50 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -1248,23 +1215,22 @@
     "country": "GB",
     "lat": 54.978,
     "lng": -1.614,
-    "cluster_count": 7,
-    "evidence_count": 664,
+    "cluster_count": 6,
+    "evidence_count": 479,
     "cluster_ids": [
-      "north-east-energy",
       "north-east-manufacturing",
+      "north-east-energy",
       "north-east-digital",
       "north-east-life-sciences",
-      "north-east-creative",
       "north-east-space",
-      "north-east-innovation-ecosystem"
+      "north-east-creative"
     ],
-    "summary": "7 clusters diagnosed across North East Combined Authority, drawing on 664 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 7 of 7 clusters.",
+    "summary": "North East Combined Authority's innovation footprint draws £4.17bn of UKRI lead-led funding across 4,022 grants spanning 6 active clusters, with North East Life Sciences (33%) the largest single cluster and Newcastle University (35%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "6 of 7 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 Northumbria University appears across 3 of 7 sub-clusters as a configured ecosystem-level anchor.",
-      "Pathway scale \u2014 5,006 follow-on funding events tracked against 69 declared spin-offs."
+      "Anchor concentration — Northumbria University appears across 3 of 7 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 5,006 follow-on funding events tracked against 69 declared spin-offs."
     ],
     "dominant_stacks": [
       {
@@ -1329,20 +1295,19 @@
     "country": "GB",
     "lat": 53.383,
     "lng": -1.468,
-    "cluster_count": 4,
-    "evidence_count": 399,
+    "cluster_count": 3,
+    "evidence_count": 242,
     "cluster_ids": [
+      "south-yorkshire-advanced-manufacturing",
       "south-yorkshire-healthtech",
-      "south-yorkshire-innovation-ecosystem",
-      "south-yorkshire-digital",
-      "south-yorkshire-advanced-manufacturing"
+      "south-yorkshire-digital"
     ],
-    "summary": "4 clusters diagnosed across South Yorkshire Mayoral Combined Authority, drawing on 399 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 4 of 4 clusters.",
+    "summary": "South Yorkshire Mayoral Combined Authority's innovation footprint draws £2.38bn of UKRI lead-led funding across 2,419 grants spanning 3 active clusters, with South Yorkshire Advanced Manufacturing (44%) the largest single cluster and Sheffield (48%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 4 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 University of Sheffield appears across 2 of 4 sub-clusters as a configured ecosystem-level anchor.",
-      "Pathway scale \u2014 3,471 follow-on funding events tracked against 58 declared spin-offs."
+      "All 4 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Sheffield appears across 2 of 4 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 3,471 follow-on funding events tracked against 58 declared spin-offs."
     ],
     "dominant_stacks": [
       {
@@ -1377,7 +1342,7 @@
         "_cluster_name": "South Yorkshire Healthtech"
       },
       {
-        "hypothesis": "If one MCA thematic board (e.g., Innovation Board) were permitted to commit \u00a35M from the Gainshare fund to a single named project without cross-board coordination or UK Government approval, it might reduce the system's ability to absorb demand signals through re-proving cycles. The probe would test whether unilateral action by a governance sub-unit can proceed without triggering coordination requirements or permission-seeking.",
+        "hypothesis": "If one MCA thematic board (e.g., Innovation Board) were permitted to commit £5M from the Gainshare fund to a single named project without cross-board coordination or UK Government approval, it might reduce the system's ability to absorb demand signals through re-proving cycles. The probe would test whether unilateral action by a governance sub-unit can proceed without triggering coordination requirements or permission-seeking.",
         "target_stack": "Permission-Validation",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-16",
@@ -1407,21 +1372,18 @@
     "country": "GB",
     "lat": 56.117,
     "lng": -3.937,
-    "cluster_count": 5,
-    "evidence_count": 359,
+    "cluster_count": 2,
+    "evidence_count": 118,
     "cluster_ids": [
-      "stirling-clackmannanshire-food-drink",
-      "stirling-clackmannanshire-manufacturing",
-      "stirling-clackmannanshire-aquaculture",
-      "stirling-clackmannanshire-innovation-ecosystem",
-      "stirling-clackmannanshire-digital"
+      "stirling-clackmannanshire-digital",
+      "stirling-clackmannanshire-manufacturing"
     ],
-    "summary": "5 clusters diagnosed across Stirling and Clackmannanshire, drawing on 359 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 5 of 5 clusters.",
+    "summary": "Stirling and Clackmannanshire's innovation footprint draws £125m of UKRI lead-led funding across 93 grants spanning 2 active clusters, with Stirling Clackmannanshire Manufacturing (64%) the largest single cluster and Stirling (36%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "4 of 5 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 University of Stirling appears across 2 of 5 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 4 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "Anchor concentration — University of Stirling appears across 2 of 5 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 4 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -1486,22 +1448,20 @@
     "country": "GB",
     "lat": 56.462,
     "lng": -2.97,
-    "cluster_count": 6,
-    "evidence_count": 524,
+    "cluster_count": 4,
+    "evidence_count": 301,
     "cluster_ids": [
-      "tay-cities-innovation-ecosystem",
-      "tay-cities-creative-tech",
-      "tay-cities-agri-food",
-      "tay-cities-clean-growth",
       "tay-cities-life-sciences",
+      "tay-cities-creative-tech",
+      "tay-cities-clean-growth",
       "tay-cities-engineering"
     ],
-    "summary": "6 clusters diagnosed across Tay Cities Region, drawing on 524 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "summary": "Tay Cities Region's innovation footprint draws £1.67bn of UKRI lead-led funding across 1,688 grants spanning 4 active clusters, with Tay Cities Life Sciences (36%) the largest single cluster and St Andrews (32%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 6 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 University of Dundee appears across 2 of 6 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 56 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "All 6 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Dundee appears across 2 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 56 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -1566,22 +1526,20 @@
     "country": "GB",
     "lat": 54.568,
     "lng": -1.235,
-    "cluster_count": 6,
-    "evidence_count": 581,
+    "cluster_count": 4,
+    "evidence_count": 331,
     "cluster_ids": [
       "tees-valley-net-zero",
-      "tees-valley-life-sciences",
-      "tees-valley-logistics",
       "tees-valley-manufacturing",
       "tees-valley-digital",
-      "tees-valley-innovation-ecosystem"
+      "tees-valley-life-sciences"
     ],
-    "summary": "6 clusters diagnosed across Tees Valley Combined Authority, drawing on 581 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "summary": "Tees Valley Combined Authority's innovation footprint draws £3.40bn of UKRI lead-led funding across 758 grants spanning 4 active clusters, with Tees Valley Life Sciences (83%) the largest single cluster and Centre For Process Innovation (78%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 6 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 Teesside University appears across 3 of 6 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 16 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "All 6 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — Teesside University appears across 3 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 16 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -1646,27 +1604,26 @@
     "country": "GB",
     "lat": 51.454,
     "lng": -0.973,
-    "cluster_count": 11,
-    "evidence_count": 1209,
+    "cluster_count": 10,
+    "evidence_count": 870,
     "cluster_ids": [
-      "thames-valley-quantum",
       "thames-valley-life-sciences",
-      "thames-valley-creative",
-      "thames-valley-environmental-intelligence",
-      "thames-valley-digital",
-      "thames-valley-business-services",
-      "thames-valley-defence-tech",
       "thames-valley-space",
       "thames-valley-energy",
-      "thames-valley-innovation-ecosystem",
-      "thames-valley-engineering"
+      "thames-valley-digital",
+      "thames-valley-engineering",
+      "thames-valley-creative",
+      "thames-valley-environmental-intelligence",
+      "thames-valley-business-services",
+      "thames-valley-future-mobility",
+      "thames-valley-defence-tech"
     ],
-    "summary": "11 clusters diagnosed across Thames Valley Strategic Mayoral Authority, drawing on 1,209 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 11 of 11 clusters.",
+    "summary": "Thames Valley's innovation footprint draws £17.89bn of UKRI lead-led funding across 31,249 grants spanning 10 active clusters, with Thames Valley Life Sciences (36%) the largest single cluster and Oxford (29%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 11 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 University of Oxford appears across 7 of 11 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 354 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "All 11 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Oxford appears across 7 of 11 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 354 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -1731,24 +1688,21 @@
     "country": "GB",
     "lat": 52.486,
     "lng": -1.891,
-    "cluster_count": 8,
-    "evidence_count": 875,
+    "cluster_count": 5,
+    "evidence_count": 455,
     "cluster_ids": [
-      "west-midlands-bpfs",
-      "west-midlands-digital",
-      "west-midlands-logistics",
-      "west-midlands-creative",
       "west-midlands-advanced-manufacturing",
+      "west-midlands-digital",
       "west-midlands-health-tech",
-      "west-midlands-innovation-ecosystem",
-      "west-midlands-clean-growth"
+      "west-midlands-clean-growth",
+      "west-midlands-creative"
     ],
-    "summary": "8 clusters diagnosed across West Midlands Combined Authority, drawing on 875 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.",
+    "summary": "West Midlands Combined Authority's innovation footprint draws £5.78bn of UKRI lead-led funding across 5,696 grants spanning 5 active clusters, with WMCA Advanced Manufacturing (39%) the largest single cluster and Warwick (19%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 8 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 University of Birmingham appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.",
-      "Pathway scale \u2014 5,606 follow-on funding events tracked against 76 declared spin-offs."
+      "All 8 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of Birmingham appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 5,606 follow-on funding events tracked against 76 declared spin-offs."
     ],
     "dominant_stacks": [
       {
@@ -1792,7 +1746,7 @@
         "_cluster_name": "WMCA HealthTech"
       },
       {
-        "hypothesis": "If one support programme (e.g., Innovation Birmingham, STEAMhouse) launched a cohort with pre-committed capital allocation (e.g., \u00a3500k committed before applications) rather than validating through coordination and permission cycles, it might reduce the system's ability to absorb opportunity signals through re-proving and waiting without adaptation.",
+        "hypothesis": "If one support programme (e.g., Innovation Birmingham, STEAMhouse) launched a cohort with pre-committed capital allocation (e.g., £500k committed before applications) rather than validating through coordination and permission cycles, it might reduce the system's ability to absorb opportunity signals through re-proving and waiting without adaptation.",
         "target_stack": "Permission-Validation",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-16",
@@ -1813,8 +1767,8 @@
     "country": "GB",
     "lat": 51.454,
     "lng": -2.588,
-    "cluster_count": 9,
-    "evidence_count": 909,
+    "cluster_count": 7,
+    "evidence_count": 622,
     "cluster_ids": [
       "west-of-england-clean-tech",
       "west-of-england-space",
@@ -1822,16 +1776,14 @@
       "west-of-england-fin-tech",
       "west-of-england-aerospace",
       "west-of-england-digital",
-      "west-of-england-innovation-ecosystem",
-      "west-of-england-quantum",
       "west-of-england-life-sciences"
     ],
-    "summary": "9 clusters diagnosed across West of England Combined Authority, drawing on 909 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 9 of 9 clusters.",
+    "summary": "West of England Combined Authority's innovation footprint draws £4.36bn of UKRI lead-led funding across 3,016 grants spanning 7 active clusters, with West of England Aerospace (32%) the largest single cluster and Bristol (34%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "8 of 9 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 University of Bristol appears across 6 of 9 sub-clusters as a configured ecosystem-level anchor.",
-      "Pathway scale \u2014 4,347 follow-on funding events tracked against 70 declared spin-offs."
+      "Anchor concentration — University of Bristol appears across 6 of 9 sub-clusters as a configured ecosystem-level anchor.",
+      "Pathway scale — 4,347 follow-on funding events tracked against 70 declared spin-offs."
     ],
     "dominant_stacks": [
       {
@@ -1857,7 +1809,7 @@
     ],
     "leverage_hypotheses": [
       {
-        "hypothesis": "If one university (e.g., University of Bristol per P001, or University of Bath per P002) launched a cleantech venture without prior WECA coordination, national funding application, or incubator programme enrollment \u2014 using only internal resources and direct industry partnership (as evidenced by P016 partnerships formed in 2024) \u2014 and publicly documented the decision pathway, it might reduce the system's ability to absorb opportunity through re-proving and coordination by demonstrating that validation can occur through action rather than process.",
+        "hypothesis": "If one university (e.g., University of Bristol per P001, or University of Bath per P002) launched a cleantech venture without prior WECA coordination, national funding application, or incubator programme enrollment — using only internal resources and direct industry partnership (as evidenced by P016 partnerships formed in 2024) — and publicly documented the decision pathway, it might reduce the system's ability to absorb opportunity through re-proving and coordination by demonstrating that validation can occur through action rather than process.",
         "target_stack": "Permission-Validation",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-16",
@@ -1899,19 +1851,19 @@
     "cluster_count": 6,
     "evidence_count": 557,
     "cluster_ids": [
-      "west-yorkshire-creative-industries",
       "west-yorkshire-advanced-manufacturing",
-      "west-yorkshire-digital-technology",
-      "west-yorkshire-green-economy",
       "west-yorkshire-health-life-sciences",
-      "west-yorkshire-financial-professional-services"
+      "west-yorkshire-digital-technology",
+      "west-yorkshire-financial-professional-services",
+      "west-yorkshire-creative-industries",
+      "west-yorkshire-green-economy"
     ],
-    "summary": "6 clusters diagnosed across West Yorkshire Combined Authority, drawing on 557 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 5 of 6 clusters.",
+    "summary": "West Yorkshire Combined Authority's innovation footprint draws £2.75bn of UKRI lead-led funding across 3,411 grants spanning 6 active clusters, with West Yorkshire Health Life Sciences (35%) the largest single cluster and Leeds (46%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "5 of 6 clusters register all three reinforcing backbone configurations at confident levels.",
-      "Anchor concentration \u2014 University of Leeds appears across 4 of 6 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 32 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "Anchor concentration — University of Leeds appears across 4 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 32 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -1976,22 +1928,21 @@
     "country": "GB",
     "lat": 53.96,
     "lng": -1.08,
-    "cluster_count": 6,
-    "evidence_count": 407,
+    "cluster_count": 5,
+    "evidence_count": 285,
     "cluster_ids": [
-      "york-north-yorkshire-food-farming",
-      "york-north-yorkshire-rail-innovation",
-      "york-north-yorkshire-defence-security",
-      "york-north-yorkshire-creative-industries",
       "york-north-yorkshire-engineering-biology-life-sciences",
-      "york-north-yorkshire-clean-energy"
+      "york-north-yorkshire-clean-energy",
+      "york-north-yorkshire-rail-innovation",
+      "york-north-yorkshire-creative-industries",
+      "york-north-yorkshire-advanced-manufacturing"
     ],
-    "summary": "6 clusters diagnosed across York and North Yorkshire Combined Authority, drawing on 407 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 6 of 6 clusters.",
+    "summary": "York and North Yorkshire Combined Authority's innovation footprint draws £4.87bn of UKRI lead-led funding across 5,958 grants spanning 5 active clusters, with York and North Yorkshire Engineering Biology Life Sciences (31%) the largest single cluster and Leeds (20%) the dominant regional anchor by UKRI £.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
-      "All 6 clusters register the three reinforcing backbone configurations at confident levels \u2014 coordination, extraction, and governance capture fire universally across the region.",
-      "Anchor concentration \u2014 University of York appears across 6 of 6 sub-clusters as a configured ecosystem-level anchor.",
-      "Extraction signal \u2014 44 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
+      "All 6 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.",
+      "Anchor concentration — University of York appears across 6 of 6 sub-clusters as a configured ecosystem-level anchor.",
+      "Extraction signal — 44 spin-offs declared by the UKRI cohort, but the spin-off match-rate is structurally empty: the diagnostic could not produce a verified count of how many remain registered or active in the region."
     ],
     "dominant_stacks": [
       {
@@ -2017,7 +1968,7 @@
     ],
     "leverage_hypotheses": [
       {
-        "hypothesis": "If RAF Linton-on-Ouse Defence Innovation Hub were to launch one pilot programme (e.g., SME co-location trial, direct procurement challenge) before completing coordination with all stakeholders or securing full national funding approval, using existing \u00a312M MoD infrastructure investment (P004), it might reduce the system's ability to absorb opportunity through re-proving-coordination-permission cycles by demonstrating that validation can occur through doing rather than coordinating.",
+        "hypothesis": "If RAF Linton-on-Ouse Defence Innovation Hub were to launch one pilot programme (e.g., SME co-location trial, direct procurement challenge) before completing coordination with all stakeholders or securing full national funding approval, using existing £12M MoD infrastructure investment (P004), it might reduce the system's ability to absorb opportunity through re-proving-coordination-permission cycles by demonstrating that validation can occur through doing rather than coordinating.",
         "target_stack": "Permission-Validation",
         "timeline": "6-12 months",
         "_target_stack_id": "STK-16",

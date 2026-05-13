@@ -86,6 +86,34 @@ function loadV3Bundle(slug) {
   catch (e) { console.warn(`Failed to parse bundle ${p}: ${e.message}`); return null; }
 }
 
+// v3 registry. When present, drives the in-scope cluster list (so we
+// only emit UK pages defined by v3, not all 377 entries in clusters.json).
+// Falls back to clusters.json iteration when the registry is absent.
+const V3_REGISTRY_PATH = path.join(__dirname, 'v3-data', 'v2_cluster_registry.json');
+const v3Registry = fs.existsSync(V3_REGISTRY_PATH)
+  ? JSON.parse(fs.readFileSync(V3_REGISTRY_PATH, 'utf8'))
+  : null;
+
+// Build a stub cluster object for registry entries with no clusters.json
+// counterpart (4 net-new clusters where Pipeline 1 data hasn't been
+// imported yet). Stalls/stacks/leverage/resemblances render empty states.
+function stubClusterFromBundle(slug, entry, bundle) {
+  return {
+    id: slug,
+    name: bundle && bundle.cluster_name ? bundle.cluster_name : slug,
+    city: bundle && bundle.region_name ? bundle.region_name : '',
+    country: 'GB',
+    parent: entry && entry.supercluster ? entry.supercluster : null,
+    regime: null,
+    summary: '',
+    _evidence_count: null,
+    _anchor_type: null,
+    stalls: [],
+    stacks: [],
+    leverage: null,
+  };
+}
+
 const V3_SOURCE_LINE_LEAD = 'Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data.';
 const V3_CTA_FRAMING = 'Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.';
 const V3_CTA_HREF = 'https://www.clusteros.io/request';
@@ -655,12 +683,34 @@ new Chart(document.getElementById('radarChart').getContext('2d'),{
 }
 
 // ── GENERATE ─────────────────────────────────────────────
+// Build the in-scope task list.
+//   - When the v3 registry is present: drive off registry's shape:"cluster"
+//     entries. This is the UK production path (125 in-scope clusters).
+//   - When absent: iterate clusters.json as before. Dev / legacy fallback.
+//   - --only filter applies on top of either set.
+const clustersById = Object.create(null);
+for (const c of clusters) clustersById[c.id] = c;
+
+let tasks;
+if (v3Registry) {
+  tasks = [];
+  for (const [slug, entry] of Object.entries(v3Registry)) {
+    if (slug.startsWith('_') || slug.startsWith('//')) continue;
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) continue;
+    if (entry.shape !== 'cluster') continue;
+    const cluster = clustersById[slug] || stubClusterFromBundle(slug, entry, loadV3Bundle(slug));
+    tasks.push({ slug, cluster });
+  }
+} else {
+  tasks = clusters.map(c => ({ slug: c.id || c.name.toLowerCase().replace(/[^a-z0-9]+/g,'-'), cluster: c }));
+}
+
 let count = 0;
 let v3Count = 0;
 let skippedExisting = 0;
 let filteredOut = 0;
-for (const cluster of clusters) {
-  const slug = cluster.id||cluster.name.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+let stubCount = 0;
+for (const { slug, cluster } of tasks) {
   if (allowedIds && !allowedIds.has(slug)) { filteredOut++; continue; }
   const outPath = path.join(outDir, `${slug}.html`);
   if (argv.newOnly && fs.existsSync(outPath)) { skippedExisting++; continue; }
@@ -669,8 +719,10 @@ for (const cluster of clusters) {
   const html = template(cluster, similar, bundle);
   fs.writeFileSync(outPath, html, 'utf8');
   if (bundle) v3Count++;
+  if (!clustersById[slug]) stubCount++;
   count++;
 }
-console.log(`Generated ${count} cluster pages → clusters/ (${v3Count} via v3 bundle)`);
+console.log(`Generated ${count} cluster pages → clusters/ (${v3Count} via v3 bundle, ${stubCount} from stubs)`);
 if (argv.newOnly) console.log(`Skipped (file already exists): ${skippedExisting}`);
 if (allowedIds) console.log(`Filtered out (outside --only / --only-file): ${filteredOut}`);
+if (v3Registry) console.log(`Driven from v3 registry (${V3_REGISTRY_PATH}).`);

@@ -149,8 +149,47 @@ footer a:hover{color:var(--green);}
 .diagnostic-cta-link-v3 a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
 .diagnostic-cta-link-v3 a:hover{border-bottom-color:var(--ink);}
 .diagnostic-source-v3{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+/* PNG tap-to-zoom trigger + modal */
+.png-zoom-trigger{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;font:inherit;color:inherit;}
+.png-zoom-hint{display:none;margin-top:0.5rem;font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
+@media(max-width:680px){.png-zoom-hint{display:block;}}
+.png-modal{position:fixed;inset:0;background:rgba(15,12,8,0.94);z-index:9999;display:flex;align-items:center;justify-content:center;overflow:auto;padding:1rem;cursor:zoom-out;}
+.png-modal img{max-width:none;height:auto;display:block;margin:auto;}
+.png-modal .png-modal-close{position:fixed;top:0.75rem;right:0.75rem;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.4);padding:0.5rem 0.9rem;border-radius:2px;cursor:pointer;}
+.png-modal .png-modal-close:hover{background:rgba(0,0,0,0.85);}
+body.png-modal-open{overflow:hidden;}
+/* Skip-nav chip row (mobile only) */
+.section-jumpnav{display:none;}
+@media(max-width:680px){
+  .section-jumpnav{display:flex;flex-wrap:wrap;gap:0.4rem;margin:0 0 2rem;padding:0 0 1.25rem;border-bottom:1px solid var(--border);}
+  .section-jumpnav a{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-dim);background:var(--surface);border:1px solid var(--border);padding:5px 9px;border-radius:2px;text-decoration:none;transition:color 0.15s,border-color 0.15s;}
+  .section-jumpnav a:hover{color:var(--green);border-color:var(--green);}
+}
+/* Mobile-only collapsibles */
+details.section-collapsible{margin-bottom:2.5rem;}
+details.section-collapsible > summary{list-style:none;cursor:pointer;}
+details.section-collapsible > summary::-webkit-details-marker{display:none;}
+details.section-collapsible > summary::marker{content:'';}
+details.section-collapsible > summary .section-label{margin-bottom:1.2rem;}
+@media(max-width:680px){
+  details.section-collapsible > summary .section-label{position:relative;padding-right:1.5rem;}
+  details.section-collapsible > summary .section-label::after{content:'▾';position:absolute;right:0;top:50%;transform:translateY(-65%);font-size:11px;color:var(--ink-muted);}
+  details.section-collapsible:not([open]) > summary .section-label::after{content:'▸';}
+}
+@media(min-width:681px){
+  details.section-collapsible > summary{cursor:default;pointer-events:none;}
+}
+/* Mobile responsive touch-ups */
 @media(max-width:640px){
+  .sibling-clusters .sibling-row{flex-direction:column;align-items:flex-start;gap:0.5rem;}
+  .sibling-clusters .sibling-sep{display:none;}
+  .stack-header{flex-direction:column;align-items:flex-start;gap:0.3rem;}
   .diagnostic-cta-v3,.diagnostic-source-v3{text-align:left;}
+}
+@media(max-width:480px){
+  h1{font-size:1.5rem;}
+  .cluster-meta{gap:0.3rem;}
+  .csb-btn{padding:0 0.7rem;font-size:10px;letter-spacing:0.05em;}
 }
 </style>
 <!-- Mixpanel tracking -->
@@ -197,7 +236,10 @@ footer a:hover{color:var(--green);}
   </header>
   <section class="diagnostic-composite-v3">
     <figure class="diagnostic-figure-v3">
-      <img src="https://preview.clusteros.io/static/diagnostics/greater-manchester-digital-diagnostic-wide.png?v=2026-05-13" alt="Greater Manchester Digital diagnostic Sankey" class="diagnostic-image-v3" loading="lazy" />
+      <button type="button" class="png-zoom-trigger" aria-label="Enlarge diagnostic Sankey">
+        <img src="https://preview.clusteros.io/static/diagnostics/greater-manchester-digital-diagnostic-wide.png?v=2026-05-13" alt="Greater Manchester Digital diagnostic Sankey" class="diagnostic-image-v3" loading="lazy" />
+      </button>
+      <p class="png-zoom-hint">Tap diagram to enlarge</p>
     </figure>
     <div class="diagnostic-cta-v3">
       <p class="diagnostic-cta-framing-v3">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
@@ -205,9 +247,17 @@ footer a:hover{color:var(--green);}
     </div>
     <p class="diagnostic-source-v3">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
   </section>
+  <nav class="section-jumpnav" aria-label="Jump to section">
+    <a href="#stalls">Stalls</a>
+    <a href="#radar">Radar</a>
+    <a href="#stacks">Stacks</a>
+    <a href="#leverage">Leverage</a>
+    <a href="#resemblances">Resemblances</a>
+    <a href="#siblings">Siblings</a>
+  </nav>
   
   <div class="two-col">
-    <div class="section">
+    <div class="section" id="stalls">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
       <div class="stall-row">
       <span class="stall-id">S1</span>
@@ -292,15 +342,15 @@ footer a:hover{color:var(--green);}
       <span class="conf conf-medium">medium</span>
     </div>
     </div>
-    <div class="section">
+    <div class="section" id="radar">
       <div class="section-label">Stall radar · Intensity across all 9 types</div>
       <div class="radar-wrap">
         <canvas id="radarChart"></canvas>
       </div>
     </div>
   </div>
-  <div class="section">
-    <div class="section-label">Stabilisation stacks · Why single interventions fail</div>
+  <details class="section section-collapsible" id="stacks" open>
+    <summary><div class="section-label">Stabilisation stacks · Why single interventions fail</div></summary>
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
@@ -358,8 +408,8 @@ footer a:hover{color:var(--green);}
       </div>
       <p class="stack-desc">Activity scaling absorbs immediate pressure while waiting for permission; the waiting period provides time for further activity to accumulate; both pressure and opportunity absorbed without requiring conversion or autonomous action.</p>
     </div></div>
-  </div>
-  <div class="section">
+  </details>
+  <div class="section" id="leverage">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
     <p class="leverage-hyp">"A probe could test whether one GMCA-funded programme launched without multi-partner coordination (using CDO authority alone) reduces the perceived necessity of coordination-permission cycles for subsequent programmes. If the unilateral launch proceeds without system collapse, it may expose whether coordination is structurally required or locally adaptive."</p>
@@ -369,8 +419,8 @@ footer a:hover{color:var(--green);}
   </div>
     <p class="disclaimer">Leverage hypotheses are testable perturbations, not prescriptions. Where demand-side behaviour is weakly visible, the correct move is observation — improving visibility before attempting change.</p>
   </div>
-  <div class="section">
-    <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
+  <details class="section section-collapsible" id="resemblances" open>
+    <summary><div class="section-label">Structural resemblances · Clusters with similar stall configurations</div></summary>
     <div class="similar-grid"><a class="similar-card" href="/clusters/cambridge-climate-tech.html">
       <div class="sc-name">Cambridgeshire Peterborough ClimateTech</div>
       <div class="sc-meta">Cambridge · United Kingdom</div>
@@ -387,8 +437,8 @@ footer a:hover{color:var(--green);}
       <div class="sc-regime">Permission-Validation</div>
       <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
     </a></div>
-  </div>
-  <div class="section sibling-clusters">
+  </details>
+  <div class="section sibling-clusters" id="siblings">
     <div class="section-label">Other clusters in Greater Manchester</div>
     <div class="sibling-row">
       <a href="/clusters/greater-manchester-creative-media.html">Greater Manchester Creative Media</a><span class="sibling-sep">·</span><a href="/clusters/greater-manchester-health.html">Greater Manchester Health</a><span class="sibling-sep">·</span><a href="/clusters/greater-manchester-advanced-materials.html">Greater Manchester Advanced Materials</a><span class="sibling-sep">·</span><a href="/clusters/greater-manchester-financial-services.html">Greater Manchester Financial Services</a><span class="sibling-sep">·</span><a href="/clusters/greater-manchester-low-carbon.html">Greater Manchester Low Carbon</a>
@@ -449,6 +499,55 @@ new Chart(document.getElementById('radarChart').getContext('2d'),{
     }
   }
 });
+</script>
+
+<script>
+(function(){
+  // Collapse mobile-only details sections on initial load.
+  function applyCollapse(){
+    var mobile = window.matchMedia('(max-width: 680px)').matches;
+    document.querySelectorAll('details.section-collapsible').forEach(function(d){
+      d.open = !mobile;
+    });
+  }
+  applyCollapse();
+  // Re-apply on resize across the breakpoint.
+  var lastIsMobile = window.matchMedia('(max-width: 680px)').matches;
+  window.addEventListener('resize', function(){
+    var nowMobile = window.matchMedia('(max-width: 680px)').matches;
+    if (nowMobile !== lastIsMobile){ lastIsMobile = nowMobile; applyCollapse(); }
+  });
+  // PNG lightbox.
+  document.addEventListener('click', function(e){
+    var trigger = e.target.closest && e.target.closest('.png-zoom-trigger');
+    if (!trigger) return;
+    e.preventDefault();
+    var img = trigger.querySelector('img');
+    if (!img) return;
+    var modal = document.createElement('div');
+    modal.className = 'png-modal';
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'png-modal-close';
+    close.textContent = 'Close ×';
+    var enlarged = document.createElement('img');
+    enlarged.src = img.src;
+    enlarged.alt = img.alt;
+    modal.appendChild(close);
+    modal.appendChild(enlarged);
+    document.body.appendChild(modal);
+    document.body.classList.add('png-modal-open');
+    function dismiss(){
+      modal.remove();
+      document.body.classList.remove('png-modal-open');
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(ev){ if (ev.key === 'Escape') dismiss(); }
+    close.addEventListener('click', dismiss);
+    modal.addEventListener('click', function(ev){ if (ev.target === modal) dismiss(); });
+    document.addEventListener('keydown', onKey);
+  });
+})();
 </script>
 </body>
 </html>

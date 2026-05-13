@@ -599,19 +599,17 @@
     "country": "GB",
     "lat": 55.864,
     "lng": -4.252,
-    "cluster_count": 8,
-    "evidence_count": 978,
+    "cluster_count": 6,
+    "evidence_count": 623,
     "cluster_ids": [
       "greater-glasgow-digital-creative",
       "greater-glasgow-advanced-manufacturing",
       "greater-glasgow-life-sciences",
-      "greater-glasgow-critical-technologies",
-      "greater-glasgow-innovation-ecosystem",
       "greater-glasgow-space",
       "greater-glasgow-net-zero",
       "greater-glasgow-fintech"
     ],
-    "summary": "8 clusters diagnosed across Greater Glasgow, drawing on 978 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.",
+    "summary": "Greater Glasgow's innovation footprint draws £4.56bn of UKRI lead-led funding across 5,718 grants spanning 6 active clusters, with Glasgow (30%) the dominant regional anchor and Greater Glasgow Digital Creative (24%) the largest single cluster.",
     "regime": "Coordination-Intermediary-Activity",
     "regional_patterns": [
       "7 of 8 clusters register all three reinforcing backbone configurations at confident levels.",

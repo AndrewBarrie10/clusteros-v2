@@ -103,7 +103,7 @@ function monthYearFromDate(iso) {
 // --font-sans, serif is reserved for h1, mono is reserved for labels,
 // pills, source line and CTA framing.
 const V3_CLUSTER_CSS = `
-.cluster-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:660px;margin:0 0 2rem;}
+.cluster-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:660px;margin:1.25rem 0 2rem;}
 .diagnostic-composite-v3{margin:0 0 3rem;}
 .diagnostic-figure-v3{margin:0;text-align:center;}
 .diagnostic-image-v3{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}

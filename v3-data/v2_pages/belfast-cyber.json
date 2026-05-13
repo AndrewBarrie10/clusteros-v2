@@ -1,0 +1,12 @@
+{
+  "v2_slug": "belfast-cyber",
+  "shape": "cluster",
+  "v3_region": "belfast_region",
+  "v3_cluster": "belfast_cyber",
+  "region_name": "Belfast Region",
+  "cluster_name": "Belfast Cyber",
+  "strap": "Belfast Cyber draws £520m of UKRI lead-led funding across 1,916 grants, anchored by Queen'S University Belfast (52%), Ulster (7%), with Seagate Technology (Ireland) on the industrial side. 19 Companies House-traced spin-outs translate to £27m UKRI per spin-out.",
+  "behaviour": "The cluster shows medium-confidence \"Re-proving instead of narrowing\" and \"Stabilising around incumbents\" behaviour — repeated infrastructure commitments reinforce incumbent positions rather than redirecting capability toward new anchors or sub-domain specialisms.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/belfast-cyber-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

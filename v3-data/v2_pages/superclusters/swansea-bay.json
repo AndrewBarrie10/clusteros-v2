@@ -1,0 +1,49 @@
+{
+  "v2_slug": "swansea-bay-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "swansea_bay_city_region",
+  "v3_cluster": "_all",
+  "region_name": "Swansea Bay City Region",
+  "cluster_name": "Swansea Bay City Region Innovation Ecosystem",
+  "strap": "Swansea Bay City Region's innovation footprint draws £974m of UKRI lead-led funding across 846 grants spanning 4 active clusters, with Swansea Bay Energy (33%) the largest single cluster and Swansea University (59%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows medium-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/swansea-bay-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "swansea-bay",
+  "constituent_clusters": [
+    {
+      "v2_slug": "swansea-bay-energy",
+      "name": "Swansea Bay Energy",
+      "v3_cluster": "swansea_bay_energy"
+    },
+    {
+      "v2_slug": "swansea-bay-manufacturing",
+      "name": "Swansea Bay Manufacturing",
+      "v3_cluster": "swansea_bay_manufacturing"
+    },
+    {
+      "v2_slug": "swansea-bay-life-sciences",
+      "name": "Swansea Bay Life Sciences",
+      "v3_cluster": "swansea_bay_life_sciences"
+    },
+    {
+      "v2_slug": "swansea-bay-digital",
+      "name": "Swansea Bay Digital",
+      "v3_cluster": "swansea_bay_digital"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 4,
+    "total_gbp": 973523526.0,
+    "total_grants": 846,
+    "top_cluster_slug": "swansea_bay_energy",
+    "top_cluster_name": "Swansea Bay Energy",
+    "top_cluster_gbp": 320108893.5,
+    "top_cluster_share": 0.3288147486432701,
+    "lead_name": "SWANSEA UNIVERSITY",
+    "lead_gbp": 574907111.0,
+    "lead_share": 0.5905425967076219,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

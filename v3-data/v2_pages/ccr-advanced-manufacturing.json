@@ -1,0 +1,12 @@
+{
+  "v2_slug": "ccr-advanced-manufacturing",
+  "shape": "cluster",
+  "v3_region": "cardiff_capital_region",
+  "v3_cluster": "ccr_advanced_manufacturing",
+  "region_name": "Cardiff Capital Region",
+  "cluster_name": "CCR Advanced Manufacturing",
+  "strap": "CCR Advanced Manufacturing draws £61m of UKRI lead-led funding across 30 grants, led by Iqe and Zenotech.",
+  "behaviour": "The cluster shows low-confidence \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/ccr-advanced-manufacturing-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

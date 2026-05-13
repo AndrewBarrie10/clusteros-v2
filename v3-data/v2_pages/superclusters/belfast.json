@@ -1,0 +1,59 @@
+{
+  "v2_slug": "belfast-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "belfast_region",
+  "v3_cluster": "_all",
+  "region_name": "Belfast Region",
+  "cluster_name": "Belfast Region Innovation Ecosystem",
+  "strap": "Belfast Region's innovation footprint draws £2.26bn of UKRI lead-led funding across 2,833 grants spanning 6 active clusters, with Belfast Maritime Net Zero (24%) the largest single cluster and Queen'S University Belfast (48%) the dominant regional anchor by UKRI £. 32 Companies House-traced spin-outs region-wide translate to £71m UKRI per spin-out.",
+  "behaviour": "The region shows medium-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/belfast-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "belfast",
+  "constituent_clusters": [
+    {
+      "v2_slug": "belfast-cyber",
+      "name": "Belfast Cyber",
+      "v3_cluster": "belfast_cyber"
+    },
+    {
+      "v2_slug": "belfast-fin-tech",
+      "name": "Belfast Fintech",
+      "v3_cluster": "belfast_fin_tech"
+    },
+    {
+      "v2_slug": "belfast-life-sciences",
+      "name": "Belfast Life Sciences",
+      "v3_cluster": "belfast_life_sciences"
+    },
+    {
+      "v2_slug": "belfast-advanced-manufacturing",
+      "name": "Belfast Advanced Manufacturing",
+      "v3_cluster": "belfast_advanced_manufacturing"
+    },
+    {
+      "v2_slug": "belfast-screen",
+      "name": "Belfast Screen",
+      "v3_cluster": "belfast_screen"
+    },
+    {
+      "v2_slug": "belfast-maritime-net-zero",
+      "name": "Belfast Maritime Net Zero",
+      "v3_cluster": "belfast_maritime_net_zero"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 6,
+    "total_gbp": 2259839438.7833343,
+    "total_grants": 2833,
+    "top_cluster_slug": "belfast_maritime_net_zero",
+    "top_cluster_name": "Belfast Maritime Net Zero",
+    "top_cluster_gbp": 547386403.2166667,
+    "top_cluster_share": 0.24222358182728762,
+    "lead_name": "QUEEN'S UNIVERSITY BELFAST",
+    "lead_gbp": 1087839168.1166673,
+    "lead_share": 0.4813789641189484,
+    "ch_spinouts": 32,
+    "gbp_per_spinout": 70619982.4619792
+  }
+}

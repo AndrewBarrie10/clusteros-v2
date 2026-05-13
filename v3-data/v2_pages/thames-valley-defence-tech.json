@@ -1,0 +1,12 @@
+{
+  "v2_slug": "thames-valley-defence-tech",
+  "shape": "cluster",
+  "v3_region": "thames_valley_strategic_mayoral_authority",
+  "v3_cluster": "thames_valley_defence_tech",
+  "region_name": "Thames Valley",
+  "cluster_name": "Thames Valley Defence Tech",
+  "strap": "Thames Valley Defence Tech draws £28m of UKRI lead-led funding across 224 grants, anchored by Oxford (66%), Surrey (28%).",
+  "behaviour": "The cluster shows medium-confidence \"Forgiving instead of redesigning\" and \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/thames-valley-defence-tech-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

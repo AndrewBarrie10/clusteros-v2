@@ -1,0 +1,12 @@
+{
+  "v2_slug": "wmca-digital",
+  "shape": "cluster",
+  "v3_region": "west_midlands_combined_authority",
+  "v3_cluster": "wmca_digital",
+  "region_name": "West Midlands Combined Authority",
+  "cluster_name": "WMCA Digital",
+  "strap": "WMCA Digital draws £722m of UKRI lead-led funding across 733 grants, anchored by Warwick (23%), Birmingham (19%).",
+  "behaviour": "The cluster shows high-confidence \"Forgiving instead of redesigning\" and \"Coordinating instead of deciding\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/wmca-digital-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

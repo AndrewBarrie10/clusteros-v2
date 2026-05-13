@@ -1,0 +1,12 @@
+{
+  "v2_slug": "greater-manchester-financial-services",
+  "shape": "cluster",
+  "v3_region": "greater_manchester_combined_authority",
+  "v3_cluster": "greater_manchester_financial_services",
+  "region_name": "Greater Manchester",
+  "cluster_name": "Greater Manchester Financial Services",
+  "strap": "Greater Manchester Financial Services draws £475m of UKRI lead-led funding across 4,836 grants, anchored by Manchester (96%), with Uk Data Service on the industrial side. 25 Companies House-traced spin-outs translate to £19m UKRI per spin-out.",
+  "behaviour": "The cluster shows low-confidence \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/greater-manchester-financial-services-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

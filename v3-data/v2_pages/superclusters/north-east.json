@@ -1,0 +1,59 @@
+{
+  "v2_slug": "north-east-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "north_east_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "North East Combined Authority",
+  "cluster_name": "North East Combined Authority Innovation Ecosystem",
+  "strap": "North East Combined Authority's innovation footprint draws £4.17bn of UKRI lead-led funding across 4,022 grants spanning 6 active clusters, with North East Life Sciences (33%) the largest single cluster and Newcastle University (35%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows medium-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/north-east-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "north-east",
+  "constituent_clusters": [
+    {
+      "v2_slug": "north-east-manufacturing",
+      "name": "North East Manufacturing",
+      "v3_cluster": "north_east_manufacturing"
+    },
+    {
+      "v2_slug": "north-east-energy",
+      "name": "North East Energy",
+      "v3_cluster": "north_east_energy"
+    },
+    {
+      "v2_slug": "north-east-digital",
+      "name": "North East Digital",
+      "v3_cluster": "north_east_digital"
+    },
+    {
+      "v2_slug": "north-east-life-sciences",
+      "name": "North East Life Sciences",
+      "v3_cluster": "north_east_life_sciences"
+    },
+    {
+      "v2_slug": "north-east-space",
+      "name": "North East Space",
+      "v3_cluster": "north_east_space"
+    },
+    {
+      "v2_slug": "north-east-creative",
+      "name": "North East Creative",
+      "v3_cluster": "north_east_creative"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 6,
+    "total_gbp": 4173351302.5,
+    "total_grants": 4022,
+    "top_cluster_slug": "north_east_life_sciences",
+    "top_cluster_name": "North East Life Sciences",
+    "top_cluster_gbp": 1364703509.0,
+    "top_cluster_share": 0.32700422516132044,
+    "lead_name": "NEWCASTLE UNIVERSITY",
+    "lead_gbp": 1463714780.0,
+    "lead_share": 0.35072886845715046,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

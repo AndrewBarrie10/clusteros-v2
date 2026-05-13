@@ -1,0 +1,12 @@
+{
+  "v2_slug": "devon-torbay-digital",
+  "shape": "cluster",
+  "v3_region": "devon_and_torbay_combined_county_authority",
+  "v3_cluster": "devon_torbay_digital",
+  "region_name": "Devon and Torbay Combined County Authority",
+  "cluster_name": "Devon and Torbay Digital",
+  "strap": "Devon and Torbay Digital draws £311m of UKRI lead-led funding across 263 grants, anchored by Exeter (35%), with Plessey Semiconductors and Met Office on the industrial side. 11 Companies House-traced spin-outs translate to £28m UKRI per spin-out.",
+  "behaviour": "The cluster shows low-confidence \"Re-proving instead of narrowing\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/devon-torbay-digital-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

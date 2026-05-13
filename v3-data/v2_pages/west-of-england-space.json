@@ -1,0 +1,12 @@
+{
+  "v2_slug": "west-of-england-space",
+  "shape": "cluster",
+  "v3_region": "west_of_england_combined_authority",
+  "v3_cluster": "west_of_england_space",
+  "region_name": "West of England Combined Authority",
+  "cluster_name": "West of England Space",
+  "strap": "West of England Space draws £37m of UKRI lead-led funding across 20 grants, anchored by Bristol (27%), with Kets Quantum Security and Environment Agency on the industrial side.",
+  "behaviour": "The cluster shows low-confidence \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-of-england-space-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

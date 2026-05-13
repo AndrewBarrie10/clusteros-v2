@@ -1,0 +1,12 @@
+{
+  "v2_slug": "west-of-england-aerospace",
+  "shape": "cluster",
+  "v3_region": "west_of_england_combined_authority",
+  "v3_cluster": "west_of_england_aerospace",
+  "region_name": "West of England Combined Authority",
+  "cluster_name": "West of England Aerospace",
+  "strap": "West of England Aerospace draws £1.38bn of UKRI lead-led funding across 952 grants, anchored by Bristol (22%), with Environment Agency and Renishaw on the industrial side.",
+  "behaviour": "The cluster shows high-confidence \"Forgiving instead of redesigning\" and \"Re-proving instead of narrowing\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-of-england-aerospace-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

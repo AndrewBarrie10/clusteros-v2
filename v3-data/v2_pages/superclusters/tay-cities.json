@@ -1,0 +1,49 @@
+{
+  "v2_slug": "tay-cities-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "tay_cities_region",
+  "v3_cluster": "_all",
+  "region_name": "Tay Cities Region",
+  "cluster_name": "Tay Cities Region Innovation Ecosystem",
+  "strap": "Tay Cities Region's innovation footprint draws £1.67bn of UKRI lead-led funding across 1,688 grants spanning 4 active clusters, with Tay Cities Life Sciences (36%) the largest single cluster and St Andrews (32%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows medium-confidence \"Coordination–Activity\" stabilisation stacks at ecosystem grain — multi-actor coordination distributes risk across institutional partners without forcing the strategic option-collapse that would convert capability into a defined pathway.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/tay-cities-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "tay-cities",
+  "constituent_clusters": [
+    {
+      "v2_slug": "tay-cities-life-sciences",
+      "name": "Tay Cities Life Sciences",
+      "v3_cluster": "tay_cities_life_sciences"
+    },
+    {
+      "v2_slug": "tay-cities-creative-tech",
+      "name": "Tay Cities Creative Tech",
+      "v3_cluster": "tay_cities_creative_tech"
+    },
+    {
+      "v2_slug": "tay-cities-clean-growth",
+      "name": "Tay Cities Clean Growth",
+      "v3_cluster": "tay_cities_clean_growth"
+    },
+    {
+      "v2_slug": "tay-cities-engineering",
+      "name": "Tay Cities Engineering",
+      "v3_cluster": "tay_cities_engineering"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 4,
+    "total_gbp": 1671541583.0,
+    "total_grants": 1688,
+    "top_cluster_slug": "tay_cities_life_sciences",
+    "top_cluster_name": "Tay Cities Life Sciences",
+    "top_cluster_gbp": 594750855.0,
+    "top_cluster_share": 0.35580978723399187,
+    "lead_name": "UNIVERSITY OF ST ANDREWS",
+    "lead_gbp": 539226471.0,
+    "lead_share": 0.32259231626904733,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

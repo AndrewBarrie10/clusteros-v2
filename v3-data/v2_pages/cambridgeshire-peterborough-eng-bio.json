@@ -1,0 +1,12 @@
+{
+  "v2_slug": "cambridgeshire-peterborough-eng-bio",
+  "shape": "cluster",
+  "v3_region": "cambridgeshire_and_peterborough_combined_authority",
+  "v3_cluster": "cambridgeshire_peterborough_eng_bio",
+  "region_name": "Cambridgeshire and Peterborough",
+  "cluster_name": "Cambridgeshire & Peterborough Engineering Biology",
+  "strap": "Cambridgeshire & Peterborough Engineering Biology draws £267m of UKRI lead-led funding across 424 grants, anchored by Cambridge (18%), European Bioinformatics Institute (9%), with Microsoft Research on the industrial side. 4 Companies House-traced spin-outs translate to £67m UKRI per spin-out.",
+  "behaviour": "The cluster shows medium-confidence \"Coordinating instead of deciding\" and \"Re-proving instead of narrowing\" behaviour — multi-actor coordination distributes risk across institutional partners without forcing the strategic option-collapse that would convert capability into a defined pathway.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/cambridgeshire-peterborough-eng-bio-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

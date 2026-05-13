@@ -1,0 +1,12 @@
+{
+  "v2_slug": "belfast-advanced-manufacturing",
+  "shape": "cluster",
+  "v3_region": "belfast_region",
+  "v3_cluster": "belfast_advanced_manufacturing",
+  "region_name": "Belfast Region",
+  "cluster_name": "Belfast Advanced Manufacturing",
+  "strap": "Belfast Advanced Manufacturing draws £458m of UKRI lead-led funding across 1,894 grants, anchored by Queen'S University Belfast (40%), Ulster (9%), with Seagate Technology (Ireland) on the industrial side. 17 Companies House-traced spin-outs translate to £27m UKRI per spin-out.",
+  "behaviour": "The cluster shows medium-confidence \"Re-proving instead of narrowing\" and \"Stabilising around incumbents\" behaviour — repeated infrastructure commitments reinforce incumbent positions rather than redirecting capability toward new anchors or sub-domain specialisms.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/belfast-advanced-manufacturing-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

@@ -1,0 +1,33 @@
+{
+  "v2_slug": "greater-glasgow-innovation-ecosystem",
+  "v3_region": "greater_glasgow",
+  "v3_cluster": "_all",
+  "region_name": "Greater Glasgow",
+  "cluster_name": "Greater Glasgow Innovation Ecosystem",
+  "strap": "Greater Glasgow's innovation footprint draws £4.56bn of UKRI lead-led funding across 5,718 grants spanning 6 active clusters, with Glasgow (30%) the dominant regional anchor and Greater Glasgow Digital Creative (24%) the largest single cluster.",
+  "behaviour": "The region shows medium-confidence \"Coordination–Intermediation\" and \"Extraction–Intermediation\" stabilisation stacks at ecosystem grain — intermediaries cluster around incumbent anchors, absorbing the coordination load that would otherwise force a redesign of how value flows between universities, public funders and corporate spin-out activity.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/greater-glasgow-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "constituent_clusters": [
+    { "v2_slug": "greater-glasgow-digital-creative",      "name": "Greater Glasgow Digital Creative",      "v3_cluster": "greater_glasgow_digital_creative" },
+    { "v2_slug": "greater-glasgow-advanced-manufacturing", "name": "Greater Glasgow Advanced Manufacturing", "v3_cluster": "greater_glasgow_advanced_manufacturing" },
+    { "v2_slug": "greater-glasgow-life-sciences",         "name": "Greater Glasgow Life Sciences",         "v3_cluster": "greater_glasgow_life_sciences" },
+    { "v2_slug": "greater-glasgow-space",                 "name": "Greater Glasgow Space",                 "v3_cluster": "greater_glasgow_space" },
+    { "v2_slug": "greater-glasgow-net-zero",              "name": "Greater Glasgow Net Zero",              "v3_cluster": "greater_glasgow_net_zero" },
+    { "v2_slug": "greater-glasgow-fintech",               "name": "Greater Glasgow Fintech",               "v3_cluster": "greater_glasgow_fintech" }
+  ],
+  "metrics": {
+    "active_clusters":   6,
+    "total_gbp":         4563013814.0,
+    "total_grants":      5718,
+    "top_cluster_slug":  "greater_glasgow_digital_creative",
+    "top_cluster_name":  "Greater Glasgow Digital Creative",
+    "top_cluster_gbp":   1117639735,
+    "top_cluster_share": 0.245,
+    "lead_name":         "UNIVERSITY OF GLASGOW",
+    "lead_gbp":          1359000000,
+    "lead_share":        0.298,
+    "ch_spinouts":       55,
+    "gbp_per_spinout":   82963887
+  }
+}

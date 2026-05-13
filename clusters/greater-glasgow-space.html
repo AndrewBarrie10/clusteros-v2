@@ -133,30 +133,20 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 
-.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
-.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
-.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
-</style>
-<style>
-.diagnostic-composite{margin:2.5rem 0 3rem;position:relative;left:50%;transform:translateX(-50%);width:min(1000px,calc(100vw - 32px));}
-.diagnostic-headlines{list-style:none;padding:0;margin:0 0 1.5rem;font-family:var(--font-mono);font-size:13.5px;line-height:1.6;color:var(--ink);}
-.diagnostic-headlines li{padding:4px 0;}
-.diagnostic-headlines b{font-weight:600;color:var(--ink);}
-.diagnostic-figure{margin:0;text-align:center;}
-.diagnostic-image{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
-.diagnostic-caption{font-family:var(--font-serif);font-size:19px;font-style:normal;color:var(--ink);line-height:1.4;margin:1.25rem auto 0;max-width:720px;text-align:center;}
-.diagnostic-cta{margin:1.75rem auto 0;max-width:720px;text-align:center;}
-.diagnostic-cta-framing{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
-.diagnostic-cta-link{margin:0;font-family:var(--font-mono);font-size:14px;}
-.diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;transition:border-bottom-color 0.15s;}
-.diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
-.diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+.cluster-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:660px;margin:0 0 2rem;}
+.diagnostic-composite-v3{margin:0 0 3rem;}
+.diagnostic-figure-v3{margin:0;text-align:center;}
+.diagnostic-image-v3{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-cta-v3{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing-v3{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link-v3{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link-v3 a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
+.diagnostic-cta-link-v3 a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source-v3{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
 @media(max-width:640px){
-  .diagnostic-composite{margin:1.75rem 0 2rem;width:calc(100vw - 32px);}
-  .diagnostic-headlines{font-size:13px;text-align:left;}
-  .diagnostic-caption{font-size:17px;text-align:left;margin-top:1rem;}
-  .diagnostic-cta,.diagnostic-source{text-align:left;}
-}</style>
+  .diagnostic-cta-v3,.diagnostic-source-v3{text-align:left;}
+}
+</style>
 <!-- Mixpanel tracking -->
 <script type="text/javascript">
   (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
@@ -193,44 +183,22 @@ footer a:hover{color:var(--green);}
       <span class="meta-tag meta-plain">Glasgow, United Kingdom</span>
       <span class="meta-tag meta-Permission-Validation">Permission-Validation</span>
       
-      <span class="meta-tag meta-plain">67 evidence items</span>
+      
     </div>
-    <p class="cluster-summary">Greater Glasgow Space runs on 67 evidence items (Greater Glasgow Space UKRI grants: 171 grants, £327m total, 34 distinct lead). The diagnostic resolves a Permission-Validation configuration at HIGH confidence.</p>
+    <p class="cluster-summary">Greater Glasgow Space draws £229m of UKRI lead-led funding across 938 grants, anchored by Strathclyde (86%), with Craft Prospect on the industrial side. 3 Companies House-traced spin-outs translate to £76m UKRI per spin-out.</p>
+    <p class="cluster-behaviour">The cluster shows medium-confidence "Incumbent–Intermediation Stabilisation" behaviour — established anchors dominate the cluster's £ with intermediary programmes mediating capability rather than challenging the incumbent structure. Pipeline 1 evidence: University of Strathclyde absorbs 86% of UKRI £ as the dominant incumbent, with formal coordination bodies and accelerator programmes mediating between academic and the Clyde Space / Craft Prospect spin-out base across £229m of UKRI activity over 938 grants.</p>
   </header>
-  <section class="diagnostic-composite">
-    <ul class="diagnostic-headlines">
-      <li><b>£229m</b> UKRI lead-led across <b>938</b> grants tagged to this cluster</li>
-      <li>Top 5 institutions absorbed <b>98%</b> of the cluster £; <b>UNIVERSITY OF STRATHCLYDE</b> alone leads <b>86%</b></li>
-      <li><b>3</b> Companies House-traced spin-outs → <b>£76m</b> UKRI per spin-out — vs <b>Greater Manchester</b>: <b>£17m</b> per spin-out</li>
-    </ul>
-    <figure class="diagnostic-figure">
-      <img src="/diagnostics/glasgow-space-diagnostic.png" alt="Diagnostic flow for Greater Glasgow Space: UKRI funders, anchor institutions, subclusters, and outcome distribution." class="diagnostic-image" loading="lazy" />
-      <figcaption class="diagnostic-caption">Largely a University of Strathclyde story — 86% of the region's £229m in UKRI space funding — supported by Glasgow-built satellite firms including Clyde Space, Craft Prospect and Wideblue, within one of Europe's leading small-satellite manufacturing hubs.</figcaption>
+  <section class="diagnostic-composite-v3">
+    <figure class="diagnostic-figure-v3">
+      <img src="https://preview.clusteros.io/static/diagnostics/greater-glasgow-space-diagnostic-wide.png?v=2026-05-12" alt="Greater Glasgow Space diagnostic Sankey" class="diagnostic-image-v3" loading="lazy" />
     </figure>
-    <div class="diagnostic-cta">
-      <p class="diagnostic-cta-framing">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
-      <p class="diagnostic-cta-link"><a href="https://www.clusteros.io/request">Request access →</a></p>
+    <div class="diagnostic-cta-v3">
+      <p class="diagnostic-cta-framing-v3">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
+      <p class="diagnostic-cta-link-v3"><a href="https://www.clusteros.io/request">Request access →</a></p>
     </div>
-    <p class="diagnostic-source">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); Crunchbase (disclosed capital). Snapshot May 2026.</p>
+    <p class="diagnostic-source-v3">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
   </section>
-  <div class="stats-row">
-    <div class="stat-cell">
-      <div class="stat-num">9</div>
-      <div class="stat-label">Active stalls</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Stacks identified</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">67</div>
-      <div class="stat-label">Evidence items</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Leverage timeline (mo)</div>
-    </div>
-  </div>
+  
   <div class="two-col">
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
@@ -373,7 +341,7 @@ footer a:hover{color:var(--green);}
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If one UKRI grant recipient (from the 34 lead organizations in P010a) were to launch a commercial product or service without prior coordination through Scottish Space Leadership Council/Space Scotland networks (P009) and without seeking Scottish Enterprise approval (P005), it might expose whether the validation-permission loop is structurally necessary or locally adaptive. Observable if: product launch occurs, coordination bodies respond or do not respond, follow-on funding patterns...</p>
+    <p class="leverage-hyp">"If one UKRI grant recipient (from the 34 lead organizations in P010a) were to launch a commercial product or service without prior coordination through Scottish Space Leadership Council/Space Scotland networks (P009) and without seeking Scottish Enterprise approval (P005), it might expose whether the validation-permission loop is structurally necessary or locally adaptive. Observable if: product launch occurs, coordination bodies respond or do not respond, follow-on funding patterns shift."</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -382,28 +350,23 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/belfast-screen.html">
-      <div class="sc-name">Belfast Screen</div>
-      <div class="sc-meta">Belfast · GB</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/belfast-cyber.html">
+      <div class="sc-name">Belfast Cyber</div>
+      <div class="sc-meta">Belfast · United Kingdom</div>
       <div class="sc-regime">Permission-Validation</div>
-      <div class="sc-match">6 shared stacks · 61 evidence · Tier 1 - Robust</div>
-      <div class="sc-mechanism">Permission-Validation: Re-proving requires coordination to appear credible; coordination requires permission to proceed; waiting extends the re-proving cycle; all three signals absorbed by the validation-permission loop.</div>
-      <div class="sc-absorbed">Absorbs: Demand, Friction, Opportunity</div>
-    </a><a class="similar-card" href="/clusters/colombo-it-services-digital.html">
-      <div class="sc-name">Colombo IT Services &amp; Digital</div>
-      <div class="sc-meta">Colombo · LK</div>
-      <div class="sc-regime">Growing</div>
-      <div class="sc-match">1 shared stack · 59 evidence · P2</div>
-      <div class="sc-mechanism">Partnership-Coordination Stabilisation: Partnership formation (Re-proving: , , , ) operates within coordination structures (Coordinating: , , , , ) that provide legitimacy frameworks for permission-seeking behavior (Waiting: , , , ). Coordi...</div>
-      <div class="sc-absorbed">Absorbs: Uncertainty (multinational partner selection), Pressure (legitimacy demonstration), Complexity (multi-stakeholder alignment)</div>
-    </a><a class="similar-card" href="/clusters/manila-bpo-it-services.html">
-      <div class="sc-name">Manila BPO &amp; IT Services</div>
-      <div class="sc-meta">Manila · PH</div>
-      <div class="sc-regime">Mature</div>
-      <div class="sc-match">1 shared stack · 58 evidence · P2</div>
-      <div class="sc-mechanism">Validation–Coordination Stabilisation: Re-proving sector viability through expansion announcements (Re-proving) plausibly sustains coordination activity (Coordinating) by providing tangible evidence for multi-stakeholder alignment; coordin...</div>
-      <div class="sc-absorbed">Absorbs: Uncertainty (market viability), Pressure (stakeholder expectations), Complexity (multi-actor environment)</div>
-    </a></div></div>
+      <div class="sc-stall">Primary: Scaling Activity Instead of Throughput</div>
+    </a><a class="similar-card" href="/clusters/belfast-advanced-manufacturing.html">
+      <div class="sc-name">Belfast AdvancedManufacturing</div>
+      <div class="sc-meta">Belfast · United Kingdom</div>
+      <div class="sc-regime">Permission-Validation</div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a><a class="similar-card" href="/clusters/cambridge-digital.html">
+      <div class="sc-name">Cambridgeshire Peterborough Digital</div>
+      <div class="sc-meta">Cambridge · United Kingdom</div>
+      <div class="sc-regime">Permission-Validation</div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a></div>
+  </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>

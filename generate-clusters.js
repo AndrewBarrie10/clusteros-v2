@@ -74,6 +74,65 @@ const diagnostics = fs.existsSync(diagnosticsRegistryPath)
   ? JSON.parse(fs.readFileSync(diagnosticsRegistryPath, 'utf8'))
   : { clusters: {}, superclusters: {}, cta: null, source_line: '' };
 
+// v3 per-page bundles. When a bundle exists for a cluster slug, the page is
+// rendered in v3 mode (strap + behaviour + hot-linked PNG + DSIT source line)
+// and the legacy evidence pill, stats-row and bullets composite are dropped.
+// When absent, the legacy template is used.
+const V3_BUNDLES_DIR = path.join(__dirname, 'v3-data', 'v2_pages');
+function loadV3Bundle(slug) {
+  const p = path.join(V3_BUNDLES_DIR, `${slug}.json`);
+  if (!fs.existsSync(p)) return null;
+  try { return JSON.parse(fs.readFileSync(p, 'utf8')); }
+  catch (e) { console.warn(`Failed to parse bundle ${p}: ${e.message}`); return null; }
+}
+
+const V3_SOURCE_LINE_LEAD = 'Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data.';
+const V3_CTA_FRAMING = 'Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.';
+const V3_CTA_HREF = 'https://www.clusteros.io/request';
+const V3_CTA_TEXT = 'Request access →';
+
+function monthYearFromDate(iso) {
+  if (!iso) return '';
+  const m = iso.match(/^(\d{4})-(\d{2})/);
+  if (!m) return '';
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return `${months[parseInt(m[2],10)-1]} ${m[1]}`;
+}
+
+// FT/McKinsey-style typography for v3 cluster pages: prose stays in
+// --font-sans, serif is reserved for h1, mono is reserved for labels,
+// pills, source line and CTA framing.
+const V3_CLUSTER_CSS = `
+.cluster-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:660px;margin:0 0 2rem;}
+.diagnostic-composite-v3{margin:0 0 3rem;}
+.diagnostic-figure-v3{margin:0;text-align:center;}
+.diagnostic-image-v3{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-cta-v3{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing-v3{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link-v3{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link-v3 a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
+.diagnostic-cta-link-v3 a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source-v3{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+@media(max-width:640px){
+  .diagnostic-cta-v3,.diagnostic-source-v3{text-align:left;}
+}`;
+
+function renderV3Composite(bundle) {
+  const png = bundle.diagnostic_png_url + (bundle.snapshot_date ? `?v=${bundle.snapshot_date}` : '');
+  const sourceLine = `${V3_SOURCE_LINE_LEAD} Snapshot ${monthYearFromDate(bundle.snapshot_date)}.`;
+  return `
+  <section class="diagnostic-composite-v3">
+    <figure class="diagnostic-figure-v3">
+      <img src="${png}" alt="${bundle.cluster_name || ''} diagnostic Sankey" class="diagnostic-image-v3" loading="lazy" />
+    </figure>
+    <div class="diagnostic-cta-v3">
+      <p class="diagnostic-cta-framing-v3">${V3_CTA_FRAMING}</p>
+      <p class="diagnostic-cta-link-v3"><a href="${V3_CTA_HREF}">${V3_CTA_TEXT}</a></p>
+    </div>
+    <p class="diagnostic-source-v3">${sourceLine}</p>
+  </section>`;
+}
+
 function loadHeadlines(headlinesPath) {
   if (!headlinesPath) return null;
   const rel = headlinesPath.replace(/^\//, '');
@@ -312,8 +371,9 @@ function jsonLd(c) {
 }
 
 // ── TEMPLATE ─────────────────────────────────────────────
-function template(c, similar) {
+function template(c, similar, bundle) {
   const rd = radarData(c);
+  const isV3 = !!bundle;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -448,7 +508,8 @@ footer a:hover{color:var(--green);}
   nav{padding:0 1rem;}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
-</style>${diagnosticStyles(c.id, 'cluster')}
+${isV3 ? V3_CLUSTER_CSS : ''}
+</style>${isV3 ? '' : diagnosticStyles(c.id, 'cluster')}
 <!-- Mixpanel tracking -->
 <script type="text/javascript">
   (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
@@ -485,11 +546,12 @@ footer a:hover{color:var(--green);}
       <span class="meta-tag meta-plain">${c.city}, ${countryName(c.country)}</span>
       <span class="meta-tag meta-${c.regime||'emerging'}">${regimeLabel(c.regime)}</span>
       ${c._anchor_type?`<span class="meta-tag meta-plain">${anchorLabel(c._anchor_type)}</span>`:''}
-      ${c._evidence_count?`<span class="meta-tag meta-plain">${c._evidence_count} evidence items</span>`:''}
+      ${(!isV3 && c._evidence_count)?`<span class="meta-tag meta-plain">${c._evidence_count} evidence items</span>`:''}
     </div>
-    <p class="cluster-summary">${c.summary||''}</p>
-  </header>${renderDiagnosticComposite(c.id, 'cluster')}
-  <div class="stats-row">
+    <p class="cluster-summary">${isV3 ? (bundle.strap||'') : (c.summary||'')}</p>
+    ${isV3 && bundle.behaviour ? `<p class="cluster-behaviour">${bundle.behaviour}</p>` : ''}
+  </header>${isV3 ? renderV3Composite(bundle) : renderDiagnosticComposite(c.id, 'cluster')}
+  ${isV3 ? '' : `<div class="stats-row">
     <div class="stat-cell">
       <div class="stat-num">${(c.stalls||[]).length}</div>
       <div class="stat-label">Active stalls</div>
@@ -506,7 +568,7 @@ footer a:hover{color:var(--green);}
       <div class="stat-num">${c.leverage&&c.leverage.timeline?c.leverage.timeline.split('-')[0]:'—'}</div>
       <div class="stat-label">Leverage timeline (mo)</div>
     </div>
-  </div>
+  </div>`}
   <div class="two-col">
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
@@ -594,6 +656,7 @@ new Chart(document.getElementById('radarChart').getContext('2d'),{
 
 // ── GENERATE ─────────────────────────────────────────────
 let count = 0;
+let v3Count = 0;
 let skippedExisting = 0;
 let filteredOut = 0;
 for (const cluster of clusters) {
@@ -602,10 +665,12 @@ for (const cluster of clusters) {
   const outPath = path.join(outDir, `${slug}.html`);
   if (argv.newOnly && fs.existsSync(outPath)) { skippedExisting++; continue; }
   const similar = findSimilar(cluster, clusters);
-  const html = template(cluster, similar);
+  const bundle = loadV3Bundle(slug);
+  const html = template(cluster, similar, bundle);
   fs.writeFileSync(outPath, html, 'utf8');
+  if (bundle) v3Count++;
   count++;
 }
-console.log(`Generated ${count} cluster pages → clusters/`);
+console.log(`Generated ${count} cluster pages → clusters/ (${v3Count} via v3 bundle)`);
 if (argv.newOnly) console.log(`Skipped (file already exists): ${skippedExisting}`);
 if (allowedIds) console.log(`Filtered out (outside --only / --only-file): ${filteredOut}`);

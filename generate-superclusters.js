@@ -422,9 +422,9 @@ function renderConstituentTableV3(constituents, clusterIndex) {
         const cj = clusterIndex[cc.v2_slug] || {};
         return `<tr>
           <td><a href="/clusters/${cc.v2_slug}.html">${cc.name}</a></td>
-          <td>${cj.regime || '—'}</td>
-          <td>${dominantStallsFor(cj) || '—'}</td>
-          <td>${cj._evidence_count || '—'}</td>
+          <td data-label="Regime">${cj.regime || '—'}</td>
+          <td data-label="Dominant stalls">${dominantStallsFor(cj) || '—'}</td>
+          <td data-label="Evidence">${cj._evidence_count || '—'}</td>
         </tr>`;
       }).join('')}
     </tbody>
@@ -445,9 +445,103 @@ const V3_COMPOSITE_CSS = `
 .diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
 .diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
 .diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+/* PNG tap-to-zoom */
+.png-zoom-trigger{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;font:inherit;color:inherit;}
+.png-zoom-hint{display:none;margin-top:0.5rem;font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
+@media(max-width:680px){.png-zoom-hint{display:block;}}
+.png-modal{position:fixed;inset:0;background:rgba(15,12,8,0.94);z-index:9999;display:flex;align-items:center;justify-content:center;overflow:auto;padding:1rem;cursor:zoom-out;}
+.png-modal img{max-width:none;height:auto;display:block;margin:auto;}
+.png-modal .png-modal-close{position:fixed;top:0.75rem;right:0.75rem;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.4);padding:0.5rem 0.9rem;border-radius:2px;cursor:pointer;}
+.png-modal .png-modal-close:hover{background:rgba(0,0,0,0.85);}
+body.png-modal-open{overflow:hidden;}
+/* Skip-nav chip row (mobile only) */
+.section-jumpnav{display:none;}
+@media(max-width:680px){
+  .section-jumpnav{display:flex;flex-wrap:wrap;gap:0.4rem;margin:0 0 2rem;padding:0 0 1.25rem;border-bottom:1px solid var(--border);}
+  .section-jumpnav a{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-dim);background:var(--surface);border:1px solid var(--border);padding:5px 9px;border-radius:2px;text-decoration:none;transition:color 0.15s,border-color 0.15s;}
+  .section-jumpnav a:hover{color:var(--green);border-color:var(--green);}
+}
+/* Mobile-only collapsibles */
+details.section-collapsible{margin-bottom:2.5rem;}
+details.section-collapsible > summary{list-style:none;cursor:pointer;}
+details.section-collapsible > summary::-webkit-details-marker{display:none;}
+details.section-collapsible > summary::marker{content:'';}
+details.section-collapsible > summary .section-label{margin-bottom:1.2rem;}
+@media(max-width:680px){
+  details.section-collapsible > summary .section-label{position:relative;padding-right:1.5rem;}
+  details.section-collapsible > summary .section-label::after{content:'▾';position:absolute;right:0;top:50%;transform:translateY(-65%);font-size:11px;color:var(--ink-muted);}
+  details.section-collapsible:not([open]) > summary .section-label::after{content:'▸';}
+}
+@media(min-width:681px){
+  details.section-collapsible > summary{cursor:default;pointer-events:none;}
+}
+/* Constituent Clusters table — stacked cards on mobile */
+@media(max-width:640px){
+  .ct thead{display:none;}
+  .ct,.ct tbody,.ct tr,.ct td{display:block;width:100%;}
+  .ct tr{border-bottom:1px solid var(--border);padding:0.9rem 0;}
+  .ct td{padding:0.2rem 0;border-bottom:none;}
+  .ct td:first-child{font-family:var(--font-sans);font-size:14px;color:var(--ink);margin-bottom:0.5rem;}
+  .ct td:first-child a{border-bottom-color:var(--border-2);}
+  .ct td:not(:first-child)::before{content:attr(data-label) ': ';font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-muted);margin-right:6px;}
+}
+/* Mobile responsive touch-ups */
 @media(max-width:640px){
   .diagnostic-cta,.diagnostic-source{text-align:left;}
+  .stack-header{flex-direction:column;align-items:flex-start;gap:0.3rem;}
+}
+@media(max-width:480px){
+  h1{font-size:1.5rem;}
+  .sc-meta{gap:0.3rem;}
 }`;
+
+// Shared mobile JS: PNG lightbox + close-collapsibles-on-mobile-load.
+const V3_MOBILE_JS = `
+<script>
+(function(){
+  function applyCollapse(){
+    var mobile = window.matchMedia('(max-width: 680px)').matches;
+    document.querySelectorAll('details.section-collapsible').forEach(function(d){
+      d.open = !mobile;
+    });
+  }
+  applyCollapse();
+  var lastIsMobile = window.matchMedia('(max-width: 680px)').matches;
+  window.addEventListener('resize', function(){
+    var nowMobile = window.matchMedia('(max-width: 680px)').matches;
+    if (nowMobile !== lastIsMobile){ lastIsMobile = nowMobile; applyCollapse(); }
+  });
+  document.addEventListener('click', function(e){
+    var trigger = e.target.closest && e.target.closest('.png-zoom-trigger');
+    if (!trigger) return;
+    e.preventDefault();
+    var img = trigger.querySelector('img');
+    if (!img) return;
+    var modal = document.createElement('div');
+    modal.className = 'png-modal';
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'png-modal-close';
+    close.textContent = 'Close ×';
+    var enlarged = document.createElement('img');
+    enlarged.src = img.src;
+    enlarged.alt = img.alt;
+    modal.appendChild(close);
+    modal.appendChild(enlarged);
+    document.body.appendChild(modal);
+    document.body.classList.add('png-modal-open');
+    function dismiss(){
+      modal.remove();
+      document.body.classList.remove('png-modal-open');
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(ev){ if (ev.key === 'Escape') dismiss(); }
+    close.addEventListener('click', dismiss);
+    modal.addEventListener('click', function(ev){ if (ev.target === modal) dismiss(); });
+    document.addEventListener('keydown', onKey);
+  });
+})();
+<\/script>`;
 
 function templateV3(sc, children, bundle) {
   const aggStalls = aggregateStalls(children);
@@ -558,7 +652,10 @@ ${MIXPANEL_SNIPPET}
   ${bundle.behaviour ? `<p class="sc-behaviour">${bundle.behaviour}</p>` : ''}
   <section class="diagnostic-composite">
     <figure class="diagnostic-figure">
-      <img src="${pngUrl}" alt="${bundle.region_name || sc.name} diagnostic Sankey" class="diagnostic-image" loading="lazy" />
+      <button type="button" class="png-zoom-trigger" aria-label="Enlarge diagnostic Sankey">
+        <img src="${pngUrl}" alt="${bundle.region_name || sc.name} diagnostic Sankey" class="diagnostic-image" loading="lazy" />
+      </button>
+      <p class="png-zoom-hint">Tap diagram to enlarge</p>
     </figure>
     <div class="diagnostic-cta">
       <p class="diagnostic-cta-framing">${V3_CTA_FRAMING}</p>
@@ -566,30 +663,36 @@ ${MIXPANEL_SNIPPET}
     </div>
     <p class="diagnostic-source">${sourceLine}</p>
   </section>
-  <div class="section">
+  <nav class="section-jumpnav" aria-label="Jump to section">
+    <a href="#constituents">Constituents</a>
+    <a href="#agg-stalls">Stalls</a>
+    <a href="#dom-stacks">Stacks</a>
+    <a href="#leverage">Leverage</a>
+  </nav>
+  <div class="section" id="constituents">
     <div class="section-label">Constituent clusters</div>
     ${renderConstituentTableV3(bundle.constituent_clusters, clusterIndex)}
   </div>
-  <div class="section">
+  <div class="section" id="agg-stalls">
     <div class="section-label">Aggregate stall pattern · Average intensity across clusters</div>
     ${renderAggregateStalls(aggStalls)}
   </div>
-  <div class="section">
-    <div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div>
+  <details class="section section-collapsible" id="dom-stacks" open>
+    <summary><div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div></summary>
     <div class="stacks-box">${
       sc.dominant_stacks && sc.dominant_stacks.length
         ? renderDominantStacksRich(sc.dominant_stacks, children)
         : renderStacks(aggStacks)
     }</div>
-  </div>
-  <div class="section">
-    <div class="section-label">Top leverage hypotheses</div>
+  </details>
+  <details class="section section-collapsible" id="leverage" open>
+    <summary><div class="section-label">Top leverage hypotheses</div></summary>
     ${
       sc.leverage_hypotheses && sc.leverage_hypotheses.length
         ? renderLeverageRich(sc.leverage_hypotheses, children)
         : renderLeverage(lev)
     }
-  </div>
+  </details>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
@@ -599,6 +702,7 @@ ${MIXPANEL_SNIPPET}
     <a href="/about.html">About</a>
   </span>
 </footer>
+${V3_MOBILE_JS}
 </body>
 </html>`;
 }

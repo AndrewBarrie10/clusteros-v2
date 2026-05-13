@@ -80,8 +80,54 @@ footer a:hover{color:var(--green);}
 .diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
 .diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
 .diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+/* PNG tap-to-zoom */
+.png-zoom-trigger{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;font:inherit;color:inherit;}
+.png-zoom-hint{display:none;margin-top:0.5rem;font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
+@media(max-width:680px){.png-zoom-hint{display:block;}}
+.png-modal{position:fixed;inset:0;background:rgba(15,12,8,0.94);z-index:9999;display:flex;align-items:center;justify-content:center;overflow:auto;padding:1rem;cursor:zoom-out;}
+.png-modal img{max-width:none;height:auto;display:block;margin:auto;}
+.png-modal .png-modal-close{position:fixed;top:0.75rem;right:0.75rem;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.4);padding:0.5rem 0.9rem;border-radius:2px;cursor:pointer;}
+.png-modal .png-modal-close:hover{background:rgba(0,0,0,0.85);}
+body.png-modal-open{overflow:hidden;}
+/* Skip-nav chip row (mobile only) */
+.section-jumpnav{display:none;}
+@media(max-width:680px){
+  .section-jumpnav{display:flex;flex-wrap:wrap;gap:0.4rem;margin:0 0 2rem;padding:0 0 1.25rem;border-bottom:1px solid var(--border);}
+  .section-jumpnav a{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-dim);background:var(--surface);border:1px solid var(--border);padding:5px 9px;border-radius:2px;text-decoration:none;transition:color 0.15s,border-color 0.15s;}
+  .section-jumpnav a:hover{color:var(--green);border-color:var(--green);}
+}
+/* Mobile-only collapsibles */
+details.section-collapsible{margin-bottom:2.5rem;}
+details.section-collapsible > summary{list-style:none;cursor:pointer;}
+details.section-collapsible > summary::-webkit-details-marker{display:none;}
+details.section-collapsible > summary::marker{content:'';}
+details.section-collapsible > summary .section-label{margin-bottom:1.2rem;}
+@media(max-width:680px){
+  details.section-collapsible > summary .section-label{position:relative;padding-right:1.5rem;}
+  details.section-collapsible > summary .section-label::after{content:'▾';position:absolute;right:0;top:50%;transform:translateY(-65%);font-size:11px;color:var(--ink-muted);}
+  details.section-collapsible:not([open]) > summary .section-label::after{content:'▸';}
+}
+@media(min-width:681px){
+  details.section-collapsible > summary{cursor:default;pointer-events:none;}
+}
+/* Constituent Clusters table — stacked cards on mobile */
+@media(max-width:640px){
+  .ct thead{display:none;}
+  .ct,.ct tbody,.ct tr,.ct td{display:block;width:100%;}
+  .ct tr{border-bottom:1px solid var(--border);padding:0.9rem 0;}
+  .ct td{padding:0.2rem 0;border-bottom:none;}
+  .ct td:first-child{font-family:var(--font-sans);font-size:14px;color:var(--ink);margin-bottom:0.5rem;}
+  .ct td:first-child a{border-bottom-color:var(--border-2);}
+  .ct td:not(:first-child)::before{content:attr(data-label) ': ';font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-muted);margin-right:6px;}
+}
+/* Mobile responsive touch-ups */
 @media(max-width:640px){
   .diagnostic-cta,.diagnostic-source{text-align:left;}
+  .stack-header{flex-direction:column;align-items:flex-start;gap:0.3rem;}
+}
+@media(max-width:480px){
+  h1{font-size:1.5rem;}
+  .sc-meta{gap:0.3rem;}
 }
 </style>
 <!-- Mixpanel tracking -->
@@ -121,7 +167,10 @@ footer a:hover{color:var(--green);}
   <p class="sc-behaviour">The region shows high-confidence "Validation–Coordination" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.</p>
   <section class="diagnostic-composite">
     <figure class="diagnostic-figure">
-      <img src="https://preview.clusteros.io/static/diagnostics/edinburgh-south-east-innovation-ecosystem-diagnostic-wide.png?v=2026-05-13" alt="Edinburgh and South East diagnostic Sankey" class="diagnostic-image" loading="lazy" />
+      <button type="button" class="png-zoom-trigger" aria-label="Enlarge diagnostic Sankey">
+        <img src="https://preview.clusteros.io/static/diagnostics/edinburgh-south-east-innovation-ecosystem-diagnostic-wide.png?v=2026-05-13" alt="Edinburgh and South East diagnostic Sankey" class="diagnostic-image" loading="lazy" />
+      </button>
+      <p class="png-zoom-hint">Tap diagram to enlarge</p>
     </figure>
     <div class="diagnostic-cta">
       <p class="diagnostic-cta-framing">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
@@ -129,7 +178,13 @@ footer a:hover{color:var(--green);}
     </div>
     <p class="diagnostic-source">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
   </section>
-  <div class="section">
+  <nav class="section-jumpnav" aria-label="Jump to section">
+    <a href="#constituents">Constituents</a>
+    <a href="#agg-stalls">Stalls</a>
+    <a href="#dom-stacks">Stacks</a>
+    <a href="#leverage">Leverage</a>
+  </nav>
+  <div class="section" id="constituents">
     <div class="section-label">Constituent clusters</div>
     <table class="ct">
     <thead><tr>
@@ -138,39 +193,39 @@ footer a:hover{color:var(--green);}
     <tbody>
       <tr>
           <td><a href="/clusters/edinburgh-south-east-data-ai.html">ESES Data AI</a></td>
-          <td>Permission-Validation</td>
-          <td>Stabilising Around Incumbents, Re-proving Instead of Narrowing, Extracting Without Reinvesting</td>
-          <td>99</td>
+          <td data-label="Regime">Permission-Validation</td>
+          <td data-label="Dominant stalls">Stabilising Around Incumbents, Re-proving Instead of Narrowing, Extracting Without Reinvesting</td>
+          <td data-label="Evidence">99</td>
         </tr><tr>
           <td><a href="/clusters/edinburgh-south-east-fin-tech.html">Edinburgh and South East Fintech</a></td>
-          <td>Extraction-Narrative</td>
-          <td>Re-proving Instead of Narrowing, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
-          <td>91</td>
+          <td data-label="Regime">Extraction-Narrative</td>
+          <td data-label="Dominant stalls">Re-proving Instead of Narrowing, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
+          <td data-label="Evidence">91</td>
         </tr><tr>
           <td><a href="/clusters/edinburgh-south-east-life-sciences.html">ESES Life Sciences</a></td>
-          <td>Extraction-Narrative</td>
-          <td>Stabilising Around Incumbents, Narrating Instead of Testing, Coordinating Instead of Deciding</td>
-          <td>87</td>
+          <td data-label="Regime">Extraction-Narrative</td>
+          <td data-label="Dominant stalls">Stabilising Around Incumbents, Narrating Instead of Testing, Coordinating Instead of Deciding</td>
+          <td data-label="Evidence">87</td>
         </tr><tr>
           <td><a href="/clusters/edinburgh-south-east-space.html">ESES Space</a></td>
-          <td>Coordination-Incumbent-Permission</td>
-          <td>Coordinating Instead of Deciding, Stabilising Around Incumbents</td>
-          <td>69</td>
+          <td data-label="Regime">Coordination-Incumbent-Permission</td>
+          <td data-label="Dominant stalls">Coordinating Instead of Deciding, Stabilising Around Incumbents</td>
+          <td data-label="Evidence">69</td>
         </tr><tr>
           <td><a href="/clusters/edinburgh-south-east-advanced-manufacturing.html">ESES Advanced Manufacturing</a></td>
-          <td>Intermediary-Narrative</td>
-          <td>Coordinating Instead of Deciding, Mediating Instead of Coupling, Stabilising Around Incumbents</td>
-          <td>76</td>
+          <td data-label="Regime">Intermediary-Narrative</td>
+          <td data-label="Dominant stalls">Coordinating Instead of Deciding, Mediating Instead of Coupling, Stabilising Around Incumbents</td>
+          <td data-label="Evidence">76</td>
         </tr>
     </tbody>
   </table>
   </div>
-  <div class="section">
+  <div class="section" id="agg-stalls">
     <div class="section-label">Aggregate stall pattern · Average intensity across clusters</div>
     <p class="empty">No aggregate stall data yet.</p>
   </div>
-  <div class="section">
-    <div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div>
+  <details class="section section-collapsible" id="dom-stacks" open>
+    <summary><div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div></summary>
     <div class="stacks-box">
     <div class="stack-item">
       <div class="stack-header">
@@ -208,9 +263,9 @@ footer a:hover{color:var(--green);}
       </div>
       <p class="stack-desc">Activity volume generates demand for more re-proving; re-proving keeps all programmes alive; forgiving keeps non-performers in the portfolio; all three pressure types absorbed.</p>
     </div></div>
-  </div>
-  <div class="section">
-    <div class="section-label">Top leverage hypotheses</div>
+  </details>
+  <details class="section section-collapsible" id="leverage" open>
+    <summary><div class="section-label">Top leverage hypotheses</div></summary>
     
     <div class="leverage-block">
       <p class="leverage-hyp">"If one case of successful direct coupling between a firm and university (bypassing intermediaries) were documented and published by City Region Deal or Scottish Enterprise (e.g., company X contracted directly with University of Edinburgh research group Y, resulting in patent Z and product launch), it might reduce the system's ability to absorb uncertainty about direct coupling through intermediary narrative by shifting the burden of proof to demonstrating why intermediation is necessary."</p>
@@ -242,7 +297,7 @@ footer a:hover{color:var(--green);}
         <span class="lm-tag">medium testability</span>
       </div>
     </div>
-  </div>
+  </details>
 </main>
 <footer>
   <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
@@ -252,5 +307,51 @@ footer a:hover{color:var(--green);}
     <a href="/about.html">About</a>
   </span>
 </footer>
+
+<script>
+(function(){
+  function applyCollapse(){
+    var mobile = window.matchMedia('(max-width: 680px)').matches;
+    document.querySelectorAll('details.section-collapsible').forEach(function(d){
+      d.open = !mobile;
+    });
+  }
+  applyCollapse();
+  var lastIsMobile = window.matchMedia('(max-width: 680px)').matches;
+  window.addEventListener('resize', function(){
+    var nowMobile = window.matchMedia('(max-width: 680px)').matches;
+    if (nowMobile !== lastIsMobile){ lastIsMobile = nowMobile; applyCollapse(); }
+  });
+  document.addEventListener('click', function(e){
+    var trigger = e.target.closest && e.target.closest('.png-zoom-trigger');
+    if (!trigger) return;
+    e.preventDefault();
+    var img = trigger.querySelector('img');
+    if (!img) return;
+    var modal = document.createElement('div');
+    modal.className = 'png-modal';
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'png-modal-close';
+    close.textContent = 'Close ×';
+    var enlarged = document.createElement('img');
+    enlarged.src = img.src;
+    enlarged.alt = img.alt;
+    modal.appendChild(close);
+    modal.appendChild(enlarged);
+    document.body.appendChild(modal);
+    document.body.classList.add('png-modal-open');
+    function dismiss(){
+      modal.remove();
+      document.body.classList.remove('png-modal-open');
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(ev){ if (ev.key === 'Escape') dismiss(); }
+    close.addEventListener('click', dismiss);
+    modal.addEventListener('click', function(ev){ if (ev.target === modal) dismiss(); });
+    document.addEventListener('keydown', onKey);
+  });
+})();
+</script>
 </body>
 </html>

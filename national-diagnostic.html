@@ -294,6 +294,48 @@ i.seg-ind    { background:var(--border-2); }
 .cta p { font-size:13px; line-height:1.6; color:var(--ink-dim); margin:0; }
 .cta-arrow { margin-top:auto; font-size:9px; color:var(--green); font-weight:700; }
 
+/* ── Mobile-only collapsible report sections ────────────────────────────── */
+details.sec-collapsible > summary { list-style: none; }
+details.sec-collapsible > summary::-webkit-details-marker { display: none; }
+details.sec-collapsible > summary::marker { content: ''; }
+@media (min-width: 681px) {
+  details.sec-collapsible > summary { display: none; }
+}
+@media (max-width: 680px) {
+  details.sec-collapsible > summary {
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--ink-dim); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 2px;
+    padding: 9px 14px; margin: 12px 0 18px;
+  }
+  details.sec-collapsible > summary::after { content: '▾'; font-size: 10px; color: var(--ink-muted); }
+  details.sec-collapsible:not([open]) > summary::after { content: '▸'; }
+  details.sec-collapsible > summary:hover { color: var(--ink); border-color: var(--ink-dim); }
+}
+
+/* ── Floating "Jump to your region" pill (mobile only) ──────────────────── */
+.jump-pill { display: none; }
+@media (max-width: 680px) {
+  .jump-pill {
+    display: flex; align-items: center; gap: 8px;
+    position: fixed; right: 14px; bottom: 18px; z-index: 70;
+    padding: 10px 14px; border-radius: 999px;
+    background: var(--green); color: #fff;
+    font-family: var(--font-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+  }
+  .jump-pill.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .jump-pill::after { content: '→'; }
+}
+
 /* ── Mobile ─────────────────────────────────────────────────────────────── */
 
 @media (max-width: 880px) {
@@ -446,7 +488,8 @@ i.seg-ind    { background:var(--border-2); }
     </div>
     </div>
 
-    <div class="evidence-differentiator">
+    <details class="sec-collapsible evidence-differentiator" open>
+      <summary>Where this reading comes from</summary>
       <h3 class="serif">Where this reading comes from</h3>
       <p>
         This is not drawn from surveys, interviews, or expert opinion. It is
@@ -461,9 +504,9 @@ i.seg-ind    { background:var(--border-2); }
         Every pattern traces through specific evidence items.
         The threads are visible.
       </p>
-    </div>
+    </details>
 
-    
+
 <figure class="evidence-chain">
   <figcaption class="chain-caption serif">One evidence thread, end to end</figcaption>
   <svg viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -551,6 +594,8 @@ i.seg-ind    { background:var(--border-2); }
   <div class="sec-inner">
     <p class="kicker">Section 3 — The Framework</p>
     <h2 class="sec-h serif">How this works</h2>
+    <details class="sec-collapsible" open>
+      <summary>Read section</summary>
 
     <p class="lede">
       Regional innovation ecosystems are complex adaptive systems &mdash; no
@@ -622,6 +667,7 @@ i.seg-ind    { background:var(--border-2); }
       says so and downgrades its confidence. That discipline is the
       framework's value, not its limitation.
     </p>
+    </details>
   </div>
 </section>
 
@@ -630,6 +676,8 @@ i.seg-ind    { background:var(--border-2); }
   <div class="sec-inner">
     <p class="kicker">Section 4 — The National Pattern</p>
     <h2 class="sec-h serif">What UK regional innovation ecosystems do</h2>
+    <details class="sec-collapsible" open>
+      <summary>Read section</summary>
 
     <p class="lede">
       The stall fingerprint at national scale. Each bar shows the share of
@@ -759,6 +807,7 @@ i.seg-ind    { background:var(--border-2); }
       </p>
     </div>
 
+    </details>
   </div>
 </section>
 
@@ -1265,6 +1314,44 @@ i.seg-ind    { background:var(--border-2); }
       // Buffer until Mixpanel is available; the parent site's loader picks
       // these up from window.dataLayer or similar. No-op for now.
     }
+  }
+})();
+</script>
+<a class="jump-pill" href="#regions" aria-label="Jump to your region">Find your region</a>
+<script>
+(function(){
+  // Collapse mobile-only sections on initial load; reopen on resize back to desktop.
+  function applyCollapse(){
+    var mobile = window.matchMedia('(max-width: 680px)').matches;
+    document.querySelectorAll('details.sec-collapsible').forEach(function(d){
+      d.open = !mobile;
+    });
+  }
+  applyCollapse();
+  var lastIsMobile = window.matchMedia('(max-width: 680px)').matches;
+  window.addEventListener('resize', function(){
+    var nowMobile = window.matchMedia('(max-width: 680px)').matches;
+    if (nowMobile !== lastIsMobile){ lastIsMobile = nowMobile; applyCollapse(); }
+  });
+  // Floating "Find your region" pill: visible mid-page, hidden once #regions enters view.
+  var pill = document.querySelector('.jump-pill');
+  var regions = document.getElementById('regions');
+  if (pill && regions && 'IntersectionObserver' in window){
+    // Show pill once user has scrolled past the first viewport-and-a-half.
+    var triggerY = window.innerHeight * 1.2;
+    function onScroll(){
+      if (window.scrollY > triggerY) pill.classList.add('visible');
+      else pill.classList.remove('visible');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    // Hide once the regions section comes into view.
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) pill.classList.remove('visible');
+      });
+    }, { threshold: 0.1 });
+    io.observe(regions);
   }
 })();
 </script>

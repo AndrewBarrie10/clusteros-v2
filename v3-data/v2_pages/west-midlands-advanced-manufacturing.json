@@ -1,0 +1,12 @@
+{
+  "v2_slug": "west-midlands-advanced-manufacturing",
+  "shape": "cluster",
+  "v3_region": "west_midlands_combined_authority",
+  "v3_cluster": "wmca_advanced_manufacturing",
+  "region_name": "West Midlands Combined Authority",
+  "cluster_name": "WMCA Advanced Manufacturing",
+  "strap": "WMCA Advanced Manufacturing draws £2.24bn of UKRI lead-led funding across 1,843 grants, anchored by Warwick (15%), Birmingham (9%), with Jaguar Land Rover on the industrial side.",
+  "behaviour": "The cluster shows medium-confidence \"Re-proving instead of narrowing\" and \"Forgiving instead of redesigning\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-midlands-advanced-manufacturing-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

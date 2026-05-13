@@ -294,19 +294,6 @@ i.seg-ind    { background:var(--border-2); }
 .cta p { font-size:13px; line-height:1.6; color:var(--ink-dim); margin:0; }
 .cta-arrow { margin-top:auto; font-size:9px; color:var(--green); font-weight:700; }
 
-/* ── In-content TOC block (always visible) ──────────────────────────────── */
-.toc-block { margin: 0 0 56px; padding: 22px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 2px; }
-.toc-block-h { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-muted); margin: 0 0 14px; }
-.toc-list { list-style: none; padding: 0; margin: 0; }
-.toc-list li { padding: 0; margin: 0; }
-.toc-list a { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-family: var(--serif); font-size: 17px; color: var(--ink); text-decoration: none; transition: color 0.15s; }
-.toc-list li:last-child a { border-bottom: 0; }
-.toc-list a:hover { color: var(--green); }
-.toc-list .toc-jump { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); }
-.toc-list a:hover .toc-jump { color: var(--green); }
-.toc-list .toc-highlight { color: var(--green); font-weight: 600; }
-.toc-list .toc-highlight .toc-jump { color: var(--green); }
-
 /* ── Mobile-only collapsible report sections ────────────────────────────── */
 details.sec-collapsible > summary { list-style: none; }
 details.sec-collapsible > summary::-webkit-details-marker { display: none; }
@@ -599,23 +586,6 @@ details.sec-collapsible > summary::marker { content: ''; }
   </p>
 </figure>
 
-  </div>
-</section>
-
-
-<section id="toc" class="sec sec-toc" data-section="toc">
-  <div class="sec-inner">
-    <nav class="toc-block" aria-label="On this page">
-      <p class="toc-block-h">On this page</p>
-      <ul class="toc-list">
-        <li><a href="#framework"><span>How this works</span><span class="toc-jump">Jump →</span></a></li>
-        <li><a href="#national"><span>What UK ecosystems do</span><span class="toc-jump">Jump →</span></a></li>
-        <li><a href="#regions" class="toc-highlight"><span>Twenty-five ecosystem readings</span><span class="toc-jump">Jump →</span></a></li>
-        <li><a href="#leverage"><span>Where pressure might shift</span><span class="toc-jump">Jump →</span></a></li>
-        <li><a href="#frontiers"><span>Four frontiers</span><span class="toc-jump">Jump →</span></a></li>
-        <li><a href="#invitation"><span>Two ways forward</span><span class="toc-jump">Jump →</span></a></li>
-      </ul>
-    </nav>
   </div>
 </section>
 

@@ -150,6 +150,9 @@ function monthYearFromDate(iso) {
 // pills, source line and CTA framing.
 const V3_CLUSTER_CSS = `
 .cluster-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:660px;margin:1.25rem 0 2rem;}
+.cluster-behaviour-pending{border-left:3px solid var(--border-2);padding-left:1rem;color:var(--ink-muted);font-style:italic;}
+.cluster-behaviour-pending strong{font-style:normal;color:var(--ink-dim);font-weight:500;}
+.meta-tag.meta-pending{background:var(--surface);color:var(--ink-muted);border:1px dashed var(--border-2);}
 .diagnostic-composite-v3{margin:0 0 3rem;}
 .diagnostic-figure-v3{margin:0;text-align:center;}
 .diagnostic-image-v3{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
@@ -514,6 +517,12 @@ function jsonLd(c) {
 function template(c, similar, bundle) {
   const rd = radarData(c);
   const isV3 = !!bundle;
+  // A stub page is a v3 page where Pipeline 1 evidence (stalls/stacks/
+  // leverage) hasn't been imported yet — the bundle gives us strap + PNG
+  // but the behavioural sections render empty. The bundle's behaviour
+  // paragraph claims specific stalls/confidence which would mislead, so
+  // we replace it with an explicit "diagnostic pending" note.
+  const isStub = isV3 && (!c.stalls || c.stalls.length === 0);
   // Parent-region navigation context (v3 pages only). Pulls the region's
   // canonical display name from the supercluster bundle so the cluster page
   // matches the supercluster page's h1 and the national-diagnostic tile.
@@ -708,12 +717,15 @@ ${isV3 ? V3_CLUSTER_CSS : ''}
       ${isV3 && parentSlug
         ? `<a class="meta-tag meta-plain meta-link" href="/superclusters/${parentSlug}">${c.city}, ${countryName(c.country)}</a>`
         : `<span class="meta-tag meta-plain">${c.city}, ${countryName(c.country)}</span>`}
-      <span class="meta-tag meta-${c.regime||'emerging'}">${regimeLabel(c.regime)}</span>
+      ${isStub ? '' : `<span class="meta-tag meta-${c.regime||'emerging'}">${regimeLabel(c.regime)}</span>`}
       ${c._anchor_type?`<span class="meta-tag meta-plain">${anchorLabel(c._anchor_type)}</span>`:''}
       ${(!isV3 && c._evidence_count)?`<span class="meta-tag meta-plain">${c._evidence_count} evidence items</span>`:''}
+      ${isStub ? `<span class="meta-tag meta-pending">Diagnostic pending</span>` : ''}
     </div>
     <p class="cluster-summary">${isV3 ? (bundle.strap||'') : (c.summary||'')}</p>
-    ${isV3 && bundle.behaviour ? `<p class="cluster-behaviour">${bundle.behaviour}</p>` : ''}
+    ${isStub
+      ? `<p class="cluster-behaviour cluster-behaviour-pending"><strong>Behavioural diagnostic not yet run for this cluster.</strong> The funding flow above shows the structural footprint. Stalls, stacks and leverage hypotheses populate when Pipeline 1 evidence has been imported for this cluster.</p>`
+      : (isV3 && bundle.behaviour ? `<p class="cluster-behaviour">${bundle.behaviour}</p>` : '')}
   </header>${isV3 ? renderV3Composite(bundle) : renderDiagnosticComposite(c.id, 'cluster')}
   ${isV3 ? `<nav class="section-jumpnav" aria-label="Jump to section">
     <a href="#stalls">Stalls</a>

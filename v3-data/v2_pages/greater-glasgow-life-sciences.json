@@ -1,0 +1,12 @@
+{
+  "v2_slug": "greater-glasgow-life-sciences",
+  "shape": "cluster",
+  "v3_region": "greater_glasgow",
+  "v3_cluster": "greater_glasgow_life_sciences",
+  "region_name": "Greater Glasgow",
+  "cluster_name": "Greater Glasgow Life Sciences",
+  "strap": "Greater Glasgow Life Sciences draws £1.07bn of UKRI lead-led funding across 4,329 grants, anchored by Glasgow (31%), Strathclyde (20%). 29 Companies House-traced spin-outs translate to £37m UKRI per spin-out.",
+  "behaviour": "The cluster shows medium-confidence \"Extracting without reinvesting\" and \"Forgiving instead of redesigning\" behaviour — extraction events accumulate without triggering structural redesign of support mechanisms, leaving value retention to recur rather than flow forward into new corporate formation. Pipeline 1 evidence: company acquisitions and exit transactions cluster 2020-2022 alongside 35 new company registrations 2007-2025, with no patterns evidencing redesign of support mechanisms following the 14 venture-funded companies' performance trajectories.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/greater-glasgow-life-sciences-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

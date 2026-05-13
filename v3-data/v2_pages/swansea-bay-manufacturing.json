@@ -1,0 +1,12 @@
+{
+  "v2_slug": "swansea-bay-manufacturing",
+  "shape": "cluster",
+  "v3_region": "swansea_bay_city_region",
+  "v3_cluster": "swansea_bay_manufacturing",
+  "region_name": "Swansea Bay City Region",
+  "cluster_name": "Swansea Bay Manufacturing",
+  "strap": "Swansea Bay Manufacturing draws £218m of UKRI lead-led funding across 194 grants, anchored by Swansea University (39%), with Sail Databank and Microlink Devices Uk on the industrial side.",
+  "behaviour": "The cluster shows medium-confidence \"Forgiving instead of redesigning\" and \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/swansea-bay-manufacturing-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

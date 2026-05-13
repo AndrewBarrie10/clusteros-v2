@@ -1,0 +1,12 @@
+{
+  "v2_slug": "west-yorkshire-health-life-sciences",
+  "shape": "cluster",
+  "v3_region": "west_yorkshire_combined_authority",
+  "v3_cluster": "west_yorkshire_health_life_sciences",
+  "region_name": "West Yorkshire Combined Authority",
+  "cluster_name": "West Yorkshire Health Life Sciences",
+  "strap": "West Yorkshire Health Life Sciences draws £955m of UKRI lead-led funding across 1,454 grants, anchored by Leeds (51%), Leeds Teaching Hospitals Nhs Trust (14%).",
+  "behaviour": "The cluster shows high-confidence \"Re-proving instead of narrowing\" and \"Forgiving instead of redesigning\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-yorkshire-health-life-sciences-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

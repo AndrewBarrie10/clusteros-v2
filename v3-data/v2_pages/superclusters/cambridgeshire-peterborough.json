@@ -1,0 +1,59 @@
+{
+  "v2_slug": "cambridgeshire-peterborough-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "cambridgeshire_and_peterborough_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "Cambridgeshire and Peterborough",
+  "cluster_name": "Cambridgeshire and Peterborough Innovation Ecosystem",
+  "strap": "Cambridgeshire and Peterborough's innovation footprint draws £7.80bn of UKRI lead-led funding across 11,243 grants spanning 6 active clusters, with Cambridgeshire Peterborough Life Sciences (28%) the largest single cluster and Cambridge (31%) the dominant regional anchor by UKRI £. 122 Companies House-traced spin-outs region-wide translate to £64m UKRI per spin-out.",
+  "behaviour": "The region shows low-confidence \"Program–Narrative\" stabilisation stacks at ecosystem grain — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/cambridgeshire-peterborough-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "cambridgeshire-peterborough",
+  "constituent_clusters": [
+    {
+      "v2_slug": "cambridgeshire-peterborough-life-sciences",
+      "name": "Cambridgeshire Peterborough Life Sciences",
+      "v3_cluster": "cambridgeshire_peterborough_life_sciences"
+    },
+    {
+      "v2_slug": "cambridgeshire-peterborough-semiconductors",
+      "name": "Cambridgeshire Peterborough Semiconductors",
+      "v3_cluster": "cambridgeshire_peterborough_semiconductors"
+    },
+    {
+      "v2_slug": "cambridgeshire-peterborough-digital",
+      "name": "Cambridgeshire Peterborough Digital",
+      "v3_cluster": "cambridgeshire_peterborough_digital"
+    },
+    {
+      "v2_slug": "cambridgeshire-peterborough-eng-bio",
+      "name": "Cambridgeshire & Peterborough Engineering Biology",
+      "v3_cluster": "cambridgeshire_peterborough_eng_bio"
+    },
+    {
+      "v2_slug": "cambridgeshire-peterborough-advanced-manufacturing-aerospace-and-industrial-engineering",
+      "name": "Cambridgeshire Peterborough Advanced Manufacturing Aerospace and Industrial Engineering",
+      "v3_cluster": "cambridgeshire_peterborough_advanced_manufacturing_aerospace_and_industrial_engineering"
+    },
+    {
+      "v2_slug": "cambridgeshire-peterborough-climate-tech",
+      "name": "Cambridgeshire & Peterborough Climate Tech",
+      "v3_cluster": "cambridgeshire_peterborough_climate_tech"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 6,
+    "total_gbp": 7803799859.933335,
+    "total_grants": 11243,
+    "top_cluster_slug": "cambridgeshire_peterborough_life_sciences",
+    "top_cluster_name": "Cambridgeshire Peterborough Life Sciences",
+    "top_cluster_gbp": 2212731606.8333344,
+    "top_cluster_share": 0.2835454069233699,
+    "lead_name": "UNIVERSITY OF CAMBRIDGE",
+    "lead_gbp": 2435119481.433336,
+    "lead_share": 0.31204279006895724,
+    "ch_spinouts": 122,
+    "gbp_per_spinout": 63965572.62240439
+  }
+}

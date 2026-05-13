@@ -1,0 +1,54 @@
+{
+  "v2_slug": "lancashire-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "lancashire_combined_county_authority",
+  "v3_cluster": "_all",
+  "region_name": "Lancashire Combined County Authority",
+  "cluster_name": "Lancashire Combined County Authority Innovation Ecosystem",
+  "strap": "Lancashire Combined County Authority's innovation footprint draws £1.64bn of UKRI lead-led funding across 1,468 grants spanning 5 active clusters, with Lancashire Clean Energy (36%) the largest single cluster and Lancaster University (47%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows high-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/lancashire-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "lancashire",
+  "constituent_clusters": [
+    {
+      "v2_slug": "lancashire-advanced-manufacturing",
+      "name": "Lancashire Advanced Manufacturing",
+      "v3_cluster": "lancashire_advanced_manufacturing"
+    },
+    {
+      "v2_slug": "lancashire-clean-energy",
+      "name": "Lancashire Clean Energy",
+      "v3_cluster": "lancashire_clean_energy"
+    },
+    {
+      "v2_slug": "lancashire-digital-cyber",
+      "name": "Lancashire Digital Cyber",
+      "v3_cluster": "lancashire_digital_cyber"
+    },
+    {
+      "v2_slug": "lancashire-health-innovation",
+      "name": "Lancashire Health Innovation",
+      "v3_cluster": "lancashire_health_innovation"
+    },
+    {
+      "v2_slug": "lancashire-space",
+      "name": "Lancashire Space",
+      "v3_cluster": "lancashire_space"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 5,
+    "total_gbp": 1636540222.6666667,
+    "total_grants": 1468,
+    "top_cluster_slug": "lancashire_clean_energy",
+    "top_cluster_name": "Lancashire Clean Energy",
+    "top_cluster_gbp": 591459910.1666667,
+    "top_cluster_share": 0.36140872187235956,
+    "lead_name": "LANCASTER UNIVERSITY",
+    "lead_gbp": 768679433.0,
+    "lead_share": 0.46969785548409704,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

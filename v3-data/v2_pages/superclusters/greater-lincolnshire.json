@@ -1,0 +1,39 @@
+{
+  "v2_slug": "greater-lincolnshire-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "greater_lincolnshire_combined_county_authority",
+  "v3_cluster": "_all",
+  "region_name": "Greater Lincolnshire Combined County Authority",
+  "cluster_name": "Greater Lincolnshire Combined County Authority Innovation Ecosystem",
+  "strap": "Greater Lincolnshire Combined County Authority's innovation footprint draws £2.29bn of UKRI lead-led funding across 2,010 grants spanning 2 active clusters, with Greater Lincolnshire Energy (54%) the largest single cluster and Nottingham (31%) the dominant regional anchor by UKRI £. 33 Companies House-traced spin-outs region-wide translate to £69m UKRI per spin-out.",
+  "behaviour": "The region shows medium-confidence \"Coordination–Activity\" stabilisation stacks at ecosystem grain — multi-actor coordination distributes risk across institutional partners without forcing the strategic option-collapse that would convert capability into a defined pathway.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/greater-lincolnshire-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "greater-lincolnshire",
+  "constituent_clusters": [
+    {
+      "v2_slug": "greater-lincolnshire-energy",
+      "name": "Greater Lincolnshire Energy",
+      "v3_cluster": "greater_lincolnshire_energy"
+    },
+    {
+      "v2_slug": "greater-lincolnshire-manufacturing",
+      "name": "Greater Lincolnshire Manufacturing",
+      "v3_cluster": "greater_lincolnshire_manufacturing"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 2,
+    "total_gbp": 2288512851.5,
+    "total_grants": 2010,
+    "top_cluster_slug": "greater_lincolnshire_energy",
+    "top_cluster_name": "Greater Lincolnshire Energy",
+    "top_cluster_gbp": 1238104485.0,
+    "top_cluster_share": 0.5410083164656416,
+    "lead_name": "UNIVERSITY OF NOTTINGHAM",
+    "lead_gbp": 698404971.5,
+    "lead_share": 0.3051785228307686,
+    "ch_spinouts": 33,
+    "gbp_per_spinout": 69348874.28787878
+  }
+}

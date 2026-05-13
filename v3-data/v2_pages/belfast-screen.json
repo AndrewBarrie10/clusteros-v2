@@ -1,0 +1,12 @@
+{
+  "v2_slug": "belfast-screen",
+  "shape": "cluster",
+  "v3_region": "belfast_region",
+  "v3_cluster": "belfast_screen",
+  "region_name": "Belfast Region",
+  "cluster_name": "Belfast Screen",
+  "strap": "Belfast Screen draws £6m of UKRI lead-led funding across 7 grants, led by Taunt Studios and Studio Ulster.",
+  "behaviour": "The cluster shows low-confidence \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/belfast-screen-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

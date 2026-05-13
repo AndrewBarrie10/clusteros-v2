@@ -1,0 +1,12 @@
+{
+  "v2_slug": "north-east-life-sciences",
+  "shape": "cluster",
+  "v3_region": "north_east_combined_authority",
+  "v3_cluster": "north_east_life_sciences",
+  "region_name": "North East Combined Authority",
+  "cluster_name": "North East Life Sciences",
+  "strap": "North East Life Sciences draws £1.36bn of UKRI lead-led funding across 1,582 grants, anchored by Newcastle University (49%), Durham University (6%), with Centre For Process Innovation on the industrial side.",
+  "behaviour": "The cluster shows high-confidence \"Re-proving instead of narrowing\" and \"Forgiving instead of redesigning\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/north-east-life-sciences-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

@@ -1,0 +1,12 @@
+{
+  "v2_slug": "eses-data-ai",
+  "shape": "cluster",
+  "v3_region": "edinburgh_and_south_east",
+  "v3_cluster": "eses_data_ai",
+  "region_name": "Edinburgh and South East",
+  "cluster_name": "ESES Data AI",
+  "strap": "ESES Data AI draws £972m of UKRI lead-led funding across 836 grants, anchored by Edinburgh (31%), Heriot-Watt University (16%), with St Microelectronics on the industrial side.",
+  "behaviour": "The cluster shows high-confidence \"Forgiving instead of redesigning\" and \"Re-proving instead of narrowing\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/eses-data-ai-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

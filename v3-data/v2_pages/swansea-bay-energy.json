@@ -1,0 +1,12 @@
+{
+  "v2_slug": "swansea-bay-energy",
+  "shape": "cluster",
+  "v3_region": "swansea_bay_city_region",
+  "v3_cluster": "swansea_bay_energy",
+  "region_name": "Swansea Bay City Region",
+  "cluster_name": "Swansea Bay Energy",
+  "strap": "Swansea Bay Energy draws £320m of UKRI lead-led funding across 256 grants, anchored by Swansea University (50%), with Active Building Centre and Marine Power Systems on the industrial side.",
+  "behaviour": "The cluster shows high-confidence \"Forgiving instead of redesigning\" and \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/swansea-bay-energy-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

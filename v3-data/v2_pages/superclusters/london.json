@@ -1,0 +1,64 @@
+{
+  "v2_slug": "london-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "greater_london_authority",
+  "v3_cluster": "_all",
+  "region_name": "Greater London",
+  "cluster_name": "Greater London Innovation Ecosystem",
+  "strap": "Greater London's innovation footprint draws £18.77bn of UKRI lead-led funding across 29,338 grants spanning 7 active clusters, with London Life Sciences Health (29%) the largest single cluster and University College London (20%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows low-confidence \"Program–Narrative\" stabilisation stacks at ecosystem grain — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/london-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "london",
+  "constituent_clusters": [
+    {
+      "v2_slug": "london-ai-data-software",
+      "name": "London AI Data Software",
+      "v3_cluster": "london_ai_data_software"
+    },
+    {
+      "v2_slug": "london-creative-media-fashion",
+      "name": "London Creative Media Fashion",
+      "v3_cluster": "london_creative_media_fashion"
+    },
+    {
+      "v2_slug": "london-life-sciences-health",
+      "name": "London Life Sciences Health",
+      "v3_cluster": "london_life_sciences_health"
+    },
+    {
+      "v2_slug": "london-financial-services-fin-tech",
+      "name": "London Financial Services FinTech",
+      "v3_cluster": "london_financial_services_fin_tech"
+    },
+    {
+      "v2_slug": "london-transport-logistics-mobility",
+      "name": "London Transport Logistics Mobility",
+      "v3_cluster": "london_transport_logistics_mobility"
+    },
+    {
+      "v2_slug": "london-climate-tech-net-zero",
+      "name": "London Climate Tech Net Zero",
+      "v3_cluster": "london_climate_tech_net_zero"
+    },
+    {
+      "v2_slug": "london-commerce-retail-platforms",
+      "name": "London Commerce Retail Platforms",
+      "v3_cluster": "london_commerce_retail_platforms"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 7,
+    "total_gbp": 18773731549.999996,
+    "total_grants": 29338,
+    "top_cluster_slug": "london_life_sciences_health",
+    "top_cluster_name": "London Life Sciences Health",
+    "top_cluster_gbp": 5487676980.083334,
+    "top_cluster_share": 0.29230613879121625,
+    "lead_name": "UNIVERSITY COLLEGE LONDON",
+    "lead_gbp": 3724397432.93334,
+    "lead_share": 0.1983834392759995,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

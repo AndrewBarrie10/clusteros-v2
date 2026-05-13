@@ -1,0 +1,49 @@
+{
+  "v2_slug": "liverpool-city-region-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "liverpool_city_region_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "Liverpool City Region Combined Authority",
+  "cluster_name": "Liverpool City Region Combined Authority Innovation Ecosystem",
+  "strap": "Liverpool City Region Combined Authority's innovation footprint draws £3.64bn of UKRI lead-led funding across 3,572 grants spanning 4 active clusters, with Liverpool City Region Health Life Sciences (32%) the largest single cluster and Liverpool (32%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows low-confidence \"Program–Narrative\" stabilisation stacks at ecosystem grain — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/liverpool-city-region-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "liverpool-city-region",
+  "constituent_clusters": [
+    {
+      "v2_slug": "liverpool-city-region-health-life-sciences",
+      "name": "Liverpool City Region Health Life Sciences",
+      "v3_cluster": "liverpool_city_region_health_life_sciences"
+    },
+    {
+      "v2_slug": "liverpool-city-region-advanced-manufacturing",
+      "name": "Liverpool City Region Advanced Manufacturing",
+      "v3_cluster": "liverpool_city_region_advanced_manufacturing"
+    },
+    {
+      "v2_slug": "liverpool-city-region-digital-creative",
+      "name": "Liverpool City Region Digital Creative",
+      "v3_cluster": "liverpool_city_region_digital_creative"
+    },
+    {
+      "v2_slug": "liverpool-city-region-clean-energy",
+      "name": "Liverpool City Region Clean Energy",
+      "v3_cluster": "liverpool_city_region_clean_energy"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 4,
+    "total_gbp": 3643724558.666667,
+    "total_grants": 3572,
+    "top_cluster_slug": "liverpool_city_region_health_life_sciences",
+    "top_cluster_name": "Liverpool City Region Health Life Sciences",
+    "top_cluster_gbp": 1166122936.5,
+    "top_cluster_share": 0.32003597355523344,
+    "lead_name": "UNIVERSITY OF LIVERPOOL",
+    "lead_gbp": 1180584200.0,
+    "lead_share": 0.32400478713242975,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

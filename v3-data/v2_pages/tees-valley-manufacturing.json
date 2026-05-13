@@ -1,0 +1,12 @@
+{
+  "v2_slug": "tees-valley-manufacturing",
+  "shape": "cluster",
+  "v3_region": "tees_valley_combined_authority",
+  "v3_cluster": "tees_valley_manufacturing",
+  "region_name": "Tees Valley Combined Authority",
+  "cluster_name": "Tees Valley Manufacturing",
+  "strap": "Tees Valley Manufacturing draws £294m of UKRI lead-led funding across 148 grants, anchored by Teesside University (9%), Materials Processing Institute (7%), with Kromek Group on the industrial side.",
+  "behaviour": "The cluster shows low-confidence \"Forgiving instead of redesigning\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/tees-valley-manufacturing-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

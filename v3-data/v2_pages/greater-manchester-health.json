@@ -1,0 +1,12 @@
+{
+  "v2_slug": "greater-manchester-health",
+  "shape": "cluster",
+  "v3_region": "greater_manchester_combined_authority",
+  "v3_cluster": "greater_manchester_health",
+  "region_name": "Greater Manchester",
+  "cluster_name": "Greater Manchester Health",
+  "strap": "Greater Manchester Health draws £1.51bn of UKRI lead-led funding across 5,705 grants, anchored by Manchester (40%), with Medicines Discovery Catapult and Siemens on the industrial side. 52 Companies House-traced spin-outs translate to £29m UKRI per spin-out.",
+  "behaviour": "The cluster shows medium-confidence \"Re-proving instead of narrowing\" and \"Stabilising around incumbents\" behaviour — repeated infrastructure commitments reinforce incumbent positions rather than redirecting capability toward new anchors or sub-domain specialisms.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/greater-manchester-health-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

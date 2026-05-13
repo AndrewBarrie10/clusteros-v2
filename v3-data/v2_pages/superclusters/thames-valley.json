@@ -1,0 +1,79 @@
+{
+  "v2_slug": "thames-valley-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "thames_valley_strategic_mayoral_authority",
+  "v3_cluster": "_all",
+  "region_name": "Thames Valley",
+  "cluster_name": "Thames Valley Innovation Ecosystem",
+  "strap": "Thames Valley's innovation footprint draws £17.89bn of UKRI lead-led funding across 31,249 grants spanning 10 active clusters, with Thames Valley Life Sciences (36%) the largest single cluster and Oxford (29%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows medium-confidence \"Coordination–Activity\" stabilisation stacks at ecosystem grain — multi-actor coordination distributes risk across institutional partners without forcing the strategic option-collapse that would convert capability into a defined pathway.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/thames-valley-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "thames-valley",
+  "constituent_clusters": [
+    {
+      "v2_slug": "thames-valley-life-sciences",
+      "name": "Thames Valley Life Sciences",
+      "v3_cluster": "thames_valley_life_sciences"
+    },
+    {
+      "v2_slug": "thames-valley-space",
+      "name": "Thames Valley Space",
+      "v3_cluster": "thames_valley_space"
+    },
+    {
+      "v2_slug": "thames-valley-energy",
+      "name": "Thames Valley Energy",
+      "v3_cluster": "thames_valley_energy"
+    },
+    {
+      "v2_slug": "thames-valley-digital",
+      "name": "Thames Valley Digital",
+      "v3_cluster": "thames_valley_digital"
+    },
+    {
+      "v2_slug": "thames-valley-engineering",
+      "name": "Thames Valley Engineering",
+      "v3_cluster": "thames_valley_engineering"
+    },
+    {
+      "v2_slug": "thames-valley-creative",
+      "name": "Thames Valley Creative",
+      "v3_cluster": "thames_valley_creative"
+    },
+    {
+      "v2_slug": "thames-valley-environmental-intelligence",
+      "name": "Thames Valley Environmental Intelligence",
+      "v3_cluster": "thames_valley_environmental_intelligence"
+    },
+    {
+      "v2_slug": "thames-valley-business-services",
+      "name": "Thames Valley Business Services",
+      "v3_cluster": "thames_valley_business_services"
+    },
+    {
+      "v2_slug": "thames-valley-future-mobility",
+      "name": "Thames Valley Future Mobility",
+      "v3_cluster": "thames_valley_future_mobility"
+    },
+    {
+      "v2_slug": "thames-valley-defence-tech",
+      "name": "Thames Valley Defence Tech",
+      "v3_cluster": "thames_valley_defence_tech"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 10,
+    "total_gbp": 17887172465.000004,
+    "total_grants": 31249,
+    "top_cluster_slug": "thames_valley_life_sciences",
+    "top_cluster_name": "Thames Valley Life Sciences",
+    "top_cluster_gbp": 6368591674.200003,
+    "top_cluster_share": 0.35604239220376976,
+    "lead_name": "UNIVERSITY OF OXFORD",
+    "lead_gbp": 5250373108.333337,
+    "lead_share": 0.2935272815536827,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

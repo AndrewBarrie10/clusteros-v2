@@ -1,0 +1,12 @@
+{
+  "v2_slug": "south-yorkshire-digital",
+  "shape": "cluster",
+  "v3_region": "south_yorkshire_mayoral_combined_authority",
+  "v3_cluster": "south_yorkshire_digital",
+  "region_name": "South Yorkshire Mayoral Combined Authority",
+  "cluster_name": "South Yorkshire Digital",
+  "strap": "South Yorkshire Digital draws £400m of UKRI lead-led funding across 353 grants, anchored by Sheffield (38%), Sheffield Hallam University (13%), with Ansys Uk on the industrial side.",
+  "behaviour": "The cluster shows high-confidence \"Forgiving instead of redesigning\" and \"Coordinating instead of deciding\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/south-yorkshire-digital-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

@@ -100,6 +100,12 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .sc-meta{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-bottom:6px;}
 .sc-regime{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);margin-bottom:4px;}
 .sc-stall{font-size:11px;color:var(--ink-muted);line-height:1.4;}
+.meta-link{text-decoration:none;cursor:pointer;transition:background 0.15s,color 0.15s;}
+.meta-link:hover{background:var(--border);color:var(--ink);}
+.sibling-clusters .sibling-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:0.5rem 0.6rem;font-size:13px;line-height:1.6;}
+.sibling-clusters .sibling-row a{font-family:var(--font-sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:1px;transition:color 0.15s,border-bottom-color 0.15s;}
+.sibling-clusters .sibling-row a:hover{color:var(--green);border-bottom-color:var(--green);}
+.sibling-clusters .sibling-sep{color:var(--ink-muted);user-select:none;}
 .cta-block{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-top:3rem;}
 .cta-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.8rem;}
 .cta-h{font-family:var(--font-serif);font-size:1.3rem;margin-bottom:0.6rem;}
@@ -167,20 +173,21 @@ footer a:hover{color:var(--green);}
   <div class="nav-left">
     <a class="nav-logo" href="/">ClusterOS</a>
     <span class="nav-sep">/</span>
-    <a class="nav-back" href="/">All clusters</a>
+    <a class="nav-back" href="/superclusters/thames-valley">Thames Valley</a>
   </div>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
     <a href="/">ClusterOS</a><span>›</span>
-    <a href="/">Clusters</a><span>›</span>
+    <a href="/national-diagnostic">National Diagnostic</a><span>›</span>
+    <a href="/superclusters/thames-valley">Thames Valley</a><span>›</span>
     Thames Valley Future Mobility
   </div>
   <header class="cluster-header">
     <p class="cluster-eyebrow">ClusterOS Diagnostic Profile</p>
     <h1>Thames Valley Future Mobility</h1>
     <div class="cluster-meta">
-      <span class="meta-tag meta-plain">Thames Valley, United Kingdom</span>
+      <a class="meta-tag meta-plain meta-link" href="/superclusters/thames-valley">Thames Valley, United Kingdom</a>
       <span class="meta-tag meta-emerging">Unknown</span>
       
       
@@ -223,6 +230,12 @@ footer a:hover{color:var(--green);}
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
     <div class="similar-grid"><p class="empty">No comparable clusters identified.</p></div>
+  </div>
+  <div class="section sibling-clusters">
+    <div class="section-label">Other clusters in Thames Valley</div>
+    <div class="sibling-row">
+      <a href="/clusters/thames-valley-life-sciences.html">Thames Valley Life Sciences</a><span class="sibling-sep">·</span><a href="/clusters/thames-valley-space.html">Thames Valley Space</a><span class="sibling-sep">·</span><a href="/clusters/thames-valley-energy.html">Thames Valley Energy</a><span class="sibling-sep">·</span><a href="/clusters/thames-valley-digital.html">Thames Valley Digital</a><span class="sibling-sep">·</span><a href="/clusters/thames-valley-engineering.html">Thames Valley Engineering</a><span class="sibling-sep">·</span><a href="/clusters/thames-valley-creative.html">Thames Valley Creative</a><span class="sibling-sep">·</span><a href="/clusters/thames-valley-environmental-intelligence.html">Thames Valley Environmental Intelligence</a><span class="sibling-sep">·</span><a href="/clusters/thames-valley-business-services.html">Thames Valley Business Services</a><span class="sibling-sep">·</span><a href="/clusters/thames-valley-defence-tech.html">Thames Valley Defence Tech</a>
+    </div>
   </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>

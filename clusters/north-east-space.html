@@ -100,6 +100,12 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .sc-meta{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-bottom:6px;}
 .sc-regime{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);margin-bottom:4px;}
 .sc-stall{font-size:11px;color:var(--ink-muted);line-height:1.4;}
+.meta-link{text-decoration:none;cursor:pointer;transition:background 0.15s,color 0.15s;}
+.meta-link:hover{background:var(--border);color:var(--ink);}
+.sibling-clusters .sibling-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:0.5rem 0.6rem;font-size:13px;line-height:1.6;}
+.sibling-clusters .sibling-row a{font-family:var(--font-sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:1px;transition:color 0.15s,border-bottom-color 0.15s;}
+.sibling-clusters .sibling-row a:hover{color:var(--green);border-bottom-color:var(--green);}
+.sibling-clusters .sibling-sep{color:var(--ink-muted);user-select:none;}
 .cta-block{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-top:3rem;}
 .cta-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.8rem;}
 .cta-h{font-family:var(--font-serif);font-size:1.3rem;margin-bottom:0.6rem;}
@@ -167,20 +173,21 @@ footer a:hover{color:var(--green);}
   <div class="nav-left">
     <a class="nav-logo" href="/">ClusterOS</a>
     <span class="nav-sep">/</span>
-    <a class="nav-back" href="/">All clusters</a>
+    <a class="nav-back" href="/superclusters/north-east">North East Combined Authority</a>
   </div>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
     <a href="/">ClusterOS</a><span>›</span>
-    <a href="/">Clusters</a><span>›</span>
+    <a href="/national-diagnostic">National Diagnostic</a><span>›</span>
+    <a href="/superclusters/north-east">North East Combined Authority</a><span>›</span>
     North East Space
   </div>
   <header class="cluster-header">
     <p class="cluster-eyebrow">ClusterOS Diagnostic Profile</p>
     <h1>North East Space</h1>
     <div class="cluster-meta">
-      <span class="meta-tag meta-plain">Newcastle, United Kingdom</span>
+      <a class="meta-tag meta-plain meta-link" href="/superclusters/north-east">Newcastle, United Kingdom</a>
       <span class="meta-tag meta-Coordination-Incumbent-Permission">Coordination-Incumbent-Permission</span>
       
       
@@ -359,6 +366,12 @@ footer a:hover{color:var(--green);}
       <div class="sc-regime">Coordination-Incumbent-Permission</div>
       <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
     </a></div>
+  </div>
+  <div class="section sibling-clusters">
+    <div class="section-label">Other clusters in North East Combined Authority</div>
+    <div class="sibling-row">
+      <a href="/clusters/north-east-manufacturing.html">North East Manufacturing</a><span class="sibling-sep">·</span><a href="/clusters/north-east-energy.html">North East Energy</a><span class="sibling-sep">·</span><a href="/clusters/north-east-digital.html">North East Digital</a><span class="sibling-sep">·</span><a href="/clusters/north-east-life-sciences.html">North East Life Sciences</a><span class="sibling-sep">·</span><a href="/clusters/north-east-creative.html">North East Creative</a>
+    </div>
   </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>

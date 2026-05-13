@@ -86,6 +86,24 @@ function loadV3Bundle(slug) {
   catch (e) { console.warn(`Failed to parse bundle ${p}: ${e.message}`); return null; }
 }
 
+// Preload supercluster bundles so cluster pages can render parent-region
+// breadcrumbs, top nav, location pill and sibling-cluster navigation.
+const V3_SC_BUNDLES_DIR = path.join(__dirname, 'v3-data', 'v2_pages', 'superclusters');
+const v3SuperBundles = Object.create(null);
+if (fs.existsSync(V3_SC_BUNDLES_DIR)) {
+  for (const f of fs.readdirSync(V3_SC_BUNDLES_DIR)) {
+    if (!f.endsWith('.json')) continue;
+    try {
+      v3SuperBundles[f.replace('.json','')] = JSON.parse(
+        fs.readFileSync(path.join(V3_SC_BUNDLES_DIR, f), 'utf8')
+      );
+    } catch (e) { /* skip malformed */ }
+  }
+}
+function loadV3SuperBundle(parentSlug) {
+  return parentSlug ? (v3SuperBundles[parentSlug] || null) : null;
+}
+
 // v3 registry. When present, drives the in-scope cluster list (so we
 // only emit UK pages defined by v3, not all 377 entries in clusters.json).
 // Falls back to clusters.json iteration when the registry is absent.
@@ -402,6 +420,15 @@ function jsonLd(c) {
 function template(c, similar, bundle) {
   const rd = radarData(c);
   const isV3 = !!bundle;
+  // Parent-region navigation context (v3 pages only). Pulls the region's
+  // canonical display name from the supercluster bundle so the cluster page
+  // matches the supercluster page's h1 and the national-diagnostic tile.
+  const parentSlug = isV3 ? c.parent : null;
+  const parentBundle = parentSlug ? loadV3SuperBundle(parentSlug) : null;
+  const parentName = (parentBundle && parentBundle.region_name) || '';
+  const siblings = (parentBundle && Array.isArray(parentBundle.constituent_clusters))
+    ? parentBundle.constituent_clusters.filter(cc => cc.v2_slug !== c.id)
+    : [];
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -504,6 +531,12 @@ h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:
 .sc-meta{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-bottom:6px;}
 .sc-regime{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);margin-bottom:4px;}
 .sc-stall{font-size:11px;color:var(--ink-muted);line-height:1.4;}
+.meta-link{text-decoration:none;cursor:pointer;transition:background 0.15s,color 0.15s;}
+.meta-link:hover{background:var(--border);color:var(--ink);}
+.sibling-clusters .sibling-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:0.5rem 0.6rem;font-size:13px;line-height:1.6;}
+.sibling-clusters .sibling-row a{font-family:var(--font-sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:1px;transition:color 0.15s,border-bottom-color 0.15s;}
+.sibling-clusters .sibling-row a:hover{color:var(--green);border-bottom-color:var(--green);}
+.sibling-clusters .sibling-sep{color:var(--ink-muted);user-select:none;}
 .cta-block{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-top:3rem;}
 .cta-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.8rem;}
 .cta-h{font-family:var(--font-serif);font-size:1.3rem;margin-bottom:0.6rem;}
@@ -558,20 +591,29 @@ ${isV3 ? V3_CLUSTER_CSS : ''}
   <div class="nav-left">
     <a class="nav-logo" href="/">ClusterOS</a>
     <span class="nav-sep">/</span>
-    <a class="nav-back" href="/">All clusters</a>
+    ${isV3 && parentSlug && parentName
+      ? `<a class="nav-back" href="/superclusters/${parentSlug}">${parentName}</a>`
+      : `<a class="nav-back" href="/">All clusters</a>`}
   </div>
 </nav>
 <main class="page-wrap">
   <div class="breadcrumb">
-    <a href="/">ClusterOS</a><span>›</span>
+    ${isV3 && parentSlug && parentName
+      ? `<a href="/">ClusterOS</a><span>›</span>
+    <a href="/national-diagnostic">National Diagnostic</a><span>›</span>
+    <a href="/superclusters/${parentSlug}">${parentName}</a><span>›</span>
+    ${c.name}`
+      : `<a href="/">ClusterOS</a><span>›</span>
     <a href="/">Clusters</a><span>›</span>
-    ${c.name}
+    ${c.name}`}
   </div>
   <header class="cluster-header">
     <p class="cluster-eyebrow">ClusterOS Diagnostic Profile</p>
     <h1>${c.name}</h1>
     <div class="cluster-meta">
-      <span class="meta-tag meta-plain">${c.city}, ${countryName(c.country)}</span>
+      ${isV3 && parentSlug
+        ? `<a class="meta-tag meta-plain meta-link" href="/superclusters/${parentSlug}">${c.city}, ${countryName(c.country)}</a>`
+        : `<span class="meta-tag meta-plain">${c.city}, ${countryName(c.country)}</span>`}
       <span class="meta-tag meta-${c.regime||'emerging'}">${regimeLabel(c.regime)}</span>
       ${c._anchor_type?`<span class="meta-tag meta-plain">${anchorLabel(c._anchor_type)}</span>`:''}
       ${(!isV3 && c._evidence_count)?`<span class="meta-tag meta-plain">${c._evidence_count} evidence items</span>`:''}
@@ -622,6 +664,12 @@ ${isV3 ? V3_CLUSTER_CSS : ''}
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
     <div class="similar-grid">${renderSimilar(similar)}</div>
   </div>
+  ${(isV3 && siblings.length) ? `<div class="section sibling-clusters">
+    <div class="section-label">Other clusters in ${parentName}</div>
+    <div class="sibling-row">
+      ${siblings.map(s => `<a href="/clusters/${s.v2_slug}.html">${s.name}</a>`).join('<span class="sibling-sep">·</span>')}
+    </div>
+  </div>` : ''}
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>

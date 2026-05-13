@@ -1,0 +1,54 @@
+{
+  "v2_slug": "york-north-yorkshire-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "york_and_north_yorkshire_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "York and North Yorkshire Combined Authority",
+  "cluster_name": "York and North Yorkshire Combined Authority Innovation Ecosystem",
+  "strap": "York and North Yorkshire Combined Authority's innovation footprint draws £4.87bn of UKRI lead-led funding across 5,958 grants spanning 5 active clusters, with York and North Yorkshire Engineering Biology Life Sciences (31%) the largest single cluster and Leeds (20%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows low-confidence \"Program–Narrative\" stabilisation stacks at ecosystem grain — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/york-north-yorkshire-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12",
+  "supercluster_slug": "york-north-yorkshire",
+  "constituent_clusters": [
+    {
+      "v2_slug": "york-north-yorkshire-engineering-biology-life-sciences",
+      "name": "York and North Yorkshire Engineering Biology Life Sciences",
+      "v3_cluster": "york_and_north_yorkshire_engineering_biology_life_sciences"
+    },
+    {
+      "v2_slug": "york-north-yorkshire-clean-energy",
+      "name": "York and North Yorkshire Clean Energy",
+      "v3_cluster": "york_and_north_yorkshire_clean_energy"
+    },
+    {
+      "v2_slug": "york-north-yorkshire-rail-innovation",
+      "name": "York and North Yorkshire Rail Innovation",
+      "v3_cluster": "york_and_north_yorkshire_rail_innovation"
+    },
+    {
+      "v2_slug": "york-north-yorkshire-creative-industries",
+      "name": "York and North Yorkshire Creative Industries",
+      "v3_cluster": "york_and_north_yorkshire_creative_industries"
+    },
+    {
+      "v2_slug": "york-north-yorkshire-advanced-manufacturing",
+      "name": "York and North Yorkshire Advanced Manufacturing",
+      "v3_cluster": "york_and_north_yorkshire_advanced_manufacturing"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 5,
+    "total_gbp": 4866457438.0,
+    "total_grants": 5958,
+    "top_cluster_slug": "york_and_north_yorkshire_engineering_biology_life_sciences",
+    "top_cluster_name": "York and North Yorkshire Engineering Biology Life Sciences",
+    "top_cluster_gbp": 1513305088.5,
+    "top_cluster_share": 0.3109664695068068,
+    "lead_name": "UNIVERSITY OF LEEDS",
+    "lead_gbp": 985943727.5,
+    "lead_share": 0.2025998870967625,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

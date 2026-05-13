@@ -337,38 +337,38 @@
     "shape": "supercluster",
     "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/greater-manchester.json"
   },
-  "aberdeen-energy": {
+  "aberdeen-aberdeenshire-energy": {
     "v2_display_name": "Aberdeen Energy",
-    "supercluster": "aberdeen",
+    "supercluster": "aberdeen-aberdeenshire",
     "v3_region": "aberdeen_and_aberdeenshire",
     "v3_cluster": "aberdeen_energy",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/aberdeen-energy.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/aberdeen-aberdeenshire-energy.json"
   },
-  "aberdeen-digital": {
+  "aberdeen-aberdeenshire-digital": {
     "v2_display_name": "Aberdeen Digital",
-    "supercluster": "aberdeen",
+    "supercluster": "aberdeen-aberdeenshire",
     "v3_region": "aberdeen_and_aberdeenshire",
     "v3_cluster": "aberdeen_digital",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/aberdeen-digital.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/aberdeen-aberdeenshire-digital.json"
   },
-  "aberdeen-life-sciences": {
+  "aberdeen-aberdeenshire-life-sciences": {
     "v2_display_name": "Aberdeen Life Sciences",
-    "supercluster": "aberdeen",
+    "supercluster": "aberdeen-aberdeenshire",
     "v3_region": "aberdeen_and_aberdeenshire",
     "v3_cluster": "aberdeen_life_sciences",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/aberdeen-life-sciences.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/aberdeen-aberdeenshire-life-sciences.json"
   },
-  "aberdeen-innovation-ecosystem": {
+  "aberdeen-aberdeenshire-innovation-ecosystem": {
     "v2_display_name": "Aberdeen and Aberdeenshire Innovation Ecosystem",
-    "supercluster": "aberdeen",
+    "supercluster": "aberdeen-aberdeenshire",
     "v3_region": "aberdeen_and_aberdeenshire",
     "v3_cluster": "_all",
     "_notes": "Region-overview supercluster page; Sankey shows the no-filter view.",
     "shape": "supercluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/aberdeen.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/aberdeen-aberdeenshire.json"
   },
   "belfast-cyber": {
     "v2_display_name": "Belfast Cyber",
@@ -427,168 +427,119 @@
     "shape": "supercluster",
     "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/belfast.json"
   },
-  "cambridgeshire-peterborough-life-sciences": {
+  "cambridge-life-sciences": {
     "v2_display_name": "Cambridgeshire Peterborough Life Sciences",
-    "supercluster": "cambridgeshire-peterborough",
+    "supercluster": "cambridge",
     "v3_region": "cambridgeshire_and_peterborough_combined_authority",
     "v3_cluster": "cambridgeshire_peterborough_life_sciences",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridgeshire-peterborough-life-sciences.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridge-life-sciences.json"
   },
-  "cambridgeshire-peterborough-semiconductors": {
+  "cambridge-semiconductors": {
     "v2_display_name": "Cambridgeshire Peterborough Semiconductors",
-    "supercluster": "cambridgeshire-peterborough",
+    "supercluster": "cambridge",
     "v3_region": "cambridgeshire_and_peterborough_combined_authority",
     "v3_cluster": "cambridgeshire_peterborough_semiconductors",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridgeshire-peterborough-semiconductors.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridge-semiconductors.json"
   },
-  "cambridgeshire-peterborough-digital": {
+  "cambridge-digital": {
     "v2_display_name": "Cambridgeshire Peterborough Digital",
-    "supercluster": "cambridgeshire-peterborough",
+    "supercluster": "cambridge",
     "v3_region": "cambridgeshire_and_peterborough_combined_authority",
     "v3_cluster": "cambridgeshire_peterborough_digital",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridgeshire-peterborough-digital.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridge-digital.json"
   },
-  "cambridgeshire-peterborough-eng-bio": {
+  "cambridge-eng-bio": {
     "v2_display_name": "Cambridgeshire & Peterborough Engineering Biology",
-    "supercluster": "cambridgeshire-peterborough",
+    "supercluster": "cambridge",
     "v3_region": "cambridgeshire_and_peterborough_combined_authority",
     "v3_cluster": "cambridgeshire_peterborough_eng_bio",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridgeshire-peterborough-eng-bio.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridge-eng-bio.json"
   },
-  "cambridgeshire-peterborough-advanced-manufacturing-aerospace-and-industrial-engineering": {
+  "cambridge-advanced-manufacturing-aerospace-and-industrial-engineering": {
     "v2_display_name": "Cambridgeshire Peterborough Advanced Manufacturing Aerospace and Industrial Engineering",
-    "supercluster": "cambridgeshire-peterborough",
+    "supercluster": "cambridge",
     "v3_region": "cambridgeshire_and_peterborough_combined_authority",
     "v3_cluster": "cambridgeshire_peterborough_advanced_manufacturing_aerospace_and_industrial_engineering",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridgeshire-peterborough-advanced-manufacturing-aerospace-and-industrial-engineering.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridge-advanced-manufacturing-aerospace-and-industrial-engineering.json"
   },
-  "cambridgeshire-peterborough-climate-tech": {
+  "cambridge-climate-tech": {
     "v2_display_name": "Cambridgeshire & Peterborough Climate Tech",
-    "supercluster": "cambridgeshire-peterborough",
+    "supercluster": "cambridge",
     "v3_region": "cambridgeshire_and_peterborough_combined_authority",
     "v3_cluster": "cambridgeshire_peterborough_climate_tech",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridgeshire-peterborough-climate-tech.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cambridge-climate-tech.json"
   },
-  "cambridgeshire-peterborough-innovation-ecosystem": {
+  "cambridge-innovation-ecosystem": {
     "v2_display_name": "Cambridgeshire and Peterborough Innovation Ecosystem",
-    "supercluster": "cambridgeshire-peterborough",
+    "supercluster": "cambridge",
     "v3_region": "cambridgeshire_and_peterborough_combined_authority",
     "v3_cluster": "_all",
     "_notes": "Region-overview supercluster page; Sankey shows the no-filter view.",
     "shape": "supercluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/cambridgeshire-peterborough.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/cambridge.json"
   },
-  "ccr-compound-semiconductors": {
+  "cardiff-capital-compound-semiconductors": {
     "v2_display_name": "CCR Compound Semiconductors",
-    "supercluster": "ccr",
+    "supercluster": "cardiff-capital",
     "v3_region": "cardiff_capital_region",
     "v3_cluster": "ccr_compound_semiconductors",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/ccr-compound-semiconductors.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cardiff-capital-compound-semiconductors.json"
   },
-  "ccr-fin-tech": {
+  "cardiff-capital-fin-tech": {
     "v2_display_name": "Cardiff Capital Region Fintech",
-    "supercluster": "ccr",
+    "supercluster": "cardiff-capital",
     "v3_region": "cardiff_capital_region",
     "v3_cluster": "ccr_fin_tech",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/ccr-fin-tech.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cardiff-capital-fin-tech.json"
   },
-  "ccr-cyber": {
+  "cardiff-capital-cyber": {
     "v2_display_name": "CCR Cyber",
-    "supercluster": "ccr",
+    "supercluster": "cardiff-capital",
     "v3_region": "cardiff_capital_region",
     "v3_cluster": "ccr_cyber",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/ccr-cyber.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cardiff-capital-cyber.json"
   },
-  "ccr-creative": {
+  "cardiff-capital-creative": {
     "v2_display_name": "CCR Creative",
-    "supercluster": "ccr",
+    "supercluster": "cardiff-capital",
     "v3_region": "cardiff_capital_region",
     "v3_cluster": "ccr_creative",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/ccr-creative.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cardiff-capital-creative.json"
   },
-  "ccr-med-tech": {
+  "cardiff-capital-med-tech": {
     "v2_display_name": "Cardiff Capital Region Med Tech",
-    "supercluster": "ccr",
+    "supercluster": "cardiff-capital",
     "v3_region": "cardiff_capital_region",
     "v3_cluster": "ccr_med_tech",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/ccr-med-tech.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cardiff-capital-med-tech.json"
   },
-  "ccr-advanced-manufacturing": {
+  "cardiff-capital-advanced-manufacturing": {
     "v2_display_name": "CCR Advanced Manufacturing",
-    "supercluster": "ccr",
+    "supercluster": "cardiff-capital",
     "v3_region": "cardiff_capital_region",
     "v3_cluster": "ccr_advanced_manufacturing",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/ccr-advanced-manufacturing.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/cardiff-capital-advanced-manufacturing.json"
   },
-  "ccr-innovation-ecosystem": {
+  "cardiff-capital-innovation-ecosystem": {
     "v2_display_name": "Cardiff Capital Region Innovation Ecosystem",
-    "supercluster": "ccr",
+    "supercluster": "cardiff-capital",
     "v3_region": "cardiff_capital_region",
     "v3_cluster": "_all",
     "_notes": "Region-overview supercluster page; Sankey shows the no-filter view.",
     "shape": "supercluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/ccr.json"
-  },
-  "derry-digital": {
-    "v2_display_name": "Derry Digital",
-    "supercluster": "derry",
-    "v3_region": "derry_city_and_strabane",
-    "v3_cluster": "derry_digital",
-    "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/derry-digital.json"
-  },
-  "derry-manufacturing": {
-    "v2_display_name": "Derry Manufacturing",
-    "supercluster": "derry",
-    "v3_region": "derry_city_and_strabane",
-    "v3_cluster": "derry_manufacturing",
-    "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/derry-manufacturing.json"
-  },
-  "derry-life-sciences": {
-    "v2_display_name": "Derry Life Sciences",
-    "supercluster": "derry",
-    "v3_region": "derry_city_and_strabane",
-    "v3_cluster": "derry_life_sciences",
-    "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/derry-life-sciences.json"
-  },
-  "derry-creative": {
-    "v2_display_name": "Derry Creative",
-    "supercluster": "derry",
-    "v3_region": "derry_city_and_strabane",
-    "v3_cluster": "derry_creative",
-    "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/derry-creative.json"
-  },
-  "derry-fin-tech": {
-    "v2_display_name": "Derry Fintech",
-    "supercluster": "derry",
-    "v3_region": "derry_city_and_strabane",
-    "v3_cluster": "derry_fin_tech",
-    "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/derry-fin-tech.json"
-  },
-  "derry-innovation-ecosystem": {
-    "v2_display_name": "Derry City and Strabane Innovation Ecosystem",
-    "supercluster": "derry",
-    "v3_region": "derry_city_and_strabane",
-    "v3_cluster": "_all",
-    "_notes": "Region-overview supercluster page; Sankey shows the no-filter view.",
-    "shape": "supercluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/derry.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/cardiff-capital.json"
   },
   "devon-torbay-advanced-manufacturing": {
     "v2_display_name": "Devon and Torbay Advanced Manufacturing",
@@ -680,54 +631,54 @@
     "shape": "supercluster",
     "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/east-midlands.json"
   },
-  "eses-data-ai": {
+  "edinburgh-south-east-data-ai": {
     "v2_display_name": "ESES Data AI",
-    "supercluster": "eses",
+    "supercluster": "edinburgh-south-east",
     "v3_region": "edinburgh_and_south_east",
     "v3_cluster": "eses_data_ai",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/eses-data-ai.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/edinburgh-south-east-data-ai.json"
   },
-  "eses-fin-tech": {
+  "edinburgh-south-east-fin-tech": {
     "v2_display_name": "Edinburgh and South East Fintech",
-    "supercluster": "eses",
+    "supercluster": "edinburgh-south-east",
     "v3_region": "edinburgh_and_south_east",
     "v3_cluster": "eses_fin_tech",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/eses-fin-tech.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/edinburgh-south-east-fin-tech.json"
   },
-  "eses-life-sciences": {
+  "edinburgh-south-east-life-sciences": {
     "v2_display_name": "ESES Life Sciences",
-    "supercluster": "eses",
+    "supercluster": "edinburgh-south-east",
     "v3_region": "edinburgh_and_south_east",
     "v3_cluster": "eses_life_sciences",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/eses-life-sciences.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/edinburgh-south-east-life-sciences.json"
   },
-  "eses-space": {
+  "edinburgh-south-east-space": {
     "v2_display_name": "ESES Space",
-    "supercluster": "eses",
+    "supercluster": "edinburgh-south-east",
     "v3_region": "edinburgh_and_south_east",
     "v3_cluster": "eses_space",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/eses-space.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/edinburgh-south-east-space.json"
   },
-  "eses-advanced-manufacturing": {
+  "edinburgh-south-east-advanced-manufacturing": {
     "v2_display_name": "ESES Advanced Manufacturing",
-    "supercluster": "eses",
+    "supercluster": "edinburgh-south-east",
     "v3_region": "edinburgh_and_south_east",
     "v3_cluster": "eses_advanced_manufacturing",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/eses-advanced-manufacturing.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/edinburgh-south-east-advanced-manufacturing.json"
   },
-  "eses-innovation-ecosystem": {
+  "edinburgh-south-east-innovation-ecosystem": {
     "v2_display_name": "Edinburgh and South East Innovation Ecosystem",
-    "supercluster": "eses",
+    "supercluster": "edinburgh-south-east",
     "v3_region": "edinburgh_and_south_east",
     "v3_cluster": "_all",
     "_notes": "Region-overview supercluster page; Sankey shows the no-filter view.",
     "shape": "supercluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/eses.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/edinburgh-south-east.json"
   },
   "greater-lincolnshire-energy": {
     "v2_display_name": "Greater Lincolnshire Energy",
@@ -754,46 +705,46 @@
     "shape": "supercluster",
     "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/greater-lincolnshire.json"
   },
-  "highlands-and-islands-energy": {
+  "inverness-highlands-energy": {
     "v2_display_name": "Highlands and Islands Energy",
-    "supercluster": "highlands-and-islands",
+    "supercluster": "inverness-highlands",
     "v3_region": "inverness_and_highlands",
     "v3_cluster": "highlands_and_islands_energy",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/highlands-and-islands-energy.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/inverness-highlands-energy.json"
   },
-  "highlands-and-islands-life-sciences": {
+  "inverness-highlands-life-sciences": {
     "v2_display_name": "Highlands and Islands Life Sciences",
-    "supercluster": "highlands-and-islands",
+    "supercluster": "inverness-highlands",
     "v3_region": "inverness_and_highlands",
     "v3_cluster": "highlands_and_islands_life_sciences",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/highlands-and-islands-life-sciences.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/inverness-highlands-life-sciences.json"
   },
-  "highlands-and-islands-space": {
+  "inverness-highlands-space": {
     "v2_display_name": "Highlands and Islands Space",
-    "supercluster": "highlands-and-islands",
+    "supercluster": "inverness-highlands",
     "v3_region": "inverness_and_highlands",
     "v3_cluster": "highlands_and_islands_space",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/highlands-and-islands-space.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/inverness-highlands-space.json"
   },
-  "highlands-and-islands-creative": {
+  "inverness-highlands-creative": {
     "v2_display_name": "Highlands and Islands Creative",
-    "supercluster": "highlands-and-islands",
+    "supercluster": "inverness-highlands",
     "v3_region": "inverness_and_highlands",
     "v3_cluster": "highlands_and_islands_creative",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/highlands-and-islands-creative.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/inverness-highlands-creative.json"
   },
-  "highlands-and-islands-innovation-ecosystem": {
+  "inverness-highlands-innovation-ecosystem": {
     "v2_display_name": "Inverness and Highlands Innovation Ecosystem",
-    "supercluster": "highlands-and-islands",
+    "supercluster": "inverness-highlands",
     "v3_region": "inverness_and_highlands",
     "v3_cluster": "_all",
     "_notes": "Region-overview supercluster page; Sankey shows the no-filter view.",
     "shape": "supercluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/highlands-and-islands.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/inverness-highlands.json"
   },
   "lancashire-advanced-manufacturing": {
     "v2_display_name": "Lancashire Advanced Manufacturing",
@@ -1000,47 +951,6 @@
     "shape": "supercluster",
     "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/stirling-clackmannanshire.json"
   },
-  "swansea-bay-energy": {
-    "v2_display_name": "Swansea Bay Energy",
-    "supercluster": "swansea-bay",
-    "v3_region": "swansea_bay_city_region",
-    "v3_cluster": "swansea_bay_energy",
-    "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/swansea-bay-energy.json"
-  },
-  "swansea-bay-manufacturing": {
-    "v2_display_name": "Swansea Bay Manufacturing",
-    "supercluster": "swansea-bay",
-    "v3_region": "swansea_bay_city_region",
-    "v3_cluster": "swansea_bay_manufacturing",
-    "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/swansea-bay-manufacturing.json"
-  },
-  "swansea-bay-life-sciences": {
-    "v2_display_name": "Swansea Bay Life Sciences",
-    "supercluster": "swansea-bay",
-    "v3_region": "swansea_bay_city_region",
-    "v3_cluster": "swansea_bay_life_sciences",
-    "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/swansea-bay-life-sciences.json"
-  },
-  "swansea-bay-digital": {
-    "v2_display_name": "Swansea Bay Digital",
-    "supercluster": "swansea-bay",
-    "v3_region": "swansea_bay_city_region",
-    "v3_cluster": "swansea_bay_digital",
-    "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/swansea-bay-digital.json"
-  },
-  "swansea-bay-innovation-ecosystem": {
-    "v2_display_name": "Swansea Bay City Region Innovation Ecosystem",
-    "supercluster": "swansea-bay",
-    "v3_region": "swansea_bay_city_region",
-    "v3_cluster": "_all",
-    "_notes": "Region-overview supercluster page; Sankey shows the no-filter view.",
-    "shape": "supercluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/swansea-bay.json"
-  },
   "tay-cities-life-sciences": {
     "v2_display_name": "Tay Cities Life Sciences",
     "supercluster": "tay-cities",
@@ -1123,54 +1033,54 @@
     "shape": "supercluster",
     "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/tees-valley.json"
   },
-  "wmca-advanced-manufacturing": {
+  "west-midlands-advanced-manufacturing": {
     "v2_display_name": "WMCA Advanced Manufacturing",
-    "supercluster": "wmca",
+    "supercluster": "west-midlands",
     "v3_region": "west_midlands_combined_authority",
     "v3_cluster": "wmca_advanced_manufacturing",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/wmca-advanced-manufacturing.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/west-midlands-advanced-manufacturing.json"
   },
-  "wmca-digital": {
+  "west-midlands-digital": {
     "v2_display_name": "WMCA Digital",
-    "supercluster": "wmca",
+    "supercluster": "west-midlands",
     "v3_region": "west_midlands_combined_authority",
     "v3_cluster": "wmca_digital",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/wmca-digital.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/west-midlands-digital.json"
   },
-  "wmca-health-tech": {
+  "west-midlands-health-tech": {
     "v2_display_name": "West Midlands Health Tech",
-    "supercluster": "wmca",
+    "supercluster": "west-midlands",
     "v3_region": "west_midlands_combined_authority",
     "v3_cluster": "wmca_health_tech",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/wmca-health-tech.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/west-midlands-health-tech.json"
   },
-  "wmca-clean-growth": {
+  "west-midlands-clean-growth": {
     "v2_display_name": "WMCA Clean Growth",
-    "supercluster": "wmca",
+    "supercluster": "west-midlands",
     "v3_region": "west_midlands_combined_authority",
     "v3_cluster": "wmca_clean_growth",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/wmca-clean-growth.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/west-midlands-clean-growth.json"
   },
-  "wmca-creative": {
+  "west-midlands-creative": {
     "v2_display_name": "WMCA Creative",
-    "supercluster": "wmca",
+    "supercluster": "west-midlands",
     "v3_region": "west_midlands_combined_authority",
     "v3_cluster": "wmca_creative",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/wmca-creative.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/west-midlands-creative.json"
   },
-  "wmca-innovation-ecosystem": {
+  "west-midlands-innovation-ecosystem": {
     "v2_display_name": "West Midlands Combined Authority Innovation Ecosystem",
-    "supercluster": "wmca",
+    "supercluster": "west-midlands",
     "v3_region": "west_midlands_combined_authority",
     "v3_cluster": "_all",
     "_notes": "Region-overview supercluster page; Sankey shows the no-filter view.",
     "shape": "supercluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/wmca.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/west-midlands.json"
   },
   "west-yorkshire-advanced-manufacturing": {
     "v2_display_name": "West Yorkshire Advanced Manufacturing",
@@ -1229,54 +1139,54 @@
     "shape": "supercluster",
     "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/west-yorkshire.json"
   },
-  "york-and-north-yorkshire-engineering-biology-life-sciences": {
+  "york-north-yorkshire-engineering-biology-life-sciences": {
     "v2_display_name": "York and North Yorkshire Engineering Biology Life Sciences",
-    "supercluster": "york-and-north-yorkshire",
+    "supercluster": "york-north-yorkshire",
     "v3_region": "york_and_north_yorkshire_combined_authority",
     "v3_cluster": "york_and_north_yorkshire_engineering_biology_life_sciences",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-and-north-yorkshire-engineering-biology-life-sciences.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-north-yorkshire-engineering-biology-life-sciences.json"
   },
-  "york-and-north-yorkshire-clean-energy": {
+  "york-north-yorkshire-clean-energy": {
     "v2_display_name": "York and North Yorkshire Clean Energy",
-    "supercluster": "york-and-north-yorkshire",
+    "supercluster": "york-north-yorkshire",
     "v3_region": "york_and_north_yorkshire_combined_authority",
     "v3_cluster": "york_and_north_yorkshire_clean_energy",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-and-north-yorkshire-clean-energy.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-north-yorkshire-clean-energy.json"
   },
-  "york-and-north-yorkshire-rail-innovation": {
+  "york-north-yorkshire-rail-innovation": {
     "v2_display_name": "York and North Yorkshire Rail Innovation",
-    "supercluster": "york-and-north-yorkshire",
+    "supercluster": "york-north-yorkshire",
     "v3_region": "york_and_north_yorkshire_combined_authority",
     "v3_cluster": "york_and_north_yorkshire_rail_innovation",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-and-north-yorkshire-rail-innovation.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-north-yorkshire-rail-innovation.json"
   },
-  "york-and-north-yorkshire-creative-industries": {
+  "york-north-yorkshire-creative-industries": {
     "v2_display_name": "York and North Yorkshire Creative Industries",
-    "supercluster": "york-and-north-yorkshire",
+    "supercluster": "york-north-yorkshire",
     "v3_region": "york_and_north_yorkshire_combined_authority",
     "v3_cluster": "york_and_north_yorkshire_creative_industries",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-and-north-yorkshire-creative-industries.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-north-yorkshire-creative-industries.json"
   },
-  "york-and-north-yorkshire-advanced-manufacturing": {
+  "york-north-yorkshire-advanced-manufacturing": {
     "v2_display_name": "York and North Yorkshire Advanced Manufacturing",
-    "supercluster": "york-and-north-yorkshire",
+    "supercluster": "york-north-yorkshire",
     "v3_region": "york_and_north_yorkshire_combined_authority",
     "v3_cluster": "york_and_north_yorkshire_advanced_manufacturing",
     "shape": "cluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-and-north-yorkshire-advanced-manufacturing.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/york-north-yorkshire-advanced-manufacturing.json"
   },
-  "york-and-north-yorkshire-innovation-ecosystem": {
+  "york-north-yorkshire-innovation-ecosystem": {
     "v2_display_name": "York and North Yorkshire Combined Authority Innovation Ecosystem",
-    "supercluster": "york-and-north-yorkshire",
+    "supercluster": "york-north-yorkshire",
     "v3_region": "york_and_north_yorkshire_combined_authority",
     "v3_cluster": "_all",
     "_notes": "Region-overview supercluster page; Sankey shows the no-filter view.",
     "shape": "supercluster",
-    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/york-and-north-yorkshire.json"
+    "bundle_url": "https://preview.clusteros.io/data/v2_pages/superclusters/york-north-yorkshire.json"
   },
   "london-ai-data-software": {
     "v2_display_name": "London AI Data Software",

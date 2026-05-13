@@ -1,0 +1,12 @@
+{
+  "v2_slug": "edinburgh-south-east-space",
+  "shape": "cluster",
+  "v3_region": "edinburgh_and_south_east",
+  "v3_cluster": "eses_space",
+  "region_name": "Edinburgh and South East",
+  "cluster_name": "ESES Space",
+  "strap": "ESES Space draws £53m of UKRI lead-led funding across 55 grants, anchored by Heriot-Watt University (49%), Edinburgh (33%).",
+  "behaviour": "The cluster shows low-confidence \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/edinburgh-south-east-space-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

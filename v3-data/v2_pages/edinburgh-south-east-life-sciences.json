@@ -1,0 +1,12 @@
+{
+  "v2_slug": "edinburgh-south-east-life-sciences",
+  "shape": "cluster",
+  "v3_region": "edinburgh_and_south_east",
+  "v3_cluster": "eses_life_sciences",
+  "region_name": "Edinburgh and South East",
+  "cluster_name": "ESES Life Sciences",
+  "strap": "ESES Life Sciences draws £1.96bn of UKRI lead-led funding across 2,527 grants, anchored by Edinburgh (58%), St Andrews (11%).",
+  "behaviour": "The cluster shows high-confidence \"Re-proving instead of narrowing\" and \"Forgiving instead of redesigning\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/edinburgh-south-east-life-sciences-diagnostic-wide.png",
+  "snapshot_date": "2026-05-12"
+}

@@ -69,23 +69,18 @@ footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 
 footer a{color:var(--ink-muted);text-decoration:none;}
 footer a:hover{color:var(--green);}
 
-.sc-summary{font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:1.25rem;}
-.sc-metric-quad{list-style:none;padding:0;margin:0 0 2.5rem;font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--ink);max-width:720px;}
-.sc-metric-quad li{padding:3px 0;}
-.sc-metric-quad b{font-weight:600;color:var(--ink);}
+.sc-summary{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:1.25rem;}
+.sc-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:2rem;}
 .diagnostic-composite{margin:1.5rem 0 3rem;}
-.diagnostic-figure{margin:0 0 1.25rem;text-align:center;}
+.diagnostic-figure{margin:0;text-align:center;}
 .diagnostic-image{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
-.diagnostic-behaviour{font-family:var(--font-serif);font-size:18px;color:var(--ink);line-height:1.5;margin:0 auto 1.5rem;max-width:720px;text-align:center;}
-.diagnostic-cta{margin:1.5rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta{margin:1.75rem auto 0;max-width:720px;text-align:center;}
 .diagnostic-cta-framing{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
 .diagnostic-cta-link{margin:0;font-family:var(--font-mono);font-size:14px;}
 .diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
 .diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
 .diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
 @media(max-width:640px){
-  .sc-metric-quad{font-size:12.5px;}
-  .diagnostic-behaviour{font-size:16px;text-align:left;margin-top:1rem;}
   .diagnostic-cta,.diagnostic-source{text-align:left;}
 }
 </style>
@@ -109,25 +104,17 @@ footer a:hover{color:var(--green);}
     <span class="meta-tag">6 clusters</span>
   </div>
   <p class="sc-summary">Greater Glasgow's innovation footprint draws £4.56bn of UKRI lead-led funding across 5,718 grants spanning 6 active clusters, with Glasgow (30%) the dominant regional anchor and Greater Glasgow Digital Creative (24%) the largest single cluster.</p>
-  <ul class="sc-metric-quad"><li>£4.56bn UKRI lead-led across 5,718 grants spanning <b>6</b> active clusters</li><li>Largest cluster: <b>Greater Glasgow Digital Creative</b> at <b>25%</b> of regional £ (£1.12bn)</li><li>Region-wide lead: <b>UNIVERSITY OF GLASGOW</b> — £1.36bn across all clusters (30% of regional £)</li><li>55 Companies House-traced spin-outs region-wide → £83m UKRI per spin-out</li></ul>
+  <p class="sc-behaviour">The region shows medium-confidence "Coordination–Intermediation" and "Extraction–Intermediation" stabilisation stacks at ecosystem grain — intermediaries cluster around incumbent anchors, absorbing the coordination load that would otherwise force a redesign of how value flows between universities, public funders and corporate spin-out activity. Pipeline 1 evidence: infrastructure deployment 2015-2024 across multiple clusters, support-programme establishment 1998-2024 and 2024 activity concentration all re-evidence "Re-proving instead of narrowing" behaviour; University of Strathclyde appears as institutional anchor across 8 of 8 sub-clusters as ecosystem-level intermediation.</p>
   <section class="diagnostic-composite">
     <figure class="diagnostic-figure">
       <img src="https://preview.clusteros.io/static/diagnostics/greater-glasgow-innovation-ecosystem-diagnostic-wide.png?v=2026-05-12" alt="Greater Glasgow diagnostic Sankey" class="diagnostic-image" loading="lazy" />
     </figure>
-    <p class="diagnostic-behaviour">The region shows medium-confidence "Coordination–Intermediation" and "Extraction–Intermediation" stabilisation stacks at ecosystem grain — intermediaries cluster around incumbent anchors, absorbing the coordination load that would otherwise force a redesign of how value flows between universities, public funders and corporate spin-out activity.</p>
     <div class="diagnostic-cta">
       <p class="diagnostic-cta-framing">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
       <p class="diagnostic-cta-link"><a href="https://www.clusteros.io/request">Request access →</a></p>
     </div>
     <p class="diagnostic-source">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
   </section>
-  
-  <div class="section">
-    <div class="section-label">Regional patterns · Cross-cluster synthesis</div>
-    <ul class="rp-list">
-      <li>7 of 8 clusters register all three reinforcing backbone configurations at confident levels.</li><li>Anchor concentration — University of Strathclyde appears across 6 of 8 sub-clusters as a configured ecosystem-level anchor.</li>
-    </ul>
-  </div>
   <div class="section">
     <div class="section-label">Constituent clusters</div>
     <table class="ct">

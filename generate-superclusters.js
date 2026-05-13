@@ -40,10 +40,10 @@ if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
 // v3 per-page bundles. When a bundle exists for a supercluster, the page is
 // rendered from the bundle (strap, behaviour, metrics, constituent_clusters,
 // hot-linked diagnostic PNG). When absent, the legacy template is used.
-// Bundle slug = `${sc.id}-innovation-ecosystem` matching the v3 registry.
-const V3_BUNDLES_DIR = path.join(__dirname, 'v3-data', 'v2_pages');
+// Bundle path matches v3: data/v2_pages/superclusters/<sc.id>.json
+const V3_BUNDLES_DIR = path.join(__dirname, 'v3-data', 'v2_pages', 'superclusters');
 function loadBundle(scId) {
-  const p = path.join(V3_BUNDLES_DIR, `${scId}-innovation-ecosystem.json`);
+  const p = path.join(V3_BUNDLES_DIR, `${scId}.json`);
   if (!fs.existsSync(p)) return null;
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); }
   catch (e) { console.warn(`Failed to parse bundle ${p}: ${e.message}`); return null; }
@@ -378,19 +378,6 @@ function renderLeverageRich(hypotheses, children) {
 
 // ── v3 BUNDLE HELPERS ───────────────────────────────────
 
-function formatGbp(amount) {
-  if (amount == null) return '—';
-  if (amount >= 1e9) return `£${(amount / 1e9).toFixed(2)}bn`;
-  if (amount >= 1e6) return `£${Math.round(amount / 1e6)}m`;
-  return `£${Math.round(amount).toLocaleString()}`;
-}
-function formatPct(x) {
-  if (x == null) return '—';
-  return `${Math.round(x * 100)}%`;
-}
-function formatInt(n) {
-  return n == null ? '—' : n.toLocaleString();
-}
 function monthYearFromDate(iso) {
   // "2026-05-12" → "May 2026"
   if (!iso) return '';
@@ -404,28 +391,6 @@ const V3_SOURCE_LINE_LEAD = 'Sources: UKRI Gateway to Research (grants, outcomes
 const V3_CTA_FRAMING = 'Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.';
 const V3_CTA_HREF = 'https://www.clusteros.io/request';
 const V3_CTA_TEXT = 'Request access →';
-
-// Pipeline 1 narrative bullets that contradict v3 numbers. Filter from
-// regional_patterns when a v3 bundle is rendering the page.
-const V3_DROP_PATTERN_PHRASES = [
-  /structurally empty/i,
-  /could not produce a verified count/i,
-];
-function filterPatterns(patterns) {
-  if (!patterns) return [];
-  return patterns.filter(p => !V3_DROP_PATTERN_PHRASES.some(re => re.test(p)));
-}
-
-function renderMetricQuad(metrics) {
-  if (!metrics) return '';
-  const lines = [
-    `${formatGbp(metrics.total_gbp)} UKRI lead-led across ${formatInt(metrics.total_grants)} grants spanning <b>${metrics.active_clusters}</b> active clusters`,
-    `Largest cluster: <b>${metrics.top_cluster_name}</b> at <b>${formatPct(metrics.top_cluster_share)}</b> of regional £ (${formatGbp(metrics.top_cluster_gbp)})`,
-    `Region-wide lead: <b>${metrics.lead_name}</b> — ${formatGbp(metrics.lead_gbp)} across all clusters (${formatPct(metrics.lead_share)} of regional £)`,
-    `${formatInt(metrics.ch_spinouts)} Companies House-traced spin-outs region-wide → ${formatGbp(metrics.gbp_per_spinout)} UKRI per spin-out`,
-  ];
-  return `<ul class="sc-metric-quad">${lines.map(l => `<li>${l}</li>`).join('')}</ul>`;
-}
 
 function renderConstituentTableV3(constituents, clusterIndex) {
   if (!constituents || !constituents.length) {
@@ -449,24 +414,21 @@ function renderConstituentTableV3(constituents, clusterIndex) {
   </table>`;
 }
 
+// FT/McKinsey-style typography: prose stays in --font-sans, serif is reserved
+// for h1, mono is reserved for labels, pills, source line, and CTA framing.
 const V3_COMPOSITE_CSS = `
-.sc-summary{font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:1.25rem;}
-.sc-metric-quad{list-style:none;padding:0;margin:0 0 2.5rem;font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--ink);max-width:720px;}
-.sc-metric-quad li{padding:3px 0;}
-.sc-metric-quad b{font-weight:600;color:var(--ink);}
+.sc-summary{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:1.25rem;}
+.sc-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:2rem;}
 .diagnostic-composite{margin:1.5rem 0 3rem;}
-.diagnostic-figure{margin:0 0 1.25rem;text-align:center;}
+.diagnostic-figure{margin:0;text-align:center;}
 .diagnostic-image{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
-.diagnostic-behaviour{font-family:var(--font-serif);font-size:18px;color:var(--ink);line-height:1.5;margin:0 auto 1.5rem;max-width:720px;text-align:center;}
-.diagnostic-cta{margin:1.5rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta{margin:1.75rem auto 0;max-width:720px;text-align:center;}
 .diagnostic-cta-framing{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
 .diagnostic-cta-link{margin:0;font-family:var(--font-mono);font-size:14px;}
 .diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
 .diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
 .diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
 @media(max-width:640px){
-  .sc-metric-quad{font-size:12.5px;}
-  .diagnostic-behaviour{font-size:16px;text-align:left;margin-top:1rem;}
   .diagnostic-cta,.diagnostic-source{text-align:left;}
 }`;
 
@@ -478,7 +440,6 @@ function templateV3(sc, children, bundle) {
   const pngUrl = bundle.diagnostic_png_url + (bundle.snapshot_date ? `?v=${bundle.snapshot_date}` : '');
   const sourceLine = `${V3_SOURCE_LINE_LEAD} Snapshot ${monthYearFromDate(bundle.snapshot_date)}.`;
   const clusterCount = metrics.active_clusters != null ? metrics.active_clusters : children.length;
-  const filteredPatterns = filterPatterns(sc.regional_patterns);
 
   // Index clusters.json by id for table joins.
   const clusterIndex = Object.create(null);
@@ -576,25 +537,17 @@ ${V3_COMPOSITE_CSS}
     <span class="meta-tag">${clusterCount} cluster${clusterCount === 1 ? '' : 's'}</span>
   </div>
   <p class="sc-summary">${bundle.strap || ''}</p>
-  ${renderMetricQuad(metrics)}
+  ${bundle.behaviour ? `<p class="sc-behaviour">${bundle.behaviour}</p>` : ''}
   <section class="diagnostic-composite">
     <figure class="diagnostic-figure">
       <img src="${pngUrl}" alt="${bundle.region_name || sc.name} diagnostic Sankey" class="diagnostic-image" loading="lazy" />
     </figure>
-    ${bundle.behaviour ? `<p class="diagnostic-behaviour">${bundle.behaviour}</p>` : ''}
     <div class="diagnostic-cta">
       <p class="diagnostic-cta-framing">${V3_CTA_FRAMING}</p>
       <p class="diagnostic-cta-link"><a href="${V3_CTA_HREF}">${V3_CTA_TEXT}</a></p>
     </div>
     <p class="diagnostic-source">${sourceLine}</p>
   </section>
-  ${filteredPatterns.length ? `
-  <div class="section">
-    <div class="section-label">Regional patterns · Cross-cluster synthesis</div>
-    <ul class="rp-list">
-      ${filteredPatterns.map(p => `<li>${p}</li>`).join('')}
-    </ul>
-  </div>` : ''}
   <div class="section">
     <div class="section-label">Constituent clusters</div>
     ${renderConstituentTableV3(bundle.constituent_clusters, clusterIndex)}

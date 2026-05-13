@@ -1,0 +1,12 @@
+{
+  "v2_slug": "lancashire-advanced-manufacturing",
+  "shape": "cluster",
+  "v3_region": "lancashire_combined_county_authority",
+  "v3_cluster": "lancashire_advanced_manufacturing",
+  "region_name": "Lancashire Combined County Authority",
+  "cluster_name": "Lancashire Advanced Manufacturing",
+  "strap": "Lancashire Advanced Manufacturing draws £397m of UKRI lead-led funding across 281 grants, anchored by Lancaster University (26%), with Victrex and Machine Tool Technologies on the industrial side.",
+  "behaviour": "The cluster shows medium-confidence \"Forgiving instead of redesigning\" and \"Re-proving instead of narrowing\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/lancashire-advanced-manufacturing-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

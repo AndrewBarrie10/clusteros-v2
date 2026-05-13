@@ -1,0 +1,12 @@
+{
+  "v2_slug": "tees-valley-net-zero",
+  "shape": "cluster",
+  "v3_region": "tees_valley_combined_authority",
+  "v3_cluster": "tees_valley_net_zero",
+  "region_name": "Tees Valley Combined Authority",
+  "cluster_name": "Tees Valley Net Zero",
+  "strap": "Tees Valley Net Zero draws £149m of UKRI lead-led funding across 102 grants, anchored by Materials Processing Institute (11%), Teesside University (8%), with Tees Valley Combined Authority on the industrial side.",
+  "behaviour": "The cluster shows low-confidence \"Forgiving instead of redesigning\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/tees-valley-net-zero-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

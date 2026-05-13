@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>West Midlands Combined Authority — ClusterOS Regional Diagnostic</title>
-<meta name="description" content="8 clusters diagnosed across West Midlands Combined Authority, drawing on 875 evidence items cross-referenced at entity level. The Coordination-Intermediary-Acti">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"West Midlands Combined Authority — ClusterOS Regional Diagnostic","description":"8 clusters diagnosed across West Midlands Combined Authority, drawing on 875 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.","url":"https://www.clusteros.io/superclusters/west-midlands","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Birmingham","addressCountry":"GB"},"hasPart":[{"@type":"Dataset","name":"WMCA BPFS","url":"https://www.clusteros.io/clusters/west-midlands-bpfs.html"},{"@type":"Dataset","name":"WMCA Digital","url":"https://www.clusteros.io/clusters/west-midlands-digital.html"},{"@type":"Dataset","name":"WMCA Logistics","url":"https://www.clusteros.io/clusters/west-midlands-logistics.html"},{"@type":"Dataset","name":"WMCA Creative","url":"https://www.clusteros.io/clusters/west-midlands-creative.html"},{"@type":"Dataset","name":"WMCA Advanced Manufacturing","url":"https://www.clusteros.io/clusters/west-midlands-advanced-manufacturing.html"},{"@type":"Dataset","name":"WMCA HealthTech","url":"https://www.clusteros.io/clusters/west-midlands-health-tech.html"},{"@type":"Dataset","name":"West Midlands Innovation Ecosystem","url":"https://www.clusteros.io/clusters/west-midlands-innovation-ecosystem.html"},{"@type":"Dataset","name":"WMCA Clean Growth","url":"https://www.clusteros.io/clusters/west-midlands-clean-growth.html"}]}</script>
+<meta name="description" content="West Midlands Combined Authority's innovation footprint draws £5.78bn of UKRI lead-led funding across 5,696 grants spanning 5 active clusters, with WMCA Advance">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"West Midlands Combined Authority — ClusterOS Regional Diagnostic","description":"West Midlands Combined Authority's innovation footprint draws £5.78bn of UKRI lead-led funding across 5,696 grants spanning 5 active clusters, with WMCA Advanced Manufacturing (39%) the largest single cluster and Warwick (19%) the dominant regional anchor by UKRI £.","url":"https://www.clusteros.io/superclusters/west-midlands","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Birmingham","addressCountry":"GB"},"hasPart":[{"@type":"Dataset","name":"WMCA BPFS","url":"https://www.clusteros.io/clusters/west-midlands-bpfs.html"},{"@type":"Dataset","name":"WMCA Digital","url":"https://www.clusteros.io/clusters/west-midlands-digital.html"},{"@type":"Dataset","name":"WMCA Logistics","url":"https://www.clusteros.io/clusters/west-midlands-logistics.html"},{"@type":"Dataset","name":"WMCA Creative","url":"https://www.clusteros.io/clusters/west-midlands-creative.html"},{"@type":"Dataset","name":"WMCA Advanced Manufacturing","url":"https://www.clusteros.io/clusters/west-midlands-advanced-manufacturing.html"},{"@type":"Dataset","name":"WMCA HealthTech","url":"https://www.clusteros.io/clusters/west-midlands-health-tech.html"},{"@type":"Dataset","name":"West Midlands Innovation Ecosystem","url":"https://www.clusteros.io/clusters/west-midlands-innovation-ecosystem.html"},{"@type":"Dataset","name":"WMCA Clean Growth","url":"https://www.clusteros.io/clusters/west-midlands-clean-growth.html"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -33,12 +33,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem
 h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:400;line-height:1.15;margin-bottom:1rem;}
 .sc-meta{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:1.2rem;}
 .meta-tag{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:2px;background:var(--surface);color:var(--ink-dim);border:1px solid var(--border);}
-.sc-summary{font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:2.5rem;}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);margin-bottom:2.5rem;}
-.stat-cell{padding:1rem 1.2rem;border-right:1px solid var(--border);}
-.stat-cell:last-child{border-right:none;}
-.stat-num{font-family:var(--font-serif);font-size:2rem;color:var(--green);line-height:1;margin-bottom:0.2rem;}
-.stat-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
 .section{margin-bottom:2.5rem;}
 .section-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
 .ct{width:100%;border-collapse:collapse;font-size:13px;}
@@ -71,11 +65,24 @@ h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:40
 .rp-list li:last-child{border-bottom:none;}
 .rp-list li::before{content:'›';position:absolute;left:0;color:var(--green);font-weight:600;}
 .empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
-.empty code{font-family:var(--font-mono);font-size:12px;color:var(--ink);background:var(--surface);padding:1px 5px;border-radius:2px;}
 footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 footer a{color:var(--ink-muted);text-decoration:none;}
 footer a:hover{color:var(--green);}
-@media(max-width:680px){.stats-row{grid-template-columns:1fr 1fr;}.stat-cell:last-child{border-top:1px solid var(--border);grid-column:span 2;}.agg-row{grid-template-columns:28px 1fr 50px;}.agg-count{display:none;}}
+
+.sc-summary{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:1.25rem;}
+.sc-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:2rem;}
+.diagnostic-composite{margin:1.5rem 0 3rem;}
+.diagnostic-figure{margin:0;text-align:center;}
+.diagnostic-image{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-cta{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
+.diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+@media(max-width:640px){
+  .diagnostic-cta,.diagnostic-source{text-align:left;}
+}
 </style>
 </head>
 <body>
@@ -94,30 +101,20 @@ footer a:hover{color:var(--green);}
   <div class="sc-meta">
     <span class="meta-tag">Birmingham, United Kingdom</span>
     <span class="meta-tag">Supercluster</span>
-    <span class="meta-tag">8 clusters</span>
+    <span class="meta-tag">5 clusters</span>
   </div>
-  <p class="sc-summary">8 clusters diagnosed across West Midlands Combined Authority, drawing on 875 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 8 of 8 clusters.</p>
-  <div class="stats-row">
-    <div class="stat-cell">
-      <div class="stat-num">8</div>
-      <div class="stat-label">Clusters diagnosed</div>
+  <p class="sc-summary">West Midlands Combined Authority's innovation footprint draws £5.78bn of UKRI lead-led funding across 5,696 grants spanning 5 active clusters, with WMCA Advanced Manufacturing (39%) the largest single cluster and Warwick (19%) the dominant regional anchor by UKRI £.</p>
+  <p class="sc-behaviour">The region shows medium-confidence "Coordination–Activity" stabilisation stacks at ecosystem grain — multi-actor coordination distributes risk across institutional partners without forcing the strategic option-collapse that would convert capability into a defined pathway.</p>
+  <section class="diagnostic-composite">
+    <figure class="diagnostic-figure">
+      <img src="https://preview.clusteros.io/static/diagnostics/west-midlands-innovation-ecosystem-diagnostic-wide.png?v=2026-05-13" alt="West Midlands Combined Authority diagnostic Sankey" class="diagnostic-image" loading="lazy" />
+    </figure>
+    <div class="diagnostic-cta">
+      <p class="diagnostic-cta-framing">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
+      <p class="diagnostic-cta-link"><a href="https://www.clusteros.io/request">Request access →</a></p>
     </div>
-    <div class="stat-cell">
-      <div class="stat-num">875</div>
-      <div class="stat-label">Evidence items</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">10</div>
-      <div class="stat-label">Distinct stacks</div>
-    </div>
-  </div>
-  
-  <div class="section">
-    <div class="section-label">Regional patterns · Cross-cluster synthesis</div>
-    <ul class="rp-list">
-      <li>All 8 clusters register the three reinforcing backbone configurations at confident levels — coordination, extraction, and governance capture fire universally across the region.</li><li>Anchor concentration — University of Birmingham appears across 4 of 8 sub-clusters as a configured ecosystem-level anchor.</li><li>Pathway scale — 5,606 follow-on funding events tracked against 76 declared spin-offs.</li>
-    </ul>
-  </div>
+    <p class="diagnostic-source">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
+  </section>
   <div class="section">
     <div class="section-label">Constituent clusters</div>
     <table class="ct">
@@ -126,46 +123,31 @@ footer a:hover{color:var(--green);}
     </tr></thead>
     <tbody>
       <tr>
-        <td><a href="/clusters/west-midlands-bpfs.html">WMCA BPFS</a></td>
-        <td>Volume-Tolerance</td>
-        <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
-        <td>116</td>
-      </tr><tr>
-        <td><a href="/clusters/west-midlands-digital.html">WMCA Digital</a></td>
-        <td>Extraction-Permission (Triple)</td>
-        <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
-        <td>103</td>
-      </tr><tr>
-        <td><a href="/clusters/west-midlands-logistics.html">WMCA Logistics</a></td>
-        <td>Permission-Validation</td>
-        <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
-        <td>78</td>
-      </tr><tr>
-        <td><a href="/clusters/west-midlands-creative.html">WMCA Creative</a></td>
-        <td>Permission-Validation</td>
-        <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Mediating Instead of Coupling</td>
-        <td>87</td>
-      </tr><tr>
-        <td><a href="/clusters/west-midlands-advanced-manufacturing.html">WMCA Advanced Manufacturing</a></td>
-        <td>Coordination-Incumbent-Permission</td>
-        <td>Coordinating Instead of Deciding, Stabilising Around Incumbents</td>
-        <td>93</td>
-      </tr><tr>
-        <td><a href="/clusters/west-midlands-health-tech.html">WMCA HealthTech</a></td>
-        <td>Extraction-Narrative</td>
-        <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
-        <td>86</td>
-      </tr><tr>
-        <td><a href="/clusters/west-midlands-innovation-ecosystem.html">West Midlands Innovation Ecosystem</a></td>
-        <td>Permission-Validation</td>
-        <td>Coordinating Instead of Deciding, Stabilising Around Incumbents, Scaling Activity Instead of Throughput</td>
-        <td>226</td>
-      </tr><tr>
-        <td><a href="/clusters/west-midlands-clean-growth.html">WMCA Clean Growth</a></td>
-        <td>Permission-Validation</td>
-        <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
-        <td>86</td>
-      </tr>
+          <td><a href="/clusters/west-midlands-advanced-manufacturing.html">WMCA Advanced Manufacturing</a></td>
+          <td>Coordination-Incumbent-Permission</td>
+          <td>Coordinating Instead of Deciding, Stabilising Around Incumbents</td>
+          <td>93</td>
+        </tr><tr>
+          <td><a href="/clusters/west-midlands-digital.html">WMCA Digital</a></td>
+          <td>Extraction-Permission (Triple)</td>
+          <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
+          <td>103</td>
+        </tr><tr>
+          <td><a href="/clusters/west-midlands-health-tech.html">West Midlands Health Tech</a></td>
+          <td>Extraction-Narrative</td>
+          <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
+          <td>86</td>
+        </tr><tr>
+          <td><a href="/clusters/west-midlands-clean-growth.html">WMCA Clean Growth</a></td>
+          <td>Permission-Validation</td>
+          <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
+          <td>86</td>
+        </tr><tr>
+          <td><a href="/clusters/west-midlands-creative.html">WMCA Creative</a></td>
+          <td>Permission-Validation</td>
+          <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Mediating Instead of Coupling</td>
+          <td>87</td>
+        </tr>
     </tbody>
   </table>
   </div>

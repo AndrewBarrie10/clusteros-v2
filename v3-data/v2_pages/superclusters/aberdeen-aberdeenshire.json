@@ -1,0 +1,44 @@
+{
+  "v2_slug": "aberdeen-aberdeenshire-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "aberdeen_and_aberdeenshire",
+  "v3_cluster": "_all",
+  "region_name": "Aberdeen and Aberdeenshire",
+  "cluster_name": "Aberdeen and Aberdeenshire Innovation Ecosystem",
+  "strap": "Aberdeen and Aberdeenshire's innovation footprint draws £1.16bn of UKRI lead-led funding across 1,788 grants spanning 3 active clusters, with Aberdeen Energy (56%) the largest single cluster and Aberdeen (45%) the dominant regional anchor by UKRI £. 9 Companies House-traced spin-outs region-wide translate to £129m UKRI per spin-out.",
+  "behaviour": "The region shows high-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/aberdeen-aberdeenshire-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "aberdeen-aberdeenshire",
+  "constituent_clusters": [
+    {
+      "v2_slug": "aberdeen-aberdeenshire-energy",
+      "name": "Aberdeen Energy",
+      "v3_cluster": "aberdeen_energy"
+    },
+    {
+      "v2_slug": "aberdeen-aberdeenshire-digital",
+      "name": "Aberdeen Digital",
+      "v3_cluster": "aberdeen_digital"
+    },
+    {
+      "v2_slug": "aberdeen-aberdeenshire-life-sciences",
+      "name": "Aberdeen Life Sciences",
+      "v3_cluster": "aberdeen_life_sciences"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 3,
+    "total_gbp": 1161126947.9833333,
+    "total_grants": 1788,
+    "top_cluster_slug": "aberdeen_energy",
+    "top_cluster_name": "Aberdeen Energy",
+    "top_cluster_gbp": 651840783.7166667,
+    "top_cluster_share": 0.5613863194276868,
+    "lead_name": "UNIVERSITY OF ABERDEEN",
+    "lead_gbp": 518243849.65000004,
+    "lead_share": 0.44632832831078073,
+    "ch_spinouts": 9,
+    "gbp_per_spinout": 129014105.33148149
+  }
+}

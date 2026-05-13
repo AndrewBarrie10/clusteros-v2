@@ -1,0 +1,12 @@
+{
+  "v2_slug": "tay-cities-engineering",
+  "shape": "cluster",
+  "v3_region": "tay_cities_region",
+  "v3_cluster": "tay_cities_engineering",
+  "region_name": "Tay Cities Region",
+  "cluster_name": "Tay Cities Engineering",
+  "strap": "Tay Cities Engineering draws £275m of UKRI lead-led funding across 315 grants, anchored by St Andrews (25%), Dundee (13%), with Carnegie Trust on the industrial side.",
+  "behaviour": "The cluster shows medium-confidence \"Forgiving instead of redesigning\" and \"Re-proving instead of narrowing\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/tay-cities-engineering-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

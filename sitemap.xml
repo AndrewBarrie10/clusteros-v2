@@ -157,12 +157,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/aberdeen-aberdeenshire-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/aberdeen-aberdeenshire-life-sciences.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -331,12 +325,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/belfast-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/belfast-life-sciences.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -487,12 +475,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/cambridge-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/cambridge-life-sciences.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -554,12 +536,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/cardiff-capital-fin-tech.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/cardiff-capital-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -733,12 +709,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/east-midlands-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/east-midlands-life-sciences.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -776,12 +746,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/edinburgh-south-east-fin-tech.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/edinburgh-south-east-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -853,12 +817,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/greater-glasgow-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/greater-glasgow-life-sciences.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -890,12 +848,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/greater-lincolnshire-energy.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/greater-lincolnshire-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -944,12 +896,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/greater-manchester-health.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/greater-manchester-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1040,12 +986,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/hull-east-yorkshire-health-tech.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/hull-east-yorkshire-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1207,12 +1147,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/lancashire-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/lancashire-space.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -1261,12 +1195,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/liverpool-city-region-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/liverpool-city-region-maritime-logistics.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -1304,12 +1232,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/london-financial-services-fin-tech.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/london-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1514,12 +1436,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/north-east-energy.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/north-east-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1885,12 +1801,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/south-yorkshire-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/stirling-clackmannanshire-aquaculture.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -1904,12 +1814,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/stirling-clackmannanshire-food-drink.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/stirling-clackmannanshire-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1981,12 +1885,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/tay-cities-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/tay-cities-life-sciences.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -1994,12 +1892,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/tees-valley-digital.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/tees-valley-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -2084,12 +1976,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/thames-valley-environmental-intelligence.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/thames-valley-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -2257,12 +2143,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.clusteros.io/clusters/west-midlands-innovation-ecosystem.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.clusteros.io/clusters/west-midlands-logistics.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -2294,12 +2174,6 @@
   </url>
   <url>
     <loc>https://www.clusteros.io/clusters/west-of-england-fin-tech.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.clusteros.io/clusters/west-of-england-innovation-ecosystem.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

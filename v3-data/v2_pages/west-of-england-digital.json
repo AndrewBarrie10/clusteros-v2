@@ -1,0 +1,12 @@
+{
+  "v2_slug": "west-of-england-digital",
+  "shape": "cluster",
+  "v3_region": "west_of_england_combined_authority",
+  "v3_cluster": "west_of_england_digital",
+  "region_name": "West of England Combined Authority",
+  "cluster_name": "West of England Digital",
+  "strap": "West of England Digital draws £704m of UKRI lead-led funding across 454 grants, anchored by Bristol (33%), with Airbus Operations and Environment Agency on the industrial side.",
+  "behaviour": "The cluster shows medium-confidence \"Forgiving instead of redesigning\" and \"Mediating instead of coupling\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-of-england-digital-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

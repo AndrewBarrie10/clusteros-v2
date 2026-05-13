@@ -133,9 +133,19 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 
-.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
-.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
-.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
+.cluster-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:660px;margin:1.25rem 0 2rem;}
+.diagnostic-composite-v3{margin:0 0 3rem;}
+.diagnostic-figure-v3{margin:0;text-align:center;}
+.diagnostic-image-v3{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-cta-v3{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing-v3{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link-v3{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link-v3 a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
+.diagnostic-cta-link-v3 a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source-v3{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+@media(max-width:640px){
+  .diagnostic-cta-v3,.diagnostic-source-v3{text-align:left;}
+}
 </style>
 <!-- Mixpanel tracking -->
 <script type="text/javascript">
@@ -173,28 +183,22 @@ footer a:hover{color:var(--green);}
       <span class="meta-tag meta-plain">Cardiff, United Kingdom</span>
       <span class="meta-tag meta-Extraction-Intermediary">Extraction-Intermediary</span>
       
-      <span class="meta-tag meta-plain">83 evidence items</span>
+      
     </div>
-    <p class="cluster-summary">CCR Advanced Manufacturing runs on 83 evidence items (CCR Advanced Manufacturing UKRI grants: 397 grants, £794m total, 59 distinct). The diagnostic resolves a Extraction-Intermediary configuration at HIGH confidence.</p>
+    <p class="cluster-summary">CCR Advanced Manufacturing draws £61m of UKRI lead-led funding across 30 grants, led by Iqe and Zenotech.</p>
+    <p class="cluster-behaviour">The cluster shows low-confidence "Stabilising around incumbents" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.</p>
   </header>
-  <div class="stats-row">
-    <div class="stat-cell">
-      <div class="stat-num">9</div>
-      <div class="stat-label">Active stalls</div>
+  <section class="diagnostic-composite-v3">
+    <figure class="diagnostic-figure-v3">
+      <img src="https://preview.clusteros.io/static/diagnostics/cardiff-capital-advanced-manufacturing-diagnostic-wide.png?v=2026-05-13" alt="CCR Advanced Manufacturing diagnostic Sankey" class="diagnostic-image-v3" loading="lazy" />
+    </figure>
+    <div class="diagnostic-cta-v3">
+      <p class="diagnostic-cta-framing-v3">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
+      <p class="diagnostic-cta-link-v3"><a href="https://www.clusteros.io/request">Request access →</a></p>
     </div>
-    <div class="stat-cell">
-      <div class="stat-num">1</div>
-      <div class="stat-label">Stacks identified</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">83</div>
-      <div class="stat-label">Evidence items</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Leverage timeline (mo)</div>
-    </div>
-  </div>
+    <p class="diagnostic-source-v3">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
+  </section>
+  
   <div class="two-col">
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
@@ -302,7 +306,7 @@ footer a:hover{color:var(--green);}
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If spin-off employment destinations and founder locations were published as a standard UKRI grant outcome metric, it might reduce the system's ability to absorb success signals without addressing local...</p>
+    <p class="leverage-hyp">"If spin-off employment destinations and founder locations were published as a standard UKRI grant outcome metric, it might reduce the system's ability to absorb success signals without addressing local retention."</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -311,28 +315,23 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/aberdeen-aberdeenshire-life-sciences.html">
-      <div class="sc-name">Aberdeen LifeSciences</div>
-      <div class="sc-meta">Aberdeen · GB</div>
-      <div class="sc-regime">Extraction-Intermediary</div>
-      <div class="sc-match">1 shared stack · 73 evidence · Tier 1 - Robust</div>
-      <div class="sc-mechanism">Extraction-Intermediary: Incumbents extract value via intermediary relationships; intermediaries protect incumbent access; incumbent stability suppresses the disruption that would reduce extraction.</div>
-      <div class="sc-absorbed">Absorbs: Complexity, Disruption, Success</div>
-    </a><a class="similar-card" href="/clusters/greater-glasgow-fintech.html">
+    <div class="similar-grid"><a class="similar-card" href="/clusters/greater-glasgow-fintech.html">
       <div class="sc-name">Greater Glasgow Fintech</div>
-      <div class="sc-meta">Glasgow · GB</div>
+      <div class="sc-meta">Glasgow · United Kingdom</div>
       <div class="sc-regime">Extraction-Intermediary</div>
-      <div class="sc-match">1 shared stack · 168 evidence · Tier 1 - Robust</div>
-      <div class="sc-mechanism">Extraction-Intermediary: Incumbents extract value via intermediary relationships; intermediaries protect incumbent access; incumbent stability suppresses the disruption that would reduce extraction.</div>
-      <div class="sc-absorbed">Absorbs: Complexity, Disruption, Success</div>
+      <div class="sc-stall">Primary: Scaling Activity Instead of Throughput</div>
     </a><a class="similar-card" href="/clusters/aberdeen-aberdeenshire-energy.html">
       <div class="sc-name">Aberdeen Energy</div>
-      <div class="sc-meta">Aberdeen · GB</div>
+      <div class="sc-meta">Aberdeen · United Kingdom</div>
       <div class="sc-regime">Extraction-Permission (Triple)</div>
-      <div class="sc-match">0 shared stall · 86 evidence · Tier 1 - Robust</div>
-      <div class="sc-mechanism">Extraction-Permission (Triple): Incumbents extract value while functioning as permission gatekeepers; waiting for permission delays autonomous actor formation; incumbent centrality reinforces the permission architecture that sustain...</div>
-      <div class="sc-absorbed">Absorbs: Success, Disruption, Opportunity</div>
-    </a></div></div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a><a class="similar-card" href="/clusters/aberdeen-aberdeenshire-life-sciences.html">
+      <div class="sc-name">Aberdeen LifeSciences</div>
+      <div class="sc-meta">Aberdeen · United Kingdom</div>
+      <div class="sc-regime">Extraction-Intermediary</div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a></div>
+  </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>

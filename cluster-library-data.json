@@ -9,7 +9,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 181,
-    "url": "/clusters/aberdeen-aberdeenshire-innovation-ecosystem.html"
+    "url": "/superclusters/aberdeen-aberdeenshire"
   },
   {
     "slug": "aberdeen-aberdeenshire-digital",
@@ -54,7 +54,7 @@
     "country": "United Arab Emirates",
     "continent": "Asia",
     "sector": "Life Sciences",
-    "dominant_configuration": "Expansion–Intermediation Coupling",
+    "dominant_configuration": "Expansion\u2013Intermediation Coupling",
     "pattern_tier": "P2",
     "evidence_count": 53,
     "url": "/clusters/abu-dhabi-helm-life-sciences.html"
@@ -66,7 +66,7 @@
     "country": "Ghana",
     "continent": "Africa",
     "sector": "FinTech",
-    "dominant_configuration": "Regulatory Sequencing–Market Entry Coordination",
+    "dominant_configuration": "Regulatory Sequencing\u2013Market Entry Coordination",
     "pattern_tier": "P2",
     "evidence_count": 70,
     "url": "/clusters/accra-fintech.html"
@@ -78,7 +78,7 @@
     "country": "Australia",
     "continent": "Oceania",
     "sector": "Space",
-    "dominant_configuration": "Narrative–Activity Stabilisation",
+    "dominant_configuration": "Narrative\u2013Activity Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 62,
     "url": "/clusters/adelaide-space-technology.html"
@@ -102,7 +102,7 @@
     "country": "Netherlands",
     "continent": "Europe",
     "sector": "FinTech",
-    "dominant_configuration": "Network–Narrative Stabilisation",
+    "dominant_configuration": "Network\u2013Narrative Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 68,
     "url": "/clusters/amsterdam-fintech-creative-tech.html"
@@ -114,7 +114,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Cyber Security",
-    "dominant_configuration": "Incumbent–Extraction Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Extraction Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 57,
     "url": "/clusters/atlanta-cyber-security.html"
@@ -126,7 +126,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "FinTech",
-    "dominant_configuration": "Incumbent–Extraction Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Extraction Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 69,
     "url": "/clusters/atlanta-fintech-payments.html"
@@ -150,7 +150,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "AI and Deep Tech",
-    "dominant_configuration": "Extraction–Incumbent Stabilisation",
+    "dominant_configuration": "Extraction\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 73,
     "url": "/clusters/austin-ai-deep-tech.html"
@@ -186,7 +186,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "MedTech",
-    "dominant_configuration": "Coordination–Intermediation Alignment",
+    "dominant_configuration": "Coordination\u2013Intermediation Alignment",
     "pattern_tier": "P1",
     "evidence_count": 56,
     "url": "/clusters/austin-life-sciences-medtech.html"
@@ -198,7 +198,7 @@
     "country": "Australia",
     "continent": "Oceania",
     "sector": "Cyber Security",
-    "dominant_configuration": "Legitimacy–Coordination Stabilisation",
+    "dominant_configuration": "Legitimacy\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 53,
     "url": "/clusters/australia-canberra-cyber-security.html"
@@ -210,7 +210,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Cyber Security",
-    "dominant_configuration": "Narrative–Coordination Stabilisation",
+    "dominant_configuration": "Narrative\u2013Coordination Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 69,
     "url": "/clusters/baltimore-maryland-cyber-security.html"
@@ -222,7 +222,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Life Sciences",
-    "dominant_configuration": "Coordination–Intermediation Stabilisation",
+    "dominant_configuration": "Coordination\u2013Intermediation Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 80,
     "url": "/clusters/baltimore-maryland-life-sciences-biotech.html"
@@ -258,7 +258,7 @@
     "country": "India",
     "continent": "Asia",
     "sector": "Quantum and Deep Science",
-    "dominant_configuration": "Validation–Partnership Stabilisation",
+    "dominant_configuration": "Validation\u2013Partnership Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 76,
     "url": "/clusters/bangalore-quantum-deep-science.html"
@@ -270,7 +270,7 @@
     "country": "Thailand",
     "continent": "Asia",
     "sector": "Digital",
-    "dominant_configuration": "Extraction–Incumbent Stabilisation",
+    "dominant_configuration": "Extraction\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 70,
     "url": "/clusters/bangkok-digital-e-commerce.html"
@@ -282,7 +282,7 @@
     "country": "Thailand",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Incumbent–Extraction Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Extraction Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 74,
     "url": "/clusters/bangkok-fintech.html"
@@ -294,7 +294,7 @@
     "country": "Spain",
     "continent": "Europe",
     "sector": "BioMed and Digital Health",
-    "dominant_configuration": "Network Mediation–Incumbent Centrality",
+    "dominant_configuration": "Network Mediation\u2013Incumbent Centrality",
     "pattern_tier": "P2",
     "evidence_count": 78,
     "url": "/clusters/barcelona-biomed-digital-health.html"
@@ -306,7 +306,7 @@
     "country": "Switzerland",
     "continent": "Europe",
     "sector": "Life Sciences",
-    "dominant_configuration": "Intermediation–Activity Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Activity Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 65,
     "url": "/clusters/basel-life-sciences.html"
@@ -318,7 +318,7 @@
     "country": "Spain",
     "continent": "Europe",
     "sector": "Innovation Ecosystem",
-    "dominant_configuration": "Intermediation–Coordination Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 68,
     "url": "/clusters/basque-country-innovation-ecosystem.html"
@@ -381,7 +381,7 @@
     "dominant_configuration": "Extraction-Narrative",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 191,
-    "url": "/clusters/belfast-innovation-ecosystem.html"
+    "url": "/superclusters/belfast"
   },
   {
     "slug": "belfast-life-sciences",
@@ -438,7 +438,7 @@
     "country": "Germany",
     "continent": "Europe",
     "sector": "AI and Deep Tech",
-    "dominant_configuration": "Incumbent Stabilisation–Mediation Buffering",
+    "dominant_configuration": "Incumbent Stabilisation\u2013Mediation Buffering",
     "pattern_tier": "P2",
     "evidence_count": 75,
     "url": "/clusters/berlin-ai-deep-tech.html"
@@ -457,24 +457,24 @@
   },
   {
     "slug": "bogot-creative-tech",
-    "name": "Bogotá Creative Tech",
-    "region": "Bogotá Creative",
+    "name": "Bogot\u00e1 Creative Tech",
+    "region": "Bogot\u00e1 Creative",
     "country": "Colombia",
     "continent": "South America",
     "sector": "Tech",
-    "dominant_configuration": "Intermediation–Incumbent Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 59,
     "url": "/clusters/bogot-creative-tech.html"
   },
   {
     "slug": "bogot-fintech",
-    "name": "Bogotá FinTech",
-    "region": "Bogotá",
+    "name": "Bogot\u00e1 FinTech",
+    "region": "Bogot\u00e1",
     "country": "Colombia",
     "continent": "South America",
     "sector": "FinTech",
-    "dominant_configuration": "Capital–Incumbent Stabilisation",
+    "dominant_configuration": "Capital\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 64,
     "url": "/clusters/bogot-fintech.html"
@@ -498,7 +498,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "CleanTech",
-    "dominant_configuration": "Proliferation–Permission Cycle",
+    "dominant_configuration": "Proliferation\u2013Permission Cycle",
     "pattern_tier": "P2",
     "evidence_count": 59,
     "url": "/clusters/boston-cleantech.html"
@@ -558,7 +558,7 @@
     "country": "Argentina",
     "continent": "South America",
     "sector": "Creative Tech",
-    "dominant_configuration": "Incumbent–Dependency Alignment",
+    "dominant_configuration": "Incumbent\u2013Dependency Alignment",
     "pattern_tier": null,
     "evidence_count": 69,
     "url": "/clusters/buenos-aires-creative-tech-gaming.html"
@@ -570,7 +570,7 @@
     "country": "Argentina",
     "continent": "South America",
     "sector": "FinTech",
-    "dominant_configuration": "Incumbent–Regulatory Coordination",
+    "dominant_configuration": "Incumbent\u2013Regulatory Coordination",
     "pattern_tier": "P2",
     "evidence_count": 55,
     "url": "/clusters/buenos-aires-fintech.html"
@@ -594,7 +594,7 @@
     "country": "South Korea",
     "continent": "Asia",
     "sector": "Innovation Ecosystem",
-    "dominant_configuration": "Narrative–Activity Stabilisation",
+    "dominant_configuration": "Narrative\u2013Activity Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 54,
     "url": "/clusters/busan-innovation-ecosystem.html"
@@ -618,7 +618,7 @@
     "country": "Canada",
     "continent": "North America",
     "sector": "CleanTech",
-    "dominant_configuration": "Incumbent–Narrative Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Narrative Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 72,
     "url": "/clusters/calgary-cleantech-energy-transition.html"
@@ -633,7 +633,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 202,
-    "url": "/clusters/cambridge-innovation-ecosystem.html"
+    "url": "/superclusters/cambridge"
   },
   {
     "slug": "cambridge-advanced-manufacturing-aerospace-and-industrial-engineering",
@@ -738,7 +738,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Space",
-    "dominant_configuration": "Coordination–Mediation Stabilisation",
+    "dominant_configuration": "Coordination\u2013Mediation Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 50,
     "url": "/clusters/cape-canaveral-space-coast.html"
@@ -750,7 +750,7 @@
     "country": "South Africa",
     "continent": "Africa",
     "sector": "CleanTech",
-    "dominant_configuration": "Incumbent–Permission Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Permission Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 55,
     "url": "/clusters/cape-town-cleantech.html"
@@ -762,7 +762,7 @@
     "country": "South Africa",
     "continent": "Africa",
     "sector": "FinTech",
-    "dominant_configuration": "Intermediation–Incumbent Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 65,
     "url": "/clusters/cape-town-fintech.html"
@@ -777,7 +777,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 191,
-    "url": "/clusters/cardiff-capital-innovation-ecosystem.html"
+    "url": "/superclusters/cardiff-capital"
   },
   {
     "slug": "casablanca-fintech-digital",
@@ -882,7 +882,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Advanced Manufacturing",
-    "dominant_configuration": "Intermediation–Coordination Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 61,
     "url": "/clusters/chicago-advanced-manufacturing.html"
@@ -918,7 +918,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Life Sciences",
-    "dominant_configuration": "Intermediation–Incumbent Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Incumbent Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 73,
     "url": "/clusters/chicago-life-sciences-biotech.html"
@@ -942,7 +942,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Space",
-    "dominant_configuration": "Coordination–Narrative Stabilisation",
+    "dominant_configuration": "Coordination\u2013Narrative Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 60,
     "url": "/clusters/colorado-springs-space-technology.html"
@@ -1002,7 +1002,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Advanced Manufacturing",
-    "dominant_configuration": "Investment–Incumbent Stabilisation",
+    "dominant_configuration": "Investment\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 72,
     "url": "/clusters/detroit-michigan-advanced-manufacturing.html"
@@ -1110,7 +1110,7 @@
     "country": "Bangladesh",
     "continent": "Asia",
     "sector": "Garment Tech and FinTech",
-    "dominant_configuration": "Narrative–Partnership Stabilisation",
+    "dominant_configuration": "Narrative\u2013Partnership Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 80,
     "url": "/clusters/dhaka-garment-tech-fintech.html"
@@ -1122,7 +1122,7 @@
     "country": "United Arab Emirates",
     "continent": "Asia",
     "sector": "AI and Deep Tech",
-    "dominant_configuration": "Intermediation–Incumbent Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Incumbent Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 60,
     "url": "/clusters/dubai-ai-smart-city.html"
@@ -1134,7 +1134,7 @@
     "country": "United Arab Emirates",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Intermediation–Incumbent Alignment",
+    "dominant_configuration": "Intermediation\u2013Incumbent Alignment",
     "pattern_tier": "P2",
     "evidence_count": 56,
     "url": "/clusters/dubai-fintech.html"
@@ -1146,7 +1146,7 @@
     "country": "United Arab Emirates",
     "continent": "Asia",
     "sector": "Logistics",
-    "dominant_configuration": "Coordination–Platform Stabilisation",
+    "dominant_configuration": "Coordination\u2013Platform Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 73,
     "url": "/clusters/dubai-logistics-tech.html"
@@ -1185,7 +1185,7 @@
     "dominant_configuration": "Extraction-Narrative",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 186,
-    "url": "/clusters/east-midlands-innovation-ecosystem.html"
+    "url": "/superclusters/east-midlands"
   },
   {
     "slug": "east-midlands-life-sciences",
@@ -1233,7 +1233,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 222,
-    "url": "/clusters/edinburgh-south-east-innovation-ecosystem.html"
+    "url": "/superclusters/edinburgh-south-east"
   },
   {
     "slug": "eindhoven-brainport-innovation-ecosystem",
@@ -1350,7 +1350,7 @@
     "country": "Sweden",
     "continent": "Europe",
     "sector": "Automotive and Sustainability",
-    "dominant_configuration": "Narrative–Coordination Stabilisation",
+    "dominant_configuration": "Narrative\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 79,
     "url": "/clusters/gothenburg-automotive-sustainability-tech.html"
@@ -1413,7 +1413,7 @@
     "dominant_configuration": "Volume-Tolerance",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 264,
-    "url": "/clusters/greater-glasgow-innovation-ecosystem.html"
+    "url": "/superclusters/greater-glasgow"
   },
   {
     "slug": "greater-glasgow-life-sciences",
@@ -1497,7 +1497,7 @@
     "dominant_configuration": "Process-Permission",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 153,
-    "url": "/clusters/greater-lincolnshire-innovation-ecosystem.html"
+    "url": "/superclusters/greater-lincolnshire"
   },
   {
     "slug": "greater-lincolnshire-manufacturing",
@@ -1593,7 +1593,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 224,
-    "url": "/clusters/greater-manchester-innovation-ecosystem.html"
+    "url": "/superclusters/greater-manchester"
   },
   {
     "slug": "greater-manchester-low-carbon",
@@ -1614,7 +1614,7 @@
     "country": "France",
     "continent": "Europe",
     "sector": "Deep Tech and Semiconductors",
-    "dominant_configuration": "Validation–Coordination Stabilisation",
+    "dominant_configuration": "Validation\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 69,
     "url": "/clusters/grenoble-deep-tech-semiconductors.html"
@@ -1650,7 +1650,7 @@
     "country": "United Kingdom",
     "continent": "Europe",
     "sector": "Space",
-    "dominant_configuration": "Anchor–Intermediation Stabilisation",
+    "dominant_configuration": "Anchor\u2013Intermediation Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 55,
     "url": "/clusters/harwell-space-technology.html"
@@ -1662,7 +1662,7 @@
     "country": "Finland",
     "continent": "Europe",
     "sector": "Digital",
-    "dominant_configuration": "Extraction–Stabilisation Coupling",
+    "dominant_configuration": "Extraction\u2013Stabilisation Coupling",
     "pattern_tier": "P1",
     "evidence_count": 61,
     "url": "/clusters/helsinki-gaming-digital-ai.html"
@@ -1770,7 +1770,7 @@
     "country": "Vietnam",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Permission–Incumbent Stabilisation",
+    "dominant_configuration": "Permission\u2013Incumbent Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 62,
     "url": "/clusters/ho-chi-minh-city-fintech.html"
@@ -1794,7 +1794,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Space",
-    "dominant_configuration": "Intermediation–Incumbent Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Incumbent Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 56,
     "url": "/clusters/houston-space-technology.html"
@@ -1809,7 +1809,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 149,
-    "url": "/clusters/hull-east-yorkshire-innovation-ecosystem.html"
+    "url": "/superclusters/hull-east-yorkshire"
   },
   {
     "slug": "hull-east-yorkshire-advanced-manufacturing",
@@ -1902,7 +1902,7 @@
     "country": "India",
     "continent": "Asia",
     "sector": "Life Sciences",
-    "dominant_configuration": "Coordination–Permission Stabilisation",
+    "dominant_configuration": "Coordination\u2013Permission Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 50,
     "url": "/clusters/hyderabad-genome-valley-life-sciences.html"
@@ -1914,7 +1914,7 @@
     "country": "Pakistan",
     "continent": "Asia",
     "sector": "Tech",
-    "dominant_configuration": "Authorization–Coordination Stabilisation",
+    "dominant_configuration": "Authorization\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 63,
     "url": "/clusters/islamabad-it-services-tech.html"
@@ -1938,7 +1938,7 @@
     "country": "Indonesia",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Intermediation–Incumbent Absorption",
+    "dominant_configuration": "Intermediation\u2013Incumbent Absorption",
     "pattern_tier": "P2",
     "evidence_count": 65,
     "url": "/clusters/jakarta-fintech.html"
@@ -1950,7 +1950,7 @@
     "country": "South Africa",
     "continent": "Africa",
     "sector": "FinTech",
-    "dominant_configuration": "Incumbent–Coordination Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Coordination Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 70,
     "url": "/clusters/johannesburg-fintech.html"
@@ -1974,7 +1974,7 @@
     "country": "Pakistan",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Coordination–Intermediation Alignment",
+    "dominant_configuration": "Coordination\u2013Intermediation Alignment",
     "pattern_tier": "P2",
     "evidence_count": 62,
     "url": "/clusters/karachi-fintech.html"
@@ -1986,7 +1986,7 @@
     "country": "Rwanda",
     "continent": "Africa",
     "sector": "Innovation Ecosystem",
-    "dominant_configuration": "Intermediation–Permission Coupling",
+    "dominant_configuration": "Intermediation\u2013Permission Coupling",
     "pattern_tier": null,
     "evidence_count": 79,
     "url": "/clusters/kigali-tech-innovation-ecosystem.html"
@@ -1998,7 +1998,7 @@
     "country": "Poland",
     "continent": "Europe",
     "sector": "Cyber Security",
-    "dominant_configuration": "Incumbent–Extraction Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Extraction Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 57,
     "url": "/clusters/krakow-cyber-security-it-services.html"
@@ -2022,7 +2022,7 @@
     "country": "Malaysia",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Narrative–Intermediation Stabilisation",
+    "dominant_configuration": "Narrative\u2013Intermediation Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 66,
     "url": "/clusters/kuala-lumpur-fintech.html"
@@ -2034,7 +2034,7 @@
     "country": "Nigeria",
     "continent": "Africa",
     "sector": "Tech",
-    "dominant_configuration": "Extraction–Incumbent Stabilisation",
+    "dominant_configuration": "Extraction\u2013Incumbent Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 77,
     "url": "/clusters/lagos-digital-creative-tech.html"
@@ -2046,7 +2046,7 @@
     "country": "Nigeria",
     "continent": "Africa",
     "sector": "FinTech",
-    "dominant_configuration": "Narrative–Activity Stabilisation",
+    "dominant_configuration": "Narrative\u2013Activity Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 58,
     "url": "/clusters/lagos-fintech.html"
@@ -2109,7 +2109,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 191,
-    "url": "/clusters/lancashire-innovation-ecosystem.html"
+    "url": "/superclusters/lancashire"
   },
   {
     "slug": "lancashire-space",
@@ -2130,7 +2130,7 @@
     "country": "Belgium",
     "continent": "Europe",
     "sector": "Hardware",
-    "dominant_configuration": "Breadth–Coordination Stabilisation",
+    "dominant_configuration": "Breadth\u2013Coordination Stabilisation",
     "pattern_tier": null,
     "evidence_count": 82,
     "url": "/clusters/leuven-nanoelectronics-ai-hardware.html"
@@ -2154,7 +2154,7 @@
     "country": "Portugal",
     "continent": "Europe",
     "sector": "Digital",
-    "dominant_configuration": "Extraction–Narrative Stabilisation",
+    "dominant_configuration": "Extraction\u2013Narrative Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 81,
     "url": "/clusters/lisbon-digital-web3.html"
@@ -2217,7 +2217,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 201,
-    "url": "/clusters/liverpool-city-region-innovation-ecosystem.html"
+    "url": "/superclusters/liverpool-city-region"
   },
   {
     "slug": "liverpool-city-region-maritime-logistics",
@@ -2313,7 +2313,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 240,
-    "url": "/clusters/london-innovation-ecosystem.html"
+    "url": "/superclusters/london"
   },
   {
     "slug": "london-life-sciences-health",
@@ -2346,7 +2346,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Space",
-    "dominant_configuration": "Activity–Intermediation Alignment",
+    "dominant_configuration": "Activity\u2013Intermediation Alignment",
     "pattern_tier": "P1",
     "evidence_count": 54,
     "url": "/clusters/los-angeles-space-technology.html"
@@ -2382,7 +2382,7 @@
     "country": "Philippines",
     "continent": "Asia",
     "sector": "BPO and IT Services",
-    "dominant_configuration": "Coordination–Approval Coupling",
+    "dominant_configuration": "Coordination\u2013Approval Coupling",
     "pattern_tier": "P2",
     "evidence_count": 58,
     "url": "/clusters/manila-bpo-it-services.html"
@@ -2394,7 +2394,7 @@
     "country": "Philippines",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Incumbent–Activity Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Activity Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 58,
     "url": "/clusters/manila-fintech.html"
@@ -2406,7 +2406,7 @@
     "country": "Colombia",
     "continent": "South America",
     "sector": "Innovation Ecosystem",
-    "dominant_configuration": "Coordination–Intermediation Stabilisation",
+    "dominant_configuration": "Coordination\u2013Intermediation Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 63,
     "url": "/clusters/medellin-innovation-ecosystem.html"
@@ -2430,7 +2430,7 @@
     "country": "Australia",
     "continent": "Oceania",
     "sector": "Life Sciences",
-    "dominant_configuration": "Coordination–Incumbency Stabilisation",
+    "dominant_configuration": "Coordination\u2013Incumbency Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 65,
     "url": "/clusters/melbourne-life-sciences.html"
@@ -2454,7 +2454,7 @@
     "country": "Mexico",
     "continent": "North America",
     "sector": "FinTech",
-    "dominant_configuration": "Coordination–Permission Sequencing",
+    "dominant_configuration": "Coordination\u2013Permission Sequencing",
     "pattern_tier": "P2",
     "evidence_count": 62,
     "url": "/clusters/mexico-city-fintech.html"
@@ -2466,7 +2466,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "FinTech",
-    "dominant_configuration": "Narrative–Activity Stabilisation",
+    "dominant_configuration": "Narrative\u2013Activity Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 69,
     "url": "/clusters/miami-fintech-crypto.html"
@@ -2478,7 +2478,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Life Sciences",
-    "dominant_configuration": "Activity–Narrative Stabilisation",
+    "dominant_configuration": "Activity\u2013Narrative Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 74,
     "url": "/clusters/miami-life-sciences.html"
@@ -2490,7 +2490,7 @@
     "country": "Italy",
     "continent": "Europe",
     "sector": "Tech",
-    "dominant_configuration": "Incumbent–Permission Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Permission Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 63,
     "url": "/clusters/milan-fintech-design-tech.html"
@@ -2502,7 +2502,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "FinTech",
-    "dominant_configuration": "Incumbent–Intermediary Configuration",
+    "dominant_configuration": "Incumbent\u2013Intermediary Configuration",
     "pattern_tier": "P2",
     "evidence_count": 59,
     "url": "/clusters/minneapolis-fintech.html"
@@ -2526,7 +2526,7 @@
     "country": "Mexico",
     "continent": "North America",
     "sector": "Advanced Manufacturing",
-    "dominant_configuration": "Initiation–Mediation–Activity Stabilisation",
+    "dominant_configuration": "Initiation\u2013Mediation\u2013Activity Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 75,
     "url": "/clusters/monterrey-advanced-manufacturing.html"
@@ -2586,7 +2586,7 @@
     "country": "Germany",
     "continent": "Europe",
     "sector": "Life Sciences",
-    "dominant_configuration": "Incumbent–Coordination Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 78,
     "url": "/clusters/munich-life-sciences-biotech.html"
@@ -2598,7 +2598,7 @@
     "country": "Kenya",
     "continent": "Africa",
     "sector": "AgTech",
-    "dominant_configuration": "Extraction–Expansion Stabilisation",
+    "dominant_configuration": "Extraction\u2013Expansion Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 61,
     "url": "/clusters/nairobi-agtech.html"
@@ -2634,7 +2634,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "AI and Deep Tech",
-    "dominant_configuration": "Activity–Mediation Stabilisation",
+    "dominant_configuration": "Activity\u2013Mediation Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 68,
     "url": "/clusters/new-york-city-ai-deep-tech.html"
@@ -2646,7 +2646,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Cyber Security",
-    "dominant_configuration": "Incumbent–Intermediary Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Intermediary Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 75,
     "url": "/clusters/new-york-city-cyber-security.html"
@@ -2658,7 +2658,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "FinTech",
-    "dominant_configuration": "Extraction–Intermediation Stabilisation",
+    "dominant_configuration": "Extraction\u2013Intermediation Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 73,
     "url": "/clusters/new-york-city-fintech.html"
@@ -2733,7 +2733,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 185,
-    "url": "/clusters/north-east-innovation-ecosystem.html"
+    "url": "/superclusters/north-east"
   },
   {
     "slug": "north-east-life-sciences",
@@ -2802,7 +2802,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Aviation and Aerospace",
-    "dominant_configuration": "Incumbent–Coordination Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Coordination Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 55,
     "url": "/clusters/orlando-aviation-aerospace.html"
@@ -2814,7 +2814,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Cyber Security",
-    "dominant_configuration": "Coordination–Mediation Stabilisation",
+    "dominant_configuration": "Coordination\u2013Mediation Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 56,
     "url": "/clusters/orlando-cybersecurity.html"
@@ -2826,7 +2826,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Digital Media",
-    "dominant_configuration": "Mediation–Extraction Stabilisation",
+    "dominant_configuration": "Mediation\u2013Extraction Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 58,
     "url": "/clusters/orlando-digital-media.html"
@@ -2850,7 +2850,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Photonics and Optics",
-    "dominant_configuration": "Incumbent–Extraction Alignment",
+    "dominant_configuration": "Incumbent\u2013Extraction Alignment",
     "pattern_tier": "P1",
     "evidence_count": 58,
     "url": "/clusters/orlando-photonics-optics.html"
@@ -2862,7 +2862,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Simulation and Training",
-    "dominant_configuration": "Extraction–Coordination Stabilisation",
+    "dominant_configuration": "Extraction\u2013Coordination Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 61,
     "url": "/clusters/orlando-simulation-training.html"
@@ -2874,7 +2874,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Space",
-    "dominant_configuration": "Intermediation–Activity Scaling",
+    "dominant_configuration": "Intermediation\u2013Activity Scaling",
     "pattern_tier": "P3",
     "evidence_count": 57,
     "url": "/clusters/orlando-spacetech.html"
@@ -2886,7 +2886,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Tourism Technology",
-    "dominant_configuration": "Coordination–Activity Stabilisation",
+    "dominant_configuration": "Coordination\u2013Activity Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 68,
     "url": "/clusters/orlando-tourism-technology.html"
@@ -2958,7 +2958,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "MedTech",
-    "dominant_configuration": "Coordination–Incumbent Stabilisation",
+    "dominant_configuration": "Coordination\u2013Incumbent Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 60,
     "url": "/clusters/philadelphia-medtech.html"
@@ -2970,7 +2970,7 @@
     "country": "Cambodia",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Validation–Coordination Stabilisation",
+    "dominant_configuration": "Validation\u2013Coordination Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 51,
     "url": "/clusters/phnom-penh-fintech.html"
@@ -2982,7 +2982,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Innovation Ecosystem",
-    "dominant_configuration": "Incumbent–Coordination Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 75,
     "url": "/clusters/pittsburgh-regional-innovation-ecosystem.html"
@@ -3006,7 +3006,7 @@
     "country": "Czech Republic",
     "continent": "Europe",
     "sector": "Enterprise Tech",
-    "dominant_configuration": "Incumbent Anchoring–Permission Dependency",
+    "dominant_configuration": "Incumbent Anchoring\u2013Permission Dependency",
     "pattern_tier": "P1",
     "evidence_count": 69,
     "url": "/clusters/prague-enterprise-tech-mobility.html"
@@ -3018,7 +3018,7 @@
     "country": "India",
     "continent": "Asia",
     "sector": "Tech",
-    "dominant_configuration": "Validation–Coordination Stabilisation",
+    "dominant_configuration": "Validation\u2013Coordination Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 69,
     "url": "/clusters/pune-it-services-auto-tech.html"
@@ -3030,7 +3030,7 @@
     "country": "Canada",
     "continent": "North America",
     "sector": "Innovation Ecosystem",
-    "dominant_configuration": "Activity–Mediation Stabilisation",
+    "dominant_configuration": "Activity\u2013Mediation Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 57,
     "url": "/clusters/quebec-city-innovation-ecosystem.html"
@@ -3042,7 +3042,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Innovation Ecosystem",
-    "dominant_configuration": "Intermediary–Coordination Stabilisation",
+    "dominant_configuration": "Intermediary\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 76,
     "url": "/clusters/research-triangle-innovation-ecosystem.html"
@@ -3066,7 +3066,7 @@
     "country": "Brazil",
     "continent": "South America",
     "sector": "CleanTech",
-    "dominant_configuration": "Coordination–Validation Deferral",
+    "dominant_configuration": "Coordination\u2013Validation Deferral",
     "pattern_tier": "P2",
     "evidence_count": 72,
     "url": "/clusters/rio-de-janeiro-energy-tech-cleantech.html"
@@ -3078,7 +3078,7 @@
     "country": "Saudi Arabia",
     "continent": "Asia",
     "sector": "Tech",
-    "dominant_configuration": "Coordination–Intermediation Stabilisation",
+    "dominant_configuration": "Coordination\u2013Intermediation Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 68,
     "url": "/clusters/riyadh-ai-tech.html"
@@ -3090,7 +3090,7 @@
     "country": "Saudi Arabia",
     "continent": "Asia",
     "sector": "Tech",
-    "dominant_configuration": "Coordination–Mediation Stabilisation",
+    "dominant_configuration": "Coordination\u2013Mediation Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 75,
     "url": "/clusters/riyadh-energy-transition-tech.html"
@@ -3102,7 +3102,7 @@
     "country": "Saudi Arabia",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Regulatory–Coordination Absorption",
+    "dominant_configuration": "Regulatory\u2013Coordination Absorption",
     "pattern_tier": "P1",
     "evidence_count": 63,
     "url": "/clusters/riyadh-fintech.html"
@@ -3114,7 +3114,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "FinTech",
-    "dominant_configuration": "Extraction–Incumbent Stabilisation",
+    "dominant_configuration": "Extraction\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 86,
     "url": "/clusters/salt-lake-city-fintech-software.html"
@@ -3126,7 +3126,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Life Sciences",
-    "dominant_configuration": "Coordination–Intermediation Stabilisation",
+    "dominant_configuration": "Coordination\u2013Intermediation Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 64,
     "url": "/clusters/salt-lake-city-life-sciences.html"
@@ -3150,7 +3150,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Tech",
-    "dominant_configuration": "Incumbent–Resource Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Resource Stabilisation",
     "pattern_tier": null,
     "evidence_count": 77,
     "url": "/clusters/san-diego-defense-tech.html"
@@ -3174,7 +3174,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Cyber Security",
-    "dominant_configuration": "Coordination–Incumbent Stabilisation",
+    "dominant_configuration": "Coordination\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 74,
     "url": "/clusters/san-francisco-bay-area-cyber-security.html"
@@ -3193,12 +3193,12 @@
   },
   {
     "slug": "san-jos-costa-rica-cleantech-digital",
-    "name": "San José Costa Rica CleanTech & Digital",
-    "region": "San José Costa Rica CleanTech",
+    "name": "San Jos\u00e9 Costa Rica CleanTech & Digital",
+    "region": "San Jos\u00e9 Costa Rica CleanTech",
     "country": "Costa Rica",
     "continent": "North America",
     "sector": "Digital",
-    "dominant_configuration": "Incumbent–Intermediary Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Intermediary Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 63,
     "url": "/clusters/san-jos-costa-rica-cleantech-digital.html"
@@ -3210,7 +3210,7 @@
     "country": "Chile",
     "continent": "South America",
     "sector": "FinTech",
-    "dominant_configuration": "Validation–Intermediation Configuration",
+    "dominant_configuration": "Validation\u2013Intermediation Configuration",
     "pattern_tier": "P3",
     "evidence_count": 52,
     "url": "/clusters/santiago-fintech.html"
@@ -3222,7 +3222,7 @@
     "country": "Chile",
     "continent": "South America",
     "sector": "CleanTech",
-    "dominant_configuration": "Narrative–Coordination Stabilisation",
+    "dominant_configuration": "Narrative\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 72,
     "url": "/clusters/santiago-mining-tech-cleantech.html"
@@ -3270,7 +3270,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "CleanTech",
-    "dominant_configuration": "Incumbent–Permission Alignment",
+    "dominant_configuration": "Incumbent\u2013Permission Alignment",
     "pattern_tier": "P3",
     "evidence_count": 58,
     "url": "/clusters/seattle-cleantech.html"
@@ -3282,7 +3282,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Life Sciences",
-    "dominant_configuration": "Incumbent–Coordination Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Coordination Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 84,
     "url": "/clusters/seattle-life-sciences-biotech.html"
@@ -3294,7 +3294,7 @@
     "country": "South Korea",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Incumbent Stabilisation–Capital Extraction Alignment",
+    "dominant_configuration": "Incumbent Stabilisation\u2013Capital Extraction Alignment",
     "pattern_tier": "P2",
     "evidence_count": 64,
     "url": "/clusters/seoul-fintech.html"
@@ -3306,7 +3306,7 @@
     "country": "South Korea",
     "continent": "Asia",
     "sector": "Life Sciences",
-    "dominant_configuration": "Incumbent–Intermediation Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Intermediation Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 70,
     "url": "/clusters/seoul-life-sciences-biotech.html"
@@ -3330,7 +3330,7 @@
     "country": "China",
     "continent": "Asia",
     "sector": "Tech",
-    "dominant_configuration": "Coordination–Intermediation Stabilisation",
+    "dominant_configuration": "Coordination\u2013Intermediation Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 64,
     "url": "/clusters/shanghai-fintech-enterprise-tech.html"
@@ -3342,7 +3342,7 @@
     "country": "China",
     "continent": "Asia",
     "sector": "Hardware",
-    "dominant_configuration": "Intermediation–Coordination Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Coordination Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 69,
     "url": "/clusters/shenzhen-hardware-electronics.html"
@@ -3354,7 +3354,7 @@
     "country": "Singapore",
     "continent": "Asia",
     "sector": "AI and Deep Tech",
-    "dominant_configuration": "Partnership Formation–Incumbent Integration",
+    "dominant_configuration": "Partnership Formation\u2013Incumbent Integration",
     "pattern_tier": "P2",
     "evidence_count": 70,
     "url": "/clusters/singapore-ai-deep-tech.html"
@@ -3366,7 +3366,7 @@
     "country": "Singapore",
     "continent": "Asia",
     "sector": "Life Sciences",
-    "dominant_configuration": "Extraction–Mediation Stabilisation",
+    "dominant_configuration": "Extraction\u2013Mediation Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 63,
     "url": "/clusters/singapore-biopolis-life-sciences.html"
@@ -3390,7 +3390,7 @@
     "country": "Singapore",
     "continent": "Asia",
     "sector": "FinTech",
-    "dominant_configuration": "Intermediation–Narrative Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Narrative Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 74,
     "url": "/clusters/singapore-fintech-digital-assets.html"
@@ -3441,7 +3441,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 157,
-    "url": "/clusters/south-yorkshire-innovation-ecosystem.html"
+    "url": "/superclusters/south-yorkshire"
   },
   {
     "slug": "stirling-clackmannanshire-innovation-ecosystem",
@@ -3453,7 +3453,7 @@
     "dominant_configuration": "Intermediary-Narrative",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 142,
-    "url": "/clusters/stirling-clackmannanshire-innovation-ecosystem.html"
+    "url": "/superclusters/stirling-clackmannanshire"
   },
   {
     "slug": "stirling-clackmannanshire-aquaculture",
@@ -3510,7 +3510,7 @@
     "country": "Sweden",
     "continent": "Europe",
     "sector": "FinTech",
-    "dominant_configuration": "Incumbent Anchoring–Extraction Stabilisation",
+    "dominant_configuration": "Incumbent Anchoring\u2013Extraction Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 68,
     "url": "/clusters/stockholm-fintech-payments.html"
@@ -3522,7 +3522,7 @@
     "country": "Germany",
     "continent": "Europe",
     "sector": "Tech",
-    "dominant_configuration": "Incumbent–Intermediary Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Intermediary Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 76,
     "url": "/clusters/stuttgart-automotive-mobility-tech.html"
@@ -3534,7 +3534,7 @@
     "country": "Australia",
     "continent": "Oceania",
     "sector": "AI and Deep Tech",
-    "dominant_configuration": "Intermediation Layer–Incumbent Gravity",
+    "dominant_configuration": "Intermediation Layer\u2013Incumbent Gravity",
     "pattern_tier": "P1",
     "evidence_count": 70,
     "url": "/clusters/sydney-ai-deep-tech.html"
@@ -3553,48 +3553,48 @@
   },
   {
     "slug": "s-o-paulo-agtech",
-    "name": "São Paulo AgTech",
-    "region": "São Paulo",
+    "name": "S\u00e3o Paulo AgTech",
+    "region": "S\u00e3o Paulo",
     "country": "Brazil",
     "continent": "South America",
     "sector": "AgTech",
-    "dominant_configuration": "Incumbent–Partnership Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Partnership Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 67,
     "url": "/clusters/s-o-paulo-agtech.html"
   },
   {
     "slug": "s-o-paulo-ai-deep-tech",
-    "name": "São Paulo AI & Deep Tech",
-    "region": "São Paulo",
+    "name": "S\u00e3o Paulo AI & Deep Tech",
+    "region": "S\u00e3o Paulo",
     "country": "Brazil",
     "continent": "South America",
     "sector": "AI and Deep Tech",
-    "dominant_configuration": "Coordination–Intermediation Stabilisation",
+    "dominant_configuration": "Coordination\u2013Intermediation Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 76,
     "url": "/clusters/s-o-paulo-ai-deep-tech.html"
   },
   {
     "slug": "s-o-paulo-fintech",
-    "name": "São Paulo FinTech",
-    "region": "São Paulo",
+    "name": "S\u00e3o Paulo FinTech",
+    "region": "S\u00e3o Paulo",
     "country": "Brazil",
     "continent": "South America",
     "sector": "FinTech",
-    "dominant_configuration": "Regulatory–Entrepreneurial Sequencing",
+    "dominant_configuration": "Regulatory\u2013Entrepreneurial Sequencing",
     "pattern_tier": "P1",
     "evidence_count": 66,
     "url": "/clusters/s-o-paulo-fintech.html"
   },
   {
     "slug": "s-o-paulo-life-sciences-biotech",
-    "name": "São Paulo Life Sciences & BioTech",
-    "region": "São Paulo",
+    "name": "S\u00e3o Paulo Life Sciences & BioTech",
+    "region": "S\u00e3o Paulo",
     "country": "Brazil",
     "continent": "South America",
     "sector": "Life Sciences",
-    "dominant_configuration": "Coordination–Incumbent Stabilisation",
+    "dominant_configuration": "Coordination\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 68,
     "url": "/clusters/s-o-paulo-life-sciences-biotech.html"
@@ -3606,7 +3606,7 @@
     "country": "Taiwan",
     "continent": "Asia",
     "sector": "AI and Deep Tech",
-    "dominant_configuration": "Coordination–Intermediation Configuration",
+    "dominant_configuration": "Coordination\u2013Intermediation Configuration",
     "pattern_tier": "P2",
     "evidence_count": 64,
     "url": "/clusters/taipei-ai-software.html"
@@ -3618,7 +3618,7 @@
     "country": "Taiwan",
     "continent": "Asia",
     "sector": "Hardware",
-    "dominant_configuration": "Incumbent–Extraction Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Extraction Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 78,
     "url": "/clusters/taipei-semiconductor-hardware.html"
@@ -3681,7 +3681,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 165,
-    "url": "/clusters/tay-cities-innovation-ecosystem.html"
+    "url": "/superclusters/tay-cities"
   },
   {
     "slug": "tay-cities-life-sciences",
@@ -3717,7 +3717,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 174,
-    "url": "/clusters/tees-valley-innovation-ecosystem.html"
+    "url": "/superclusters/tees-valley"
   },
   {
     "slug": "tees-valley-life-sciences",
@@ -3798,7 +3798,7 @@
     "country": "Israel",
     "continent": "Asia",
     "sector": "Life Sciences",
-    "dominant_configuration": "Incumbent–Coordination Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 63,
     "url": "/clusters/tel-aviv-life-sciences-biotech.html"
@@ -3933,7 +3933,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 248,
-    "url": "/clusters/thames-valley-innovation-ecosystem.html"
+    "url": "/superclusters/thames-valley"
   },
   {
     "slug": "the-hague-cyber-security",
@@ -3942,7 +3942,7 @@
     "country": "Netherlands",
     "continent": "Europe",
     "sector": "Cyber Security",
-    "dominant_configuration": "Incumbent–Intermediation Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Intermediation Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 52,
     "url": "/clusters/the-hague-cyber-security.html"
@@ -3978,7 +3978,7 @@
     "country": "Japan",
     "continent": "Asia",
     "sector": "Life Sciences",
-    "dominant_configuration": "Legitimacy–Incumbent Stabilisation",
+    "dominant_configuration": "Legitimacy\u2013Incumbent Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 83,
     "url": "/clusters/tokyo-life-sciences-biotech.html"
@@ -3990,7 +3990,7 @@
     "country": "Canada",
     "continent": "North America",
     "sector": "AI and Deep Tech",
-    "dominant_configuration": "Extraction–Incumbent Stabilisation",
+    "dominant_configuration": "Extraction\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 80,
     "url": "/clusters/toronto-ai-deep-tech.html"
@@ -4026,7 +4026,7 @@
     "country": "France",
     "continent": "Europe",
     "sector": "Space",
-    "dominant_configuration": "Extraction–Incumbent Stabilisation",
+    "dominant_configuration": "Extraction\u2013Incumbent Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 60,
     "url": "/clusters/toulouse-space-technology.html"
@@ -4038,7 +4038,7 @@
     "country": "Japan",
     "continent": "Asia",
     "sector": "Space",
-    "dominant_configuration": "Incumbent–Intermediary Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Intermediary Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 55,
     "url": "/clusters/tsukuba-space-technology.html"
@@ -4050,7 +4050,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Innovation Ecosystem",
-    "dominant_configuration": "Activity–Coordination Stabilisation",
+    "dominant_configuration": "Activity\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 56,
     "url": "/clusters/tulsa-regional-innovation-ecosystem.html"
@@ -4062,7 +4062,7 @@
     "country": "United Arab Emirates",
     "continent": "Asia",
     "sector": "Cyber Security",
-    "dominant_configuration": "Demonstration–Coordination Stabilisation",
+    "dominant_configuration": "Demonstration\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 63,
     "url": "/clusters/uae-cyber-security.html"
@@ -4074,7 +4074,7 @@
     "country": "United Arab Emirates",
     "continent": "Asia",
     "sector": "Space",
-    "dominant_configuration": "Demonstration–Narrative Stabilisation",
+    "dominant_configuration": "Demonstration\u2013Narrative Stabilisation",
     "pattern_tier": "P3",
     "evidence_count": 57,
     "url": "/clusters/uae-space-technology.html"
@@ -4086,7 +4086,7 @@
     "country": "Mongolia",
     "continent": "Asia",
     "sector": "Mining Tech",
-    "dominant_configuration": "Incumbent–Extraction Stabilisation",
+    "dominant_configuration": "Incumbent\u2013Extraction Stabilisation",
     "pattern_tier": "P2",
     "evidence_count": 51,
     "url": "/clusters/ulaanbaatar-mining-tech.html"
@@ -4110,7 +4110,7 @@
     "country": "Canada",
     "continent": "North America",
     "sector": "Life Sciences",
-    "dominant_configuration": "Activity–Narrative Stabilisation",
+    "dominant_configuration": "Activity\u2013Narrative Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 70,
     "url": "/clusters/vancouver-life-sciences-biotech.html"
@@ -4146,7 +4146,7 @@
     "country": "United States",
     "continent": "North America",
     "sector": "Cyber Security",
-    "dominant_configuration": "Resource–Incumbent Stabilisation",
+    "dominant_configuration": "Resource\u2013Incumbent Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 68,
     "url": "/clusters/washington-dc-cyber-security.html"
@@ -4161,7 +4161,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 226,
-    "url": "/clusters/west-midlands-innovation-ecosystem.html"
+    "url": "/superclusters/west-midlands"
   },
   {
     "slug": "west-of-england-aerospace",
@@ -4233,7 +4233,7 @@
     "dominant_configuration": "Permission-Validation",
     "pattern_tier": "Tier 1 - Robust",
     "evidence_count": 205,
-    "url": "/clusters/west-of-england-innovation-ecosystem.html"
+    "url": "/superclusters/west-of-england"
   },
   {
     "slug": "west-of-england-life-sciences",
@@ -4518,7 +4518,7 @@
     "country": "Switzerland",
     "continent": "Europe",
     "sector": "MedTech",
-    "dominant_configuration": "Intermediation–Coordination Stabilisation",
+    "dominant_configuration": "Intermediation\u2013Coordination Stabilisation",
     "pattern_tier": "P1",
     "evidence_count": 66,
     "url": "/clusters/zurich-zug-medtech.html"

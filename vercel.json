@@ -1,7 +1,265 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/data", "destination": "/cluster-library", "permanent": true },
-    { "source": "/data.html", "destination": "/cluster-library", "permanent": true }
+    {
+      "source": "/data",
+      "destination": "/cluster-library",
+      "permanent": true
+    },
+    {
+      "source": "/data.html",
+      "destination": "/cluster-library",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/aberdeen-aberdeenshire-innovation-ecosystem",
+      "destination": "/superclusters/aberdeen-aberdeenshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/aberdeen-aberdeenshire-innovation-ecosystem.html",
+      "destination": "/superclusters/aberdeen-aberdeenshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/belfast-innovation-ecosystem",
+      "destination": "/superclusters/belfast",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/belfast-innovation-ecosystem.html",
+      "destination": "/superclusters/belfast",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/cambridge-innovation-ecosystem",
+      "destination": "/superclusters/cambridge",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/cambridge-innovation-ecosystem.html",
+      "destination": "/superclusters/cambridge",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/cardiff-capital-innovation-ecosystem",
+      "destination": "/superclusters/cardiff-capital",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/cardiff-capital-innovation-ecosystem.html",
+      "destination": "/superclusters/cardiff-capital",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/devon-torbay-innovation-ecosystem",
+      "destination": "/superclusters/devon-torbay",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/devon-torbay-innovation-ecosystem.html",
+      "destination": "/superclusters/devon-torbay",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/east-midlands-innovation-ecosystem",
+      "destination": "/superclusters/east-midlands",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/east-midlands-innovation-ecosystem.html",
+      "destination": "/superclusters/east-midlands",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/edinburgh-south-east-innovation-ecosystem",
+      "destination": "/superclusters/edinburgh-south-east",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/edinburgh-south-east-innovation-ecosystem.html",
+      "destination": "/superclusters/edinburgh-south-east",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/greater-glasgow-innovation-ecosystem",
+      "destination": "/superclusters/greater-glasgow",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/greater-glasgow-innovation-ecosystem.html",
+      "destination": "/superclusters/greater-glasgow",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/greater-lincolnshire-innovation-ecosystem",
+      "destination": "/superclusters/greater-lincolnshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/greater-lincolnshire-innovation-ecosystem.html",
+      "destination": "/superclusters/greater-lincolnshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/london-innovation-ecosystem",
+      "destination": "/superclusters/london",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/london-innovation-ecosystem.html",
+      "destination": "/superclusters/london",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/greater-manchester-innovation-ecosystem",
+      "destination": "/superclusters/greater-manchester",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/greater-manchester-innovation-ecosystem.html",
+      "destination": "/superclusters/greater-manchester",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/hull-east-yorkshire-innovation-ecosystem",
+      "destination": "/superclusters/hull-east-yorkshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/hull-east-yorkshire-innovation-ecosystem.html",
+      "destination": "/superclusters/hull-east-yorkshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/inverness-highlands-innovation-ecosystem",
+      "destination": "/superclusters/inverness-highlands",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/inverness-highlands-innovation-ecosystem.html",
+      "destination": "/superclusters/inverness-highlands",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/lancashire-innovation-ecosystem",
+      "destination": "/superclusters/lancashire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/lancashire-innovation-ecosystem.html",
+      "destination": "/superclusters/lancashire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/liverpool-city-region-innovation-ecosystem",
+      "destination": "/superclusters/liverpool-city-region",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/liverpool-city-region-innovation-ecosystem.html",
+      "destination": "/superclusters/liverpool-city-region",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/north-east-innovation-ecosystem",
+      "destination": "/superclusters/north-east",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/north-east-innovation-ecosystem.html",
+      "destination": "/superclusters/north-east",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/south-yorkshire-innovation-ecosystem",
+      "destination": "/superclusters/south-yorkshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/south-yorkshire-innovation-ecosystem.html",
+      "destination": "/superclusters/south-yorkshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/stirling-clackmannanshire-innovation-ecosystem",
+      "destination": "/superclusters/stirling-clackmannanshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/stirling-clackmannanshire-innovation-ecosystem.html",
+      "destination": "/superclusters/stirling-clackmannanshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/tay-cities-innovation-ecosystem",
+      "destination": "/superclusters/tay-cities",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/tay-cities-innovation-ecosystem.html",
+      "destination": "/superclusters/tay-cities",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/tees-valley-innovation-ecosystem",
+      "destination": "/superclusters/tees-valley",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/tees-valley-innovation-ecosystem.html",
+      "destination": "/superclusters/tees-valley",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/thames-valley-innovation-ecosystem",
+      "destination": "/superclusters/thames-valley",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/thames-valley-innovation-ecosystem.html",
+      "destination": "/superclusters/thames-valley",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/west-midlands-innovation-ecosystem",
+      "destination": "/superclusters/west-midlands",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/west-midlands-innovation-ecosystem.html",
+      "destination": "/superclusters/west-midlands",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/west-of-england-innovation-ecosystem",
+      "destination": "/superclusters/west-of-england",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/west-of-england-innovation-ecosystem.html",
+      "destination": "/superclusters/west-of-england",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/west-yorkshire-innovation-ecosystem",
+      "destination": "/superclusters/west-yorkshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/west-yorkshire-innovation-ecosystem.html",
+      "destination": "/superclusters/west-yorkshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/york-north-yorkshire-innovation-ecosystem",
+      "destination": "/superclusters/york-north-yorkshire",
+      "permanent": true
+    },
+    {
+      "source": "/clusters/york-north-yorkshire-innovation-ecosystem.html",
+      "destination": "/superclusters/york-north-yorkshire",
+      "permanent": true
+    }
   ]
 }

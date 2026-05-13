@@ -1,0 +1,12 @@
+{
+  "v2_slug": "belfast-fin-tech",
+  "shape": "cluster",
+  "v3_region": "belfast_region",
+  "v3_cluster": "belfast_fin_tech",
+  "region_name": "Belfast Region",
+  "cluster_name": "Belfast Fintech",
+  "strap": "Belfast Fintech draws £244m of UKRI lead-led funding across 1,501 grants, anchored by Queen'S University Belfast (87%), with Northern Ireland Dept For The Economy and Volunteer Now on the industrial side. 10 Companies House-traced spin-outs translate to £24m UKRI per spin-out.",
+  "behaviour": "The cluster shows low-confidence \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/belfast-fin-tech-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

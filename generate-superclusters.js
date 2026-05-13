@@ -15,11 +15,39 @@
 const fs = require('fs');
 const path = require('path');
 
+// --only id1,id2 limits regeneration to the listed supercluster ids.
+function parseArgs(argv) {
+  const opts = { only: null };
+  for (let i = 2; i < argv.length; i++) {
+    const a = argv[i];
+    if (a === '--only') {
+      opts.only = (argv[++i] || '').split(',').map(s => s.trim()).filter(Boolean);
+    } else if (a.startsWith('--only=')) {
+      opts.only = a.slice('--only='.length).split(',').map(s => s.trim()).filter(Boolean);
+    }
+  }
+  return opts;
+}
+const argv = parseArgs(process.argv);
+const allowedIds = argv.only ? new Set(argv.only) : null;
+
 const supers   = JSON.parse(fs.readFileSync('./superclusters.json', 'utf8'));
 const clusters = JSON.parse(fs.readFileSync('./clusters.json', 'utf8'));
 
 const outDir = path.join(__dirname, 'superclusters');
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
+
+// v3 per-page bundles. When a bundle exists for a supercluster, the page is
+// rendered from the bundle (strap, behaviour, metrics, constituent_clusters,
+// hot-linked diagnostic PNG). When absent, the legacy template is used.
+// Bundle path matches v3: data/v2_pages/superclusters/<sc.id>.json
+const V3_BUNDLES_DIR = path.join(__dirname, 'v3-data', 'v2_pages', 'superclusters');
+function loadBundle(scId) {
+  const p = path.join(V3_BUNDLES_DIR, `${scId}.json`);
+  if (!fs.existsSync(p)) return null;
+  try { return JSON.parse(fs.readFileSync(p, 'utf8')); }
+  catch (e) { console.warn(`Failed to parse bundle ${p}: ${e.message}`); return null; }
+}
 
 const diagnosticsRegistryPath = path.join(__dirname, 'diagnostics.json');
 const diagnostics = fs.existsSync(diagnosticsRegistryPath)
@@ -348,6 +376,215 @@ function renderLeverageRich(hypotheses, children) {
   }).join('');
 }
 
+// ── v3 BUNDLE HELPERS ───────────────────────────────────
+
+function monthYearFromDate(iso) {
+  // "2026-05-12" → "May 2026"
+  if (!iso) return '';
+  const m = iso.match(/^(\d{4})-(\d{2})/);
+  if (!m) return '';
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return `${months[parseInt(m[2],10)-1]} ${m[1]}`;
+}
+
+const V3_SOURCE_LINE_LEAD = 'Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data.';
+const V3_CTA_FRAMING = 'Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.';
+const V3_CTA_HREF = 'https://www.clusteros.io/request';
+const V3_CTA_TEXT = 'Request access →';
+
+function renderConstituentTableV3(constituents, clusterIndex) {
+  if (!constituents || !constituents.length) {
+    return `<p class="empty">No constituent clusters listed in bundle.</p>`;
+  }
+  return `<table class="ct">
+    <thead><tr>
+      <th>Cluster</th><th>Regime</th><th>Dominant stalls</th><th>Evidence</th>
+    </tr></thead>
+    <tbody>
+      ${constituents.map(cc => {
+        const cj = clusterIndex[cc.v2_slug] || {};
+        return `<tr>
+          <td><a href="/clusters/${cc.v2_slug}.html">${cc.name}</a></td>
+          <td>${cj.regime || '—'}</td>
+          <td>${dominantStallsFor(cj) || '—'}</td>
+          <td>${cj._evidence_count || '—'}</td>
+        </tr>`;
+      }).join('')}
+    </tbody>
+  </table>`;
+}
+
+// FT/McKinsey-style typography: prose stays in --font-sans, serif is reserved
+// for h1, mono is reserved for labels, pills, source line, and CTA framing.
+const V3_COMPOSITE_CSS = `
+.sc-summary{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:1.25rem;}
+.sc-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:2rem;}
+.diagnostic-composite{margin:1.5rem 0 3rem;}
+.diagnostic-figure{margin:0;text-align:center;}
+.diagnostic-image{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-cta{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
+.diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+@media(max-width:640px){
+  .diagnostic-cta,.diagnostic-source{text-align:left;}
+}`;
+
+function templateV3(sc, children, bundle) {
+  const aggStalls = aggregateStalls(children);
+  const aggStacks = aggregateStacks(children);
+  const lev = topLeverages(children);
+  const metrics = bundle.metrics || {};
+  const pngUrl = bundle.diagnostic_png_url + (bundle.snapshot_date ? `?v=${bundle.snapshot_date}` : '');
+  const sourceLine = `${V3_SOURCE_LINE_LEAD} Snapshot ${monthYearFromDate(bundle.snapshot_date)}.`;
+  const clusterCount = metrics.active_clusters != null ? metrics.active_clusters : children.length;
+
+  // Index clusters.json by id for table joins.
+  const clusterIndex = Object.create(null);
+  for (const c of clusters) clusterIndex[c.id] = c;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${bundle.region_name || sc.name} — ClusterOS Regional Diagnostic</title>
+<meta name="description" content="${(bundle.strap || '').replace(/"/g,'&quot;').slice(0,160)}">
+<script type="application/ld+json">${jsonLd(sc, children)}<\/script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1a1a;--ink-dim:#5a5650;--ink-muted:#8c8780;
+  --page:#f7f4ef;--surface:#f0ece4;--border:#ddd8cf;--border-2:#c8c2b7;
+  --green:#2a7a4f;--green-dim:#1d5c3a;--signal:#c8f0d0;
+  --font-serif:'Instrument Serif',Georgia,serif;
+  --font-sans:'Geist',system-ui,sans-serif;
+  --font-mono:'Geist Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);padding-bottom:56px;background:var(--page);color:var(--ink);font-weight:300;line-height:1.6;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;background:rgba(247,244,239,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--green);letter-spacing:0.12em;text-decoration:none;text-transform:uppercase;}
+.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.1em;}
+.nav-back::before{content:'← ';color:var(--ink-muted);}
+.page-wrap{max-width:920px;margin:0 auto;padding:3rem 2rem 5rem;}
+.breadcrumb{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:2rem;}
+.breadcrumb a{color:var(--ink-muted);text-decoration:none;}
+.breadcrumb a:hover{color:var(--green);}
+.breadcrumb span{margin:0 6px;}
+.sc-eyebrow{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1rem;}
+h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:400;line-height:1.15;margin-bottom:1rem;}
+.sc-meta{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:1.2rem;}
+.meta-tag{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:2px;background:var(--surface);color:var(--ink-dim);border:1px solid var(--border);}
+.section{margin-bottom:2.5rem;}
+.section-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
+.ct{width:100%;border-collapse:collapse;font-size:13px;}
+.ct th{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-muted);text-align:left;padding:0.6rem 0.8rem;border-bottom:1px solid var(--border-2);font-weight:600;}
+.ct td{padding:0.7rem 0.8rem;border-bottom:1px solid var(--border);color:var(--ink-dim);}
+.ct td a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);}
+.ct td a:hover{color:var(--green);border-bottom-color:var(--green);}
+.agg-row{display:grid;grid-template-columns:32px 1fr 60px 90px;gap:0.8rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
+.agg-row:last-child{border-bottom:none;}
+.agg-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;}
+.agg-bar-wrap{background:var(--surface);height:6px;border-radius:2px;overflow:hidden;}
+.agg-bar{height:100%;background:var(--green);}
+.agg-pct{font-family:var(--font-mono);font-size:11px;color:var(--ink);}
+.agg-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);}
+.stacks-box{border:1px solid var(--border);}
+.stack-item{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);}
+.stack-item:last-child{border-bottom:none;}
+.stack-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;flex-wrap:wrap;}
+.stack-num{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
+.stack-stalls{font-family:var(--font-mono);font-size:12px;color:var(--green);font-weight:600;}
+.stack-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-left:auto;}
+.stack-desc{font-size:13px;font-weight:300;color:var(--ink-dim);line-height:1.65;}
+.leverage-block{border-left:3px solid var(--signal);padding:1rem 1.2rem;background:rgba(200,240,208,0.12);margin-bottom:0.8rem;}
+.leverage-hyp{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:0.6rem;}
+.leverage-meta{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.lm-tag{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
+.lm-tag a{color:inherit;text-decoration:none;}
+.rp-list{list-style:none;padding:0;margin:0;}
+.rp-list li{font-size:14px;color:var(--ink-dim);line-height:1.65;padding:0.6rem 0 0.6rem 1.2rem;border-bottom:1px solid var(--border);position:relative;}
+.rp-list li:last-child{border-bottom:none;}
+.rp-list li::before{content:'›';position:absolute;left:0;color:var(--green);font-weight:600;}
+.empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
+footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+footer a{color:var(--ink-muted);text-decoration:none;}
+footer a:hover{color:var(--green);}
+${V3_COMPOSITE_CSS}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">ClusterOS</a>
+  <a class="nav-back" href="/national-diagnostic">National Diagnostic</a>
+</nav>
+<main class="page-wrap">
+  <div class="breadcrumb">
+    <a href="/">ClusterOS</a><span>›</span>
+    <a href="/national-diagnostic">National Diagnostic</a><span>›</span>
+    ${bundle.region_name || sc.name}
+  </div>
+  <p class="sc-eyebrow">ClusterOS Regional Diagnostic</p>
+  <h1>${bundle.region_name || sc.name}</h1>
+  <div class="sc-meta">
+    <span class="meta-tag">${sc.city ? sc.city + ', ' : ''}${countryName(sc.country)}</span>
+    <span class="meta-tag">Supercluster</span>
+    <span class="meta-tag">${clusterCount} cluster${clusterCount === 1 ? '' : 's'}</span>
+  </div>
+  <p class="sc-summary">${bundle.strap || ''}</p>
+  ${bundle.behaviour ? `<p class="sc-behaviour">${bundle.behaviour}</p>` : ''}
+  <section class="diagnostic-composite">
+    <figure class="diagnostic-figure">
+      <img src="${pngUrl}" alt="${bundle.region_name || sc.name} diagnostic Sankey" class="diagnostic-image" loading="lazy" />
+    </figure>
+    <div class="diagnostic-cta">
+      <p class="diagnostic-cta-framing">${V3_CTA_FRAMING}</p>
+      <p class="diagnostic-cta-link"><a href="${V3_CTA_HREF}">${V3_CTA_TEXT}</a></p>
+    </div>
+    <p class="diagnostic-source">${sourceLine}</p>
+  </section>
+  <div class="section">
+    <div class="section-label">Constituent clusters</div>
+    ${renderConstituentTableV3(bundle.constituent_clusters, clusterIndex)}
+  </div>
+  <div class="section">
+    <div class="section-label">Aggregate stall pattern · Average intensity across clusters</div>
+    ${renderAggregateStalls(aggStalls)}
+  </div>
+  <div class="section">
+    <div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div>
+    <div class="stacks-box">${
+      sc.dominant_stacks && sc.dominant_stacks.length
+        ? renderDominantStacksRich(sc.dominant_stacks, children)
+        : renderStacks(aggStacks)
+    }</div>
+  </div>
+  <div class="section">
+    <div class="section-label">Top leverage hypotheses</div>
+    ${
+      sc.leverage_hypotheses && sc.leverage_hypotheses.length
+        ? renderLeverageRich(sc.leverage_hypotheses, children)
+        : renderLeverage(lev)
+    }
+  </div>
+</main>
+<footer>
+  <span>© 2026 ClusterOS · Community Lab · Edinburgh</span>
+  <span>
+    <a href="/">Homepage</a> ·
+    <a href="/national-diagnostic">National Diagnostic</a> ·
+    <a href="/about.html">About</a>
+  </span>
+</footer>
+</body>
+</html>`;
+}
+
 function template(sc, children) {
   const aggStalls = aggregateStalls(children);
   const aggStacks = aggregateStacks(children);
@@ -505,10 +742,16 @@ footer a:hover{color:var(--green);}
 }
 
 let count = 0;
+let v3Count = 0;
+let filteredOut = 0;
 for (const sc of supers) {
+  if (allowedIds && !allowedIds.has(sc.id)) { filteredOut++; continue; }
   const children = clusters.filter(c => c.parent === sc.id);
-  const html = template(sc, children);
+  const bundle = loadBundle(sc.id);
+  const html = bundle ? templateV3(sc, children, bundle) : template(sc, children);
   fs.writeFileSync(path.join(outDir, `${sc.id}.html`), html, 'utf8');
+  if (bundle) v3Count++;
   count++;
 }
-console.log(`Generated ${count} supercluster pages → superclusters/`);
+console.log(`Generated ${count} supercluster pages → superclusters/ (${v3Count} via v3 bundle)`);
+if (allowedIds) console.log(`Filtered out (outside --only): ${filteredOut}`);

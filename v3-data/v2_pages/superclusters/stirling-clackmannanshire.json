@@ -1,0 +1,39 @@
+{
+  "v2_slug": "stirling-clackmannanshire-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "stirling_and_clackmannanshire",
+  "v3_cluster": "_all",
+  "region_name": "Stirling and Clackmannanshire",
+  "cluster_name": "Stirling and Clackmannanshire Innovation Ecosystem",
+  "strap": "Stirling and Clackmannanshire's innovation footprint draws £125m of UKRI lead-led funding across 93 grants spanning 2 active clusters, with Stirling Clackmannanshire Manufacturing (64%) the largest single cluster and Stirling (36%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows high-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/stirling-clackmannanshire-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "stirling-clackmannanshire",
+  "constituent_clusters": [
+    {
+      "v2_slug": "stirling-clackmannanshire-digital",
+      "name": "Stirling Clackmannanshire Digital",
+      "v3_cluster": "stirling_clackmannanshire_digital"
+    },
+    {
+      "v2_slug": "stirling-clackmannanshire-manufacturing",
+      "name": "Stirling Clackmannanshire Manufacturing",
+      "v3_cluster": "stirling_clackmannanshire_manufacturing"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 2,
+    "total_gbp": 125208413.0,
+    "total_grants": 93,
+    "top_cluster_slug": "stirling_clackmannanshire_manufacturing",
+    "top_cluster_name": "Stirling Clackmannanshire Manufacturing",
+    "top_cluster_gbp": 79748171.5,
+    "top_cluster_share": 0.6369234270224318,
+    "lead_name": "UNIVERSITY OF STIRLING",
+    "lead_gbp": 45654252.0,
+    "lead_share": 0.3646260734891672,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

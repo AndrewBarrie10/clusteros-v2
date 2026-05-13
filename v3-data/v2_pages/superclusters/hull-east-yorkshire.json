@@ -1,0 +1,49 @@
+{
+  "v2_slug": "hull-east-yorkshire-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "hull_and_east_yorkshire_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "Hull and East Yorkshire Combined Authority",
+  "cluster_name": "Hull and East Yorkshire Combined Authority Innovation Ecosystem",
+  "strap": "Hull and East Yorkshire Combined Authority's innovation footprint draws £1.98bn of UKRI lead-led funding across 2,046 grants spanning 4 active clusters, with Hull and East Yorkshire Advanced Manufacturing (33%) the largest single cluster and York (45%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows medium-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/hull-east-yorkshire-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "hull-east-yorkshire",
+  "constituent_clusters": [
+    {
+      "v2_slug": "hull-east-yorkshire-advanced-manufacturing",
+      "name": "Hull and East Yorkshire Advanced Manufacturing",
+      "v3_cluster": "hull_east_yorkshire_advanced_manufacturing"
+    },
+    {
+      "v2_slug": "hull-east-yorkshire-clean-energy",
+      "name": "Hull and East Yorkshire Clean Energy",
+      "v3_cluster": "hull_east_yorkshire_clean_energy"
+    },
+    {
+      "v2_slug": "hull-east-yorkshire-digital",
+      "name": "Hull and East Yorkshire Digital",
+      "v3_cluster": "hull_east_yorkshire_digital"
+    },
+    {
+      "v2_slug": "hull-east-yorkshire-health-tech",
+      "name": "Hull and East Yorkshire Health Tech",
+      "v3_cluster": "hull_east_yorkshire_health_tech"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 4,
+    "total_gbp": 1984800856.0,
+    "total_grants": 2046,
+    "top_cluster_slug": "hull_east_yorkshire_advanced_manufacturing",
+    "top_cluster_name": "Hull and East Yorkshire Advanced Manufacturing",
+    "top_cluster_gbp": 652162808.8333334,
+    "top_cluster_share": 0.32857846008170677,
+    "lead_name": "UNIVERSITY OF YORK",
+    "lead_gbp": 884102313.0,
+    "lead_share": 0.44543628159338117,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

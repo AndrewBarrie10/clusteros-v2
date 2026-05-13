@@ -133,9 +133,19 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 
-.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
-.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
-.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
+.cluster-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:660px;margin:1.25rem 0 2rem;}
+.diagnostic-composite-v3{margin:0 0 3rem;}
+.diagnostic-figure-v3{margin:0;text-align:center;}
+.diagnostic-image-v3{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-cta-v3{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing-v3{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link-v3{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link-v3 a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
+.diagnostic-cta-link-v3 a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source-v3{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+@media(max-width:640px){
+  .diagnostic-cta-v3,.diagnostic-source-v3{text-align:left;}
+}
 </style>
 <!-- Mixpanel tracking -->
 <script type="text/javascript">
@@ -173,28 +183,22 @@ footer a:hover{color:var(--green);}
       <span class="meta-tag meta-plain">Newcastle, United Kingdom</span>
       <span class="meta-tag meta-Permission-Validation">Permission-Validation</span>
       
-      <span class="meta-tag meta-plain">96 evidence items</span>
+      
     </div>
-    <p class="cluster-summary">North East Digital runs on 96 evidence items (North East Digital UKRI grants: 379 grants, £457m total, 69 distinct lead org). The diagnostic resolves a Permission-Validation configuration at HIGH confidence.</p>
+    <p class="cluster-summary">North East Digital draws £562m of UKRI lead-led funding across 487 grants, anchored by Newcastle University (27%), Durham University (12%).</p>
+    <p class="cluster-behaviour">The cluster shows high-confidence "Forgiving instead of redesigning" and "Coordinating instead of deciding" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.</p>
   </header>
-  <div class="stats-row">
-    <div class="stat-cell">
-      <div class="stat-num">9</div>
-      <div class="stat-label">Active stalls</div>
+  <section class="diagnostic-composite-v3">
+    <figure class="diagnostic-figure-v3">
+      <img src="https://preview.clusteros.io/static/diagnostics/north-east-digital-diagnostic-wide.png?v=2026-05-13" alt="North East Digital diagnostic Sankey" class="diagnostic-image-v3" loading="lazy" />
+    </figure>
+    <div class="diagnostic-cta-v3">
+      <p class="diagnostic-cta-framing-v3">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
+      <p class="diagnostic-cta-link-v3"><a href="https://www.clusteros.io/request">Request access →</a></p>
     </div>
-    <div class="stat-cell">
-      <div class="stat-num">7</div>
-      <div class="stat-label">Stacks identified</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">96</div>
-      <div class="stat-label">Evidence items</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Leverage timeline (mo)</div>
-    </div>
-  </div>
+    <p class="diagnostic-source-v3">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
+  </section>
+  
   <div class="two-col">
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
@@ -344,7 +348,7 @@ footer a:hover{color:var(--green);}
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If one intermediary (e.g., Generator, Dynamo North East) launched a single cohort-based programme with pre-committed entry criteria and fixed timeline, announcing it as operational rather than seeking multi-stakeholder coordination, it might expose whether the validation-permission loop is structurally necessary or adaptive. The programme would validate by doing (accepting companies, delivering services, reporting outcomes) rather than coordinating or seeking...</p>
+    <p class="leverage-hyp">"If one intermediary (e.g., Generator, Dynamo North East) launched a single cohort-based programme with pre-committed entry criteria and fixed timeline, announcing it as operational rather than seeking multi-stakeholder coordination, it might expose whether the validation-permission loop is structurally necessary or adaptive. The programme would validate by doing (accepting companies, delivering services, reporting outcomes) rather than coordinating or seeking permission."</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -353,28 +357,23 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/belfast-screen.html">
-      <div class="sc-name">Belfast Screen</div>
-      <div class="sc-meta">Belfast · GB</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/aberdeen-aberdeenshire-innovation-ecosystem.html">
+      <div class="sc-name">Aberdeen and Aberdeenshire Innovation Ecosystem</div>
+      <div class="sc-meta">Aberdeen · United Kingdom</div>
       <div class="sc-regime">Permission-Validation</div>
-      <div class="sc-match">7 shared stacks · 61 evidence · Tier 1 - Robust</div>
-      <div class="sc-mechanism">Permission-Validation: Re-proving requires coordination to appear credible; coordination requires permission to proceed; waiting extends the re-proving cycle; all three signals absorbed by the validation-permission loop.</div>
-      <div class="sc-absorbed">Absorbs: Demand, Friction, Opportunity</div>
-    </a><a class="similar-card" href="/clusters/colombo-it-services-digital.html">
-      <div class="sc-name">Colombo IT Services &amp; Digital</div>
-      <div class="sc-meta">Colombo · LK</div>
-      <div class="sc-regime">Growing</div>
-      <div class="sc-match">1 shared stack · 59 evidence · P2</div>
-      <div class="sc-mechanism">Partnership-Coordination Stabilisation: Partnership formation (Re-proving: , , , ) operates within coordination structures (Coordinating: , , , , ) that provide legitimacy frameworks for permission-seeking behavior (Waiting: , , , ). Coordi...</div>
-      <div class="sc-absorbed">Absorbs: Uncertainty (multinational partner selection), Pressure (legitimacy demonstration), Complexity (multi-stakeholder alignment)</div>
-    </a><a class="similar-card" href="/clusters/manila-bpo-it-services.html">
-      <div class="sc-name">Manila BPO &amp; IT Services</div>
-      <div class="sc-meta">Manila · PH</div>
-      <div class="sc-regime">Mature</div>
-      <div class="sc-match">1 shared stack · 58 evidence · P2</div>
-      <div class="sc-mechanism">Validation–Coordination Stabilisation: Re-proving sector viability through expansion announcements (Re-proving) plausibly sustains coordination activity (Coordinating) by providing tangible evidence for multi-stakeholder alignment; coordin...</div>
-      <div class="sc-absorbed">Absorbs: Uncertainty (market viability), Pressure (stakeholder expectations), Complexity (multi-actor environment)</div>
-    </a></div></div>
+      <div class="sc-stall">Primary: Waiting for Permission</div>
+    </a><a class="similar-card" href="/clusters/belfast-maritime-net-zero.html">
+      <div class="sc-name">Belfast MaritimeNetZero</div>
+      <div class="sc-meta">Belfast · United Kingdom</div>
+      <div class="sc-regime">Permission-Validation</div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a><a class="similar-card" href="/clusters/belfast-advanced-manufacturing.html">
+      <div class="sc-name">Belfast AdvancedManufacturing</div>
+      <div class="sc-meta">Belfast · United Kingdom</div>
+      <div class="sc-regime">Permission-Validation</div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a></div>
+  </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>

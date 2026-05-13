@@ -1,0 +1,12 @@
+{
+  "v2_slug": "cambridge-digital",
+  "shape": "cluster",
+  "v3_region": "cambridgeshire_and_peterborough_combined_authority",
+  "v3_cluster": "cambridgeshire_peterborough_digital",
+  "region_name": "Cambridgeshire and Peterborough",
+  "cluster_name": "Cambridgeshire Peterborough Digital",
+  "strap": "Cambridgeshire Peterborough Digital draws £1.52bn of UKRI lead-led funding across 6,034 grants, anchored by Cambridge (40%), with Microsoft Research and Arm on the industrial side. 51 Companies House-traced spin-outs translate to £30m UKRI per spin-out.",
+  "behaviour": "The cluster shows medium-confidence \"Re-proving instead of narrowing\" and \"Stabilising around incumbents\" behaviour — repeated infrastructure commitments reinforce incumbent positions rather than redirecting capability toward new anchors or sub-domain specialisms.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/cambridge-digital-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

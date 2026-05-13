@@ -1,0 +1,59 @@
+{
+  "v2_slug": "greater-manchester-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "greater_manchester_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "Greater Manchester",
+  "cluster_name": "Greater Manchester Innovation Ecosystem",
+  "strap": "Greater Manchester's innovation footprint draws £6.84bn of UKRI lead-led funding across 9,221 grants spanning 6 active clusters, with Greater Manchester Advanced Materials (29%) the largest single cluster and Manchester (46%) the dominant regional anchor by UKRI £. 115 Companies House-traced spin-outs region-wide translate to £59m UKRI per spin-out.",
+  "behaviour": "The region shows medium-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/greater-manchester-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "greater-manchester",
+  "constituent_clusters": [
+    {
+      "v2_slug": "greater-manchester-digital",
+      "name": "Greater Manchester Digital",
+      "v3_cluster": "greater_manchester_digital"
+    },
+    {
+      "v2_slug": "greater-manchester-creative-media",
+      "name": "Greater Manchester Creative Media",
+      "v3_cluster": "greater_manchester_creative_media"
+    },
+    {
+      "v2_slug": "greater-manchester-health",
+      "name": "Greater Manchester Health",
+      "v3_cluster": "greater_manchester_health"
+    },
+    {
+      "v2_slug": "greater-manchester-advanced-materials",
+      "name": "Greater Manchester Advanced Materials",
+      "v3_cluster": "greater_manchester_advanced_materials"
+    },
+    {
+      "v2_slug": "greater-manchester-financial-services",
+      "name": "Greater Manchester Financial Services",
+      "v3_cluster": "greater_manchester_financial_services"
+    },
+    {
+      "v2_slug": "greater-manchester-low-carbon",
+      "name": "Greater Manchester Low Carbon",
+      "v3_cluster": "greater_manchester_low_carbon"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 6,
+    "total_gbp": 6835979831.8166685,
+    "total_grants": 9221,
+    "top_cluster_slug": "greater_manchester_advanced_materials",
+    "top_cluster_name": "Greater Manchester Advanced Materials",
+    "top_cluster_gbp": 1982983928.1666663,
+    "top_cluster_share": 0.2900804240143123,
+    "lead_name": "UNIVERSITY OF MANCHESTER",
+    "lead_gbp": 3149291469.066669,
+    "lead_share": 0.46069349918338504,
+    "ch_spinouts": 115,
+    "gbp_per_spinout": 59443302.885362335
+  }
+}

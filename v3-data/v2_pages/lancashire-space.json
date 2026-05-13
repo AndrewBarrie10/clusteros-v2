@@ -1,0 +1,12 @@
+{
+  "v2_slug": "lancashire-space",
+  "shape": "cluster",
+  "v3_region": "lancashire_combined_county_authority",
+  "v3_cluster": "lancashire_space",
+  "region_name": "Lancashire Combined County Authority",
+  "cluster_name": "Lancashire Space",
+  "strap": "Lancashire Space draws £15m of UKRI lead-led funding across 34 grants, anchored by Lancaster University (55%), Lancashire (36%), with Centre For Ecology & Hydrology on the industrial side.",
+  "behaviour": "The cluster shows low-confidence \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/lancashire-space-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

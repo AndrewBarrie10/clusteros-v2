@@ -1,0 +1,12 @@
+{
+  "v2_slug": "west-midlands-clean-growth",
+  "shape": "cluster",
+  "v3_region": "west_midlands_combined_authority",
+  "v3_cluster": "wmca_clean_growth",
+  "region_name": "West Midlands Combined Authority",
+  "cluster_name": "WMCA Clean Growth",
+  "strap": "WMCA Clean Growth draws £1.23bn of UKRI lead-led funding across 1,048 grants, anchored by Birmingham (16%), Warwick (14%), with Altair Engineering on the industrial side.",
+  "behaviour": "The cluster shows high-confidence \"Re-proving instead of narrowing\" and \"Forgiving instead of redesigning\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-midlands-clean-growth-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

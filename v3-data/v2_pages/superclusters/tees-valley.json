@@ -1,0 +1,49 @@
+{
+  "v2_slug": "tees-valley-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "tees_valley_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "Tees Valley Combined Authority",
+  "cluster_name": "Tees Valley Combined Authority Innovation Ecosystem",
+  "strap": "Tees Valley Combined Authority's innovation footprint draws £3.40bn of UKRI lead-led funding across 758 grants spanning 4 active clusters, with Tees Valley Life Sciences (83%) the largest single cluster and Centre For Process Innovation (78%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows high-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/tees-valley-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "tees-valley",
+  "constituent_clusters": [
+    {
+      "v2_slug": "tees-valley-net-zero",
+      "name": "Tees Valley Net Zero",
+      "v3_cluster": "tees_valley_net_zero"
+    },
+    {
+      "v2_slug": "tees-valley-manufacturing",
+      "name": "Tees Valley Manufacturing",
+      "v3_cluster": "tees_valley_manufacturing"
+    },
+    {
+      "v2_slug": "tees-valley-digital",
+      "name": "Tees Valley Digital",
+      "v3_cluster": "tees_valley_digital"
+    },
+    {
+      "v2_slug": "tees-valley-life-sciences",
+      "name": "Tees Valley Life Sciences",
+      "v3_cluster": "tees_valley_life_sciences"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 4,
+    "total_gbp": 3397968694.0,
+    "total_grants": 758,
+    "top_cluster_slug": "tees_valley_life_sciences",
+    "top_cluster_name": "Tees Valley Life Sciences",
+    "top_cluster_gbp": 2836696301.0,
+    "top_cluster_share": 0.834821199503376,
+    "lead_name": "CENTRE FOR PROCESS INNOVATION",
+    "lead_gbp": 2643301043.0,
+    "lead_share": 0.7779062378259803,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

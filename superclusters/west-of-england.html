@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>West of England Combined Authority — ClusterOS Regional Diagnostic</title>
-<meta name="description" content="9 clusters diagnosed across West of England Combined Authority, drawing on 909 evidence items cross-referenced at entity level. The Coordination-Intermediary-Ac">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"West of England Combined Authority — ClusterOS Regional Diagnostic","description":"9 clusters diagnosed across West of England Combined Authority, drawing on 909 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 9 of 9 clusters.","url":"https://www.clusteros.io/superclusters/west-of-england","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Bristol","addressCountry":"GB"},"hasPart":[{"@type":"Dataset","name":"West of England CleanTech","url":"https://www.clusteros.io/clusters/west-of-england-clean-tech.html"},{"@type":"Dataset","name":"West of England Space","url":"https://www.clusteros.io/clusters/west-of-england-space.html"},{"@type":"Dataset","name":"West of England Creative","url":"https://www.clusteros.io/clusters/west-of-england-creative.html"},{"@type":"Dataset","name":"West of England FinTech","url":"https://www.clusteros.io/clusters/west-of-england-fin-tech.html"},{"@type":"Dataset","name":"West of England Aerospace","url":"https://www.clusteros.io/clusters/west-of-england-aerospace.html"},{"@type":"Dataset","name":"West of England Digital","url":"https://www.clusteros.io/clusters/west-of-england-digital.html"},{"@type":"Dataset","name":"West of England Innovation Ecosystem","url":"https://www.clusteros.io/clusters/west-of-england-innovation-ecosystem.html"},{"@type":"Dataset","name":"West of England Quantum","url":"https://www.clusteros.io/clusters/west-of-england-quantum.html"},{"@type":"Dataset","name":"West of England LifeSciences","url":"https://www.clusteros.io/clusters/west-of-england-life-sciences.html"}]}</script>
+<meta name="description" content="West of England Combined Authority's innovation footprint draws £4.36bn of UKRI lead-led funding across 3,016 grants spanning 7 active clusters, with West of En">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"West of England Combined Authority — ClusterOS Regional Diagnostic","description":"West of England Combined Authority's innovation footprint draws £4.36bn of UKRI lead-led funding across 3,016 grants spanning 7 active clusters, with West of England Aerospace (32%) the largest single cluster and Bristol (34%) the dominant regional anchor by UKRI £.","url":"https://www.clusteros.io/superclusters/west-of-england","creator":{"@type":"Organization","name":"ClusterOS","url":"https://clusteros.io"},"spatialCoverage":{"@type":"Place","name":"Bristol","addressCountry":"GB"},"hasPart":[{"@type":"Dataset","name":"West of England CleanTech","url":"https://www.clusteros.io/clusters/west-of-england-clean-tech.html"},{"@type":"Dataset","name":"West of England Space","url":"https://www.clusteros.io/clusters/west-of-england-space.html"},{"@type":"Dataset","name":"West of England Creative","url":"https://www.clusteros.io/clusters/west-of-england-creative.html"},{"@type":"Dataset","name":"West of England FinTech","url":"https://www.clusteros.io/clusters/west-of-england-fin-tech.html"},{"@type":"Dataset","name":"West of England Aerospace","url":"https://www.clusteros.io/clusters/west-of-england-aerospace.html"},{"@type":"Dataset","name":"West of England Digital","url":"https://www.clusteros.io/clusters/west-of-england-digital.html"},{"@type":"Dataset","name":"West of England Innovation Ecosystem","url":"https://www.clusteros.io/clusters/west-of-england-innovation-ecosystem.html"},{"@type":"Dataset","name":"West of England Quantum","url":"https://www.clusteros.io/clusters/west-of-england-quantum.html"},{"@type":"Dataset","name":"West of England LifeSciences","url":"https://www.clusteros.io/clusters/west-of-england-life-sciences.html"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -33,12 +33,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem
 h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:400;line-height:1.15;margin-bottom:1rem;}
 .sc-meta{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:1.2rem;}
 .meta-tag{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:2px;background:var(--surface);color:var(--ink-dim);border:1px solid var(--border);}
-.sc-summary{font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:2.5rem;}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);margin-bottom:2.5rem;}
-.stat-cell{padding:1rem 1.2rem;border-right:1px solid var(--border);}
-.stat-cell:last-child{border-right:none;}
-.stat-num{font-family:var(--font-serif);font-size:2rem;color:var(--green);line-height:1;margin-bottom:0.2rem;}
-.stat-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;}
 .section{margin-bottom:2.5rem;}
 .section-label{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
 .ct{width:100%;border-collapse:collapse;font-size:13px;}
@@ -71,32 +65,25 @@ h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:40
 .rp-list li:last-child{border-bottom:none;}
 .rp-list li::before{content:'›';position:absolute;left:0;color:var(--green);font-weight:600;}
 .empty{font-size:13px;color:var(--ink-muted);font-style:italic;padding:0.8rem 0;}
-.empty code{font-family:var(--font-mono);font-size:12px;color:var(--ink);background:var(--surface);padding:1px 5px;border-radius:2px;}
 footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 footer a{color:var(--ink-muted);text-decoration:none;}
 footer a:hover{color:var(--green);}
-@media(max-width:680px){.stats-row{grid-template-columns:1fr 1fr;}.stat-cell:last-child{border-top:1px solid var(--border);grid-column:span 2;}.agg-row{grid-template-columns:28px 1fr 50px;}.agg-count{display:none;}}
-</style>
-<style>
-.diagnostic-composite{margin:2.5rem 0 3rem;position:relative;left:50%;transform:translateX(-50%);width:min(1000px,calc(100vw - 32px));}
-.diagnostic-headlines{list-style:none;padding:0;margin:0 0 1.5rem;font-family:var(--font-mono);font-size:13.5px;line-height:1.6;color:var(--ink);}
-.diagnostic-headlines li{padding:4px 0;}
-.diagnostic-headlines b{font-weight:600;color:var(--ink);}
+
+.sc-summary{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:1.25rem;}
+.sc-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:720px;margin-bottom:2rem;}
+.diagnostic-composite{margin:1.5rem 0 3rem;}
 .diagnostic-figure{margin:0;text-align:center;}
 .diagnostic-image{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
-.diagnostic-caption{font-family:var(--font-serif);font-size:19px;font-style:normal;color:var(--ink);line-height:1.4;margin:1.25rem auto 0;max-width:720px;text-align:center;}
 .diagnostic-cta{margin:1.75rem auto 0;max-width:720px;text-align:center;}
 .diagnostic-cta-framing{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
 .diagnostic-cta-link{margin:0;font-family:var(--font-mono);font-size:14px;}
-.diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;transition:border-bottom-color 0.15s;}
+.diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
 .diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
 .diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
 @media(max-width:640px){
-  .diagnostic-composite{margin:1.75rem 0 2rem;width:calc(100vw - 32px);}
-  .diagnostic-headlines{font-size:13px;text-align:left;}
-  .diagnostic-caption{font-size:17px;text-align:left;margin-top:1rem;}
   .diagnostic-cta,.diagnostic-source{text-align:left;}
-}</style>
+}
+</style>
 </head>
 <body>
 <nav>
@@ -114,46 +101,20 @@ footer a:hover{color:var(--green);}
   <div class="sc-meta">
     <span class="meta-tag">Bristol, United Kingdom</span>
     <span class="meta-tag">Supercluster</span>
-    <span class="meta-tag">9 clusters</span>
+    <span class="meta-tag">7 clusters</span>
   </div>
-  <p class="sc-summary">9 clusters diagnosed across West of England Combined Authority, drawing on 909 evidence items cross-referenced at entity level. The Coordination-Intermediary-Activity configuration fires confidently in 9 of 9 clusters.</p>
+  <p class="sc-summary">West of England Combined Authority's innovation footprint draws £4.36bn of UKRI lead-led funding across 3,016 grants spanning 7 active clusters, with West of England Aerospace (32%) the largest single cluster and Bristol (34%) the dominant regional anchor by UKRI £.</p>
+  <p class="sc-behaviour">The region shows low-confidence "Program–Narrative" stabilisation stacks at ecosystem grain — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.</p>
   <section class="diagnostic-composite">
-    <ul class="diagnostic-headlines">
-      <li><b>£4.36bn</b> UKRI lead-led across <b>3,016</b> grants spanning <b>7</b> active clusters</li>
-      <li>Largest cluster: <b>West of England Aerospace</b> at <b>32%</b> of regional £ (<b>£1.38bn</b>)</li>
-      <li>Region-wide lead: <b>UNIVERSITY OF BRISTOL</b> — <b>£1.47bn</b> across all clusters (<b>34%</b> of regional £)</li>
-    </ul>
     <figure class="diagnostic-figure">
-      <img src="/diagnostics/west-of-england-diagnostic.png" alt="Diagnostic flow for the West of England innovation ecosystem: UKRI funders, anchor institutions, clusters, and outcome distribution." class="diagnostic-image" loading="lazy" />
-      <figcaption class="diagnostic-caption">University of Bristol accounts for £1.47bn — 34% of the £4.36bn drawn across the region's seven UKRI-active clusters — with Renishaw, Airbus, the National Composites Centre and the Filton clean-tech and aerospace corridor reinforcing the wider innovation ecosystem.</figcaption>
+      <img src="https://preview.clusteros.io/static/diagnostics/west-of-england-innovation-ecosystem-diagnostic-wide.png?v=2026-05-13" alt="West of England Combined Authority diagnostic Sankey" class="diagnostic-image" loading="lazy" />
     </figure>
     <div class="diagnostic-cta">
       <p class="diagnostic-cta-framing">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
       <p class="diagnostic-cta-link"><a href="https://www.clusteros.io/request">Request access →</a></p>
     </div>
-    <p class="diagnostic-source">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); Crunchbase (disclosed capital). Snapshot May 2026.</p>
+    <p class="diagnostic-source">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
   </section>
-  <div class="stats-row">
-    <div class="stat-cell">
-      <div class="stat-num">9</div>
-      <div class="stat-label">Clusters diagnosed</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">909</div>
-      <div class="stat-label">Evidence items</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">10</div>
-      <div class="stat-label">Distinct stacks</div>
-    </div>
-  </div>
-  
-  <div class="section">
-    <div class="section-label">Regional patterns · Cross-cluster synthesis</div>
-    <ul class="rp-list">
-      <li>8 of 9 clusters register all three reinforcing backbone configurations at confident levels.</li><li>Anchor concentration — University of Bristol appears across 6 of 9 sub-clusters as a configured ecosystem-level anchor.</li><li>Pathway scale — 4,347 follow-on funding events tracked against 70 declared spin-offs.</li>
-    </ul>
-  </div>
   <div class="section">
     <div class="section-label">Constituent clusters</div>
     <table class="ct">
@@ -162,51 +123,41 @@ footer a:hover{color:var(--green);}
     </tr></thead>
     <tbody>
       <tr>
-        <td><a href="/clusters/west-of-england-clean-tech.html">West of England CleanTech</a></td>
-        <td>Permission-Validation</td>
-        <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
-        <td>86</td>
-      </tr><tr>
-        <td><a href="/clusters/west-of-england-space.html">West of England Space</a></td>
-        <td>Permission-Validation</td>
-        <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
-        <td>83</td>
-      </tr><tr>
-        <td><a href="/clusters/west-of-england-creative.html">West of England Creative</a></td>
-        <td>Permission-Validation</td>
-        <td>Stabilising Around Incumbents, Re-proving Instead of Narrowing, Coordinating Instead of Deciding</td>
-        <td>88</td>
-      </tr><tr>
-        <td><a href="/clusters/west-of-england-fin-tech.html">West of England FinTech</a></td>
-        <td>Coordination-Incumbent-Permission</td>
-        <td>Coordinating Instead of Deciding, Stabilising Around Incumbents, Scaling Activity Instead of Throughput</td>
-        <td>86</td>
-      </tr><tr>
-        <td><a href="/clusters/west-of-england-aerospace.html">West of England Aerospace</a></td>
-        <td>Extraction-Narrative</td>
-        <td>Re-proving Instead of Narrowing, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
-        <td>88</td>
-      </tr><tr>
-        <td><a href="/clusters/west-of-england-digital.html">West of England Digital</a></td>
-        <td>Permission-Validation</td>
-        <td>Coordinating Instead of Deciding, Mediating Instead of Coupling, Stabilising Around Incumbents</td>
-        <td>95</td>
-      </tr><tr>
-        <td><a href="/clusters/west-of-england-innovation-ecosystem.html">West of England Innovation Ecosystem</a></td>
-        <td>Permission-Validation</td>
-        <td>Stabilising Around Incumbents, Re-proving Instead of Narrowing, Coordinating Instead of Deciding</td>
-        <td>205</td>
-      </tr><tr>
-        <td><a href="/clusters/west-of-england-quantum.html">West of England Quantum</a></td>
-        <td>Permission-Validation</td>
-        <td>Stabilising Around Incumbents, Re-proving Instead of Narrowing, Coordinating Instead of Deciding</td>
-        <td>82</td>
-      </tr><tr>
-        <td><a href="/clusters/west-of-england-life-sciences.html">West of England LifeSciences</a></td>
-        <td>Permission-Validation</td>
-        <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
-        <td>96</td>
-      </tr>
+          <td><a href="/clusters/west-of-england-clean-tech.html">West of England Clean Tech</a></td>
+          <td>Permission-Validation</td>
+          <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
+          <td>86</td>
+        </tr><tr>
+          <td><a href="/clusters/west-of-england-space.html">West of England Space</a></td>
+          <td>Permission-Validation</td>
+          <td>Coordinating Instead of Deciding, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
+          <td>83</td>
+        </tr><tr>
+          <td><a href="/clusters/west-of-england-creative.html">West of England Creative</a></td>
+          <td>Permission-Validation</td>
+          <td>Stabilising Around Incumbents, Re-proving Instead of Narrowing, Coordinating Instead of Deciding</td>
+          <td>88</td>
+        </tr><tr>
+          <td><a href="/clusters/west-of-england-fin-tech.html">West of England Fintech</a></td>
+          <td>Coordination-Incumbent-Permission</td>
+          <td>Coordinating Instead of Deciding, Stabilising Around Incumbents, Scaling Activity Instead of Throughput</td>
+          <td>86</td>
+        </tr><tr>
+          <td><a href="/clusters/west-of-england-aerospace.html">West of England Aerospace</a></td>
+          <td>Extraction-Narrative</td>
+          <td>Re-proving Instead of Narrowing, Extracting Without Reinvesting, Stabilising Around Incumbents</td>
+          <td>88</td>
+        </tr><tr>
+          <td><a href="/clusters/west-of-england-digital.html">West of England Digital</a></td>
+          <td>Permission-Validation</td>
+          <td>Coordinating Instead of Deciding, Mediating Instead of Coupling, Stabilising Around Incumbents</td>
+          <td>95</td>
+        </tr><tr>
+          <td><a href="/clusters/west-of-england-life-sciences.html">West of England Life Sciences</a></td>
+          <td>Permission-Validation</td>
+          <td>Stabilising Around Incumbents, Coordinating Instead of Deciding, Extracting Without Reinvesting</td>
+          <td>96</td>
+        </tr>
     </tbody>
   </table>
   </div>

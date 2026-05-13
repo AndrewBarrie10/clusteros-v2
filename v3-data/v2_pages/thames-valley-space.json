@@ -1,0 +1,12 @@
+{
+  "v2_slug": "thames-valley-space",
+  "shape": "cluster",
+  "v3_region": "thames_valley_strategic_mayoral_authority",
+  "v3_cluster": "thames_valley_space",
+  "region_name": "Thames Valley",
+  "cluster_name": "Thames Valley Space",
+  "strap": "Thames Valley Space draws £1.13bn of UKRI lead-led funding across 8,915 grants, anchored by Oxford (76%), Surrey (14%).",
+  "behaviour": "The cluster shows medium-confidence \"Forgiving instead of redesigning\" and \"Stabilising around incumbents\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/thames-valley-space-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

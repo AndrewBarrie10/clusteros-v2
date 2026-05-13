@@ -133,30 +133,20 @@ footer a:hover{color:var(--green);}
   .page-wrap{padding:2rem 1.2rem 4rem;}
 }
 
-.sc-match{font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;color:var(--teal,#0c9488);margin-top:0.3rem;}
-.sc-mechanism{font-size:0.75rem;color:var(--ink-dim,#5a5650);line-height:1.55;margin-top:0.5rem;font-weight:300;}
-.sc-absorbed{font-family:var(--mono,monospace);font-size:0.65rem;color:var(--ink-muted,#8c8780);margin-top:0.3rem;font-style:italic;}
-</style>
-<style>
-.diagnostic-composite{margin:2.5rem 0 3rem;position:relative;left:50%;transform:translateX(-50%);width:min(1000px,calc(100vw - 32px));}
-.diagnostic-headlines{list-style:none;padding:0;margin:0 0 1.5rem;font-family:var(--font-mono);font-size:13.5px;line-height:1.6;color:var(--ink);}
-.diagnostic-headlines li{padding:4px 0;}
-.diagnostic-headlines b{font-weight:600;color:var(--ink);}
-.diagnostic-figure{margin:0;text-align:center;}
-.diagnostic-image{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
-.diagnostic-caption{font-family:var(--font-serif);font-size:19px;font-style:normal;color:var(--ink);line-height:1.4;margin:1.25rem auto 0;max-width:720px;text-align:center;}
-.diagnostic-cta{margin:1.75rem auto 0;max-width:720px;text-align:center;}
-.diagnostic-cta-framing{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
-.diagnostic-cta-link{margin:0;font-family:var(--font-mono);font-size:14px;}
-.diagnostic-cta-link a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;transition:border-bottom-color 0.15s;}
-.diagnostic-cta-link a:hover{border-bottom-color:var(--ink);}
-.diagnostic-source{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
+.cluster-behaviour{font-family:var(--font-sans);font-size:1rem;font-weight:300;color:var(--ink-dim);line-height:1.75;max-width:660px;margin:1.25rem 0 2rem;}
+.diagnostic-composite-v3{margin:0 0 3rem;}
+.diagnostic-figure-v3{margin:0;text-align:center;}
+.diagnostic-image-v3{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.diagnostic-cta-v3{margin:1.75rem auto 0;max-width:720px;text-align:center;}
+.diagnostic-cta-framing-v3{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0 0 0.75rem;}
+.diagnostic-cta-link-v3{margin:0;font-family:var(--font-mono);font-size:14px;}
+.diagnostic-cta-link-v3 a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);padding-bottom:2px;}
+.diagnostic-cta-link-v3 a:hover{border-bottom-color:var(--ink);}
+.diagnostic-source-v3{margin:1.5rem auto 0;max-width:720px;font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);line-height:1.5;text-align:center;}
 @media(max-width:640px){
-  .diagnostic-composite{margin:1.75rem 0 2rem;width:calc(100vw - 32px);}
-  .diagnostic-headlines{font-size:13px;text-align:left;}
-  .diagnostic-caption{font-size:17px;text-align:left;margin-top:1rem;}
-  .diagnostic-cta,.diagnostic-source{text-align:left;}
-}</style>
+  .diagnostic-cta-v3,.diagnostic-source-v3{text-align:left;}
+}
+</style>
 <!-- Mixpanel tracking -->
 <script type="text/javascript">
   (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
@@ -193,44 +183,22 @@ footer a:hover{color:var(--green);}
       <span class="meta-tag meta-plain">Glasgow, United Kingdom</span>
       <span class="meta-tag meta-Extraction-Narrative">Extraction-Narrative</span>
       
-      <span class="meta-tag meta-plain">95 evidence items</span>
+      
     </div>
-    <p class="cluster-summary">Greater Glasgow Life Sciences runs on 95 evidence items (Greater Glasgow Life Sciences UKRI grants: 282 grants, £315m total, 41 distin). The diagnostic resolves a Extraction-Narrative configuration at HIGH confidence.</p>
+    <p class="cluster-summary">Greater Glasgow Life Sciences draws £1.07bn of UKRI lead-led funding across 4,329 grants, anchored by Glasgow (31%), Strathclyde (20%). 29 Companies House-traced spin-outs translate to £37m UKRI per spin-out.</p>
+    <p class="cluster-behaviour">The cluster shows medium-confidence "Extracting without reinvesting" and "Forgiving instead of redesigning" behaviour — extraction events accumulate without triggering structural redesign of support mechanisms, leaving value retention to recur rather than flow forward into new corporate formation. Pipeline 1 evidence: company acquisitions and exit transactions cluster 2020-2022 alongside 35 new company registrations 2007-2025, with no patterns evidencing redesign of support mechanisms following the 14 venture-funded companies' performance trajectories.</p>
   </header>
-  <section class="diagnostic-composite">
-    <ul class="diagnostic-headlines">
-      <li><b>£1.07bn</b> UKRI lead-led across <b>4,329</b> grants tagged to this cluster</li>
-      <li>Top 5 institutions absorbed <b>68%</b> of the cluster £; <b>UNIVERSITY OF GLASGOW</b> alone leads <b>31%</b></li>
-      <li><b>29</b> Companies House-traced spin-outs → <b>£37m</b> UKRI per spin-out</li>
-    </ul>
-    <figure class="diagnostic-figure">
-      <img src="/diagnostics/glasgow-life-sciences-diagnostic.png" alt="Diagnostic flow for Greater Glasgow Life Sciences: UKRI funders, anchor institutions, four subclusters, and outcome distribution." class="diagnostic-image" loading="lazy" />
-      <figcaption class="diagnostic-caption">Anchored by the University of Glasgow (31%) and Strathclyde (20%), and reinforced by Glasgow Caledonian University, NHS Greater Glasgow & Clyde and the IBioIC industrial-biotech innovation centre, the cluster attracts £1.07bn of UKRI funding across 4,329 grants.</figcaption>
+  <section class="diagnostic-composite-v3">
+    <figure class="diagnostic-figure-v3">
+      <img src="https://preview.clusteros.io/static/diagnostics/greater-glasgow-life-sciences-diagnostic-wide.png?v=2026-05-13" alt="Greater Glasgow Life Sciences diagnostic Sankey" class="diagnostic-image-v3" loading="lazy" />
     </figure>
-    <div class="diagnostic-cta">
-      <p class="diagnostic-cta-framing">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
-      <p class="diagnostic-cta-link"><a href="https://www.clusteros.io/request">Request access →</a></p>
+    <div class="diagnostic-cta-v3">
+      <p class="diagnostic-cta-framing-v3">Same data examined through five diagnostic lenses — Pipeline, Leverage, Triple Helix, Throughput, Collaboration. The interactive diagnostic is currently in private preview.</p>
+      <p class="diagnostic-cta-link-v3"><a href="https://www.clusteros.io/request">Request access →</a></p>
     </div>
-    <p class="diagnostic-source">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); Crunchbase (disclosed capital). Snapshot May 2026.</p>
+    <p class="diagnostic-source-v3">Sources: UKRI Gateway to Research (grants, outcomes); OpenAlex (publications); Companies House (spin-out lifecycle); DSIT (cluster mapping); Public investment data. Snapshot May 2026.</p>
   </section>
-  <div class="stats-row">
-    <div class="stat-cell">
-      <div class="stat-num">9</div>
-      <div class="stat-label">Active stalls</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">2</div>
-      <div class="stat-label">Stacks identified</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">95</div>
-      <div class="stat-label">Evidence items</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Leverage timeline (mo)</div>
-    </div>
-  </div>
+  
   <div class="two-col">
     <div class="section">
       <div class="section-label">Active stalls · Behavioural substitution patterns</div>
@@ -345,7 +313,7 @@ footer a:hover{color:var(--green);}
   <div class="section">
     <div class="section-label">Stage 5 · Leverage hypothesis</div>
     <div class="leverage-block">
-    <p class="leverage-hyp">"If ecosystem reports (e.g., from Scottish Enterprise, Life Sciences Scotland, or GCID) separated "value created" metrics (spin-offs formed, equity raised, patents filed) from "value retained" metrics (companies headquartered in cluster, employment in cluster, procurement from cluster suppliers), it might reduce the system's ability to absorb success and uncertainty signals through aggregated success narratives without making the distinction between extraction and retention visible and...</p>
+    <p class="leverage-hyp">"If ecosystem reports (e.g., from Scottish Enterprise, Life Sciences Scotland, or GCID) separated "value created" metrics (spin-offs formed, equity raised, patents filed) from "value retained" metrics (companies headquartered in cluster, employment in cluster, procurement from cluster suppliers), it might reduce the system's ability to absorb success and uncertainty signals through aggregated success narratives without making the distinction between extraction and retention visible and testable."</p>
     <div class="leverage-meta">
       <span class="lm-tag">6-12 months</span>
     </div>
@@ -354,28 +322,23 @@ footer a:hover{color:var(--green);}
   </div>
   <div class="section">
     <div class="section-label">Structural resemblances · Clusters with similar stall configurations</div>
-    <div class="similar-grid"><a class="similar-card" href="/clusters/belfast-life-sciences.html">
-      <div class="sc-name">Belfast LifeSciences</div>
-      <div class="sc-meta">Belfast · GB</div>
+    <div class="similar-grid"><a class="similar-card" href="/clusters/edinburgh-south-east-fin-tech.html">
+      <div class="sc-name">ESES FinTech</div>
+      <div class="sc-meta">Edinburgh · United Kingdom</div>
       <div class="sc-regime">Extraction-Narrative</div>
-      <div class="sc-match">2 shared stacks · 81 evidence · Tier 1 - Robust</div>
-      <div class="sc-mechanism">Extraction-Narrative: Value extraction events generate narrative about ecosystem success; narrative legitimises continued extraction by framing it as ecosystem contribution; uncertainty about whether extraction is harmful ...</div>
-      <div class="sc-absorbed">Absorbs: Success, Uncertainty</div>
-    </a><a class="similar-card" href="/clusters/dhaka-garment-tech-fintech.html">
-      <div class="sc-name">Dhaka Garment Tech &amp; FinTech</div>
-      <div class="sc-meta">Dhaka · BD</div>
-      <div class="sc-regime">Growing</div>
-      <div class="sc-match">1 shared stack · 80 evidence · P2</div>
-      <div class="sc-mechanism">Narrative–Partnership Stabilisation: Narrating behavior (Narrating: international partnerships 2018-2024 with Visa, Mastercard, H&amp;M Foundation, Microsoft, Ant Financial) co-occurs with external capital extraction (Extracting: internation...</div>
-      <div class="sc-absorbed">Absorbs: Opportunity (partnerships and capital signal growth potential), Uncertainty (international validation reduces perceived risk), Pressure (external resources address immediate funding gaps)</div>
-    </a><a class="similar-card" href="/clusters/jakarta-fintech.html">
-      <div class="sc-name">Jakarta FinTech</div>
-      <div class="sc-meta">Jakarta · ID</div>
-      <div class="sc-regime">Growing</div>
-      <div class="sc-match">1 shared stack · 65 evidence · P2</div>
-      <div class="sc-mechanism">Capital Mobilisation–Narrative Coupling: Extracting without reinvesting (Extracting: VC funding flows) plausibly sustains narrating instead of testing (Narrating: valuation announcements) by providing capital that enables announcement-worthy...</div>
-      <div class="sc-absorbed">Absorbs: Pressure (growth expectations), Opportunity (capital availability), Uncertainty (market validation)</div>
-    </a></div></div>
+      <div class="sc-stall">Primary: Scaling Activity Instead of Throughput</div>
+    </a><a class="similar-card" href="/clusters/belfast-cyber.html">
+      <div class="sc-name">Belfast Cyber</div>
+      <div class="sc-meta">Belfast · United Kingdom</div>
+      <div class="sc-regime">Permission-Validation</div>
+      <div class="sc-stall">Primary: Scaling Activity Instead of Throughput</div>
+    </a><a class="similar-card" href="/clusters/cardiff-capital-fin-tech.html">
+      <div class="sc-name">CCR FinTech</div>
+      <div class="sc-meta">Cardiff · United Kingdom</div>
+      <div class="sc-regime">Permission-Validation</div>
+      <div class="sc-stall">Primary: Stabilising Around Incumbents</div>
+    </a></div>
+  </div>
   <div class="cta-block">
     <div class="cta-label">What happens next</div>
     <div class="cta-h">This is a structural profile, not a full diagnostic.</div>

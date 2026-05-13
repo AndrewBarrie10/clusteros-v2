@@ -1,0 +1,12 @@
+{
+  "v2_slug": "west-yorkshire-advanced-manufacturing",
+  "shape": "cluster",
+  "v3_region": "west_yorkshire_combined_authority",
+  "v3_cluster": "west_yorkshire_advanced_manufacturing",
+  "region_name": "West Yorkshire Combined Authority",
+  "cluster_name": "West Yorkshire Advanced Manufacturing",
+  "strap": "West Yorkshire Advanced Manufacturing draws £575m of UKRI lead-led funding across 740 grants, anchored by Leeds (39%), Huddersfield (6%), with Cummins Turbo Technologies on the industrial side.",
+  "behaviour": "The cluster shows high-confidence \"Forgiving instead of redesigning\" and \"Re-proving instead of narrowing\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-yorkshire-advanced-manufacturing-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

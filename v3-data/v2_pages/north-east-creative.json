@@ -1,0 +1,12 @@
+{
+  "v2_slug": "north-east-creative",
+  "shape": "cluster",
+  "v3_region": "north_east_combined_authority",
+  "v3_cluster": "north_east_creative",
+  "region_name": "North East Combined Authority",
+  "cluster_name": "North East Creative",
+  "strap": "North East Creative draws £22m of UKRI lead-led funding across 28 grants, anchored by Durham University (33%), Northumbria University (20%).",
+  "behaviour": "The cluster shows medium-confidence \"Coordinating instead of deciding\" and \"Narrating instead of testing\" behaviour — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/north-east-creative-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13"
+}

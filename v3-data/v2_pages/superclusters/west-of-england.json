@@ -1,0 +1,64 @@
+{
+  "v2_slug": "west-of-england-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "west_of_england_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "West of England Combined Authority",
+  "cluster_name": "West of England Combined Authority Innovation Ecosystem",
+  "strap": "West of England Combined Authority's innovation footprint draws £4.36bn of UKRI lead-led funding across 3,016 grants spanning 7 active clusters, with West of England Aerospace (32%) the largest single cluster and Bristol (34%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows low-confidence \"Program–Narrative\" stabilisation stacks at ecosystem grain — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-of-england-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "west-of-england",
+  "constituent_clusters": [
+    {
+      "v2_slug": "west-of-england-clean-tech",
+      "name": "West of England Clean Tech",
+      "v3_cluster": "west_of_england_clean_tech"
+    },
+    {
+      "v2_slug": "west-of-england-space",
+      "name": "West of England Space",
+      "v3_cluster": "west_of_england_space"
+    },
+    {
+      "v2_slug": "west-of-england-creative",
+      "name": "West of England Creative",
+      "v3_cluster": "west_of_england_creative"
+    },
+    {
+      "v2_slug": "west-of-england-fin-tech",
+      "name": "West of England Fintech",
+      "v3_cluster": "west_of_england_fin_tech"
+    },
+    {
+      "v2_slug": "west-of-england-aerospace",
+      "name": "West of England Aerospace",
+      "v3_cluster": "west_of_england_aerospace"
+    },
+    {
+      "v2_slug": "west-of-england-digital",
+      "name": "West of England Digital",
+      "v3_cluster": "west_of_england_digital"
+    },
+    {
+      "v2_slug": "west-of-england-life-sciences",
+      "name": "West of England Life Sciences",
+      "v3_cluster": "west_of_england_life_sciences"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 7,
+    "total_gbp": 4358413538.0,
+    "total_grants": 3016,
+    "top_cluster_slug": "west_of_england_aerospace",
+    "top_cluster_name": "West of England Aerospace",
+    "top_cluster_gbp": 1382337720.6666665,
+    "top_cluster_share": 0.3171653420710044,
+    "lead_name": "UNIVERSITY OF BRISTOL",
+    "lead_gbp": 1474819818.0,
+    "lead_share": 0.33838455326494077,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

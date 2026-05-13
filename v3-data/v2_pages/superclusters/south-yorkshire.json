@@ -1,0 +1,44 @@
+{
+  "v2_slug": "south-yorkshire-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "south_yorkshire_mayoral_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "South Yorkshire Mayoral Combined Authority",
+  "cluster_name": "South Yorkshire Mayoral Combined Authority Innovation Ecosystem",
+  "strap": "South Yorkshire Mayoral Combined Authority's innovation footprint draws £2.38bn of UKRI lead-led funding across 2,419 grants spanning 3 active clusters, with South Yorkshire Advanced Manufacturing (44%) the largest single cluster and Sheffield (48%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows high-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/south-yorkshire-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "south-yorkshire",
+  "constituent_clusters": [
+    {
+      "v2_slug": "south-yorkshire-advanced-manufacturing",
+      "name": "South Yorkshire Advanced Manufacturing",
+      "v3_cluster": "south_yorkshire_advanced_manufacturing"
+    },
+    {
+      "v2_slug": "south-yorkshire-healthtech",
+      "name": "South Yorkshire Healthtech",
+      "v3_cluster": "south_yorkshire_healthtech"
+    },
+    {
+      "v2_slug": "south-yorkshire-digital",
+      "name": "South Yorkshire Digital",
+      "v3_cluster": "south_yorkshire_digital"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 3,
+    "total_gbp": 2375639563.5,
+    "total_grants": 2419,
+    "top_cluster_slug": "south_yorkshire_advanced_manufacturing",
+    "top_cluster_name": "South Yorkshire Advanced Manufacturing",
+    "top_cluster_gbp": 1041677751.0,
+    "top_cluster_share": 0.4384830792535334,
+    "lead_name": "UNIVERSITY OF SHEFFIELD",
+    "lead_gbp": 1151440665.5,
+    "lead_share": 0.4846866011119957,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "v2_slug": "east-midlands-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "east_midlands_combined_county_authority",
+  "v3_cluster": "_all",
+  "region_name": "East Midlands Combined County Authority",
+  "cluster_name": "East Midlands Combined County Authority Innovation Ecosystem",
+  "strap": "East Midlands Combined County Authority's innovation footprint draws £5.96bn of UKRI lead-led funding across 6,599 grants spanning 4 active clusters, with East Midlands Life Sciences (32%) the largest single cluster and Sheffield (22%) the dominant regional anchor by UKRI £. 102 Companies House-traced spin-outs region-wide translate to £58m UKRI per spin-out.",
+  "behaviour": "The region shows low-confidence \"Program–Narrative\" stabilisation stacks at ecosystem grain — research narrative is reinforced by recurring programme launches rather than narrowing toward commercial scaling, with academic capacity reabsorbing the cluster's signal.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/east-midlands-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "east-midlands",
+  "constituent_clusters": [
+    {
+      "v2_slug": "east-midlands-transport",
+      "name": "East Midlands Transport",
+      "v3_cluster": "east_midlands_transport"
+    },
+    {
+      "v2_slug": "east-midlands-clean-energy",
+      "name": "East Midlands Clean Energy",
+      "v3_cluster": "east_midlands_clean_energy"
+    },
+    {
+      "v2_slug": "east-midlands-life-sciences",
+      "name": "East Midlands Life Sciences",
+      "v3_cluster": "east_midlands_life_sciences"
+    },
+    {
+      "v2_slug": "east-midlands-digital",
+      "name": "East Midlands Digital",
+      "v3_cluster": "east_midlands_digital"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 4,
+    "total_gbp": 5958005945.0,
+    "total_grants": 6599,
+    "top_cluster_slug": "east_midlands_life_sciences",
+    "top_cluster_name": "East Midlands Life Sciences",
+    "top_cluster_gbp": 1914627556.0,
+    "top_cluster_share": 0.3213537505122446,
+    "lead_name": "UNIVERSITY OF SHEFFIELD",
+    "lead_gbp": 1283884284.0,
+    "lead_share": 0.21548892294702132,
+    "ch_spinouts": 102,
+    "gbp_per_spinout": 58411822.99019608
+  }
+}

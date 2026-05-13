@@ -1,0 +1,54 @@
+{
+  "v2_slug": "edinburgh-south-east-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "edinburgh_and_south_east",
+  "v3_cluster": "_all",
+  "region_name": "Edinburgh and South East",
+  "cluster_name": "Edinburgh and South East Innovation Ecosystem",
+  "strap": "Edinburgh and South East's innovation footprint draws £4.15bn of UKRI lead-led funding across 4,474 grants spanning 5 active clusters, with ESES Life Sciences (47%) the largest single cluster and Edinburgh (43%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows high-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/edinburgh-south-east-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "edinburgh-south-east",
+  "constituent_clusters": [
+    {
+      "v2_slug": "edinburgh-south-east-data-ai",
+      "name": "ESES Data AI",
+      "v3_cluster": "eses_data_ai"
+    },
+    {
+      "v2_slug": "edinburgh-south-east-fin-tech",
+      "name": "Edinburgh and South East Fintech",
+      "v3_cluster": "eses_fin_tech"
+    },
+    {
+      "v2_slug": "edinburgh-south-east-life-sciences",
+      "name": "ESES Life Sciences",
+      "v3_cluster": "eses_life_sciences"
+    },
+    {
+      "v2_slug": "edinburgh-south-east-space",
+      "name": "ESES Space",
+      "v3_cluster": "eses_space"
+    },
+    {
+      "v2_slug": "edinburgh-south-east-advanced-manufacturing",
+      "name": "ESES Advanced Manufacturing",
+      "v3_cluster": "eses_advanced_manufacturing"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 5,
+    "total_gbp": 4149247262.0,
+    "total_grants": 4474,
+    "top_cluster_slug": "eses_life_sciences",
+    "top_cluster_name": "ESES Life Sciences",
+    "top_cluster_gbp": 1960539220.5,
+    "top_cluster_share": 0.47250479344896656,
+    "lead_name": "UNIVERSITY OF EDINBURGH",
+    "lead_gbp": 1798380374.0,
+    "lead_share": 0.4334232838978011,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

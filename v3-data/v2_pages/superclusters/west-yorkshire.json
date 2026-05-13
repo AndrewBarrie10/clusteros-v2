@@ -1,0 +1,59 @@
+{
+  "v2_slug": "west-yorkshire-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "west_yorkshire_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "West Yorkshire Combined Authority",
+  "cluster_name": "West Yorkshire Combined Authority Innovation Ecosystem",
+  "strap": "West Yorkshire Combined Authority's innovation footprint draws £2.75bn of UKRI lead-led funding across 3,411 grants spanning 6 active clusters, with West Yorkshire Health Life Sciences (35%) the largest single cluster and Leeds (46%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows medium-confidence \"Validation–Coordination\" stabilisation stacks at ecosystem grain — validation activity recurs through programmes and partnerships without the testing-and-narrowing motion that converts capability into market position.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-yorkshire-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "west-yorkshire",
+  "constituent_clusters": [
+    {
+      "v2_slug": "west-yorkshire-advanced-manufacturing",
+      "name": "West Yorkshire Advanced Manufacturing",
+      "v3_cluster": "west_yorkshire_advanced_manufacturing"
+    },
+    {
+      "v2_slug": "west-yorkshire-health-life-sciences",
+      "name": "West Yorkshire Health Life Sciences",
+      "v3_cluster": "west_yorkshire_health_life_sciences"
+    },
+    {
+      "v2_slug": "west-yorkshire-digital-technology",
+      "name": "West Yorkshire Digital Technology",
+      "v3_cluster": "west_yorkshire_digital_technology"
+    },
+    {
+      "v2_slug": "west-yorkshire-financial-professional-services",
+      "name": "West Yorkshire Financial Professional Services",
+      "v3_cluster": "west_yorkshire_financial_professional_services"
+    },
+    {
+      "v2_slug": "west-yorkshire-creative-industries",
+      "name": "West Yorkshire Creative Industries",
+      "v3_cluster": "west_yorkshire_creative_industries"
+    },
+    {
+      "v2_slug": "west-yorkshire-green-economy",
+      "name": "West Yorkshire Green Economy",
+      "v3_cluster": "west_yorkshire_green_economy"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 6,
+    "total_gbp": 2745861040.5,
+    "total_grants": 3411,
+    "top_cluster_slug": "west_yorkshire_health_life_sciences",
+    "top_cluster_name": "West Yorkshire Health Life Sciences",
+    "top_cluster_gbp": 954624413.0,
+    "top_cluster_share": 0.34765940407026946,
+    "lead_name": "UNIVERSITY OF LEEDS",
+    "lead_gbp": 1273983560.5,
+    "lead_share": 0.4639650520217212,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "v2_slug": "west-midlands-innovation-ecosystem",
+  "shape": "supercluster",
+  "v3_region": "west_midlands_combined_authority",
+  "v3_cluster": "_all",
+  "region_name": "West Midlands Combined Authority",
+  "cluster_name": "West Midlands Combined Authority Innovation Ecosystem",
+  "strap": "West Midlands Combined Authority's innovation footprint draws £5.78bn of UKRI lead-led funding across 5,696 grants spanning 5 active clusters, with WMCA Advanced Manufacturing (39%) the largest single cluster and Warwick (19%) the dominant regional anchor by UKRI £.",
+  "behaviour": "The region shows medium-confidence \"Coordination–Activity\" stabilisation stacks at ecosystem grain — multi-actor coordination distributes risk across institutional partners without forcing the strategic option-collapse that would convert capability into a defined pathway.",
+  "diagnostic_png_url": "https://preview.clusteros.io/static/diagnostics/west-midlands-innovation-ecosystem-diagnostic-wide.png",
+  "snapshot_date": "2026-05-13",
+  "supercluster_slug": "west-midlands",
+  "constituent_clusters": [
+    {
+      "v2_slug": "west-midlands-advanced-manufacturing",
+      "name": "WMCA Advanced Manufacturing",
+      "v3_cluster": "wmca_advanced_manufacturing"
+    },
+    {
+      "v2_slug": "west-midlands-digital",
+      "name": "WMCA Digital",
+      "v3_cluster": "wmca_digital"
+    },
+    {
+      "v2_slug": "west-midlands-health-tech",
+      "name": "West Midlands Health Tech",
+      "v3_cluster": "wmca_health_tech"
+    },
+    {
+      "v2_slug": "west-midlands-clean-growth",
+      "name": "WMCA Clean Growth",
+      "v3_cluster": "wmca_clean_growth"
+    },
+    {
+      "v2_slug": "west-midlands-creative",
+      "name": "WMCA Creative",
+      "v3_cluster": "wmca_creative"
+    }
+  ],
+  "metrics": {
+    "active_clusters": 5,
+    "total_gbp": 5780382397.0,
+    "total_grants": 5696,
+    "top_cluster_slug": "wmca_advanced_manufacturing",
+    "top_cluster_name": "WMCA Advanced Manufacturing",
+    "top_cluster_gbp": 2244604284.1666665,
+    "top_cluster_share": 0.3883141512111048,
+    "lead_name": "UNIVERSITY OF WARWICK",
+    "lead_gbp": 1107040127.0,
+    "lead_share": 0.19151676324641606,
+    "ch_spinouts": 0,
+    "gbp_per_spinout": 0
+  }
+}

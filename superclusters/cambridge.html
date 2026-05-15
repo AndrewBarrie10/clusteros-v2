@@ -40,13 +40,20 @@ h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:40
 .ct td{padding:0.7rem 0.8rem;border-bottom:1px solid var(--border);color:var(--ink-dim);}
 .ct td a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);}
 .ct td a:hover{color:var(--green);border-bottom-color:var(--green);}
-.agg-row{display:grid;grid-template-columns:32px 1fr 60px 90px;gap:0.8rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
+.agg-row{display:grid;grid-template-columns:minmax(220px,auto) 1fr 50px 80px;gap:0.8rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
 .agg-row:last-child{border-bottom:none;}
-.agg-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;}
+.agg-label{display:flex;align-items:baseline;gap:0.55rem;min-width:0;}
+.agg-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;flex-shrink:0;}
+.agg-name{font-size:13px;color:var(--ink-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .agg-bar-wrap{background:var(--surface);height:6px;border-radius:2px;overflow:hidden;}
 .agg-bar{height:100%;background:var(--green);}
 .agg-pct{font-family:var(--font-mono);font-size:11px;color:var(--ink);}
 .agg-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);}
+@media(max-width:680px){
+  .agg-row{grid-template-columns:1fr 50px 50px;gap:0.5rem;}
+  .agg-count{display:none;}
+  .agg-name{font-size:12px;}
+}
 .stacks-box{border:1px solid var(--border);}
 .stack-item{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);}
 .stack-item:last-child{border-bottom:none;}
@@ -228,47 +235,47 @@ details.section-collapsible > summary .section-label{margin-bottom:1.2rem;}
   <div class="section" id="agg-stalls">
     <div class="section-label">Aggregate stall pattern · Average intensity across clusters</div>
     <div class="agg-row">
-      <span class="agg-id">S6</span>
+      <span class="agg-label"><span class="agg-id">S6</span><span class="agg-name">Stabilising Around Incumbents</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:79%"></div></div>
       <span class="agg-pct">79%</span>
       <span class="agg-count">6 clusters</span>
     </div><div class="agg-row">
-      <span class="agg-id">S2</span>
+      <span class="agg-label"><span class="agg-id">S2</span><span class="agg-name">Coordinating Instead of Deciding</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:50%"></div></div>
       <span class="agg-pct">50%</span>
       <span class="agg-count">6 clusters</span>
     </div><div class="agg-row">
-      <span class="agg-id">S5</span>
+      <span class="agg-label"><span class="agg-id">S5</span><span class="agg-name">Mediating Instead of Coupling</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:46%"></div></div>
       <span class="agg-pct">46%</span>
       <span class="agg-count">6 clusters</span>
     </div><div class="agg-row">
-      <span class="agg-id">S7</span>
+      <span class="agg-label"><span class="agg-id">S7</span><span class="agg-name">Narrating Instead of Testing</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:38%"></div></div>
       <span class="agg-pct">38%</span>
       <span class="agg-count">6 clusters</span>
     </div><div class="agg-row">
-      <span class="agg-id">S1</span>
+      <span class="agg-label"><span class="agg-id">S1</span><span class="agg-name">Re-proving Instead of Narrowing</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:33%"></div></div>
       <span class="agg-pct">33%</span>
       <span class="agg-count">6 clusters</span>
     </div><div class="agg-row">
-      <span class="agg-id">S9</span>
+      <span class="agg-label"><span class="agg-id">S9</span><span class="agg-name">Waiting for Permission</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:33%"></div></div>
       <span class="agg-pct">33%</span>
       <span class="agg-count">6 clusters</span>
     </div><div class="agg-row">
-      <span class="agg-id">S4</span>
+      <span class="agg-label"><span class="agg-id">S4</span><span class="agg-name">Extracting Without Reinvesting</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:29%"></div></div>
       <span class="agg-pct">29%</span>
       <span class="agg-count">6 clusters</span>
     </div><div class="agg-row">
-      <span class="agg-id">S8</span>
+      <span class="agg-label"><span class="agg-id">S8</span><span class="agg-name">Scaling Activity Instead of Throughput</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:25%"></div></div>
       <span class="agg-pct">25%</span>
       <span class="agg-count">6 clusters</span>
     </div><div class="agg-row">
-      <span class="agg-id">S3</span>
+      <span class="agg-label"><span class="agg-id">S3</span><span class="agg-name">Forgiving Instead of Redesigning</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:10%"></div></div>
       <span class="agg-pct">10%</span>
       <span class="agg-count">6 clusters</span>

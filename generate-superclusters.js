@@ -143,6 +143,17 @@ const STALL_NAME_TO_ID = {
   'scaling activity instead of throughput': 'S8',
   'waiting for permission': 'S9',
 };
+const STALL_ID_TO_NAME = {
+  S1: 'Re-proving Instead of Narrowing',
+  S2: 'Coordinating Instead of Deciding',
+  S3: 'Forgiving Instead of Redesigning',
+  S4: 'Extracting Without Reinvesting',
+  S5: 'Mediating Instead of Coupling',
+  S6: 'Stabilising Around Incumbents',
+  S7: 'Narrating Instead of Testing',
+  S8: 'Scaling Activity Instead of Throughput',
+  S9: 'Waiting for Permission',
+};
 
 function aggregateStalls(children) {
   const totals = {};
@@ -157,7 +168,7 @@ function aggregateStalls(children) {
   });
   return Object.keys(totals).map(id => ({
     id,
-    name: id,
+    name: STALL_ID_TO_NAME[id] || id,
     avg: totals[id] / counts[id],
     count: counts[id]
   })).sort((a, b) => b.avg - a.avg);
@@ -249,7 +260,7 @@ function renderAggregateStalls(stalls) {
   return stalls.slice(0, 9).map(s => {
     const pct = Math.round(s.avg * 100);
     return `<div class="agg-row">
-      <span class="agg-id">${s.id}</span>
+      <span class="agg-label"><span class="agg-id">${s.id}</span><span class="agg-name">${s.name}</span></span>
       <div class="agg-bar-wrap"><div class="agg-bar" style="width:${pct}%"></div></div>
       <span class="agg-pct">${pct}%</span>
       <span class="agg-count">${s.count} clusters</span>
@@ -613,13 +624,20 @@ h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:40
 .ct td{padding:0.7rem 0.8rem;border-bottom:1px solid var(--border);color:var(--ink-dim);}
 .ct td a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);}
 .ct td a:hover{color:var(--green);border-bottom-color:var(--green);}
-.agg-row{display:grid;grid-template-columns:32px 1fr 60px 90px;gap:0.8rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
+.agg-row{display:grid;grid-template-columns:minmax(220px,auto) 1fr 50px 80px;gap:0.8rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
 .agg-row:last-child{border-bottom:none;}
-.agg-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;}
+.agg-label{display:flex;align-items:baseline;gap:0.55rem;min-width:0;}
+.agg-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;flex-shrink:0;}
+.agg-name{font-size:13px;color:var(--ink-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .agg-bar-wrap{background:var(--surface);height:6px;border-radius:2px;overflow:hidden;}
 .agg-bar{height:100%;background:var(--green);}
 .agg-pct{font-family:var(--font-mono);font-size:11px;color:var(--ink);}
 .agg-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);}
+@media(max-width:680px){
+  .agg-row{grid-template-columns:1fr 50px 50px;gap:0.5rem;}
+  .agg-count{display:none;}
+  .agg-name{font-size:12px;}
+}
 .stacks-box{border:1px solid var(--border);}
 .stack-item{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);}
 .stack-item:last-child{border-bottom:none;}
@@ -771,13 +789,20 @@ h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:40
 .ct td{padding:0.7rem 0.8rem;border-bottom:1px solid var(--border);color:var(--ink-dim);}
 .ct td a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-2);}
 .ct td a:hover{color:var(--green);border-bottom-color:var(--green);}
-.agg-row{display:grid;grid-template-columns:32px 1fr 60px 90px;gap:0.8rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
+.agg-row{display:grid;grid-template-columns:minmax(220px,auto) 1fr 50px 80px;gap:0.8rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);}
 .agg-row:last-child{border-bottom:none;}
-.agg-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;}
+.agg-label{display:flex;align-items:baseline;gap:0.55rem;min-width:0;}
+.agg-id{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);font-weight:600;flex-shrink:0;}
+.agg-name{font-size:13px;color:var(--ink-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .agg-bar-wrap{background:var(--surface);height:6px;border-radius:2px;overflow:hidden;}
 .agg-bar{height:100%;background:var(--green);}
 .agg-pct{font-family:var(--font-mono);font-size:11px;color:var(--ink);}
 .agg-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);}
+@media(max-width:680px){
+  .agg-row{grid-template-columns:1fr 50px 50px;gap:0.5rem;}
+  .agg-count{display:none;}
+  .agg-name{font-size:12px;}
+}
 .stacks-box{border:1px solid var(--border);}
 .stack-item{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);}
 .stack-item:last-child{border-bottom:none;}
@@ -800,7 +825,7 @@ h1{font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:40
 footer{border-top:1px solid var(--border);padding:2rem;max-width:920px;margin:0 auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 footer a{color:var(--ink-muted);text-decoration:none;}
 footer a:hover{color:var(--green);}
-@media(max-width:680px){.stats-row{grid-template-columns:1fr 1fr;}.stat-cell:last-child{border-top:1px solid var(--border);grid-column:span 2;}.agg-row{grid-template-columns:28px 1fr 50px;}.agg-count{display:none;}}
+@media(max-width:680px){.stats-row{grid-template-columns:1fr 1fr;}.stat-cell:last-child{border-top:1px solid var(--border);grid-column:span 2;}.agg-row{grid-template-columns:1fr 50px 50px;gap:0.5rem;}.agg-count{display:none;}.agg-name{font-size:12px;}}
 </style>${diagnosticStyles(sc.id, 'supercluster')}
 ${MIXPANEL_SNIPPET}
 </head>

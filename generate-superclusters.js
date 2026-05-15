@@ -544,8 +544,19 @@ const V3_MOBILE_JS = `
 <\/script>`;
 
 function templateV3(sc, children, bundle) {
-  const aggStalls = aggregateStalls(children);
-  const aggStacks = aggregateStacks(children);
+  // Restrict aggregation to v3's canonical active children. clusters.json's
+  // `parent` field includes the deprecated <region>-innovation-ecosystem and
+  // any NA clusters; bundle.constituent_clusters is the v3-active set.
+  const v3ChildSlugs = new Set((bundle.constituent_clusters || []).map(cc => cc.v2_slug));
+  const v3Children = v3ChildSlugs.size
+    ? children.filter(c => v3ChildSlugs.has(c.id))
+    : children;
+  const aggStalls = aggregateStalls(v3Children);
+  const aggStacks = aggregateStacks(v3Children);
+  // "Dominant" = appears in 2+ constituent clusters. Falls back to all stacks
+  // for tiny regions (e.g. Stirling has only 2 children with no overlap).
+  const aggStacksDominant = aggStacks.filter(s => (s.count || 0) >= 2);
+  const aggStacksToRender = aggStacksDominant.length ? aggStacksDominant : aggStacks;
   const lev = topLeverages(children);
   const metrics = bundle.metrics || {};
   const pngUrl = bundle.diagnostic_png_url + (bundle.snapshot_date ? `?v=${bundle.snapshot_date}` : '');
@@ -679,11 +690,7 @@ ${MIXPANEL_SNIPPET}
   </div>
   <details class="section section-collapsible" id="dom-stacks" open>
     <summary><div class="section-label">Dominant stacks · Most common stabilisation patterns in the region</div></summary>
-    <div class="stacks-box">${
-      sc.dominant_stacks && sc.dominant_stacks.length
-        ? renderDominantStacksRich(sc.dominant_stacks, children)
-        : renderStacks(aggStacks)
-    }</div>
+    <div class="stacks-box">${renderStacks(aggStacksToRender)}</div>
   </details>
   <details class="section section-collapsible" id="leverage" open>
     <summary><div class="section-label">Top leverage hypotheses</div></summary>

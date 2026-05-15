@@ -185,6 +185,24 @@
       closeSuperclusterPanel();
       expand(sid);
     });
+
+    // Symmetry with openSuperclusterPanel's closeClusterPanel call:
+    // map.js's openClusterPanel can't be wrapped (the file is locked, loaded
+    // before us, and doesn't expose openClusterPanel on window). So observe
+    // #cluster-panel for the 'open' class being added — that's the signal
+    // that map.js just opened a leaf-cluster panel and we should close ours.
+    var clusterPanel = document.getElementById('cluster-panel');
+    if (clusterPanel && typeof MutationObserver !== 'undefined') {
+      new MutationObserver(function (records) {
+        for (var i = 0; i < records.length; i++) {
+          if (records[i].attributeName === 'class' &&
+              clusterPanel.classList.contains('open')) {
+            closeSuperclusterPanel();
+            return;
+          }
+        }
+      }).observe(clusterPanel, { attributes: true, attributeFilter: ['class'] });
+    }
   }
 
   function openSuperclusterPanel(sc) {

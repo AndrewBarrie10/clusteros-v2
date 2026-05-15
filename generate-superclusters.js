@@ -127,17 +127,21 @@ const COUNTRIES = {
 };
 function countryName(code) { return COUNTRIES[code] || code; }
 
+// Lowercase keys + case-insensitive lookup — clusters.json uses Title Case
+// ("Re-proving Instead of Narrowing") for stall names, so a literal map would
+// silently miss every entry and the Aggregate Stall Pattern section would
+// render empty across all 25 regions.
 const STALL_NAME_TO_ID = {
-  'Re-proving instead of narrowing': 'S1',
-  'Coordinating instead of deciding': 'S2',
-  'Forgiving instead of redesigning': 'S3',
-  'Extracting without reinvesting': 'S4',
-  'Mediating instead of coupling': 'S5',
-  'Stabilizing around incumbents': 'S6',
-  'Stabilising around incumbents': 'S6',
-  'Narrating instead of testing': 'S7',
-  'Scaling activity instead of throughput': 'S8',
-  'Waiting for permission': 'S9',
+  're-proving instead of narrowing': 'S1',
+  'coordinating instead of deciding': 'S2',
+  'forgiving instead of redesigning': 'S3',
+  'extracting without reinvesting': 'S4',
+  'mediating instead of coupling': 'S5',
+  'stabilizing around incumbents': 'S6',
+  'stabilising around incumbents': 'S6',
+  'narrating instead of testing': 'S7',
+  'scaling activity instead of throughput': 'S8',
+  'waiting for permission': 'S9',
 };
 
 function aggregateStalls(children) {
@@ -145,7 +149,7 @@ function aggregateStalls(children) {
   const counts = {};
   children.forEach(c => {
     (c.stalls || []).forEach(s => {
-      const id = STALL_NAME_TO_ID[s.name];
+      const id = STALL_NAME_TO_ID[(s.name || '').toLowerCase()];
       if (!id) return;
       totals[id] = (totals[id] || 0) + (s.intensity || 0);
       counts[id] = (counts[id] || 0) + 1;

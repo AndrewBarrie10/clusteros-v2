@@ -759,8 +759,7 @@ function StepIndicator({ current, completedUpTo }) {
                   fontFamily: 'var(--font-mono)',
                   fontSize: '10px',
                   fontWeight: 600,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
+                  letterSpacing: '0.02em',
                   color: isActive ? 'var(--dj-chalk)' : isCompleted ? 'var(--steward)' : 'var(--dj-chalk-muted)',
                   marginBottom: '2px',
                 }}>{stage.label}</div>
@@ -810,7 +809,7 @@ function ConfidenceBadge({ level }) {
   return (
     <span style={{
       fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 600,
-      letterSpacing: '0.1em', textTransform: 'uppercase',
+      letterSpacing: '0.02em',
       color, background: bg, border: `1px solid ${border}`,
       borderRadius: '3px', padding: '3px 8px',
     }}>{level} confidence</span>
@@ -922,17 +921,17 @@ const ecoStyles = {
   heading: { fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 400, color: 'var(--dj-chalk)', marginBottom: '8px', lineHeight: 1.3 },
   sub: { fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginBottom: '24px', lineHeight: 1.6 },
   section: { marginBottom: '24px' },
-  sectionLabel: { display: 'block', fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '4px' },
+  sectionLabel: { display: 'block', fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.02em', marginBottom: '4px' },
   sectionHint: { display: 'block', fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'var(--dj-chalk-muted)', marginBottom: '8px' },
   editArea: { width: '100%', minHeight: '140px', padding: '14px 16px', fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--dj-chalk-dim)', lineHeight: 1.7, background: 'var(--dj-surface)', border: '1px solid var(--dj-border)', borderRadius: '6px', resize: 'vertical', outline: 'none', boxSizing: 'border-box' },
   refineRow: { display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', marginTop: '6px' },
   refineHint: { fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', flex: 1 },
-  btnRefine: { fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 500, letterSpacing: '0.05em', padding: '6px 14px', border: '1px solid var(--dj-border)', borderRadius: '3px', background: 'transparent', color: 'var(--dj-chalk-muted)', cursor: 'pointer', whiteSpace: 'nowrap' },
+  btnRefine: { fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 500, letterSpacing: '0', padding: '6px 14px', border: '1px solid var(--dj-border)', borderRadius: '3px', background: 'transparent', color: 'var(--dj-chalk-muted)', cursor: 'pointer', whiteSpace: 'nowrap' },
   structuralSection: { padding: '16px 20px', background: 'var(--dj-surface)', border: '1px solid var(--dj-border)', borderRadius: '6px', marginBottom: '16px' },
   infoText: { fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-dim)', lineHeight: 1.6, margin: 0 },
   sticky: { position: 'sticky', bottom: 0, paddingTop: '16px', paddingBottom: '24px', background: 'var(--dj-bg)', borderTop: '1px solid var(--dj-border)', display: 'flex', gap: '10px', flexWrap: 'wrap', zIndex: 2 },
-  btnPrimary: { fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', padding: '12px 24px', border: 'none', borderRadius: '4px', background: 'var(--signal)', color: '#fff', cursor: 'pointer' },
-  btnSecondary: { fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', padding: '12px 24px', border: '1px solid var(--dj-border)', borderRadius: '4px', background: 'transparent', color: 'var(--dj-chalk-dim)', cursor: 'pointer' },
+  btnPrimary: { fontFamily: 'var(--font-sans)', fontSize: '13px', fontWeight: 500, letterSpacing: '0', padding: '12px 24px', border: 'none', borderRadius: '4px', background: 'var(--signal)', color: '#fff', cursor: 'pointer' },
+  btnSecondary: { fontFamily: 'var(--font-sans)', fontSize: '13px', fontWeight: 500, letterSpacing: '0', padding: '12px 24px', border: '1px solid var(--dj-border)', borderRadius: '4px', background: 'transparent', color: 'var(--dj-chalk-dim)', cursor: 'pointer' },
 };
 
 function EcosystemDescriptionStage({ onConfirm, onBack }) {
@@ -2027,7 +2026,7 @@ function CirculationDiagram({ journeyState, allActive }) {
         stroke="var(--dj-border)" strokeWidth="1.2" strokeDasharray="6 4" />
       <text x={cx} y="28" textAnchor="middle"
         fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace"
-        fontSize="8" letterSpacing="0.12em">SOVEREIGN BOUNDARY</text>
+        fontSize="8" letterSpacing="0.12em">Sovereign boundary</text>
 
       {/* Flow paths */}
       {flows.map(f => {
@@ -2417,18 +2416,18 @@ function InfrastructureDiagramEmbed() {
         <rect x="0" y="600" width="960" height="80" fill="#0d1625" opacity="0.9"/>
 
         {/* Layer labels */}
-        <text x="14" y="76" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,76)">ACTOR EXPERIENCE</text>
-        <text x="14" y="196" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,196)">INTELLIGENCE</text>
-        <text x="14" y="316" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,316)">PROTOCOL</text>
-        <text x="14" y="436" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,436)">DATA LAYER</text>
-        <text x="14" y="556" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,556)">EXTERNAL SIGNALS</text>
-        <text x="14" y="656" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,656)">GOVERNANCE</text>
+        <text x="14" y="76" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,76)">Actor experience</text>
+        <text x="14" y="196" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,196)">Intelligence</text>
+        <text x="14" y="316" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,316)">Protocol</text>
+        <text x="14" y="436" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,436)">Data layer</text>
+        <text x="14" y="556" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,556)">External signals</text>
+        <text x="14" y="656" fill="#3a5570" fontSize="8.5" letterSpacing="1.5" textAnchor="start" transform="rotate(-90,14,656)">Governance</text>
         <line x1="30" y1="10" x2="30" y2="670" stroke="#ddd8cf" strokeWidth="0.5"/>
 
         {/* Layer 1: Application Layer */}
         <rect x="50" y="22" width="170" height="96" rx="2" fill="#111c2e" stroke="#ddd8cf" strokeWidth="1"/>
         <rect x="50" y="22" width="170" height="18" rx="2" fill="#1e3a28"/><rect x="50" y="34" width="170" height="6" fill="#1e3a28"/>
-        <text x="135" y="34" fill="#c8f0d0" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">FOUNDER JOURNEY</text>
+        <text x="135" y="34" fill="#c8f0d0" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">Founder journey</text>
         <text x="60" y="58" fill="#c2cfe0" fontSize="7.5">Personalised pathway</text>
         <text x="60" y="72" fill="#c2cfe0" fontSize="7.5">Step unlock logic</text>
         <text x="60" y="86" fill="#c2cfe0" fontSize="7.5">Matched connections</text>
@@ -2437,7 +2436,7 @@ function InfrastructureDiagramEmbed() {
 
         <rect x="240" y="22" width="170" height="96" rx="2" fill="#111c2e" stroke="#ddd8cf" strokeWidth="1"/>
         <rect x="240" y="22" width="170" height="18" rx="2" fill="#2e2a14"/><rect x="240" y="34" width="170" height="6" fill="#2e2a14"/>
-        <text x="325" y="34" fill="#f5d97a" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">ANCHOR JOURNEY</text>
+        <text x="325" y="34" fill="#f5d97a" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">Anchor journey</text>
         <text x="250" y="58" fill="#c2cfe0" fontSize="7.5">Capability scouting</text>
         <text x="250" y="72" fill="#c2cfe0" fontSize="7.5">RFI signal management</text>
         <text x="250" y="86" fill="#c2cfe0" fontSize="7.5">Supply chain visibility</text>
@@ -2446,7 +2445,7 @@ function InfrastructureDiagramEmbed() {
 
         <rect x="430" y="22" width="170" height="96" rx="2" fill="#111c2e" stroke="#ddd8cf" strokeWidth="1"/>
         <rect x="430" y="22" width="170" height="18" rx="2" fill="#162e2d"/><rect x="430" y="34" width="170" height="6" fill="#162e2d"/>
-        <text x="515" y="34" fill="#7dd3c8" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">RESEARCHER JOURNEY</text>
+        <text x="515" y="34" fill="#7dd3c8" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">Researcher journey</text>
         <text x="440" y="58" fill="#c2cfe0" fontSize="7.5">Demand signal translation</text>
         <text x="440" y="72" fill="#c2cfe0" fontSize="7.5">Commercial opportunity map</text>
         <text x="440" y="86" fill="#c2cfe0" fontSize="7.5">IP boundary controls</text>
@@ -2455,7 +2454,7 @@ function InfrastructureDiagramEmbed() {
 
         <rect x="620" y="22" width="310" height="96" rx="2" fill="#111c2e" stroke="#c8f0d0" strokeWidth="1.5"/>
         <rect x="620" y="22" width="310" height="18" rx="2" fill="#f0ece4"/><rect x="620" y="34" width="310" height="6" fill="#f0ece4"/>
-        <text x="775" y="34" fill="#1a1a1a" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">STEWARD INTERROGATION</text>
+        <text x="775" y="34" fill="#1a1a1a" fontSize="7.5" fontWeight="500" letterSpacing="0.8" textAnchor="middle">Steward interrogation</text>
         <text x="630" y="58" fill="#c2cfe0" fontSize="7.5">System health signals (4 per cluster)</text>
         <text x="630" y="72" fill="#c2cfe0" fontSize="7.5">Stall detection · Stack analysis</text>
         <text x="630" y="86" fill="#c2cfe0" fontSize="7.5">Open-ended diagnostic interrogation</text>
@@ -2464,7 +2463,7 @@ function InfrastructureDiagramEmbed() {
 
         {/* Layer 2: AI Runtime */}
         <rect x="50" y="142" width="880" height="88" rx="2" fill="#1a3a28"/>
-        <text x="490" y="163" fill="#c8f0d0" fontSize="8" fontWeight="500" letterSpacing="1.5" textAnchor="middle">AI RUNTIME</text>
+        <text x="490" y="163" fill="#c8f0d0" fontSize="8" fontWeight="500" letterSpacing="1.5" textAnchor="middle">AI runtime</text>
         <line x1="50" y1="170" x2="930" y2="170" stroke="#2a5038" strokeWidth="0.5"/>
         <text x="140" y="190" fill="#7ecf96" fontSize="7.5" textAnchor="middle">Journey Construction</text>
         <text x="280" y="190" fill="#7ecf96" fontSize="7.5" textAnchor="middle">Signal Propagation</text>
@@ -2493,7 +2492,7 @@ function InfrastructureDiagramEmbed() {
         <rect x="50" y="382" width="450" height="98" rx="2" fill="#0d1f14" stroke="#2a7a4f" strokeWidth="1.5"/>
         <rect x="50" y="382" width="450" height="20" rx="2" fill="#1e3a28"/><rect x="50" y="396" width="450" height="6" fill="#1e3a28"/>
         <text x="62" y="395" fill="#c8f0d0" fontSize="9" fontWeight="700">★</text>
-        <text x="295" y="396" fill="#c8f0d0" fontSize="8.5" fontWeight="700" letterSpacing="1.5" textAnchor="middle">SOVEREIGN ECOSYSTEM DATABASE</text>
+        <text x="295" y="396" fill="#c8f0d0" fontSize="8.5" fontWeight="700" letterSpacing="1.5" textAnchor="middle">Sovereign ecosystem database</text>
         <text x="65" y="416" fill="#c8f0d0" fontSize="7.5" fontWeight="500">Supercluster  ·  Clusters  ·  Groups  ·  Actors</text>
         <text x="65" y="430" fill="#a8c4b0" fontSize="7.5">Actor profiles  ·  Signal history  ·  Journey state  ·  Evidence base</text>
         <text x="65" y="444" fill="#a8c4b0" fontSize="7.5">Diagnostic outputs  ·  Stall records  ·  Leverage hypotheses</text>
@@ -2502,7 +2501,7 @@ function InfrastructureDiagramEmbed() {
 
         <rect x="515" y="382" width="415" height="98" rx="2" fill="#111c2e" stroke="#ddd8cf" strokeWidth="1"/>
         <rect x="515" y="382" width="415" height="16" rx="2" fill="#1e3a28"/><rect x="515" y="392" width="415" height="6" fill="#1e3a28"/>
-        <text x="722" y="393" fill="#c8f0d0" fontSize="7.5" fontWeight="500" letterSpacing="1" textAnchor="middle">AUTONOMOUS BOT NETWORK</text>
+        <text x="722" y="393" fill="#c8f0d0" fontSize="7.5" fontWeight="500" letterSpacing="1" textAnchor="middle">Autonomous bot network</text>
         {[['Evidence\nIngestion Bot',528],['Signal\nMonitoring Bot',628],['Actor\nEnrichment Bot',728],['Health\nMonitoring Bot',828]].map(([t,x])=>{
           const lines=t.split('\n'); return (
           <g key={t}><rect x={x} y="406" width="90" height="34" rx="2" fill="#0d1625" stroke="#ddd8cf" strokeWidth="0.8"/>
@@ -2727,7 +2726,7 @@ function ArchitectureSchemaSVG({ activeLayer, secondaryLayers, selectedStalls, c
                     rx="4" fill="var(--dj-bg)" stroke="var(--dj-border)" strokeWidth="0.8" />
                   <text x={botX + 8} y={startY + 12}
                     fill="var(--dj-chalk-muted)" fontFamily="'Geist Mono', monospace"
-                    fontSize="6" fontWeight="600" letterSpacing="0.1em">BOT NETWORK</text>
+                    fontSize="6" fontWeight="600" letterSpacing="0.1em">Bot network</text>
                   {layer.bots.map((c, ci) => {
                     const col = ci % botCols;
                     const row = Math.floor(ci / botCols);
@@ -3045,7 +3044,7 @@ function MobileAccordion({ journeyState, config }) {
 
         {stewardExpanded && stewardAnnotation && (
           <div style={{ marginTop: '16px', borderTop: '1px solid rgba(125,211,200,0.2)', paddingTop: '16px' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.12em', color: '#7dd3c8', marginBottom: '12px' }}>STEWARD INTERROGATION</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.02em', color: '#7dd3c8', marginBottom: '12px' }}>Steward interrogation</div>
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.65, color: '#e8edf5', marginBottom: '16px' }}>
               Today when your board asks what's working, someone compiles a report. With this configuration, you ask questions and get answers from live signals:
             </p>
@@ -3123,7 +3122,7 @@ function ArchitectureSchemaCards({ selectedStalls }) {
               )}
               {cats.map(cat => (
                 <div key={cat.label} style={{ marginBottom: '8px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--steward)', marginBottom: '4px' }}>{cat.label}</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 600, letterSpacing: '0.02em', color: 'var(--steward)', marginBottom: '4px' }}>{cat.label}</div>
                   <div style={schema.cardPills}>
                     {cat.items.map(item => (
                       <span key={item} style={schema.pill}>{item}</span>
@@ -3132,7 +3131,7 @@ function ArchitectureSchemaCards({ selectedStalls }) {
                 </div>
               ))}
               <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid var(--dj-border)' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--dj-chalk-muted)', marginBottom: '4px' }}>BOT NETWORK</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 600, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '4px' }}>Bot network</div>
                 <div style={schema.cardPills}>
                   {bots.map(b => (
                     <span key={b.id} style={schema.pill}>{b.label}</span>
@@ -3739,7 +3738,7 @@ function DigitalOSStage() {
               {/* 1. What you told us — their own ecosystem description */}
               {annotation.stewardSection.findingParagraph && (
                 <div style={{ padding: '16px', background: 'rgba(12,148,136,0.04)', border: '1px solid rgba(12,148,136,0.12)', borderRadius: '6px', marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--steward)', marginBottom: '8px' }}>YOUR ASSESSMENT</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--steward)', marginBottom: '8px' }}>Your assessment</div>
                   <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.65, color: 'var(--dj-chalk-dim)', margin: 0, fontStyle: 'italic' }}>
                     <BoldText text={annotation.stewardSection.findingParagraph} />
                   </p>
@@ -3749,7 +3748,7 @@ function DigitalOSStage() {
               {/* 2. What we found — structural diagnosis per stack */}
               {annotation.stewardSection.stackDiagnoses && annotation.stewardSection.stackDiagnoses.length > 0 && (
                 <div style={{ marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>STRUCTURAL DIAGNOSIS</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>Structural diagnosis</div>
                   {annotation.stewardSection.stackDiagnoses.map((d, i) => (
                     <p key={i} style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk)', margin: '0 0 8px' }}>
                       <BoldText text={d} />
@@ -3766,7 +3765,7 @@ function DigitalOSStage() {
               {/* 3. Where leverage sits — what would change */}
               {annotation.stewardSection.leverageSummaries && annotation.stewardSection.leverageSummaries.length > 0 && (
                 <div style={{ marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>WHERE LEVERAGE SITS</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>Where leverage sits</div>
                   {annotation.stewardSection.leverageSummaries.map((l, i) => (
                     <p key={i} style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk-dim)', margin: '0 0 8px', paddingLeft: '12px', borderLeft: '2px solid var(--steward)' }}>
                       <BoldText text={l} />
@@ -3778,7 +3777,7 @@ function DigitalOSStage() {
               {/* 4. What becomes visible — steward questions */}
               {annotation.stewardSection.stewardQuestions && annotation.stewardSection.stewardQuestions.length > 0 && (
                 <div style={{ marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>WHAT BECOMES VISIBLE</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>What becomes visible</div>
                   <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', margin: '0 0 12px', lineHeight: 1.5 }}>
                     With this infrastructure deployed, these are the questions you can ask — and get answered from live actor behaviour, not compiled reports:
                   </p>
@@ -3793,7 +3792,7 @@ function DigitalOSStage() {
               {/* 5. Recommendation — next step */}
               {annotation.stewardSection.recommendation && (
                 <div style={{ padding: '16px', background: 'rgba(42,122,79,0.04)', border: '1px solid rgba(42,122,79,0.15)', borderRadius: '6px', marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--signal)', marginBottom: '8px' }}>RECOMMENDATION</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--signal)', marginBottom: '8px' }}>Recommendation</div>
                   <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk)', margin: 0 }}>
                     <BoldText text={annotation.stewardSection.recommendation} />
                   </p>
@@ -4006,7 +4005,7 @@ function ReportModal({ phase, journeyState, onClose }) {
               Your report has opened in a new tab.
             </p>
             <a href={reportUrlRef.current || '/diagnostic-report.html'} target="_blank" rel="noopener"
-              style={{ display: 'inline-block', marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'var(--dj-teal)', color: '#fff', padding: '12px 24px', borderRadius: '3px', textDecoration: 'none' }}>
+              style={{ display: 'inline-block', marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', background: 'var(--dj-teal)', color: '#fff', padding: '12px 24px', borderRadius: '3px', textDecoration: 'none' }}>
               Open again →
             </a>
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: '11px', color: 'var(--dj-chalk-muted)', marginTop: '10px' }}>
@@ -4390,7 +4389,7 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
         {/* Linchpin identification */}
         {stacks.length > 1 && linchpinStall && linchpinCount > 1 && (
           <div style={{ padding: '12px 16px', background: 'rgba(125,211,200,0.08)', border: '1px solid rgba(125,211,200,0.2)', borderLeft: '3px solid #7dd3c8', borderRadius: '0 4px 4px 0', marginBottom: '16px' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7dd3c8', marginBottom: '6px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.02em', color: '#7dd3c8', marginBottom: '6px' }}>
               {stacks.length} configurations · 1 structural linchpin
             </div>
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-dim)', lineHeight: 1.6, margin: 0 }}>
@@ -4569,7 +4568,7 @@ function TransitionCard({ transitionType, journeyState, onContinue, onStop, onBa
         {/* Steward interrogation preview */}
         {stewardQs.length > 0 && (
           <div style={{ marginBottom: '20px', padding: '16px 18px', background: 'rgba(42,122,79,0.06)', border: '1px solid rgba(42,122,79,0.15)', borderRadius: '4px' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#2a7a4f', marginBottom: '10px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.02em', color: '#2a7a4f', marginBottom: '10px' }}>
               What the infrastructure lets you ask
             </div>
             {stewardQs.slice(0, 3).map((q, i) => (
@@ -5290,7 +5289,6 @@ const styles = {
     fontSize: '12px',
     fontWeight: 600,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     color: 'var(--dj-chalk-muted)',
   },
   placeholderHint: {
@@ -5351,7 +5349,6 @@ const styles = {
     fontSize: '11px',
     fontWeight: 500,
     letterSpacing: '0.06em',
-    textTransform: 'uppercase',
     color: 'var(--founder)',
     background: 'transparent',
     border: '1px solid rgba(217,119,6,0.25)',
@@ -5434,8 +5431,7 @@ const styles = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--founder)',
     background: 'rgba(217,119,6,0.08)',
     border: '1px solid rgba(217,119,6,0.2)',
@@ -5460,8 +5456,7 @@ const styles = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '4px',
   },
@@ -5497,8 +5492,7 @@ const s1 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
   },
   healthStatus: {
@@ -5548,7 +5542,7 @@ const s1 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
+    letterSpacing: '0.02em',
   },
   cardCheck: {
     width: '18px',
@@ -5610,7 +5604,6 @@ const s1 = {
     fontSize: '11px',
     fontWeight: 600,
     letterSpacing: '0.06em',
-    textTransform: 'uppercase',
     color: 'var(--founder)',
   },
 
@@ -5710,7 +5703,7 @@ const s2 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
   },
   cardName: {
@@ -5751,8 +5744,7 @@ const s2 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '4px',
   },
@@ -5768,8 +5760,7 @@ const s2 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '4px',
   },
@@ -5816,7 +5807,6 @@ const s2 = {
     fontSize: '11px',
     fontWeight: 600,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     color: 'var(--dj-chalk)',
     marginBottom: '4px',
   },
@@ -5879,8 +5869,7 @@ const s3 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '8px',
     display: 'block',
@@ -5973,8 +5962,7 @@ const s3 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     background: 'rgba(12,148,136,0.08)',
     border: '1px solid rgba(12,148,136,0.2)',
@@ -6020,8 +6008,7 @@ const s3 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '16px',
   },
@@ -6254,8 +6241,7 @@ const arch = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     marginBottom: '6px',
     transition: 'color 0.4s',
   },
@@ -6307,8 +6293,7 @@ const arch = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '6px',
   },
@@ -6570,8 +6555,7 @@ const schema = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '8px',
   },
@@ -6666,7 +6650,7 @@ const schema = {
     fontFamily: "'Geist Mono', monospace",
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '16px',
   },
@@ -6745,8 +6729,7 @@ const s0 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '6px',
   },
@@ -6814,7 +6797,6 @@ const sticky = {
     fontSize: '11px',
     fontWeight: 700,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     textDecoration: 'none',
     padding: '0 1.4rem',
     height: '100%',
@@ -6843,7 +6825,6 @@ const sticky = {
     fontSize: '11px',
     fontWeight: 700,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     textDecoration: 'none',
     padding: '0 1.4rem',
     height: '100%',
@@ -6862,7 +6843,6 @@ const sticky = {
     fontSize: '10px',
     fontWeight: 600,
     letterSpacing: '0.06em',
-    textTransform: 'uppercase',
     padding: '0 1rem',
     height: '100%',
     display: 'flex',
@@ -6917,8 +6897,7 @@ const sticky = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '4px',
   },
@@ -6939,7 +6918,6 @@ const sticky = {
     fontSize: '11px',
     fontWeight: 700,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     color: '#fff',
     background: 'var(--signal)',
     border: 'none',

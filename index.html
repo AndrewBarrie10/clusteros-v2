@@ -39,6 +39,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 
 <link rel="stylesheet" href="/site.css">
+<!-- HOMEPAGE DE-AI PILOT: scoped overrides so this page reads less "AI-template"
+     without changing the other 30 pages. Eyebrows -> serif italic; labels/tags ->
+     sans; uppercase + wide tracking removed. Once approved, these move into
+     site.css (dropping !important) and this block is deleted. -->
+<style>
+  /* Eyebrows: editorial serif italic instead of spaced-out code caps */
+  .hero-eyebrow, .bridge-eyebrow, .pipeline-eyebrow,
+  .dir-intro-eyebrow, .dir-card-eyebrow {
+    font-family: var(--font-serif) !important;
+    font-style: italic !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    font-weight: 400 !important;
+  }
+  /* Labels, tags and badges: plain sans, sentence case, no shouting */
+  .pipeline-step-tag, .pipeline-note-label, .panel-tag, .sub-fork-label,
+  .adaptive-cta-label, .dash-section-label, .cp-section-label,
+  .dash-metric-label, .dash-step-badge, .dash-role-badge,
+  .mcp-label, .db-label, .feed-tag, .conn-badge {
+    font-family: var(--font-sans) !important;
+    text-transform: none !important;
+    letter-spacing: 0.01em !important;
+  }
+</style>
 <script defer src="/_vercel/insights/script.js"></script>
 <!-- Mixpanel tracking -->
 <script type="text/javascript">

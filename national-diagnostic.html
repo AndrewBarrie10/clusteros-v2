@@ -47,7 +47,7 @@ body {
 a { color:var(--green); text-decoration:none; }
 a:hover { color:var(--green-dim); }
 .serif { font-family:var(--serif); font-weight:400; letter-spacing:-0.01em; }
-.mono { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; }
+.mono { font-family: var(--font-sans, system-ui, sans-serif); font-size:10px; font-weight:600; letter-spacing: 0.02em; }
 
 /* ── Side nav ─────────────────────────────────────────────────────────── */
 
@@ -68,12 +68,11 @@ body { padding-top:56px; }
 .nav-brand { display:flex; flex-direction:column; gap:8px; padding-bottom:20px; border-bottom:1px solid var(--border); }
 .logo { font-family:var(--serif); font-size:18px; color:var(--ink); }
 .logo span { color:var(--green); }
-.nav-doctype { font-family:var(--mono); font-size:8.5px; font-weight:700; letter-spacing:0.16em;
-               text-transform:uppercase; color:var(--ink-muted); line-height:1.4; }
+.nav-doctype { font-family: var(--font-sans, system-ui, sans-serif); font-size:8.5px; font-weight:700; letter-spacing: 0.02em; color:var(--ink-muted); line-height:1.4; }
 .nav-items { display:flex; flex-direction:column; gap:4px; }
 .nav-items a {
-  font-family:var(--mono); font-size:10px; font-weight:600;
-  letter-spacing:0.08em; text-transform:uppercase;
+  font-family: var(--font-sans, system-ui, sans-serif); font-size:10px; font-weight:600;
+  letter-spacing: 0.02em;
   color:var(--ink-muted); padding:8px 12px; border-left:2px solid transparent;
   transition:color .2s, border-color .2s, background .2s;
 }
@@ -89,8 +88,8 @@ body { padding-top:56px; }
 .sec-inner { max-width:var(--max); margin:0 auto; }
 .sec-inner.narrow { max-width:680px; }
 .kicker {
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  letter-spacing:0.18em; text-transform:uppercase; color:var(--green);
+  font-family: var(--font-serif, Georgia, serif); font-style: italic; font-size:10px; font-weight:700;
+  letter-spacing: 0.02em; color:var(--green);
   margin-bottom:16px; display:inline-block; padding-bottom:6px;
   border-bottom:1px solid var(--green);
 }
@@ -137,8 +136,8 @@ strong { font-weight:600; color:var(--ink); }
   font-weight:400; letter-spacing:-0.03em;
 }
 .stack-pct span { font-size:30px; color:var(--green-dim); margin-left:2px; }
-.stack-pct-label { font-family:var(--mono); font-size:9px; font-weight:700;
-                   letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-muted);
+.stack-pct-label { font-family: var(--font-sans, system-ui, sans-serif); font-size:9px; font-weight:700;
+                   letter-spacing: 0.02em; color:var(--ink-muted);
                    margin-top:6px; margin-bottom:18px; }
 .stack-name { font-size:20px; line-height:1.2; color:var(--ink); margin-bottom:10px; }
 .stack-components { font-size:13px; line-height:1.5; color:var(--ink-muted); }
@@ -152,8 +151,8 @@ strong { font-weight:600; color:var(--ink); }
 .evidence-differentiator p { font-size:15px; line-height:1.7; color:var(--ink-dim); max-width:72ch; }
 
 .evidence-chain { margin:48px 0 0; }
-.chain-caption { font-family:var(--mono); font-size:10px; font-weight:700;
-                 letter-spacing:0.14em; text-transform:uppercase; color:var(--green);
+.chain-caption { font-family: var(--font-sans, system-ui, sans-serif); font-size:10px; font-weight:700;
+                 letter-spacing: 0.02em; color:var(--green);
                  margin-bottom:14px; }
 .evidence-chain svg { width:100%; height:auto; max-width:880px; display:block; }
 .chain-note { font-size:13px; color:var(--ink-muted); line-height:1.55;
@@ -250,8 +249,8 @@ i.seg-ind    { background:var(--border-2); }
 .leverage-table th, .leverage-table td { padding:14px 16px; text-align:left;
                                           vertical-align:top;
                                           border-bottom:1px solid var(--border); }
-.leverage-table th { font-family:var(--mono); font-size:9px; font-weight:700;
-                     letter-spacing:0.12em; text-transform:uppercase;
+.leverage-table th { font-family: var(--font-sans, system-ui, sans-serif); font-size:9px; font-weight:700;
+                     letter-spacing: 0.02em;
                      color:var(--green); background:var(--page); }
 .leverage-table th.lt-count-h, .leverage-table .lt-count { text-align:right; width:80px; }
 .lt-name { font-size:15px; color:var(--ink); white-space:nowrap; padding-right:16px; }
@@ -288,8 +287,8 @@ i.seg-ind    { background:var(--border-2); }
 .cta-primary { border-top:4px solid var(--green); background:var(--signal); }
 .cta-secondary { border-top:4px solid var(--ink); }
 .cta:hover { transform:translateY(-2px); color:var(--ink); }
-.cta-tag { font-family:var(--mono); font-size:9px; color:var(--green); font-weight:700;
-           letter-spacing:0.14em; text-transform:uppercase; }
+.cta-tag { font-family: var(--font-sans, system-ui, sans-serif); font-size:9px; color:var(--green); font-weight:700;
+           letter-spacing: 0.02em; }
 .cta h3 { font-size:24px; line-height:1.2; color:var(--ink); }
 .cta p { font-size:13px; line-height:1.6; color:var(--ink-dim); margin:0; }
 .cta-arrow { margin-top:auto; font-size:9px; color:var(--green); font-weight:700; }
@@ -305,8 +304,7 @@ details.sec-collapsible > summary::marker { content: ''; }
   details.sec-collapsible > summary {
     cursor: pointer;
     display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--font-mono); font-size: 11px;
-    text-transform: uppercase; letter-spacing: 0.1em;
+    font-family: var(--font-sans, system-ui, sans-serif); font-size: 11px; letter-spacing: 0.02em;
     color: var(--ink-dim); background: var(--surface);
     border: 1px solid var(--border); border-radius: 2px;
     padding: 9px 14px; margin: 12px 0 18px;
@@ -324,8 +322,7 @@ details.sec-collapsible > summary::marker { content: ''; }
     position: fixed; right: 14px; bottom: 18px; z-index: 70;
     padding: 10px 14px; border-radius: 999px;
     background: var(--green); color: #fff;
-    font-family: var(--font-mono); font-size: 11px;
-    text-transform: uppercase; letter-spacing: 0.08em;
+    font-family: var(--font-sans, system-ui, sans-serif); font-size: 11px; letter-spacing: 0.02em;
     text-decoration: none;
     box-shadow: 0 4px 18px rgba(0,0,0,0.18);
     opacity: 0; transform: translateY(6px);

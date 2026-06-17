@@ -921,7 +921,7 @@ const ecoStyles = {
   heading: { fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 400, color: 'var(--dj-chalk)', marginBottom: '8px', lineHeight: 1.3 },
   sub: { fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', marginBottom: '24px', lineHeight: 1.6 },
   section: { marginBottom: '24px' },
-  sectionLabel: { display: 'block', fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.02em', marginBottom: '4px' },
+  sectionLabel: { display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '13px', fontWeight: 400, letterSpacing: '0', color: 'var(--dj-chalk-muted)', marginBottom: '4px' },
   sectionHint: { display: 'block', fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'var(--dj-chalk-muted)', marginBottom: '8px' },
   editArea: { width: '100%', minHeight: '140px', padding: '14px 16px', fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--dj-chalk-dim)', lineHeight: 1.7, background: 'var(--dj-surface)', border: '1px solid var(--dj-border)', borderRadius: '6px', resize: 'vertical', outline: 'none', boxSizing: 'border-box' },
   refineRow: { display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', marginTop: '6px' },
@@ -3044,7 +3044,7 @@ function MobileAccordion({ journeyState, config }) {
 
         {stewardExpanded && stewardAnnotation && (
           <div style={{ marginTop: '16px', borderTop: '1px solid rgba(125,211,200,0.2)', paddingTop: '16px' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.02em', color: '#7dd3c8', marginBottom: '12px' }}>Steward interrogation</div>
+            <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '12px', fontWeight: 600, letterSpacing: '0.02em', color: '#7dd3c8', marginBottom: '12px' }}>Steward interrogation</div>
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.65, color: '#e8edf5', marginBottom: '16px' }}>
               Today when your board asks what's working, someone compiles a report. With this configuration, you ask questions and get answers from live signals:
             </p>
@@ -3131,7 +3131,7 @@ function ArchitectureSchemaCards({ selectedStalls }) {
                 </div>
               ))}
               <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid var(--dj-border)' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 600, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '4px' }}>Bot network</div>
+                <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '12px', fontWeight: 600, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '4px' }}>Bot network</div>
                 <div style={schema.cardPills}>
                   {bots.map(b => (
                     <span key={b.id} style={schema.pill}>{b.label}</span>
@@ -3738,7 +3738,7 @@ function DigitalOSStage() {
               {/* 1. What you told us — their own ecosystem description */}
               {annotation.stewardSection.findingParagraph && (
                 <div style={{ padding: '16px', background: 'rgba(12,148,136,0.04)', border: '1px solid rgba(12,148,136,0.12)', borderRadius: '6px', marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--steward)', marginBottom: '8px' }}>Your assessment</div>
+                  <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '12px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--steward)', marginBottom: '8px' }}>Your assessment</div>
                   <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.65, color: 'var(--dj-chalk-dim)', margin: 0, fontStyle: 'italic' }}>
                     <BoldText text={annotation.stewardSection.findingParagraph} />
                   </p>
@@ -3748,7 +3748,7 @@ function DigitalOSStage() {
               {/* 2. What we found — structural diagnosis per stack */}
               {annotation.stewardSection.stackDiagnoses && annotation.stewardSection.stackDiagnoses.length > 0 && (
                 <div style={{ marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>Structural diagnosis</div>
+                  <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '12px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>Structural diagnosis</div>
                   {annotation.stewardSection.stackDiagnoses.map((d, i) => (
                     <p key={i} style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk)', margin: '0 0 8px' }}>
                       <BoldText text={d} />
@@ -3765,7 +3765,7 @@ function DigitalOSStage() {
               {/* 3. Where leverage sits — what would change */}
               {annotation.stewardSection.leverageSummaries && annotation.stewardSection.leverageSummaries.length > 0 && (
                 <div style={{ marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>Where leverage sits</div>
+                  <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '12px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>Where leverage sits</div>
                   {annotation.stewardSection.leverageSummaries.map((l, i) => (
                     <p key={i} style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk-dim)', margin: '0 0 8px', paddingLeft: '12px', borderLeft: '2px solid var(--steward)' }}>
                       <BoldText text={l} />
@@ -3777,7 +3777,7 @@ function DigitalOSStage() {
               {/* 4. What becomes visible — steward questions */}
               {annotation.stewardSection.stewardQuestions && annotation.stewardSection.stewardQuestions.length > 0 && (
                 <div style={{ marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>What becomes visible</div>
+                  <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '12px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--dj-chalk-muted)', marginBottom: '10px' }}>What becomes visible</div>
                   <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--dj-chalk-muted)', margin: '0 0 12px', lineHeight: 1.5 }}>
                     With this infrastructure deployed, these are the questions you can ask — and get answered from live actor behaviour, not compiled reports:
                   </p>
@@ -3792,7 +3792,7 @@ function DigitalOSStage() {
               {/* 5. Recommendation — next step */}
               {annotation.stewardSection.recommendation && (
                 <div style={{ padding: '16px', background: 'rgba(42,122,79,0.04)', border: '1px solid rgba(42,122,79,0.15)', borderRadius: '6px', marginBottom: '20px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--signal)', marginBottom: '8px' }}>Recommendation</div>
+                  <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '12px', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--signal)', marginBottom: '8px' }}>Recommendation</div>
                   <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.7, color: 'var(--dj-chalk)', margin: 0 }}>
                     <BoldText text={annotation.stewardSection.recommendation} />
                   </p>

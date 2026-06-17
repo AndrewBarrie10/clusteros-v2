@@ -1012,8 +1012,7 @@ function StepIndicator({
         fontFamily: 'var(--font-mono)',
         fontSize: '10px',
         fontWeight: 600,
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
+        letterSpacing: '0.02em',
         color: isActive ? 'var(--dj-chalk)' : isCompleted ? 'var(--steward)' : 'var(--dj-chalk-muted)',
         marginBottom: '2px'
       }
@@ -1057,8 +1056,7 @@ function ConfidenceBadge({
       fontFamily: 'var(--font-mono)',
       fontSize: '9px',
       fontWeight: 600,
-      letterSpacing: '0.1em',
-      textTransform: 'uppercase',
+      letterSpacing: '0.02em',
       color,
       background: bg,
       border: `1px solid ${border}`,
@@ -1200,8 +1198,7 @@ const ecoStyles = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 700,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     marginBottom: '4px'
   },
   sectionHint: {
@@ -1240,10 +1237,10 @@ const ecoStyles = {
     flex: 1
   },
   btnRefine: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '10px',
+    fontFamily: 'var(--font-sans)',
+    fontSize: '12px',
     fontWeight: 500,
-    letterSpacing: '0.05em',
+    letterSpacing: '0',
     padding: '6px 14px',
     border: '1px solid var(--dj-border)',
     borderRadius: '3px',
@@ -1279,10 +1276,10 @@ const ecoStyles = {
     zIndex: 2
   },
   btnPrimary: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '11px',
-    fontWeight: 600,
-    letterSpacing: '0.05em',
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    fontWeight: 500,
+    letterSpacing: '0',
     padding: '12px 24px',
     border: 'none',
     borderRadius: '4px',
@@ -1291,10 +1288,10 @@ const ecoStyles = {
     cursor: 'pointer'
   },
   btnSecondary: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '11px',
-    fontWeight: 600,
-    letterSpacing: '0.05em',
+    fontFamily: 'var(--font-sans)',
+    fontSize: '13px',
+    fontWeight: 500,
+    letterSpacing: '0',
     padding: '12px 24px',
     border: '1px solid var(--dj-border)',
     borderRadius: '4px',
@@ -2538,7 +2535,7 @@ function CirculationDiagram({
     fontFamily: "'Geist Mono', monospace",
     fontSize: "8",
     letterSpacing: "0.12em"
-  }, "SOVEREIGN BOUNDARY"), flows.map(f => {
+  }, "Sovereign boundary"), flows.map(f => {
     const active = activeFlows.has(f.id);
     return React.createElement("g", {
       key: f.id,
@@ -3113,7 +3110,7 @@ function InfrastructureDiagramEmbed() {
     letterSpacing: "1.5",
     textAnchor: "start",
     transform: "rotate(-90,14,76)"
-  }, "ACTOR EXPERIENCE"), React.createElement("text", {
+  }, "Actor experience"), React.createElement("text", {
     x: "14",
     y: "196",
     fill: "#3a5570",
@@ -3121,7 +3118,7 @@ function InfrastructureDiagramEmbed() {
     letterSpacing: "1.5",
     textAnchor: "start",
     transform: "rotate(-90,14,196)"
-  }, "INTELLIGENCE"), React.createElement("text", {
+  }, "Intelligence"), React.createElement("text", {
     x: "14",
     y: "316",
     fill: "#3a5570",
@@ -3129,7 +3126,7 @@ function InfrastructureDiagramEmbed() {
     letterSpacing: "1.5",
     textAnchor: "start",
     transform: "rotate(-90,14,316)"
-  }, "PROTOCOL"), React.createElement("text", {
+  }, "Protocol"), React.createElement("text", {
     x: "14",
     y: "436",
     fill: "#3a5570",
@@ -3137,7 +3134,7 @@ function InfrastructureDiagramEmbed() {
     letterSpacing: "1.5",
     textAnchor: "start",
     transform: "rotate(-90,14,436)"
-  }, "DATA LAYER"), React.createElement("text", {
+  }, "Data layer"), React.createElement("text", {
     x: "14",
     y: "556",
     fill: "#3a5570",
@@ -3145,7 +3142,7 @@ function InfrastructureDiagramEmbed() {
     letterSpacing: "1.5",
     textAnchor: "start",
     transform: "rotate(-90,14,556)"
-  }, "EXTERNAL SIGNALS"), React.createElement("text", {
+  }, "External signals"), React.createElement("text", {
     x: "14",
     y: "656",
     fill: "#3a5570",
@@ -3153,7 +3150,7 @@ function InfrastructureDiagramEmbed() {
     letterSpacing: "1.5",
     textAnchor: "start",
     transform: "rotate(-90,14,656)"
-  }, "GOVERNANCE"), React.createElement("line", {
+  }, "Governance"), React.createElement("line", {
     x1: "30",
     y1: "10",
     x2: "30",
@@ -3190,7 +3187,7 @@ function InfrastructureDiagramEmbed() {
     fontWeight: "500",
     letterSpacing: "0.8",
     textAnchor: "middle"
-  }, "FOUNDER JOURNEY"), React.createElement("text", {
+  }, "Founder journey"), React.createElement("text", {
     x: "60",
     y: "58",
     fill: "#c2cfe0",
@@ -3246,7 +3243,7 @@ function InfrastructureDiagramEmbed() {
     fontWeight: "500",
     letterSpacing: "0.8",
     textAnchor: "middle"
-  }, "ANCHOR JOURNEY"), React.createElement("text", {
+  }, "Anchor journey"), React.createElement("text", {
     x: "250",
     y: "58",
     fill: "#c2cfe0",
@@ -3302,7 +3299,7 @@ function InfrastructureDiagramEmbed() {
     fontWeight: "500",
     letterSpacing: "0.8",
     textAnchor: "middle"
-  }, "RESEARCHER JOURNEY"), React.createElement("text", {
+  }, "Researcher journey"), React.createElement("text", {
     x: "440",
     y: "58",
     fill: "#c2cfe0",
@@ -3358,7 +3355,7 @@ function InfrastructureDiagramEmbed() {
     fontWeight: "500",
     letterSpacing: "0.8",
     textAnchor: "middle"
-  }, "STEWARD INTERROGATION"), React.createElement("text", {
+  }, "Steward interrogation"), React.createElement("text", {
     x: "630",
     y: "58",
     fill: "#c2cfe0",
@@ -3399,7 +3396,7 @@ function InfrastructureDiagramEmbed() {
     fontWeight: "500",
     letterSpacing: "1.5",
     textAnchor: "middle"
-  }, "AI RUNTIME"), React.createElement("line", {
+  }, "AI runtime"), React.createElement("line", {
     x1: "50",
     y1: "170",
     x2: "930",
@@ -3566,7 +3563,7 @@ function InfrastructureDiagramEmbed() {
     fontWeight: "700",
     letterSpacing: "1.5",
     textAnchor: "middle"
-  }, "SOVEREIGN ECOSYSTEM DATABASE"), React.createElement("text", {
+  }, "Sovereign ecosystem database"), React.createElement("text", {
     x: "65",
     y: "416",
     fill: "#c8f0d0",
@@ -3622,7 +3619,7 @@ function InfrastructureDiagramEmbed() {
     fontWeight: "500",
     letterSpacing: "1",
     textAnchor: "middle"
-  }, "AUTONOMOUS BOT NETWORK"), [['Evidence\nIngestion Bot', 528], ['Signal\nMonitoring Bot', 628], ['Actor\nEnrichment Bot', 728], ['Health\nMonitoring Bot', 828]].map(([t, x]) => {
+  }, "Autonomous bot network"), [['Evidence\nIngestion Bot', 528], ['Signal\nMonitoring Bot', 628], ['Actor\nEnrichment Bot', 728], ['Health\nMonitoring Bot', 828]].map(([t, x]) => {
     const lines = t.split('\n');
     return React.createElement("g", {
       key: t
@@ -4136,7 +4133,7 @@ function ArchitectureSchemaSVG({
         fontSize: "6",
         fontWeight: "600",
         letterSpacing: "0.1em"
-      }, "BOT NETWORK"), layer.bots.map((c, ci) => {
+      }, "Bot network"), layer.bots.map((c, ci) => {
         const col = ci % botCols;
         const row = Math.floor(ci / botCols);
         const bx = botX + 6 + col * botCW;
@@ -4685,11 +4682,11 @@ function MobileAccordion({
       fontFamily: 'var(--font-mono)',
       fontSize: '9px',
       fontWeight: 600,
-      letterSpacing: '0.12em',
+      letterSpacing: '0.02em',
       color: '#7dd3c8',
       marginBottom: '12px'
     }
-  }, "STEWARD INTERROGATION"), React.createElement("p", {
+  }, "Steward interrogation"), React.createElement("p", {
     style: {
       fontFamily: 'var(--font-sans)',
       fontSize: '13px',
@@ -4878,7 +4875,7 @@ function ArchitectureSchemaCards({
           fontFamily: 'var(--font-mono)',
           fontSize: '8px',
           fontWeight: 600,
-          letterSpacing: '0.1em',
+          letterSpacing: '0.02em',
           color: 'var(--steward)',
           marginBottom: '4px'
         }
@@ -4898,11 +4895,11 @@ function ArchitectureSchemaCards({
           fontFamily: 'var(--font-mono)',
           fontSize: '8px',
           fontWeight: 600,
-          letterSpacing: '0.1em',
+          letterSpacing: '0.02em',
           color: 'var(--dj-chalk-muted)',
           marginBottom: '4px'
         }
-      }, "BOT NETWORK"), React.createElement("div", {
+      }, "Bot network"), React.createElement("div", {
         style: schema.cardPills
       }, bots.map(b => React.createElement("span", {
         key: b.id,
@@ -5640,11 +5637,11 @@ function DigitalOSStage() {
         fontFamily: 'var(--font-mono)',
         fontSize: '8px',
         fontWeight: 700,
-        letterSpacing: '0.12em',
+        letterSpacing: '0.02em',
         color: 'var(--steward)',
         marginBottom: '8px'
       }
-    }, "YOUR ASSESSMENT"), React.createElement("p", {
+    }, "Your assessment"), React.createElement("p", {
       style: {
         fontFamily: 'var(--font-sans)',
         fontSize: '13px',
@@ -5664,11 +5661,11 @@ function DigitalOSStage() {
         fontFamily: 'var(--font-mono)',
         fontSize: '8px',
         fontWeight: 700,
-        letterSpacing: '0.12em',
+        letterSpacing: '0.02em',
         color: 'var(--dj-chalk-muted)',
         marginBottom: '10px'
       }
-    }, "STRUCTURAL DIAGNOSIS"), annotation.stewardSection.stackDiagnoses.map((d, i) => React.createElement("p", {
+    }, "Structural diagnosis"), annotation.stewardSection.stackDiagnoses.map((d, i) => React.createElement("p", {
       key: i,
       style: {
         fontFamily: 'var(--font-sans)',
@@ -5697,11 +5694,11 @@ function DigitalOSStage() {
         fontFamily: 'var(--font-mono)',
         fontSize: '8px',
         fontWeight: 700,
-        letterSpacing: '0.12em',
+        letterSpacing: '0.02em',
         color: 'var(--dj-chalk-muted)',
         marginBottom: '10px'
       }
-    }, "WHERE LEVERAGE SITS"), annotation.stewardSection.leverageSummaries.map((l, i) => React.createElement("p", {
+    }, "Where leverage sits"), annotation.stewardSection.leverageSummaries.map((l, i) => React.createElement("p", {
       key: i,
       style: {
         fontFamily: 'var(--font-sans)',
@@ -5723,11 +5720,11 @@ function DigitalOSStage() {
         fontFamily: 'var(--font-mono)',
         fontSize: '8px',
         fontWeight: 700,
-        letterSpacing: '0.12em',
+        letterSpacing: '0.02em',
         color: 'var(--dj-chalk-muted)',
         marginBottom: '10px'
       }
-    }, "WHAT BECOMES VISIBLE"), React.createElement("p", {
+    }, "What becomes visible"), React.createElement("p", {
       style: {
         fontFamily: 'var(--font-sans)',
         fontSize: '13px',
@@ -5763,11 +5760,11 @@ function DigitalOSStage() {
         fontFamily: 'var(--font-mono)',
         fontSize: '8px',
         fontWeight: 700,
-        letterSpacing: '0.12em',
+        letterSpacing: '0.02em',
         color: 'var(--signal)',
         marginBottom: '8px'
       }
-    }, "RECOMMENDATION"), React.createElement("p", {
+    }, "Recommendation"), React.createElement("p", {
       style: {
         fontFamily: 'var(--font-sans)',
         fontSize: '14px',
@@ -6054,7 +6051,6 @@ function ReportModal({
       fontSize: '11px',
       fontWeight: 700,
       letterSpacing: '0.08em',
-      textTransform: 'uppercase',
       background: 'var(--dj-teal)',
       color: '#fff',
       padding: '12px 24px',
@@ -6638,8 +6634,7 @@ function TransitionCard({
         fontFamily: 'var(--font-mono)',
         fontSize: '9px',
         fontWeight: 700,
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
+        letterSpacing: '0.02em',
         color: '#7dd3c8',
         marginBottom: '6px'
       }
@@ -6956,8 +6951,7 @@ function TransitionCard({
         fontFamily: 'var(--font-mono)',
         fontSize: '9px',
         fontWeight: 700,
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
+        letterSpacing: '0.02em',
         color: '#2a7a4f',
         marginBottom: '10px'
       }
@@ -7812,7 +7806,6 @@ const styles = {
     fontSize: '12px',
     fontWeight: 600,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     color: 'var(--dj-chalk-muted)'
   },
   placeholderHint: {
@@ -7881,7 +7874,6 @@ const styles = {
     fontSize: '11px',
     fontWeight: 500,
     letterSpacing: '0.06em',
-    textTransform: 'uppercase',
     color: 'var(--founder)',
     background: 'transparent',
     border: '1px solid rgba(217,119,6,0.25)',
@@ -7960,8 +7952,7 @@ const styles = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--founder)',
     background: 'rgba(217,119,6,0.08)',
     border: '1px solid rgba(217,119,6,0.2)',
@@ -7986,8 +7977,7 @@ const styles = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '4px'
   },
@@ -8019,8 +8009,7 @@ const s1 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)'
   },
   healthStatus: {
@@ -8066,7 +8055,7 @@ const s1 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em'
+    letterSpacing: '0.02em'
   },
   cardCheck: {
     width: '18px',
@@ -8124,7 +8113,6 @@ const s1 = {
     fontSize: '11px',
     fontWeight: 600,
     letterSpacing: '0.06em',
-    textTransform: 'uppercase',
     color: 'var(--founder)'
   },
   stackCard: {
@@ -8215,7 +8203,7 @@ const s2 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)'
   },
   cardName: {
@@ -8254,8 +8242,7 @@ const s2 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '4px'
   },
@@ -8271,8 +8258,7 @@ const s2 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '4px'
   },
@@ -8315,7 +8301,6 @@ const s2 = {
     fontSize: '11px',
     fontWeight: 600,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     color: 'var(--dj-chalk)',
     marginBottom: '4px'
   },
@@ -8374,8 +8359,7 @@ const s3 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '8px',
     display: 'block'
@@ -8460,8 +8444,7 @@ const s3 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     background: 'rgba(12,148,136,0.08)',
     border: '1px solid rgba(12,148,136,0.2)',
@@ -8505,8 +8488,7 @@ const s3 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '10px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '16px'
   },
@@ -8722,8 +8704,7 @@ const arch = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     marginBottom: '6px',
     transition: 'color 0.4s'
   },
@@ -8772,8 +8753,7 @@ const arch = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '6px'
   },
@@ -9034,8 +9014,7 @@ const schema = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '8px'
   },
@@ -9126,7 +9105,7 @@ const schema = {
     fontFamily: "'Geist Mono', monospace",
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '16px'
   },
@@ -9203,8 +9182,7 @@ const s0 = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--steward)',
     marginBottom: '6px'
   },
@@ -9270,7 +9248,6 @@ const sticky = {
     fontSize: '11px',
     fontWeight: 700,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     textDecoration: 'none',
     padding: '0 1.4rem',
     height: '100%',
@@ -9299,7 +9276,6 @@ const sticky = {
     fontSize: '11px',
     fontWeight: 700,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     textDecoration: 'none',
     padding: '0 1.4rem',
     height: '100%',
@@ -9318,7 +9294,6 @@ const sticky = {
     fontSize: '10px',
     fontWeight: 600,
     letterSpacing: '0.06em',
-    textTransform: 'uppercase',
     padding: '0 1rem',
     height: '100%',
     display: 'flex',
@@ -9371,8 +9346,7 @@ const sticky = {
     fontFamily: 'var(--font-mono)',
     fontSize: '9px',
     fontWeight: 600,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
+    letterSpacing: '0.02em',
     color: 'var(--dj-chalk-muted)',
     marginBottom: '4px'
   },
@@ -9393,7 +9367,6 @@ const sticky = {
     fontSize: '11px',
     fontWeight: 700,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase',
     color: '#fff',
     background: 'var(--signal)',
     border: 'none',

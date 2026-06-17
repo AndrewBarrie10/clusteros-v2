@@ -22,22 +22,22 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 .screen-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
 .screen-logo{font-family:var(--serif);font-size:16px;color:var(--ink);text-decoration:none}
 .screen-logo span{font-family:var(--mono);font-size:12px;color:var(--green);font-weight:700}
-.btn-print{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:var(--green);color:#fff;border:none;padding:10px 20px;border-radius:3px;cursor:pointer}
+.btn-print{font-family: var(--font-sans, system-ui, sans-serif);font-size:11px;font-weight:700;letter-spacing: 0.02em;background:var(--green);color:#fff;border:none;padding:10px 20px;border-radius:3px;cursor:pointer}
 .document{background:#fff;box-shadow:0 4px 40px rgba(0,0,0,0.12);padding:64px 72px}
 .doc-header{display:grid;grid-template-columns:1fr auto;align-items:start;gap:32px;padding-bottom:32px;border-bottom:2px solid var(--ink);margin-bottom:40px}
 .doc-logo{font-family:var(--serif);font-size:22px;color:var(--ink)}
 .doc-logo span{font-family:var(--mono);font-size:16px;color:var(--green);font-weight:700}
-.doc-type{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-muted);margin-top:6px}
+.doc-type{font-family: var(--font-sans, system-ui, sans-serif);font-size:9px;font-weight:700;letter-spacing: 0.02em;color:var(--ink-muted);margin-top:6px}
 .doc-meta{text-align:right}
 .doc-meta-date{font-family:var(--mono);font-size:10px;color:var(--ink-muted);margin-bottom:4px}
 .doc-section{margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--border)}
 .doc-section:last-of-type{border-bottom:none}
-.doc-section-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.doc-section-label{font-family: var(--font-sans, system-ui, sans-serif);font-size:9px;font-weight:700;letter-spacing: 0.02em;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .doc-section-num{background:var(--green);color:#fff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
 .doc-section-heading{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:400;margin-bottom:14px;line-height:1.2}
 .doc-section-heading em{font-style:italic;color:var(--green)}
 .doc-body{font-size:13px;color:var(--ink-dim);line-height:1.72;margin-bottom:20px;font-weight:300}
-.doc-tag{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border-2);border-radius:2px;color:var(--ink-muted);display:inline-block}
+.doc-tag{font-family: var(--font-sans, system-ui, sans-serif);font-size:9px;font-weight:700;letter-spacing: 0.02em;padding:4px 10px;border:1px solid var(--border-2);border-radius:2px;color:var(--ink-muted);display:inline-block}
 .config-name{font-family:var(--serif);font-size:28px;color:var(--ink);margin-bottom:8px}
 .tech-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .arch-schema{display:flex;flex-direction:column;gap:2px;margin-bottom:16px;border:1px solid var(--border);border-radius:3px;overflow:hidden}
@@ -50,19 +50,19 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
 .layer-card-head{padding:14px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .layer-card-num{font-family:var(--mono);font-size:9px;font-weight:700;opacity:0.6}
 .layer-card-name{font-family:var(--serif);font-size:16px;font-weight:400;flex:1}
-.layer-card-role{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px;opacity:0.8}
-.layer-card-tier{font-family:var(--mono);font-size:7px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 6px;border-radius:2px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
+.layer-card-role{font-family: var(--font-sans, system-ui, sans-serif);font-size:8px;font-weight:700;letter-spacing: 0.02em;padding:3px 8px;border-radius:2px;opacity:0.8}
+.layer-card-tier{font-family: var(--font-sans, system-ui, sans-serif);font-size:7px;font-weight:700;letter-spacing: 0.02em;padding:2px 6px;border-radius:2px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
 .layer-card-stalls{padding:10px 18px;border-top:1px solid rgba(0,0,0,0.06);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.layer-stall-pill{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.06em;padding:2px 8px;border-radius:8px;background:currentColor;color:inherit}
+.layer-stall-pill{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing: 0.02em;padding:2px 8px;border-radius:8px;background:currentColor;color:inherit}
 .layer-stall-pill{background:rgba(0,0,0,0.05)}
 .layer-stall-connector{font-size:10px;color:var(--ink-dim);font-weight:300}
 .layer-card-body{padding:16px 18px;background:#fff;font-size:12px;color:var(--ink-dim);line-height:1.7;font-weight:300;white-space:pre-line}
 .tech-rec{padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin:8px 0 16px}
-.tech-rec-label{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.tech-rec-label{font-family: var(--font-sans, system-ui, sans-serif);font-size:8px;font-weight:700;letter-spacing: 0.02em;color:var(--green);margin-bottom:4px}
 .tech-rec-value{font-size:14px;color:var(--ink);font-weight:500;margin-bottom:4px}
 .tech-rec-rationale{font-size:12px;color:var(--ink-dim);line-height:1.6;font-weight:300}
 .steward-block{margin-top:24px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:4px}
-.steward-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.steward-label{font-family: var(--font-sans, system-ui, sans-serif);font-size:9px;font-weight:700;letter-spacing: 0.02em;color:var(--teal);margin-bottom:8px}
 .steward-heading{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:14px;line-height:1.25;color:var(--ink)}
 .steward-heading em{font-style:italic;color:var(--green)}
 .steward-question{padding:10px 14px;background:rgba(12,148,136,0.04);border:1px solid rgba(12,148,136,0.12);border-radius:3px;margin-bottom:8px;font-size:12px;color:var(--ink-dim);line-height:1.5}
@@ -129,7 +129,7 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
     <div id="doc-error" class="error">
       <p style="font-family:var(--serif);font-size:20px;color:var(--ink)">No diagnostic data found</p>
       <p style="font-size:13px;color:var(--ink-dim)">Complete the self-diagnostic journey first, then open this page.</p>
-      <a href="/diagnostic-journey" style="font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:var(--green);color:#fff;border:none;padding:10px 20px;border-radius:3px;text-decoration:none;margin-top:12px">Start the diagnostic</a>
+      <a href="/diagnostic-journey" style="font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing: 0.02em;background:var(--green);color:#fff;border:none;padding:10px 20px;border-radius:3px;text-decoration:none;margin-top:12px">Start the diagnostic</a>
     </div>
 
     <div id="doc-content" style="display:none">
@@ -208,7 +208,7 @@ body{font-family:var(--sans);background:#e8e4de;color:var(--ink);min-height:100v
       ${qa.stage ? `<span class="doc-tag">${QUALIFIER_LABELS.stage[qa.stage] || qa.stage}</span>` : ''}
     </div>
     <p class="doc-body">This document specifies the 7-layer infrastructure architecture generated from your self-diagnostic. Each layer addresses a structural function — from sovereign data ownership to actor-facing applications. Layers marked with active stalls are configured to directly address the behavioural patterns your diagnostic identified.</p>
-    ${ecoDesc.inside ? `<div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin-bottom:16px"><div style="font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:0.1em;color:var(--ink-muted);margin-bottom:4px">YOUR ECOSYSTEM FROM INSIDE</div><p style="font-size:12px;color:var(--ink-dim);line-height:1.65;margin:0;font-weight:300">${ecoDesc.inside}</p></div>` : ''}
+    ${ecoDesc.inside ? `<div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin-bottom:16px"><div style="font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing: 0.02em;color:var(--ink-muted);margin-bottom:4px">Your ecosystem from inside</div><p style="font-size:12px;color:var(--ink-dim);line-height:1.65;margin:0;font-weight:300">${ecoDesc.inside}</p></div>` : ''}
     ${stackListText ? `<p class="doc-body"><strong style="color:var(--ink)">Detected stacks:</strong> ${stackListText}</p>` : ''}
   </div>`;
 

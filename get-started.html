@@ -26,7 +26,7 @@
 <style>
 /* HERO */
 .hero { padding: 100px 32px 64px; max-width: 960px; margin: 0 auto; }
-.hero-tag { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 20px; }
+.hero-tag { font-family: var(--font-sans, system-ui, sans-serif); font-size: 10px; font-weight: 700; letter-spacing: 0.02em; color: var(--green); margin-bottom: 20px; }
 .hero-h { font-family: 'Instrument Serif', serif; font-size: clamp(36px, 6vw, 56px); line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 24px; }
 .hero-h em { font-style: italic; color: var(--green); }
 .hero-p { font-size: 16px; color: var(--dim); line-height: 1.72; }
@@ -44,13 +44,13 @@
 .snap-card { border-radius: 10px; border: 1px solid rgba(245,217,122,0.35); background: linear-gradient(135deg, rgba(245,217,122,0.05) 0%, rgba(245,217,122,0.02) 100%); overflow: hidden; }
 .snap-head { padding: 22px 24px 18px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; border-bottom: 1px solid rgba(245,217,122,0.15); flex-wrap: wrap; }
 .snap-head-left { display: flex; align-items: flex-start; gap: 16px; flex: 1; }
-.snap-tier { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; padding: 4px 8px; border-radius: 2px; flex-shrink: 0; margin-top: 3px; background: rgba(217,119,6,0.1); border: 1px solid rgba(245,217,122,0.3); color: var(--amber); }
+.snap-tier { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.02em; padding: 4px 8px; border-radius: 2px; flex-shrink: 0; margin-top: 3px; background: rgba(217,119,6,0.1); border: 1px solid rgba(245,217,122,0.3); color: var(--amber); }
 .snap-title { font-family: 'Instrument Serif', serif; font-size: 22px; color: #1a1a1a; line-height: 1.15; margin-bottom: 4px; }
 .snap-meta { display: flex; gap: 8px; flex-wrap: wrap; }
-.snap-badge { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; background: rgba(0,0,0,0.03); border: 1px solid var(--border2); color: var(--ink-dim); }
+.snap-badge { font-family: var(--font-sans, system-ui, sans-serif); font-size: 9px; font-weight: 700; letter-spacing: 0.02em; padding: 3px 8px; border-radius: 2px; background: rgba(0,0,0,0.03); border: 1px solid var(--border2); color: var(--ink-dim); }
 .snap-price { text-align: right; flex-shrink: 0; }
 .snap-price-val { font-family: 'Instrument Serif', serif; font-size: 30px; color: var(--amber); line-height: 1; letter-spacing: -0.02em; }
-.snap-price-note { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--ink-dim); margin-top: 3px; letter-spacing: 0.06em; }
+.snap-price-note { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--ink-dim); margin-top: 3px; letter-spacing: 0.02em; }
 .snap-body { padding: 20px 24px; background: rgba(247,244,239,0.4); display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
 @media (max-width: 520px) { .snap-body { grid-template-columns: 1fr; } }
 @media (max-width: 640px) {
@@ -79,7 +79,7 @@
   .carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
   .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: #ddd8cf; transition: background 0.2s, transform 0.2s; cursor: pointer; }
   .carousel-dot.active { background: var(--green); transform: scale(1.3); }
-  .carousel-hint { display: block; font-family: 'Geist Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 8px; }
+  .carousel-hint { display: block; font-family: var(--font-sans, system-ui, sans-serif); font-size: 9px; letter-spacing: 0.02em; color: var(--ink-muted); margin-bottom: 8px; }
 }
 @media (min-width: 641px) {
   .carousel-dots { display: none; }
@@ -95,7 +95,7 @@
 .snap-cta { padding: 16px 24px; border-top: 1px solid rgba(245,217,122,0.15); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .snap-cta-text { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
 .snap-cta-text strong { color: var(--dim); font-weight: 400; }
-.snap-btn { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+.snap-btn { font-family: var(--font-sans, system-ui, sans-serif); font-size: 10px; font-weight: 700; letter-spacing: 0.02em; padding: 10px 18px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
 
 /* PHASES */
 .phases { max-width: 960px; margin: 0 auto; padding: 16px 24px 0; display: flex; flex-direction: column; gap: 16px; }
@@ -106,14 +106,14 @@
 .phase-head { padding: 22px 24px 18px; display: flex; align-items: flex-start; gap: 16px; border-bottom: 1px solid var(--border); }
 .phase-card.p2 .phase-head { border-bottom-color: rgba(200,240,208,0.1); background: rgba(200,240,208,0.02); }
 
-.phase-num { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; padding: 4px 8px; border-radius: 2px; flex-shrink: 0; margin-top: 3px; }
+.phase-num { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.02em; padding: 4px 8px; border-radius: 2px; flex-shrink: 0; margin-top: 3px; }
 .phase-card.p1 .phase-num { background: rgba(217,119,6,0.1); border: 1px solid rgba(245,217,122,0.25); color: var(--amber); }
 .phase-card.p2 .phase-num { background: rgba(200,240,208,0.08); border: 1px solid rgba(200,240,208,0.2); color: var(--green); }
 
 .phase-title-wrap { flex: 1; }
 .phase-title { font-family: 'Instrument Serif', serif; font-size: 22px; color: #1a1a1a; line-height: 1.15; margin-bottom: 4px; }
 .phase-meta { display: flex; gap: 10px; flex-wrap: wrap; }
-.phase-badge { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
+.phase-badge { font-family: var(--font-sans, system-ui, sans-serif); font-size: 9px; font-weight: 700; letter-spacing: 0.02em; padding: 3px 8px; border-radius: 2px; }
 .phase-badge.time { background: rgba(0,0,0,0.03); border: 1px solid var(--border2); color: var(--ink-dim); }
 .phase-badge.scope { background: rgba(0,0,0,0.03); border: 1px solid var(--border2); color: var(--ink-dim); }
 
@@ -124,7 +124,7 @@
 .phase-col + .phase-col { border-left: 1px solid var(--border); }
 @media (max-width: 520px) { .phase-col + .phase-col { border-left: none; border-top: 1px solid var(--border); } }
 
-.col-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+.col-label { font-family: var(--font-sans, system-ui, sans-serif); font-size: 9px; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 12px; }
 .phase-card.p1 .col-label.yours { color: var(--amber); }
 .phase-card.p1 .col-label.ours  { color: var(--green); }
 .phase-card.p2 .col-label.yours { color: var(--amber); }
@@ -142,7 +142,7 @@
 
 /* Deliverable highlight */
 .deliverable { margin: 0 24px 0; padding: 16px 18px; background: rgba(200,240,208,0.04); border: 1px solid rgba(200,240,208,0.1); border-top: none; display: flex; gap: 12px; align-items: flex-start; }
-.del-label { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); flex-shrink: 0; padding-top: 3px; white-space: nowrap; }
+.del-label { font-family: var(--font-sans, system-ui, sans-serif); font-size: 9px; font-weight: 700; letter-spacing: 0.02em; color: var(--green); flex-shrink: 0; padding-top: 3px; white-space: nowrap; }
 .del-text { font-size: 13px; color: var(--dim); line-height: 1.55; }
 .del-text strong { color: #1a1a1a; font-weight: 400; }
 
@@ -151,7 +151,7 @@
 
 /* WHAT'S REQUIRED SECTION */
 .required { max-width: 960px; margin: 0 auto; padding: 56px 24px 0; }
-.sec-tag { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.sec-tag { font-family: var(--font-sans, system-ui, sans-serif); font-size: 9px; font-weight: 700; letter-spacing: 0.02em; color: var(--green); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
 .sec-tag::before { content: ''; width: 16px; height: 1px; background: var(--muted); }
 .sec-h { font-family: 'Instrument Serif', serif; font-size: clamp(24px, 3.5vw, 34px); line-height: 1.1; color: #1a1a1a; margin-bottom: 8px; }
 .sec-h em { font-style: italic; color: var(--green); }
@@ -168,7 +168,7 @@
 /* WHY START WITH DIAGNOSTIC */
 .why { max-width: 960px; margin: 0 auto; padding: 48px 24px 0; }
 .why-box { padding: 22px 24px; border: 1px solid var(--border2); border-radius: 8px; background: var(--surface); }
-.why-head { font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 12px; }
+.why-head { font-family: var(--font-sans, system-ui, sans-serif); font-size: 9px; font-weight: 700; letter-spacing: 0.02em; color: var(--ink-dim); margin-bottom: 12px; }
 .why-list { display: flex; flex-direction: column; gap: 10px; }
 .why-item { display: flex; gap: 12px; }
 .why-item-mark { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--green); flex-shrink: 0; padding-top: 2px; }
@@ -196,10 +196,10 @@
 .cta-h em { font-style: italic; color: var(--green); }
 .cta-p { font-size: 14px; color: var(--ink-dim); line-height: 1.7; margin-bottom: 28px; max-width: 440px; margin-left: auto; margin-right: auto; }
 .cta-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.btn-primary { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px 24px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; }
-.btn-secondary { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px 24px; border-radius: 3px; border: 1px solid var(--green); color: var(--green); text-decoration: none; }
+.btn-primary { font-family: var(--font-sans, system-ui, sans-serif); font-size: 11px; font-weight: 700; letter-spacing: 0.02em; padding: 13px 24px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; }
+.btn-secondary { font-family: var(--font-sans, system-ui, sans-serif); font-size: 11px; font-weight: 700; letter-spacing: 0.02em; padding: 13px 24px; border-radius: 3px; border: 1px solid var(--green); color: var(--green); text-decoration: none; }
 .btn-secondary:hover { background: var(--green); color: #fff; }
-.cta-note { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--ink-dim); margin-top: 16px; letter-spacing: 0.06em; }
+.cta-note { font-family: 'Geist Mono', monospace; font-size: 9px; color: var(--ink-dim); margin-top: 16px; letter-spacing: 0.02em; }
 
 .footer-pad { padding-bottom: 80px; }
 
@@ -222,21 +222,21 @@
 }
 .sa-left { padding: 32px 32px; }
 .sa-right { padding: 32px 32px; border-left: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 16px; }
-.sa-tier { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+.sa-tier { font-family: var(--font-sans, system-ui, sans-serif); font-size: 10px; font-weight: 700; letter-spacing: 0.02em; color: var(--green); margin-bottom: 12px; }
 .sa-title { font-family: var(--font-serif); font-size: 22px; color: var(--ink); line-height: 1.15; margin-bottom: 10px; }
 .sa-title em { font-style: italic; color: var(--green); }
 .sa-body { font-size: 13px; color: var(--ink-dim); line-height: 1.7; margin-bottom: 16px; }
 .sa-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-.sa-badge { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; background: rgba(42,122,79,0.06); border: 1px solid rgba(42,122,79,0.15); color: var(--green); }
-.sa-btn { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 22px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.15s; }
+.sa-badge { font-family: var(--font-sans, system-ui, sans-serif); font-size: 9px; font-weight: 700; letter-spacing: 0.02em; padding: 3px 8px; border-radius: 2px; background: rgba(42,122,79,0.06); border: 1px solid rgba(42,122,79,0.15); color: var(--green); }
+.sa-btn { font-family: var(--font-sans, system-ui, sans-serif); font-size: 11px; font-weight: 700; letter-spacing: 0.02em; padding: 12px 22px; border-radius: 3px; background: var(--green); color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.15s; }
 .sa-btn:hover { opacity: 0.85; }
-.sa-what-label { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px; }
+.sa-what-label { font-family: var(--font-sans, system-ui, sans-serif); font-size: 9px; font-weight: 700; letter-spacing: 0.02em; color: var(--ink-muted); margin-bottom: 12px; }
 .sa-items { display: flex; flex-direction: column; gap: 8px; }
 .sa-item { display: flex; gap: 10px; }
 .sa-item-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(42,122,79,0.35); flex-shrink: 0; margin-top: 7px; }
 .sa-item-text { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
 .sa-item-text strong { color: var(--ink); font-weight: 400; }
-.sa-note { font-family: var(--font-mono); font-size: 9px; color: var(--ink-muted); letter-spacing: 0.06em; }
+.sa-note { font-family: var(--font-mono); font-size: 9px; color: var(--ink-muted); letter-spacing: 0.02em; }
 hr { border: none; border-top: 1px solid var(--border); }
 
 /* Reveal */
@@ -279,7 +279,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 
 
-.nav-links a { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: #8c8780; transition: color 0.2s; }
+.nav-links a { font-family: var(--font-sans, system-ui, sans-serif); font-size: 10px; font-weight: 400; letter-spacing: 0.02em; text-decoration: none; color: #8c8780; transition: color 0.2s; }
 .nav-links a:hover { color: #1a1a1a; }
 
 
@@ -337,11 +337,11 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 
 /* Free Self-Diagnostic — amber CTA */
-.btn-amber { font-family: var(--font-mono, 'Geist Mono', monospace); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px 24px; border-radius: 3px; background: var(--amber); color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.15s; }
+.btn-amber { font-family: var(--font-mono, 'Geist Mono', monospace); font-size: 11px; font-weight: 700; letter-spacing: 0.02em; padding: 13px 24px; border-radius: 3px; background: var(--amber); color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.15s; }
 .btn-amber:hover { opacity: 0.85; }
-.sa-btn-amber { font-family: var(--font-mono, 'Geist Mono', monospace); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 22px; border-radius: 3px; background: var(--amber); color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.15s; }
+.sa-btn-amber { font-family: var(--font-mono, 'Geist Mono', monospace); font-size: 11px; font-weight: 700; letter-spacing: 0.02em; padding: 12px 22px; border-radius: 3px; background: var(--amber); color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.15s; }
 .sa-btn-amber:hover { opacity: 0.85; }
-.tier-tag-free { font-family: var(--font-mono, 'Geist Mono', monospace); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); }
+.tier-tag-free { font-family: var(--font-mono, 'Geist Mono', monospace); font-size: 9px; font-weight: 700; letter-spacing: 0.02em; color: var(--amber); }
 
 </style>
 <!-- Mixpanel tracking -->
@@ -423,7 +423,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 <div style="max-width:960px;margin:32px auto 0;padding:0 24px;">
   <div style="border-top:1px solid var(--border);padding-top:32px;display:flex;align-items:center;gap:16px;">
-    <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;">Commission a diagnostic</div>
+    <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing: 0.02em;color:var(--ink-muted);white-space:nowrap;">Commission a diagnostic</div>
     <div style="flex:1;height:1px;background:var(--border);"></div>
     <div style="font-size:13px;color:var(--ink-dim);">Tier 2 and Tier 3 are below.</div>
   </div>
@@ -472,7 +472,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 
     <!-- QUESTIONNAIRE CALLOUT -->
     <div style="padding:18px 24px;border-top:1px solid rgba(245,217,122,0.15);background:rgba(245,217,122,0.03);">
-      <div style="font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#f5d97a;margin-bottom:10px;">The ClusterOS Diagnostic Instrument</div>
+      <div style="font-family:'Geist Mono', monospace;font-size:9px;font-weight:700;letter-spacing: 0.02em;color:#f5d97a;margin-bottom:10px;">The ClusterOS Diagnostic Instrument</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div style="font-size:12px;color:var(--dim);line-height:1.6;">Role-segmented questions for founders, anchors, researchers, and stewards — each designed to surface the specific stall dynamics relevant to that actor type. Short enough to complete in under 10 minutes.</div>
         <div style="font-size:12px;color:var(--dim);line-height:1.6;">Questions are designed against the 9-stall framework from the start — not a generic survey retrofitted to the analysis. Responses are anonymous to the steward and aggregated as signals, not individual opinions.</div>
@@ -616,7 +616,7 @@ hr { border: none; border-top: 1px solid var(--border); }
 
 .sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 950; background: #f7f4ef; border-top: 1px solid #ddd8cf; height: 56px; display: flex; align-items: center; justify-content: flex-end; }
 .sticky-bar-inner { display: flex; align-items: center; height: 100%; }
-.sticky-btn { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0 1.4rem; height: 100%; display: flex; align-items: center; white-space: nowrap; transition: opacity 0.15s; }
+.sticky-btn { font-family: var(--font-sans, system-ui, sans-serif); font-size: 11px; font-weight: 700; letter-spacing: 0.02em; text-decoration: none; padding: 0 1.4rem; height: 100%; display: flex; align-items: center; white-space: nowrap; transition: opacity 0.15s; }
 .sticky-amber { background: var(--amber, #d97706); color: #fff; }
 .sticky-amber:hover { opacity: 0.85; }
 .sticky-green { background: var(--green); color: #fff; }

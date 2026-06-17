@@ -1195,10 +1195,12 @@ const ecoStyles = {
   },
   sectionLabel: {
     display: 'block',
-    fontFamily: 'var(--font-mono)',
-    fontSize: '9px',
-    fontWeight: 700,
-    letterSpacing: '0.02em',
+    fontFamily: 'var(--font-serif)',
+    fontStyle: 'italic',
+    fontSize: '13px',
+    fontWeight: 400,
+    letterSpacing: '0',
+    color: 'var(--dj-chalk-muted)',
     marginBottom: '4px'
   },
   sectionHint: {
@@ -4679,8 +4681,9 @@ function MobileAccordion({
     }
   }, React.createElement("div", {
     style: {
-      fontFamily: 'var(--font-mono)',
-      fontSize: '9px',
+      fontFamily: 'var(--font-serif)',
+      fontStyle: 'italic',
+      fontSize: '12px',
       fontWeight: 600,
       letterSpacing: '0.02em',
       color: '#7dd3c8',
@@ -4892,8 +4895,9 @@ function ArchitectureSchemaCards({
         }
       }, React.createElement("div", {
         style: {
-          fontFamily: 'var(--font-mono)',
-          fontSize: '8px',
+          fontFamily: 'var(--font-serif)',
+          fontStyle: 'italic',
+          fontSize: '12px',
           fontWeight: 600,
           letterSpacing: '0.02em',
           color: 'var(--dj-chalk-muted)',
@@ -5634,8 +5638,9 @@ function DigitalOSStage() {
       }
     }, React.createElement("div", {
       style: {
-        fontFamily: 'var(--font-mono)',
-        fontSize: '8px',
+        fontFamily: 'var(--font-serif)',
+        fontStyle: 'italic',
+        fontSize: '12px',
         fontWeight: 700,
         letterSpacing: '0.02em',
         color: 'var(--steward)',
@@ -5658,8 +5663,9 @@ function DigitalOSStage() {
       }
     }, React.createElement("div", {
       style: {
-        fontFamily: 'var(--font-mono)',
-        fontSize: '8px',
+        fontFamily: 'var(--font-serif)',
+        fontStyle: 'italic',
+        fontSize: '12px',
         fontWeight: 700,
         letterSpacing: '0.02em',
         color: 'var(--dj-chalk-muted)',
@@ -5691,8 +5697,9 @@ function DigitalOSStage() {
       }
     }, React.createElement("div", {
       style: {
-        fontFamily: 'var(--font-mono)',
-        fontSize: '8px',
+        fontFamily: 'var(--font-serif)',
+        fontStyle: 'italic',
+        fontSize: '12px',
         fontWeight: 700,
         letterSpacing: '0.02em',
         color: 'var(--dj-chalk-muted)',
@@ -5717,8 +5724,9 @@ function DigitalOSStage() {
       }
     }, React.createElement("div", {
       style: {
-        fontFamily: 'var(--font-mono)',
-        fontSize: '8px',
+        fontFamily: 'var(--font-serif)',
+        fontStyle: 'italic',
+        fontSize: '12px',
         fontWeight: 700,
         letterSpacing: '0.02em',
         color: 'var(--dj-chalk-muted)',
@@ -5757,8 +5765,9 @@ function DigitalOSStage() {
       }
     }, React.createElement("div", {
       style: {
-        fontFamily: 'var(--font-mono)',
-        fontSize: '8px',
+        fontFamily: 'var(--font-serif)',
+        fontStyle: 'italic',
+        fontSize: '12px',
         fontWeight: 700,
         letterSpacing: '0.02em',
         color: 'var(--signal)',
